@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  description: MyText
+  start_date: 2009-12-22
+  estimated_end_date: 2009-12-22
+  end_date: 2009-12-22
+  estimated_done: 1
+  state: MyString
+
+two:
+  name: MyString
+  description: MyText
+  start_date: 2009-12-22
+  estimated_end_date: 2009-12-22
+  end_date: 2009-12-22
+  estimated_done: 1
+  state: MyString
