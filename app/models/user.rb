@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   belongs_to :company
   
   
-  has_many    :sc_models
+  has_many    :sc_models    , :conditions => { "sc_models.project_id"      => nil } # les modeles ayant un utilisateur ET un projet appartiennent au projet.
   has_many    :user_projects,                                             :dependent => :destroy # Pour les gestionnaires, reattribuer ce projet.
   has_many    :projects,       :through => :user_projects
   has_many    :owned_projects, :through => :user_projects, :source => :task , :conditions => { "user_projects.is_admin"     => true }
