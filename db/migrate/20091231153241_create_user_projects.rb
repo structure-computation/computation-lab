@@ -1,9 +1,9 @@
 class CreateUserProjects < ActiveRecord::Migration
   def self.up
     create_table :user_projects do |t|
-      t.integer :user_id
-      t.integer :project_id
-      t.integer :is_admin
+      t.integer  :user_id
+      t.integer  :project_id
+      t.integer  :is_admin
 
       t.timestamps
     end
