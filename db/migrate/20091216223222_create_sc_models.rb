@@ -1,6 +1,6 @@
 class CreateScModels < ActiveRecord::Migration
   def self.up
-    create_table sc_models do |t|
+    create_table :sc_models do |t|
       t.string   :name
       t.integer  :user_id
       t.integer  :project_id
