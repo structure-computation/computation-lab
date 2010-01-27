@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
 
   
   # Relations
-  belongs_to :company
+  belongs_to  :company
   
   
   has_many    :sc_models    , :conditions => { "sc_models.project_id"      => nil } # les modeles ayant un utilisateur ET un projet appartiennent au projet.
