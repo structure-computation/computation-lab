@@ -142,11 +142,13 @@ function affiche_NM_page(){
 //---------------------------------------------------------------------------------------------------------------------
 // traitement en fin de requette pour laffichage du tableau des models
 function init_Tableau_model(Tableau_model_temp)
+// function init_Tableau_model(response)
 {
-    //var Tableau_calcul_temp = eval('(' + response + ')');
+    // var Tableau_calcul_temp = eval('[' + response + ']');
     if (Tableau_model_temp)
     {   
-        Tableau_model = clone(Tableau_model_temp);
+        // Tableau_model = clone(Tableau_model_temp);
+        Tableau_model = Tableau_model_temp;
     }
     else
     {
@@ -160,7 +162,8 @@ function init_Tableau_model(Tableau_model_temp)
 function get_Tableau_model()
 {
     var url_php = "/modele/index";
-    $.getJSON(url_php,init_Tableau_model);
+    // $.getJSON(url_php,init_Tableau_model);
+    $.getJSON(url_php,[],init_Tableau_model);
 }
 
 
@@ -189,7 +192,7 @@ function affiche_Tableau_content(current_tableau, strname, stridentificateur){
     for(i=0; i<taille_tableau_content; i++) {
         i_page = i + content_tableau_current_page[strname] * taille_tableau_content;
         content_tableau_connect[strname][i]=i_page;
-        strContent_lign = new String();
+        strContent_lign = new String();                 // Ne sert à rien, realloue sur la ligne suivante ! Idem pour les autres creations de chaines.
         strContent_lign = strname + '_lign_' + i;
         strContent_2 = new String();
         strContent_2 = strname + '_2_' + i;
@@ -204,11 +207,12 @@ function affiche_Tableau_content(current_tableau, strname, stridentificateur){
         if(i_page<taille_Tableau){
             id_lign.className = "largeBoxTable_Model_lign on";
             strtemp_2 = new String();
-            strtemp_2 = current_tableau[i_page][stridentificateur[0]];
+            // TODO: Ajout temporaire de 'sc_model' pour s'adapter au test courant.
+            strtemp_2 = current_tableau[i_page]['sc_model'][stridentificateur[0]];
             strtemp_3 = new String();
-            strtemp_3 = current_tableau[i_page][stridentificateur[1]];
+            strtemp_3 = current_tableau[i_page]['sc_model'][stridentificateur[1]];
             strtemp_4 = new String();
-            strtemp_4 = current_tableau[i_page][stridentificateur[2]] + '/' + current_tableau[i_page][stridentificateur[3]];
+            strtemp_4 = current_tableau[i_page]['sc_model'][stridentificateur[2]] + '/' + current_tableau[i_page][stridentificateur[3]];
             remplacerTexte(id_2, strtemp_2);
             remplacerTexte(id_3, strtemp_3);
             remplacerTexte(id_4, strtemp_4);

@@ -10,12 +10,12 @@ class ModeleController < ApplicationController
     
     respond_to do |format|
       format.html
-      format.js   { render :json => @modeles.to_json}
+      format.js   {render :json => @modeles.to_json}
     end
     
     # respond_to do |format|
-    #   format.html { render :action => "fiche_affaire_consultation", :layout => false }
-    #   format.xml  { render :xml => @deal }
+    #   format.html { render :action => "vue_a_afficher", :layout => false }
+    #   format.xml  { render :xml => @objet_a_renvoyer   }
     # end
     
   end

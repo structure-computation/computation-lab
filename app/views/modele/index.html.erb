@@ -197,7 +197,7 @@
 					    		</div>	
 							</div>
 							
-							<%  (1..20).each do |i|
+							<%  (0...20).each do |i|
 					   		%>
 					   		<div id="LM_model_lign_<%= i %>" class="largeBoxTable_Model_lign" >
 						   		<div class="largeBoxTable_Model_lign_pair" >
@@ -239,7 +239,7 @@
 						<img src="/images/page_moins.png" style="vertical-align:middle;"> 
 					</a>
 					page 
-					<% (1..5).each do |i|
+					<% (0...5).each do |i|
 			   		%>
 					<a style="cursor: pointer;"  id="LM_model_page_<%= i %>" onclick="go_page_model(<%= i %>)"><%= i %></a>
 					<% end
