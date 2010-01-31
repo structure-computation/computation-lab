@@ -152,8 +152,8 @@ function init_Tableau_model(Tableau_model_temp)
     }
     else
     {
-        Tableau_model[0]= new Array();
-        Tableau_model[0]['name']='aucun model';
+        Tableau_model[0]         =  new Array();
+        Tableau_model[0]['name'] = 'aucun model';
     }
     affiche_Tableau_model();
 }
@@ -182,7 +182,8 @@ function affiche_Tableau_model(){
     filtre_Tableau_model();
     var current_tableau     =  Tableau_model_filter;
     var strname             =  'LM_model';
-    var stridentificateur   =  new Array('name','project','new_results','résults');
+    // var stridentificateur   =  new Array('name','project','new_results','résults');
+    var stridentificateur   =  new Array('name','description','new_results','résults');
     affiche_Tableau_content(current_tableau, strname, stridentificateur);
 }
 
@@ -192,26 +193,21 @@ function affiche_Tableau_content(current_tableau, strname, stridentificateur){
     for(i=0; i<taille_tableau_content; i++) {
         i_page = i + content_tableau_current_page[strname] * taille_tableau_content;
         content_tableau_connect[strname][i]=i_page;
-        strContent_lign = new String();                 // Ne sert à rien, realloue sur la ligne suivante ! Idem pour les autres creations de chaines.
+        
         strContent_lign = strname + '_lign_' + i;
-        strContent_2 = new String();
         strContent_2 = strname + '_2_' + i;
-        strContent_3 = new String();
         strContent_3 = strname + '_3_' + i;
-        strContent_4 = new String();
         strContent_4 = strname + '_4_' + i;
         var id_lign  = document.getElementById(strContent_lign);
         var id_2     = document.getElementById(strContent_2);
         var id_3     = document.getElementById(strContent_3);
         var id_4     = document.getElementById(strContent_4);
+        
         if(i_page<taille_Tableau){
             id_lign.className = "largeBoxTable_Model_lign on";
-            strtemp_2 = new String();
             // TODO: Ajout temporaire de 'sc_model' pour s'adapter au test courant.
             strtemp_2 = current_tableau[i_page]['sc_model'][stridentificateur[0]];
-            strtemp_3 = new String();
             strtemp_3 = current_tableau[i_page]['sc_model'][stridentificateur[1]];
-            strtemp_4 = new String();
             strtemp_4 = current_tableau[i_page]['sc_model'][stridentificateur[2]] + '/' + current_tableau[i_page][stridentificateur[3]];
             remplacerTexte(id_2, strtemp_2);
             remplacerTexte(id_3, strtemp_3);
@@ -264,7 +260,7 @@ function go_page_model(num){
         content_tableau_current_page['LM_model'] = content_tableau_liste_page['LM_model'].length-1;
     }else{
         var num_page = num + content_tableau_curseur_page['LM_model'];
-        content_tableau_current_page['LM_model']=content_tableau_liste_page['LM_model'][num_page]-1;    
+        content_tableau_current_page['LM_model'] = content_tableau_liste_page['LM_model'][num_page]-1;    
     }
     affiche_Tableau_model();
 }
