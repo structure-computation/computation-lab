@@ -4,7 +4,7 @@ class Project < ActiveRecord::Base
   
   has_many    :user_projects
   has_many    :users , :through => :user_projects
-  has_many    :admins, :through => :user_projects, :source => :users, :condition => {"user_projects.is_admin"     => true}
+  has_many    :admins, :through => :user_projects, :source => :users, :conditions => {"user_projects.is_admin"     => true}
               
   has_many    :sc_models
   has_many    :tasks

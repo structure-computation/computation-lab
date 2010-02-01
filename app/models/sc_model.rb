@@ -5,6 +5,8 @@ class ScModel < ActiveRecord::Base
   
   has_many    :calcul_results
   
-  
+  def has_result? 
+    return (rand(1) > 0.5)
+  end
   
 end
