@@ -257,10 +257,10 @@
 					page 
 					<% (1..5).each do |i|
 			   		%>
-					<a style="cursor: pointer;"  id="LM_model_page_<%= i %>" onclick="go_page_model(<%= i %>)"><%= i %></a>
+					<a style="cursor: pointer;"  id="LM_model_page_<%= i %>" ><%= i %></a>
 					<% end
 			    	%>
-			    	<a style="cursor: pointer;"  onclick="go_page_model('end')" class="page_select" > 
+			    	<a style="cursor: pointer;"  class="page_select" > 
 			    		<img src="/images/page_plus.png" style="vertical-align:middle;"> 
 		    		</a>
 		    	-->
@@ -284,8 +284,8 @@
     	<script type="text/javascript">
 			// $(document).ready(get_Tableau_model);
 			$(document).ready(function() { 
-          $("largeBoxTable_Model").tablesorter({widthFixed: true, widgets: ['zebra']});
-          // .tablesorterPager({container: $("#footer_top_2")}); 
+          $("largeBoxTable_Model").tablesorter({widthFixed: true, widgets: ['zebra']})
+          .tablesorterPager({container: $("#footer_top_2")}); 
       });
 		</script>
 		
