@@ -3,59 +3,8 @@
 		tablesorterPager: new function() {
 			
 			function updatePageDisplay(c) {
-				var s = $(c.cssPageDisplay,c.container).val((c.page+1) + c.seperator + c.totalPages);
+				var s = $(c.cssPageDisplay,c.container).val((c.page+1) + c.seperator + c.totalPages);	
 			}
-			
-			
-			
-			function setLinks(table, c){							//C.laborier
-				a = "";
-				//Suppression des liens existants
-				$(c.cssLinksPlace, c.container).empty();
-				for(var i = 0 ; i < c.totalPages ; i++){
-					var aCss = "";
-					if(c.page == i)
-						aCss = "current";
-					a += "<a id='"+i+"' class='"+aCss+"'>"+(i+1)+"</a>"
-				}
-				
-				//Ajout des liens
-				$(c.cssLinksPlace, c.container).append(a);
-				
-				//Evenement click sur un lien
-				$("a", c.cssLinksPlace, c.container).bind("click", function(e){
-					e.preventDefault();
-					c.page = $(this).attr("id");
-					moveToPage(table);
-				});
-				
-				
-				//Calcul du margin left du pager
-				$(c.container).each(function(){
-				
-					//initialisation des éléments
-					$(this).css("padding-left", "0px");
-					$(c.cssLinksPlace).css("width", "auto");
-					
-					//Si la taille du pager est trop grande
-					if($(this).width() >= $("#liste_affaires").width()){
-						
-						//On ajuste la taille du contenuer de liens de manière à ce que les boutons suivant et précédent tienne sur les bords
-						$(c.cssLinksPlace).width(826);
-						
-						//on réajuste le padding left
-						padding_left = ($("#liste_affaires").width() - $(this).width()) / 2;
-						$(this).css("padding-left", padding_left+"px");
-					}
-					else{
-						padding_left = ($("#liste_affaires").width() - $(this).width()) / 2;
-						$(this).css("padding-left", padding_left+"px");
-					}
-				});
-				
-				
-			}																//C.laborier
-			
 			
 			function setPageSize(table,size) {
 				var c = table.config;
@@ -63,7 +12,7 @@
 				c.totalPages = Math.ceil(c.totalRows / c.size);
 				c.pagerPositionSet = false;
 				moveToPage(table);
-				//fixPosition(table);
+				fixPosition(table);
 			}
 			
 			function fixPosition(table) {
@@ -116,6 +65,7 @@
 				if(c.page < 0 || c.page > (c.totalPages-1)) {
 					c.page = 0;
 				}
+				
 				renderTable(table,c.rowsCopy);
 			}
 			
@@ -135,20 +85,21 @@
 				// clear the table body
 				
 				$.tablesorter.clearTableBody(table);
+				
 				for(var i = s; i < e; i++) {
-
-					// tableBody.append(rows[i]);
+					
+					//tableBody.append(rows[i]);
 					
 					var o = rows[i];
 					var l = o.length;
 					for(var j=0; j < l; j++) {
+						
 						tableBody[0].appendChild(o[j]);
 
 					}
 				}
 				
-        
-				//fixPosition(table,tableBody);
+				fixPosition(table,tableBody);
 				
 				$(table).trigger("applyWidgets");
 				
@@ -157,10 +108,6 @@
 				}
 				
 				updatePageDisplay(c);
-				
-				setLinks(table, c);						//C.laborier
-        c.initTabFct();               //C.laborier
-        
 			}
 			
 			this.appender = function(table,rows) {
@@ -172,7 +119,6 @@
 				c.totalPages = Math.ceil(c.totalRows / c.size);
 				
 				renderTable(table,rows);
-
 			};
 			
 			this.defaults = {
@@ -188,11 +134,9 @@
 				cssLast: '.last',
 				cssPageDisplay: '.pagedisplay',
 				cssPageSize: '.pagesize',
-				cssLinksPlace: '.lst_lien_pager', //C.laborier
 				seperator: "/",
 				positionFixed: true,
-				appender: this.appender, 
-				initTabFct: ''                    //C.laborier : paramètre utiliser pour le passage d'une fonction au constructeur qui initialisera le contenu du tableau après chaque action sur un élément (pagination, tri etc... )
+				appender: this.appender
 			};
 			
 			this.construct = function(settings) {
@@ -202,12 +146,10 @@
 					config = $.extend(this.config, $.tablesorterPager.defaults, settings);
 					
 					var table = this, pager = config.container;
-					
-					config.size = parseInt($(".pagesize").val());
-					
+				
 					$(this).trigger("appendCache");
 					
-					
+					config.size = parseInt($(".pagesize",pager).val());
 					
 					$(config.cssFirst,pager).click(function() {
 						moveToFirstPage(table);
@@ -225,12 +167,13 @@
 						moveToLastPage(table);
 						return false;
 					});
-					$(config.cssPageSize).change(function() {
+					$(config.cssPageSize,pager).change(function() {
 						setPageSize(table,parseInt($(this).val()));
 						return false;
 					});
 				});
 			};
+			
 		}
 	});
 	// extend plugin scope
@@ -238,4 +181,4 @@
         tablesorterPager: $.tablesorterPager.construct
 	});
 	
-})(jQuery);	
+})(jQuery);				
