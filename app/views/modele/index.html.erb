@@ -7,10 +7,15 @@
     	<meta content="fr" name="language" />
     	<meta content="index, follow" name="robots" />
     	<link rel="stylesheet" href="/stylesheets/main.css" media="screen" />
-    	<script src="/javascripts/sources_ext/jquery-1.3.2.js" type="text/javascript"></script>
-    	<script src="/javascripts/texteutils.js" type="text/javascript"></script>
-    	<script src="/javascripts/jquery.tablesorter.js" type="text/javascript"></script>
-    	<script src="/javascripts/jquery.tablesorter.pager.js" type="text/javascript"></script>
+    	<script src="/javascripts/sources_ext/jquery-1.3.2.js"  type="text/javascript"></script>
+    	<script src="/javascripts/texteutils.js"                type="text/javascript"></script>
+    	<script src="/javascripts/jquery.tablesorter.js"        type="text/javascript"></script>
+    	<script src="/javascripts/jquery.tablesorter.pager.js"  type="text/javascript"></script>
+    	
+    	<script  type="text/javascript">
+    	  // partie utilisee pour redefinir des actions normalement definies dans le fichier js functions_layer_LM.js le temps de le supprimer.
+    	  function go_page_model(param){}; 
+    	</script>
     	<% #php include("./php/functions_layer_LM.php");  
     	%>
   	</head>
@@ -175,56 +180,62 @@
 						</div>
 <!-- ...................fin filtre -->
 <!-- ...................liste des projet -->
-						<div id="largeBoxTable_Model">
-							<div id="largeBoxTable_Model_first" >
-								<div id="LM_model_0_1" class="largeBoxTable_Model_0" style="width: 21px;">
-					    		</div>
-					    		<div id="LM_model_0_2" class="largeBoxTable_Model_0" style="width: 246px;">
-					    			<p>Nom</p>
-					    		</div>
-					    		<div id="LM_model_0_3" class="largeBoxTable_Model_0" style="width: 196px;">
-					    			<p>Projet</p>
-					    		</div>
-					    		<div id="LM_model_0_4" class="largeBoxTable_Model_0" style="width: 85px;">
-					    			<p>Résultats</p>
-					    		</div>
-					    		<div id="LM_model_0_5" class="largeBoxTable_Model_0" style="width: 59px;">
-					    			<p>Visu</p>
-					    		</div>
-					    		<div id="LM_model_0_6" class="largeBoxTable_Model_0" style="width: 59px;">
-					    			<p>Calcul</p>
-					    		</div>
-					    		<div id="LM_model_0_7" class="largeBoxTable_Model_0" style="width: 21px;">
-					    		</div>	
-							</div>
+						<table id="largeBoxTable_Model">
+						  <thead>
+							  <tr id="largeBoxTable_Model_first" >
+  								<th id="LM_model_0_1" class="largeBoxTable_Model_0" style="width: 21px;">
+  					    		</th>
+  					    		<th id="LM_model_0_2" class="largeBoxTable_Model_0" style="width: 246px;">
+  					    			Nom
+  					    		</th>
+  					    		<th id="LM_model_0_3" class="largeBoxTable_Model_0" style="width: 196px;">
+  					    			Projet
+  					    		</th>
+  					    		<th id="LM_model_0_4" class="largeBoxTable_Model_0" style="width: 85px;">
+  					    			Résultats
+  					    		</th>
+  					    		<th id="LM_model_0_5" class="largeBoxTable_Model_0" style="width: 59px;">
+  					    			Visu
+  					    		</th>
+  					    		<th id="LM_model_0_6" class="largeBoxTable_Model_0" style="width: 59px;">
+  					    			Calcul
+  					    		</th>
+  					    		<th id="LM_model_0_7" class="largeBoxTable_Model_0" style="width: 21px;">
+  					    		</th>	
+  							</tr>
+							</thead>
 							
-							<%  @modeles.each do |modele| %> 
-							<% i = 1 %>        						    		
-					   		<div id="LM_model_lign_<%= i %>" class="largeBoxTable_Model_lign" >
-						   		<div class="largeBoxTable_Model_lign_pair" >
-							   		<div id="LM_model_1_<%= i %>" class="largeBoxTable_Model_1" >
-						    		</div>
-						    		<div id="LM_model_2_<%= i %>" class="largeBoxTable_Model_2" >
-						    		  <%= modele.name %>
-						    		</div>
-						    		<div id="LM_model_3_<%= i %>" class="largeBoxTable_Model_3" >
-						    		  <%= modele.project.name %>
-						    		</div>
-						    		<div id="LM_model_4_<%= i %>" class="largeBoxTable_Model_4" >
-						    		  <%= modele.has_result? ? "Oui" : "Non" %>
-						    		</div>
-						    		<div id="LM_model_5_<%= i %>" class="largeBoxTable_Model_5" >
-						    		</div>
-						    		<a  href="SC_compute_NC.php"> 
-						    			<div id="LM_model_6_<%= i %>" class="largeBoxTable_Model_6" >
-						    			</div>
-						    		</a>
-						    		<div id="LM_model_7_<%= i %>" class="largeBoxTable_Model_7" >
-						    		</div>							
-						    	</div>
-					    	</div>
-					    	<% end %>						
-					    </div>
+							<tbody>
+  							<%  @modeles.each do |modele| %> 
+  							<% i = 1 %>        						    		
+  					   		<tr id="LM_model_lign_<%= i %>" class="largeBoxTable_Model_lign" >
+  						   		<!-- <div class="largeBoxTable_Model_lign_pair" > -->
+  							   		<td id="LM_model_1_<%= i %>" class="largeBoxTable_Model_1" >
+  						    		</td>
+  						    		<td id="LM_model_2_<%= i %>" class="largeBoxTable_Model_2" >
+  						    		  <%= modele.name %>
+  						    		</td>
+  						    		<td id="LM_model_3_<%= i %>" class="largeBoxTable_Model_3" >
+  						    		  <%= modele.project.name %>
+  						    		</td>
+  						    		<td id="LM_model_4_<%= i %>" class="largeBoxTable_Model_4" >
+  						    		  <%= modele.has_result? ? "Oui" : "Non" %>
+  						    		</td>
+  						    		<td id="LM_model_5_<%= i %>" class="largeBoxTable_Model_5" >
+  						    		</td>
+  						    		<td>
+    						    		<a  href="SC_compute_NC.php"> 
+    						    			<div id="LM_model_6_<%= i %>" class="largeBoxTable_Model_6" >
+    						    			</div>
+    						    		</a>
+  						    		</td>
+  						    		<td id="LM_model_7_<%= i %>" class="largeBoxTable_Model_7" >
+  						    		</td>							
+  						    	<!-- </div> -->
+  					    	</tr>
+  					    <% end %>	
+					    </tbody>					
+					  </table>
 <!-- ...................fin liste des projet -->
 					</div>
 				</div>
@@ -237,9 +248,10 @@
 				<div id="footer_top_1">
 				</div>
 				<div id="footer_top_2">
-					<a style="cursor: pointer;"  onclick="go_page_model('first')" class="page_select" > 
+					<!-- <a style="cursor: pointer;"   class="page_select" > 
 						<img src="/images/page_moins.png" style="vertical-align:middle;"> 
 					</a>
+					-->
 					
 					<!-- 
 					page 
@@ -272,9 +284,8 @@
     	<script type="text/javascript">
 			// $(document).ready(get_Tableau_model);
 			$(document).ready(function() { 
-          $("largeBoxTable_Model") 
-          .tablesorter({widthFixed: true, widgets: ['zebra']}) 
-          .tablesorterPager({container: $("#footer_top_2")}); 
+          $("largeBoxTable_Model").tablesorter({widthFixed: true, widgets: ['zebra']});
+          // .tablesorterPager({container: $("#footer_top_2")}); 
       });
 		</script>
 		
