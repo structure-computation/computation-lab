@@ -1,0 +1,45 @@
+
+// Definitions generales de la partie "content"
+
+!content_width        =   945px
+!content_right_width  =   745px
+!content_left_width   =   197px
+!content_height_min   =   497px
+
+#content
+  width:      !content_width
+  text-align: left
+  background: transparent url('../images/conteneur_milieu.png') repeat-y left top
+  float:      left
+
+
+.black
+  position:           absolute
+  z-index:            10
+  width:              940px 
+  height:             100% 
+  background-color:   black
+  filter:             Alpha(opacity=50)
+  -moz-opacity:       .50
+  -khtml-opacity:     0.50
+  opacity:            .50
+
+
+#contentleft
+  width:              !content_left_width
+  text-align:         left
+  background:         transparent 
+  float:              left
+
+
+#contentright
+  width:              !content_right_width
+  text-align:         left
+  background:         transparent
+  float:              left
+
+
+.contentheightmin
+  height:             !content_height_min
+  background:         transparent 
+  float:              left
