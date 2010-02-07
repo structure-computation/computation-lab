@@ -67,15 +67,14 @@
 <!-- ...................fin filtre -->
 <!-- ...................liste des projet -->
       
-      <%= render :partial => "modele_list" %>
+              <%= render :partial => "modele_list" %>
 
-<!-- ...................fin liste des projet -->
-					</div>
-				</div>
-<!-- ...........fin partie droite du contenu -->
-			</div>
 
-    	<script type="text/javascript">
+					</div> <!-- ...................fin largeBoxcontent de liste des projet -->
+				</div> <!-- ...........fin partie droite du contenu -->
+
+
+    <script type="text/javascript">
 			// $(document).ready(get_Tableau_model);
 			$(document).ready(function() { 
 			  $("#largeBoxTable_Model").tablesorter({ debug:false, widthFixed: true, widgets: ['zebra'] }).tablesorterPager({container: $("#paginationHolder")}); 
