@@ -1,0 +1,41 @@
+/
+  partie header commune à toute les pages, CSproject.selected
+#header_top
+  #bl_1.black.off
+  #header_top_logo
+  #header_top_societe
+    Nom de la société
+    %br
+    %span{ :style => "font-size: 0.70em; color : #b8b9c3" }
+      n°1010
+  #header_top_temp
+  #header_top_user
+    Jérémie Bellec
+    %br
+    %span{ :style => "font-size: 0.70em; color : #b8b9c3; text-decoration: underline ;" }
+      déconnexion
+#header_menu
+  #bl_2.black.off
+  #menu
+    %ul
+      %li#mAccueil
+        %a{ :href => "./" }
+          Accueil
+      %li#mSCmanage
+        %a{ :href => "SCmanage.htm" }
+          SC manage
+      %li#mSCproject
+        %a{ :href => "index.htm" }
+          SC project
+      %li#mSCcompute.selected
+        %a{ :href => "index.php" }
+          SC compute
+  #header_profil_1
+    %img{ :src => "/images/picto_profil.png" }
+  #header_profil_2
+    %span{ :style => "text-decoration: underline ;" }
+      mon profil
+#header_barre_bas
+  #bl_3.black.off
+/
+  fin partie header
