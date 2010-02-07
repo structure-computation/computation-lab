@@ -1,0 +1,39 @@
+/ Vue Index des modeles.
+/ wizard création de projet en premier plan
+
+#bl_5.black.off
+- # include("./contenu/LM_wizard/Wiz_nouveau_modele.php");
+
+/ partie gauche du contenu, raccourci
+#contentleft
+  .contentheightmin
+  = render :partial => "partials/raccourcis_leftbox"
+  = render :partial => "partials/ajouts_leftbox"
+/ fin partie gauche du contenu
+
+/ partie droite du contenu, tableaux, informations importantes
+#contentright
+  #largeBox
+    %h2
+      Liste des modèles
+  #largeBoxcontent
+    / taille minimum du contenu du contenu
+    .contentheightmin
+    / taille minimum du contenu du contenu
+    
+    = render :partial => "filtre_des_modeles"
+    
+    / liste des projet
+    = render :partial => "modele_list"
+    / fin largeBoxcontent de la liste des projet
+    
+/ fin de #contentright, partie droite du contenu
+
+%script{ :type => "text/javascript" }
+  \// $(document).ready(get_Tableau_model);
+  $(document).ready(function() {
+  $("#largeBoxTable_Model").tablesorter({ debug:false, widthFixed: true, widgets: ['zebra'] }).tablesorterPager({container: $("#paginationHolder")});
+  
+  \// $("largeBoxTable_Model").tablesorter({widthFixed: true, widgets: ['zebra']})
+  \// .tablesorterPager({container: $("#footer_top_2")});
+  });

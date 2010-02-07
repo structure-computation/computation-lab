@@ -1,0 +1,48 @@
+/ filtre
+#largeBoxfilter
+  %form{ :method => "post", :action => "foo.php" }
+    #largeBoxfilter_1
+      Nom :
+      %input{ :name => "username", :type => "text", :style => "width:180px" }
+      Référence :
+      %input{ :name => "ref", :type => "text", :style => "width:150px" }
+      Nouveaux résultats :
+      %input{ :name => "new_result", :type => "text", :style => "width:100px" }
+      Statut :
+      %input{ :name => "statut", :type => "text", :style => "width:182px" }
+    #largeBoxfilter_2
+      %table#table_lbfilter
+        %tr
+          %td
+            Début :
+          %td
+            entre le
+          %td
+            %input{ :name => "date_deb_1", :type => "text", :style => "width:115px" }
+          %td
+            et le
+          %td
+            %input{ :name => "date_deb_2", :type => "text", :style => "width:115px" }
+        %tr
+          %td
+            Fin :
+          %td
+            entre le
+          %td
+            %input{ :name => "date_fin_1", :type => "text", :style => "width:115px" }
+          %td
+            et le
+          %td
+            %input{ :name => "date_fin_2", :type => "text", :style => "width:115px" }
+    #largeBoxfilter_2
+      %table#table_lbfilter
+        %tr
+          %td.bouton_jaune
+            %img{ :src => "/images/picto_loupe_filtre.png" }
+            Filtrer les projets
+        %tr
+          %td
+            %span{ :style => "vertical-align:top; text-decoration: underline ;" }
+              Annuler les filtres de recherche
+            %img{ :src => "/images/picto_annuler_filter.png", :style => "vertical-align:middle;" }
+/ fin du filtre
