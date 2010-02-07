@@ -16,7 +16,7 @@ class ModeleController < ApplicationController
     }
     
     respond_to do |format|
-      format.html {render :layout => false }
+      format.html {render :layout => true }
       format.js   {render :json => @modeles.to_json}
     end
     
