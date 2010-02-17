@@ -75,10 +75,10 @@
           = render :partial => "calcul/nc_box_propriete"
           = render :partial => "calcul/NC_etape_initialisation/box_active"
           = render :partial => "calcul/NC_etape_materiaux/box_active"
-          -# <?php include("./contenu/NC_etape_liaisons/NC_box_active.php");  ?>
-          -# <?php include("./contenu/NC_etape_CLs/NC_box_active.php");  ?>
-          -# <?php include("./contenu/NC_etape_options/NC_box_active.php");  ?>
-          -# <?php include("./contenu/NC_etape_previsions/NC_box_active.php");  ?>
+          = render :partial => "calcul/NC_etape_liaisons/box_active"
+          = render :partial => "calcul/NC_etape_CLs/box_active"
+          = render :partial => "calcul/NC_etape_options/box_active"
+          = render :partial => "calcul/NC_etape_previsions/box_active"
         / fin partie centre du contenu
         
         / partie droite du contenu, tableau des pieces, interface, bord...
@@ -101,7 +101,7 @@
         / fin scrollbar du contenu
         
         %script{ :type => "text/javascript" }
-          / equal_height_NC_fake();
+          equal_height_NC_fake();
           $(document).ready(get_Tableau_calcul);
           $(document).ready(get_Tableau_mat);
           $(document).ready(get_Tableau_liaison);

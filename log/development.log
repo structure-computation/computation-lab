@@ -15994,3 +15994,861 @@ Migrating to CreateBoundaryConditions (20100217152155)
   [4;36;1mSQL (34.4ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
   [4;35;1mSQL (4.6ms)[0m   [0mdescribe `users`[0m
   [4;36;1mSQL (2.4ms)[0m   [0;1mSHOW KEYS FROM `users`[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing CalculController#index (for 127.0.0.1 at 2010-02-17 17:31:11) [GET]
+Rendering calcul/index
+Rendered layouts/_header (0.9ms)
+Rendered calcul/_progressbar (0.5ms)
+Rendered calcul/NC_etape_initialisation/_box_left (18.3ms)
+Rendered calcul/NC_etape_materiaux/_box_left (251.5ms)
+Rendered calcul/NC_etape_liaisons/_box_left (29.3ms)
+Rendered calcul/NC_etape_CLs/_box_left (5.3ms)
+Rendered calcul/NC_etape_options/_box_left (0.4ms)
+Rendered calcul/NC_etape_previsions/_box_left (0.3ms)
+Rendered calcul/_nc_box_visu (0.3ms)
+Rendered calcul/_nc_box_propriete (0.3ms)
+Rendered calcul/NC_etape_initialisation/_box_active (38.8ms)
+Rendered calcul/NC_etape_materiaux/_box_active (32.7ms)
+Completed in 427ms (View: 412, DB: 1) | 200 OK [http://localhost/calcul]
+  [4;35;1mSQL (0.5ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing CalculController#initialisation (for 127.0.0.1 at 2010-02-17 17:31:16) [GET]
+  [4;35;1mCalculResult Columns (5.2ms)[0m   [0mSHOW FIELDS FROM `calcul_results`[0m
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+Completed in 114ms (View: 3, DB: 6) | 200 OK [http://localhost/calcul/initialisation]
+  [4;36;1mSQL (10.9ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (19.8ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing CalculController#materiaux (for 127.0.0.1 at 2010-02-17 17:31:17) [GET]
+  [4;36;1mCalculResult Columns (4.2ms)[0m   [0;1mSHOW FIELDS FROM `calcul_results`[0m
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+Completed in 143ms (View: 2, DB: 35) | 200 OK [http://localhost/calcul/materiaux]
+  [4;35;1mSQL (0.3ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing CalculController#liaisons (for 127.0.0.1 at 2010-02-17 17:31:17) [GET]
+  [4;35;1mCalculResult Columns (4.6ms)[0m   [0mSHOW FIELDS FROM `calcul_results`[0m
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+Completed in 146ms (View: 3, DB: 5) | 200 OK [http://localhost/calcul/liaisons]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing CalculController#index (for 127.0.0.1 at 2010-02-17 17:39:24) [GET]
+Rendering calcul/index
+Rendered layouts/_header (0.8ms)
+Rendered calcul/_progressbar (0.3ms)
+Rendered calcul/NC_etape_initialisation/_box_left (22.2ms)
+Rendered calcul/NC_etape_materiaux/_box_left (38.4ms)
+Rendered calcul/NC_etape_liaisons/_box_left (35.8ms)
+Rendered calcul/NC_etape_CLs/_box_left (4.9ms)
+Rendered calcul/NC_etape_options/_box_left (0.4ms)
+Rendered calcul/NC_etape_previsions/_box_left (0.4ms)
+Rendered calcul/_nc_box_visu (0.3ms)
+Rendered calcul/_nc_box_propriete (0.3ms)
+Rendered calcul/NC_etape_initialisation/_box_active (100.9ms)
+Rendered calcul/NC_etape_materiaux/_box_active (91.0ms)
+Completed in 640ms (View: 634, DB: 1) | 200 OK [http://localhost/calcul]
+  [4;36;1mSQL (1.5ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (10.0ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing CalculController#initialisation (for 127.0.0.1 at 2010-02-17 17:39:28) [GET]
+  [4;36;1mCalculResult Columns (3.8ms)[0m   [0;1mSHOW FIELDS FROM `calcul_results`[0m
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+Completed in 822ms (View: 3, DB: 15) | 200 OK [http://localhost/calcul/initialisation]
+  [4;35;1mSQL (0.3ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing CalculController#materiaux (for 127.0.0.1 at 2010-02-17 17:39:29) [GET]
+  [4;35;1mCalculResult Columns (4.6ms)[0m   [0mSHOW FIELDS FROM `calcul_results`[0m
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+Completed in 164ms (View: 2, DB: 5) | 200 OK [http://localhost/calcul/materiaux]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing CalculController#liaisons (for 127.0.0.1 at 2010-02-17 17:39:29) [GET]
+  [4;36;1mCalculResult Columns (6.5ms)[0m   [0;1mSHOW FIELDS FROM `calcul_results`[0m
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+Completed in 132ms (View: 3, DB: 7) | 200 OK [http://localhost/calcul/liaisons]
+  [4;35;1mSQL (1.0ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing CalculController#index (for 127.0.0.1 at 2010-02-17 17:40:02) [GET]
+Rendering calcul/index
+Rendered layouts/_header (0.8ms)
+Rendered calcul/_progressbar (0.4ms)
+Rendered calcul/NC_etape_initialisation/_box_left (23.4ms)
+Rendered calcul/NC_etape_materiaux/_box_left (37.9ms)
+Rendered calcul/NC_etape_liaisons/_box_left (20.5ms)
+Rendered calcul/NC_etape_CLs/_box_left (7.5ms)
+Rendered calcul/NC_etape_options/_box_left (0.4ms)
+Rendered calcul/NC_etape_previsions/_box_left (0.3ms)
+Rendered calcul/_nc_box_visu (0.3ms)
+Rendered calcul/_nc_box_propriete (0.3ms)
+Rendered calcul/NC_etape_initialisation/_box_active (56.7ms)
+Rendered calcul/NC_etape_materiaux/_box_active (49.5ms)
+Rendered calcul/NC_etape_liaisons/_box_active (72.1ms)
+Completed in 615ms (View: 610, DB: 1) | 200 OK [http://localhost/calcul]
+  [4;35;1mSQL (0.6ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing CalculController#initialisation (for 127.0.0.1 at 2010-02-17 17:40:06) [GET]
+  [4;35;1mCalculResult Columns (9.9ms)[0m   [0mSHOW FIELDS FROM `calcul_results`[0m
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+Completed in 244ms (View: 2, DB: 11) | 200 OK [http://localhost/calcul/initialisation]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing CalculController#materiaux (for 127.0.0.1 at 2010-02-17 17:40:06) [GET]
+  [4;36;1mCalculResult Columns (3.8ms)[0m   [0;1mSHOW FIELDS FROM `calcul_results`[0m
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+Completed in 137ms (View: 2, DB: 4) | 200 OK [http://localhost/calcul/materiaux]
+  [4;35;1mSQL (0.3ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing CalculController#liaisons (for 127.0.0.1 at 2010-02-17 17:40:06) [GET]
+  [4;35;1mCalculResult Columns (6.1ms)[0m   [0mSHOW FIELDS FROM `calcul_results`[0m
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+Completed in 460ms (View: 3, DB: 7) | 200 OK [http://localhost/calcul/liaisons]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing CalculController#index (for 127.0.0.1 at 2010-02-17 17:46:24) [GET]
+Rendering calcul/index
+Rendered layouts/_header (0.8ms)
+Rendered calcul/_progressbar (0.3ms)
+Rendered calcul/NC_etape_initialisation/_box_left (18.4ms)
+Rendered calcul/NC_etape_materiaux/_box_left (33.2ms)
+Rendered calcul/NC_etape_liaisons/_box_left (32.4ms)
+Rendered calcul/NC_etape_CLs/_box_left (35.4ms)
+Rendered calcul/NC_etape_options/_box_left (0.4ms)
+Rendered calcul/NC_etape_previsions/_box_left (0.3ms)
+Rendered calcul/_nc_box_visu (0.3ms)
+Rendered calcul/_nc_box_propriete (0.3ms)
+Rendered calcul/NC_etape_initialisation/_box_active (36.1ms)
+Rendered calcul/NC_etape_materiaux/_box_active (42.5ms)
+Rendered calcul/NC_etape_liaisons/_box_active (272.0ms)
+Rendered calcul/NC_etape_CLs/_box_active (68.3ms)
+Completed in 723ms (View: 706, DB: 1) | 200 OK [http://localhost/calcul]
+  [4;36;1mSQL (0.6ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing CalculController#initialisation (for 127.0.0.1 at 2010-02-17 17:46:28) [GET]
+  [4;36;1mCalculResult Columns (5.1ms)[0m   [0;1mSHOW FIELDS FROM `calcul_results`[0m
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+Completed in 366ms (View: 2, DB: 6) | 200 OK [http://localhost/calcul/initialisation]
+  [4;35;1mSQL (0.3ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing CalculController#materiaux (for 127.0.0.1 at 2010-02-17 17:46:28) [GET]
+  [4;35;1mCalculResult Columns (4.6ms)[0m   [0mSHOW FIELDS FROM `calcul_results`[0m
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+Completed in 204ms (View: 2, DB: 5) | 200 OK [http://localhost/calcul/materiaux]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing CalculController#liaisons (for 127.0.0.1 at 2010-02-17 17:46:29) [GET]
+  [4;36;1mCalculResult Columns (3.7ms)[0m   [0;1mSHOW FIELDS FROM `calcul_results`[0m
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+Completed in 139ms (View: 2, DB: 4) | 200 OK [http://localhost/calcul/liaisons]
+  [4;35;1mSQL (0.3ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (2.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing CalculController#index (for 127.0.0.1 at 2010-02-17 17:50:43) [GET]
+Rendering calcul/index
+Rendered layouts/_header (1.0ms)
+Rendered calcul/_progressbar (0.3ms)
+Rendered calcul/NC_etape_initialisation/_box_left (276.4ms)
+Rendered calcul/NC_etape_materiaux/_box_left (22.7ms)
+Rendered calcul/NC_etape_liaisons/_box_left (21.2ms)
+Rendered calcul/NC_etape_CLs/_box_left (51.2ms)
+Rendered calcul/NC_etape_options/_box_left (25.5ms)
+Rendered calcul/NC_etape_previsions/_box_left (0.4ms)
+Rendered calcul/_nc_box_visu (0.3ms)
+Rendered calcul/_nc_box_propriete (0.5ms)
+Rendered calcul/NC_etape_initialisation/_box_active (49.6ms)
+Rendered calcul/NC_etape_materiaux/_box_active (31.5ms)
+Rendered calcul/NC_etape_liaisons/_box_active (31.8ms)
+Rendered calcul/NC_etape_CLs/_box_active (139.5ms)
+Rendered calcul/NC_etape_options/_box_active (23.7ms)
+Completed in 852ms (View: 846, DB: 3) | 200 OK [http://localhost/calcul]
+  [4;35;1mSQL (0.5ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (21.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing CalculController#initialisation (for 127.0.0.1 at 2010-02-17 17:50:47) [GET]
+  [4;35;1mCalculResult Columns (4.5ms)[0m   [0mSHOW FIELDS FROM `calcul_results`[0m
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+Completed in 137ms (View: 2, DB: 26) | 200 OK [http://localhost/calcul/initialisation]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing CalculController#materiaux (for 127.0.0.1 at 2010-02-17 17:50:47) [GET]
+  [4;36;1mCalculResult Columns (5.6ms)[0m   [0;1mSHOW FIELDS FROM `calcul_results`[0m
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+Completed in 137ms (View: 3, DB: 6) | 200 OK [http://localhost/calcul/materiaux]
+  [4;35;1mSQL (0.4ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing CalculController#liaisons (for 127.0.0.1 at 2010-02-17 17:50:48) [GET]
+  [4;35;1mCalculResult Columns (5.1ms)[0m   [0mSHOW FIELDS FROM `calcul_results`[0m
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+Completed in 143ms (View: 2, DB: 6) | 200 OK [http://localhost/calcul/liaisons]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing CalculController#index (for 127.0.0.1 at 2010-02-17 17:53:16) [GET]
+Rendering calcul/index
+Rendered layouts/_header (0.9ms)
+Rendered calcul/_progressbar (0.3ms)
+Rendered calcul/NC_etape_initialisation/_box_left (30.0ms)
+Rendered calcul/NC_etape_materiaux/_box_left (18.3ms)
+Rendered calcul/NC_etape_liaisons/_box_left (20.5ms)
+Rendered calcul/NC_etape_CLs/_box_left (5.2ms)
+Rendered calcul/NC_etape_options/_box_left (34.6ms)
+Rendered calcul/NC_etape_previsions/_box_left (12.0ms)
+Rendered calcul/_nc_box_visu (0.3ms)
+Rendered calcul/_nc_box_propriete (0.3ms)
+Rendered calcul/NC_etape_initialisation/_box_active (42.1ms)
+Rendered calcul/NC_etape_materiaux/_box_active (32.7ms)
+Rendered calcul/NC_etape_liaisons/_box_active (40.7ms)
+Rendered calcul/NC_etape_CLs/_box_active (34.2ms)
+Rendered calcul/NC_etape_options/_box_active (21.5ms)
+Rendered calcul/NC_etape_previsions/_box_active (79.4ms)
+Completed in 784ms (View: 779, DB: 1) | 200 OK [http://localhost/calcul]
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (4.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing CalculController#initialisation (for 127.0.0.1 at 2010-02-17 17:53:20) [GET]
+  [4;36;1mCalculResult Columns (34.0ms)[0m   [0;1mSHOW FIELDS FROM `calcul_results`[0m
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+Completed in 307ms (View: 2, DB: 39) | 200 OK [http://localhost/calcul/initialisation]
+  [4;35;1mSQL (0.3ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing CalculController#materiaux (for 127.0.0.1 at 2010-02-17 17:53:20) [GET]
+  [4;35;1mCalculResult Columns (5.2ms)[0m   [0mSHOW FIELDS FROM `calcul_results`[0m
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+Completed in 199ms (View: 57, DB: 6) | 200 OK [http://localhost/calcul/materiaux]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing CalculController#liaisons (for 127.0.0.1 at 2010-02-17 17:53:21) [GET]
+  [4;36;1mCalculResult Columns (6.7ms)[0m   [0;1mSHOW FIELDS FROM `calcul_results`[0m
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+Completed in 133ms (View: 3, DB: 7) | 200 OK [http://localhost/calcul/liaisons]
+  [4;35;1mSQL (0.3ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing CalculController#index (for 127.0.0.1 at 2010-02-17 17:53:47) [GET]
+Rendering calcul/index
+Rendered layouts/_header (0.9ms)
+Rendered calcul/_progressbar (0.4ms)
+Rendered calcul/NC_etape_initialisation/_box_left (23.1ms)
+Rendered calcul/NC_etape_materiaux/_box_left (22.4ms)
+Rendered calcul/NC_etape_liaisons/_box_left (56.4ms)
+Rendered calcul/NC_etape_CLs/_box_left (6.2ms)
+Rendered calcul/NC_etape_options/_box_left (0.4ms)
+Rendered calcul/NC_etape_previsions/_box_left (0.3ms)
+Rendered calcul/_nc_box_visu (0.3ms)
+Rendered calcul/_nc_box_propriete (0.3ms)
+Rendered calcul/NC_etape_initialisation/_box_active (50.2ms)
+Rendered calcul/NC_etape_materiaux/_box_active (56.5ms)
+Rendered calcul/NC_etape_liaisons/_box_active (31.3ms)
+Rendered calcul/NC_etape_CLs/_box_active (32.7ms)
+Rendered calcul/NC_etape_options/_box_active (0.4ms)
+Rendered calcul/NC_etape_previsions/_box_active (0.3ms)
+Completed in 387ms (View: 381, DB: 1) | 200 OK [http://localhost/calcul]
+  [4;35;1mSQL (0.3ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing CalculController#initialisation (for 127.0.0.1 at 2010-02-17 17:53:51) [GET]
+  [4;35;1mCalculResult Columns (4.0ms)[0m   [0mSHOW FIELDS FROM `calcul_results`[0m
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+Completed in 123ms (View: 3, DB: 5) | 200 OK [http://localhost/calcul/initialisation]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing CalculController#materiaux (for 127.0.0.1 at 2010-02-17 17:53:51) [GET]
+  [4;36;1mCalculResult Columns (3.8ms)[0m   [0;1mSHOW FIELDS FROM `calcul_results`[0m
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+Completed in 133ms (View: 2, DB: 4) | 200 OK [http://localhost/calcul/materiaux]
+  [4;35;1mSQL (0.3ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing CalculController#liaisons (for 127.0.0.1 at 2010-02-17 17:53:51) [GET]
+  [4;35;1mCalculResult Columns (4.2ms)[0m   [0mSHOW FIELDS FROM `calcul_results`[0m
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+Completed in 338ms (View: 2, DB: 5) | 200 OK [http://localhost/calcul/liaisons]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing CalculController#index (for 127.0.0.1 at 2010-02-17 17:53:58) [GET]
+Rendering calcul/index
+Rendered layouts/_header (0.9ms)
+Rendered calcul/_progressbar (0.3ms)
+Rendered calcul/NC_etape_initialisation/_box_left (32.5ms)
+Rendered calcul/NC_etape_materiaux/_box_left (18.5ms)
+Rendered calcul/NC_etape_liaisons/_box_left (20.2ms)
+Rendered calcul/NC_etape_CLs/_box_left (5.7ms)
+Rendered calcul/NC_etape_options/_box_left (0.4ms)
+Rendered calcul/NC_etape_previsions/_box_left (0.3ms)
+Rendered calcul/_nc_box_visu (0.4ms)
+Rendered calcul/_nc_box_propriete (0.4ms)
+Rendered calcul/NC_etape_initialisation/_box_active (46.4ms)
+Rendered calcul/NC_etape_materiaux/_box_active (31.0ms)
+Rendered calcul/NC_etape_liaisons/_box_active (30.4ms)
+Rendered calcul/NC_etape_CLs/_box_active (36.6ms)
+Rendered calcul/NC_etape_options/_box_active (0.4ms)
+Rendered calcul/NC_etape_previsions/_box_active (0.3ms)
+Completed in 263ms (View: 257, DB: 1) | 200 OK [http://localhost/calcul]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing CalculController#initialisation (for 127.0.0.1 at 2010-02-17 17:54:01) [GET]
+  [4;36;1mCalculResult Columns (23.2ms)[0m   [0;1mSHOW FIELDS FROM `calcul_results`[0m
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+Completed in 387ms (View: 2, DB: 24) | 200 OK [http://localhost/calcul/initialisation]
+  [4;35;1mSQL (11.3ms)[0m   [0mSET NAMES 'utf8'[0m
+  [4;36;1mSQL (12.6ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing CalculController#materiaux (for 127.0.0.1 at 2010-02-17 17:54:02) [GET]
+  [4;35;1mCalculResult Columns (4.2ms)[0m   [0mSHOW FIELDS FROM `calcul_results`[0m
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+Completed in 179ms (View: 3, DB: 28) | 200 OK [http://localhost/calcul/materiaux]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing CalculController#liaisons (for 127.0.0.1 at 2010-02-17 17:54:02) [GET]
+  [4;36;1mCalculResult Columns (3.7ms)[0m   [0;1mSHOW FIELDS FROM `calcul_results`[0m
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+WARNING: Can't mass-assign these protected attributes: type
+Completed in 342ms (View: 2, DB: 4) | 200 OK [http://localhost/calcul/liaisons]
