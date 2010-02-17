@@ -7,7 +7,7 @@ function init_Tableau_mat(Tableau_mat_temp)
     {	
     	var taille_Tableau=Tableau_mat_temp.length;
     	for(i=0; i<taille_Tableau; i++) {
-    		Tableau_mat[i]=Tableau_mat_temp[i]['calcul_result'];
+    		Tableau_mat[i]=Tableau_mat_temp[i]['material'];
     	}
     }
     else

@@ -85,9 +85,9 @@
         #NC_contentright.on
           / hauteur minimum du contenu
           .contentheightmin
-          -# <?php include("./contenu/NC_etape_materiaux/box_right_1.php");  ?>
-          -# <?php include("./contenu/NC_etape_liaisons/box_right_1.php");  ?>
-          -# <?php include("./contenu/NC_etape_CLs/box_right_1.php");  ?>
+          = render :partial => "calcul/NC_etape_materiaux/box_right"
+          = render :partial => "calcul/NC_etape_liaisons/box_right"
+          = render :partial => "calcul/NC_etape_CLs/box_right"
         / fin partie droite du contenu
         
         / scrollbar du contenu, raccourci
@@ -105,8 +105,8 @@
           $(document).ready(get_Tableau_calcul);
           $(document).ready(get_Tableau_mat);
           $(document).ready(get_Tableau_liaison);
-        /  $(document).ready(get_Tableau_CL);
-        /  affiche_NC_page_initialisation();
+          $(document).ready(get_Tableau_CL);
+          affiche_NC_page_initialisation();
       / fin NC_content
       
       / partie haute du footer, bas de la boite projet plus bouton

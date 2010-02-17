@@ -26,7 +26,7 @@ function init_Tableau_calcul(Tableau_calcul_temp)
 
 function get_Tableau_calcul()
 {	
-	var url_php = "/calcul/initialisation";
+	var url_php = "/calcul/calculs";
     $.getJSON(url_php,init_Tableau_calcul);
 }
 

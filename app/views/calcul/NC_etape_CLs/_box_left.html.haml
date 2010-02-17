@@ -39,10 +39,10 @@
     - (0...3).each do |i|
       .tableNC_impair
         .tableNC_box_0{ :id => "CL_1_#{i}" }
-          %a{ :onclick => "select_CL('<?php echo ($i); ?>')", :style => "cursor: pointer;" }
+          %a{ :onclick => "select_CL(#{i})", :style => "cursor: pointer;" }
             .tableNC_box_1{ :id => "CL_11_#{i}" }
             .tableNC_box_2{ :id => "CL_12_#{i}" }
-          %a{ :onclick => "info_select('CL',<?php echo $i ; ?>)", :style => "cursor: pointer;" }
+          %a{ :onclick => "info_select('CL',#{i})", :style => "cursor: pointer;" }
             .tableNC_box_4{ :id => "CL_14_#{i}" }
 
     %div{ :style => "width:248px; height:22px; float:left;" }
@@ -51,10 +51,10 @@
     - (3...7).each do |i|
       .tableNC_impair
         .tableNC_box_0{ :id => "CL_1_#{i}" }
-          %a{ :onclick => "select_CL('<?php echo ($i); ?>')", :style => "cursor: pointer;" }
+          %a{ :onclick => "select_CL(#{i})", :style => "cursor: pointer;" }
             .tableNC_box_1{ :id => "CL_11_#{i}" }
             .tableNC_box_2{ :id => "CL_12_#{i}" }
-          %a{ :onclick => "info_select('CL',<?php echo $i ; ?>)", :style => "cursor: pointer;" }
+          %a{ :onclick => "info_select('CL',#{i})", :style => "cursor: pointer;" }
             .tableNC_box_4{ :id => "CL_14_#{i}" }
               
     %div{ :style => "width:248px; height:23px; float:left;" }

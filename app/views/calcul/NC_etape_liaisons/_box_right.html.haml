@@ -1,0 +1,29 @@
+#NC_page_liaisons_2.off
+  .NC_top_box
+    Liste des interfaces
+  #page_liaison_22.NC_box
+    .NC_filter{ :style => "width:248px; height:120px" }
+    /  <?php include("./contenu/NC_etape_liaisons/NC_filter_interfaces.php");  ?>
+    - (0...20).each do |i|
+      .tableNC_impair
+        .tableNC_box_0{ :id => "interface_1_#{i}" }
+          %a{:id => "interface_1a_#{i}", :onclick => "select_interfaces_liaison(#{i})", :style => "cursor: pointer;" }
+            .tableNC_box_retrait_10{ :id => "interface_1r_#{i}" }
+            .tableNC_box_1{ :id => "interface_11_#{i}" }
+            .tableNC_box_2{ :id => "interface_12_#{i}" }
+          %a{ :onclick => "visu_interface_select(#{i})", :style => "cursor: pointer;" }
+            .tableNC_box_3{ :id => "interface_13_#{i}" }
+
+    .NC_filter{ :style => "width:248px; height:20px" }
+      .NC_bottom_page_1.right
+        %a.page_select{ :onclick => "go_page_interface('first')", :style => "cursor: pointer;" }
+          <
+        page
+        - (0...5).each do |i|
+          %a{ :id => "interface_page_#{i}", :onclick => "go_page_interface(#{i})", :style => "cursor: pointer;" }
+            #{i}
+        %a.page_select{ :onclick => "go_page_interface('end')", :style => "cursor: pointer;" }
+          >
+
+/ %script{ :type => "text/javascript" }
+/   $(document).ready(get_Tableau_interface);

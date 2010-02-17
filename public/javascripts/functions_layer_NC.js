@@ -108,7 +108,7 @@ function affiche_NC_page(scrollbar_state,box_prop_state){
 	//var affiche_off = new Array('page_initialisation', 'page_materiaux', 'page_liaisons', 'page_CLs', 'page_options', 'page_multiresolution', 'page_previsions');
 	var affiche_off = new Array('page_initialisation', 'page_materiaux', 'page_liaisons', 'page_CLs', 'page_options', 'page_previsions');
 	var taille_off = new Number(affiche_off.length);
-	var taille_off = 1;
+	// var taille_off = 1;
 	
 	// on cache tout
 	for(i_off=0; i_off<taille_off; i_off++){

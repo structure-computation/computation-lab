@@ -7,7 +7,7 @@ function init_Tableau_liaison(Tableau_liaison_temp)
     {	
     	var taille_Tableau=Tableau_liaison_temp.length;
     	for(i=0; i<taille_Tableau; i++) {
-    		Tableau_liaison[i]=Tableau_liaison_temp[i]['calcul_result'];
+    		Tableau_liaison[i]=Tableau_liaison_temp[i]['link'];
     	}
     }
     else
@@ -15,9 +15,9 @@ function init_Tableau_liaison(Tableau_liaison_temp)
     	Tableau_liaison[0]= new Array();
         Tableau_liaison[0]['name']='aucun calcul';
     }
-    strtemp = Tableau_liaison[0]['name']; 
-    var id_test = document.getElementById("textetest"); 
-    remplacerTexte(id_test, strtemp);
+//    strtemp = Tableau_liaison[0]['name']; 
+//    var id_test = document.getElementById("textetest"); 
+//    remplacerTexte(id_test, strtemp);
     affiche_Tableau_liaison();
 }
 
