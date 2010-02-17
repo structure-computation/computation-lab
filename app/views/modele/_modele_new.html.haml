@@ -1,0 +1,62 @@
+
+#NM_wiz_layer.off
+  #NM_wiz_layer_top
+    Création d'un nouveau modèle
+  #NM_wiz_layer_milieu
+    #NM_wiz_menu
+      %a{ :onclick => "()" } #NM_PB_page_information{ :style => "z-index: 100; margin-left:0px;" }
+        Information
+      %a{ :onclick => "()" } #NM_PB_page_fichier{ :style => "z-index: 99; margin-left:220px" }
+        Fichiers
+      %a{ :onclick => "()" } #NM_PB_page_resume{ :style => "z-index: 98; margin-left:440px" }
+        Résumé
+        
+    / page information
+    #NM_page_information
+      .NM_bleu{ :style => "width: 600px; height: 20px;  margin: 50px 0px 0 63px;" }
+        Déposer un nouveau modèle
+      .NM_fond_gris{ :style => "width: 600px; margin: 5px 0px 0 63px;" }
+        Vous allez déposer un nouveau maillage. Les formats reconnus sont :
+        %br
+        \     	- avs
+        %br
+        \     	- bulkDdata (Nastran)
+        %br
+        Attention : les maillages que vous déposez doivent être compatibles au niveau des liaisons entre les pièces pour que le calcul
+        soit correctement réalisé par SCcompute.
+        %br
+        %br
+        A l'étape suivante vous pourrez télécharger votre modèle ainsi qu'une image le représentant. Les données de ce modèle seront lues automatiquement.
+ 
+    / page fichier et description
+    #NM_page_fichier
+      %div{ :style => "width:700px; height:50px" }
+      .NM_text_1{ :style => "width:200px;" }
+        Nom du modèle :
+      .NM_text_1{ :style => "width:500px;" }
+        %input#NM_name{ :type => "text", :value => "premier calcul", :onKeyup => "Tableau_init_change_value()" }
+      .NM_text_1{ :style => "width:200px;" }
+        Charger le modèle :
+      .NM_text_1{ :style => "width:500px;" }
+        %input#NM_model{ :type => "file", :value => "emplacement du fichier", :onKeyup => "Tableau_init_change_value()" }
+      .NM_text_1{ :style => "width:200px;" }
+        Charger Une image :
+      .NM_text_1{ :style => "width:500px;" }
+        %input#NM_image{ :type => "file", :value => "emplacement du fichier", :onKeyup => "Tableau_init_change_value()" }
+      .NM_text_2{ :style => "width:200px;" }
+        Description :
+      .NM_text_2{ :style => "width:500px;" }
+        %textarea#NM_description{ :onKeyup => "Tableau_init_change_value()" }
+      .NM_fond_gris{ :style => "width: 600px; margin: 5px 0px 0 63px;" }
+        L'ensemble de nos logiciels travail sur le modèle.
+ 
+    / page résumé
+    #NM_page_resume
+
+  #NM_wiz_layer_bas
+    %a{ :href => "#", :onclick => "displayNewModel('off')" } #NM_create_bouton_jaune
+      Annuler
+    %a{ :onclick => "NM_next_stape()", :style => "cursor: pointer;" } #NM_footer_bouton_suivant.NM_footer_top_bouton{ :style => "margin-right:5px;" }
+      Suivant
+    %a{ :onclick => "NM_previous_stape()", :style => "cursor: pointer;" } #NM_footer_bouton_precedent.NM_footer_top_bouton
+      Précédent

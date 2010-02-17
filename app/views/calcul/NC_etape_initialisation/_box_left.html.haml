@@ -1,0 +1,28 @@
+#NC_page_initialisation_1.off
+  .NC_top_box
+    Bibliothèque des calcul
+  #page_calcul_12.NC_box
+    .NC_filter{ :style => "width:248px; height:120px" }
+    /  <?php include("./contenu/NC_etape_initialisation/NC_filter_calcul.php");  ?>
+    - (0...20).each do |i|
+      .tableNC_impair
+        .tableNC_box_0{ :id => "calcul_1_#{i}" }
+          %a{ :id => "calcul_1a_#{i}", :onclick => "select_calcul(#{i})", :style => "cursor: pointer;" }
+            .tableNC_box_1{ :id => "calcul_11_#{i}" }
+            .tableNC_box_2{ :id => "calcul_12_#{i}" }
+          %a{ :onclick => "", :style => "cursor: pointer;" }
+            .tableNC_box_4{ :id => "calcul_14_#{i}" }
+
+    .NC_filter{ :style => "width:248px; height:20px" }
+      .NC_bottom_page_1.left
+        %a.page_select{ :onclick => "go_page_calcul('first')", :style => "cursor: pointer;" }
+          <
+        page
+        - (0...5).each do |i|
+          %a{ :id => "calcul_page_#{i}", :onclick => "go_page_calcul(#{i})", :style => "cursor: pointer;" }
+            #{i}
+        %a.page_select{ :onclick => "go_page_calcul('end')", :style => "cursor: pointer;" }
+          >
+-# %script{ :type => "text/javascript" }
+-#   $(document).ready(get_Tableau_calcul);
+  

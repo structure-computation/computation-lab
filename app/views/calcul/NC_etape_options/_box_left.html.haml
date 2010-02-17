@@ -1,0 +1,58 @@
+#NC_page_options_1.off
+  .NC_top_box
+    Choix des options
+  #page_options_12.NC_box.options
+    .NC_filter{ :style => "width:248px; height:120px" }
+    /  <?php include("./contenu/NC_etape_options/NC_filter_options.php");  ?>
+    
+    #page_options_13.NC_box_select_opt{ :style => "height: 120px" }
+      .NC_box_opt_line_titre
+        %a{ :onclick => "select_option('test')", :style => "cursor: pointer;" }
+          #page_options_test_bouton.NC_box_radio_select
+          #page_options_test.NC_box_select_opt_titre
+            Mode Test
+      #page_options_test_1.NC_box_para_opt_option
+        Aucune option n'est disponible dans ce mode.
+        Le calcul est linéaire sans zoom structurel, et le niveau de convergence est faible.
+        L'objectif de ce mode est de vérifier le paramétrage de votre calcul.
+        
+    #page_options_14.NC_box_select_opt{ :style => "height: 80px" }
+      .NC_box_opt_line_titre
+        %a{ :onclick => "select_option('normal')", :style => "cursor: pointer;" }
+          #page_options_normal_bouton.NC_box_radio_select
+          #page_options_normal.NC_box_select_opt_titre
+            Mode Normal
+      .NC_box_opt_line_option
+        #page_options_normal_bouton_1.NC_box_check_select
+        #page_options_normal_1.NC_box_select_opt_option
+          Convergence méthode LATIN
+      .NC_box_opt_line_option
+        #page_options_normal_bouton_2.NC_box_check_select
+        #page_options_normal_2.NC_box_select_opt_option
+          Précision du calcul
+          
+    #page_options_15.NC_box_select_opt.on{ :style => "height: 150px" }
+      .NC_box_opt_line_titre
+        #page_options_expert_bouton.NC_box_radio_select
+        #page_options_expert.NC_box_select_opt_titre
+          Mode Expert
+      .NC_box_opt_line_option
+        #page_options_expert_bouton_1.NC_box_check_select
+        #page_options_expert_1.NC_box_select_opt_option
+          Convergence méthode LATIN
+      .NC_box_opt_line_option
+        #page_options_expert_bouton_2.NC_box_check_select
+        #page_options_expert_2.NC_box_select_opt_option
+          Précision du calcul
+      .NC_box_opt_line_option
+        #page_options_expert_bouton_3.NC_box_check_select
+        #page_options_expert_3.NC_box_select_opt_option
+          Précision imposée par boite
+      .NC_box_opt_line_option
+        #page_options_expert_bouton_4.NC_box_check_select
+        #page_options_expert_4.NC_box_select_opt_option
+          Ajout de fissures
+      .NC_box_opt_line_option
+        #page_options_expert_bouton_5.NC_box_check_select
+        #page_options_expert_5.NC_box_select_opt_option
+          Calcul d'amortissement
