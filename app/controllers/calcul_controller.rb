@@ -28,7 +28,7 @@ class CalculController < ApplicationController
   def materiaux
     @materiaux = []
     (1..25).each{ |i|
-      mat =    Material.new(:name => "Nom calcul " + i.to_s)                                                 
+      mat =    Material.new(:name => "Nom calcul " + i.to_s,   :type =>  'isotrope',  :comp => 'el pl')                                                 
       @materiaux << mat
     }
     

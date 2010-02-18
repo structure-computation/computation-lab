@@ -1,0 +1,409 @@
+#prop_materiaux.on
+  .NC_prop_box_titre{ :style => "height:75px" }
+    .NC_prop_box_text_0{ :style => "width:130px;" }
+      Nom :
+    #prop_mat_top_name.NC_prop_box_text_2{ :style => "width:150px;" }
+      mat 1
+    .NC_prop_box_text_0{ :style => "width:130px;" }
+      Référence :
+    #prop_mat_top_ref.NC_prop_box_text_2{ :style => "width:150px;" }
+      M_1010_1_30
+    .NC_prop_box_text_0{ :style => "width:130px;" }
+      Type :
+    .NC_prop_box_text_0{ :style => "width:480px;" }
+      #prop_mat_top_isotrope.NC_box_radio_prop
+      .NC_prop_box_text_1_in
+        isotrope
+      #prop_mat_top_orthotrope.NC_box_radio_prop
+      .NC_prop_box_text_1_in
+        orthotrope
+    .NC_prop_box_text_0{ :style => "width:130px;" }
+      comportement :
+    .NC_prop_box_text_0{ :style => "width:480px;" }
+      #prop_mat_top_elastique.NC_box_check_prop
+      .NC_prop_box_text_1_in
+        elastique
+      #prop_mat_top_plastique.NC_box_check_prop
+      .NC_prop_box_text_1_in
+        plastique
+      #prop_mat_top_endomageable.NC_box_check_prop
+      .NC_prop_box_text_1_in
+        endomageable
+      #prop_mat_top_visqueux.NC_box_check_prop
+      .NC_prop_box_text_1_in
+        visqueux
+
+  #prop_menu_mat
+    %ul
+      %li#prop_mat_menu_info.selected
+        %a{ :onclick => "prop_mat_affich('info')", :style => "cursor: pointer;" }
+          info
+      %li#prop_mat_menu_generique
+        %a{ :onclick => "prop_mat_affich('generique')", :style => "cursor: pointer;" }
+          générique
+      %li#prop_mat_menu_elastique
+        %a{ :onclick => "prop_mat_affich('elastique')", :style => "cursor: pointer;" }
+          élasticité
+      %li#prop_mat_menu_plastique
+        %a{ :onclick => "prop_mat_affich('plastique')", :style => "cursor: pointer;" }
+          plasticité
+      %li#prop_mat_menu_endomageable
+        %a{ :onclick => "prop_mat_affich('endomageable')", :style => "cursor: pointer;" }
+          endomagement
+      %li#prop_mat_menu_visqueux
+        %a{ :onclick => "prop_mat_affich('visqueux')", :style => "cursor: pointer;" }
+          viscosité
+          
+  #prop_mat_info.NC_prop_box.on
+    .NC_prop_box_text_titre{ :style => "width:95px;" }
+      Pour ce calcul
+    .NC_prop_box_text_1{ :style => "width:80px;" }
+      Nom :
+    .NC_prop_box_text_1{ :style => "width:300px;" }
+      %input#prop_mat_name_select{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
+    .NC_prop_box_text_1{ :style => "width:150px;" }
+    .NC_prop_box_text_titre{ :style => "width:95px;" }
+    .NC_prop_box_text_1{ :style => "width:80px;" }
+      Description :
+    .NC_prop_box_text_3{ :style => "width:455px;" }
+      %textarea#prop_mat_description{ :onKeyup => "prop_mat_change_value()", :style => "width:445px;" }
+    %div{ :style => "width:670px; height:10px; float:left;" }
+      %hr{ :size => "1", :color => "midnightblue", :align => "center", :width => "98%" }
+    %div{ :name => "prop_dim_0" }
+      %div{ :name => "prop_dim_2_in" }
+        .NC_prop_box_text_1{ :style => "width:160px;" }
+          Directions principales :
+        .NC_prop_box_text_1{ :style => "width:160px;" }
+        %div{ :name => "prop_dim_3_in" }
+          .NC_prop_box_text_1{ :style => "width:160px;" }
+    %div{ :name => "prop_dim_2" }
+      .NC_prop_box_text_1{ :style => "width:50px;" }
+        %p
+          v1(x) =
+      .NC_prop_box_text_1{ :style => "width:100px;" }
+        %input#prop_mat_dir_1_x{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
+      .NC_prop_box_text_1{ :style => "width:50px;" }
+        %p
+          v1(y) =
+      .NC_prop_box_text_1{ :style => "width:100px;" }
+        %input#prop_mat_dir_1_y{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
+      %div{ :name => "prop_dim_3_in" }
+        .NC_prop_box_text_1{ :style => "width:50px;" }
+          %p
+            v1(z) =
+        .NC_prop_box_text_1{ :style => "width:100px;" }
+          %input#prop_mat_dir_1_z{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
+    %div{ :name => "prop_dim_2" }
+      .NC_prop_box_text_1{ :style => "width:50px;" }
+        %p
+          v2(x) =
+      .NC_prop_box_text_1{ :style => "width:100px;" }
+        %input#prop_mat_dir_2_x{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
+      .NC_prop_box_text_1{ :style => "width:50px;" }
+        %p
+          v2(y) =
+      .NC_prop_box_text_1{ :style => "width:100px;" }
+        %input#prop_mat_dir_2_y{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
+      %div{ :name => "prop_dim_3_in" }
+        .NC_prop_box_text_1{ :style => "width:50px;" }
+          %p
+            v2(z) =
+        .NC_prop_box_text_1{ :style => "width:100px;" }
+          %input#prop_mat_dir_2_z{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
+    %div{ :name => "prop_dim_3" }
+      .NC_prop_box_text_1{ :style => "width:50px;" }
+        %p
+          v3(x) =
+      .NC_prop_box_text_1{ :style => "width:100px;" }
+        %input#prop_mat_dir_3_x{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
+      .NC_prop_box_text_1{ :style => "width:50px;" }
+        %p
+          v3(y) =
+      .NC_prop_box_text_1{ :style => "width:100px;" }
+        %input#prop_mat_dir_3_y{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
+      %div{ :name => "prop_dim_3_in" }
+        .NC_prop_box_text_1{ :style => "width:50px;" }
+          %p
+            v3(z) =
+        .NC_prop_box_text_1{ :style => "width:100px;" }
+          %input#prop_mat_dir_3_z{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
+          
+  #prop_mat_generique.NC_prop_box.on
+    .NC_prop_box_text_1{ :style => "width:160px;" }
+      Masse volumique :
+    .NC_prop_box_text_1{ :style => "width:50px;" }
+      %p
+        m1 =
+    .NC_prop_box_text_1{ :style => "width:100px;" }
+      %input#prop_mat_rho{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
+    .NC_prop_box_text_1{ :style => "width:200px;" }
+    %div{ :name => "prop_dim_0" }
+      %div{ :name => "prop_dim_2_in" }
+        .NC_prop_box_text_1{ :style => "width:160px;" }
+      .NC_prop_box_text_1{ :style => "width:160px;" }
+        dilatation thermique :
+    %div{ :name => "prop_dim_1" }
+      %div{ :name => "prop_dim_2_in" }
+        .NC_prop_box_text_1{ :style => "width:130px;" }
+          %p
+            Selon V1
+      .NC_prop_box_text_1{ :style => "width:50px;" }
+        %p
+          a1 =
+      .NC_prop_box_text_1{ :style => "width:100px;" }
+        %input#prop_mat_alpha_1{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
+    %div{ :name => "prop_dim_2" }
+      %div{ :name => "prop_dim_2_in" }
+        .NC_prop_box_text_1{ :style => "width:130px;" }
+          %p
+            Selon V2
+      .NC_prop_box_text_1{ :style => "width:50px;" }
+        %p
+          a2 =
+      .NC_prop_box_text_1{ :style => "width:100px;" }
+        %input#prop_mat_alpha_2{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
+    %div{ :name => "prop_dim_3" }
+      %div{ :name => "prop_dim_3_in" }
+        .NC_prop_box_text_1{ :style => "width:130px;" }
+          %p
+            Selon V3
+      .NC_prop_box_text_1{ :style => "width:50px;" }
+        %p
+          a3 =
+      .NC_prop_box_text_1{ :style => "width:100px;" }
+        %input#prop_mat_alpha_3{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
+        
+  #prop_mat_elastique.NC_prop_box.off
+    %div{ :name => "prop_dim_0" }
+      %div{ :name => "prop_dim_2_in" }
+        .NC_prop_box_text_1{ :style => "width:160px;" }
+      .NC_prop_box_text_1{ :style => "width:160px;" }
+        Module d'Young :
+      .NC_prop_box_text_1{ :style => "width:160px;" }
+        Module de cisaillement :
+      .NC_prop_box_text_1{ :style => "width:160px;" }
+        Coefficient de poisson :
+      .NC_prop_box_text_1{ :style => "width:160px;" }
+        limite de rupture :
+    %div{ :name => "prop_dim_1" }
+      %div{ :name => "prop_dim_2_in" }
+        .NC_prop_box_text_1{ :style => "width:130px;" }
+          %p
+            Selon V1
+      .NC_prop_box_text_1{ :style => "width:50px;" }
+        %p
+          E1 =
+      .NC_prop_box_text_1{ :style => "width:100px;" }
+        %input#prop_mat_E_1{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
+      .NC_prop_box_text_1{ :style => "width:50px;" }
+        %p
+          c1 =
+      .NC_prop_box_text_1{ :style => "width:100px;" }
+        %input#prop_mat_cis_1{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
+      .NC_prop_box_text_1{ :style => "width:50px;" }
+        %p
+          mu12 =
+      .NC_prop_box_text_1{ :style => "width:100px;" }
+        %input#prop_mat_mu_12{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
+      .NC_prop_box_text_1{ :style => "width:50px;" }
+        %p
+          Sr1 =
+      .NC_prop_box_text_1{ :style => "width:100px;" }
+        %input#prop_mat_sigma_r_1{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
+    %div{ :name => "prop_dim_2" }
+      %div{ :name => "prop_dim_2_in" }
+        .NC_prop_box_text_1{ :style => "width:130px;" }
+          %p
+            Selon V2
+      .NC_prop_box_text_1{ :style => "width:50px;" }
+        %p
+          E2 =
+      .NC_prop_box_text_1{ :style => "width:100px;" }
+        %input#prop_mat_E_2{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
+      .NC_prop_box_text_1{ :style => "width:50px;" }
+        %p
+          c2 =
+      .NC_prop_box_text_1{ :style => "width:100px;" }
+        %input#prop_mat_cis_2{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
+      .NC_prop_box_text_1{ :style => "width:50px;" }
+        %p
+          mu23 =
+      .NC_prop_box_text_1{ :style => "width:100px;" }
+        %input#prop_mat_mu_23{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
+      .NC_prop_box_text_1{ :style => "width:50px;" }
+        %p
+          Sr2 =
+      .NC_prop_box_text_1{ :style => "width:100px;" }
+        %input#prop_mat_sigma_r_2{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
+    %div{ :name => "prop_dim_3" }
+      %div{ :name => "prop_dim_3_in" }
+        .NC_prop_box_text_1{ :style => "width:130px;" }
+          %p
+            Selon V3
+      .NC_prop_box_text_1{ :style => "width:50px;" }
+        %p
+          E3 =
+      .NC_prop_box_text_1{ :style => "width:100px;" }
+        %input#prop_mat_E_3{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
+      .NC_prop_box_text_1{ :style => "width:50px;" }
+        %p
+          c3 =
+      .NC_prop_box_text_1{ :style => "width:100px;" }
+        %input#prop_mat_cis_3{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
+      .NC_prop_box_text_1{ :style => "width:50px;" }
+        %p
+          mu31 =
+      .NC_prop_box_text_1{ :style => "width:100px;" }
+        %input#prop_mat_mu_31{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
+      .NC_prop_box_text_1{ :style => "width:50px;" }
+        %p
+          Sr3 =
+      .NC_prop_box_text_1{ :style => "width:100px;" }
+        %input#prop_mat_sigma_r_3{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
+        
+        
+  #prop_mat_plastique.NC_prop_box.off
+    %div{ :name => "prop_dim_0" }
+      %div{ :name => "prop_dim_2_in" }
+        .NC_prop_box_text_1{ :style => "width:160px;" }
+      .NC_prop_box_text_1{ :style => "width:160px;" }
+        limite de plasticité :
+      .NC_prop_box_text_1{ :style => "width:160px;" }
+        taux de plastification :
+      .NC_prop_box_text_1{ :style => "width:160px;" }
+        déformation plastique :
+    %div{ :name => "prop_dim_1" }
+      %div{ :name => "prop_dim_2_in" }
+        .NC_prop_box_text_1{ :style => "width:130px;" }
+          %p
+            Selon V1
+      .NC_prop_box_text_1{ :style => "width:50px;" }
+        %p
+          Sp1 =
+      .NC_prop_box_text_1{ :style => "width:100px;" }
+        %input#prop_mat_sigma_p_1{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
+      .NC_prop_box_text_1{ :style => "width:50px;" }
+        %p
+          dp1 =
+      .NC_prop_box_text_1{ :style => "width:100px;" }
+        %input#prop_mat_dp_1{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
+      .NC_prop_box_text_1{ :style => "width:50px;" }
+        %p
+          p1 =
+      .NC_prop_box_text_1{ :style => "width:100px;" }
+        %input#prop_mat_p_1{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
+    %div{ :name => "prop_dim_2" }
+      %div{ :name => "prop_dim_2_in" }
+        .NC_prop_box_text_1{ :style => "width:130px;" }
+          %p
+            Selon V2
+      .NC_prop_box_text_1{ :style => "width:50px;" }
+        %p
+          Sp2 =
+      .NC_prop_box_text_1{ :style => "width:100px;" }
+        %input#prop_mat_sigma_p_2{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
+      .NC_prop_box_text_1{ :style => "width:50px;" }
+        %p
+          dp2 =
+      .NC_prop_box_text_1{ :style => "width:100px;" }
+        %input#prop_mat_dp_2{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
+      .NC_prop_box_text_1{ :style => "width:50px;" }
+        %p
+          p2 =
+      .NC_prop_box_text_1{ :style => "width:100px;" }
+        %input#prop_mat_p_2{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
+    %div{ :name => "prop_dim_3" }
+      %div{ :name => "prop_dim_3_in" }
+        .NC_prop_box_text_1{ :style => "width:130px;" }
+          %p
+            Selon V3
+      .NC_prop_box_text_1{ :style => "width:50px;" }
+        %p
+          Sp3 =
+      .NC_prop_box_text_1{ :style => "width:100px;" }
+        %input#prop_mat_sigma_p_3{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
+      .NC_prop_box_text_1{ :style => "width:50px;" }
+        %p
+          dp3 =
+      .NC_prop_box_text_1{ :style => "width:100px;" }
+        %input#prop_mat_dp_3{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
+      .NC_prop_box_text_1{ :style => "width:50px;" }
+        %p
+          p3 =
+      .NC_prop_box_text_1{ :style => "width:100px;" }
+        %input#prop_mat_p_3{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
+        
+  #prop_mat_endomageable.NC_prop_box.off
+    %div{ :name => "prop_dim_0" }
+      %div{ :name => "prop_dim_2_in" }
+        .NC_prop_box_text_1{ :style => "width:160px;" }
+      .NC_prop_box_text_1{ :style => "width:160px;" }
+        limite d'endomagement :
+      .NC_prop_box_text_1{ :style => "width:160px;" }
+        endomagement :
+    %div{ :name => "prop_dim_1" }
+      %div{ :name => "prop_dim_2_in" }
+        .NC_prop_box_text_1{ :style => "width:130px;" }
+          %p
+            Selon V1
+      .NC_prop_box_text_1{ :style => "width:50px;" }
+        %p
+          Se1 =
+      .NC_prop_box_text_1{ :style => "width:100px;" }
+        %input#prop_mat_sigma_e_1{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
+      .NC_prop_box_text_1{ :style => "width:50px;" }
+        %p
+          e1 =
+      .NC_prop_box_text_1{ :style => "width:100px;" }
+        %input#prop_mat_ed_1{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
+    %div{ :name => "prop_dim_2" }
+      %div{ :name => "prop_dim_2_in" }
+        .NC_prop_box_text_1{ :style => "width:130px;" }
+          %p
+            Selon V2
+      .NC_prop_box_text_1{ :style => "width:50px;" }
+        %p
+          Se2 =
+      .NC_prop_box_text_1{ :style => "width:100px;" }
+        %input#prop_mat_sigma_e_2{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
+      .NC_prop_box_text_1{ :style => "width:50px;" }
+        %p
+          e2 =
+      .NC_prop_box_text_1{ :style => "width:100px;" }
+        %input#prop_mat_ed_2{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
+    %div{ :name => "prop_dim_3" }
+      %div{ :name => "prop_dim_3_in" }
+        .NC_prop_box_text_1{ :style => "width:130px;" }
+          %p
+            Selon V3
+      .NC_prop_box_text_1{ :style => "width:50px;" }
+        %p
+          Se3 =
+      .NC_prop_box_text_1{ :style => "width:100px;" }
+        %input#prop_mat_sigma_e_3{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
+      .NC_prop_box_text_1{ :style => "width:50px;" }
+        %p
+          e3 =
+      .NC_prop_box_text_1{ :style => "width:100px;" }
+        %input#prop_mat_ed_3{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
+        
+        
+  #prop_mat_visqueux.NC_prop_box.off
+    %div{ :name => "prop_dim_0" }
+      %div{ :name => "prop_dim_2_in" }
+        .NC_prop_box_text_1{ :style => "width:160px;" }
+    %div{ :name => "prop_dim_1" }
+      %div{ :name => "prop_dim_2_in" }
+        .NC_prop_box_text_1{ :style => "width:130px;" }
+          %p
+            Selon V1
+    %div{ :name => "prop_dim_2" }
+      %div{ :name => "prop_dim_2_in" }
+        .NC_prop_box_text_1{ :style => "width:130px;" }
+          %p
+            Selon V2
+    %div{ :name => "prop_dim_3" }
+      %div{ :name => "prop_dim_3_in" }
+        .NC_prop_box_text_1{ :style => "width:130px;" }
+          %p
+            Selon V3

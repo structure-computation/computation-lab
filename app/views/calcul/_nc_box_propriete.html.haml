@@ -7,6 +7,6 @@
       #NC_top_box_prop_3.NC_triangle_cote
   #NC_content_box_prop.NC_box_prop.off
     .NC_box_prop_height_min
-    / <?php include("./contenu/NC_etape_materiaux/prop_materiaux.php");  ?>
-    / <?php include("./contenu/NC_etape_liaisons/prop_liaisons.php");  ?>
-    / <?php include("./contenu/NC_etape_CLs/prop_CLs.php");  ?>
+    = render :partial => "calcul/NC_etape_materiaux/prop_materiaux"
+    = render :partial => "calcul/NC_etape_liaisons/prop_liaisons"
+    = render :partial => "calcul/NC_etape_CLs/prop_CLs"

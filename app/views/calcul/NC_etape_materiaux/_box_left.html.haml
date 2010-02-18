@@ -10,7 +10,7 @@
           %a{ :id => "mat_1a_#{i}", :onclick => "select_mat(#{i})", :style => "cursor: pointer;" }
             .tableNC_box_1{ :id => "mat_11_#{i}" }
             .tableNC_box_2{ :id => "mat_12_#{i}" }
-          %a{ :onclick => "", :style => "cursor: pointer;" }
+          %a{ :onclick => "info_select('mat',#{i})", :style => "cursor: pointer;" }
             .tableNC_box_4{ :id => "mat_14_#{i}" }
 
     .NC_filter{ :style => "width:248px; height:20px" }
