@@ -8,7 +8,7 @@ class CreateCalculResults < ActiveRecord::Migration
       t.string    :result_file_path
       t.string    :name
       t.text      :description
-      t.string    :type
+      t.string    :ctype
 #      t.integer   :timestep              non repris : parametres du calcul.
 #      t.integer   :timestep_numbers
 #      t.integer   :timestep_total_time

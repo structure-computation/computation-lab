@@ -177,7 +177,8 @@ function affiche_Tableau_init_select(){
 			if(id_init_key != null){
 				remplacerTexte(id_init_key, Tableau_init_select[key]);
 			}
-		}else if(id_init_key != null && key == 'type'){
+		}else if(id_init_key != null && key == 'ctype'){
+			id_init_key.value = Tableau_init_select[key];
 			if(Tableau_init_select[key]=='statique'){
 				document.getElementById('NC_init_non_statique').className = 'off';
 			}else{
@@ -269,6 +270,8 @@ function Tableau_init_add_step(){
 	
 	// ajout du step de chargement à touts les CL
 	for(i=0;i<Tableau_CL_select_volume.length;i++){
+		//test1=array2json(Tableau_CL_select_volume[i]);
+		//alert(test1);
 		Tableau_CL_select_volume[i]['step'][taille_Tableau_init_time_step] = clone(Tableau_CL_step);
 	}
 	for(i=0;i<Tableau_CL_select.length;i++){

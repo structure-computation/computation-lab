@@ -88,7 +88,7 @@ function prop_mat_affich_info(){
 				remplacerTexte(id_prop_key, prop_mat_for_info[key]);
 			}
 		}
-		if(key=='type'){
+		if(key=='mtype'){
 			var strContent_prop_isotrope = 'prop_mat_top_isotrope' ;
 			var strContent_prop_orthotrope = 'prop_mat_top_orthotrope'  ;
 			var id_prop_isotrope = document.getElementById(strContent_prop_isotrope);
@@ -450,7 +450,7 @@ function prop_CL_affich_info(){
 			if(id_prop_key != null){
 				remplacerTexte(id_prop_key, prop_CL_for_info[key]);
 			}
-		}else if(key=='type'){
+		}else if(key=='bctype'){
 			var strContent_prop_key = 'prop_CL_top_apply_on' ;
 			var id_prop_key = document.getElementById(strContent_prop_key);
 			var str_apply_on = new String();

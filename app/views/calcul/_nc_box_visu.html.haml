@@ -8,8 +8,8 @@
       
   #NC_content_box_visu.NC_box_visu.on
     #NC_box_visu_1.NC_box_content_visu
-      / %canvas#mainimg{ :height => "277px", :width => "639px" }
-      /  canvas
+      %canvas#mainimg{ :height => "277px", :width => "639px" }
+        canvas
     #NC_box_visu_bouton.NC_espace_bouton_visu
       #NC_box_visu_bouton_01.NC_bouton_visu_01
       #NC_box_visu_bouton_02.NC_bouton_visu_02{ :onmousedown => "fit_img( document.getElementById('mainimg') )" }
@@ -20,5 +20,5 @@
       #NC_box_visu_bouton_07.NC_bouton_visu_07
       #NC_box_visu_bouton_08.NC_bouton_visu_08
       #NC_box_visu_bouton_09.NC_bouton_visu_09
-/ %script
-/  $(document).ready( function() { img_init( document.getElementById("mainimg") ); } );
+%script
+  $(document).ready( function() { img_init( document.getElementById("mainimg") ); } );

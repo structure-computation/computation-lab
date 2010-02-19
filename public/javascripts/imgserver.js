@@ -3,7 +3,7 @@ var button = "none";
 var delay_send = 100;
 var want_z_sorting = false;
 var max_time_for_img_disp = 100;
-var address_php = "../cgi-bin/imgserver.cgi";
+var address_php = "/usr/lib/cgi-bin/imgserver.cgi";
 // about:config -> middlemouse.contentLoadURL;false
 
 function pos_part( x ) { if ( x >= 0 ) return x; return 0; }
@@ -28,6 +28,8 @@ function send_async_xml_http_request( url, func ) {
     xhr_object.onreadystatechange = function() {
         if( this.readyState == 4 && this.status == 200 )
             func( this.responseText );
+ 	if( this.readyState == 4 && this.status != 200 )
+            alert('pas de reponse');
     };
     xhr_object.send( null );
 }
@@ -533,6 +535,7 @@ function img_init( canvas ) {
     canvas.onmousewheel = img_mouse_wheel;
 
     // start new session. When ready, draw img
+    //alert(address_php + "?mode=newsession&w=" + canvas.width + "&h=" + canvas.height);
     send_async_xml_http_request( address_php + "?mode=newsession&w=" + canvas.width + "&h=" + canvas.height, function( rep ) {
         canvas.cam_data.img_session_id = rep;
         update_img_src( canvas );

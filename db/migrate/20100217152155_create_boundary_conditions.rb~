@@ -8,7 +8,7 @@ class CreateBoundaryConditions < ActiveRecord::Migration
 	  t.integer  :id_select
       t.string   :name_select
       t.text     :description
-	  t.string   :bctype						# volume, effort ou depl
+	  t.string   :cltype						# volume, effort ou depl
 	  t.string   :type_picto				# pour la visualisation du bon picto sur l'interface (poids, acceleration, centrifuge, effort ou depl)
 	 
       t.timestamps
