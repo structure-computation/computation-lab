@@ -1,17 +1,19 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  name: MyString
-  address: MyString
-  city: MyString
-  zipcode: MyString
-  country: MyString
-  division: MyString
+tf_avionics:
+  name: "TF Avionics"
+  address: 7 rue du jour
+  city: Toulouse
+  zipcode: 31000
+  country: France
+  division: Calcul
+  created_at: <%= 2.year.since.to_s %>
 
-two:
-  name: MyString
-  address: MyString
-  city: MyString
-  zipcode: MyString
-  country: MyString
-  division: MyString
+be_civil:
+  name: BE Building physics
+  address: 12 av du predident Wilson
+  city: Paris
+  zipcode: 75000
+  country: France
+  division: -
+  created_at: <%= 1.year.since.to_s %>
