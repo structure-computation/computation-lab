@@ -1,0 +1,29 @@
+#NC_page_CLs_2.off
+  .NC_top_box
+    Liste des bords
+  #page_CL_22.NC_box
+    .NC_filter{ :style => "width:248px; height:120px" }
+    /  <?php include("./contenu/NC_etape_CLs/NC_filter_bords.php");  ?>
+    - (0...20).each do |i|
+      .tableNC_impair
+        .tableNC_box_0{ :id => "bord_1_#{i}" }
+          %a{:id => "bord_1a_#{i}", :onclick => "select_bords_CL(#{i})", :style => "cursor: pointer;" }
+            .tableNC_box_retrait_10{ :id => "bord_1r_#{i}" }
+            .tableNC_box_1{ :id => "bord_11_#{i}" }
+            .tableNC_box_2{ :id => "bord_12_#{i}" }
+          %a{ :onclick => "visu_bord_select(#{i})", :style => "cursor: pointer;" }
+            .tableNC_box_3{ :id => "bord_13_#{i}" }
+
+    .NC_filter{ :style => "width:248px; height:20px" }
+      .NC_bottom_page_1.right
+        %a.page_select{ :onclick => "go_page_bord('first')", :style => "cursor: pointer;" }
+          <
+        page
+        - (0...5).each do |i|
+          %a{ :id => "bord_page_#{i}", :onclick => "go_page_bord(#{i})", :style => "cursor: pointer;" }
+            #{i}
+        %a.page_select{ :onclick => "go_page_bord('end')", :style => "cursor: pointer;" }
+          >
+
+/ %script{ :type => "text/javascript" }
+/   $(document).ready(get_Tableau_bord);

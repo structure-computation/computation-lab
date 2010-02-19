@@ -1,0 +1,267 @@
+body, div, h1, h2, h3, p, ul, li {
+  margin: 0;
+  padding: 0;
+  position: relative; }
+
+div.clearline {
+  clear: both; }
+
+body {
+  background-color: #f8f8f8;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 100%;
+  color: black;
+  line-height: 1;
+  text-align: center;
+  margin-top: 10px; }
+
+#conteneur {
+  background: transparent;
+  width: !contener_width;
+  margin: 0 auto; }
+
+#header_top {
+  background: transparent url('../images/header_top.png') no-repeat left top;
+  width: !header_width;
+  height: !header_top_height;
+  text-align: left;
+  float: left; }
+  #header_top #header_top_logo {
+    width: !header_logo_width;
+    height: !header_top_height;
+    text-align: left;
+    float: left; }
+  #header_top #header_top_societe {
+    width: 480px;
+    height: !header_top_height;
+    text-align: right;
+    padding: 10px 0px 0 0px;
+    color: #e5e5e5;
+    font-size: 0.80em;
+    font-weight: normal;
+    float: left; }
+  #header_top #header_top_temp {
+    width: 10px;
+    height: !header_top_height;
+    float: left; }
+  #header_top #header_top_user {
+    width: 125px;
+    height: !header_top_height;
+    text-align: right;
+    padding: 10px 0px 0 0px;
+    color: #e5e5e5;
+    font-size: 0.80em;
+    font-weight: normal;
+    float: left; }
+
+#header_menu {
+  background: transparent url('../images/header_menu.png') no-repeat left top;
+  width: !header_width;
+  height: !header_menu_height;
+  text-align: left;
+  float: left; }
+  #header_menu #header_profil_1 {
+    width: 315px;
+    height: !header_menu_height;
+    text-align: right;
+    padding: 0px 0px 0px 0px;
+    color: #b8b9c3;
+    font-size: 0.70em;
+    font-weight: 100;
+    float: left; }
+  #header_menu #header_profil_2 {
+    width: 65px;
+    height: !header_menu_height;
+    text-align: right;
+    padding: 18px 0px 0px 0px;
+    color: #b8b9c3;
+    font-size: 0.70em;
+    font-weight: 100;
+    float: left; }
+  #header_menu #menu {
+    width: 550px;
+    height: 35px;
+    background: transparent;
+    float: left;
+    margin: 0px 0px 0 1px; }
+    #header_menu #menu li {
+      list-style-type: none;
+      float: left;
+      width: 125px;
+      height: 35px;
+      background: transparent;
+      line-height: 35px;
+      margin: 0px 0px 0 0px;
+      padding: 5px 0px 0 0px;
+      text-align: center; }
+  #header_menu #mAccueil.selected, #header_menu #mSCmanage.selected, #header_menu #mSCproject.selected, #header_menu #mSCcompute.selected {
+    background: transparent url('../images/header_menu_selected.png') no-repeat left top; }
+  #header_menu #menu li a {
+    font-size: 0.80em;
+    font-weight: normal;
+    color: #e5e5e5;
+    text-decoration: none;
+    display: block; }
+  #header_menu #menu li.selected a {
+    color: #2a3556; }
+  #header_menu #menu li a:hover {
+    color: #ffdb00; }
+  #header_menu #menu li.selected a:hover {
+    color: #2a3556; }
+
+#header_barre_bas {
+  background: transparent url('../images/header_barre_bas.png') no-repeat left top;
+  width: !header_width;
+  height: 2px;
+  text-align: left;
+  float: left; }
+
+#path_bar {
+  background: transparent url('../images/path_bar.png') no-repeat left top;
+  width: !header_width;
+  height: 27px;
+  float: left; }
+
+#path_bar_1 {
+  width: 42px;
+  height: 27px;
+  float: left; }
+
+#path_bar_2 {
+  width: 900px;
+  height: 27px;
+  line-height: 29px;
+  text-align: left;
+  font-size: 0.5em;
+  vertical-align: middle;
+  float: left; }
+
+#footer_top {
+  width: 945px;
+  height: 49px;
+  text-align: left;
+  background: transparent url('../images/footer_top.png') no-repeat left top;
+  float: left; }
+
+#black_footer_top.black {
+  position: absolute;
+  z-index: 10;
+  width: 945px;
+  height: 49px;
+  background: transparent url('../images/black_footer_top.png') no-repeat top left;
+  filter: Alpha(opacity=50);
+  -moz-opacity: .50;
+  -khtml-opacity: 0.50;
+  opacity: .50; }
+
+#footer {
+  position: relative;
+  background: transparent url('../images/footer.png') no-repeat top left;
+  height: 31px;
+  width: 945px;
+  float: left; }
+
+#black_footer.black {
+  position: absolute;
+  z-index: 10;
+  width: 945px;
+  height: 31px;
+  background: transparent url('../images/black_footer.png') no-repeat top left;
+  filter: Alpha(opacity=50);
+  -moz-opacity: .50;
+  -khtml-opacity: 0.50;
+  opacity: .50; }
+
+#footer p {
+  color: #C8C8C8;
+  text-decoration: none;
+  line-height: 20px;
+  text-align: left;
+  font-size: 0.6em;
+  margin-left: 12px;
+  float: left; }
+#footer a {
+  color: #C8C8C8;
+  text-decoration: none;
+  line-height: 20px;
+  text-align: left;
+  font-size: 0.6em;
+  margin-left: 12px;
+  float: left;
+  position: absolute;
+  right: 18px;
+  text-decoration: underline; }
+  #footer a:hover {
+    text-decoration: none; }
+
+#content {
+  width: !content_width;
+  text-align: left;
+  background: transparent url('../images/conteneur_milieu.png') repeat-y left top;
+  float: left; }
+
+.black {
+  position: absolute;
+  z-index: 10;
+  width: 940px;
+  height: 100%;
+  background-color: black;
+  filter: Alpha(opacity=50);
+  -moz-opacity: .50;
+  -khtml-opacity: 0.50;
+  opacity: .50; }
+
+#contentleft {
+  width: !content_left_width;
+  text-align: left;
+  background: transparent;
+  float: left; }
+
+#contentright {
+  width: !content_right_width;
+  text-align: left;
+  background: transparent;
+  float: left; }
+
+.contentheightmin {
+  height: !content_height_min;
+  background: transparent;
+  float: left; }
+
+#leftBox {
+  background: transparent url('../images/left_box_header_Bg.png') no-repeat top left;
+  width: !leftbox_width;
+  margin: 0px 0px 0 0;
+  float: left; }
+  #leftBox h2 {
+    width: !leftbox_width;
+    height: 19px;
+    font-weight: normal;
+    font-size: 0.8em;
+    color: black;
+    padding: 10px 0 0 0px;
+    text-align: center; }
+
+#leftBoxcontent {
+  background: transparent url('../images/left_box_side_Bg.png') repeat-y left top;
+  width: !leftbox_width;
+  float: left; }
+
+#tableleftBox {
+  width: 177px;
+  margin: 3px 0px 0px 15px;
+  font-weight: 100;
+  font-size: 0.75em;
+  color: #696969;
+  border: none;
+  border-collapse: collapse; }
+  #tableleftBox tr {
+    height: 20px; }
+    #tableleftBox tr a {
+      text-decoration: underline; }
+
+#leftBoxfoot {
+  background: transparent url('../images/left_box_bottom_Bg.png') no-repeat top left;
+  width: !leftbox_width;
+  height: 15px;
+  float: left; }

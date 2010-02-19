@@ -1,0 +1,64 @@
+#NC_page_CLs_1.off
+  .NC_top_box
+    Bibliothèque des CLs
+  #page_CL_12.NC_box
+    .NC_CL_titre_actif
+      Efforts volumiques
+    .NC_CL_titre_actif_1
+      .tableNC_CL_pair
+        #CLv_1_0.tableNC_box_0_CLv
+          %a{ :onclick => "select_CL_vol(0)", :style => "cursor: pointer;" }
+            #CLv_11_0.tableNC_box_1
+            #CLv_12_0.tableNC_box_2
+          %a{ :onclick => "info_select('CLv',0)", :style => "cursor: pointer;" }
+            #CLv_14_0.tableNC_box_4
+          .tableNC_box_3_CLv
+            %input#CLv_13_0{ :type => "checkbox", :onclick => "select_CL_vol(0)" }
+      .tableNC_CL_impair
+        #CLv_1_1.tableNC_box_0_CLv
+          %a{ :onclick => "select_CL_vol(1)", :style => "cursor: pointer;" }
+            #CLv_11_1.tableNC_box_1
+            #CLv_12_1.tableNC_box_2
+          %a{ :onclick => "info_select('CLv',1)", :style => "cursor: pointer;" }
+            #CLv_14_1.tableNC_box_4
+          .tableNC_box_3_CLv
+            %input#CLv_13_1{ :type => "checkbox", :onclick => "select_CL_vol(1)" }
+      .tableNC_CL_pair
+        #CLv_1_2.tableNC_box_0_CLv
+          %a{ :onclick => "select_CL_vol(2)", :style => "cursor: pointer;" }
+            #CLv_11_2.tableNC_box_1
+            #CLv_12_2.tableNC_box_2
+          %a{ :onclick => "info_select('CLv',2)", :style => "cursor: pointer;" }
+            #CLv_14_2.tableNC_box_4
+          .tableNC_box_3_CLv
+            %input#CLv_13_2{ :type => "checkbox", :onclick => "select_CL_vol(2)" }
+            
+    %div{ :style => "width:248px; height:192px; float:left;" }
+    .NC_CL_titre
+      Conditions Limites en effort
+    - (0...3).each do |i|
+      .tableNC_impair
+        .tableNC_box_0{ :id => "CL_1_#{i}" }
+          %a{ :onclick => "select_CL(#{i})", :style => "cursor: pointer;" }
+            .tableNC_box_1{ :id => "CL_11_#{i}" }
+            .tableNC_box_2{ :id => "CL_12_#{i}" }
+          %a{ :onclick => "info_select('CL',#{i})", :style => "cursor: pointer;" }
+            .tableNC_box_4{ :id => "CL_14_#{i}" }
+
+    %div{ :style => "width:248px; height:22px; float:left;" }
+    .NC_CL_titre
+      Conditions Limites en déplacement
+    - (3...7).each do |i|
+      .tableNC_impair
+        .tableNC_box_0{ :id => "CL_1_#{i}" }
+          %a{ :onclick => "select_CL(#{i})", :style => "cursor: pointer;" }
+            .tableNC_box_1{ :id => "CL_11_#{i}" }
+            .tableNC_box_2{ :id => "CL_12_#{i}" }
+          %a{ :onclick => "info_select('CL',#{i})", :style => "cursor: pointer;" }
+            .tableNC_box_4{ :id => "CL_14_#{i}" }
+              
+    %div{ :style => "width:248px; height:23px; float:left;" }
+    .NC_filter{ :style => "width:248px; height:20px" }
+      
+-# %script{ :type => "text/javascript" }
+-#   $(document).ready(get_Tableau_CL);

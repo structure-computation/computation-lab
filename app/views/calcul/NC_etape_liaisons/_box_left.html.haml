@@ -1,0 +1,27 @@
+#NC_page_liaisons_1.off
+  .NC_top_box
+    Bibliothèque des liaisons
+  #page_liaison_12.NC_box
+    .NC_filter{ :style => "width:248px; height:120px" }
+    /  <?php include("./contenu/NC_etape_liaisons/NC_filter_liaison.php");  ?>
+    - (0...20).each do |i|
+      .tableNC_impair
+        .tableNC_box_0{ :id => "liaison_1_#{i}" }
+          %a{ :id => "liaison_1a_#{i}", :onclick => "select_liaison(#{i})", :style => "cursor: pointer;" }
+            .tableNC_box_1{ :id => "liaison_11_#{i}" }
+            .tableNC_box_2{ :id => "liaison_12_#{i}" }
+          %a{ :onclick => "info_select('liaison',#{i})", :style => "cursor: pointer;" }
+            .tableNC_box_4{ :id => "liaison_14_#{i}" }
+
+    .NC_filter{ :style => "width:248px; height:20px" }
+      .NC_bottom_page_1.left
+        %a.page_select{ :onclick => "go_page_liaison('first')", :style => "cursor: pointer;" }
+          <
+        page
+        - (0...5).each do |i|
+          %a{ :id => "liaison_page_#{i}", :onclick => "go_page_liaison(#{i})", :style => "cursor: pointer;" }
+            #{i}
+        %a.page_select{ :onclick => "go_page_liaison('end')", :style => "cursor: pointer;" }
+          >
+-# %script{ :type => "text/javascript" }
+-#   $(document).ready(get_Tableau_liaison);

@@ -1,0 +1,33 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<!DOCTYPE KDevPrjSession>
+<KDevPrjSession>
+ <DocsAndViews NumberOfDocuments="6" >
+  <Doc0 NumberOfViews="1" URL="file:///home/jeremie/developpement/SC_Interface/app/views/calcul/index.html.haml" >
+   <View0 Encoding="" line="0" Type="Source" />
+  </Doc0>
+  <Doc1 NumberOfViews="1" URL="file:///home/jeremie/developpement/SC_Interface/app/controllers/calcul_controller.rb" >
+   <View0 Encoding="" line="17" Type="Source" />
+  </Doc1>
+  <Doc2 NumberOfViews="1" URL="file:///home/jeremie/developpement/SC_Interface/public/javascripts/NC_etape_initialisation/functions_init.js" >
+   <View0 Encoding="" line="180" Type="Source" />
+  </Doc2>
+  <Doc3 NumberOfViews="1" URL="file:///home/jeremie/developpement/SC_Interface/app/views/calcul/NC_etape_initialisation/_box_active.html.haml" >
+   <View0 Encoding="" line="25" Type="Source" />
+  </Doc3>
+  <Doc4 NumberOfViews="1" URL="file:///home/jeremie/developpement/SC_Interface/app/views/calcul/_nc_box_visu.html.haml" >
+   <View0 Encoding="" line="10" Type="Source" />
+  </Doc4>
+  <Doc5 NumberOfViews="1" URL="file:///home/jeremie/developpement/SC_Interface/public/javascripts/imgserver.js" >
+   <View0 Encoding="" line="5" Type="Source" />
+  </Doc5>
+ </DocsAndViews>
+ <pluginList>
+  <kdevbookmarks>
+   <bookmarks/>
+  </kdevbookmarks>
+  <kdevrbdebugger>
+   <breakpointList/>
+   <watchExpressions/>
+  </kdevrbdebugger>
+ </pluginList>
+</KDevPrjSession>

@@ -1,0 +1,44 @@
+#NC_page_options_active_2.off
+  .NC_top_active_box{ :style => "margin-top:3px;" }
+    %div{ :style => "float: left; width: 70px; height: 27px;" }
+    %div{ :style => "float: left; width: 532px; height: 27px;" }
+      Convergence de la méthode LATIN
+    %a{ :onclick => "affich_box_opt(1)", :style => "cursor: pointer;" }
+      #NC_top_box_opt_1.NC_triangle_bas
+
+  #NC_options_active_box_1.NC_active_box_opt_1
+    %form{ :name => "form_opt_1" }
+      .NC_active_box_opt_i
+      .NC_active_box_opt_j
+      .NC_active_box_opt_i
+        Nombre d'itération maximum :
+      .NC_active_box_opt_j
+        %input#opt_LATIN_nb_iter{ :type => "text", :value => "300", :onKeyup => "change_opt_value('LATIN_nb_iter')" }
+      .NC_active_box_opt_i
+      .NC_active_box_opt_j
+      .NC_active_box_opt_i
+        taux de convergence de la méthode :
+      .NC_active_box_opt_j
+        %input#opt_LATIN_conv{ :type => "text", :value => "0,0001", :onKeyup => "change_opt_value('LATIN_conv')" }
+        
+  .NC_top_active_box{ :style => "margin-top:3px;" }
+    %div{ :style => "float: left; width: 70px; height: 27px;" }
+    %div{ :style => "float: left; width: 532px; height: 27px;" }
+      Précision du calcul
+    %a{ :onclick => "affich_box_opt(2)", :style => "cursor: pointer;" }
+      #NC_top_box_opt_2.NC_triangle_bas
+
+  #NC_options_active_box_2.NC_active_box_opt_1
+    %form{ :name => "form_opt_1" }
+      .NC_active_box_opt_i
+      .NC_active_box_opt_j
+      .NC_active_box_opt_i
+        Nombre de niveau maximum (zoom) :
+      .NC_active_box_opt_j
+        %input#opt_PREC_nb_niveaux{ :type => "text", :value => "4", :onKeyup => "change_opt_value('PREC_nb_niveaux')" }
+      .NC_active_box_opt_i
+      .NC_active_box_opt_j
+      .NC_active_box_opt_i
+        Niveau Erreur de modèle (%) :
+      .NC_active_box_opt_j
+        %input#opt_PREC_erreur{ :type => "text", :value => "20", :onKeyup => "change_opt_value('PREC_erreur')" }

@@ -1,0 +1,64 @@
+#NC_page_liaisons_active_2.off{ :style => "width:674px;" }
+  %div{ :style => "width:337px; float:left;" }
+    .NC_top_active_twin_box{ :style => "margin-top:3px;" }
+      Liaisons sélectionnées
+    #NC_liaison_active_twin_box_1.NC_active_twin_box.on
+      - (0...9).each do |i|
+        .tableNC_twin_pair
+          .tableNC_twin_box_0{     :id => "liaison_twin_1_#{i}" }
+            %a{ :id => "liaison_twin_1a_#{i}", :onclick => "active_liaison_select(#{i})", :style => "cursor: pointer;" }
+              %div{                :id => "liaison_twin_1r_#{i}"}
+              .tableNC_box_1{      :id => "liaison_twin_11_#{i}"}
+              .tableNC_twin_box_2{ :id => "liaison_twin_12_#{i}"}
+            %a{ :onclick => "visu_liaison_select(#{i})",        :style => "cursor: pointer;" }
+              .tableNC_box_3{      :id => "liaison_twin_13_#{i}"}
+            %a{ :onclick => "info_select('liaison_twin',#{i})", :style => "cursor: pointer;" }
+              .tableNC_box_4{      :id => "liaison_twin_14_#{i}"}
+
+      .NC_active_bottom{ :style => "width:333px;" }
+        .NC_bottom_page_1.left
+          %a.page_select{ :onclick => "go_page_liaison_select('first')", :style => "cursor: pointer;" }
+            <
+          page
+          - (0...5).each do |i|
+            %a{:id => "liaison_twin_1page_#{i}", :onclick => "go_page_liaison_select(#{i})", :style => "cursor: pointer;" }
+              #{i}
+          %a.page_select{ :onclick => "go_page_liaison_select('end')",   :style => "cursor: pointer;" }
+            >
+        .NC_bottom_page_2.right
+          %a.NC_bottom_button{ :onclick => "suppr_liaison_select()",     :style => "cursor: pointer;" }
+            supprimer x
+            
+  %div{ :style => "width:337px; float:left;" }
+    .NC_top_active_twin_box{ :style => "margin-top:3px;" }
+      Interfaces associées à la liaison active
+    #NC_liaison_active_twin_box_2.NC_active_twin_box.on
+      - (0...9).each do |i|
+        .tableNC_twin_pair
+          .tableNC_twin_box_0{     :id => "interface_twin_1_#{i}" }
+            %a{ :id => "interface_twin_1a_#{i}", :onclick => "info_select('interface_twin',#{i})", :style => "cursor: pointer;" }
+              %div{                :id => "interface_twin_1r_#{i}"}
+              .tableNC_box_1{      :id => "interface_twin_11_#{i}"}
+              .tableNC_twin_box_2{ :id => "interface_twin_12_#{i}"}
+            %a{ :onclick => "visu_interface_select(#{i})",        :style => "cursor: pointer;" }
+              .tableNC_box_3{      :id => "interface_twin_13_#{i}"}
+            %a{ :onclick => "info_select('interface_twin',#{i})", :style => "cursor: pointer;" }
+              .tableNC_box_4{      :id => "interface_twin_14_#{i}"}
+
+      .NC_active_bottom{ :style => "width:333px;" }
+        .NC_bottom_page_1.left
+          %a.page_select{ :onclick => "go_page_interface_select('first')", :style => "cursor: pointer;" }
+            <
+          page
+          - (0...5).each do |i|
+            %a{:id => "interface_twin_2page_#{i}", :onclick => "go_page_interface_select(#{i})", :style => "cursor: pointer;" }
+              #{i}
+          %a.page_select{ :onclick => "go_page_interface_select('end')",   :style => "cursor: pointer;" }
+            >
+        .NC_bottom_page_2.right
+          %a.NC_bottom_button{ :onclick => "suppr_interface_select()",     :style => "cursor: pointer;" }
+            supprimer x
+                       
+%script{ :type => "text/javascript" }
+  affiche_Tableau_liaison_select();
+  affiche_Tableau_interface_select();

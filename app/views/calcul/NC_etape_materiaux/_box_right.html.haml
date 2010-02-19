@@ -1,0 +1,29 @@
+#NC_page_materiaux_2.off
+  .NC_top_box
+    Liste des pièces
+  #page_mat_22.NC_box
+    .NC_filter{ :style => "width:248px; height:120px" }
+    /  <?php include("./contenu/NC_etape_materiaux/NC_filter_pieces.php");  ?>
+    - (0...20).each do |i|
+      .tableNC_impair
+        .tableNC_box_0{ :id => "piece_1_#{i}" }
+          %a{:id => "piece_1a_#{i}", :onclick => "select_pieces_mat(#{i})", :style => "cursor: pointer;" }
+            .tableNC_box_retrait_10{ :id => "piece_1r_#{i}" }
+            .tableNC_box_1{ :id => "piece_11_#{i}" }
+            .tableNC_box_2{ :id => "piece_12_#{i}" }
+          %a{ :onclick => "visu_piece_select(#{i})", :style => "cursor: pointer;" }
+            .tableNC_box_3{ :id => "piece_13_#{i}" }
+
+    .NC_filter{ :style => "width:248px; height:20px" }
+      .NC_bottom_page_1.right
+        %a.page_select{ :onclick => "go_page_piece('first')", :style => "cursor: pointer;" }
+          <
+        page
+        - (0...5).each do |i|
+          %a{ :id => "piece_page_#{i}", :onclick => "go_page_piece(#{i})", :style => "cursor: pointer;" }
+            #{i}
+        %a.page_select{ :onclick => "go_page_piece('end')", :style => "cursor: pointer;" }
+          >
+
+/ %script{ :type => "text/javascript" }
+/   $(document).ready(get_Tableau_piece);

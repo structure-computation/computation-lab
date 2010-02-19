@@ -9,7 +9,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100112215706) do
+ActiveRecord::Schema.define(:version => 20100217152155) do
+
+  create_table "boundary_conditions", :force => true do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.integer  "ref"
+    t.integer  "id_select"
+    t.string   "name_select"
+    t.text     "description"
+    t.string   "bctype"
+    t.string   "type_picto"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "calcul_accounts", :force => true do |t|
     t.integer  "company_id"
@@ -30,7 +44,7 @@ ActiveRecord::Schema.define(:version => 20100112215706) do
     t.string   "result_file_path"
     t.string   "name"
     t.text     "description"
-    t.string   "type"
+    t.string   "ctype"
     t.string   "state"
     t.integer  "cpu_second_used"
     t.integer  "gpu_second_used"
@@ -52,6 +66,29 @@ ActiveRecord::Schema.define(:version => 20100112215706) do
     t.datetime "updated_at"
   end
 
+  create_table "links", :force => true do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.integer  "reference"
+    t.integer  "id_select"
+    t.string   "name_select"
+    t.text     "description"
+    t.string   "comp_generique"
+    t.string   "comp_complexe"
+    t.integer  "type_num"
+    t.float    "Ep"
+    t.float    "jeux"
+    t.float    "R"
+    t.float    "f"
+    t.float    "Lp"
+    t.float    "Dp"
+    t.float    "p"
+    t.float    "Lr"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "log_calculs", :force => true do |t|
     t.integer  "sc_model_id"
     t.integer  "user_id"
@@ -65,6 +102,61 @@ ActiveRecord::Schema.define(:version => 20100112215706) do
     t.string   "log_type"
     t.integer  "en_forfait"
     t.integer  "hors_forfait"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "materials", :force => true do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.integer  "reference"
+    t.integer  "id_select"
+    t.string   "name_select"
+    t.text     "description"
+    t.string   "mtype"
+    t.string   "comp"
+    t.integer  "type_num"
+    t.float    "dir_1_x"
+    t.float    "dir_2_x"
+    t.float    "dir_3_x"
+    t.float    "dir_1_y"
+    t.float    "dir_2_y"
+    t.float    "dir_3_y"
+    t.float    "dir_1_z"
+    t.float    "dir_2_z"
+    t.float    "dir_3_z"
+    t.float    "E_1"
+    t.float    "E_2"
+    t.float    "E_3"
+    t.float    "cis_1"
+    t.float    "cis_2"
+    t.float    "cis_3"
+    t.float    "mu_12"
+    t.float    "mu_23"
+    t.float    "mu_31"
+    t.float    "alpha_1"
+    t.float    "alpha_2"
+    t.float    "alpha_3"
+    t.float    "rho"
+    t.float    "sigma_p_1"
+    t.float    "sigma_p_2"
+    t.float    "sigma_p_3"
+    t.float    "sigma_r_1"
+    t.float    "sigma_r_2"
+    t.float    "sigma_r_3"
+    t.float    "sigma_e_1"
+    t.float    "sigma_e_2"
+    t.float    "sigma_e_3"
+    t.float    "dp_1"
+    t.float    "dp_2"
+    t.float    "dp_3"
+    t.float    "p_1"
+    t.float    "p_2"
+    t.float    "p_3"
+    t.float    "ed_1"
+    t.float    "ed_2"
+    t.float    "ed_3"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
