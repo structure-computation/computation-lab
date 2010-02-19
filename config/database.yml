@@ -28,3 +28,13 @@ production:
   encoding: utf8
   pool: 10
   # password: u7N5TeqPXt4pxtjX
+
+test:  
+  adapter: mysql
+  database: structcompTest
+  timeout: 5000
+  username: structcomp
+  host: localhost
+  encoding: utf8
+  pool: 10
+  # password: u7N5TeqPXt4pxtjX
