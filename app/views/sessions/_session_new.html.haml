@@ -1,0 +1,28 @@
+#NM_wiz_layer.on
+  #NM_wiz_layer_top
+    Accédez à votre espace calcul
+  #NM_wiz_layer_milieu
+        
+      
+    %div{ :style => "width: 300px; height:300px; margin: 100px 0px 0 213px;" }
+      #login_format
+        - form_tag session_path do
+          %p= label_tag 'login'
+          = text_field_tag 'login', @login
+          %br
+          %br
+          %p= label_tag 'password'
+          = password_field_tag 'password', nil
+
+          -# %p= label_tag 'remember_me', 'Remember me'
+          -# = check_box_tag 'remember_me', '1', @remember_me
+
+          -# %p= submit_tag 'Log in' 
+
+  #NM_wiz_layer_bas
+    %a{ :href => "#", :onclick => "" } 
+      #NM_create_bouton_jaune
+        Annuler
+    %a{ :href => "#", :onclick => "" }
+      #NM_footer_bouton_suivant.NM_footer_top_bouton{ :style => "margin-right:5px;" }
+        Log in

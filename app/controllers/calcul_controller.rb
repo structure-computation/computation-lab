@@ -69,5 +69,4 @@ class CalculController < ApplicationController
     end
   end
 
-
 end

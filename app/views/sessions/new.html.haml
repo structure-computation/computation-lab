@@ -1,0 +1,11 @@
+/ Vue Index des modeles.
+/ wizard création de projet en premier plan
+.contentheightmin
+#bl_5.black.off
+/ wizard de creation d'un nouveau modele
+= render :partial => "session_new"
+
+%script{ :type => "text/javascript" }
+  $(document).ready(displayBlack('on'));
+
+

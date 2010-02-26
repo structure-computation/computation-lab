@@ -3,7 +3,7 @@ var button = "none";
 var delay_send = 100;
 var want_z_sorting = false;
 var max_time_for_img_disp = 100;
-var address_php = "/usr/lib/cgi-bin/imgserver.cgi";
+var address_php = "/cgi-bin/imgserver.cgi";
 // about:config -> middlemouse.contentLoadURL;false
 
 function pos_part( x ) { if ( x >= 0 ) return x; return 0; }
@@ -32,6 +32,7 @@ function send_async_xml_http_request( url, func ) {
             alert('pas de reponse');
     };
     xhr_object.send( null );
+    //$.get(url,func);
 }
 
 function get_eye_pos( cam_data ) {
