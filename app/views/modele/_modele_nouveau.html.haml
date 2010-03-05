@@ -1,4 +1,3 @@
-
 #NM_wiz_layer.off
   #NM_wiz_layer_top
     Création d'un nouveau modèle
@@ -29,35 +28,44 @@
         soit correctement réalisé par SCcompute.
         %br
         %br
-        A l'étape suivante vous pourrez télécharger votre modèle ainsi qu'une image le représentant. Les données de ce modèle seront lues automatiquement.
- 
+        / A l'étape suivante vous pourrez télécharger votre modèle ainsi qu'une image le représentant. Les données de ce modèle seront lues automatiquement.
+        / - form_tag ({:action => 'upload'}, {:multipart => true}) do
+        / .NM_bleu{ :style => "width: 600px; height: 20px;  margin: 20px 0px 0 63px;" }
+        /   Charger le modèle :
+        / .NM_text_1{ :style => "width:63px;" }
+        / .NM_text_1{ :style => "width:500px;" }
+        /   = file_field_tag :fichier
+        / -#  /%input#upload{:name => "upload", :type => "file", :value => "emplacement du fichier"}
+        / .NM_text_1{ :style => "width:100px;" }
+        /   = submit_tag :upload 
+        / -#  /%input{:type=>"submit",:value=>"upload"}
+        / .NM_text_1{ :style => "width:400px;" }
+      .NM_bleu{ :style => "width: 600px; height: 20px;  margin: 20px 0px 0 63px;" }
+        Charger le modèle :
+      .NM_text_1{ :style => "width:63px;" }
+      .NM_text_1{ :style => "width:500px;" }
+        %input#fichier{:name => "fichier", :type => "file"}
+
     / page fichier et description
     #NM_page_fichier
-      %div{ :style => "width:700px; height:50px" }
+      %div{ :style => "width:700px; height:100px" }
       .NM_text_1{ :style => "width:200px;" }
         Nom du modèle :
       .NM_text_1{ :style => "width:500px;" }
         %input#NM_name{ :type => "text", :value => "premier calcul", :onKeyup => "Tableau_init_change_value()" }
-      .NM_text_1{ :style => "width:200px;" }
-        Charger le modèle :
-      .NM_text_1{ :style => "width:500px;" }
-        %input#NM_model{ :type => "file", :value => "emplacement du fichier", :onKeyup => "Tableau_init_change_value()" }
-      .NM_text_1{ :style => "width:200px;" }
-        Charger Une image :
-      .NM_text_1{ :style => "width:500px;" }
-        %input#NM_image{ :type => "file", :value => "emplacement du fichier", :onKeyup => "Tableau_init_change_value()" }
+        / %input#NM_image{ :type => "file", :value => "emplacement du fichier", :onKeyup => "Tableau_init_change_value()" }
       .NM_text_2{ :style => "width:200px;" }
         Description :
       .NM_text_2{ :style => "width:500px;" }
         %textarea#NM_description{ :onKeyup => "Tableau_init_change_value()" }
-      .NM_fond_gris{ :style => "width: 600px; margin: 5px 0px 0 63px;" }
-        L'ensemble de nos logiciels travail sur le modèle.
+      /.NM_fond_gris{ :style => "width: 600px; margin: 5px 0px 0 63px;" }
+      /  L'ensemble de nos logiciels travail sur le modèle.
  
     / page résumé
     #NM_page_resume
 
   #NM_wiz_layer_bas
-    %a{ :href => "#", :onclick => "displayNewModel('off')" } 
+    %a{ :style => "cursor: pointer;", :onclick => "displayNewModel('off')" } 
       #NM_create_bouton_jaune
         Annuler
     %a{ :onclick => "NM_next_stape()", :style => "cursor: pointer;" } 
@@ -66,3 +74,5 @@
     %a{ :onclick => "NM_previous_stape()", :style => "cursor: pointer;" } 
       #NM_footer_bouton_precedent.NM_footer_top_bouton
         Précédent
+  %script{ :type => "text/javascript" }
+    $(document).ready(UploadAsyncrone);

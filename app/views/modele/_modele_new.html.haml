@@ -30,6 +30,9 @@
  
     / page fichier et description
     #NM_page_fichier
+      %form{:action=>"/upload",:method=>"post",:enctype=>"multipart/form-data"}
+
+
       %div{ :style => "width:700px; height:50px" }
       .NM_text_1{ :style => "width:200px;" }
         Nom du modèle :
@@ -38,11 +41,12 @@
       .NM_text_1{ :style => "width:200px;" }
         Charger le modèle :
       .NM_text_1{ :style => "width:500px;" }
-        %input#NM_model{ :type => "file", :value => "emplacement du fichier", :onKeyup => "Tableau_init_change_value()" }
-      .NM_text_1{ :style => "width:200px;" }
-        Charger Une image :
-      .NM_text_1{ :style => "width:500px;" }
-        %input#NM_image{ :type => "file", :value => "emplacement du fichier", :onKeyup => "Tableau_init_change_value()" }
+        %input#NM_model{ :type => "file", :value => "emplacement du fichier" }
+          = file_field_tag :fichier
+      / .NM_text_1{ :style => "width:200px;" }
+      /  Charger Une image :
+      / .NM_text_1{ :style => "width:500px;" }
+      /  %input#NM_image{ :type => "file", :value => "emplacement du fichier", :onKeyup => "Tableau_init_change_value()" }
       .NM_text_2{ :style => "width:200px;" }
         Description :
       .NM_text_2{ :style => "width:500px;" }

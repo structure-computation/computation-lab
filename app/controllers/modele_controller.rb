@@ -5,7 +5,7 @@ class ModeleController < ApplicationController
     # Creation d'un projet et de plusieurs SC_modeles pour tester le comportement du tableau.
     @project = Project.new(:name => "Nom projet")
     @modeles = []
-    (1..15).each{ |i|
+    (1..5).each{ |i|
       modele =    ScModel.new(:name              => "Nom modele " + i.to_s, :user_id           => 0, 
                               :project_id        => 0,              :model_file_path   => "/test/modele", 
                               :image_path        => "/test/image",  :description       => "Modele de test numero " + i.to_s, 
@@ -27,7 +27,21 @@ class ModeleController < ApplicationController
     
   end
   
+  def uploadFile
+    post = ScModel.save(params[:upload])
+    render :text => "File has been uploaded successfully"
+  end
   
+  def upload
+    file = params[:fichier]
+    if file.size > 0
+      File.open("#{RAILS_ROOT}/public/test/#{file.original_filename}", 'w+') do |f|
+        f.write(file.read)
+      end
+    end
+    render :text => "téléchergement ok"
+  end
+
   
   
 end
