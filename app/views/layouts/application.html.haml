@@ -38,17 +38,15 @@
     #conteneur
       = render :partial => "layouts/header"
       = render :partial => "layouts/pathbar"
-      /
-        partie contenu
-      #content
+      /partie contenu
+      /#content
         
-        / Debut affichage du code de la vue
-        = yield
-        / Fin du code d'affichage de la vue
+      / Debut affichage du code de la vue
+      = yield
+      / Fin du code d'affichage de la vue
 
-      /
-        Fin content
-      = render :partial => "layouts/a_CORRIGER_footer_top"
+      / Fin content
+      / = render :partial => "layouts/a_CORRIGER_footer_top"
       = render :partial => "layouts/footer"
     /
       Fin conteneur

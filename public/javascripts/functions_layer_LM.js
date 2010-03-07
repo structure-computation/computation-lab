@@ -269,7 +269,7 @@ function affiche_Tableau_content(current_tableau, strname, stridentificateur){
     for(i=0; i<nb_page; i++) {
         content_tableau_liste_page[strname][i] = i+1;
     }
-/*    for(i=content_tableau_curseur_page[strname]; i<content_tableau_curseur_page[strname]+5; i++) { // on affiche un lien vers 5 pages
+    for(i=content_tableau_curseur_page[strname]; i<content_tableau_curseur_page[strname]+5; i++) { // on affiche un lien vers 5 pages
         if(i<nb_page){
             strpage = new String();
             strpage = content_tableau_liste_page[strname][i];
@@ -285,7 +285,7 @@ function affiche_Tableau_content(current_tableau, strname, stridentificateur){
         }else{
             id_page.className = '';
         }
-    }  */ 
+    }  
 }
 
 // affiche la page num pour la liste des models

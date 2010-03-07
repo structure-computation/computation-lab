@@ -1,0 +1,15 @@
+/ contenu
+#largeBoxContentCompte
+  / menu du compte calcul
+  #CompteMenu
+    %ul
+      %li#cmUtilisation.selected
+        %a{ :onclick => "affich_utilisation_calcul()", :style => "cursor: pointer;" }
+          Utilisation
+      %li#cmDescription
+        %a{ :onclick => "affich_description_calcul()", :style => "cursor: pointer;" }
+          Description
+
+  #CompteContent   
+/ fin menu compte calcul
+/ fin du contenu

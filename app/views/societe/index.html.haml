@@ -3,7 +3,7 @@
 #content
   #bl_5.black.off
   / wizard de creation d'un nouveau modele
-  = render :partial => "modele_nouveau"
+  /= render :partial => "modele_nouveau"
 
   / partie gauche du contenu, raccourci
   #contentleft
@@ -16,29 +16,18 @@
   #contentright
     #largeBox
       %h2
-        Liste des modèles
+        Liste des comptes
     #largeBoxcontent
       / taille minimum du contenu du contenu
       .contentheightmin
       / taille minimum du contenu du contenu
       
-      = render :partial => "filtre_des_modeles"
+      /compte de calcul
+      = render :partial => "resume_calcul"
+      = render :partial => "contenu_calcul"
       
-      / liste des projet
-      = render :partial => "modele_list"
-      / fin largeBoxcontent de la liste des projet
       
   / fin de #contentright, partie droite du contenu
   =javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery?
-  %script{ :type => "text/javascript" }
-    $(document).ready(get_Tableau_model);
-    //AuthToken();
-
-
-  - # $(document).ready(function() {
-  - # $("#largeBoxTable_Model").tablesorter({ debug:false, widthFixed: true, widgets: ['zebra'] }).tablesorterPager({container: $("#paginationHolder")});
   
-  - # \// $("largeBoxTable_Model").tablesorter({widthFixed: true, widgets: ['zebra']})
-  - # \// .tablesorterPager({container: $("#footer_top_2")});
-  - # });
-= render :partial => "a_CORRIGER_footer_top"
+= render :partial => "footer_top"
