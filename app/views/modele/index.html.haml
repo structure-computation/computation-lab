@@ -29,9 +29,12 @@
     / fin largeBoxcontent de la liste des projet
     
 / fin de #contentright, partie droite du contenu
-
+=javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery?
 %script{ :type => "text/javascript" }
   $(document).ready(get_Tableau_model);
+  //AuthToken();
+
+
   - # $(document).ready(function() {
   - # $("#largeBoxTable_Model").tablesorter({ debug:false, widthFixed: true, widgets: ['zebra'] }).tablesorterPager({container: $("#paginationHolder")});
   

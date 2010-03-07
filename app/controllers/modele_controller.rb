@@ -1,6 +1,6 @@
 # This controller handles the login/logout function of the site.  
 class ModeleController < ApplicationController
-  
+  #session :cookie_only => false, :only => :upload
   def index
     # Creation d'un projet et de plusieurs SC_modeles pour tester le comportement du tableau.
     @project = Project.new(:name => "Nom projet")
@@ -33,13 +33,14 @@ class ModeleController < ApplicationController
   end
   
   def upload
-    file = params[:fichier]
+    file = params[:Filedata]
     if file.size > 0
       File.open("#{RAILS_ROOT}/public/test/#{file.original_filename}", 'w+') do |f|
         f.write(file.read)
       end
     end
-    render :text => "téléchergement ok"
+    render :json => { :result => 'success' }
+    #render :text => "téléchergement ok"
   end
 
   

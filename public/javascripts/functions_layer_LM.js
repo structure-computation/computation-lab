@@ -144,9 +144,34 @@ function UploadAsyncrone() {
       flash_url: '/javascripts/sources_ext/swfupload.swf',
       button_image_url: '/images/blankButton.png'
     });
+//     $('#fichier').uploadify({
+//         'uploader': '/javascripts/sources_ext/jquery_uploadify/uploadify.swf',
+//         'script':    '/modele/upload',
+//         'scriptData': { 'format': 'json'},// 'authenticity_token': encodeURIComponent('<%= form_authenticity_token if protect_against_forgery? %>'), '<%= Rails.configuration.action_controller.session[:session_key]%>': '<%= u session.session_id %>' },
+//         'cancelImg': '/images/cancel.png',
+//         'scriptAccess': 'always',
+//         //'buttonImg': '/images/blankButton.png',
+//         'auto'           : true,
+//     });
+
     //alert('on est dans la fonction');
 }  
 
+// $(document).ajaxSend(function(event, request, settings) {
+//   if (typeof(AUTH_TOKEN) == "undefined") return;
+//   // settings.data is a serialized string like "foo=bar&baz=boink" (or null)
+//   settings.data = settings.data || "";
+//   settings.data += (settings.data ? "&" : "") + "authenticity_token=" + encodeURIComponent(AUTH_TOKEN);
+// });
+
+// Always send the authenticity_token with ajax
+$(document).ajaxSend(function(event, request, settings) {
+  if ( settings.type == 'post' || settings.type == 'put' ) {
+    settings.data = (settings.data ? settings.data + "&" : "")
+      + "authenticity_token=" + encodeURIComponent( AUTH_TOKEN );
+    request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  }
+});
 
 //---------------------------------------------------------------------------------------------------------------------
 // fonctions utiles pour l'obtention de la liste des modeles (tableau)

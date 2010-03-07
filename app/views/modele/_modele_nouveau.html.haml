@@ -29,22 +29,21 @@
         %br
         %br
         / A l'étape suivante vous pourrez télécharger votre modèle ainsi qu'une image le représentant. Les données de ce modèle seront lues automatiquement.
-        / - form_tag ({:action => 'upload'}, {:multipart => true}) do
+      - form_tag ({:action => 'upload'}, {:multipart => true}) do
+        .NM_bleu{ :style => "width: 600px; height: 20px;  margin: 20px 0px 0 63px;" }
+          Charger le modèle :
+        .NM_bleu{ :style => "width:600px; height: 20px; margin: 0px 0px 0 50px;" }
+          = file_field_tag :fichier
+        -#  /%input#upload{:name => "upload", :type => "file", :value => "emplacement du fichier"}
+        /.NM_text_1{ :style => "width:100px;" }
+        /  = submit_tag :upload 
+        / -#  /%input{:type=>"submit",:value=>"upload"}
+        / .NM_text_1{ :style => "width:400px;" }
         / .NM_bleu{ :style => "width: 600px; height: 20px;  margin: 20px 0px 0 63px;" }
         /   Charger le modèle :
         / .NM_text_1{ :style => "width:63px;" }
-        / .NM_text_1{ :style => "width:500px;" }
-        /   = file_field_tag :fichier
-        / -#  /%input#upload{:name => "upload", :type => "file", :value => "emplacement du fichier"}
-        / .NM_text_1{ :style => "width:100px;" }
-        /   = submit_tag :upload 
-        / -#  /%input{:type=>"submit",:value=>"upload"}
-        / .NM_text_1{ :style => "width:400px;" }
-      .NM_bleu{ :style => "width: 600px; height: 20px;  margin: 20px 0px 0 63px;" }
-        Charger le modèle :
-      .NM_text_1{ :style => "width:63px;" }
-      .NM_text_1{ :style => "width:500px;" }
-        %input#fichier{:name => "fichier", :type => "file"}
+        / .NM_bleu{ :style => "width:500px;" }
+        /   %input#fichier{:name => "fichier", :type => "file"}
 
     / page fichier et description
     #NM_page_fichier
