@@ -987,16 +987,16 @@ body
  * pour la page manage 
  * -----------------------------------------------------------------------------------------------------
  */ 
-#largeBoxResumeCompte
+.largeBoxResumeCompte
 {
   background: transparent url('../images/manage_compte_bg.png') repeat-x left top;
   width: 726px;
   height: 83px;
-  margin: 5px 0px 0 6px;
+  margin: 15px 0px 0 6px;
   border: thin solid #696969;
   float: left;
 }
-#largeBoxContentCompte
+.largeBoxContentCompte
 {
   background: transparent url('../images/manage_compte1_bg.png') repeat left top;
   width: 726px;
@@ -1011,7 +1011,16 @@ body
  * resume pour un compte
  *
  */
-#ResumeCompte1
+.ResumeCompte1
+{
+  background: transparent url('../images/manage_fleche_compte_cote.png') no-repeat center center;
+  width: 70px;
+  height: 83px;
+  margin: 0px 0px 0 0px;
+  border-right: thin solid #696969;
+  float: left;
+}
+.ResumeCompte1Selected
 {
   background: transparent url('../images/manage_fleche_compte_bas.png') no-repeat center center;
   width: 70px;
@@ -1020,7 +1029,7 @@ body
   border-right: thin solid #696969;
   float: left;
 }
-#ResumeCompte2
+.ResumeCompte2
 {
   background: transparent;
   width: 120px;
@@ -1029,7 +1038,7 @@ body
   border-right: thin solid #696969;
   float: left;
 }
-#ResumeCompte3
+.ResumeCompte3
 {
   background: transparent;
   width: 342px;
@@ -1038,7 +1047,7 @@ body
   border-right: thin solid #696969;
   float: left;
 }
-#ResumeCompte4
+.ResumeCompte4
 {
   background: transparent;
   width: 120px;
@@ -1047,21 +1056,87 @@ body
   border-right: thin solid #696969;
   float: left;
 }
-#ResumeCompte5
+.ResumeCompte5
 {
-  background: transparent;
+  background: transparent url('../images/manage_pause_compte.png') no-repeat center center;
   width: 70px;
   height: 83px;
   margin: 0px 0px 0 0px;
   border: none;
   float: left;
 }
- 
+.ResumeCompte3GreenBar
+{
+  background: transparent url('../images/greybar.png') no-repeat top left;
+  width: 306px;
+  height: 18px;
+  margin: 5px 0px 0 15px;
+  float: left;
+}
+.ResumeCompte3GreenBarDebut
+{
+  background: transparent url('../images/greenbar_debut.png') no-repeat top left;
+  width: 6px;
+  height: 18px;
+  float: left;
+}
+.ResumeCompte3GreenBarMilieu
+{
+  background: transparent url('../images/greenbar_milieu.png') repeat-x left top;
+  height: 18px;
+  float: left;
+}
+.ResumeCompte3GreenBarFin
+{
+  background: transparent url('../images/greenbar_fin.png') no-repeat top left;
+  width: 6px;
+  height: 18px;
+  float: left;
+}
+.ResumeCompteText1
+{
+  height:20px; 
+  margin:5px 0px 0 15px; 
+  line-height: 20px;
+  font-weight: 100;
+  font-size: 0.85em;
+  color: black;
+  text-align:center;
+  //border: thin solid #2a3557;
+  float:left;
+}
+.ResumeCompteText2
+{
+  height:20px; 
+  margin:5px 0px 0 15px; 
+  line-height: 20px;
+  font-weight: 100;
+  font-size: 0.75em;
+  color: #696969;
+  text-align:center;
+  float:left;
+}
+.ResumeCompteBouton
+{
+  background: transparent url('../images/manage_bouton_jaune.png') no-repeat top left;
+  height:20px;
+  width: 90px;
+  margin: 5px 25px 0px 0px; 
+  line-height: 20px;
+  font-weight: 100;
+  font-size: 0.65em;
+  color: #2a3556;
+  text-align:center;
+  float:right;
+}
+
+
+
 /*
  * menu pour le contenu d'un compte
  *
  */
-#CompteMenu
+.CompteMenu
 {
   background: transparent;
   width: 720px;
@@ -1070,7 +1145,7 @@ body
   border: none;
   float: left;
 }
-#CompteMenu li
+.CompteMenu li
 {
   list-style-type: none;
   float: left;
@@ -1083,12 +1158,12 @@ body
   text-align: center;
 }
 
-#cmUtilisation.selected, #cmDescription.selected
+#CCMUtilisation.selected, #CCMDescription.selected, #CAMUtilisation.selected, #CAMDescription.selected
 {
   background: transparent url('../images/projet_menu_selected.png') no-repeat left top;
 }
 
-#CompteMenu li a
+.CompteMenu li a
 {
   font-size: 0.80em;
   font-weight: normal;
@@ -1097,17 +1172,17 @@ body
   display: block;
 }
 
-#CompteMenu li.selected a
+.CompteMenu li.selected a
 {
   color: #2a3556;
 }
 
-#CompteMenu li a:hover
+.CompteMenu li a:hover
 {
   color: #ffdb00;
 }
 
-#CompteMenu li.selected a:hover
+.CompteMenu li.selected a:hover
 {
   color: #2a3556;
 }
@@ -1116,7 +1191,7 @@ body
  * menu pour le contenu d'un compte
  *
  */
-#CompteContent
+.CompteContent
 {
   background: #ffffff;
   width: 720px;
@@ -1125,6 +1200,96 @@ body
   border: thin solid #2a3556;
   float: left;
 }
+/*
+ * filtre pour le compte
+ *
+ */
+.CompteContentFilter
+{
+  background-color: #2a3556;
+  width: 100%;
+  padding-top:10px;
+  float: left;
+}
+.CompteContentFilter1
+{
+  width: 230px;
+  height: 31px;
+  margin: 0px 0px 0px 5px;
+  font-weight: normal;
+  font-size: 0.65em;
+  color: #f0f0f0;
+  text-align:right;
+  float: left;
+}
+.CompteContentFilter1 a
+{
+  font-weight: normal;
+  color: #f0f0f0;
+  text-decoration: underline;
+}
+.CompteContentFilter2
+{
+  //width: 270px;
+  height: 31px;
+  margin: 0px 0px 0px 5px;
+  line-height: 20px;
+  font-weight: normal;
+  font-size: 0.65em;
+  color: #f0f0f0;
+  text-align:right;
+  float: left;
+}
+.CompteContentFilter3
+{
+  width: 190px;
+  height: 31px;
+  margin: 0px 0px 0px 5px;
+  font-weight: normal;
+  font-size: 0.65em;
+  color: #f0f0f0;
+  text-align:right;
+  float: left;
+}
 
+.CompteContentFilter2 input[type="text"], .CompteContentFilter3 input[type="text"]
+{ 
+  height: px;
+  width: 90%; 
+  float:left;
+  border: none;
+}
+
+.CompteContentFilterBoutonJaune
+{
+  background : transparent url('../images/button_jaune_filtre_tache.png') no-repeat right top;
+  width: 230px;
+  height: 31px;
+  margin: 0px 0px 0px 5px;
+  text-align:center;
+  font-size: 0.75em;
+  line-height:23px;
+  float: left;
+}
+.CompteContentFilterBoutonJaune img
+{
+  vertical-align:top;
+  border:none;
+  margin:3px 25px 0 0px;
+}
+.CompteContentFilterBoutonJaune a
+{
+  font-weight: normal;
+  color: #2a3556;
+  text-decoration: none;
+  display: block;
+}
+.CompteContentFilterBoutonJaune a:hover
+{
+  //font-style:italic;
+  //color: #2a3556;
+  color: blach;
+  
+} 
 
 

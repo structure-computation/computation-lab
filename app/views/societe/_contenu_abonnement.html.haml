@@ -1,13 +1,13 @@
 / contenu
-#CompteCalculContent.largeBoxContentCompte.off
-  / menu du compte calcul
+#CompteAbonnementContent.largeBoxContentCompte.off
+  / menu du compte abonnement
   .CompteMenu
     %ul
-      %li#CCMUtilisation.selected
-        %a{ :onclick => "affich_utilisation_calcul()", :style => "cursor: pointer;" }
-          Décompte
-      %li#CCMDescription
-        %a{ :onclick => "affich_description_calcul()", :style => "cursor: pointer;" }
+      %li#CAMUtilisation.selected
+        %a{ :onclick => "affich_contenu_compte_abonnement()", :style => "cursor: pointer;" }
+          Utilisation
+      %li#CAMDescription
+        %a{ :onclick => "affich_contenu_compte_abonnement()", :style => "cursor: pointer;" }
           Description
 
   .CompteContent  
@@ -38,15 +38,5 @@
         %img{ :src => "./images/picto_annuler_filtre_taches.png", :border => "0", :style => "vertical-align:middle;" }
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-/ fin menu compte calcul
+/ fin menu compte abonnement
 / fin du contenu

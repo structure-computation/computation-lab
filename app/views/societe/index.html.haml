@@ -1,5 +1,6 @@
 / Vue Index des modeles.
 / wizard création de projet en premier plan
+%script{ :src => "/javascripts/functions_layer_societe.js" ,   :type => "text/javascript" }
 #content
   #bl_5.black.off
   / wizard de creation d'un nouveau modele
@@ -7,7 +8,7 @@
 
   / partie gauche du contenu, raccourci
   #contentleft
-    .contentheightmin
+    /.contentheightmin
     = render :partial => "partials/raccourcis_leftbox"
     = render :partial => "partials/ajouts_leftbox"
   / fin partie gauche du contenu
@@ -22,6 +23,9 @@
       .contentheightmin
       / taille minimum du contenu du contenu
       
+      /compte d'abonnement annuel
+      = render :partial => "resume_abonnement"
+      = render :partial => "contenu_abonnement"
       /compte de calcul
       = render :partial => "resume_calcul"
       = render :partial => "contenu_calcul"
