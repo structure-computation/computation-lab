@@ -34,51 +34,6 @@ function pair(nombre)
 {
    return ((nombre-1)%2);
 }
-//-----------------------------------------------------------------------------------------------------------
-// affichage du contenu du compte calcul
-//-----------------------------------------------------------------------------------------------------------
-
-var bool_affiche_compte_calcul = false ;
-
-function affich_contenu_compte_calcul(){
-	if(!bool_affiche_compte_calcul){
-		// switch du contenu
-		$('#CompteCalculContent').slideDown("slow");
-		// bouton afficher
-		id_fleche_compte_calcul = document.getElementById('CompteCalculFleche');	
-		id_fleche_compte_calcul.className = 'ResumeCompte1Selected';
-		bool_affiche_compte_calcul = true ;
-	}
-	else if(bool_affiche_compte_calcul){
-		// switch du contenu
-		$('#CompteCalculContent').slideUp("slow");
-		// bouton afficher
-		id_fleche_compte_calcul = document.getElementById('CompteCalculFleche');	
-		id_fleche_compte_calcul.className = 'ResumeCompte1';
-		bool_affiche_compte_calcul = false ;
-	}
-}
-
-var bool_affiche_compte_abonnement = false ;
-
-function affich_contenu_compte_abonnement(){
-	if(!bool_affiche_compte_abonnement){
-		// switch du contenu
-		$('#CompteAbonnementContent').slideDown("slow");
-		// bouton afficher
-		id_fleche_compte_abonnement = document.getElementById('CompteAbonnementFleche');	
-		id_fleche_compte_abonnement.className = 'ResumeCompte1Selected';
-		bool_affiche_compte_abonnement = true ;
-	}
-	else if(bool_affiche_compte_abonnement){
-		// switch du contenu
-		$('#CompteAbonnementContent').slideUp("slow");
-		// bouton afficher
-		id_fleche_compte_abonnement = document.getElementById('CompteAbonnementFleche');	
-		id_fleche_compte_abonnement.className = 'ResumeCompte1';
-		bool_affiche_compte_abonnement = false ;
-	}
-}
 
 
 //-------------------------------------------------------------------------------------------------
@@ -86,7 +41,6 @@ function affich_contenu_compte_abonnement(){
 //-------------------------------------------------------------------------------------------------
 // traitement en fin de requette pour laffichage du tableau des membres
 function init_Tableau_membre(Tableau_membre_temp)
-// function init_Tableau_membre(response)
 {
     // var Tableau_calcul_temp = eval('[' + response + ']');
     if (Tableau_membre_temp)
@@ -100,11 +54,10 @@ function init_Tableau_membre(Tableau_membre_temp)
     }
     affiche_Tableau_membre();
 }
-
 // requette pour l'obtention du tableau des membres
 function get_Tableau_membre()
-{
-    var url_php = "/user/index";
+{ 
+    var url_php = "/societe/list_membre";
     $.getJSON(url_php,[],init_Tableau_membre);
 }
 
@@ -115,7 +68,6 @@ function get_Tableau_membre()
 
 function filtre_Tableau_membre(){
     Tableau_membre_filter = Tableau_membre;
-    
 }
 
 // affichage du tableau des membres
@@ -125,7 +77,7 @@ function affiche_Tableau_membre(){
     var current_tableau     =  Tableau_membre_filter;
     var strname             =  'membre';
     // var stridentificateur   =  new Array('name','project','new_results','résults');
-    var stridentificateur   =  new Array('name','description','new_results','résults');
+    var stridentificateur   =  new Array('email','firstname','lastname');
     affiche_Tableau_content(current_tableau, strname, stridentificateur);
 }
 
@@ -157,7 +109,7 @@ function affiche_Tableau_content(current_tableau, strname, stridentificateur){
             // TODO: Ajout temporaire de 'sc_membre' pour s'adapter au test courant.
             strtemp_2 = current_tableau[i_page]['user'][stridentificateur[0]];
             strtemp_3 = current_tableau[i_page]['user'][stridentificateur[1]];
-            strtemp_4 = current_tableau[i_page]['user'][stridentificateur[2]] + '/' + current_tableau[i_page][stridentificateur[3]];
+            strtemp_4 = current_tableau[i_page]['user'][stridentificateur[2]];
             remplacerTexte(id_2, strtemp_2);
             remplacerTexte(id_3, strtemp_3);
             remplacerTexte(id_4, strtemp_4);

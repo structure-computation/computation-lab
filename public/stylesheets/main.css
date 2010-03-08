@@ -398,7 +398,7 @@ body
   float: left
 }
 /*
- * espace des filtre et des info projets
+ * espace des filtres
  *
  */
 #largeBoxfilter
@@ -406,55 +406,86 @@ body
   background-color: #f0f0f0;
   width: 722px;
   height: 120px;
-  margin: 13px 0px 0 9px;
+  margin: 5px 0px 0 9px;
   font-weight: normal;
   font-size: 0.75em;
   color: #696969;
   float: left;
   text-align: justify;
-  
 }
 #largeBoxfilter_1
 {
   width: 240px;
   height: 110px;
-  margin: 5px 0px 0 30px;
+  margin: 0px 0px 0 25px;
   float: left;
   line-height: 25px;
 }
 #largeBoxfilter_2
 {
   width: 420px;
-  height: 50px;
-  margin: 5px 0px 0 30px;
+  height: 60px;
+  margin: 0px 0px 0 35px;
   line-height: 23px;
   float: left;
 }
-#table_lbfilter {
-	width: 390px ;
-	border : medium ;
-	border-collapse: collapse;
-	border-top-width : 0px;
-	border-bottom-width : 0px;
-	text-align: right;
-}
-#table_lbfilter tr {
-	height: 23px;
-}
-#table_lbfilter td.bouton_jaune {
-	width: 350px;
-	height: 32px;
-	padding: 0px 40px 0 0px;
-	color: #2a3556;
-  	background: transparent url('../images/filter_button_jaune.png') no-repeat right top;
-}
-#table_lbfilter td.bouton_jaune img
+
+.largeBoxFilter1
 {
-  vertical-align:top;
+  //width: 230px;
+  height: 24px;
+  margin: 5px 0px 0px 5px;
+  font-weight: normal;
+  text-align:left;
+  float: left;
+}
+.largeBoxFilter2
+{
+  //width: 230px;
+  height: 24px;
+  margin: 5px 0px 0px 5px;
+  font-weight: normal;
+  text-align:left;
+  float: left;
+}
+.largeBoxFilter3
+{
+  //width: 230px;
+  height: 25px;
+  margin: 0px 35px 0px 5px;
+  font-weight: normal;
+  text-align:right;
+  float: right;
+}
+.largeBoxFilter1 input[type="text"]
+{ 
+  width: 90%; 
+  float:left;
+  border: thin solid #2a3556;
+}
+
+.largeBoxFilter2 input[type="text"]
+{ 
+  width: 90%; 
+  float:right;
+  border: thin solid #2a3556;
+}
+.largeBoxFilterBoutonJaune
+{
+  width: 232px;
+  height: 32px;
+  margin: 0px 30px 0 0px;
+  line-height: 32px;
+  color: #2a3556;
+  background: transparent url('../images/filter_button_jaune.png') no-repeat right top;
+  float:right;
+}
+.largeBoxFilterBoutonJaune img
+{
+  vertical-align:middle;
   border:none;
   margin:0px 25px 0 15px;
 }
-
 /*
  * tableau pour la liste des modeles
  *
@@ -992,8 +1023,8 @@ body
   background: transparent url('../images/manage_compte_bg.png') repeat-x left top;
   width: 726px;
   height: 83px;
-  margin: 15px 0px 0 6px;
-  border: thin solid #696969;
+  margin: 15px 0px 0 7px;
+  //border: thin solid #696969;
   float: left;
 }
 .largeBoxContentCompte
@@ -1001,9 +1032,9 @@ body
   background: transparent url('../images/manage_compte1_bg.png') repeat left top;
   width: 726px;
   //height: 500px;
-  margin: 0px 0px 0 6px;
-  border: thin solid #696969;
-  border-top: none;
+  margin: 0px 0px 0 7px;
+  //border: thin solid #696969;
+  border-top: thin solid #696969;
   float: left;
 }
 
@@ -1254,7 +1285,7 @@ body
 
 .CompteContentFilter2 input[type="text"], .CompteContentFilter3 input[type="text"]
 { 
-  height: px;
+  //height: 20px;
   width: 90%; 
   float:left;
   border: none;
@@ -1291,5 +1322,89 @@ body
   color: blach;
   
 } 
+/*
+ * tableau pour la liste des membres
+ *
+ */
+ 
+#largeBoxTable_Membre
+{
+  width: 725px;
+  margin: 13px 0px 0 9px; 
+  float: left;
+}
+ 
+#largeBoxTable_Membre_first
+{
+  border: none;
+  background : transparent url('../images/tableau_header_Bg.png') repeat-x left top;
+  height: 35px;
+  width: 722px;
+  line-height: 30px;
+  font-size: 0.75em;
+  font-style: bold;
+  text-align: left;
+  //font-weight: normal;
+  //border-bottom: thin solid #ffffff;
+  color: #ffffff;
+  float: left;
+}
 
+.largeBoxTable_Membre_1
+{
+  width: 25px;
+  height: 35px; 
+  background: transparent url('../images/fleche.png') no-repeat center center;
+  border-right: thin solid #ffffff;
+  float: left;
+}
+.largeBoxTable_Membre_1:hover
+{
+  background: transparent url('../images/LM_fleche_select.png') no-repeat center center;
+}
+.largeBoxTable_Membre_2
+{
+  width: 245px;
+  height: 35px; 
+  margin: 0px 0px 0 5px;
+  background: transparent ;
+  border-right: thin solid #ffffff;
+  float: left;
+}
+.largeBoxTable_Membre_3
+{
+  width: 195px;
+  height: 35px; 
+  margin: 0px 0px 0 5px;
+  background: transparent;
+  border-right: thin solid #ffffff;
+  float: left;
+}
+.largeBoxTable_Membre_4
+{
+  width: 148px;
+  height: 35px; 
+  margin: 0px 0px 0 5px;
+  background: transparent ;
+  border-right: thin solid #ffffff;
+  float: left;
+}
+.largeBoxTable_Membre_5
+{
+  width: 59px;
+  height: 35px; 
+  margin: 0px 0px 0 5px;
+  background: transparent url('../images/LM_visu.png') no-repeat center center;
+  border-right: thin solid #ffffff;
+  float: left;
+}
+
+.largeBoxTable_Membre_6
+{
+  width: 25px;
+  height: 35px; 
+  background: transparent url('../images/croix_suppr.png') no-repeat center center;
+  border-right: thin solid #ffffff;
+  float: left;
+}
 

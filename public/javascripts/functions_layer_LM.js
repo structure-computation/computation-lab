@@ -1,8 +1,8 @@
 <!--
 
-//---------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------
 // initialisation
-//---------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------
 
 var NMcurrent_stape                 =  0;                        // étape pour le wizzard nouveau model
 
@@ -37,6 +37,12 @@ function clone(myArray){
         newArray[property] = typeof (myArray[property]) == 'object' ? clone(myArray[property]) : myArray[property]
     } 
     return newArray
+}
+
+
+function pair(nombre)
+{
+   return ((nombre-1)%2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -173,9 +179,9 @@ $(document).ajaxSend(function(event, request, settings) {
   }
 });
 
-//---------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------
 // fonctions utiles pour l'obtention de la liste des modeles (tableau)
-//---------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------
 // traitement en fin de requette pour laffichage du tableau des models
 function init_Tableau_model(Tableau_model_temp)
 // function init_Tableau_model(response)
@@ -191,6 +197,7 @@ function init_Tableau_model(Tableau_model_temp)
         Tableau_model[0]         =  new Array();
         Tableau_model[0]['name'] = 'aucun model';
     }
+    alert("on est la");
     affiche_Tableau_model();
 }
 
@@ -231,16 +238,23 @@ function affiche_Tableau_content(current_tableau, strname, stridentificateur){
         content_tableau_connect[strname][i]=i_page;
         
         strContent_lign = strname + '_lign_' + i;
+	strContent_pair = strname + '_pair_' + i;
         strContent_2 = strname + '_2_' + i;
         strContent_3 = strname + '_3_' + i;
         strContent_4 = strname + '_4_' + i;
         var id_lign  = document.getElementById(strContent_lign);
+	var id_pair  = document.getElementById(strContent_pair);
         var id_2     = document.getElementById(strContent_2);
         var id_3     = document.getElementById(strContent_3);
         var id_4     = document.getElementById(strContent_4);
         
         if(i_page<taille_Tableau){
             id_lign.className = "largeBoxTable_Model_lign on";
+	    if(pair(i)){
+		id_pair.className = "largeBoxTable_Model_lign_pair";
+	    }else{
+		id_pair.className = "largeBoxTable_Model_lign_impair";
+	    }
             // TODO: Ajout temporaire de 'sc_model' pour s'adapter au test courant.
             strtemp_2 = current_tableau[i_page]['sc_model'][stridentificateur[0]];
             strtemp_3 = current_tableau[i_page]['sc_model'][stridentificateur[1]];
