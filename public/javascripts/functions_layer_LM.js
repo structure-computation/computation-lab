@@ -197,7 +197,6 @@ function init_Tableau_model(Tableau_model_temp)
         Tableau_model[0]         =  new Array();
         Tableau_model[0]['name'] = 'aucun model';
     }
-    alert("on est la");
     affiche_Tableau_model();
 }
 
@@ -314,6 +313,35 @@ function go_page_model(num){
     }
     affiche_Tableau_model();
 }
+
+// afficher le détail d'un modele
+function affich_detail_modele(){
+    // switch du contenu
+    //$('#ModelListe').slideUp("slow");
+    //$('#ModelDetail').slideDown("slow");
+    strModelListe = 'ModelListe';    
+    IdModelListe     = document.getElementById(strModelListe);
+    IdModelListe.className = "off";
+    strModelDetail = 'ModelDetail';    
+    IdModelDetail  = document.getElementById(strModelDetail);
+    IdModelDetail.className = "on";
+    //setTimeout($('#ModelListe').slideUp("slow"),1250);
+}
+// fermer le détail d'un modele
+function ferme_detail_modele(){
+    // switch du contenu
+    //$('#ModelDetail').slideUp("slow");
+    //$('#ModelListe').slideDown("slow");  
+    strModelDetail = 'ModelDetail';    
+    IdModelDetail  = document.getElementById(strModelDetail);
+    IdModelDetail.className = "off";
+    trModelListe = 'ModelListe';    
+    IdModelListe     = document.getElementById(strModelListe);
+    IdModelListe.className = "on";
+    //setTimeout($('#ModelDetail').slideUp("slow"),1250);
+    
+}
+
 
 
 -->

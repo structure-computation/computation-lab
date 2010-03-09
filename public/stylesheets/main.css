@@ -135,6 +135,14 @@ body
   background: transparent url('../images/footer_top.png') no-repeat left top;
   float: left;
 }
+#footer_top_void
+{
+  width: 945px;
+  height: 49px;
+  text-align: left;
+  background: transparent url('../images/footer_top_void.png') no-repeat left top;
+  float: left;
+}
 #black_footer_top.black
 { 
 	position: absolute;
@@ -357,6 +365,42 @@ body
 {
   text-decoration: underline ;
 }
+
+#leftBoxLigne
+{
+  width: 177px;
+  height: 20px;
+  margin: 10px 0px 0px 15px;
+  font-weight: 100;
+  font-size: 0.75em;
+  color: #696969;
+  float:left;
+}
+#leftBoxLigne1
+{
+  width: 177px;
+  height: 20px;
+  margin: 0px 0px 0px 15px;
+  font-weight: 100;
+  font-size: 0.75em;
+  color: #696969;
+  float:left;
+}
+
+#leftBoxCase
+{
+  height: 20px;
+  font-weight: 100;
+  //font-size: 0.75em;
+  line-height: 16px;
+  color: #696969;
+  float:left;
+}
+#leftBoxCase a
+{
+  text-decoration: underline ;
+}
+
 
 #leftBoxfoot
 {
@@ -1407,4 +1451,108 @@ body
   border-right: thin solid #ffffff;
   float: left;
 }
+/*
+ * cadre pour les details model, membres...
+ *
+ */
+ 
+.DetailCadre
+{ 
+  background-color: #f0f0f0;
+  width: 720px;
+  height: 400px;
+  margin: 5px 0px 0 9px;
+  font-weight: normal;
+  font-size: 0.75em;
+  border: thin solid #2a3556;
+  float: left;
+}
+.DetailFermeture
+{ 
+  width: 723px;
+  height: 28px;
+  margin: 0px 0px 0 9px;
+  float: left;
+}
+.DetailTextFermeture
+{ 
+  background: transparent url('../images/button_supprimer_model.png') no-repeat top right;
+  width: 187px;
+  height: 28px;
+  text-align: center;
+  color: #ffffff;
+  line-height: 25px;
+  font-size: 0.75em;
+  float: right;
+}
 
+.DetailCadreModel1 {
+  width: 277px ;
+  height: 380px;
+  margin: 8px 0px 0 20px;
+  float: left;
+}
+.DetailCadreModel2 {
+  background-color: #b8b9c3;
+  border-top: thin solid #ffffff;
+  width: 400px ;
+  height: 300px;
+  margin: 18px 0px 0 6px;
+  float: left;
+}
+.DetailCadreModelMarge {
+  height: 10px;
+  width: 275px ;
+  float: left;
+}
+
+.DetailCadreModelLigne {
+  border-top: thin solid #ffffff;
+  height: 25px;
+  width: 275px ;
+  margin: 0px 0px 0 0px;
+  //font-weight: normal;
+  //font-size: 0.75em;
+  float: left;
+}
+.DetailCadreModelCase1 {
+  //border-top: thin solid #ffffff;
+  background-color: #9297a8;
+  color: #ffffff;
+  padding: 0px 0px 0 5px;
+  line-height: 22px;
+  height: 25px;
+  width: 175px ;
+  float: left;
+}
+.DetailCadreModelCase2 {
+  //border: thin solid #ffffff;
+  background-color: #b8b9c3;
+  padding: 0px 0px 0 5px;
+  line-height: 22px;
+  height: 25px;
+  width: 90px ;
+  float: left;
+}
+
+.DetailCadreModelDescriptionTop {
+  background-color: #9297a8;
+  width: 270px ;
+  height: 25px;
+  margin: 2px 0px 0 0px;
+  padding-left: 5px;
+  line-height: 22px;
+  color: #ffffff;
+  float: left;
+}
+.DetailCadreModelDescription {
+  background-color: #b8b9c3;
+  width: 266px ;
+  height: 133px;
+  margin: 2px 0px 0 0px;
+  padding-left: 5px;
+  padding-right: 4px;
+  font-weight: normal;
+  font-size: 0.75em;
+  float: left;
+}

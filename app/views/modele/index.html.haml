@@ -25,11 +25,13 @@
       .contentheightmin
       / taille minimum du contenu du contenu
       
-      = render :partial => "filtre_des_modeles"
-      
-      / liste des projet
-      = render :partial => "modele_list"
-      / fin largeBoxcontent de la liste des projet
+      #ModelDetail.off
+        = render :partial => "modele_detail"
+      #ModelListe.on
+        = render :partial => "filtre_des_modeles"
+        / liste des projet
+        = render :partial => "modele_list"
+        / fin largeBoxcontent de la liste des projet
       
   / fin de #contentright, partie droite du contenu
   =javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery?
