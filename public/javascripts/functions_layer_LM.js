@@ -15,7 +15,7 @@ var content_tableau_connect         =  new Array();              // connectivit�
 var content_tableau_current_page    =  new Array();              // numéro de la page du tableau (sert pour la définition de la connectivité)    
 var content_tableau_curseur_page    =  new Array();              // nombre de page du tableau (sert pour l'affichage des page en bas des tableaux)
 var content_tableau_liste_page      =  new Array();              // liste des pages du tableau (sert pour l'affichage des page en bas des tableaux)
-var content_tableau_page            =  new Array('LM_model');    // initialisation des pages avec tableau dynamique
+var content_tableau_page            =  new Array('sc_model');    // initialisation des pages avec tableau dynamique
 
 for(i=0; i<content_tableau_page.length ; i++){
     content_tableau_connect[content_tableau_page[i]] = new Array(taille_tableau_content);
@@ -27,9 +27,9 @@ for(i=0; i<content_tableau_page.length ; i++){
     }
 }
 
-//---------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------
 // fonctions génériques
-//---------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------
 
 function clone(myArray){
     var newArray = new Array();
@@ -45,9 +45,9 @@ function pair(nombre)
    return ((nombre-1)%2);
 }
 
-//---------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------
 // fonctions utiles pour l'affichage des cache noir et des wizard
-//---------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------
 
 function displayBlack(interupteur) {
     var arrLinkId    = new Array('bl_1','bl_2','bl_3','bl_4','bl_5','black_footer_top','black_footer');
@@ -138,12 +138,12 @@ function affiche_NM_page(){
     
     strContent_page         = new String();
     strContent_page         = 'NM_' + affiche_on ;
-    if(id_page = document.getElementById(strContent_page)){ // TODO: BUG ? s/=/==/ ?
+    if(id_page = document.getElementById(strContent_page)){
         id_page.className   = "on";
     }
 }
 
-
+// telecharger le fichier de maillage de maniere asynchrone
 function UploadAsyncrone() {
     $("#fichier").makeAsyncUploader({
       upload_url: "/modele/upload", 
@@ -223,13 +223,13 @@ function affiche_Tableau_model(){
     taille_tableau_content  =  20;
     filtre_Tableau_model();
     var current_tableau     =  Tableau_model_filter;
-    var strname             =  'LM_model';
+    var strname             =  'sc_model';
     // var stridentificateur   =  new Array('name','project','new_results','résults');
     var stridentificateur   =  new Array('name','description','new_results','résults');
     affiche_Tableau_content(current_tableau, strname, stridentificateur);
 }
 
-// affichage des tableau content ('LM_model')
+// affichage des tableau content ('sc_model')
 function affiche_Tableau_content(current_tableau, strname, stridentificateur){
     var taille_Tableau=current_tableau.length;
     for(i=0; i<taille_tableau_content; i++) {
@@ -304,12 +304,12 @@ function affiche_Tableau_content(current_tableau, strname, stridentificateur){
 // affiche la page num pour la liste des models
 function go_page_model(num){
     if(num=='first'){
-        content_tableau_current_page['LM_model'] = 0;
+        content_tableau_current_page['sc_model'] = 0;
     }else if(num=='end'){
-        content_tableau_current_page['LM_model'] = content_tableau_liste_page['LM_model'].length-1;
+        content_tableau_current_page['sc_model'] = content_tableau_liste_page['sc_model'].length-1;
     }else{
-        var num_page = num + content_tableau_curseur_page['LM_model'];
-        content_tableau_current_page['LM_model'] = content_tableau_liste_page['LM_model'][num_page]-1;    
+        var num_page = num + content_tableau_curseur_page['sc_model'];
+        content_tableau_current_page['sc_model'] = content_tableau_liste_page['sc_model'][num_page]-1;    
     }
     affiche_Tableau_model();
 }
