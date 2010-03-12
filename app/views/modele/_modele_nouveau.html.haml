@@ -52,13 +52,13 @@
           Nom du modèle :
         .NM_text_1{ :style => "width:500px;" }
           /= text_field_tag :NM_name, :value => "premier calcul", :onKeyup => "Tableau_init_change_value()"
-          %input#NM_name{ :type => "text", :value => "premier calcul", :onKeyup => "Tableau_init_change_value()" }
+          %input#sc_model_info_name{ :type => "text", :onKeyup => "new_model_info_change_value()" }
           / %input#NM_image{ :type => "file", :value => "emplacement du fichier", :onKeyup => "Tableau_init_change_value()" }
         .NM_text_2{ :style => "width:200px;" }
           Description :
         .NM_text_2{ :style => "width:500px;" }
           /= text_area_tag :NM_description, :onKeyup => "Tableau_NM_model_change_value()"
-          %textarea#NM_description{ :onKeyup => "Tableau_init_change_value()" }
+          %textarea#sc_model_info_description{ :onKeyup => "new_model_info_change_value()" }
       /.NM_fond_gris{ :style => "width: 600px; margin: 5px 0px 0 63px;" }
       /  L'ensemble de nos logiciels travail sur le modèle.
  

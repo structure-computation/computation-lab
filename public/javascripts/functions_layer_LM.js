@@ -1,5 +1,84 @@
 <!--
+(function ($) {
+    m = {
+            '\b': '\\b',
+            '\t': '\\t',
+            '\n': '\\n',
+            '\f': '\\f',
+            '\r': '\\r',
+            '"' : '\\"',
+            '\\': '\\\\'
+	},
+	$.toJSON = function (value, whitelist) {
+		var a,          // The array holding the partial texts.
+			i,          // The loop counter.
+			k,          // The member key.
+			l,          // Length.
+			r = /["\\\x00-\x1f\x7f-\x9f]/g,
+			v;          // The member value.
 
+		switch (typeof value) {
+		case 'string':
+			return r.test(value) ?
+				'"' + value.replace(r, function (a) {
+					var c = m[a];
+					if (c) {
+						return c;
+					}
+					c = a.charCodeAt();
+					return '\\u00' + Math.floor(c / 16).toString(16) + (c % 16).toString(16);
+				}) + '"' :
+				'"' + value + '"';
+
+		case 'number':
+			return isFinite(value) ? String(value) : 'null';
+
+		case 'boolean':
+		case 'null':
+			return String(value);
+
+		case 'object':
+			if (!value) {
+				return 'null';
+			}
+			if (typeof value.toJSON === 'function') {
+				return $.toJSON(value.toJSON());
+			}
+			a = [];
+			if (typeof value.length === 'number' &&
+					!(value.propertyIsEnumerable('length'))) {
+				l = value.length;
+				for (i = 0; i < l; i += 1) {
+					a.push($.toJSON(value[i], whitelist) || 'null');
+				}
+				return '[' + a.join(',') + ']';
+			}
+			if (whitelist) {
+				l = whitelist.length;
+				for (i = 0; i < l; i += 1) {
+					k = whitelist[i];
+					if (typeof k === 'string') {
+						v = $.toJSON(value[k], whitelist);
+						if (v) {
+							a.push($.toJSON(k) + ':' + v);
+						}
+					}
+				}
+			} else {
+				for (k in value) {
+					if (typeof k === 'string') {
+						v = $.toJSON(value[k], whitelist);
+						if (v) {
+							a.push($.toJSON(k) + ':' + v);
+						}
+					}
+				}
+			}
+			return '{' + a.join(',') + '}';
+		}
+	};
+	
+})(jQuery);
 //---------------------------------------------------------------------------------------------------------
 // initialisation
 //---------------------------------------------------------------------------------------------------------
@@ -27,6 +106,16 @@ for(i=0; i<content_tableau_page.length ; i++){
     }
 }
 
+// initialisation du tableau des info sur le nouveau modele
+var Tableau_new_model_info          =  new Object();              // tableau des models
+Tableau_new_model_info['sc_model']  =  new Object();
+Tableau_new_model_info['sc_model']['id_user'] = 'test';
+Tableau_new_model_info['sc_model']['id_company'] = 'test';
+Tableau_new_model_info['sc_model']['id_project'] = 'test';
+Tableau_new_model_info['sc_model']['name'] = 'super';
+Tableau_new_model_info['sc_model']['dim'] = 'test';
+Tableau_new_model_info['sc_model']['description'] = 'description cool';
+
 //------------------------------------------------------------------------------------------------------
 // fonctions génériques
 //------------------------------------------------------------------------------------------------------
@@ -44,6 +133,68 @@ function pair(nombre)
 {
    return ((nombre-1)%2);
 }
+
+// convertir une array en json string
+function array2json(arr) {
+    var parts = [];
+    var is_list = (Object.prototype.toString.apply(arr) === '[object Array]');
+    var virgule ='on';
+
+    for(var key in arr) {
+    	//if(key!='clone'){
+	    	var value = arr[key];
+	        if(typeof value == "object") { //Custom handling for arrays
+		    var str = "";
+		    //if(!is_list) 
+		    str =  key ;
+		    parts.push(str);
+		    virgule ='off';
+	            if(is_list) parts.push(array2json(value)); /* :RECURSION: */
+	            else parts[key] = array2json(value); /* :RECURSION: */
+	            //else parts.push('"' + key + '":' + returnedVal);
+	        } else {
+	        	if(typeof value != "function"){
+		            var str = "";
+		            //if(!is_list) 
+		             str =  '\''+key + '\':';
+		
+		            //Custom handling for multiple data types
+		            if(typeof value == "number") str += value; //Numbers
+		            else if(value === false) str += 'false'; //The booleans
+		            else if(value === true) str += 'true';
+		            else str +=  '\''+value+'\'' ; //All other things
+		            // :TODO: Is there any more datatype we should be in the lookout for? (Functions?)
+	            	parts.push(str);
+	        	}
+	        }
+    	//}
+    }
+    if(virgule =='on'){
+      var json = parts.join(", ");
+      return '[' + json + ']';//Return numerical JSON
+    }
+    else if(virgule =='off'){
+      var json = parts.join("");
+      return '[' + json + ']';//Return associative JSON
+    }
+    
+    //if(is_list) return '{' + json + '}';//Return numerical JSON
+    //return '{' + json + '}';//Return associative JSON
+}
+function array2object(array){
+    var object = new Object();
+    for(var key in array) {
+	var value = array[key];
+	if(typeof value == "Array") { //Custom handling for arrays
+            object[key] = array2object(value);
+        } else {
+            object[key] = value;
+        }
+    }
+    return object;
+}
+
+
 
 //----------------------------------------------------------------------------------------------------------
 // fonctions utiles pour l'affichage des cache noir et des wizard
@@ -69,6 +220,9 @@ function displayNewModel(interupteur) {
     displayBlack(interupteur);
     document.getElementById('NM_wiz_layer').className = interupteur;
     NMcurrent_stape = 'page_information';
+    if(interupteur=='on'){
+	new_model_info_affiche_value();
+    }
     affiche_NM_page();
 }
 
@@ -76,6 +230,7 @@ function displayNewModel(interupteur) {
 // afficher la page suivante ou la page precedente
 function NM_next_stape(){
     if(NMcurrent_stape == 'page_fichier'){
+        send_new_model_info();
         NMcurrent_stape = 'page_resume';
         affiche_NM_page();
     }
@@ -143,6 +298,45 @@ function affiche_NM_page(){
     }
 }
 
+//afficher les info d'un nouveau model
+function new_model_info_affiche_value(){
+	for(key in Tableau_new_model_info['sc_model']){
+		var strContent_info_key = 'sc_model_info_' + key ;
+		var id_info_key = document.getElementById(strContent_info_key);
+		if(id_info_key != null){
+			id_info_key.value = Tableau_new_model_info[key] ;
+		}
+	}
+	
+}
+
+//changer les info d'un nouveau model
+function new_model_info_change_value(){
+	for(key in Tableau_new_model_info['sc_model']){
+		var strContent_info_key = 'sc_model_info_' + key ;
+		var id_info_key = document.getElementById(strContent_info_key);
+		if(id_info_key != null){
+			Tableau_new_model_info[key] = id_info_key.value ;
+		}
+	}
+	
+}
+
+
+//-------------------------------------------------------------------------------------------------
+// fonctions utiles pour l'envoie des infos sur le nouveau model
+//-------------------------------------------------------------------------------------------------
+
+// Always send the authenticity_token with ajax
+// $(document).ajaxSend(function(event, request, settings) {
+//   if ( settings.type == 'post' || settings.type == 'put' ) {
+//     settings.data = (settings.data ? settings.data + "&" : "")
+//       + "authenticity_token=" + encodeURIComponent( AUTH_TOKEN );
+//     request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+//   }
+// });
+
+
 // telecharger le fichier de maillage de maniere asynchrone
 function UploadAsyncrone() {
     $("#fichier").makeAsyncUploader({
@@ -170,14 +364,28 @@ function UploadAsyncrone() {
 //   settings.data += (settings.data ? "&" : "") + "authenticity_token=" + encodeURIComponent(AUTH_TOKEN);
 // });
 
-// Always send the authenticity_token with ajax
-$(document).ajaxSend(function(event, request, settings) {
-  if ( settings.type == 'post' || settings.type == 'put' ) {
-    settings.data = (settings.data ? settings.data + "&" : "")
-      + "authenticity_token=" + encodeURIComponent( AUTH_TOKEN );
-    request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-  }
-});
+// telecharger le nom et la description du model
+function send_new_model_info()
+{
+    var url_php = "/modele/create";
+    var param1 = array2object(Tableau_new_model_info);
+    //alert(param2);
+    //alert(param);
+    //$.getJSON(url_php, Tableau_new_model_info,function(json){alert(json);});
+    //$.getJSON(url_php,param1 ,function(json){alert(json);});
+    $.ajax({
+	url: "/modele/create",
+	type: 'POST',
+	dataType: 'json',
+	data: $.toJSON(Tableau_new_model_info),
+	contentType: 'application/json; charset=utf-8',
+	success: function(json) {
+	    alert(json);
+	}
+    });
+
+}
+
 
 //-------------------------------------------------------------------------------------------------
 // fonctions utiles pour l'obtention de la liste des modeles (tableau)

@@ -27,9 +27,12 @@ class ModeleController < ApplicationController
     
   end
   
-  def uploadFile
-    post = ScModel.save(params[:upload])
-    render :text => "File has been uploaded successfully"
+  def create
+    num_model = 1
+    File.open("#{RAILS_ROOT}/public/test/model_#{num_model}", 'w+') do |f|
+        f.write(params.to_json)
+    end
+    render :json => { :result => 'success' }
   end
   
   def upload
