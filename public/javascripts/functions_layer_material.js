@@ -3,10 +3,10 @@
 // initialisation
 //---------------------------------------------------------------------------------------------------------
 
-var NMcurrent_stape                 =  0;                        // étape pour le wizzard nouveau membre
+var NMcurrent_stape                 =  0;                        // étape pour le wizzard nouveau material
 
-var Tableau_membre                   =  new Array();              // tableau des membres
-var Tableau_membre_filter            =  new Array();              // tableau des membres filtres pour l'affichage
+var Tableau_material                   =  new Array();              // tableau des materials
+var Tableau_material_filter            =  new Array();              // tableau des materials filtres pour l'affichage
 
 //initialisation de la taille du tableau pour la box content et de la table de correspondance
 var taille_tableau_content          =  20;                       // taille du tableau dans la content box
@@ -14,7 +14,7 @@ var content_tableau_connect         =  new Array();              // connectivit�
 var content_tableau_current_page    =  new Array();              // numéro de la page du tableau (sert pour la définition de la connectivité)    
 var content_tableau_curseur_page    =  new Array();              // nombre de page du tableau (sert pour l'affichage des page en bas des tableaux)
 var content_tableau_liste_page      =  new Array();              // liste des pages du tableau (sert pour l'affichage des page en bas des tableaux)
-var content_tableau_page            =  new Array('membre');    // initialisation des pages avec tableau dynamique
+var content_tableau_page            =  new Array('material');    // initialisation des pages avec tableau dynamique
 
 for(i=0; i<content_tableau_page.length ; i++){
     content_tableau_connect[content_tableau_page[i]] = new Array(taille_tableau_content);
@@ -28,51 +28,51 @@ for(i=0; i<content_tableau_page.length ; i++){
 
 
 //-------------------------------------------------------------------------------------------------
-// fonctions utiles pour l'obtention de la liste des membres (tableau)
+// fonctions utiles pour l'obtention de la liste des materials (tableau)
 //-------------------------------------------------------------------------------------------------
-// traitement en fin de requette pour laffichage du tableau des membres
-function init_Tableau_membre(Tableau_membre_temp)
+// traitement en fin de requette pour laffichage du tableau des materials
+function init_Tableau_material(Tableau_material_temp)
 {
     // var Tableau_calcul_temp = eval('[' + response + ']');
-    if (Tableau_membre_temp)
+    if (Tableau_material_temp)
     {   
-        Tableau_membre = Tableau_membre_temp;
+        Tableau_material = Tableau_material_temp;
     }
     else
     {
-        Tableau_membre[0]         =  new Array();
-        Tableau_membre[0]['name'] = 'aucun membre';
+        Tableau_material[0]         =  new Array();
+        Tableau_material[0]['name'] = 'aucun material';
     }
-    affiche_Tableau_membre();
+    affiche_Tableau_material();
 }
-// requette pour l'obtention du tableau des membres
-function get_Tableau_membre()
+// requette pour l'obtention du tableau des materials
+function get_Tableau_material()
 { 
-    var url_php = "/company/list_membre";
-    $.getJSON(url_php,[],init_Tableau_membre);
+    var url_php = "/material/index";
+    $.getJSON(url_php,[],init_Tableau_material);
 }
 
 
 //------------------------------------------------------------------------------------------------------
-// fonctions utiles pour l'affichage de la liste des membres (tableau)
+// fonctions utiles pour l'affichage de la liste des materials (tableau)
 //------------------------------------------------------------------------------------------------------
 
-function filtre_Tableau_membre(){
-    Tableau_membre_filter = Tableau_membre;
+function filtre_Tableau_material(){
+    Tableau_material_filter = Tableau_material;
 }
 
-// affichage du tableau des membres
-function affiche_Tableau_membre(){
+// affichage du tableau des materials
+function affiche_Tableau_material(){
     taille_tableau_content  =  20;
-    filtre_Tableau_membre();
-    var current_tableau     =  Tableau_membre_filter;
-    var strname             =  'membre';
+    filtre_Tableau_material();
+    var current_tableau     =  Tableau_material_filter;
+    var strname             =  'material';
     // var stridentificateur   =  new Array('name','project','new_results','résults');
-    var stridentificateur   =  new Array('email','firstname','lastname');
+    var stridentificateur   =  new Array('name','name','mtype','comp');
     affiche_Tableau_content(current_tableau, strname, stridentificateur);
 }
 
-// affichage des tableau content ('LM_membre')
+// affichage des tableau content ('LM_material')
 function affiche_Tableau_content(current_tableau, strname, stridentificateur){
     var taille_Tableau=current_tableau.length;
     for(i=0; i<taille_tableau_content; i++) {
@@ -84,28 +84,31 @@ function affiche_Tableau_content(current_tableau, strname, stridentificateur){
         strContent_2 = strname + '_2_' + i;
         strContent_3 = strname + '_3_' + i;
         strContent_4 = strname + '_4_' + i;
+	strContent_5 = strname + '_5_' + i;
         var id_lign  = document.getElementById(strContent_lign);
 	var id_pair  = document.getElementById(strContent_pair);
         var id_2     = document.getElementById(strContent_2);
         var id_3     = document.getElementById(strContent_3);
         var id_4     = document.getElementById(strContent_4);
+	var id_5     = document.getElementById(strContent_5);
         
         if(i_page<taille_Tableau){
-            id_lign.className = "largeBoxTable_Membre_lign on";
+            id_lign.className = "largeBoxTable_Material_lign on";
 	    if(pair(i)){
-		id_pair.className = "largeBoxTable_Membre_lign_pair";
+		id_pair.className = "largeBoxTable_Material_lign_pair";
 	    }else{
-		id_pair.className = "largeBoxTable_Membre_lign_impair";
+		id_pair.className = "largeBoxTable_Material_lign_impair";
 	    }
-            // TODO: Ajout temporaire de 'sc_membre' pour s'adapter au test courant.
-            strtemp_2 = current_tableau[i_page]['user'][stridentificateur[0]];
-            strtemp_3 = current_tableau[i_page]['user'][stridentificateur[1]];
-            strtemp_4 = current_tableau[i_page]['user'][stridentificateur[2]];
+            strtemp_2 = current_tableau[i_page]['material'][stridentificateur[0]];
+            strtemp_3 = current_tableau[i_page]['material'][stridentificateur[1]];
+            strtemp_4 = current_tableau[i_page]['material'][stridentificateur[2]];
+	    strtemp_5 = current_tableau[i_page]['material'][stridentificateur[3]];
             remplacerTexte(id_2, strtemp_2);
             remplacerTexte(id_3, strtemp_3);
             remplacerTexte(id_4, strtemp_4);
+	    remplacerTexte(id_5, strtemp_5);
         }else{
-            id_lign.className = "largeBoxTable_Membre_lign off";
+            id_lign.className = "largeBoxTable_Material_lign off";
         }
     }
     // pour l'affichage des page en bas de la boite
@@ -144,17 +147,17 @@ function affiche_Tableau_content(current_tableau, strname, stridentificateur){
     }  
 }
 
-// affiche la page num pour la liste des membres
-function go_page_membre(num){
+// affiche la page num pour la liste des materials
+function go_page_material(num){
     if(num=='first'){
-        content_tableau_current_page['membre'] = 0;
+        content_tableau_current_page['material'] = 0;
     }else if(num=='end'){
-        content_tableau_current_page['membre'] = content_tableau_liste_page['membre'].length-1;
+        content_tableau_current_page['material'] = content_tableau_liste_page['material'].length-1;
     }else{
-        var num_page = num + content_tableau_curseur_page['membre'];
-        content_tableau_current_page['membre'] = content_tableau_liste_page['membre'][num_page]-1;    
+        var num_page = num + content_tableau_curseur_page['material'];
+        content_tableau_current_page['material'] = content_tableau_liste_page['material'][num_page]-1;    
     }
-    affiche_Tableau_membre();
+    affiche_Tableau_material();
 }
 
 

@@ -1,4 +1,4 @@
-class SocieteController < ApplicationController
+class CompanyController < ApplicationController
   def list_membre
     # Creation d'une liste fictive d'utilisateur pour l'affichage.
     @users = []

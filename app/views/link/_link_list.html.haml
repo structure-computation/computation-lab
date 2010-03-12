@@ -1,0 +1,28 @@
+#largeBoxTable_Link
+  #largeBoxTable_Link_first
+    #link_0_1.largeBoxTable_Link_0{ :style => "width: 21px;" }
+    #link_0_2.largeBoxTable_Link_0{ :style => "width: 246px;" }
+      %p
+        Nom
+    #link_0_3.largeBoxTable_Link_0{ :style => "width: 199px;" }
+      %p
+        Famille
+    #link_0_4.largeBoxTable_Link_0{ :style => "width: 100px;" }
+      %p
+        générique
+    #link_0_5.largeBoxTable_Link_0{ :style => "width: 100px;" }
+      %p
+        complexe
+    #link_0_6.largeBoxTable_Link_0{ :style => "width: 21px;" }
+    
+  - (0...20).each do |i|
+    .largeBoxTable_Link_lign{ :id => "link_lign_#{i}" }
+      .largeBoxTable_Link_lign_pair{ :id => "link_pair_#{i}" }
+        %a{ :style => "cursor: pointer;", :onclick => "affich_detail_link(#{i})" }
+          .largeBoxTable_Link_1{ :id => "link_1_#{i}" }
+        .largeBoxTable_Link_2{ :id => "link_2_#{i}" }
+        .largeBoxTable_Link_3{ :id => "link_3_#{i}" }
+        .largeBoxTable_Link_4{ :id => "link_4_#{i}" }
+        .largeBoxTable_Link_5{ :id => "link_5_#{i}" }
+        .largeBoxTable_Link_6{ :id => "link_6_#{i}" }
+  / Fin du tableau de présentation des modèles.
