@@ -160,6 +160,196 @@ function go_page_material(num){
     affiche_Tableau_material();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+// fonctions utiles pour l'affichage du detail d'un materiaux
+//---------------------------------------------------------------------------------------------------------------------
 
+
+// afficher le détail d'un materiaux
+function affich_detail_material(num){
+    var num_select = content_tableau_connect['material'][num];
+    var table_detail = Tableau_material_filter[num_select]['material'];
+    prop_mat_affich_info(table_detail);
+ 
+    strModelListe = 'MaterialListe';    
+    IdModelListe     = document.getElementById(strModelListe);
+    IdModelListe.className = "off";
+    strModelDetail = 'MaterialDetail';    
+    IdModelDetail  = document.getElementById(strModelDetail);
+    IdModelDetail.className = "on";
+    //setTimeout($('#ModelListe').slideUp("slow"),1250);
+}
+// fermer le détail d'un modele
+function ferme_detail_material(){
+    strModelDetail = 'MaterialDetail';    
+    IdModelDetail  = document.getElementById(strModelDetail);
+    IdModelDetail.className = "off";
+    trModelListe = 'MaterialListe';    
+    IdModelListe     = document.getElementById(strModelListe);
+    IdModelListe.className = "on";
+    //setTimeout($('#ModelDetail').slideUp("slow"),1250);
+    
+}
+
+// afficher une page et cacher les autres
+function prop_mat_affich(name_prop){
+	var affiche_on = name_prop;
+	var affiche_off = new Array('info','generique', 'elastique', 'plastique', 'endomageable','visqueux');
+	var taille_off = new Number(affiche_off.length);
+	
+	// on cache tout
+	for(i_off=0; i_off<taille_off; i_off++){
+		var className_page = "NC_prop_box off";
+		var strContent_prop_page = 'prop_mat_' + affiche_off[i_off] ;
+		//alert(strContent_prop_page);
+		var id_prop_page = document.getElementById(strContent_prop_page);
+		id_prop_page.className = className_page ;
+		
+		var className_menu = "";
+		var strContent_prop_menu = 'prop_mat_menu_' + affiche_off[i_off] ;
+		var id_prop_menu = document.getElementById(strContent_prop_menu);
+		if(id_prop_menu.className.match('off')){
+		}else{
+			id_prop_menu.className = className_menu ;
+		}
+		
+	}
+	// on affiche les éléments de la bonne page
+	var className_page = "NC_prop_box on";
+	var strContent_prop_page = 'prop_mat_' + affiche_on ;
+	var id_prop_page = document.getElementById(strContent_prop_page);
+	id_prop_page.className = className_page ;
+	
+	var className_menu = "selected";
+	var strContent_prop_menu = 'prop_mat_menu_' + affiche_on ;
+	var id_prop_menu = document.getElementById(strContent_prop_menu);
+	id_prop_menu.className = className_menu ;
+}
+
+
+// afficher les propriété du matériaux à visualiser 
+function prop_mat_affich_info(prop_mat_for_info){
+	// prop_mat_for_info est le matériaux sélectionné
+	// on rempli le cartouche top du matériaux pour info
+	problem_dimension = 3;
+	for(key in prop_mat_for_info){
+		if(key=='name'){
+			var strContent_prop_key = 'prop_mat_top_' + key ;
+			var id_prop_key = document.getElementById(strContent_prop_key);
+			if(id_prop_key != null){
+				remplacerTexte(id_prop_key, prop_mat_for_info[key]);
+			}
+		}
+		if(key=='ref'){
+			var strContent_prop_key = 'prop_mat_top_' + key ;
+			var id_prop_key = document.getElementById(strContent_prop_key);
+			if(id_prop_key != null){
+				remplacerTexte(id_prop_key, prop_mat_for_info[key]);
+			}
+		}
+		if(key=='mtype'){
+			var strContent_prop_isotrope = 'prop_mat_top_isotrope' ;
+			var strContent_prop_orthotrope = 'prop_mat_top_orthotrope'  ;
+			var id_prop_isotrope = document.getElementById(strContent_prop_isotrope);
+			var id_prop_orthotrope = document.getElementById(strContent_prop_orthotrope);
+			if(prop_mat_for_info[key] == 'isotrope') {
+				id_prop_isotrope.className = "NC_box_radio_prop actif";
+				id_prop_orthotrope.className = "NC_box_radio_prop";
+				for(dim=2; dim<=3; dim++){
+					str_dim = 'prop_dim_' + dim;
+					str_dim_in = 'prop_dim_' + dim + '_in';
+					id_dim = document.getElementsByName(str_dim);
+					id_dim_in = document.getElementsByName(str_dim_in);
+					var strClass = 'off';
+					for(n2=0;n2<id_dim.length;n2++){
+						id_dim[n2].className = strClass ;
+					}
+					for(n2=0;n2<id_dim_in.length;n2++){
+						id_dim_in[n2].className = strClass ;
+					}
+				}	
+			}else if(prop_mat_for_info[key] == 'orthotrope') {
+				id_prop_isotrope.className = "NC_box_radio_prop";
+				id_prop_orthotrope.className = "NC_box_radio_prop actif";
+				for(dim=2; dim<=3; dim++){
+					str_dim = 'prop_dim_' + dim;
+					id_dim = document.getElementsByName(str_dim);
+					str_dim_in = 'prop_dim_' + dim + '_in';
+					id_dim_in = document.getElementsByName(str_dim_in);
+					var strClass = 'on';
+					if(dim > problem_dimension) strClass = "off";
+					for(n2=0;n2<id_dim.length;n2++){
+						id_dim[n2].className = strClass ;
+					}
+					for(n2=0;n2<id_dim_in.length;n2++){
+						id_dim_in[n2].className = strClass ;
+					}
+				}		
+			}
+		}
+		if(key=='comp'){
+			var strContent_prop_elastique = 'prop_mat_top_elastique' ;
+			var strContent_prop_plastique = 'prop_mat_top_plastique'  ;
+			var strContent_prop_endomageable = 'prop_mat_top_endomageable'  ;
+			var strContent_prop_visqueux = 'prop_mat_top_visqueux'  ;
+			
+			var id_prop_elastique = document.getElementById(strContent_prop_elastique);
+			var id_prop_plastique = document.getElementById(strContent_prop_plastique);
+			var id_prop_endomageable = document.getElementById(strContent_prop_endomageable);
+			var id_prop_visqueux = document.getElementById(strContent_prop_visqueux);
+			//elastique
+			if(prop_mat_for_info[key].match('el')){
+				id_prop_elastique.className = "NC_box_check_prop actif";
+				var id_prop_menu = document.getElementById('prop_mat_menu_elastique');
+				id_prop_menu.className = "on";
+			}else{ 
+				id_prop_elastique.className = "NC_box_check_prop";
+				var id_prop_menu = document.getElementById('prop_mat_menu_elastique');
+				id_prop_menu.className = "off";
+			}
+			//plastique
+			if(prop_mat_for_info[key].match('pl')){
+				id_prop_plastique.className = "NC_box_check_prop actif";
+				var id_prop_menu = document.getElementById('prop_mat_menu_plastique');
+				id_prop_menu.className = "on";
+			}else{ 
+				id_prop_plastique.className = "NC_box_check_prop";
+				var id_prop_menu = document.getElementById('prop_mat_menu_plastique');
+				id_prop_menu.className = "off";
+			}
+			//endomageable
+			if(prop_mat_for_info[key].match('en')){
+				id_prop_endomageable.className = "NC_box_check_prop actif";
+				var id_prop_menu = document.getElementById('prop_mat_menu_endomageable');
+				id_prop_menu.className = "on";
+			}else{ 
+				id_prop_endomageable.className = "NC_box_check_prop";
+				var id_prop_menu = document.getElementById('prop_mat_menu_endomageable');
+				id_prop_menu.className = "off";
+			}
+			//visqueux	
+			if(prop_mat_for_info[key].match('vi')){
+				id_prop_visqueux.className = "NC_box_check_prop actif";
+				var id_prop_menu = document.getElementById('prop_mat_menu_visqueux');
+				id_prop_menu.className = "on";
+			}else{ 
+				id_prop_visqueux.className = "NC_box_check_prop";
+				var id_prop_menu = document.getElementById('prop_mat_menu_visqueux');
+				id_prop_menu.className = "off";
+			}		
+		}
+	}
+	prop_mat_affich('info');
+	
+	// on rempli les propriété du matériaux
+	for(key in prop_mat_for_info){
+		var strContent_prop_key = 'prop_mat_' + key ;
+		var id_prop_key = document.getElementById(strContent_prop_key);
+		if(id_prop_key != null){
+			id_prop_key.value = prop_mat_for_info[key] ;
+			id_prop_key.disabled = true;
+		}
+	}	
+}
 
 -->

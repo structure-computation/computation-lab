@@ -3,7 +3,7 @@ class MaterialController < ApplicationController
   def index 
     @materials = []
     (1..5).each{ |i|
-      mat =    Material.new(:name => "Nom materiaux " + i.to_s,   :mtype =>  'isotrope',  :comp => 'el pl') 
+      mat =    Material.new(:name => "Nom materiaux " + i.to_s,   :mtype =>  'orthotrope',  :comp => 'el') 
       @materials << mat
     }
     

@@ -759,11 +759,21 @@ body
 { 
   background-color: #f0f0f0;
   width: 720px;
-  height: 420px;
+  //height: 420px;
   margin: 5px 0px 0 9px;
   font-weight: normal;
-  font-size: 0.75em;
+  //font-size: 0.75em;
   border: thin solid #2a3556;
+  float: left;
+}
+.DetailCadreTitre {
+  width: 710px ;
+  height: 20;
+  margin: 5px 0px 0 5px;
+  text-align: center;
+  color: #2a3556;
+  font-size: 1em;
+  text-decoration: underline;
   float: left;
 }
 .DetailFermeture

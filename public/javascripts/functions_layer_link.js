@@ -160,6 +160,177 @@ function go_page_link(num){
     affiche_Tableau_link();
 }
 
+// -------------------------------------------------------------------------------------------------------------------------------------------
+// fonctions utiles pour l'affichage des différentes propriété liaisons :
+// ('prop_liaison_generique', 'prop_liaison_complexe')
+// -------------------------------------------------------------------------------------------------------------------------------------------
+
+
+// afficher le détail d'un materiaux
+function affich_detail_link(num){
+    var num_select = content_tableau_connect['link'][num];
+    var table_detail = Tableau_link_filter[num_select]['link'];
+    prop_liaison_affich_info(table_detail);
+ 
+    strModelListe = 'LinkListe';    
+    IdModelListe     = document.getElementById(strModelListe);
+    IdModelListe.className = "off";
+    strModelDetail = 'LinkDetail';    
+    IdModelDetail  = document.getElementById(strModelDetail);
+    IdModelDetail.className = "on";
+    //setTimeout($('#ModelListe').slideUp("slow"),1250);
+}
+// fermer le détail d'un modele
+function ferme_detail_link(){
+    strModelDetail = 'LinkDetail';    
+    IdModelDetail  = document.getElementById(strModelDetail);
+    IdModelDetail.className = "off";
+    trModelListe = 'LinkListe';    
+    IdModelListe     = document.getElementById(strModelListe);
+    IdModelListe.className = "on";
+    //setTimeout($('#ModelDetail').slideUp("slow"),1250);
+    
+}
+
+
+
+// afficher une page et cacher les autres
+function prop_liaison_affich(name_prop){
+	var affiche_on = name_prop;
+	var affiche_off = new Array('generique', 'complexe');
+	var taille_off = new Number(affiche_off.length);
+	
+	// on cache tout
+	for(i_off=0; i_off<taille_off; i_off++){
+		var className_page = "NC_prop_box off";
+		var strContent_prop_page = 'prop_liaison_' + affiche_off[i_off] ;
+		//alert(strContent_prop_page);
+		var id_prop_page = document.getElementById(strContent_prop_page);
+		id_prop_page.className = className_page ;
+		
+		var className_menu = "";
+		var strContent_prop_menu = 'prop_liaison_menu_' + affiche_off[i_off] ;
+		var id_prop_menu = document.getElementById(strContent_prop_menu);
+		if(id_prop_menu.className.match('off')){
+		}else{
+			id_prop_menu.className = className_menu ;
+		}
+		
+	}
+	
+	// on affiche les éléments de la bonne page
+	var className_page = "NC_prop_box on";
+	var strContent_prop_page = 'prop_liaison_' + affiche_on ;
+	var id_prop_page = document.getElementById(strContent_prop_page);
+	id_prop_page.className = className_page ;
+	
+	var className_menu = "selected";
+	var strContent_prop_menu = 'prop_liaison_menu_' + affiche_on ;
+	var id_prop_menu = document.getElementById(strContent_prop_menu);
+	id_prop_menu.className = className_menu ;
+}
+
+
+// afficher les propriété de la liaison à visualiser 
+function prop_liaison_affich_info(prop_liaison_for_info){
+	// prop_liaison_for_info est la liaison sélectionné
+	// on rempli le cartouche top de la liaison pour info
+	for(key in prop_liaison_for_info){
+		if(key=='name'){
+			var strContent_prop_key = 'prop_liaison_top_' + key ;
+			var id_prop_key = document.getElementById(strContent_prop_key);
+			if(id_prop_key != null){
+				remplacerTexte(id_prop_key, prop_liaison_for_info[key]);
+			}
+		}
+		if(key=='ref'){
+			var strContent_prop_key = 'prop_liaison_top_' + key ;
+			var id_prop_key = document.getElementById(strContent_prop_key);
+			if(id_prop_key != null){
+				remplacerTexte(id_prop_key, prop_liaison_for_info[key]);
+			}
+		}
+		if(key=='comp_generique'){
+			var strContent_prop_parfaite = 'prop_liaison_top_parfaite' ;
+			var strContent_prop_elastique = 'prop_liaison_top_elastique'  ;
+			var strContent_prop_contact = 'prop_liaison_top_contact'  ;
+			var id_prop_parfaite = document.getElementById(strContent_prop_parfaite);
+			var id_prop_elastique = document.getElementById(strContent_prop_elastique);
+			var id_prop_contact = document.getElementById(strContent_prop_contact);
+			
+			if(prop_liaison_for_info[key].match('Pa')) {
+				id_prop_parfaite.className = "NC_box_radio_prop actif";
+				id_prop_elastique.className = "NC_box_radio_prop";
+				id_prop_contact.className = "NC_box_radio_prop";
+				
+				document.getElementById('prop_liaison_comp_elastique').className = "off";
+				document.getElementById('prop_liaison_comp_contact').className = "off";
+			
+			}else if(prop_liaison_for_info[key].match('El')) {
+				id_prop_parfaite.className = "NC_box_radio_prop";
+				id_prop_elastique.className = "NC_box_radio_prop actif";
+				id_prop_contact.className = "NC_box_radio_prop";
+				
+				document.getElementById('prop_liaison_comp_elastique').className = "on";
+				document.getElementById('prop_liaison_comp_contact').className = "off";
+						
+			}else if(prop_liaison_for_info[key].match('Co')) {
+				id_prop_parfaite.className = "NC_box_radio_prop";
+				id_prop_elastique.className = "NC_box_radio_prop";
+				id_prop_contact.className = "NC_box_radio_prop actif";
+				
+				document.getElementById('prop_liaison_comp_elastique').className = "off";
+				document.getElementById('prop_liaison_comp_contact').className = "on";		
+			}
+		}
+		if(key=='comp_complexe'){
+			var strContent_prop_top_plastique = 'prop_liaison_top_plastique'  ;
+			var strContent_prop_top_cassable = 'prop_liaison_top_cassable'  ;
+			var strContent_prop_plastique = 'prop_liaison_comp_plastique'  ;
+			var strContent_prop_cassable = 'prop_liaison_comp_cassable'  ;
+			
+			var id_prop_top_plastique = document.getElementById(strContent_prop_top_plastique);
+			var id_prop_top_cassable = document.getElementById(strContent_prop_top_cassable);
+			var id_prop_plastique = document.getElementById(strContent_prop_plastique);
+			var id_prop_cassable = document.getElementById(strContent_prop_cassable);
+
+			//plastique
+			if(prop_liaison_for_info[key].match('Pl')){
+				id_prop_top_plastique.className = "NC_box_check_prop actif";
+				id_prop_plastique.className = "on";
+			}else{ 
+				id_prop_top_plastique.className = "NC_box_check_prop";
+				id_prop_plastique.className = "off";
+			}
+			//cassable
+			if(prop_liaison_for_info[key].match('Ca')){
+				id_prop_top_cassable.className = "NC_box_check_prop actif";
+				id_prop_cassable.className = "on";
+			}else{ 
+				id_prop_top_cassable.className = "NC_box_check_prop";
+				id_prop_cassable.className = "off";
+			}	
+		}
+	}	
+	prop_liaison_affich('generique');
+	
+	// on rempli les propriété de la liaison
+	for(key in prop_liaison_for_info){
+		var strContent_prop_key = 'prop_liaison_' + key ;
+		var id_prop_key = document.getElementById(strContent_prop_key);
+		if(id_prop_key != null){
+			id_prop_key.value = prop_liaison_for_info[key] ;
+			id_prop_key.disabled = true;
+		}
+		if(key == 'f'){
+			var strContent_prop_key_bis = 'prop_liaison_bis_' + key ;
+			var id_prop_key_bis = document.getElementById(strContent_prop_key_bis);
+			id_prop_key_bis.value = prop_liaison_for_info[key] ;
+			id_prop_key_bis.disabled = true;
+		}
+	}	
+}
+
 
 
 -->
