@@ -643,7 +643,7 @@ body
  * wizard création de model
  *
  */
-#NM_wiz_layer
+#New_wiz_layer
 {
 	width: 736px ;
 	height: 420px ;
@@ -651,7 +651,7 @@ body
 	z-index: 20;
 	margin: 50px 0 0 105px; 
 }
-#NM_wiz_layer_top
+#New_wiz_layer_top
 {
 	background: transparent url('../images/create_projet_top.png') no-repeat left top;
 	width: 736px ;
@@ -663,21 +663,21 @@ body
 	
 	float: left ;
 }
-#NM_wiz_layer_milieu
+#New_wiz_layer_milieu
 {
 	background: transparent url('../images/create_projet_milieu.png') repeat-y left top;
 	width: 736px ;
 	height: 360px ;
 	float: left ;
 }
-#NM_wiz_layer_bas
+#New_wiz_layer_bas
 {
 	background: transparent url('../images/create_projet_bas.png') no-repeat left top;
 	width: 736px ;
 	height: 36px ;
 	float: left ;
 }
-#NM_create_bouton_jaune
+.New_create_bouton_jaune
 {
 	background: transparent url('../images/create_button_jaune.png') no-repeat left top;
 	width: 118px ;
@@ -690,36 +690,43 @@ body
 	line-height:25px;
 	float: left ;
 }
-#NM_create_bouton_jaune a
-{	
-  	font-weight: normal;
-  	color: #2a3556;
-  	text-decoration: none;
-  	font-size: 0.80em;
-  	display: block;
+.New_create_bouton_jaune a
+{
+	font-weight: normal;
+	color: #2a3556;
+	text-decoration: none;
+	font-size: 0.80em;
+	display: block;
 }
 
-#NM_footer_bouton_precedent
+.New_footer_bouton_precedent
 {
   width: 121px;
   height: 32px;
   background: transparent url('../images/NC_footer_bouton_precedent.png') no-repeat left top;
   float: right;
 }
-#NM_footer_bouton_suivant
+.New_footer_bouton_suivant
 {
   width: 121px;
   height: 32px;
   background: transparent url('../images/NC_footer_bouton_suivant.png') no-repeat left top;
   float: right;
 }
-.NM_footer_top_bouton
+.New_footer_top_bouton
 {
   font-size: 0.80em;
   font-weight: normal;
   text-align: center;
   line-height: 32px;
   color:#2a3557;
+}
+.wiz_pic_ok
+{
+  width: 70px;
+  height: 70px;
+  background: transparent url('../images/wizar_pic_ok.png') no-repeat center center;
+  float: left;
 }
 .ProgressBar 
 { 

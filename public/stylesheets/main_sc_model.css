@@ -252,6 +252,12 @@
   //color:black;
   float:left	
 }
+.NM_fond_resume
+{
+  padding: 0px 0px 0px 0px; 
+  background-color: #f0f0f0 ;
+  float:left	
+}
 .NM_text_1
 {
   height:30px; 

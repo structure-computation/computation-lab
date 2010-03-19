@@ -102,7 +102,7 @@ function displayBlack(interupteur) {
 
 function displayNewModel(interupteur) {
     displayBlack(interupteur);
-    document.getElementById('NM_wiz_layer').className = interupteur;
+    document.getElementById('New_wiz_layer').className = interupteur;
     NMcurrent_stape = 'page_information';
     if(interupteur=='on'){
 	new_model_info_affiche_value();

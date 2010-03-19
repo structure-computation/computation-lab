@@ -43,7 +43,7 @@ Tableau_new_model_info['description'] = 'description cool';
 // afficher la page suivante ou la page precedente
 function NM_next_stape(){
     if(NMcurrent_stape == 'page_fichier'){
-        send_new_model_info();
+        //send_new_model_info();
         NMcurrent_stape = 'page_resume';
         affiche_NM_page();
     }

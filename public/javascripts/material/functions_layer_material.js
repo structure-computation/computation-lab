@@ -26,6 +26,11 @@ for(i=0; i<content_tableau_page.length ; i++){
     }
 }
 
+// initialisation des type de materiaux possibles pour la creation de nouveau materiaux
+var Tableau_material_new               =  new Array();              // tableau des nouveaux materials
+
+
+
 
 //-------------------------------------------------------------------------------------------------
 // fonctions utiles pour l'obtention de la liste des materials (tableau)
