@@ -2,6 +2,7 @@
 class ModeleController < ApplicationController
   #session :cookie_only => false, :only => :upload
   def index
+    @page = 'SCcompute'
     # Creation d'un projet et de plusieurs SC_modeles pour tester le comportement du tableau.
     @project = Project.new(:name => "Nom projet")
     @modeles = []

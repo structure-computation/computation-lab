@@ -1,4 +1,9 @@
 class CompanyController < ApplicationController
+  
+  def index
+    @page = 'SCmanage' 
+  end
+
   def list_membre
     # Creation d'une liste fictive d'utilisateur pour l'affichage.
     @users = []

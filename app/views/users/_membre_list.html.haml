@@ -19,7 +19,8 @@
   - (0...20).each do |i|
     .largeBoxTable_Membre_lign{ :id => "membre_lign_#{i}" }
       .largeBoxTable_Membre_lign_pair{ :id => "membre_pair_#{i}" }
-        .largeBoxTable_Membre_1{ :id => "membre_1_#{i}" }
+        %a{ :style => "cursor: pointer;", :onclick => "affich_detail_membre(#{i})" }
+          .largeBoxTable_Membre_1{ :id => "membre_1_#{i}" }
         .largeBoxTable_Membre_2{ :id => "membre_2_#{i}" }
         .largeBoxTable_Membre_3{ :id => "membre_3_#{i}" }
         .largeBoxTable_Membre_4{ :id => "membre_4_#{i}" }

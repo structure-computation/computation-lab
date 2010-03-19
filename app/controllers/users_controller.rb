@@ -6,7 +6,9 @@ class UsersController < ApplicationController
   # before_filter :admin_required, :only => [:suspend, :unsuspend, :destroy, :purge]
   before_filter :find_user, :only => [:suspend, :unsuspend, :destroy, :purge]
   
-  
+  def index
+    @page = 'SCmanage' 
+  end
  
   # render new.rhtml
   def new

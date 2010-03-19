@@ -1,6 +1,7 @@
 class MaterialController < ApplicationController
   #session :cookie_only => false, :only => :upload
   def index 
+    @page = 'SCcompute'
     @materials = []
     (1..5).each{ |i|
       mat =    Material.new(:name => "Nom materiaux " + i.to_s,   :mtype =>  'orthotrope',  :comp => 'el') 

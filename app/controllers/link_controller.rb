@@ -1,6 +1,7 @@
 class LinkController < ApplicationController
   #session :cookie_only => false, :only => :upload
   def index 
+    @page = 'SCcompute'
     @links = []
     (1..5).each{ |i|
       liaison =    Link.new(:name => "Nom liaison " + i.to_s, :comp_generique => "El", :comp_complexe => "Pl Ca")

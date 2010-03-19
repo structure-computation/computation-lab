@@ -157,6 +157,47 @@ function go_page_membre(num){
     affiche_Tableau_membre();
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+// fonctions utiles pour l'affichage du detail d'un membre
+//---------------------------------------------------------------------------------------------------------------------
 
+
+// afficher le détail d'un membre
+function affich_detail_membre(num){
+    var num_select = content_tableau_connect['membre'][num];
+    var table_detail = Tableau_membre_filter[num_select]['user'];
+    //test1=array2json(table_detail);
+    //alert(test1);
+    //afficher le detail d'un membre
+    for(key in table_detail){
+	    var strContent_detail_key = 'membre_detail_' + key ;
+	    var id_detail_key = document.getElementById(strContent_detail_key);
+	    if(id_detail_key != null){
+		strContent = new String();
+		strContent = table_detail[key];
+		//id_detail_key.value = Tableau_model_filter[num_select][key] ;
+		remplacerTexte(id_detail_key, strContent);
+	    }
+    }
+ 
+    strModelListe = 'MembreListe';    
+    IdModelListe     = document.getElementById(strModelListe);
+    IdModelListe.className = "off";
+    strModelDetail = 'MembreDetail';    
+    IdModelDetail  = document.getElementById(strModelDetail);
+    IdModelDetail.className = "on";
+    //setTimeout($('#ModelListe').slideUp("slow"),1250);
+}
+// fermer le détail d'un modele
+function ferme_detail_membre(){
+    strModelDetail = 'MembreDetail';    
+    IdModelDetail  = document.getElementById(strModelDetail);
+    IdModelDetail.className = "off";
+    trModelListe = 'MembreListe';    
+    IdModelListe     = document.getElementById(strModelListe);
+    IdModelListe.className = "on";
+    //setTimeout($('#ModelDetail').slideUp("slow"),1250);
+    
+}
 
 -->

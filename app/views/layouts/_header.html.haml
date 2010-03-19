@@ -16,19 +16,63 @@
 #header_menu
   #bl_2.black.off
   #menu
-    %ul
-      %li#mAccueil
-        %a{ :href => "./" }
-          Accueil
-      %li#mSCmanage
-        %a{ :href => "/company" }
-          SC manage
-      %li#mSCproject
-        %a{ :href => "/project" }
-          SC project
-      %li#mSCcompute.selected
-        %a{ :href => "/modele" }
-          SC compute
+    - if @page == 'Accueil' 
+      %ul
+        %li#mAccueil.selected
+          %a{ :href => "./" }
+            Accueil
+        %li#mSCmanage
+          %a{ :href => "/company" }
+            SC manage
+        %li#mSCproject
+          %a{ :href => "/project" }
+            SC project
+        %li#mSCcompute
+          %a{ :href => "/modele" }
+            SC compute
+    - if @page == 'SCmanage' 
+      %ul
+        %li#mAccueil
+          %a{ :href => "./" }
+            Accueil
+        %li#mSCmanage.selected
+          %a{ :href => "/company" }
+            SC manage
+        %li#mSCproject
+          %a{ :href => "/project" }
+            SC project
+        %li#mSCcompute
+          %a{ :href => "/modele" }
+            SC compute
+    - if @page == 'SC project' 
+      %ul
+        %li#mAccueil
+          %a{ :href => "./" }
+            Accueil
+        %li#mSCmanage
+          %a{ :href => "/company" }
+            SC manage
+        %li#mSCproject.selected
+          %a{ :href => "/project" }
+            SC project
+        %li#mSCcompute
+          %a{ :href => "/modele" }
+            SC compute
+    - if @page == 'SCcompute' 
+      %ul
+        %li#mAccueil
+          %a{ :href => "./" }
+            Accueil
+        %li#mSCmanage
+          %a{ :href => "/company" }
+            SC manage
+        %li#mSCproject
+          %a{ :href => "/project" }
+            SC project
+        %li#mSCcompute.selected
+          %a{ :href => "/modele" }
+            SC compute
+
   #header_profil_1
     %img{ :src => "/images/picto_profil.png" }
   #header_profil_2

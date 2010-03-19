@@ -1,6 +1,8 @@
 class CalculController < ApplicationController
 
+  
   def index
+    @page = 'SCcompute'
     respond_to do |format|
       format.html {render :layout => false }
     end 

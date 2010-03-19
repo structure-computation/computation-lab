@@ -139,3 +139,91 @@
   border-right: thin solid #ffffff;
   float: left;
 }
+
+/*
+ * cadre pour les details model, membres...
+ *
+ */
+
+.DetailCadreModelTitre {
+  width: 710px ;
+  height: 20;
+  margin: 5px 0px 0 5px;
+  text-align: center;
+  color: #2a3556;
+  font-size: 1em;
+  text-decoration: underline;
+  float: left;
+}
+
+.DetailCadreModel1 {
+  width: 600px ;
+  height: 380px;
+  font-size: 0.8em;
+  margin: 8px 0px 0 60px;
+  float: left;
+}
+.DetailCadreModel2 {
+  background-color: #b8b9c3;
+  border-top: thin solid #ffffff;
+  width: 400px ;
+  height: 300px;
+  margin: 18px 0px 0 6px;
+  float: left;
+}
+.DetailCadreModelMarge {
+  height: 10px;
+  width: 600px ;
+  float: left;
+}
+
+.DetailCadreModelLigne {
+  border-top: thin solid #ffffff;
+  height: 25px;
+  width: 600px ;
+  margin: 0px 0px 0 0px;
+  //font-weight: normal;
+  //font-size: 0.75em;
+  float: left;
+}
+.DetailCadreModelCase1 {
+  //border-top: thin solid #ffffff;
+  background-color: #9297a8;
+  color: #ffffff;
+  padding: 0px 0px 0 5px;
+  line-height: 22px;
+  height: 25px;
+  width: 175px ;
+  float: left;
+}
+.DetailCadreModelCase2 {
+  //border: thin solid #ffffff;
+  background-color: #b8b9c3;
+  padding: 0px 0px 0 5px;
+  line-height: 22px;
+  height: 25px;
+  width: 415px ;
+  float: left;
+}
+
+.DetailCadreModelDescriptionTop {
+  background-color: #9297a8;
+  width: 270px ;
+  height: 25px;
+  margin: 2px 0px 0 0px;
+  padding-left: 5px;
+  line-height: 22px;
+  color: #ffffff;
+  float: left;
+}
+.DetailCadreModelDescription {
+  background-color: #b8b9c3;
+  width: 266px ;
+  height: 133px;
+  margin: 2px 0px 0 0px;
+  padding: 4px 4px 2px 5px;
+  //padding-right: 4px;
+  font-weight: normal;
+  //font-size: 0.75em;
+  float: left;
+}

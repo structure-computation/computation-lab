@@ -28,11 +28,14 @@
       .contentheightmin
       / taille minimum du contenu du contenu
       
-      = render :partial => "filtre_des_membres"
-      
-      / liste des projet
-      = render :partial => "membre_list"
-      / fin largeBoxcontent de la liste des projet
+      #MembreDetail.off
+        = render :partial => "membre_detail"
+      #MembreListe.on
+        = render :partial => "filtre_des_membres"
+        / liste des membres
+        = render :partial => "membre_list"
+        / fin largeBoxcontent de la liste des membres
+
       
 / fin de #contentright, partie droite du contenu
 %script{ :type => "text/javascript" }
