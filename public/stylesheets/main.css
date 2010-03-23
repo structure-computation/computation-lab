@@ -755,6 +755,102 @@ body
   left: 10px; 
 }
 
+/*
+ * pages wizard css des textes
+ *
+ */ 
+
+.NM_bleu
+{
+  line-height: 18px;
+  padding: 0px 5px 0px 5px;
+  text-align: left;
+  font-size: 0.80em;
+  font-weight: normal;
+  //color: #e5e5e5;
+  color:#2a3557;
+  float:left	
+}
+.NM_fond_gris
+{
+  line-height: 13px;
+  padding: 10px 5px 15px 5px;
+  text-align: left;
+  font-size: 0.70em;
+  font-weight: normal;
+  background-color: #818799 ;
+  color: #e5e5e5;
+  //color:#2a3557;
+  //color:black;
+  float:left	
+}
+.NM_fond_resume
+{
+  padding: 0px 0px 0px 0px; 
+  background-color: #f0f0f0 ;
+  float:left	
+}
+.NM_text_1
+{
+  height:30px; 
+  margin:10px 5px 0 0px; 
+  line-height: 18px;
+  font-weight: 100;
+  font-size: 0.75em;
+  color: #696969;
+  text-align:right;
+  //border: thin solid #2a3557;
+  float:left;
+}
+.NM_text_1 input[type="text"]
+{ 
+  width: 80%; 
+  float:left;
+  //border: none;
+}
+.NM_text_1 input[type="file"]
+{ 
+  width: 80%; 
+  float:left;
+  //border: none;
+}
+.NM_text_1 select
+{ 
+  width: 80%; 
+  float:left;
+  //border: none;
+}
+.NM_text_1 p
+{ 
+  font-weight: 100;
+  font-size: 1.10em;
+  //text-align:left;
+  color: #2a3557;
+}
+.NM_text_2
+{
+  height:100px; 
+  margin:10px 5px 0 0px; 
+  line-height: 18px;
+  font-weight: 100;
+  font-size: 0.75em;
+  color: #696969;
+  text-align:right;
+  //border: thin solid #2a3557;
+  float:left;
+}
+.NM_text_2 textarea
+{ 
+  width: 90%;
+  height:80px;  
+  float:left;
+  font-size: 0.8em;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  //border: none;
+}
+
+
+
 
 
 /*

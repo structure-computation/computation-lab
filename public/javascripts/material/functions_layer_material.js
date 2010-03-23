@@ -14,13 +14,17 @@ var content_tableau_connect         =  new Array();              // connectivit�
 var content_tableau_current_page    =  new Array();              // numéro de la page du tableau (sert pour la définition de la connectivité)    
 var content_tableau_curseur_page    =  new Array();              // nombre de page du tableau (sert pour l'affichage des page en bas des tableaux)
 var content_tableau_liste_page      =  new Array();              // liste des pages du tableau (sert pour l'affichage des page en bas des tableaux)
-var content_tableau_page            =  new Array('material');    // initialisation des pages avec tableau dynamique
+var content_tableau_page            =  new Array('material','new_material');    // initialisation des pages avec tableau dynamique
+var taille_tableau_content_page     =  new Array()               // taille du tableau dans la content box
+taille_tableau_content_page['material'] = 20;
+taille_tableau_content_page['new_material'] = 8;
 
 for(i=0; i<content_tableau_page.length ; i++){
-    content_tableau_connect[content_tableau_page[i]] = new Array(taille_tableau_content);
+    content_tableau_connect[content_tableau_page[i]] = new Array(taille_tableau_content_page[content_tableau_page[i]]);
     content_tableau_current_page[content_tableau_page[i]] = 0;
     content_tableau_curseur_page[content_tableau_page[i]] = 0;
     content_tableau_liste_page[content_tableau_page[i]] = [1];
+    taille_tableau_content = taille_tableau_content_page[content_tableau_page[i]];
     for(j=0; j<taille_tableau_content ; j++){
         content_tableau_connect[content_tableau_page[i]][j]=j;
     }
@@ -68,7 +72,7 @@ function filtre_Tableau_material(){
 
 // affichage du tableau des materials
 function affiche_Tableau_material(){
-    taille_tableau_content  =  20;
+    taille_tableau_content  =  taille_tableau_content_page['material'];
     filtre_Tableau_material();
     var current_tableau     =  Tableau_material_filter;
     var strname             =  'material';
@@ -356,5 +360,261 @@ function prop_mat_affich_info(prop_mat_for_info){
 		}
 	}	
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+// fonctions utiles pour l'affichage d'un nouveau d'un materiaux
+//---------------------------------------------------------------------------------------------------------------------
+
+//---------------------------------------------------------------------------------------------------------
+// wizard de creation model
+//---------------------------------------------------------------------------------------------------------
+
+
+function displayNewMaterial(interupteur) {
+    displayBlack(interupteur);
+    document.getElementById('New_wiz_layer').className = interupteur;
+    NMcurrent_stape = 'page_information';
+    //affich_new_material();
+    affiche_Tableau_new_material();
+    affiche_NM_page();
+}
+
+
+// afficher la page suivante ou la page precedente
+function NM_next_stape(){
+    if(NMcurrent_stape == 'page_fichier'){
+        //send_new_model_info();
+        NMcurrent_stape = 'page_resume';
+        affiche_NM_page();
+    }
+    else if(NMcurrent_stape == 'page_information'){
+        NMcurrent_stape      = 'page_fichier';
+	affich_new_material();
+        affiche_NM_page();
+    }
+}
+function NM_previous_stape(){
+    if(NMcurrent_stape == 'page_fichier'){
+        NMcurrent_stape = 'page_information';
+        affiche_NM_page();
+    }
+    else if(NMcurrent_stape == 'page_resume'){
+        NMcurrent_stape      = 'page_fichier';
+        affiche_NM_page();
+    }
+}
+
+
+// afficher une page et cacher les autres
+function affiche_NM_page(){
+    var affiche_on  = NMcurrent_stape;
+    var affiche_off = new Array('page_information', 'page_fichier', 'page_resume');
+    var taille_off  = new Number(affiche_off.length);
+    
+    // on cache tout
+    var className   = "actif";
+    if(NMcurrent_stape == 'page_information'){
+        NMcurrent_stage = 0;
+    }
+    else if(NMcurrent_stape == 'page_fichier'){
+        NMcurrent_stage = 1;
+    }
+    else if(NMcurrent_stape == 'page_resume'){
+        NMcurrent_stage = 2;
+    }
+
+    for(i_off=0; i_off<taille_off; i_off++){
+        if(i_off >= NMcurrent_stage){
+            var className = "";
+        }
+        strContent_PB_page      =  'NM_PB_' + affiche_off[i_off] ;
+        var id_PB_page          =  document.getElementById(strContent_PB_page);
+        id_PB_page.className    =  className ;
+    }
+    
+    for(i_off=0; i_off<taille_off; i_off++){
+        strContent_page =  new String();
+        strContent_page =  'NM_' + affiche_off[i_off] ;
+        var id_page     =  document.getElementById(strContent_page);
+        if(id_page!=null){
+            id_page.className = "off";
+        }
+    }
+    // on affiche les éléments de la bonne page
+    strContent_PB_page      = 'NM_PB_' + affiche_on ;
+    var id_PB_page          = document.getElementById(strContent_PB_page);
+    id_PB_page.className    = "select";
+    
+    strContent_page         = new String();
+    strContent_page         = 'NM_' + affiche_on ;
+    if(id_page = document.getElementById(strContent_page)){
+        id_page.className   = "on";
+    }
+}
+
+
+// afficher le détail d'un materiaux
+function affich_new_material(){
+    var table_detail = Tableau_material_new;
+    new_mat_affich_info(table_detail);
+}
+
+// afficher une page et cacher les autres
+function new_mat_affich(name_prop){
+	var affiche_on = name_prop;
+	var affiche_off = new Array('info','generique', 'elastique', 'plastique', 'endomageable','visqueux');
+	var taille_off = new Number(affiche_off.length);
+	
+	// on cache tout
+	for(i_off=0; i_off<taille_off; i_off++){
+		var className_page = "NC_prop_box off";
+		var strContent_prop_page = 'new_mat_' + affiche_off[i_off] ;
+		//alert(strContent_prop_page);
+		var id_prop_page = document.getElementById(strContent_prop_page);
+		id_prop_page.className = className_page ;
+		
+		var className_menu = "";
+		var strContent_prop_menu = 'new_mat_menu_' + affiche_off[i_off] ;
+		var id_prop_menu = document.getElementById(strContent_prop_menu);
+		if(id_prop_menu.className.match('off')){
+		}else{
+			id_prop_menu.className = className_menu ;
+		}
+		
+	}
+	// on affiche les éléments de la bonne page
+	var className_page = "NC_prop_box on";
+	var strContent_prop_page = 'new_mat_' + affiche_on ;
+	var id_prop_page = document.getElementById(strContent_prop_page);
+	id_prop_page.className = className_page ;
+	
+	var className_menu = "selected";
+	var strContent_prop_menu = 'new_mat_menu_' + affiche_on ;
+	var id_prop_menu = document.getElementById(strContent_prop_menu);
+	id_prop_menu.className = className_menu ;
+}
+
+
+// afficher les propriété du matériaux à visualiser 
+function new_mat_affich_info(new_mat_for_info){
+	// new_mat_for_info est le matériaux sélectionné
+	// on rempli le cartouche top du matériaux pour info
+	problem_dimension = 3;
+	for(key in new_mat_for_info){
+		if(key=='mtype'){
+			var strContent_prop_isotrope = 'new_mat_top_isotrope' ;
+			var strContent_prop_orthotrope = 'new_mat_top_orthotrope'  ;
+			var id_prop_isotrope = document.getElementById(strContent_prop_isotrope);
+			var id_prop_orthotrope = document.getElementById(strContent_prop_orthotrope);
+			if(new_mat_for_info[key] == 'isotrope') {
+				id_prop_isotrope.className = "NC_box_radio_prop actif";
+				id_prop_orthotrope.className = "NC_box_radio_prop";
+				for(dim=2; dim<=3; dim++){
+					str_dim = 'prop_dim_' + dim;
+					str_dim_in = 'prop_dim_' + dim + '_in';
+					id_dim = document.getElementsByName(str_dim);
+					id_dim_in = document.getElementsByName(str_dim_in);
+					var strClass = 'off';
+					for(n2=0;n2<id_dim.length;n2++){
+						id_dim[n2].className = strClass ;
+					}
+					for(n2=0;n2<id_dim_in.length;n2++){
+						id_dim_in[n2].className = strClass ;
+					}
+				}	
+			}else if(new_mat_for_info[key] == 'orthotrope') {
+				id_prop_isotrope.className = "NC_box_radio_prop";
+				id_prop_orthotrope.className = "NC_box_radio_prop actif";
+				for(dim=2; dim<=3; dim++){
+					str_dim = 'prop_dim_' + dim;
+					id_dim = document.getElementsByName(str_dim);
+					str_dim_in = 'prop_dim_' + dim + '_in';
+					id_dim_in = document.getElementsByName(str_dim_in);
+					var strClass = 'on';
+					if(dim > problem_dimension) strClass = "off";
+					for(n2=0;n2<id_dim.length;n2++){
+						id_dim[n2].className = strClass ;
+					}
+					for(n2=0;n2<id_dim_in.length;n2++){
+						id_dim_in[n2].className = strClass ;
+					}
+				}		
+			}
+		}
+		if(key=='comp'){
+			var strContent_prop_elastique = 'new_mat_top_elastique' ;
+			var strContent_prop_plastique = 'new_mat_top_plastique'  ;
+			var strContent_prop_endomageable = 'new_mat_top_endomageable'  ;
+			var strContent_prop_visqueux = 'new_mat_top_visqueux'  ;
+			
+			var id_prop_elastique = document.getElementById(strContent_prop_elastique);
+			var id_prop_plastique = document.getElementById(strContent_prop_plastique);
+			var id_prop_endomageable = document.getElementById(strContent_prop_endomageable);
+			var id_prop_visqueux = document.getElementById(strContent_prop_visqueux);
+			//elastique
+			if(new_mat_for_info[key].match('el')){
+				id_prop_elastique.className = "NC_box_check_prop actif";
+				var id_prop_menu = document.getElementById('new_mat_menu_elastique');
+				id_prop_menu.className = "on";
+			}else{ 
+				id_prop_elastique.className = "NC_box_check_prop";
+				var id_prop_menu = document.getElementById('new_mat_menu_elastique');
+				id_prop_menu.className = "off";
+			}
+			//plastique
+			if(new_mat_for_info[key].match('pl')){
+				id_prop_plastique.className = "NC_box_check_prop actif";
+				var id_prop_menu = document.getElementById('new_mat_menu_plastique');
+				id_prop_menu.className = "on";
+			}else{ 
+				id_prop_plastique.className = "NC_box_check_prop";
+				var id_prop_menu = document.getElementById('new_mat_menu_plastique');
+				id_prop_menu.className = "off";
+			}
+			//endomageable
+			if(new_mat_for_info[key].match('en')){
+				id_prop_endomageable.className = "NC_box_check_prop actif";
+				var id_prop_menu = document.getElementById('new_mat_menu_endomageable');
+				id_prop_menu.className = "on";
+			}else{ 
+				id_prop_endomageable.className = "NC_box_check_prop";
+				var id_prop_menu = document.getElementById('new_mat_menu_endomageable');
+				id_prop_menu.className = "off";
+			}
+			//visqueux	
+			if(new_mat_for_info[key].match('vi')){
+				id_prop_visqueux.className = "NC_box_check_prop actif";
+				var id_prop_menu = document.getElementById('new_mat_menu_visqueux');
+				id_prop_menu.className = "on";
+			}else{ 
+				id_prop_visqueux.className = "NC_box_check_prop";
+				var id_prop_menu = document.getElementById('new_mat_menu_visqueux');
+				id_prop_menu.className = "off";
+			}		
+		}
+	}
+	new_mat_affich('info');
+	
+	// on rempli les propriété du matériaux
+	for(key in new_mat_for_info){
+		var strContent_prop_key = 'new_mat_' + key ;
+		var id_prop_key = document.getElementById(strContent_prop_key);
+		if(id_prop_key != null){
+			id_prop_key.value = new_mat_for_info[key] ;
+			id_prop_key.disabled = false;
+		}
+	}	
+}
+//changer les propriétés d'un matériaux
+function new_mat_change_value(){
+	for(key in Tableau_material_new){
+		var strContent_prop_key = 'new_mat_' + key ;
+		var id_prop_key = document.getElementById(strContent_prop_key);
+		if(id_prop_key != null){
+			Tableau_material_new[key] = id_prop_key.value ;
+		}
+	}
+}
+
 
 -->

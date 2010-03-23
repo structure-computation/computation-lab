@@ -40,6 +40,16 @@ Tableau_new_model_info['description'] = 'description cool';
 // wizard de creation model
 //---------------------------------------------------------------------------------------------------------
 
+function displayNewModel(interupteur) {
+    displayBlack(interupteur);
+    document.getElementById('New_wiz_layer').className = interupteur;
+    NMcurrent_stape = 'page_information';
+    if(interupteur=='on'){
+	new_model_info_affiche_value();
+    }
+    affiche_NM_page();
+}
+
 // afficher la page suivante ou la page precedente
 function NM_next_stape(){
     if(NMcurrent_stape == 'page_fichier'){
