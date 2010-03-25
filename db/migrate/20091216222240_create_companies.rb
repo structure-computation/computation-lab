@@ -7,6 +7,8 @@ class CreateCompanies < ActiveRecord::Migration
       t.string :zipcode
       t.string :country
       t.string :division
+      t.string :TVA
+      t.string :siren
 
       t.timestamps
     end

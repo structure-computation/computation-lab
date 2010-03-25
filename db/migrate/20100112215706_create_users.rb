@@ -9,6 +9,7 @@ class CreateUsers < ActiveRecord::Migration
       t.column :lastname,                       :string, :limit => 100, :default => '', :null => true
       t.column :telephone,                      :string, :limit => 23 , :default => '', :null => true # Souvenirs des normes ISUP etc, le max devait etre 15, lu 22 recemment...
       t.column :email,                     :string, :limit => 100
+      t.column :role,                     :string, :limit => 100
       
       # restfull auth
       t.column :crypted_password,          :string, :limit => 40

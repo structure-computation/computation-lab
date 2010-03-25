@@ -793,7 +793,7 @@ body
 .NM_text_1
 {
   height:30px; 
-  margin:10px 5px 0 5px; 
+  margin:5px 5px 0 5px; 
   line-height: 18px;
   font-weight: 100;
   font-size: 0.75em;
@@ -829,10 +829,10 @@ body
 }
 .NM_text_1 textarea
 { 
-  width: 90%;
-  height: 90%;
+  width: 80%;
+  height: 80%;
   float:left;
-  //font-size: 0.8em;
+  font-size: 0.9em;
   font-family: Verdana, Arial, Helvetica, sans-serif;
   //border: none;
 }
@@ -858,7 +858,24 @@ body
   //border: none;
 }
 
-
+.NM_text_3
+{
+  height:20px; 
+  margin:5px 5px 0 5px; 
+  line-height: 18px;
+  font-weight: 100;
+  font-size: 0.75em;
+  color: #696969;
+  text-align:right;
+  float:left;
+}
+.NM_text_3 p
+{ 
+  font-weight: 100;
+  font-size: 1.10em;
+  text-align:left;
+  color: #2a3557;
+}
 
 
 

@@ -2,6 +2,7 @@ class CreateMaterials < ActiveRecord::Migration
   def self.up
     create_table :materials do |t|
 	  t.string   :name
+	  t.string   :familly
       t.integer  :user_id
       t.integer  :project_id
       t.integer  :reference

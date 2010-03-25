@@ -62,12 +62,15 @@ ActiveRecord::Schema.define(:version => 20100217152155) do
     t.string   "zipcode"
     t.string   "country"
     t.string   "division"
+    t.string   "TVA"
+    t.string   "siren"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "links", :force => true do |t|
     t.string   "name"
+    t.string   "familly"
     t.integer  "user_id"
     t.integer  "project_id"
     t.integer  "reference"
@@ -108,6 +111,7 @@ ActiveRecord::Schema.define(:version => 20100217152155) do
 
   create_table "materials", :force => true do |t|
     t.string   "name"
+    t.string   "familly"
     t.integer  "user_id"
     t.integer  "project_id"
     t.integer  "reference"
@@ -237,6 +241,7 @@ ActiveRecord::Schema.define(:version => 20100217152155) do
     t.string   "lastname",                  :limit => 100, :default => ""
     t.string   "telephone",                 :limit => 23,  :default => ""
     t.string   "email",                     :limit => 100
+    t.string   "role",                      :limit => 100
     t.string   "crypted_password",          :limit => 40
     t.string   "salt",                      :limit => 40
     t.datetime "created_at"

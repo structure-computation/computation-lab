@@ -1,0 +1,132 @@
+#New_wiz_layer.off
+  #New_wiz_layer_top
+    Ajout d'une nouvelle company cliente
+  #New_wiz_layer_milieu
+    #NM_wiz_menu
+      %a{ :onclick => "()" } 
+        #NM_PB_page_information{ :style => "z-index: 100; margin-left:0px;" }
+          Société
+      %a{ :onclick => "()" } 
+        #NM_PB_page_fichier{ :style => "z-index: 99; margin-left:220px" }
+          Gestionnaire
+      %a{ :onclick => "()" } 
+        #NM_PB_page_resume{ :style => "z-index: 98; margin-left:440px" }
+          Résumé
+        
+    / page information
+    #NM_page_information
+      %div{ :style => "width:700px; height:10px; float:left;" }
+      .NM_text_1{ :style => "width:200px;" }
+        Nom :
+      .NM_text_1{ :style => "width:500px;" }
+        %input#new_company_name{ :type => "text", :onKeyup => "new_company_change_value()" }
+      .NM_text_1{ :style => "width:200px;" }
+        Division :
+      .NM_text_1{ :style => "width:500px;" }
+        %input#new_company_division{ :type => "text", :onKeyup => "new_company_change_value()" }
+      .NM_text_1{ :style => "width:200px; height:50px;" }
+        addresse :
+      .NM_text_1{ :style => "width:500px; height:50px;" }
+        %textarea#new_company_address{ :type => "text", :onKeyup => "new_company_change_value()" }
+      .NM_text_1{ :style => "width:200px;" }
+        Ville :
+      .NM_text_1{ :style => "width:500px;" }
+        %input#new_company_city{ :type => "text", :onKeyup => "new_company_change_value()" }
+      .NM_text_1{ :style => "width:200px;" }
+        Code postal :
+      .NM_text_1{ :style => "width:500px;" }
+        %input#new_company_zipcode{ :type => "text", :onKeyup => "new_company_change_value()" }
+      .NM_text_1{ :style => "width:200px;" }
+        Pays :
+      .NM_text_1{ :style => "width:500px;" }
+        %input#new_company_country{ :type => "text", :onKeyup => "new_company_change_value()" }
+      .NM_text_1{ :style => "width:200px;" }
+        Numéro de TVA :
+      .NM_text_1{ :style => "width:500px;" }
+        %input#new_company_TVA{ :type => "text", :onKeyup => "new_company_change_value()" }
+      .NM_text_1{ :style => "width:200px;" }
+        Numéro SIREN :
+      .NM_text_1{ :style => "width:500px;" }
+        %input#new_company_siren{ :type => "text", :onKeyup => "new_company_change_value()" }
+
+
+    / page fichier et description
+    #NM_page_fichier
+      %div{ :style => "width:700px; height:70px; float:left;" }
+      .NM_text_1{ :style => "width:200px;" }
+        email :
+      .NM_text_1{ :style => "width:500px;" }
+        %input#new_membre_email{ :type => "text", :onKeyup => "new_membre_change_value()" }
+      .NM_text_1{ :style => "width:200px;" }
+        Nom :
+      .NM_text_1{ :style => "width:500px;" }
+        %input#new_membre_lastname{ :type => "text", :onKeyup => "new_membre_change_value()" }
+      .NM_text_1{ :style => "width:200px;" }
+        Prénom :
+      .NM_text_1{ :style => "width:500px;" }
+        %input#new_membre_firstname{ :type => "text", :onKeyup => "new_membre_change_value()" }
+
+
+    / page résumé
+    #NM_page_resume
+      .NM_bleu{ :style => "width: 730px; height: 10px;  margin: 0px 0px 0 3px;" }
+      .NM_fond_resume{ :style => "width: 730px; margin: 0px 0px 0 3px;" }
+      
+        .NM_text_3{ :style => "width:200px;" }
+          Nom :
+        .NM_text_3{ :style => "width:500px;" }
+          %p#new_company_resume_name
+        .NM_text_3{ :style => "width:200px;" }
+          Division :
+        .NM_text_3{ :style => "width:500px;" }
+          %p#new_company_resume_division
+        .NM_text_3{ :style => "width:200px; height:50px;" }
+          addresse :
+        .NM_text_3{ :style => "width:500px; height:50px;" }
+          %p#new_company_resume_address
+        .NM_text_3{ :style => "width:200px;" }
+          Ville :
+        .NM_text_3{ :style => "width:500px;" }
+          %p#new_company_resume_city
+        .NM_text_3{ :style => "width:200px;" }
+          Code postal :
+        .NM_text_3{ :style => "width:500px;" }
+          %p#new_company_resume_zipcode
+        .NM_text_3{ :style => "width:200px;" }
+          Pays :
+        .NM_text_3{ :style => "width:500px;" }
+          %p#new_company_resume_country
+        .NM_text_3{ :style => "width:200px;" }
+          Numéro de TVA :
+        .NM_text_3{ :style => "width:500px;" }
+          %p#new_company_resume_TVA
+        .NM_text_3{ :style => "width:200px;" }
+          Numéro SIREN :
+        .NM_text_3{ :style => "width:500px;" }
+          %p#new_company_resume_siren
+      
+      %div{:style => "width: 350px; margin: 10px 0px 0 213px; float:left;" }
+        .wiz_pic_ok
+        .NM_bleu{ :style => "width: 250px; height:30px; margin: 5px 0px 25px 20px;" }
+          Ce nouveau client a été enregistré,  
+          Un email a été envoyé avec succès au gestionnaire 
+          qui est en attente de validation
+
+  #New_wiz_layer_bas
+    #wiz_annul.on{:style => "float: left;" }
+      %a{ :style => "cursor: pointer;", :onclick => "displayNewCompany('off')" } 
+        .New_create_bouton_jaune
+          Annuler
+    #wiz_suiv.on{:style => "float: right;" }
+      %a{ :onclick => "NM_next_stape()", :style => "cursor: pointer;" } 
+        .New_footer_bouton_suivant.New_footer_top_bouton{ :style => "margin-right:5px;" }
+          Suivant
+      %a{ :onclick => "NM_previous_stape()", :style => "cursor: pointer;" } 
+        .New_footer_bouton_precedent.New_footer_top_bouton
+          Précédent
+
+    #wiz_valid.off{:style => "float: right;" }
+      %a{ :onclick => "displayNewCompany('off')", :style => "cursor: pointer;" }
+        .New_create_bouton_jaune{ :style => "margin-right:5px;" }
+          Valider
+
