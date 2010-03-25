@@ -369,7 +369,6 @@ function prop_mat_affich_info(prop_mat_for_info){
 // wizard de creation model
 //---------------------------------------------------------------------------------------------------------
 
-
 function displayNewMaterial(interupteur) {
     displayBlack(interupteur);
     document.getElementById('New_wiz_layer').className = interupteur;
@@ -379,19 +378,21 @@ function displayNewMaterial(interupteur) {
     affiche_NM_page();
 }
 
-
 // afficher la page suivante ou la page precedente
 function NM_next_stape(){
-    if(NMcurrent_stape == 'page_fichier'){
-        //send_new_model_info();
-        NMcurrent_stape = 'page_resume';
-        affiche_NM_page();
-    }
-    else if(NMcurrent_stape == 'page_information'){
+    if(NMcurrent_stape == 'page_information'){
         NMcurrent_stape      = 'page_fichier';
 	affich_new_material();
         affiche_NM_page();
     }
+    else if(NMcurrent_stape == 'page_fichier'){
+        //send_new_model_info();
+	send_new_material();
+	affich_new_material_resume();
+        NMcurrent_stape = 'page_resume';
+	
+        affiche_NM_page();
+    }  
 }
 function NM_previous_stape(){
     if(NMcurrent_stape == 'page_fichier'){
@@ -403,7 +404,6 @@ function NM_previous_stape(){
         affiche_NM_page();
     }
 }
-
 
 // afficher une page et cacher les autres
 function affiche_NM_page(){
@@ -456,10 +456,10 @@ function affiche_NM_page(){
 // afficher le détail d'un materiaux
 function affich_new_material(){
     var table_detail = Tableau_material_new;
-    new_mat_affich_info(table_detail);
+    new_mat_affich_info(table_detail);               // dans init_new 
 }
 
-// afficher une page et cacher les autres
+// afficher une page et cacher les autres pour les propriété materiaux
 function new_mat_affich(name_prop){
 	var affiche_on = name_prop;
 	var affiche_off = new Array('info','generique', 'elastique', 'plastique', 'endomageable','visqueux');
@@ -615,6 +615,39 @@ function new_mat_change_value(){
 		}
 	}
 }
+
+// afficher le resumé d'un materiaux
+function affich_new_material_resume(){
+   for(key in Tableau_material_new){
+		var str_info_key = 'new_material_resume_' + key ;
+		var id_info_key = document.getElementById(str_info_key);
+		if(id_info_key != null){
+			strContent_info_key = Tableau_material_new[key] ; 
+			remplacerTexte(id_info_key, strContent_info_key);
+		}
+	}
+}
+
+// telecharger le nouveau materiau
+function send_new_material()
+{
+    var param1 = array2object(Tableau_material_new);
+    var Tableau_new_material_post         =  new Object(); 
+    Tableau_new_material_post['material'] =  new Object(); 
+    Tableau_new_material_post['material'] = param1;
+    $.ajax({
+	url: "/material/create",
+	type: 'POST',
+	dataType: 'json',
+	data: $.toJSON(Tableau_new_material_post),
+	contentType: 'application/json; charset=utf-8',
+	success: function(json) {
+	    alert(json);
+	}
+    });
+
+}
+
 
 
 -->

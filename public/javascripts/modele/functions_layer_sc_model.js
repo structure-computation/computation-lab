@@ -36,177 +36,6 @@ Tableau_new_model_info['name'] = 'super';
 Tableau_new_model_info['dim'] = 'test';
 Tableau_new_model_info['description'] = 'description cool';
 
-//---------------------------------------------------------------------------------------------------------
-// wizard de creation model
-//---------------------------------------------------------------------------------------------------------
-
-function displayNewModel(interupteur) {
-    displayBlack(interupteur);
-    document.getElementById('New_wiz_layer').className = interupteur;
-    NMcurrent_stape = 'page_information';
-    if(interupteur=='on'){
-	new_model_info_affiche_value();
-    }
-    affiche_NM_page();
-}
-
-// afficher la page suivante ou la page precedente
-function NM_next_stape(){
-    if(NMcurrent_stape == 'page_fichier'){
-        //send_new_model_info();
-        NMcurrent_stape = 'page_resume';
-        affiche_NM_page();
-    }
-    else if(NMcurrent_stape == 'page_information'){
-        NMcurrent_stape      = 'page_fichier';
-        affiche_NM_page();
-    }
-}
-function NM_previous_stape(){
-    if(NMcurrent_stape == 'page_fichier'){
-        NMcurrent_stape = 'page_information';
-        affiche_NM_page();
-    }
-    else if(NMcurrent_stape == 'page_resume'){
-        NMcurrent_stape      = 'page_fichier';
-        affiche_NM_page();
-    }
-}
-
-
-// afficher une page et cacher les autres
-function affiche_NM_page(){
-    var affiche_on  = NMcurrent_stape;
-    var affiche_off = new Array('page_information', 'page_fichier', 'page_resume');
-    var taille_off  = new Number(affiche_off.length);
-    
-    // on cache tout
-    var className   = "actif";
-    if(NMcurrent_stape == 'page_information'){
-        NMcurrent_stage = 0;
-    }
-    else if(NMcurrent_stape == 'page_fichier'){
-        NMcurrent_stage = 1;
-    }
-    else if(NMcurrent_stape == 'page_resume'){
-        NMcurrent_stage = 2;
-    }
-
-    for(i_off=0; i_off<taille_off; i_off++){
-        if(i_off >= NMcurrent_stage){
-            var className = "";
-        }
-        strContent_PB_page      =  'NM_PB_' + affiche_off[i_off] ;
-        var id_PB_page          =  document.getElementById(strContent_PB_page);
-        id_PB_page.className    =  className ;
-    }
-    
-    for(i_off=0; i_off<taille_off; i_off++){
-        strContent_page =  new String();
-        strContent_page =  'NM_' + affiche_off[i_off] ;
-        var id_page     =  document.getElementById(strContent_page);
-        if(id_page!=null){
-            id_page.className = "off";
-        }
-    }
-    // on affiche les éléments de la bonne page
-    strContent_PB_page      = 'NM_PB_' + affiche_on ;
-    var id_PB_page          = document.getElementById(strContent_PB_page);
-    id_PB_page.className    = "select";
-    
-    strContent_page         = new String();
-    strContent_page         = 'NM_' + affiche_on ;
-    if(id_page = document.getElementById(strContent_page)){
-        id_page.className   = "on";
-    }
-}
-
-//afficher les info d'un nouveau model
-function new_model_info_affiche_value(){
-	for(key in Tableau_new_model_info){
-		var strContent_info_key = 'sc_model_info_' + key ;
-		var id_info_key = document.getElementById(strContent_info_key);
-		if(id_info_key != null){
-			id_info_key.value = Tableau_new_model_info[key] ;
-		}
-	}
-	
-}
-
-//changer les info d'un nouveau model
-function new_model_info_change_value(){
-	for(key in Tableau_new_model_info){
-		var strContent_info_key = 'sc_model_info_' + key ;
-		var id_info_key = document.getElementById(strContent_info_key);
-		if(id_info_key != null){
-			Tableau_new_model_info[key] = id_info_key.value ;
-		}
-	}
-	
-}
-
-
-//-------------------------------------------------------------------------------------------------
-// fonctions utiles pour l'envoie des infos sur le nouveau model
-//-------------------------------------------------------------------------------------------------
-
-// Always send the authenticity_token with ajax
-// $(document).ajaxSend(function(event, request, settings) {
-//   if ( settings.type == 'post' || settings.type == 'put' ) {
-//     settings.data = (settings.data ? settings.data + "&" : "")
-//       + "authenticity_token=" + encodeURIComponent( AUTH_TOKEN );
-//     request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-//   }
-// });
-
-
-// telecharger le fichier de maillage de maniere asynchrone
-function UploadAsyncrone() {
-    $("#fichier").makeAsyncUploader({
-      upload_url: "/modele/upload", 
-      flash_url: '/javascripts/sources_ext/swfupload.swf',
-      button_image_url: '/images/blankButton.png'
-    });
-//     $('#fichier').uploadify({
-//         'uploader': '/javascripts/sources_ext/jquery_uploadify/uploadify.swf',
-//         'script':    '/modele/upload',
-//         'scriptData': { 'format': 'json'},// 'authenticity_token': encodeURIComponent('<%= form_authenticity_token if protect_against_forgery? %>'), '<%= Rails.configuration.action_controller.session[:session_key]%>': '<%= u session.session_id %>' },
-//         'cancelImg': '/images/cancel.png',
-//         'scriptAccess': 'always',
-//         //'buttonImg': '/images/blankButton.png',
-//         'auto'           : true,
-//     });
-
-    //alert('on est dans la fonction');
-}  
-
-// $(document).ajaxSend(function(event, request, settings) {
-//   if (typeof(AUTH_TOKEN) == "undefined") return;
-//   // settings.data is a serialized string like "foo=bar&baz=boink" (or null)
-//   settings.data = settings.data || "";
-//   settings.data += (settings.data ? "&" : "") + "authenticity_token=" + encodeURIComponent(AUTH_TOKEN);
-// });
-
-// telecharger le nom et la description du model
-function send_new_model_info()
-{
-    var url_php = "/modele/create";
-    var param1 = array2object(Tableau_new_model_info);
-    var Tableau_new_model_info_post         =  new Object(); 
-    Tableau_new_model_info_post['sc_model'] =  new Object(); 
-    Tableau_new_model_info_post['sc_model'] = param1;
-    $.ajax({
-	url: "/modele/create",
-	type: 'POST',
-	dataType: 'json',
-	data: $.toJSON(Tableau_new_model_info_post),
-	contentType: 'application/json; charset=utf-8',
-	success: function(json) {
-	    alert(json);
-	}
-    });
-
-}
 
 
 //-------------------------------------------------------------------------------------------------
@@ -385,6 +214,189 @@ function ferme_detail_modele(){
     
 }
 
+//---------------------------------------------------------------------------------------------------------
+// wizard de creation model
+//---------------------------------------------------------------------------------------------------------
+
+function displayNewModel(interupteur) {
+    displayBlack(interupteur);
+    document.getElementById('New_wiz_layer').className = interupteur;
+    NMcurrent_stape = 'page_information';
+    if(interupteur=='on'){
+	new_model_info_affiche_value();
+    }
+    affiche_NM_page();
+}
+
+// afficher la page suivante ou la page precedente
+function NM_next_stape(){
+    if(NMcurrent_stape == 'page_information'){
+        NMcurrent_stape      = 'page_fichier';
+        affiche_NM_page();
+    }
+    else if(NMcurrent_stape == 'page_fichier'){
+        //send_new_model_info();
+        NMcurrent_stape = 'page_resume';
+	affich_new_model_resume();
+        affiche_NM_page();
+    }
+}
+function NM_previous_stape(){
+    if(NMcurrent_stape == 'page_fichier'){
+        NMcurrent_stape = 'page_information';
+        affiche_NM_page();
+    }
+    else if(NMcurrent_stape == 'page_resume'){
+        NMcurrent_stape      = 'page_fichier';
+        affiche_NM_page();
+    }
+}
+
+
+// afficher une page et cacher les autres
+function affiche_NM_page(){
+    var affiche_on  = NMcurrent_stape;
+    var affiche_off = new Array('page_information', 'page_fichier', 'page_resume');
+    var taille_off  = new Number(affiche_off.length);
+    
+    // on cache tout
+    var className   = "actif";
+    if(NMcurrent_stape == 'page_information'){
+        NMcurrent_stage = 0;
+    }
+    else if(NMcurrent_stape == 'page_fichier'){
+        NMcurrent_stage = 1;
+    }
+    else if(NMcurrent_stape == 'page_resume'){
+        NMcurrent_stage = 2;
+    }
+
+    for(i_off=0; i_off<taille_off; i_off++){
+        if(i_off >= NMcurrent_stage){
+            var className = "";
+        }
+        strContent_PB_page      =  'NM_PB_' + affiche_off[i_off] ;
+        var id_PB_page          =  document.getElementById(strContent_PB_page);
+        id_PB_page.className    =  className ;
+    }
+    
+    for(i_off=0; i_off<taille_off; i_off++){
+        strContent_page =  new String();
+        strContent_page =  'NM_' + affiche_off[i_off] ;
+        var id_page     =  document.getElementById(strContent_page);
+        if(id_page!=null){
+            id_page.className = "off";
+        }
+    }
+    // on affiche les éléments de la bonne page
+    strContent_PB_page      = 'NM_PB_' + affiche_on ;
+    var id_PB_page          = document.getElementById(strContent_PB_page);
+    id_PB_page.className    = "select";
+    
+    strContent_page         = new String();
+    strContent_page         = 'NM_' + affiche_on ;
+    if(id_page = document.getElementById(strContent_page)){
+        id_page.className   = "on";
+    }
+}
+
+//afficher les info d'un nouveau model
+function new_model_info_affiche_value(){
+	for(key in Tableau_new_model_info){
+		var strContent_info_key = 'sc_model_info_' + key ;
+		var id_info_key = document.getElementById(strContent_info_key);
+		if(id_info_key != null){
+			id_info_key.value = Tableau_new_model_info[key] ;
+		}
+	}
+	
+}
+
+//changer les info d'un nouveau model
+function new_model_info_change_value(){
+	for(key in Tableau_new_model_info){
+		var strContent_info_key = 'sc_model_info_' + key ;
+		var id_info_key = document.getElementById(strContent_info_key);
+		if(id_info_key != null){
+			Tableau_new_model_info[key] = id_info_key.value ;
+		}
+	}
+	
+}
+
+// afficher le resumé d'un materiaux
+function affich_new_model_resume(){
+   for(key in Tableau_new_model_info){
+		var str_info_key = 'sc_model_resume_' + key ;
+		var id_info_key = document.getElementById(str_info_key);
+		if(id_info_key != null){
+			strContent_info_key = Tableau_new_model_info[key] ; 
+			remplacerTexte(id_info_key, strContent_info_key);
+		}
+	}
+}
+
+//-------------------------------------------------------------------------------------------------
+// fonctions utiles pour l'envoie des infos sur le nouveau model
+//-------------------------------------------------------------------------------------------------
+
+// Always send the authenticity_token with ajax
+// $(document).ajaxSend(function(event, request, settings) {
+//   if ( settings.type == 'post' || settings.type == 'put' ) {
+//     settings.data = (settings.data ? settings.data + "&" : "")
+//       + "authenticity_token=" + encodeURIComponent( AUTH_TOKEN );
+//     request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+//   }
+// });
+
+
+// telecharger le fichier de maillage de maniere asynchrone
+function UploadAsyncrone() {
+    $("#fichier").makeAsyncUploader({
+      upload_url: "/modele/upload", 
+      flash_url: '/javascripts/sources_ext/swfupload.swf',
+      button_image_url: '/images/blankButton.png'
+    });
+//     $('#fichier').uploadify({
+//         'uploader': '/javascripts/sources_ext/jquery_uploadify/uploadify.swf',
+//         'script':    '/modele/upload',
+//         'scriptData': { 'format': 'json'},// 'authenticity_token': encodeURIComponent('<%= form_authenticity_token if protect_against_forgery? %>'), '<%= Rails.configuration.action_controller.session[:session_key]%>': '<%= u session.session_id %>' },
+//         'cancelImg': '/images/cancel.png',
+//         'scriptAccess': 'always',
+//         //'buttonImg': '/images/blankButton.png',
+//         'auto'           : true,
+//     });
+
+    //alert('on est dans la fonction');
+}  
+
+// $(document).ajaxSend(function(event, request, settings) {
+//   if (typeof(AUTH_TOKEN) == "undefined") return;
+//   // settings.data is a serialized string like "foo=bar&baz=boink" (or null)
+//   settings.data = settings.data || "";
+//   settings.data += (settings.data ? "&" : "") + "authenticity_token=" + encodeURIComponent(AUTH_TOKEN);
+// });
+
+// telecharger le nom et la description du model
+function send_new_model_info()
+{
+    var url_php = "/modele/create";
+    var param1 = array2object(Tableau_new_model_info);
+    var Tableau_new_model_info_post         =  new Object(); 
+    Tableau_new_model_info_post['sc_model'] =  new Object(); 
+    Tableau_new_model_info_post['sc_model'] = param1;
+    $.ajax({
+	url: "/modele/create",
+	type: 'POST',
+	dataType: 'json',
+	data: $.toJSON(Tableau_new_model_info_post),
+	contentType: 'application/json; charset=utf-8',
+	success: function(json) {
+	    alert(json);
+	}
+    });
+
+}
 
 
 -->

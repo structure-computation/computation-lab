@@ -1,0 +1,101 @@
+#New_wiz_layer.off
+  #New_wiz_layer_top
+    Ajout d'un nouveau membre
+  #New_wiz_layer_milieu
+    #NM_wiz_menu
+      %a{ :onclick => "()" } 
+        #NM_PB_page_information{ :style => "z-index: 100; margin-left:0px;" }
+          Information
+      %a{ :onclick => "()" } 
+        #NM_PB_page_fichier{ :style => "z-index: 99; margin-left:220px" }
+          Coordonnées
+      %a{ :onclick => "()" } 
+        #NM_PB_page_resume{ :style => "z-index: 98; margin-left:440px" }
+          Résumé
+        
+    / page information
+    #NM_page_information
+      .NM_bleu{ :style => "width: 600px; height: 20px;  margin: 50px 0px 0 63px;" }
+        Ajouter un nouveau membre
+      .NM_fond_gris{ :style => "width: 600px; margin: 5px 0px 0 63px;" }
+        Pour ajouter un nouveu membre, vous devez avoir les renseignements suivant :
+        %br
+        \     	- adresse email valide
+        %br
+        \     	- Nom
+        %br
+        \     	- Prénom
+        %br
+        \     	- Rôle (gestionaire ou ingénieur)
+        %br
+
+    / page fichier et description
+    #NM_page_fichier
+      %div{ :style => "width:700px; height:70px; float:left;" }
+      .NM_text_1{ :style => "width:200px;" }
+        email :
+      .NM_text_1{ :style => "width:500px;" }
+        %input#new_membre_email{ :type => "text", :onKeyup => "new_membre_change_value()" }
+      .NM_text_1{ :style => "width:200px;" }
+        Nom :
+      .NM_text_1{ :style => "width:500px;" }
+        %input#new_membre_lastname{ :type => "text", :onKeyup => "new_membre_change_value()" }
+      .NM_text_1{ :style => "width:200px;" }
+        Prénom :
+      .NM_text_1{ :style => "width:500px;" }
+        %input#new_membre_firstname{ :type => "text", :onKeyup => "new_membre_change_value()" }
+      .NM_text_1{ :style => "width:200px;" }
+        Droits :
+      .NM_text_1{ :style => "width:500px;" }
+        /%input#new_membre_role{ :type => "text", :onKeyup => "new_membre_change_value()" }
+        %select#new_membre_role{ :onChange => "new_membre_change_value()"}
+          %option{:value => "ingénieur"} ingénieur
+          %option{:value => "gestionaire"} gestionaire
+
+
+
+    / page résumé
+    #NM_page_resume
+      .NM_bleu{ :style => "width: 730px; height: 70px;  margin: 0px 0px 0 3px;" }
+      .NM_fond_resume{ :style => "width: 730px; margin: 0px 0px 0 3px;" }
+      
+        .NM_text_1{ :style => "width:200px;" }
+          email :
+        .NM_text_1{ :style => "width:500px;" }
+          %p#new_membre_resume_email
+        .NM_text_1{ :style => "width:200px;" }
+          Nom :
+        .NM_text_1{ :style => "width:500px;" }
+          %p#new_membre_resume_lastname
+        .NM_text_1{ :style => "width:200px;" }
+          Prénom :
+        .NM_text_1{ :style => "width:500px;" }
+          %p#new_membre_resume_firstname
+        .NM_text_1{ :style => "width:200px;" }
+          Droits :
+        .NM_text_1{ :style => "width:500px;" }
+          %p#new_membre_resume_role
+      
+      %div{:style => "width: 350px; margin: 20px 0px 0 213px; float:left;" }
+        .wiz_pic_ok
+        .NM_bleu{ :style => "width: 250px; height:30px; margin: 16px 0px 25px 20px;" }
+          Un email a été envoyé avec succès, ce membre est en attente de validation
+
+  #New_wiz_layer_bas
+    #wiz_annul.on{:style => "float: left;" }
+      %a{ :style => "cursor: pointer;", :onclick => "displayNewMembre('off')" } 
+        .New_create_bouton_jaune
+          Annuler
+    #wiz_suiv.on{:style => "float: right;" }
+      %a{ :onclick => "NM_next_stape()", :style => "cursor: pointer;" } 
+        .New_footer_bouton_suivant.New_footer_top_bouton{ :style => "margin-right:5px;" }
+          Suivant
+      %a{ :onclick => "NM_previous_stape()", :style => "cursor: pointer;" } 
+        .New_footer_bouton_precedent.New_footer_top_bouton
+          Précédent
+
+    #wiz_valid.off{:style => "float: right;" }
+      %a{ :onclick => "displayNewMembre('off')", :style => "cursor: pointer;" }
+        .New_create_bouton_jaune{ :style => "margin-right:5px;" }
+          Valider
+

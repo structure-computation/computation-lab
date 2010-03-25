@@ -42,11 +42,11 @@ function affiche_Tableau_new(current_tableau, strname, stridentificateur){
 	var id_visqueux     = document.getElementById(strContent_visqueux);
         
         if(i_page<taille_Tableau){
-            id_lign.className = "newBoxTable_Material_lign on";
+            id_lign.className = "newBoxTable_lign on";
 	    if(pair(i)){
-		id_pair.className = "newBoxTable_Material_lign_pair";
+		id_pair.className = "newBoxTable_lign_pair";
 	    }else{
-		id_pair.className = "newBoxTable_Material_lign_impair";
+		id_pair.className = "newBoxTable_lign_impair";
 	    }
 	    strtemp_num = current_tableau[i_page]['type_num'];
             remplacerTexte(id_num, strtemp_num);
@@ -78,7 +78,7 @@ function affiche_Tableau_new(current_tableau, strname, stridentificateur){
 	    }	
 	    
         }else{
-            id_lign.className = "newBoxTable_Material_lign off";
+            id_lign.className = "newBoxTable_lign off";
         }
     }
     // pour l'affichage des page en bas de la boite
@@ -133,7 +133,7 @@ function go_page_new_material(num){
 // selectionner (activer) un matériaux de la liste pour creer un nouveau materiaux
 function select_new_material(num){
 	var new_mat_select = content_tableau_connect['new_material'][num];
-	Tableau_material_new = Tableau_material_new_list[new_mat_select];
+	Tableau_material_new = clone(Tableau_material_new_list[new_mat_select]);
 	for(i=0; i<taille_tableau_content_page['new_material'] ;i++){
 		strContent_check = 'new_material_check_' + i;
 		id_check = document.getElementById(strContent_check);

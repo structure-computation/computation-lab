@@ -1,5 +1,5 @@
-#newBoxTable_Material
-  #newBoxTable_Material_first
+.newBoxTable
+  .newBoxTable_first
     #new_material_0_1.newBoxTable_Material_0{ :style => "width: 24px;" }
     #new_material_0_2.newBoxTable_Material_0{ :style => "width: 70px;" }
       %p
@@ -12,24 +12,24 @@
         comportement
     
   - (0...8).each do |i|
-    .newBoxTable_Material_lign{ :id => "new_material_lign_#{i}" }
-      .newBoxTable_Material_lign_pair{ :id => "new_material_pair_#{i}" }
-        .newBoxTable_Material_1{ :id => "new_material_1_#{i}", :style => "width: 29px;" }
+    .newBoxTable_lign{ :id => "new_material_lign_#{i}" }
+      .newBoxTable_lign_pair{ :id => "new_material_pair_#{i}" }
+        .newBoxTable_1{ :id => "new_material_1_#{i}", :style => "width: 29px;" }
           %input{:id => "new_material_check_#{i}", :type => "checkbox", :onclick => "select_new_material(#{i})" }  
-        .newBoxTable_Material_2{ :id => "new_material_num_#{i}", :style => "width: 70px;" }
-        .newBoxTable_Material_2{ :id => "new_material_type_#{i}", :style => "width: 130px;" }
-        .newBoxTable_Material_2{ :id => "new_material_4_#{i}", :style => "width: 450px;"}
+        .newBoxTable_2{ :id => "new_material_num_#{i}", :style => "width: 70px;" }
+        .newBoxTable_2{ :id => "new_material_type_#{i}", :style => "width: 130px;" }
+        .newBoxTable_2{ :id => "new_material_4_#{i}", :style => "width: 450px;"}
           .NC_box_check_prop{ :id => "new_material_elastique_#{i}"}
-          .newBoxTable_Material_3{:style => "width: 60px;"}
+          .newBoxTable_3{:style => "width: 60px;"}
             elastique
           .NC_box_check_prop{ :id => "new_material_plastique_#{i}"}
-          .newBoxTable_Material_3{:style => "width: 60px;"}
+          .newBoxTable_3{:style => "width: 60px;"}
             plastique
           .NC_box_check_prop{ :id => "new_material_endomageable_#{i}"}
-          .newBoxTable_Material_3{:style => "width: 90px;"}
+          .newBoxTable_3{:style => "width: 90px;"}
             endomageable
           .NC_box_check_prop{ :id => "new_material_visqueux_#{i}"}
-          .newBoxTable_Material_3{:style => "width: 60px;"}
+          .newBoxTable_3{:style => "width: 60px;"}
             visqueux
 
 .NM_bleu{ :style => "width: 600px; height: 25px;  margin: 10px 0px 0 63px;" }

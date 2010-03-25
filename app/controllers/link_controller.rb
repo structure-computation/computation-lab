@@ -13,4 +13,12 @@ class LinkController < ApplicationController
       format.js   {render :json => @links.to_json}
     end
   end
+  
+  def create
+    num_model = 1
+    File.open("#{RAILS_ROOT}/public/test/link_#{num_model}", 'w+') do |f|
+        f.write(params.to_json)
+    end
+    render :json => { :result => 'success' }
+  end
 end

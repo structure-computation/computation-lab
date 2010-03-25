@@ -54,9 +54,9 @@
           /= text_field_tag :NM_name, :value => "premier calcul", :onKeyup => "Tableau_init_change_value()"
           %input#sc_model_info_name{ :type => "text", :onKeyup => "new_model_info_change_value()" }
           / %input#NM_image{ :type => "file", :value => "emplacement du fichier", :onKeyup => "Tableau_init_change_value()" }
-        .NM_text_2{ :style => "width:200px;" }
+        .NM_text_1{ :style => "width:200px;" }
           Description :
-        .NM_text_2{ :style => "width:500px;" }
+        .NM_text_1{ :style => "width:500px;" }
           /= text_area_tag :NM_description, :onKeyup => "Tableau_NM_model_change_value()"
           %textarea#sc_model_info_description{ :onKeyup => "new_model_info_change_value()" }
       /.NM_fond_gris{ :style => "width: 600px; margin: 5px 0px 0 63px;" }
@@ -68,10 +68,12 @@
       .NM_fond_resume{ :style => "width: 730px; margin: 0px 0px 0 3px;" }
         .NM_text_1{ :style => "width:200px;" }
           Nom du modèle :
-        #sc_model_info_name.NM_text_1{ :style => "width:500px;" }
-        .NM_text_2{ :style => "width:200px;" }
+        .NM_text_1{ :style => "width:500px;" }
+          %p#sc_model_resume_name
+        .NM_text_1{ :style => "width:200px;" }
           Description :
-        #sc_model_info_description.NM_text_2{ :style => "width:500px; height:100px;" }
+        .NM_text_1{ :style => "width:500px; height:100px;" }
+          %p#sc_model_resume_description
       %div{:style => "width: 300px; margin: 20px 0px 0 213px; float:left;" }
         .wiz_pic_ok
         .NM_bleu{ :style => "width: 200px; height:20px; margin: 25px 0px 25px 20px;" }

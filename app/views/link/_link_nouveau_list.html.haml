@@ -1,0 +1,46 @@
+.newBoxTable
+  .newBoxTable_first
+    .newBoxTable_0{ :style => "width: 24px;" }
+    .newBoxTable_0{ :style => "width: 70px;" }
+      %p
+        Numéro
+    .newBoxTable_0{ :style => "width: 350px;" }
+      %p
+        Comportement cénérique
+    .newBoxTable_0{ :style => "width: 230px;" }
+      %p
+        Comportement complexe
+    
+  - (0...8).each do |i|
+    .newBoxTable_lign{ :id => "new_link_lign_#{i}" }
+      .newBoxTable_lign_pair{ :id => "new_link_pair_#{i}" }
+        .newBoxTable_1{ :id => "new_link_1_#{i}", :style => "width: 29px;" }
+          %input{:id => "new_link_check_#{i}", :type => "checkbox", :onclick => "select_new_link(#{i})" }  
+        .newBoxTable_2{ :id => "new_link_num_#{i}", :style => "width: 70px;" }
+        .newBoxTable_2{ :id => "new_link_type_#{i}", :style => "width: 350px;" }
+          .NC_box_radio_prop{ :id => "new_link_parfaite_#{i}"}
+          .newBoxTable_3{:style => "width: 60px;"}
+            parfaite
+          .NC_box_radio_prop{ :id => "new_link_elastique_#{i}"}
+          .newBoxTable_3{:style => "width: 60px;"}
+            élastique
+          .NC_box_radio_prop{ :id => "new_link_contact_#{i}"}
+          .newBoxTable_3{:style => "width: 60px;"}
+            contact
+        .newBoxTable_2{ :id => "new_link_4_#{i}", :style => "width: 230px;"}
+          .NC_box_check_prop{ :id => "new_link_plastique_#{i}"}
+          .newBoxTable_3{:style => "width: 60px;"}
+            plastique
+          .NC_box_check_prop{ :id => "new_link_cassable_#{i}"}
+          .newBoxTable_3{:style => "width: 60px;"}
+            cassable
+
+.NM_bleu{ :style => "width: 600px; height: 25px;  margin: 10px 0px 0 63px;" }
+  %a.page_select{ :onclick => "go_page_new_link('first')", :style => "cursor: pointer;" }
+    %img{:src=>"/images/page_moins.png", :style=>"vertical-align:middle;"}
+  page
+  - (0...5).each do |i|
+    %a{ :id => "new_link_page_#{i}", :onclick => "go_page_new_link(#{i})", :style => "cursor: pointer;" }
+      #{i}
+  %a.page_select{ :onclick => "go_page_new_link('end')", :style => "cursor: pointer;" }
+    %img{:src=>"/images/page_plus.png", :style=>"vertical-align:middle;"}

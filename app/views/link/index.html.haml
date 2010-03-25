@@ -4,12 +4,13 @@
 
 / Javascript particulier a la page link
 %script{ :src => "/javascripts/link/functions_layer_link.js" ,   :type => "text/javascript" }
+%script{ :src => "/javascripts/link/init_new_link.js" ,   :type => "text/javascript" }
 
 / wizard création de projet en premier plan
 #content
   #bl_5.black.off
   / wizard de creation d'un nouveau link
-  /= render :partial => "link_nouveau"
+  = render :partial => "link_nouveau"
 
   / partie gauche du contenu, raccourci
   #contentleft

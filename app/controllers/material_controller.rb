@@ -13,4 +13,13 @@ class MaterialController < ApplicationController
       format.js   {render :json => @materials.to_json}
     end
   end
+  
+  def create
+    num_model = 1
+    File.open("#{RAILS_ROOT}/public/test/material_#{num_model}", 'w+') do |f|
+        f.write(params.to_json)
+    end
+    render :json => { :result => 'success' }
+  end
+  
 end

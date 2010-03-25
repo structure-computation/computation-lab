@@ -14,18 +14,27 @@ var content_tableau_connect         =  new Array();              // connectivit�
 var content_tableau_current_page    =  new Array();              // numéro de la page du tableau (sert pour la définition de la connectivité)    
 var content_tableau_curseur_page    =  new Array();              // nombre de page du tableau (sert pour l'affichage des page en bas des tableaux)
 var content_tableau_liste_page      =  new Array();              // liste des pages du tableau (sert pour l'affichage des page en bas des tableaux)
-var content_tableau_page            =  new Array('link');    // initialisation des pages avec tableau dynamique
+var content_tableau_page            =  new Array('link','new_link');    // initialisation des pages avec tableau dynamique
+
+var taille_tableau_content_page     =  new Array()               // taille du tableau dans la content box
+taille_tableau_content_page['link'] = 20;
+taille_tableau_content_page['new_link'] = 8;
+
+
 
 for(i=0; i<content_tableau_page.length ; i++){
-    content_tableau_connect[content_tableau_page[i]] = new Array(taille_tableau_content);
+    content_tableau_connect[content_tableau_page[i]] = new Array(taille_tableau_content_page[content_tableau_page[i]]);
     content_tableau_current_page[content_tableau_page[i]] = 0;
     content_tableau_curseur_page[content_tableau_page[i]] = 0;
     content_tableau_liste_page[content_tableau_page[i]] = [1];
+    taille_tableau_content = taille_tableau_content_page[content_tableau_page[i]];
     for(j=0; j<taille_tableau_content ; j++){
         content_tableau_connect[content_tableau_page[i]][j]=j;
     }
 }
 
+// initialisation des type de liaison possibles pour la creation de nouvelles liaisons
+var Tableau_link_new               =  new Array();              // tableau des nouvelles liaisons
 
 //-------------------------------------------------------------------------------------------------
 // fonctions utiles pour l'obtention de la liste des links (tableau)
@@ -330,6 +339,287 @@ function prop_liaison_affich_info(prop_liaison_for_info){
 		}
 	}	
 }
+
+
+//---------------------------------------------------------------------------------------------------------------------
+// fonctions utiles pour l'affichage d'une nouvelle liaison
+//---------------------------------------------------------------------------------------------------------------------
+
+//---------------------------------------------------------------------------------------------------------
+// wizard de creation liaison
+//---------------------------------------------------------------------------------------------------------
+
+function displayNewLink(interupteur) {
+    displayBlack(interupteur);
+    document.getElementById('New_wiz_layer').className = interupteur;
+    NMcurrent_stape = 'page_information';
+    //affich_new_link();
+    affiche_Tableau_new_link();
+    affiche_NM_page();
+}
+
+// afficher la page suivante ou la page precedente
+function NM_next_stape(){
+    if(NMcurrent_stape == 'page_information'){
+        NMcurrent_stape      = 'page_fichier';
+	affich_new_link();
+        affiche_NM_page();
+    }
+    else if(NMcurrent_stape == 'page_fichier'){
+        //send_new_model_info();
+	send_new_link();
+	affich_new_link_resume();
+        NMcurrent_stape = 'page_resume';
+	
+        affiche_NM_page();
+    }  
+}
+function NM_previous_stape(){
+    if(NMcurrent_stape == 'page_fichier'){
+        NMcurrent_stape = 'page_information';
+        affiche_NM_page();
+    }
+    else if(NMcurrent_stape == 'page_resume'){
+        NMcurrent_stape      = 'page_fichier';
+        affiche_NM_page();
+    }
+}
+
+// afficher une page et cacher les autres
+function affiche_NM_page(){
+    var affiche_on  = NMcurrent_stape;
+    var affiche_off = new Array('page_information', 'page_fichier', 'page_resume');
+    var taille_off  = new Number(affiche_off.length);
+    
+    // on cache tout
+    var className   = "actif";
+    if(NMcurrent_stape == 'page_information'){
+        NMcurrent_stage = 0;
+    }
+    else if(NMcurrent_stape == 'page_fichier'){
+        NMcurrent_stage = 1;
+    }
+    else if(NMcurrent_stape == 'page_resume'){
+        NMcurrent_stage = 2;
+    }
+
+    for(i_off=0; i_off<taille_off; i_off++){
+        if(i_off >= NMcurrent_stage){
+            var className = "";
+        }
+        strContent_PB_page      =  'NM_PB_' + affiche_off[i_off] ;
+        var id_PB_page          =  document.getElementById(strContent_PB_page);
+        id_PB_page.className    =  className ;
+    }
+    
+    for(i_off=0; i_off<taille_off; i_off++){
+        strContent_page =  new String();
+        strContent_page =  'NM_' + affiche_off[i_off] ;
+        var id_page     =  document.getElementById(strContent_page);
+        if(id_page!=null){
+            id_page.className = "off";
+        }
+    }
+    // on affiche les éléments de la bonne page
+    strContent_PB_page      = 'NM_PB_' + affiche_on ;
+    var id_PB_page          = document.getElementById(strContent_PB_page);
+    id_PB_page.className    = "select";
+    
+    strContent_page         = new String();
+    strContent_page         = 'NM_' + affiche_on ;
+    if(id_page = document.getElementById(strContent_page)){
+        id_page.className   = "on";
+    }
+}
+
+
+// afficher le détail d'une liaison
+function affich_new_link(){
+    var table_detail = Tableau_link_new;
+    new_liaison_affich_info(table_detail);               // dans init_new 
+}
+
+// afficher une page et cacher les autres
+function new_liaison_affich(name_new){
+	var affiche_on = name_new;
+	var affiche_off = new Array('generique', 'complexe');
+	var taille_off = new Number(affiche_off.length);
+	
+	// on cache tout
+	for(i_off=0; i_off<taille_off; i_off++){
+		var className_page = "NC_prop_box off";
+		var strContent_new_page = 'new_liaison_' + affiche_off[i_off] ;
+		//alert(strContent_new_page);
+		var id_new_page = document.getElementById(strContent_new_page);
+		id_new_page.className = className_page ;
+		
+		var className_menu = "";
+		var strContent_new_menu = 'new_liaison_menu_' + affiche_off[i_off] ;
+		var id_new_menu = document.getElementById(strContent_new_menu);
+		if(id_new_menu.className.match('off')){
+		}else{
+			id_new_menu.className = className_menu ;
+		}
+		
+	}
+	
+	// on affiche les éléments de la bonne page
+	var className_page = "NC_prop_box on";
+	var strContent_new_page = 'new_liaison_' + affiche_on ;
+	var id_new_page = document.getElementById(strContent_new_page);
+	id_new_page.className = className_page ;
+	
+	var className_menu = "selected";
+	var strContent_new_menu = 'new_liaison_menu_' + affiche_on ;
+	var id_new_menu = document.getElementById(strContent_new_menu);
+	id_new_menu.className = className_menu ;
+}
+
+
+// afficher les propriété de la liaison à visualiser 
+function new_liaison_affich_info(new_liaison_for_info){
+	// new_liaison_for_info est la liaison sélectionné
+	// on rempli le cartouche top de la liaison pour info
+	for(key in new_liaison_for_info){
+		if(key=='name'){
+			var strContent_new_key = 'new_liaison_top_' + key ;
+			var id_new_key = document.getElementById(strContent_new_key);
+			if(id_new_key != null){
+				remplacerTexte(id_new_key, new_liaison_for_info[key]);
+			}
+		}
+		if(key=='ref'){
+			var strContent_new_key = 'new_liaison_top_' + key ;
+			var id_new_key = document.getElementById(strContent_new_key);
+			if(id_new_key != null){
+				remplacerTexte(id_new_key, new_liaison_for_info[key]);
+			}
+		}
+		if(key=='comp_generique'){
+			var strContent_new_parfaite = 'new_liaison_top_parfaite' ;
+			var strContent_new_elastique = 'new_liaison_top_elastique'  ;
+			var strContent_new_contact = 'new_liaison_top_contact'  ;
+			var id_new_parfaite = document.getElementById(strContent_new_parfaite);
+			var id_new_elastique = document.getElementById(strContent_new_elastique);
+			var id_new_contact = document.getElementById(strContent_new_contact);
+			
+			if(new_liaison_for_info[key].match('Pa')) {
+				id_new_parfaite.className = "NC_box_radio_prop actif";
+				id_new_elastique.className = "NC_box_radio_prop";
+				id_new_contact.className = "NC_box_radio_prop";
+				
+				document.getElementById('new_liaison_comp_elastique').className = "off";
+				document.getElementById('new_liaison_comp_contact').className = "off";
+			
+			}else if(new_liaison_for_info[key].match('El')) {
+				id_new_parfaite.className = "NC_box_radio_prop";
+				id_new_elastique.className = "NC_box_radio_prop actif";
+				id_new_contact.className = "NC_box_radio_prop";
+				
+				document.getElementById('new_liaison_comp_elastique').className = "on";
+				document.getElementById('new_liaison_comp_contact').className = "off";
+						
+			}else if(new_liaison_for_info[key].match('Co')) {
+				id_new_parfaite.className = "NC_box_radio_prop";
+				id_new_elastique.className = "NC_box_radio_prop";
+				id_new_contact.className = "NC_box_radio_prop actif";
+				
+				document.getElementById('new_liaison_comp_elastique').className = "off";
+				document.getElementById('new_liaison_comp_contact').className = "on";		
+			}
+		}
+		if(key=='comp_complexe'){
+			var strContent_new_top_plastique = 'new_liaison_top_plastique'  ;
+			var strContent_new_top_cassable = 'new_liaison_top_cassable'  ;
+			var strContent_new_plastique = 'new_liaison_comp_plastique'  ;
+			var strContent_new_cassable = 'new_liaison_comp_cassable'  ;
+			
+			var id_new_top_plastique = document.getElementById(strContent_new_top_plastique);
+			var id_new_top_cassable = document.getElementById(strContent_new_top_cassable);
+			var id_new_plastique = document.getElementById(strContent_new_plastique);
+			var id_new_cassable = document.getElementById(strContent_new_cassable);
+
+			//plastique
+			if(new_liaison_for_info[key].match('Pl')){
+				id_new_top_plastique.className = "NC_box_check_prop actif";
+				id_new_plastique.className = "on";
+			}else{ 
+				id_new_top_plastique.className = "NC_box_check_prop";
+				id_new_plastique.className = "off";
+			}
+			//cassable
+			if(new_liaison_for_info[key].match('Ca')){
+				id_new_top_cassable.className = "NC_box_check_prop actif";
+				id_new_cassable.className = "on";
+			}else{ 
+				id_new_top_cassable.className = "NC_box_check_prop";
+				id_new_cassable.className = "off";
+			}	
+		}
+	}	
+	new_liaison_affich('generique');
+	
+	// on rempli les propriété de la liaison
+	for(key in new_liaison_for_info){
+		var strContent_new_key = 'new_liaison_' + key ;
+		var id_new_key = document.getElementById(strContent_new_key);
+		if(id_new_key != null){
+			id_new_key.value = new_liaison_for_info[key] ;
+			id_new_key.disabled = false;
+		}
+		if(key == 'f'){
+			var strContent_new_key_bis = 'new_liaison_bis_' + key ;
+			var id_new_key_bis = document.getElementById(strContent_new_key_bis);
+			id_new_key_bis.value = new_liaison_for_info[key] ;
+			id_new_key_bis.disabled = false;
+		}
+	}	
+}
+
+//changer les propriétés d'une liaison
+function new_liaison_change_value(){
+	for(key in Tableau_link_new){
+		var strContent_prop_key = 'new_liaison_' + key ;
+		var id_prop_key = document.getElementById(strContent_prop_key);
+		if(id_prop_key != null){
+			Tableau_link_new[key] = id_prop_key.value ;
+		}
+	}
+}
+
+// afficher le resumé d'une liaison
+function affich_new_link_resume(){
+   for(key in Tableau_link_new){
+		var str_info_key = 'new_link_resume_' + key ;
+		var id_info_key = document.getElementById(str_info_key);
+		if(id_info_key != null){
+			strContent_info_key = Tableau_link_new[key] ; 
+			remplacerTexte(id_info_key, strContent_info_key);
+		}
+	}
+}
+
+// telecharger la nouvelle liaison
+function send_new_link()
+{
+    var param1 = array2object(Tableau_link_new);
+    var Tableau_new_link_post         =  new Object(); 
+    Tableau_new_link_post['link'] =  new Object(); 
+    Tableau_new_link_post['link'] = param1;
+    $.ajax({
+	url: "/link/create",
+	type: 'POST',
+	dataType: 'json',
+	data: $.toJSON(Tableau_new_link_post),
+	contentType: 'application/json; charset=utf-8',
+	success: function(json) {
+	    alert(json);
+	}
+    });
+
+}
+
+
 
 
 
