@@ -746,6 +746,10 @@ body
   color:#2a3557;
   float:left	
 }
+.page_select
+{
+  text-decoration: underline ;
+}
 .NM_fond_gris
 {
   line-height: 13px;

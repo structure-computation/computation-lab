@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100326125340) do
+ActiveRecord::Schema.define(:version => 20100327132928) do
 
   create_table "abonnements", :force => true do |t|
     t.string   "name"
@@ -99,8 +99,11 @@ ActiveRecord::Schema.define(:version => 20100326125340) do
     t.integer  "calcul_account_id"
     t.integer  "memory_account_id"
     t.integer  "forfait_id"
+    t.integer  "jetons_utilise"
+    t.integer  "jetons_achete"
     t.float    "total_calcul"
     t.float    "total_memory"
+    t.float    "total"
     t.integer  "facture_month"
     t.integer  "facture_year"
     t.date     "facture_date"
@@ -254,6 +257,20 @@ ActiveRecord::Schema.define(:version => 20100326125340) do
     t.integer  "interfaces"
     t.integer  "used_space"
     t.string   "state"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "solde_calcul_accounts", :force => true do |t|
+    t.integer  "calcul_account_id"
+    t.integer  "log_calcul_id"
+    t.integer  "credit_id"
+    t.string   "solde_type"
+    t.float    "credit_jeton"
+    t.float    "credit_jeton_tempon"
+    t.float    "debit_jeton"
+    t.float    "solde_jeton"
+    t.float    "solde_jeton_tempon"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

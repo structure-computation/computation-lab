@@ -3,10 +3,11 @@
 // initialisation
 //---------------------------------------------------------------------------------------------------------
 
-var NMcurrent_stape                 =  0;                        // étape pour le wizzard nouveau membre
+var Tableau_solde_calcul                   =  new Array();              // tableau du solde calcul
+var Tableau_solde_calcul_filter            =  new Array();              // tableau du solde calcul filtres pour l'affichage
+var Tableau_facture	                   =  new Array();              // tableau du solde calcul
+var Tableau_facture_filter  	           =  new Array();              // tableau du solde calcul filtres pour l'affichage
 
-var Tableau_membre                   =  new Array();              // tableau des membres
-var Tableau_membre_filter            =  new Array();              // tableau des membres filtres pour l'affichage
 
 //initialisation de la taille du tableau pour la box content et de la table de correspondance
 var taille_tableau_content          =  20;                       // taille du tableau dans la content box
@@ -14,13 +15,18 @@ var content_tableau_connect         =  new Array();              // connectivit�
 var content_tableau_current_page    =  new Array();              // numéro de la page du tableau (sert pour la définition de la connectivité)    
 var content_tableau_curseur_page    =  new Array();              // nombre de page du tableau (sert pour l'affichage des page en bas des tableaux)
 var content_tableau_liste_page      =  new Array();              // liste des pages du tableau (sert pour l'affichage des page en bas des tableaux)
-var content_tableau_page            =  new Array('membre');    // initialisation des pages avec tableau dynamique
+var content_tableau_page            =  new Array('solde_calcul','facture');    // initialisation des pages avec tableau dynamique
+var taille_tableau_content_page     =  new Array()               // taille du tableau dans la content box
+taille_tableau_content_page['solde_calcul'] = 10;
+taille_tableau_content_page['facture'] = 10;
+
 
 for(i=0; i<content_tableau_page.length ; i++){
-    content_tableau_connect[content_tableau_page[i]] = new Array(taille_tableau_content);
+    content_tableau_connect[content_tableau_page[i]] = new Array(taille_tableau_content_page[content_tableau_page[i]]);
     content_tableau_current_page[content_tableau_page[i]] = 0;
     content_tableau_curseur_page[content_tableau_page[i]] = 0;
     content_tableau_liste_page[content_tableau_page[i]] = [1];
+    taille_tableau_content = taille_tableau_content_page[content_tableau_page[i]];
     for(j=0; j<taille_tableau_content ; j++){
         content_tableau_connect[content_tableau_page[i]][j]=j;
     }
@@ -34,6 +40,7 @@ var bool_affiche_compte_calcul = false ;
 
 function affich_contenu_compte_calcul(){
 	if(!bool_affiche_compte_calcul){
+		get_Tableau_solde_calcul();
 		// switch du contenu
 		$('#CompteCalculContent').slideDown("slow");
 		// bouton afficher
@@ -76,6 +83,7 @@ var bool_affiche_factures = false ;
 
 function affich_contenu_factures(){
 	if(!bool_affiche_factures){
+		get_Tableau_facture();
 		// switch du contenu
 		$('#FactureContent').slideDown("slow");
 		// bouton afficher
@@ -142,6 +150,193 @@ function affich_detail_company(){
   id_selected = document.getElementById('PCMDetail');	
   id_selected.className = 'selected';
 }
+
+//------------------------------------------------------------------------------------------------------
+// fonctions utiles pour l'affichage de le solde du compte calcul
+//------------------------------------------------------------------------------------------------------
+// traitement en fin de requette pour laffichage du tableau des materials
+function init_Tableau_solde_calcul(Tableau_solde_calcul_temp)
+{
+    //alert(Tableau_solde_calcul_temp);
+    // var Tableau_calcul_temp = eval('[' + response + ']');
+    if (Tableau_solde_calcul_temp)
+    {   
+        Tableau_solde_calcul = Tableau_solde_calcul_temp;
+    }
+    else
+    {
+        Tableau_solde_calcul[0]         =  new Array();
+        Tableau_solde_calcul[0]['solde_type'] = 'aucune entrée';
+    }
+    affiche_Tableau_solde_calcul();
+}
+// requette pour l'obtention du tableau des materials
+function get_Tableau_solde_calcul()
+{ 
+    var url_php = "/company/get_solde";
+    $.getJSON(url_php,[],init_Tableau_solde_calcul);
+}
+
+function filtre_Tableau_solde_calcul(){
+    Tableau_solde_calcul_filter = Tableau_solde_calcul;
+}
+
+// affichage du tableau decompte calcul
+function affiche_Tableau_solde_calcul(){
+    taille_tableau_content  =  taille_tableau_content_page['solde_calcul'];
+    filtre_Tableau_solde_calcul();
+    var current_tableau     =  Tableau_solde_calcul_filter;
+    var strname             =  'solde_calcul';
+    var strnamebdd          =  'solde_calcul_account';
+    var stridentificateur   =  new Array('created_at','solde_type','debit_jeton','credit_jeton','solde_jeton');
+    affiche_Tableau_content(current_tableau, strname, strnamebdd, stridentificateur);
+}
+
+// affiche la page num pour le decompte calcul
+function go_page_solde_calcul(num){
+    if(num=='first'){
+        content_tableau_current_page['solde_calcul'] = 0;
+    }else if(num=='end'){
+        content_tableau_current_page['solde_calcul'] = content_tableau_liste_page['solde_calcul'].length-1;
+    }else{
+        var num_page = num + content_tableau_curseur_page['solde_calcul'];
+        content_tableau_current_page['solde_calcul'] = content_tableau_liste_page['solde_calcul'][num_page]-1;    
+    }
+    affiche_Tableau_solde_calcul();
+}
+
+//------------------------------------------------------------------------------------------------------
+// fonctions utiles pour l'affichage de le solde du compte calcul
+//------------------------------------------------------------------------------------------------------
+
+// traitement en fin de requette pour laffichage du tableau des materials
+function init_Tableau_facture(Tableau_facture_temp)
+{
+    //alert(Tableau_facture_temp);
+    // var Tableau_calcul_temp = eval('[' + response + ']');
+    if (Tableau_facture_temp)
+    {   
+        Tableau_facture = Tableau_facture_temp;
+    }
+    else
+    {
+        Tableau_facture[0]         =  new Array();
+        Tableau_facture[0]['total'] = 'aucune facture';
+    }
+    affiche_Tableau_facture();
+}
+// requette pour l'obtention du tableau des materials
+function get_Tableau_facture()
+{ 
+    var url_php = "/company/get_facture";
+    $.getJSON(url_php,[],init_Tableau_facture);
+}
+
+function filtre_Tableau_facture(){
+    Tableau_facture_filter = Tableau_facture;
+}
+
+// affichage du tableau decompte calcul
+function affiche_Tableau_facture(){
+    //alert(Tableau_facture[0]['facture']['created_at']);
+    taille_tableau_content  =  taille_tableau_content_page['facture'];
+    filtre_Tableau_facture();
+    var current_tableau     =  Tableau_facture_filter;
+    var strname             =  'facture';
+    var strnamebdd          =  'facture';
+    var stridentificateur   =  new Array('created_at','total_calcul','total_memory','total');
+    affiche_Tableau_content(current_tableau, strname, strnamebdd, stridentificateur);
+}
+
+// affiche la page num pour le decompte calcul
+function go_page_facture(num){
+    if(num=='first'){
+        content_tableau_current_page['facture'] = 0;
+    }else if(num=='end'){
+        content_tableau_current_page['facture'] = content_tableau_liste_page['facture'].length-1;
+    }else{
+        var num_page = num + content_tableau_curseur_page['facture'];
+        content_tableau_current_page['facture'] = content_tableau_liste_page['facture'][num_page]-1;    
+    }
+    affiche_Tableau_facture();
+}
+
+//------------------------------------------------------------------------------------------------------
+// fonctions generique pour l'affichage d'un tableau
+//------------------------------------------------------------------------------------------------------
+
+
+// affichage des tableau content ('LM_material')
+function affiche_Tableau_content(current_tableau, strname, strnamebdd, stridentificateur){
+    var taille_Tableau=current_tableau.length;
+    for(i=0; i<taille_tableau_content; i++) {
+        i_page = i + content_tableau_current_page[strname] * taille_tableau_content;
+        content_tableau_connect[strname][i]=i_page;
+        
+        strContent_lign = strname + '_lign_' + i;
+	strContent_pair = strname + '_pair_' + i;
+	//alert(strContent_lign);
+	var id_lign  = document.getElementById(strContent_lign);
+	var id_pair  = document.getElementById(strContent_pair);
+	strContent =  new Array();
+	idContent =  new Array();
+	for(j=0; j<stridentificateur.length; j++) {
+	      strContent[j] = strname + '_' + j + '_' + i;
+	      idContent[j] = document.getElementById(strContent[j]);
+	}
+        
+        if(i_page<taille_Tableau){
+            id_lign.className = "contentBoxTable_lign on";
+	    if(pair(i)){
+		id_pair.className = "contentBoxTable_lign_pair";
+	    }else{
+		id_pair.className = "contentBoxTable_lign_impair";
+	    }
+	    strtemp =  new Array();
+	    for(j=0; j<stridentificateur.length; j++) {
+		  strtemp[j] = current_tableau[i_page][strnamebdd][stridentificateur[j]];
+		  remplacerTexte(idContent[j], strtemp[j]);
+	    }
+        }else{
+            id_lign.className = "contentBoxTable_lign off";
+        }
+    }
+    // pour l'affichage des page en bas de la boite
+    var nb_page = Math.floor(taille_Tableau/taille_tableau_content)+1;
+    if(nb_page < 5){
+        content_tableau_curseur_page[strname] = 0;
+    }else{
+        if(content_tableau_current_page[strname] >= nb_page-3){
+            content_tableau_curseur_page[strname] = nb_page-5;
+        }else if(content_tableau_current_page[strname] < 3){
+            content_tableau_curseur_page[strname] = 0;
+        }else{
+            content_tableau_curseur_page[strname] = content_tableau_current_page[strname]-2;
+        }
+    }
+    content_tableau_liste_page[strname] = new Array();
+    for(i=0; i<nb_page; i++) {
+        content_tableau_liste_page[strname][i] = i+1;
+    }
+    for(i=content_tableau_curseur_page[strname]; i<content_tableau_curseur_page[strname]+5; i++) { // on affiche un lien vers 5 pages
+        if(i<nb_page){
+            strpage = new String();
+            strpage = content_tableau_liste_page[strname][i];
+        }else{
+            strpage = "";
+        }
+        strContent_page = new String();
+        strContent_page = strname + '_page_' + (i-content_tableau_curseur_page[strname]);
+        var id_page = document.getElementById(strContent_page);
+        remplacerTexte(id_page, strpage);
+        if(i==content_tableau_current_page[strname]){
+            id_page.className = 'page_select';
+        }else{
+            id_page.className = '';
+        }
+    }  
+}
+
 
 
 -->
