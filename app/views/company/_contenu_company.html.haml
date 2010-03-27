@@ -1,0 +1,30 @@
+/ contenu
+#ProfilCompanyContent.largeBoxContentCompte.off
+  / menu du compte calcul
+  .CompteMenu
+    %ul
+      %li#PCMGestinaire.selected
+        %a{ :onclick => "affich_gestionnaire()", :style => "cursor: pointer;" }
+          Gestionaires
+      %li#PCMDetail
+        %a{ :onclick => "affich_detail_company()", :style => "cursor: pointer;" }
+          Détail
+
+  .CompteContent#PCCGestinaire.on
+    .CompteContentHeightMin
+    = render :partial => "gestionnaires_list"
+  .CompteContent#PCCDetail.off
+    .CompteContentHeightMin
+    = render :partial => "contenu_company_detail"
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+/ fin menu compte calcul
+/ fin du contenu

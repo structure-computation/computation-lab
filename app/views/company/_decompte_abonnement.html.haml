@@ -1,0 +1,17 @@
+.contentBoxTable
+  .contentBoxTable_first
+    .contentBoxTable_0{ :style => "width: 21px;" }
+    .contentBoxTable_0{ :style => "width: 250px;" }
+      %p
+        Membre                   
+    .contentBoxTable_0{ :style => "width: 420px;" }
+      %p
+        Mémoire Utilisée 
+    
+  - (0...10).each do |i|
+    .contentBoxTable_lign{ :id => "log_abonnement_lign_#{i}" }
+      .contentBoxTable_lign_pair{ :id => "log_abonnement_pair_#{i}" }
+        .contentBoxTable_1{ :id => "log_abonnement_1_#{i}", :style => "width: 21px;" }
+        .contentBoxTable_2{ :id => "log_abonnement_2_#{i}", :style => "width: 250px;" }
+        .contentBoxTable_4{ :id => "log_abonnement_3_#{i}", :style => "width: 420px;" }
+  / Fin du tableau de présentation des modèles.

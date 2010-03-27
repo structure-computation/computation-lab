@@ -27,7 +27,7 @@ for(i=0; i<content_tableau_page.length ; i++){
 }
 
 //-----------------------------------------------------------------------------------------------------------
-// affichage du contenu du compte calcul
+// affichage des contenu a partir de fleches
 //-----------------------------------------------------------------------------------------------------------
 
 var bool_affiche_compte_calcul = false ;
@@ -71,5 +71,77 @@ function affich_contenu_compte_abonnement(){
 		bool_affiche_compte_abonnement = false ;
 	}
 }
+
+var bool_affiche_factures = false ;
+
+function affich_contenu_factures(){
+	if(!bool_affiche_factures){
+		// switch du contenu
+		$('#FactureContent').slideDown("slow");
+		// bouton afficher
+		id_fleche_compte_abonnement = document.getElementById('FactureFleche');	
+		id_fleche_compte_abonnement.className = 'ResumeCompte1Selected';
+		bool_affiche_factures = true ;
+	}
+	else if(bool_affiche_factures){
+		// switch du contenu
+		$('#FactureContent').slideUp("slow");
+		// bouton afficher
+		id_fleche_compte_abonnement = document.getElementById('FactureFleche');	
+		id_fleche_compte_abonnement.className = 'ResumeCompte1';
+		bool_affiche_factures = false ;
+	}
+}
+
+var bool_affiche_profil_company = false ;
+
+function affich_contenu_profil_company(){
+	if(!bool_affiche_profil_company){
+		// switch du contenu
+		$('#ProfilCompanyContent').slideDown("slow");
+		// bouton afficher
+		id_fleche_compte_abonnement = document.getElementById('ProfilCompanyFleche');	
+		id_fleche_compte_abonnement.className = 'ResumeCompte1Selected';
+		bool_affiche_profil_company = true ;
+	}
+	else if(bool_affiche_profil_company){
+		// switch du contenu
+		$('#ProfilCompanyContent').slideUp("slow");
+		// bouton afficher
+		id_fleche_compte_abonnement = document.getElementById('ProfilCompanyFleche');	
+		id_fleche_compte_abonnement.className = 'ResumeCompte1';
+		bool_affiche_profil_company = false ;
+	}
+}
+
+
+//-----------------------------------------------------------------------------------------------------------
+// dans le contenu du profil company
+//-----------------------------------------------------------------------------------------------------------
+
+function affich_gestionnaire(){
+  id_off = document.getElementById('PCCDetail');	
+  id_off.className = 'CompteContent off';
+  id_on = document.getElementById('PCCGestinaire');	
+  id_on.className = 'CompteContent on';
+  
+  id_not_selected = document.getElementById('PCMDetail');	
+  id_not_selected.className = '';
+  id_selected = document.getElementById('PCMGestinaire');	
+  id_selected.className = 'selected';
+}
+
+function affich_detail_company(){
+  id_off = document.getElementById('PCCGestinaire');	
+  id_off.className = 'CompteContent off';
+  id_on = document.getElementById('PCCDetail');	
+  id_on.className = 'CompteContent on';
+  
+  id_not_selected = document.getElementById('PCMGestinaire');	
+  id_not_selected.className = '';
+  id_selected = document.getElementById('PCMDetail');	
+  id_selected.className = 'selected';
+}
+
 
 -->

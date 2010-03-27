@@ -5,14 +5,14 @@ class CreateLogCalculs < ActiveRecord::Migration
       t.integer :user_id
       t.integer :calcul_result_id
       t.integer :calcul_account_id
+      t.integer :forfait_id
       t.integer :project_id
       t.integer :calcul_time
       t.integer :gpu_cards_number
       t.date :start_date
       t.date :end_date
       t.string :log_type
-      t.integer :en_forfait
-      t.integer :hors_forfait
+      t.integer :decompte_jeton
 
       t.timestamps
     end

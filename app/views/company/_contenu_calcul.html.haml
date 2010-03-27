@@ -10,33 +10,10 @@
         %a{ :onclick => "affich_description_calcul()", :style => "cursor: pointer;" }
           Description
 
-  .CompteContent  
-    .CompteContentFilter
-      .CompteContentFilter2{ :style => "width: 60px ;" }
-        Type :
-      .CompteContentFilter2{ :style => "width: 150px ;" }
-        %input{ :name => "username", :type => "text" }
-      .CompteContentFilter2{ :style => "width: 90px ;" }
-        Référence projet :
-      .CompteContentFilter2{ :style => "width: 150px ;" }
-        %input{ :name => "username", :type => "text" }
-      .CompteContentFilterBoutonJaune
-        %a
-          %img{ :src => "./images/picto_loupe_filtre.png" }
-          Appliquer les Filtres
-      .CompteContentFilter2{ :style => "width: 60px ;" }
-        Début, du :
-      .CompteContentFilter2{ :style => "width: 150px ;" }
-        %input{ :name => "username", :type => "text" }
-      .CompteContentFilter2{ :style => "width: 90px ;" }
-        au :
-      .CompteContentFilter2{ :style => "width: 150px ;" }
-        %input{ :name => "username", :type => "text" }
-      .CompteContentFilter1
-        %a
-          Annuler les filtres
-        %img{ :src => "./images/picto_annuler_filtre_taches.png", :border => "0", :style => "vertical-align:middle;" }
-  
+  .CompteContent
+    .CompteContentHeightMin
+    = render :partial => "filtre_decompte_calcul"
+    = render :partial => "decompte_calcul"
   
   
   

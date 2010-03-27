@@ -102,11 +102,11 @@ function affiche_Tableau_content(current_tableau, strname, stridentificateur){
 	var id_5     = document.getElementById(strContent_5);
         
         if(i_page<taille_Tableau){
-            id_lign.className = "largeBoxTable_Material_lign on";
+            id_lign.className = "largeBoxTable_lign on";
 	    if(pair(i)){
-		id_pair.className = "largeBoxTable_Material_lign_pair";
+		id_pair.className = "largeBoxTable_lign_pair";
 	    }else{
-		id_pair.className = "largeBoxTable_Material_lign_impair";
+		id_pair.className = "largeBoxTable_lign_impair";
 	    }
             strtemp_2 = current_tableau[i_page]['material'][stridentificateur[0]];
             strtemp_3 = current_tableau[i_page]['material'][stridentificateur[1]];
@@ -117,7 +117,7 @@ function affiche_Tableau_content(current_tableau, strname, stridentificateur){
             remplacerTexte(id_4, strtemp_4);
 	    remplacerTexte(id_5, strtemp_5);
         }else{
-            id_lign.className = "largeBoxTable_Material_lign off";
+            id_lign.className = "largeBoxTable_lign off";
         }
     }
     // pour l'affichage des page en bas de la boite

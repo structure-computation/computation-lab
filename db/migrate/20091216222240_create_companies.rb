@@ -8,7 +8,8 @@ class CreateCompanies < ActiveRecord::Migration
       t.string :country
       t.string :division
       t.string :TVA
-      t.string :siren
+      t.integer :siren
+      t.integer :admin_user_id
 
       t.timestamps
     end

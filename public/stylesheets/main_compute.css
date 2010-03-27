@@ -38,26 +38,17 @@ body
 /* header ---------------------  */ 
 #header_top
 {
-  background: transparent url('../images/header_top.png') no-repeat left top;
-  width: 945px;
-  height: 46px;
+  background: transparent url('../images/header_bg.png') repeat-x left top;
+  width: 940px;
+  height: 83px;
   text-align: left;
   float: left;
 }
-#header_menu
+#content
 {
-  background: transparent url('../images/header_menu.png') no-repeat left top;
   width: 945px;
-  height: 35px;
   text-align: left;
-  float: left;
-}
-#header_barre_bas
-{
-  background: transparent url('../images/header_barre_bas.png') no-repeat left top;
-  width: 945px;
-  height: 2px;
-  text-align: left;
+  background: transparent url('../images/conteneur_milieu.png') repeat-y left top;
   float: left;
 }
 .black
@@ -79,27 +70,31 @@ body
  */
 #header_top_logo
 {
+  background: transparent url('../images/header_logo.png') no-repeat top left;
   width: 280px;
+  padding : 10px 0px 0 0px;
   height: 46px;
   text-align: left;
   float: left;
 }
 #header_top_societe
 {
-  width: 480px;
+  width: 200px;
   height: 46px;
   text-align: right;
   padding : 10px 0px 0 0px;
+  margin : 0px 10px 0 0px;
   color: #e5e5e5;
   font-size: 0.80em;
   font-weight: normal;
-  float: left;
+  float: right;
 }
 #header_top_temp
 {
   width: 10px;
   height: 46px;
-  float: left;
+  background: transparent url('../images/header_bg_separateur.png') no-repeat top left;
+  float: right;
 }
 #header_top_user
 {
@@ -110,30 +105,18 @@ body
   color: #e5e5e5;
   font-size: 0.80em;
   font-weight: normal;
-  float: left;
+  float: right;
 }
-#header_profil_1
+#header_top_cadena
 {
-  width: 315px;
-  height: 35px;
-  text-align: right;
-  padding : 0px 0px 0px 0px;
-  color: #b8b9c3;
-  font-size: 0.70em;
-  font-weight: 100;
-  float: left;
+  width: 43px;
+  height: 46px;
+  padding : 10px 0px 0 0px;
+  margin : 0px 10px 0 0px;
+  background: transparent url('../images/header_cadena.png') no-repeat top left;
+  float: right;
 }
-#header_profil_2
-{
-  width: 65px;
-  height: 35px;
-  text-align: right;
-  padding : 18px 0px 0px 0px;
-  color: #b8b9c3;
-  font-size: 0.70em;
-  font-weight: 100;
-  float: left;
-}
+
 
 /*
  * Css pour le menu
@@ -154,15 +137,15 @@ body
   list-style-type: none;
   float: left;
   width: 125px;
-  height: 35px;
-  background: transparent;
-  line-height: 35px;
+  height: 25px;
+  background: transparent url('../images/header_menu.png') no-repeat left top;
+  line-height: 15px;
   margin: 0px 0px 0 0px;
   padding: 5px 0px 0 0px;
   text-align: center;
 }
 
-#mAccueil.selected, #mSCmanage.selected, #mSCproject.selected, #mSCcompute.selected
+#menu li.selected
 {
   background: transparent url('../images/header_menu_selected.png') no-repeat left top;
 }
@@ -190,6 +173,7 @@ body
 {
   color: #2a3556;
 }
+
 /*
  * ccs pour les class on et off
  *

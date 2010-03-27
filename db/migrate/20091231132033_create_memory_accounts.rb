@@ -2,6 +2,7 @@ class CreateMemoryAccounts < ActiveRecord::Migration
   def self.up
     create_table :memory_accounts do |t|
       t.integer :company_id
+      t.integer :abonnement_id
       t.text :description
       t.date :inscription_date
       t.date :end_date

@@ -120,7 +120,7 @@
 .ResumeCompteText1
 {
   height:20px; 
-  margin:5px 0px 0 15px; 
+  margin:5px 0px 0 5px; 
   line-height: 20px;
   font-weight: 100;
   font-size: 0.85em;
@@ -231,211 +231,6 @@
 }
 
 /*
- * filtre pour le compte
- *
- */
-.CompteContentFilter
-{
-  background-color: #2a3556;
-  width: 100%;
-  padding-top:10px;
-  float: left;
-}
-.CompteContentFilter1
-{
-  width: 230px;
-  height: 31px;
-  margin: 0px 0px 0px 5px;
-  font-weight: normal;
-  font-size: 0.65em;
-  color: #f0f0f0;
-  text-align:right;
-  float: left;
-}
-.CompteContentFilter1 a
-{
-  font-weight: normal;
-  color: #f0f0f0;
-  text-decoration: underline;
-}
-.CompteContentFilter2
-{
-  //width: 270px;
-  height: 31px;
-  margin: 0px 0px 0px 5px;
-  line-height: 20px;
-  font-weight: normal;
-  font-size: 0.65em;
-  color: #f0f0f0;
-  text-align:right;
-  float: left;
-}
-.CompteContentFilter3
-{
-  width: 190px;
-  height: 31px;
-  margin: 0px 0px 0px 5px;
-  font-weight: normal;
-  font-size: 0.65em;
-  color: #f0f0f0;
-  text-align:right;
-  float: left;
-}
-
-.CompteContentFilter2 input[type="text"], .CompteContentFilter3 input[type="text"]
-{ 
-  //height: 20px;
-  width: 90%; 
-  float:left;
-  border: none;
-}
-
-.CompteContentFilterBoutonJaune
-{
-  background : transparent url('../images/button_jaune_filtre_tache.png') no-repeat right top;
-  width: 230px;
-  height: 31px;
-  margin: 0px 0px 0px 5px;
-  text-align:center;
-  font-size: 0.75em;
-  line-height:23px;
-  float: left;
-}
-.CompteContentFilterBoutonJaune img
-{
-  vertical-align:top;
-  border:none;
-  margin:3px 25px 0 0px;
-}
-.CompteContentFilterBoutonJaune a
-{
-  font-weight: normal;
-  color: #2a3556;
-  text-decoration: none;
-  display: block;
-}
-.CompteContentFilterBoutonJaune a:hover
-{
-  //font-style:italic;
-  //color: #2a3556;
-  color: blach;
-  
-} 
-
-
-/*
- * tableau pour les listes des wizard new
- *
- */
- 
-.contentBoxTable
-{
-  //height: 230px;
-  width: 720px;
-  margin: 1px 0px 0 0px; 
-  float: left;
-}
- 
-.contentBoxTable_first
-{
-  border: none;
-  background : transparent url('../images/tableau_header_Bg.png') repeat-x left center;
-  height: 25px;
-  width: 720px;
-  line-height: 23px;
-  font-size: 0.75em;
-  font-style: bold;
-  text-align: left;
-  //font-weight: normal;
-  //border-bottom: thin solid #ffffff;
-  color: #ffffff;
-  float: left;
-}
-.contentBoxTable_0
-{
-  margin: 0px 0px 0 5px;
-  height: 25px; 
-  background: transparent ;
-  float: left;
-}
-.contentBoxTable_0 p 
-{
-   vertical-align: middle; 
-   //display: inline;
-}
-
-.contentBoxTable_lign
-{
-  width: 720px;
-  height: 25px;
-  //border-bottom: thin solid #3d4993;
-  //border-bottom: thin solid #efefef;
-  line-height: 23px;
-  font-weight: 100;
-  font-size: 0.75em;
-  color: black;
-  background: transparent ;
-  float:left;
-}
-.contentBoxTable_lign a
-{
-  color: #2a3556;
-  text-aligned:center;
-  text-decoration:none;
-}
-
-.contentBoxTable_lign_pair
-{	
-  width: 720px;
-  height: 25px;
-  background-color: #cacbd5;
-  float:left;
-}
-.contentBoxTable_lign_impair
-{
-  width: 720px;
-  height: 25px;
-  background-color: #f0f0f0 ;
-  float:left;
-}
-.contentBoxTable_lign_pair:hover, .contentBoxTable_lign_impair:hover
-{
-  background-color: #9297a8 ;
-  color: #ffffff;
-}
-.contentBoxTable_1
-{
-  height: 25px; 
-  background: transparent ;
-  border-right: thin solid #ffffff;
-  float: left;
-}
-.contentBoxTable_2
-{
-  height: 25px; 
-  margin: 0px 0px 0 5px;
-  background: transparent ;
-  border-right: thin solid #ffffff;
-  float: left;
-}
-.contentBoxTable_3
-{
-  height: 25px; 
-  margin: 0px 0px 0 5px;
-  background: transparent ;
-  float: left;
-}
-.contentBoxTable_4
-{
-  //width: 70px;
-  height: 25px; 
-  margin: 0px 0px 0 2px;
-  background: transparent ;
-  float: left;
-}
-
-
-/*
  * cadre pour les details model, membres...
  *
  */
@@ -453,7 +248,7 @@
 
 .DetailCadreModel1 {
   width: 600px ;
-  height: 250px;
+  //height: 250px;
   font-size: 0.8em;
   margin: 8px 0px 0 60px;
   float: left;
@@ -523,4 +318,9 @@
   float: left;
 }
 
+.DetailCadreModelCase2 input[type="text"]
+{ 
+  width: 97%; 
+  float:left;
+}
 

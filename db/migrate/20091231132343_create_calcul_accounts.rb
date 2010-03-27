@@ -2,6 +2,7 @@ class CreateCalculAccounts < ActiveRecord::Migration
   def self.up
     create_table :calcul_accounts do |t|
       t.integer :company_id
+      t.integer :forfait_id
       t.text :description
       t.date :start_date
       t.date :end_date

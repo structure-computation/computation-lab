@@ -1,0 +1,25 @@
+.contentBoxTable
+  .contentBoxTable_first
+    .contentBoxTable_0{ :style => "width: 21px;" }
+    .contentBoxTable_0{ :style => "width: 100px;" }
+      %p
+        Date                   
+    .contentBoxTable_0{ :style => "width: 200px;" }
+      %p
+        Type 
+    .contentBoxTable_0{ :style => "width: 250px;" }
+      %p
+        Membre
+    .contentBoxTable_0{ :style => "width: 120px;" }
+      %p
+        Débit (jeton)
+    
+  - (0...10).each do |i|
+    .contentBoxTable_lign{ :id => "log_calcul_lign_#{i}" }
+      .contentBoxTable_lign_pair{ :id => "log_calcul_pair_#{i}" }
+        .contentBoxTable_1{ :id => "log_calcul_1_#{i}", :style => "width: 21px;" }
+        .contentBoxTable_2{ :id => "log_calcul_2_#{i}", :style => "width: 100px;" }
+        .contentBoxTable_2{ :id => "log_calcul_3_#{i}", :style => "width: 200px;" }
+        .contentBoxTable_2{ :id => "log_calcul_4_#{i}", :style => "width: 250px;" }
+        .contentBoxTable_4{ :id => "log_calcul_5_#{i}", :style => "width: 120px;" }
+  / Fin du tableau de présentation des modèles.

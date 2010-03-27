@@ -25,7 +25,7 @@
   color: #ffffff;
   float: left;
 }
-.largeBoxTable_Material_0
+.largeBoxTable_0
 {
   margin: 0px 0px 0 5px;
   height: 35px; 
@@ -34,13 +34,13 @@
   //border-right: thin solid #ffffff;
   float: left;
 }
-.largeBoxTable_Material_0 p 
+.largeBoxTable_0 p 
 {
    vertical-align: middle; 
    //display: inline;
 }
 
-.largeBoxTable_Material_lign
+.largeBoxTable_lign
 {
   width: 723px;
   height: 35px;
@@ -53,28 +53,28 @@
   background: transparent ;
   float:left;
 }
-.largeBoxTable_Material_lign a
+.largeBoxTable_lign a
 {
   color: #2a3556;
   text-aligned:center;
   text-decoration:none;
 }
 
-.largeBoxTable_Material_lign_pair
+.largeBoxTable_lign_pair
 {	
   width: 723px;
   height: 35px;
   background-color: #b8b9c3 ;
   float:left;
 }
-.largeBoxTable_Material_lign_impair
+.largeBoxTable_lign_impair
 {
   width: 723px;
   height: 35px;
   background-color: #cacbd5 ;
   float:left;
 }
-.largeBoxTable_Material_lign_pair:hover, .largeBoxTable_Material_lign_impair:hover
+.largeBoxTable_lign_pair:hover, .largeBoxTable_lign_impair:hover
 {
   background-color: #9297a8 ;
   color: #ffffff;

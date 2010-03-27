@@ -1,83 +1,79 @@
 / partie header commune à toute les pages, CSproject.selected
-#header_top
-  #bl_1.black.off
-  #header_top_logo
-  #header_top_societe
-    Nom de la société
-    %br
-    %span{ :style => "font-size: 0.70em; color : #b8b9c3" }
-      n°1010
-  #header_top_temp
-  #header_top_user
-    Jérémie Bellec
-    %br
-    %span{ :style => "font-size: 0.70em; color : #b8b9c3; text-decoration: underline ;" }
-      déconnexion
-#header_menu
-  #bl_2.black.off
-  #menu
-    - if @page == 'Accueil' 
-      %ul
-        %li#mAccueil.selected
-          %a{ :href => "./" }
-            Accueil
-        %li#mSCmanage
+#content
+  #header_top
+    #bl_1.black.off
+    #header_top_logo
+    #header_top_cadena
+    #header_top_user
+      Jérémie Bellec
+      %br
+      %span{ :style => "font-size: 0.70em; color : #b8b9c3; text-decoration: underline ;" }
+        déconnexion
+    #header_top_temp
+    #header_top_societe
+      Nom de la société
+      %br
+      %span{ :style => "font-size: 0.70em; color : #b8b9c3" }
+        n°1010
+    
+    
+    /#bl_2.black.off
+    #menu
+      - if @page == 'Accueil' 
+        %ul
+          %a{ :href => "/accueil" }
+            %li#mAccueil.selected 
+              Accueil
           %a{ :href => "/company" }
-            SC manage
-        %li#mSCproject
-          %a{ :href => "/project" }
-            SC project
-        %li#mSCcompute
+            %li#mSCmanage
+              SC manage
+          /%a{ :href => "/project" }
+          /  %li#mSCproject
+          /    SC project
           %a{ :href => "/modele" }
-            SC compute
-    - if @page == 'SCmanage' 
-      %ul
-        %li#mAccueil
-          %a{ :href => "./" }
-            Accueil
-        %li#mSCmanage.selected
+            %li#mSCcompute
+              SC compute
+      - if @page == 'SCmanage' 
+        %ul
+          %a{ :href => "/accueil" }
+            %li#mAccueil 
+              Accueil
           %a{ :href => "/company" }
-            SC manage
-        %li#mSCproject
-          %a{ :href => "/project" }
-            SC project
-        %li#mSCcompute
+            %li#mSCmanage.selected
+              SC manage
+          /%li#mSCproject
+          /  %a{ :href => "/project" }
+          /    SC project
           %a{ :href => "/modele" }
-            SC compute
-    - if @page == 'SC project' 
-      %ul
-        %li#mAccueil
-          %a{ :href => "./" }
-            Accueil
-        %li#mSCmanage
+            %li#mSCcompute
+              SC compute
+      - if @page == 'SC project' 
+        %ul
+          %a{ :href => "/accueil" }
+            %li#mAccueil
+              Accueil
           %a{ :href => "/company" }
-            SC manage
-        %li#mSCproject.selected
-          %a{ :href => "/project" }
-            SC project
-        %li#mSCcompute
+            %li#mSCmanage
+              SC manage
+          /%a{ :href => "/project" }
+          /  %li#mSCproject.selected
+          /    SC project
           %a{ :href => "/modele" }
-            SC compute
-    - if @page == 'SCcompute' 
-      %ul
-        %li#mAccueil
-          %a{ :href => "./" }
-            Accueil
-        %li#mSCmanage
-          %a{ :href => "/company" }
-            SC manage
-        %li#mSCproject
-          %a{ :href => "/project" }
-            SC project
-        %li#mSCcompute.selected
+            %li#mSCcompute
+              SC compute
+      - if @page == 'SCcompute' 
+        %ul
+          %li#mAccueil
+            %a{ :href => "/accueil" }
+              Accueil
+          %li#mSCmanage
+            %a{ :href => "/company" }
+              SC manage
+          /%a{ :href => "/project" }
+          /  %li#mSCproject
+          /    SC project
           %a{ :href => "/modele" }
-            SC compute
+            %li#mSCcompute.selected
+              SC compute
 
-  #header_profil_1
-    %img{ :src => "/images/picto_profil.png" }
-  #header_profil_2
-    %span{ :style => "text-decoration: underline ;" }
-      mon profil
-#header_barre_bas
-  #bl_3.black.off
 / fin partie header

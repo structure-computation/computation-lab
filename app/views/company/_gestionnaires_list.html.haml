@@ -1,0 +1,18 @@
+.contentBoxTable
+  .contentBoxTable_first
+    .contentBoxTable_0{ :style => "width: 21px;" }
+    .contentBoxTable_0{ :style => "width: 260px;" }
+      %p
+        Nom                   
+    .contentBoxTable_0{ :style => "width: 400px;" }
+      %p
+        email 
+    
+  - (0...10).each do |i|
+    .contentBoxTable_lign{ :id => "gestionnaire_lign_#{i}" }
+      .contentBoxTable_lign_pair{ :id => "gestionnaire_pair_#{i}" }
+        .contentBoxTable_1{ :id => "gestionnaire_1_#{i}", :style => "width: 21px;" }
+        .contentBoxTable_2{ :id => "gestionnaire_2_#{i}", :style => "width: 260px;" }
+        .contentBoxTable_2{ :id => "gestionnaire_3_#{i}", :style => "width: 400px;" }
+        .contentBoxTable_4{ :id => "gestionnaire_'_#{i}", :style => "width: 21px;" }
+  / Fin du tableau de présentation des modèles.

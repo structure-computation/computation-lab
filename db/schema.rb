@@ -9,7 +9,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100217152155) do
+ActiveRecord::Schema.define(:version => 20100326125340) do
+
+  create_table "abonnements", :force => true do |t|
+    t.string   "name"
+    t.float    "price"
+    t.integer  "Assigned_memory"
+    t.integer  "security_level"
+    t.integer  "nb_max_user"
+    t.string   "state"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "boundary_conditions", :force => true do |t|
     t.string   "name"
@@ -27,6 +40,7 @@ ActiveRecord::Schema.define(:version => 20100217152155) do
 
   create_table "calcul_accounts", :force => true do |t|
     t.integer  "company_id"
+    t.integer  "forfait_id"
     t.text     "description"
     t.date     "start_date"
     t.date     "end_date"
@@ -63,7 +77,45 @@ ActiveRecord::Schema.define(:version => 20100217152155) do
     t.string   "country"
     t.string   "division"
     t.string   "TVA"
-    t.string   "siren"
+    t.integer  "siren"
+    t.integer  "admin_user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "credits", :force => true do |t|
+    t.integer  "company_id"
+    t.integer  "forfait_id"
+    t.integer  "nb_jetons"
+    t.integer  "nb_jetons_tempon"
+    t.integer  "calcul_account_id"
+    t.date     "credit_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "factures", :force => true do |t|
+    t.integer  "company_id"
+    t.integer  "calcul_account_id"
+    t.integer  "memory_account_id"
+    t.integer  "forfait_id"
+    t.float    "total_calcul"
+    t.float    "total_memory"
+    t.integer  "facture_month"
+    t.integer  "facture_year"
+    t.date     "facture_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "forfaits", :force => true do |t|
+    t.string   "name"
+    t.float    "price"
+    t.integer  "nb_jetons"
+    t.integer  "nb_jetons_tempon"
+    t.string   "state"
+    t.date     "start_date"
+    t.date     "end_date"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -97,14 +149,14 @@ ActiveRecord::Schema.define(:version => 20100217152155) do
     t.integer  "user_id"
     t.integer  "calcul_result_id"
     t.integer  "calcul_account_id"
+    t.integer  "forfait_id"
     t.integer  "project_id"
     t.integer  "calcul_time"
     t.integer  "gpu_cards_number"
     t.date     "start_date"
     t.date     "end_date"
     t.string   "log_type"
-    t.integer  "en_forfait"
-    t.integer  "hors_forfait"
+    t.integer  "decompte_jeton"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -167,6 +219,7 @@ ActiveRecord::Schema.define(:version => 20100217152155) do
 
   create_table "memory_accounts", :force => true do |t|
     t.integer  "company_id"
+    t.integer  "abonnement_id"
     t.text     "description"
     t.date     "inscription_date"
     t.date     "end_date"
