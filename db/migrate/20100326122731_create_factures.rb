@@ -14,6 +14,7 @@ class CreateFactures < ActiveRecord::Migration
       t.bool :type_memory
       t.integer :facture_month
       t.integer :facture_year
+      t.bool :statut                                     # payee ou non
       t.date :facture_date
       t.timestamps
     end

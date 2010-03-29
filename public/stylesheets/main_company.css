@@ -1,7 +1,7 @@
 /* -----------------------------------------------------------------------------------------------------
  * pour la page manage 
  * -----------------------------------------------------------------------------------------------------
- */ 
+*/
 .largeBoxResumeCompte
 {
   background: transparent url('../images/manage_compte_bg.png') repeat-x left top;
@@ -17,6 +17,25 @@
   width: 726px;
   //height: 500px;
   margin: 0px 0px 0 7px;
+  //border: thin solid #696969;
+  border-top: thin solid #696969;
+  float: left;
+}
+.largeBoxResumeCompte1
+{
+  background: transparent url('../images/manage_compte_bg.png') repeat-x left top;
+  width: 726px;
+  height: 83px;
+  margin: 15px 0px 0 3px;
+  //border: thin solid #696969;
+  float: left;
+}
+.largeBoxContentCompte1
+{
+  background: transparent url('../images/manage_compte1_bg.png') repeat left top;
+  width: 726px;
+  //height: 500px;
+  margin: 0px 0px 0 3px;
   //border: thin solid #696969;
   border-top: thin solid #696969;
   float: left;
@@ -321,119 +340,6 @@
   color: blach;
   
 } 
-
-
-/*
- * tableau pour les listes des wizard new
- *
- */
- 
-.contentBoxTable
-{
-  //height: 230px;
-  width: 720px;
-  margin: 1px 0px 0 0px; 
-  float: left;
-}
- 
-.contentBoxTable_first
-{
-  border: none;
-  background : transparent url('../images/tableau_header_Bg.png') repeat-x left center;
-  height: 25px;
-  width: 720px;
-  line-height: 23px;
-  font-size: 0.75em;
-  font-style: bold;
-  text-align: left;
-  //font-weight: normal;
-  //border-bottom: thin solid #ffffff;
-  color: #ffffff;
-  float: left;
-}
-.contentBoxTable_0
-{
-  margin: 0px 0px 0 5px;
-  height: 25px; 
-  background: transparent ;
-  float: left;
-}
-.contentBoxTable_0 p 
-{
-   vertical-align: middle; 
-   //display: inline;
-}
-
-.contentBoxTable_lign
-{
-  width: 720px;
-  height: 25px;
-  //border-bottom: thin solid #3d4993;
-  //border-bottom: thin solid #efefef;
-  line-height: 23px;
-  font-weight: 100;
-  font-size: 0.75em;
-  color: black;
-  background: transparent ;
-  float:left;
-}
-.contentBoxTable_lign a
-{
-  color: #2a3556;
-  text-aligned:center;
-  text-decoration:none;
-}
-
-.contentBoxTable_lign_pair
-{	
-  width: 720px;
-  height: 25px;
-  background-color: #cacbd5;
-  float:left;
-}
-.contentBoxTable_lign_impair
-{
-  width: 720px;
-  height: 25px;
-  background-color: #f0f0f0 ;
-  float:left;
-}
-.contentBoxTable_lign_pair:hover, .contentBoxTable_lign_impair:hover
-{
-  background-color: #9297a8 ;
-  color: #ffffff;
-}
-.contentBoxTable_1
-{
-  height: 25px; 
-  background: transparent ;
-  border-right: thin solid #ffffff;
-  float: left;
-}
-.contentBoxTable_2
-{
-  height: 25px; 
-  margin: 0px 0px 0 5px;
-  background: transparent ;
-  border-right: thin solid #ffffff;
-  float: left;
-}
-.contentBoxTable_3
-{
-  height: 25px; 
-  margin: 0px 0px 0 5px;
-  background: transparent ;
-  float: left;
-}
-.contentBoxTable_4
-{
-  //width: 70px;
-  height: 25px; 
-  margin: 0px 0px 0 2px;
-  background: transparent ;
-  float: left;
-}
-
 
 /*
  * cadre pour les details model, membres...

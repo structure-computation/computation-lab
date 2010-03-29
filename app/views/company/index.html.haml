@@ -23,11 +23,7 @@
     #largeBox
       %h2
         Tableau de bords
-    #largeBoxcontent
-      / taille minimum du contenu du contenu
-      .contentheightmin
-      / taille minimum du contenu du contenu
-      
+    #largeBoxcontent1
       /compte d'abonnement annuel
       = render :partial => "company/abonnement/resume_abonnement"
       = render :partial => "company/abonnement/contenu_abonnement"
@@ -37,10 +33,14 @@
       /liste des facture
       = render :partial => "company/facture/resume_facture"
       = render :partial => "company/facture/contenu_facture"
+
+    #largeBox
+      %h2
+        Profile
+    #largeBoxcontent
       /profile company
       = render :partial => "company/profil_company/resume_company"
-      = render :partial => "company/profil_company/contenu_company"
-      
+      = render :partial => "company/profil_company/contenu_company"  
       
   / fin de #contentright, partie droite du contenu
   =javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery?

@@ -7,6 +7,7 @@ var Tableau_solde_calcul                   =  new Array();              // table
 var Tableau_solde_calcul_filter            =  new Array();              // tableau du solde calcul filtres pour l'affichage
 var Tableau_facture	                   =  new Array();              // tableau du solde calcul
 var Tableau_facture_filter  	           =  new Array();              // tableau du solde calcul filtres pour l'affichage
+var Tableau_gestionnaire	           =  new Array();              // tableau du solde calcul
 
 
 //initialisation de la taille du tableau pour la box content et de la table de correspondance
@@ -15,10 +16,11 @@ var content_tableau_connect         =  new Array();              // connectivit�
 var content_tableau_current_page    =  new Array();              // numéro de la page du tableau (sert pour la définition de la connectivité)    
 var content_tableau_curseur_page    =  new Array();              // nombre de page du tableau (sert pour l'affichage des page en bas des tableaux)
 var content_tableau_liste_page      =  new Array();              // liste des pages du tableau (sert pour l'affichage des page en bas des tableaux)
-var content_tableau_page            =  new Array('solde_calcul','facture');    // initialisation des pages avec tableau dynamique
+var content_tableau_page            =  new Array('solde_calcul','facture','gestionnaire');    // initialisation des pages avec tableau dynamique
 var taille_tableau_content_page     =  new Array()               // taille du tableau dans la content box
 taille_tableau_content_page['solde_calcul'] = 10;
 taille_tableau_content_page['facture'] = 10;
+taille_tableau_content_page['gestionnaire'] = 10;
 
 
 for(i=0; i<content_tableau_page.length ; i++){
@@ -105,6 +107,7 @@ var bool_affiche_profil_company = false ;
 
 function affich_contenu_profil_company(){
 	if(!bool_affiche_profil_company){
+		get_Tableau_gestionnaire();
 		// switch du contenu
 		$('#ProfilCompanyContent').slideDown("slow");
 		// bouton afficher
@@ -121,6 +124,35 @@ function affich_contenu_profil_company(){
 		bool_affiche_profil_company = false ;
 	}
 }
+
+//-----------------------------------------------------------------------------------------------------------
+// dans le contenu de la liste des facture
+//-----------------------------------------------------------------------------------------------------------
+
+function affich_liste_facture(){
+  id_off = document.getElementById('FCDetail');	
+  id_off.className = 'CompteContent off';
+  id_on = document.getElementById('FCListe');	
+  id_on.className = 'CompteContent on';
+  
+  id_not_selected = document.getElementById('FMDetail');	
+  id_not_selected.className = '';
+  id_selected = document.getElementById('FMListe');	
+  id_selected.className = 'selected';
+}
+
+function affich_detail_facture(){
+  id_off = document.getElementById('FCListe');	
+  id_off.className = 'CompteContent off';
+  id_on = document.getElementById('FCDetail');	
+  id_on.className = 'CompteContent on';
+  
+  id_not_selected = document.getElementById('FMListe');	
+  id_not_selected.className = '';
+  id_selected = document.getElementById('FMDetail');	
+  id_selected.className = 'selected';
+}
+
 
 
 //-----------------------------------------------------------------------------------------------------------
@@ -206,7 +238,7 @@ function go_page_solde_calcul(num){
 }
 
 //------------------------------------------------------------------------------------------------------
-// fonctions utiles pour l'affichage de le solde du compte calcul
+// fonctions utiles pour l'affichage de la liste des factures
 //------------------------------------------------------------------------------------------------------
 
 // traitement en fin de requette pour laffichage du tableau des materials
@@ -234,6 +266,10 @@ function get_Tableau_facture()
 
 function filtre_Tableau_facture(){
     Tableau_facture_filter = Tableau_facture;
+    var taille_Tableau=Tableau_facture_filter.length;
+    for(i=0; i<taille_Tableau; i++) {
+       Tableau_facture_filter[i]['facture']['numero'] = 'numéro_' + i ;
+    }
 }
 
 // affichage du tableau decompte calcul
@@ -244,7 +280,7 @@ function affiche_Tableau_facture(){
     var current_tableau     =  Tableau_facture_filter;
     var strname             =  'facture';
     var strnamebdd          =  'facture';
-    var stridentificateur   =  new Array('created_at','total_calcul','total_memory','total');
+    var stridentificateur   =  new Array('created_at','numero','total_calcul','total_memory','total');
     affiche_Tableau_content(current_tableau, strname, strnamebdd, stridentificateur);
 }
 
@@ -260,6 +296,56 @@ function go_page_facture(num){
     }
     affiche_Tableau_facture();
 }
+
+//------------------------------------------------------------------------------------------------------
+// fonctions utiles pour l'affichage de la liste des gestionnaires
+//------------------------------------------------------------------------------------------------------
+// traitement en fin de requette pour laffichage du tableau des user gestionnaires
+function init_Tableau_gestionnaire(Tableau_gestionnaire_temp)
+{
+    //alert(Tableau_solde_calcul_temp);
+    // var Tableau_calcul_temp = eval('[' + response + ']');
+    if (Tableau_gestionnaire_temp)
+    {   
+        Tableau_gestionnaire = Tableau_gestionnaire_temp;
+    }
+    else
+    {
+        Tableau_gestionnaire[0]         =  new Array();
+        Tableau_gestionnaire[0]['user'] = 'aucune entrée';
+    }
+    affiche_Tableau_gestionnaire();
+}
+// requette pour l'obtention du tableau des materials
+function get_Tableau_gestionnaire()
+{ 
+    var url_php = "/company/get_gestionnaire";
+    $.getJSON(url_php,[],init_Tableau_gestionnaire);
+}
+
+// affichage du tableau decompte calcul
+function affiche_Tableau_gestionnaire(){
+    taille_tableau_content  =  taille_tableau_content_page['gestionnaire'];
+    var current_tableau     =  Tableau_gestionnaire;
+    var strname             =  'gestionnaire';
+    var strnamebdd          =  'user';
+    var stridentificateur   =  new Array('created_at','firstname','email');
+    affiche_Tableau_content(current_tableau, strname, strnamebdd, stridentificateur);
+}
+
+// affiche la page num pour le decompte calcul
+function go_page_gestionnaire(num){
+    if(num=='first'){
+        content_tableau_current_page['gestionnaire'] = 0;
+    }else if(num=='end'){
+        content_tableau_current_page['gestionnaire'] = content_tableau_liste_page['gestionnaire'].length-1;
+    }else{
+        var num_page = num + content_tableau_curseur_page['gestionnaire'];
+        content_tableau_current_page['gestionnaire'] = content_tableau_liste_page['gestionnaire'][num_page]-1;    
+    }
+    affiche_Tableau_gestionnaire();
+}
+
 
 //------------------------------------------------------------------------------------------------------
 // fonctions generique pour l'affichage d'un tableau

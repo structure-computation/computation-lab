@@ -21,6 +21,25 @@
   border-top: thin solid #696969;
   float: left;
 }
+.largeBoxResumeCompte1
+{
+  background: transparent url('../images/manage_compte_bg.png') repeat-x left top;
+  width: 726px;
+  height: 83px;
+  margin: 15px 0px 0 3px;
+  //border: thin solid #696969;
+  float: left;
+}
+.largeBoxContentCompte1
+{
+  background: transparent url('../images/manage_compte1_bg.png') repeat left top;
+  width: 726px;
+  //height: 500px;
+  margin: 0px 0px 0 3px;
+  //border: thin solid #696969;
+  border-top: thin solid #696969;
+  float: left;
+}
 
 /*
  * resume pour un compte
@@ -126,7 +145,6 @@
   font-size: 0.85em;
   color: black;
   text-align:center;
-  //border: thin solid #2a3557;
   float:left;
 }
 .ResumeCompteText2
@@ -138,6 +156,17 @@
   font-size: 0.75em;
   color: #696969;
   text-align:center;
+  float:left;
+}
+.ResumeCompteText3
+{
+  height:20px; 
+  margin:5px 0px 0 5px; 
+  line-height: 20px;
+  font-weight: 100;
+  font-size: 0.85em;
+  color: black;
+  text-align:left;
   float:left;
 }
 .ResumeCompteBouton

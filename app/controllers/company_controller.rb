@@ -14,6 +14,18 @@ class CompanyController < ApplicationController
     render :json => @users.to_json
   end
   
+  
+  def get_gestionnaire
+    # Creation d'une liste fictive d'utilisateur type gestionnaire
+    @users = []
+    (1..3).each{ |i|
+      user =    User.new( :created_at  => i.to_s+"/03/2010", :email  => "prenom.nom_"+i.to_s+"@societe.com", :firstname => "prenom_"+i.to_s,  :lastname => "nom_"+i.to_s )
+      @users << user
+    } 
+    render :json => @users.to_json
+  end
+  
+  
   def get_solde
     # Creation d'une liste fictive d'opération.
     @soldes = []
@@ -28,7 +40,7 @@ class CompanyController < ApplicationController
     # Creation d'une liste fictive d'opération.
     @factures = []
     (1..18).each{ |i|
-      facture =    Facture.new( :created_at  => i.to_s+"/03/2010",  :total_calcul => "25", :total_memory => "20", :total => "45" )
+      facture =    Facture.new( :created_at  => i.to_s+"/03/2010", :total_calcul => "25", :total_memory => "20", :total => "45" )
       @factures << facture
     } 
     render :json => @factures.to_json

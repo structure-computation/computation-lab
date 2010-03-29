@@ -4,6 +4,29 @@
 //---------------------------------------------------------------------------------------------------------
 
 user_detail  =  new Array();              // initialisation des onfo user
+var Tableau_gestionnaire	           =  new Array();              // tableau du solde calcul
+
+
+//initialisation de la taille du tableau pour la box content et de la table de correspondance
+var taille_tableau_content          =  20;                       // taille du tableau dans la content box
+var content_tableau_connect         =  new Array();              // connectivité entre l'id de l'element graphique (div) et l'élément du tableau affiché dedans  
+var content_tableau_current_page    =  new Array();              // numéro de la page du tableau (sert pour la définition de la connectivité)    
+var content_tableau_curseur_page    =  new Array();              // nombre de page du tableau (sert pour l'affichage des page en bas des tableaux)
+var content_tableau_liste_page      =  new Array();              // liste des pages du tableau (sert pour l'affichage des page en bas des tableaux)
+var content_tableau_page            =  new Array('gestionnaire');    // initialisation des pages avec tableau dynamique
+var taille_tableau_content_page     =  new Array()               // taille du tableau dans la content box
+taille_tableau_content_page['gestionnaire'] = 10;
+
+for(i=0; i<content_tableau_page.length ; i++){
+    content_tableau_connect[content_tableau_page[i]] = new Array(taille_tableau_content_page[content_tableau_page[i]]);
+    content_tableau_current_page[content_tableau_page[i]] = 0;
+    content_tableau_curseur_page[content_tableau_page[i]] = 0;
+    content_tableau_liste_page[content_tableau_page[i]] = [1];
+    taille_tableau_content = taille_tableau_content_page[content_tableau_page[i]];
+    for(j=0; j<taille_tableau_content ; j++){
+        content_tableau_connect[content_tableau_page[i]][j]=j;
+    }
+}
 
 //-----------------------------------------------------------------------------------------------------------
 // affichage des contenu a partir de fleches
@@ -27,6 +50,28 @@ function affich_contenu_profil_user(){
 		id_fleche_compte_calcul = document.getElementById('ProfilUserFleche');	
 		id_fleche_compte_calcul.className = 'ResumeCompte1';
 		bool_affiche_user_detail = false ;
+	}
+}
+
+var bool_affiche_profil_company = false ;
+
+function affich_contenu_profil_company(){
+	if(!bool_affiche_profil_company){
+		get_Tableau_gestionnaire();
+		// switch du contenu
+		$('#ProfilCompanyContent').slideDown("slow");
+		// bouton afficher
+		id_fleche_compte_abonnement = document.getElementById('ProfilCompanyFleche');	
+		id_fleche_compte_abonnement.className = 'ResumeCompte1Selected';
+		bool_affiche_profil_company = true ;
+	}
+	else if(bool_affiche_profil_company){
+		// switch du contenu
+		$('#ProfilCompanyContent').slideUp("slow");
+		// bouton afficher
+		id_fleche_compte_abonnement = document.getElementById('ProfilCompanyFleche');	
+		id_fleche_compte_abonnement.className = 'ResumeCompte1';
+		bool_affiche_profil_company = false ;
 	}
 }
 
@@ -56,10 +101,6 @@ function get_user_detail()
     $.getJSON(url_php,[],init_user_detail);
 }
 
-//-------------------------------------------------------------------------------------------------
-// fonctions utiles pour l'affichage du détail du user
-//-------------------------------------------------------------------------------------------------
-
 // afficher le détail d'un membre
 function affich_detail_user(){
     var table_detail = user_detail['user'];
@@ -73,5 +114,137 @@ function affich_detail_user(){
 	    }
     }
 }
+
+
+//------------------------------------------------------------------------------------------------------
+// fonctions utiles pour l'affichage de la liste des gestionnaires
+//------------------------------------------------------------------------------------------------------
+// traitement en fin de requette pour laffichage du tableau des user gestionnaires
+function init_Tableau_gestionnaire(Tableau_gestionnaire_temp)
+{
+    //alert(Tableau_solde_calcul_temp);
+    // var Tableau_calcul_temp = eval('[' + response + ']');
+    if (Tableau_gestionnaire_temp)
+    {   
+        Tableau_gestionnaire = Tableau_gestionnaire_temp;
+    }
+    else
+    {
+        Tableau_gestionnaire[0]         =  new Array();
+        Tableau_gestionnaire[0]['user'] = 'aucune entrée';
+    }
+    affiche_Tableau_gestionnaire();
+}
+// requette pour l'obtention du tableau des materials
+function get_Tableau_gestionnaire()
+{ 
+    var url_php = "/company/get_gestionnaire";
+    $.getJSON(url_php,[],init_Tableau_gestionnaire);
+}
+
+// affichage du tableau decompte calcul
+function affiche_Tableau_gestionnaire(){
+    taille_tableau_content  =  taille_tableau_content_page['gestionnaire'];
+    var current_tableau     =  Tableau_gestionnaire;
+    var strname             =  'gestionnaire';
+    var strnamebdd          =  'user';
+    var stridentificateur   =  new Array('created_at','firstname','email');
+    affiche_Tableau_content(current_tableau, strname, strnamebdd, stridentificateur);
+}
+
+// affiche la page num pour le decompte calcul
+function go_page_gestionnaire(num){
+    if(num=='first'){
+        content_tableau_current_page['gestionnaire'] = 0;
+    }else if(num=='end'){
+        content_tableau_current_page['gestionnaire'] = content_tableau_liste_page['gestionnaire'].length-1;
+    }else{
+        var num_page = num + content_tableau_curseur_page['gestionnaire'];
+        content_tableau_current_page['gestionnaire'] = content_tableau_liste_page['gestionnaire'][num_page]-1;    
+    }
+    affiche_Tableau_gestionnaire();
+}
+
+
+//------------------------------------------------------------------------------------------------------
+// fonctions generique pour l'affichage d'un tableau
+//------------------------------------------------------------------------------------------------------
+
+
+// affichage des tableau content ('LM_material')
+function affiche_Tableau_content(current_tableau, strname, strnamebdd, stridentificateur){
+    var taille_Tableau=current_tableau.length;
+    for(i=0; i<taille_tableau_content; i++) {
+        i_page = i + content_tableau_current_page[strname] * taille_tableau_content;
+        content_tableau_connect[strname][i]=i_page;
+        
+        strContent_lign = strname + '_lign_' + i;
+	strContent_pair = strname + '_pair_' + i;
+	//alert(strContent_lign);
+	var id_lign  = document.getElementById(strContent_lign);
+	var id_pair  = document.getElementById(strContent_pair);
+	strContent =  new Array();
+	idContent =  new Array();
+	for(j=0; j<stridentificateur.length; j++) {
+	      strContent[j] = strname + '_' + j + '_' + i;
+	      idContent[j] = document.getElementById(strContent[j]);
+	}
+        
+        if(i_page<taille_Tableau){
+            id_lign.className = "contentBoxTable_lign on";
+	    if(pair(i)){
+		id_pair.className = "contentBoxTable_lign_pair";
+	    }else{
+		id_pair.className = "contentBoxTable_lign_impair";
+	    }
+	    strtemp =  new Array();
+	    for(j=0; j<stridentificateur.length; j++) {
+		  strtemp[j] = current_tableau[i_page][strnamebdd][stridentificateur[j]];
+		  remplacerTexte(idContent[j], strtemp[j]);
+	    }
+        }else{
+            id_lign.className = "contentBoxTable_lign off";
+        }
+    }
+    // pour l'affichage des page en bas de la boite
+    var nb_page = Math.floor(taille_Tableau/taille_tableau_content)+1;
+    if(nb_page < 5){
+        content_tableau_curseur_page[strname] = 0;
+    }else{
+        if(content_tableau_current_page[strname] >= nb_page-3){
+            content_tableau_curseur_page[strname] = nb_page-5;
+        }else if(content_tableau_current_page[strname] < 3){
+            content_tableau_curseur_page[strname] = 0;
+        }else{
+            content_tableau_curseur_page[strname] = content_tableau_current_page[strname]-2;
+        }
+    }
+    content_tableau_liste_page[strname] = new Array();
+    for(i=0; i<nb_page; i++) {
+        content_tableau_liste_page[strname][i] = i+1;
+    }
+    for(i=content_tableau_curseur_page[strname]; i<content_tableau_curseur_page[strname]+5; i++) { // on affiche un lien vers 5 pages
+        if(i<nb_page){
+            strpage = new String();
+            strpage = content_tableau_liste_page[strname][i];
+        }else{
+            strpage = "";
+        }
+        strContent_page = new String();
+        strContent_page = strname + '_page_' + (i-content_tableau_curseur_page[strname]);
+        var id_page = document.getElementById(strContent_page);
+        remplacerTexte(id_page, strpage);
+        if(i==content_tableau_current_page[strname]){
+            id_page.className = 'page_select';
+        }else{
+            id_page.className = '';
+        }
+    }  
+}
+
+
+
+
+
 
 -->
