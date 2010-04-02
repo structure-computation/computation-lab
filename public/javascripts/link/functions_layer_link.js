@@ -606,16 +606,27 @@ function send_new_link()
     var Tableau_new_link_post         =  new Object(); 
     Tableau_new_link_post['link'] =  new Object(); 
     Tableau_new_link_post['link'] = param1;
+    $("#new_link_pic_wait").ajaxStart(function(){
+      $(this).show();
+      $("#new_link_pic_ok").hide();
+    });
+//     $("#new_link_pic_wait").ajaxStop(function(){
+//       $(this).hide();
+//       $("#new_link_pic_ok").show();
+//     });
     $.ajax({
-	url: "/link/create",
+	//url: "/link/create",
+	url: "/cgi-bin/calculserver.cgi",
 	type: 'POST',
-	dataType: 'json',
+	dataType: 'text',
 	data: $.toJSON(Tableau_new_link_post),
 	contentType: 'application/json; charset=utf-8',
 	success: function(json) {
-	    alert(json);
+	     $("#new_link_pic_wait").hide();
+	     $("#new_link_pic_ok").show();
 	}
     });
+    
 
 }
 

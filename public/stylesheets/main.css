@@ -717,6 +717,13 @@ body
   background: transparent url('../images/wizar_pic_ok.png') no-repeat center center;
   float: left;
 }
+.wiz_pic_wait
+{
+  width: 70px;
+  height: 70px;
+  background: transparent url('../images/ajax-loader1.gif') no-repeat center center;
+  float: left;
+}
 .ProgressBar 
 { 
   width: 100px; 
