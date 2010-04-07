@@ -1,6 +1,9 @@
 # This controller handles the login/logout function of the site.  
 class ModeleController < ApplicationController
   #session :cookie_only => false, :only => :upload
+  require 'socket'
+  include Socket::Constants
+  
   def index
     @page = 'SCcompute'
     # Creation d'un projet et de plusieurs SC_modeles pour tester le comportement du tableau.
@@ -47,6 +50,18 @@ class ModeleController < ApplicationController
     #render :text => "téléchergement ok"
   end
 
-  
+  def send_info
+    num_model = 1
+    file = params[:fichier]
+    socket = Socket.new( AF_INET, SOCK_STREAM, 0 )
+    sockaddr = Socket.pack_sockaddr_in( 12346, 'localhost' )
+    socket.connect( sockaddr )
+    #socket.write( params.to_json )
+    socket.write( file.read )
+    results = socket.read
+    
+    result1 = params[:name]
+    render :text => result1 
+  end
   
 end

@@ -615,8 +615,7 @@ function send_new_link()
 //       $("#new_link_pic_ok").show();
 //     });
     $.ajax({
-	//url: "/link/create",
-	url: "/cgi-bin/calculserver.cgi",
+	url: "/link/create",
 	type: 'POST',
 	dataType: 'text',
 	data: $.toJSON(Tableau_new_link_post),

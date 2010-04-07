@@ -33,7 +33,7 @@ Tableau_new_model_info['id_user'] = 'test';
 Tableau_new_model_info['id_company'] = 'test';
 Tableau_new_model_info['id_project'] = 'test';
 Tableau_new_model_info['name'] = 'super';
-Tableau_new_model_info['dim'] = 'test';
+Tableau_new_model_info['dimension'] = 'test';
 Tableau_new_model_info['description'] = 'description cool';
 
 
@@ -235,7 +235,7 @@ function NM_next_stape(){
         affiche_NM_page();
     }
     else if(NMcurrent_stape == 'page_fichier'){
-        //send_new_model_info();
+        send_new_model_info();
         NMcurrent_stape = 'page_resume';
 	affich_new_model_resume();
         affiche_NM_page();
@@ -340,6 +340,12 @@ function affich_new_model_resume(){
 // fonctions utiles pour l'envoie des infos sur le nouveau model
 //-------------------------------------------------------------------------------------------------
 
+
+function  ajax_form(){ 
+    $('#sc_model_form').ajaxForm({dataType: 'script'});
+    //alert("Thank you for your comment!"); 
+}
+
 // Always send the authenticity_token with ajax
 // $(document).ajaxSend(function(event, request, settings) {
 //   if ( settings.type == 'post' || settings.type == 'put' ) {
@@ -380,21 +386,57 @@ function UploadAsyncrone() {
 // telecharger le nom et la description du model
 function send_new_model_info()
 {
-    var url_php = "/modele/create";
+    // pour l'upload du fichier, on récupère son nom
+//     var files = $("#fichier").attr("files")[0];
+//     var filesName = files.fileName;
+//     var filesSize = files.fileSize;
+//     alert("Uploading: "+filesName+" @ "+filesSize+"bytes");
+
+    $("#new_model_pic_wait").ajaxStart(function(){
+      $(this).show();
+      $("#new_model_pic_ok").hide();
+    });
+    
+//     var fileName = $("#fichier").val();
+//     $.ajax({
+// 	//url: "/cgi-bin/calculserver.cgi",
+// 	url: "/modele/send_info",
+// 	type: 'POST',
+// 	enctype: 'multipart/form-data',
+//         data: {file: fileName},
+// 	success: function(json) {
+// 	    alert(json);
+// 	    $("#new_model_pic_wait").hide();
+// 	    $("#new_model_pic_ok").show();
+// 	}
+//     });
+    // pour l'envoie du tableau model_new
     var param1 = array2object(Tableau_new_model_info);
     var Tableau_new_model_info_post         =  new Object(); 
     Tableau_new_model_info_post['sc_model'] =  new Object(); 
     Tableau_new_model_info_post['sc_model'] = param1;
-    $.ajax({
-	url: "/modele/create",
-	type: 'POST',
-	dataType: 'json',
-	data: $.toJSON(Tableau_new_model_info_post),
-	contentType: 'application/json; charset=utf-8',
-	success: function(json) {
-	    alert(json);
-	}
-    });
+    
+    var queryString = $('#sc_model_form').formSerialize();
+    $('#sc_model_form').ajaxSubmit(function(json) {
+	    //alert(json);
+	    $("#new_model_pic_wait").hide();
+	    $("#new_model_pic_ok").show();
+	});
+
+//     $.ajax({
+// 	//url: "/modele/create",
+// 	url: "/modele/send_info",
+// 	type: 'POST',
+// 	//dataType: 'text',
+// 	//data: $.toJSON(Tableau_new_model_info_post),
+// 	data: queryString,
+// 	//contentType: 'application/json; charset=utf-8',
+// 	success: function(json) {
+// 	    alert(json);
+// 	    $("#new_model_pic_wait").hide();
+// 	    $("#new_model_pic_ok").show();
+// 	}
+//     });
 
 }
 
