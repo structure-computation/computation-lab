@@ -38,28 +38,31 @@ class ModeleController < ApplicationController
     end
     render :json => { :result => 'success' }
   end
-  
-  def upload
-    file = params[:Filedata]
-    if file.size > 0
-      File.open("#{RAILS_ROOT}/public/test/#{file.original_filename}", 'w+') do |f|
-        f.write(file.read)
-      end
-    end
-    render :json => { :result => 'success' }
-    #render :text => "téléchergement ok"
-  end
 
   def send_info
     num_model = 1
     file = params[:fichier]
+    
+    # création des elements a envoyer au calculateur
+    identite_calcul = { :id_societe => 1, :id_user => 1, :id_projet => 1, :id_model => 1, :id_calcul => 1};
+    priorite_calcul = { :priorite => 0 };
+    mesh = {:mesh_directory => "MESH", :mesh_name => params[:name], :extension => ".bdf"};
+    
+    model_id = {:identite_calcul => identite_calcul, :priorite_calcul => priorite_calcul, :mesh => mesh}; 
+    
+    send_data = {:model_id => model_id, :fichier => file.read, :mode => "create"};
+    
+    # socket d'envoie au serveur
     socket = Socket.new( AF_INET, SOCK_STREAM, 0 )
     sockaddr = Socket.pack_sockaddr_in( 12346, 'localhost' )
     socket.connect( sockaddr )
-    #socket.write( params.to_json )
-    socket.write( file.read )
+    socket.write( send_data.to_json )
+    #socket.write( file.read )
+    
+    # reponse du calculateur
     results = socket.read
     
+    # envoie de la reponse au client
     result1 = params[:name]
     render :text => result1 
   end
