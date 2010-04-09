@@ -33,10 +33,10 @@ class ModeleController < ApplicationController
   
   def create
     num_model = 1
-    File.open("#{RAILS_ROOT}/public/test/model_#{num_model}", 'w+') do |f|
-        f.write(params.to_json)
+    File.open("#{RAILS_ROOT}/public/test/test_post_create_#{num_model}", 'w+') do |f|
+        f.write(params[:json])
     end
-    render :json => { :result => 'success' }
+    render :text => { :result => 'success' }
   end
 
   def send_info
@@ -44,9 +44,9 @@ class ModeleController < ApplicationController
     file = params[:fichier]
     
     # création des elements a envoyer au calculateur
-    identite_calcul = { :id_societe => 1, :id_user => 1, :id_projet => 1, :id_model => 1, :id_calcul => 1};
+    identite_calcul = { :id_societe => 1, :id_user => 1, :id_projet => 1, :id_model => 1, :id_calcul => 1, :dimension => params[:dimension]};
     priorite_calcul = { :priorite => 0 };
-    mesh = {:mesh_directory => "MESH", :mesh_name => params[:name], :extension => ".bdf"};
+    mesh = {:mesh_directory => "MESH", :mesh_name => "mesh", :extension => ".bdf"};
     
     model_id = {:identite_calcul => identite_calcul, :priorite_calcul => priorite_calcul, :mesh => mesh}; 
     
