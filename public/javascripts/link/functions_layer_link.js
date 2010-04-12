@@ -355,6 +355,10 @@ function displayNewLink(interupteur) {
     NMcurrent_stape = 'page_information';
     //affich_new_link();
     affiche_Tableau_new_link();
+    document.getElementById('wiz_annul').className    =  'on' ;
+    document.getElementById('wiz_suiv').className    =  'on' ;
+    document.getElementById('wiz_valid').className    =  'off' ;
+    document.getElementById('wiz_fin').className    =  'off' ;
     affiche_NM_page();
 }
 
@@ -363,6 +367,10 @@ function NM_next_stape(){
     if(NMcurrent_stape == 'page_information'){
         NMcurrent_stape      = 'page_fichier';
 	affich_new_link();
+	document.getElementById('wiz_annul').className    =  'on' ;
+	document.getElementById('wiz_suiv').className    =  'off' ;
+	document.getElementById('wiz_valid').className    =  'on' ;
+	document.getElementById('wiz_fin').className    =  'off' ;
         affiche_NM_page();
     }
     else if(NMcurrent_stape == 'page_fichier'){
@@ -370,17 +378,28 @@ function NM_next_stape(){
 	send_new_link();
 	affich_new_link_resume();
         NMcurrent_stape = 'page_resume';
-	
+	document.getElementById('wiz_annul').className    =  'off' ;
+	document.getElementById('wiz_suiv').className    =  'off' ;
+	document.getElementById('wiz_valid').className    =  'off' ;
+	document.getElementById('wiz_fin').className    =  'on' ;
         affiche_NM_page();
     }  
 }
 function NM_previous_stape(){
     if(NMcurrent_stape == 'page_fichier'){
         NMcurrent_stape = 'page_information';
+	document.getElementById('wiz_annul').className    =  'on' ;
+	document.getElementById('wiz_suiv').className    =  'on' ;
+	document.getElementById('wiz_valid').className    =  'off' ;
+	document.getElementById('wiz_fin').className    =  'off' ;
         affiche_NM_page();
     }
     else if(NMcurrent_stape == 'page_resume'){
         NMcurrent_stape      = 'page_fichier';
+	document.getElementById('wiz_annul').className    =  'on' ;
+	document.getElementById('wiz_suiv').className    =  'off' ;
+	document.getElementById('wiz_valid').className    =  'on' ;
+	document.getElementById('wiz_fin').className    =  'off' ;
         affiche_NM_page();
     }
 }
