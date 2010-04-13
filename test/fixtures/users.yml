@@ -1,0 +1,107 @@
+
+mbleriot:
+  company_id:       tf_avionics
+  firstname:        Michel
+  lastname:         Bleriot
+  telephone:        +33 5 12 34 56 78
+  email:            mb@tf.structure-computation.com
+  salt:             ac3478d69a3c81fa62e60f5c3696165a4e5e6ac4 # SHA1('0')
+  crypted_password: f874291d44ac044a67d09b6a8a657716af47d5ec # 'monkey'
+  remember_token:
+  remember_token_expires_at:
+  activation_code:
+  activated_at:
+  state:            active
+  deleted_at:
+  # created_at:      
+  # updated_at:  
+  
+#
+jlinder:
+  company_id:       tf_avionics
+  firstname:        Jean
+  lastname:         linder
+  telephone:        +33 5 12 34 56 78
+  email:            jl@tf.structure-computation.com
+  salt:             ac3478d69a3c81fa62e60f5c3696165a4e5e6ac4 # SHA1('0')
+  crypted_password: f874291d44ac044a67d09b6a8a657716af47d5ec # 'monkey'
+  remember_token:
+  remember_token_expires_at:
+  activation_code:
+  activated_at:
+  state:            active
+  deleted_at:
+  # created_at:      
+  # updated_at:  
+
+#
+mleroy:
+  company_id:       tf_avionics
+  firstname:        Marc
+  lastname:         Leroy
+  telephone:        +33 5 12 34 56 78
+  email:            ml@tf.structure-computation.com
+  salt:             ac3478d69a3c81fa62e60f5c3696165a4e5e6ac4 # SHA1('0')
+  crypted_password: f874291d44ac044a67d09b6a8a657716af47d5ec # 'monkey'
+  remember_token:
+  remember_token_expires_at:
+  activation_code:
+  activated_at:
+  state:            active
+  deleted_at:
+  # created_at:      
+  # updated_at:  
+
+#
+fcolac:
+  company_id:       tf_avionics
+  firstname:        François
+  lastname:         Colac
+  telephone:        +33 5 12 34 56 78
+  email:            fc@tf.structure-computation.com
+  salt:             ac3478d69a3c81fa62e60f5c3696165a4e5e6ac4 # SHA1('0')
+  crypted_password: f874291d44ac044a67d09b6a8a657716af47d5ec # 'monkey'
+  remember_token:
+  remember_token_expires_at:
+  activation_code:
+  activated_at:
+  state:            active
+  deleted_at:
+  # created_at:      
+  # updated_at:  
+  
+#
+gselec:
+  company_id:       be_civil
+  firstname:        Gilles
+  lastname:         Selec
+  telephone:        +33 5 12 34 56 78
+  email:            gd@bec.structure-computation.com
+  salt:             ac3478d69a3c81fa62e60f5c3696165a4e5e6ac4 # SHA1('0')
+  crypted_password: f874291d44ac044a67d09b6a8a657716af47d5ec # 'monkey'
+  remember_token:
+  remember_token_expires_at:
+  activation_code:
+  activated_at:
+  state:            active
+  deleted_at:
+  # created_at:      
+  # updated_at:
+
+#
+htrasset:
+  company_id:       be_civil
+  firstname:        Herve
+  lastname:         Trasset
+  telephone:        +33 1 23 45 67 89
+  email:            ht@bec.structure-computation.com
+  salt:             ac3478d69a3c81fa62e60f5c3696165a4e5e6ac4 # SHA1('0')
+  crypted_password: f874291d44ac044a67d09b6a8a657716af47d5ec # 'monkey'
+  remember_token:
+  remember_token_expires_at:
+  activation_code:
+  activated_at:
+  state:            active
+  deleted_at:
+  # created_at:      
+  # updated_at:
