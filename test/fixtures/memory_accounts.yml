@@ -1,19 +1,19 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  company_id: tf_avionics
-  description: Compte memoire standard TF Avionics
-  inscription_date: 2010-01-01
-  end_date: 2010-12-31
-  type: standard
-  status: active
-
-two:
-  company_id: be_civil
-  description: Compte memoire standard BE Building physics
-  inscription_date: 2010-01-01
-  end_date: 2010-12-31
-  type: standard
-  status: active
+# one:
+#   company_id: tf_avionics
+#   description: Compte memoire standard TF Avionics
+#   inscription_date: 2010-01-01
+#   end_date: 2010-12-31
+#   type: standard
+#   status: active
+# 
+# two:
+#   company_id: be_civil
+#   description: Compte memoire standard BE Building physics
+#   inscription_date: 2010-01-01
+#   end_date: 2010-12-31
+#   type: standard
+#   status: active
 
 

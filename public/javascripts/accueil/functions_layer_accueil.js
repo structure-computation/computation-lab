@@ -148,7 +148,7 @@ function affiche_Tableau_gestionnaire(){
     var current_tableau     =  Tableau_gestionnaire;
     var strname             =  'gestionnaire';
     var strnamebdd          =  'user';
-    var stridentificateur   =  new Array('created_at','firstname','email');
+    var stridentificateur   =  new Array('date','name','email');
     affiche_Tableau_content(current_tableau, strname, strnamebdd, stridentificateur);
 }
 

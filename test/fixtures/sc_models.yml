@@ -1,27 +1,27 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  name: MyString
-  user_id: 
-  project_id: 
-  model_file_path: MyString
-  image_path: MyString
-  description: MyText
-  dimension: 
-  ddl_number: 
-  parts: 
-  bonds: 
-  used_space: 
-
-two:
-  name: MyString
-  user_id: 
-  project_id: 
-  model_file_path: MyString
-  image_path: MyString
-  description: MyText
-  dimension: 
-  ddl_number: 
-  parts: 
-  bonds: 
-  used_space: 
+# one:
+#   name: MyString
+#   user_id: 
+#   project_id: 
+#   model_file_path: MyString
+#   image_path: MyString
+#   description: MyText
+#   dimension: 
+#   ddl_number: 
+#   parts: 
+#   bonds: 
+#   used_space: 
+# 
+# two:
+#   name: MyString
+#   user_id: 
+#   project_id: 
+#   model_file_path: MyString
+#   image_path: MyString
+#   description: MyText
+#   dimension: 
+#   ddl_number: 
+#   parts: 
+#   bonds: 
+#   used_space: 

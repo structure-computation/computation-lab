@@ -8,6 +8,7 @@ var Tableau_solde_calcul_filter            =  new Array();              // table
 var Tableau_facture	                   =  new Array();              // tableau du solde calcul
 var Tableau_facture_filter  	           =  new Array();              // tableau du solde calcul filtres pour l'affichage
 var Tableau_gestionnaire	           =  new Array();              // tableau du solde calcul
+var Company_detail			   =  new Array();              // detail de la company
 
 
 //initialisation de la taille du tableau pour la box content et de la table de correspondance
@@ -172,6 +173,7 @@ function affich_gestionnaire(){
 }
 
 function affich_detail_company(){
+  get_company_detail();
   id_off = document.getElementById('PCCGestinaire');	
   id_off.className = 'CompteContent off';
   id_on = document.getElementById('PCCDetail');	
@@ -303,7 +305,7 @@ function go_page_facture(num){
 // traitement en fin de requette pour laffichage du tableau des user gestionnaires
 function init_Tableau_gestionnaire(Tableau_gestionnaire_temp)
 {
-    //alert(Tableau_solde_calcul_temp);
+    //alert($.toJSON(Tableau_gestionnaire_temp));
     // var Tableau_calcul_temp = eval('[' + response + ']');
     if (Tableau_gestionnaire_temp)
     {   
@@ -329,7 +331,7 @@ function affiche_Tableau_gestionnaire(){
     var current_tableau     =  Tableau_gestionnaire;
     var strname             =  'gestionnaire';
     var strnamebdd          =  'user';
-    var stridentificateur   =  new Array('created_at','firstname','email');
+    var stridentificateur   =  new Array('date','name','email');
     affiche_Tableau_content(current_tableau, strname, strnamebdd, stridentificateur);
 }
 
@@ -423,6 +425,43 @@ function affiche_Tableau_content(current_tableau, strname, strnamebdd, stridenti
     }  
 }
 
+
+//-------------------------------------------------------------------------------------------------
+// fonctions utiles pour l'obtention du detail de la company
+//-------------------------------------------------------------------------------------------------
+// traitement en fin de requette pour l'obtention du detail
+function init_company_detail(company_temp)
+{
+    if (company_temp)
+    {   
+        Company_detail = company_temp;
+    }
+    else
+    {
+        user_detail         =  new Array();
+        user_detail['name'] = 'aucun membre';
+    }
+    fill_detail_company();
+}
+// requette pour l'obtention du tableau des membres
+function get_company_detail(){ 
+    var url_php = "/company/index";
+    $.getJSON(url_php,[],init_company_detail);
+}
+
+// afficher le détail d'une company
+function fill_detail_company(){
+    var table_detail = Company_detail['company'];
+    for(key in table_detail){
+	    var strContent_detail_key = 'company_detail_' + key ;
+	    var id_detail_key = document.getElementById(strContent_detail_key);
+	    if(id_detail_key != null){
+		strContent = new String();
+		strContent = table_detail[key];
+		remplacerTexte(id_detail_key, strContent);
+	    }
+    }
+}
 
 
 -->

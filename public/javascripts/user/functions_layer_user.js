@@ -76,7 +76,7 @@ function affiche_Tableau_membre(){
     var current_tableau     =  Tableau_membre_filter;
     var strname             =  'membre';
     // var stridentificateur   =  new Array('name','project','new_results','résults');
-    var stridentificateur   =  new Array('email','firstname','lastname');
+    var stridentificateur   =  new Array('email','firstname','role');
     affiche_Tableau_content(current_tableau, strname, stridentificateur);
 }
 

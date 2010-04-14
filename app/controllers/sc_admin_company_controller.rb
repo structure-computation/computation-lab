@@ -1,12 +1,14 @@
 class ScAdminCompanyController < ApplicationController
   #session :cookie_only => false, :only => :upload
+  before_filter :login_required
+  
   def index 
     @page = 'SCmanage'
-    @companys = []
-    (1..5).each{ |i|
-      company =    Company.new(:name => "Nom société " + i.to_s,   :city =>  'Paris',  :country => 'France') 
-      @companys << company
-    }
+    @companys = Company.all
+#     (1..5).each{ |i|
+#       company =    Company.new(:name => "Nom société " + i.to_s,   :city =>  'Paris',  :country => 'France') 
+#       @companys << company
+#     }
     
     respond_to do |format|
       format.html {render :layout => true }

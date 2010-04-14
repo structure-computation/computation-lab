@@ -92,10 +92,16 @@ function displayBlack(interupteur) {
     for (i=0; i<intNbLinkElt; i++) {
         strContent = arrLinkId[i];
         if ( interupteur == "on" ) {
-            document.getElementById(strContent).className = "black on";
+            id_black = document.getElementById(strContent);
+	    if(id_black != null){
+		    id_black.className = "black on";
+	    }
         }
         if ( interupteur == "off" ) {
-            document.getElementById(strContent).className = "black off";
+	    id_black = document.getElementById(strContent);
+	    if(id_black != null){
+		    id_black.className = "black off";
+	    }
         }
     }   
 }

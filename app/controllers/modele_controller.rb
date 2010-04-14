@@ -3,6 +3,7 @@ class ModeleController < ApplicationController
   #session :cookie_only => false, :only => :upload
   require 'socket'
   include Socket::Constants
+  before_filter :login_required
   
   def index
     @page = 'SCcompute'

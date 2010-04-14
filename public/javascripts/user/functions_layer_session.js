@@ -5,7 +5,7 @@
 //--------------------------------------------------------------------------------------------
 
 function displayBlack(interupteur) {
-    var arrLinkId    = new Array('bl_1','bl_2','bl_3','bl_5','black_footer_top','black_footer');
+    var arrLinkId    = new Array('bl_1','bl_5','black_footer_top','black_footer');
     var intNbLinkElt = new Number(arrLinkId.length);
     var strContent   = new String();
 

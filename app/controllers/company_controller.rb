@@ -1,27 +1,37 @@
 class CompanyController < ApplicationController
   
+  before_filter :login_required
+  
   def index
     @page = 'SCmanage' 
+    @current_company = Company.find(@current_user.company_id)
+    respond_to do |format|
+      format.html {render :layout => true }
+      format.js   {render :json => @current_company.to_json}
+    end
   end
 
   def list_membre
-    # Creation d'une liste fictive d'utilisateur pour l'affichage.
-    @users = []
-    (1..5).each{ |i|
-      user =    User.new( :email  => "prenom.nom_"+i.to_s+"@societe.com", :firstname => "prenom_"+i.to_s,  :lastname => "nom_"+i.to_s )
-      @users << user
-    } 
+    @users = User.find(:all, :conditions => {:company_id => session[:current_company_id]})
     render :json => @users.to_json
   end
   
   
   def get_gestionnaire
-    # Creation d'une liste fictive d'utilisateur type gestionnaire
+    #recherche des gestionnaires dans la bdd
+    gestionnaire = User.find(:all, :conditions => {:company_id => session[:current_company_id], :role => "gestionnaire"})
+
+    # creation du tableau des gestionnaires réduit a envoyer
     @users = []
-    (1..3).each{ |i|
-      user =    User.new( :created_at  => i.to_s+"/03/2010", :email  => "prenom.nom_"+i.to_s+"@societe.com", :firstname => "prenom_"+i.to_s,  :lastname => "nom_"+i.to_s )
+    gestionnaire.each{ |gestionnaire_i|
+      user = Hash.new
+      user['user'] = Hash.new
+       
+      user['user'] = { :id =>gestionnaire_i.id ,:date => gestionnaire_i.created_at.to_date, :email  => gestionnaire_i.email, :name => gestionnaire_i.firstname + " " + gestionnaire_i.lastname }
       @users << user
     } 
+   
+    
     render :json => @users.to_json
   end
   

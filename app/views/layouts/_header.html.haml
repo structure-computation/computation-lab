@@ -5,16 +5,13 @@
     #header_top_logo
     #header_top_cadena
     #header_top_user
-      Jérémie Bellec
+      #{session[:current_user_name]}
       %br
-      %span{ :style => "font-size: 0.70em; color : #b8b9c3; text-decoration: underline ;" }
+      %a{:href => "/sessions/destroy", :style => "font-size: 0.75em; color : #b8b9c3; text-decoration: underline ;" }
         déconnexion
     #header_top_temp
     #header_top_societe
-      Nom de la société
-      %br
-      %span{ :style => "font-size: 0.70em; color : #b8b9c3" }
-        n°1010
+      #{session[:current_company_name]}
     
     
     /#bl_2.black.off

@@ -1,14 +1,12 @@
-#NM_wiz_layer.on
-  #NM_wiz_layer_top
+#New_wiz_layer.on
+  #New_wiz_layer_top
     Accédez à votre espace calcul
-  #NM_wiz_layer_milieu
-        
-      
-    %div{ :style => "width: 300px; height:300px; margin: 100px 0px 0 213px;" }
-      #login_format
-        - form_tag session_path do
+  - form_tag session_path do
+    #New_wiz_layer_milieu
+      %div{ :style => "width: 400px; height:300px; margin: 100px 0px 0 213px;" }
+        #login_format
           %p= label_tag 'login'
-          = text_field_tag 'login', @login
+          = text_field_tag 'login', @login , :style => "width: 300px"
           %br
           %br
           %p= label_tag 'password'
@@ -16,13 +14,13 @@
 
           -# %p= label_tag 'remember_me', 'Remember me'
           -# = check_box_tag 'remember_me', '1', @remember_me
-
+  
           -# %p= submit_tag 'Log in' 
 
-  #NM_wiz_layer_bas
-    %a{ :href => "#", :onclick => "" } 
-      #NM_create_bouton_jaune
-        Annuler
-    %a{ :href => "#", :onclick => "" }
-      #NM_footer_bouton_suivant.NM_footer_top_bouton{ :style => "margin-right:5px;" }
-        Log in
+    #New_wiz_layer_bas
+      %a{ :href => "#", :onclick => "" } 
+        .New_create_bouton_jaune
+          Annuler
+      //%a{ :href => "/sessions/create", :onclick => "" }
+      = submit_tag 'Log in', :class => "New_footer_bouton_suivant New_footer_top_bouton", :style => "border: none; margin-right: 5px"
+      -#  Log in
