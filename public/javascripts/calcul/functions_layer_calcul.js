@@ -1,30 +1,37 @@
 <!--
-// -------------------------------------------------------------------------------------------------------------------------------------------
-// fonctions utiles  
-// -------------------------------------------------------------------------------------------------------------------------------------------
-
-// copier des arrays et des objet et non des références !!
-//Object.prototype.clone = function () {var o = new Object(); for (var property in this) {o[property] = typeof (this[property]) == 'object' ? this[property].clone() : this[property]} return o}
-
-//Array.prototype.clone = function () {var a = new Array(); for (var property in this) {a[property] = typeof (this[property]) == 'object' ? this[property].clone() : this[property]} return a}
+//------------------------------------------------------------------------------------------------------
+// fonctions génériques
+//------------------------------------------------------------------------------------------------------
 
 function clone(myArray){
-	var newArray = new Array();
-	for (var property in myArray){
-		newArray[property] = typeof (myArray[property]) == 'object' ? clone(myArray[property]) : myArray[property]
-	} 
-	return newArray
+    var newArray = new Array();
+    for (var property in myArray){
+        newArray[property] = typeof (myArray[property]) == 'object' ? clone(myArray[property]) : myArray[property]
+    } 
+    return newArray
+}
+
+
+function pair(nombre)
+{
+   return ((nombre-1)%2);
 }
 
 // convertir une array en json string
 function array2json(arr) {
     var parts = [];
     var is_list = (Object.prototype.toString.apply(arr) === '[object Array]');
+    var virgule ='on';
 
     for(var key in arr) {
     	//if(key!='clone'){
 	    	var value = arr[key];
 	        if(typeof value == "object") { //Custom handling for arrays
+		    var str = "";
+		    //if(!is_list) 
+		    str =  key ;
+		    parts.push(str);
+		    virgule ='off';
 	            if(is_list) parts.push(array2json(value)); /* :RECURSION: */
 	            else parts[key] = array2json(value); /* :RECURSION: */
 	            //else parts.push('"' + key + '":' + returnedVal);
@@ -32,23 +39,42 @@ function array2json(arr) {
 	        	if(typeof value != "function"){
 		            var str = "";
 		            //if(!is_list) 
-		             str = '"' + key + '":';
+		             str =  '\''+key + '\':';
 		
 		            //Custom handling for multiple data types
 		            if(typeof value == "number") str += value; //Numbers
 		            else if(value === false) str += 'false'; //The booleans
 		            else if(value === true) str += 'true';
-		            else str += '"' + value + '"'; //All other things
+		            else str +=  '\''+value+'\'' ; //All other things
 		            // :TODO: Is there any more datatype we should be in the lookout for? (Functions?)
 	            	parts.push(str);
 	        	}
 	        }
     	//}
     }
-    var json = parts.join(",");
+    if(virgule =='on'){
+      var json = parts.join(", ");
+      return '[' + json + ']';//Return numerical JSON
+    }
+    else if(virgule =='off'){
+      var json = parts.join("");
+      return '[' + json + ']';//Return associative JSON
+    }
     
-    if(is_list) return '[' + json + ']';//Return numerical JSON
-    return '{' + json + '}';//Return associative JSON
+    //if(is_list) return '{' + json + '}';//Return numerical JSON
+    //return '{' + json + '}';//Return associative JSON
+}
+function array2object(array){
+    var object = new Object();
+    for(var key in array) {
+	var value = array[key];
+	if(typeof value == "Array") { //Custom handling for arrays
+            object[key] = array2object(value);
+        } else {
+            object[key] = value;
+        }
+    }
+    return object;
 }
 
 

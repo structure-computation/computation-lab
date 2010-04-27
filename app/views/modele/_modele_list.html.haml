@@ -28,7 +28,8 @@
         .largeBoxTable_Model_3{ :id => "sc_model_3_#{i}" }
         .largeBoxTable_Model_4{ :id => "sc_model_4_#{i}" }
         .largeBoxTable_Model_5{ :id => "sc_model_5_#{i}" }
-        %a{ :href => "calcul" }
+        /%a{ :href => "calcul" }
+        %a{ :style => "cursor: pointer;", :onclick => "go_calcul(#{i})" }
           .largeBoxTable_Model_6{ :id => "sc_model_6_#{i}" }
         .largeBoxTable_Model_7{ :id => "sc_model_7_#{i}" }
   / Fin du tableau de présentation des modèles.

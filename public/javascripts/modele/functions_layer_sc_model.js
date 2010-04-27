@@ -174,6 +174,19 @@ function go_page_model(num){
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// fonctions utiles pour aller sur la page calcul SCcompute
+//---------------------------------------------------------------------------------------------------------------------
+
+
+// afficher le détail d'un modele
+function go_calcul(num){
+    var num_select = content_tableau_connect['sc_model'][num];
+    var url_php = "/calcul/index?id_model=" + num_select ;
+    $(location).attr('href',url_php);
+    //$.get(url_php,{ id_model: num_select });
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 // fonctions utiles pour l'affichage du detail d'un modele
 //---------------------------------------------------------------------------------------------------------------------
 
@@ -243,7 +256,7 @@ function NM_next_stape(){
         affiche_NM_page();
     }
     else if(NMcurrent_stape == 'page_fichier'){
-        //send_new_model_info();
+        send_new_model_info();
         NMcurrent_stape = 'page_resume';
 	document.getElementById('wiz_annul').className    =  'off' ;
 	document.getElementById('wiz_suiv').className    =  'off' ;

@@ -36,7 +36,7 @@
       - (0...9).each do |i|
         .tableNC_twin_pair
           .tableNC_twin_box_0{     :id => "piece_twin_1_#{i}" }
-            %a{ :id => "piece_twin_1a_#{i}", :onclick => "info_select('piece_twin',#{i})", :style => "cursor: pointer;" }
+            %a{ :id => "piece_twin_1a_#{i}", :onclick => "active_piece_select(#{i})", :style => "cursor: pointer;" }
               %div{                :id => "piece_twin_1r_#{i}"}
               .tableNC_box_1{      :id => "piece_twin_11_#{i}"}
               .tableNC_twin_box_2{ :id => "piece_twin_12_#{i}"}

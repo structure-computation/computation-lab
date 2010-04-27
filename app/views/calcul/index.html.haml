@@ -102,11 +102,14 @@
         
         %script{ :type => "text/javascript" }
           equal_height_NC_fake();
+          / $(document).ready(get_info_model(#{@id_model}));
           $(document).ready(get_Tableau_calcul);
           $(document).ready(get_Tableau_mat);
           $(document).ready(get_Tableau_liaison);
           $(document).ready(get_Tableau_CL);
           affiche_NC_page_initialisation();
+          get_info_model(#{@id_model});
+          / alert("ok");
       / fin NC_content
       
       / partie haute du footer, bas de la boite projet plus bouton

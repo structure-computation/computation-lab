@@ -1,9 +1,10 @@
 class CalculController < ApplicationController
-
+  require 'json'
   before_filter :login_required
   
   def index
     @page = 'SCcompute'
+    @id_model = params[:id_model]
     respond_to do |format|
       format.html {render :layout => false }
     end 
@@ -11,6 +12,15 @@ class CalculController < ApplicationController
     #   format.html { render :action => "vue_a_afficher", :layout => false }
     #   format.xml  { render :xml => @objet_a_renvoyer   }
     # end   
+  end
+  
+  def info_model
+    id_model = params[:id_model]  
+    fic =File.open("/home/jeremie/code/test/model_#{id_model}/mesh.txt",'r')
+    
+    respond_to do |format|
+      format.js   {render :json => JSON.parse(fic.read).to_json}
+    end
   end
   
   def calculs
