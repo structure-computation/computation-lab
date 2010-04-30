@@ -5,7 +5,7 @@
     .NC_filter{ :style => "width:248px; height:120px" }
     /  <?php include("./contenu/NC_etape_initialisation/NC_filter_calcul.php");  ?>
     - (0...20).each do |i|
-      .tableNC_impair
+      .tableNC_impair{ :id => "calcul_pair_#{i}" }
         .tableNC_box_0{ :id => "calcul_1_#{i}" }
           %a{ :id => "calcul_1a_#{i}", :onclick => "select_calcul(#{i})", :style => "cursor: pointer;" }
             .tableNC_box_1{ :id => "calcul_11_#{i}" }

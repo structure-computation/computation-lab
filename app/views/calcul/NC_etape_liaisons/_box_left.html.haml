@@ -5,7 +5,7 @@
     .NC_filter{ :style => "width:248px; height:120px" }
     /  <?php include("./contenu/NC_etape_liaisons/NC_filter_liaison.php");  ?>
     - (0...20).each do |i|
-      .tableNC_impair
+      .tableNC_impair{ :id => "liaison_pair_#{i}" }
         .tableNC_box_0{ :id => "liaison_1_#{i}" }
           %a{ :id => "liaison_1a_#{i}", :onclick => "select_liaison(#{i})", :style => "cursor: pointer;" }
             .tableNC_box_1{ :id => "liaison_11_#{i}" }

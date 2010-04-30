@@ -81,5 +81,14 @@ class CalculController < ApplicationController
       format.js   {render :json => @CLs.to_json}
     end
   end
+  
+  def create
+    num_model = 1
+    jsonobject = JSON.parse(params[:file])
+    File.open("#{RAILS_ROOT}/public/test/test_post_calcul_#{num_model}", 'w+') do |f|
+        f.write(JSON.pretty_generate(jsonobject))
+    end
+    render :json => { :result => 'success' }.to_json
+  end
 
 end

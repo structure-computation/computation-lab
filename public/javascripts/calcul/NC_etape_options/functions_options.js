@@ -11,6 +11,9 @@ function affiche_NC_page_options(){
 		NC_scroll(NC_current_scroll);
 	}
 	select_option(Tableau_option_select['mode']);
+	document.getElementById('NC_footer_top_init').className = 'off';
+	document.getElementById('NC_footer_top_suiv').className = 'on';
+	document.getElementById('NC_footer_top_valid').className = 'off';
 }
 
 // affichage des boites d'option

@@ -30,8 +30,7 @@
     %script{ :src => "/javascripts/calcul/NC_etape_previsions/functions_previsions.js", :type => "text/javascript" }
     %script{ :src => "/javascripts/calcul/NC_prop/functions_prop.js", :type => "text/javascript" }
     %script{ :src => "/javascripts/imgserver.js", :type => "text/javascript" }
-    -# <?php include("/php/functions_layer_NC.php");  ?>
-    -# <?php $NC_taille_left_NC_box = 540;  ?>
+
   %body
     #conteneur
       = render :partial => "layouts/header"
@@ -99,35 +98,44 @@
               #NC_slider_scrollbar
               #NC_slider_scrollbar_2
         / fin scrollbar du contenu
-        
-        %script{ :type => "text/javascript" }
-          equal_height_NC_fake();
-          / $(document).ready(get_info_model(#{@id_model}));
-          $(document).ready(get_Tableau_calcul);
-          $(document).ready(get_Tableau_mat);
-          $(document).ready(get_Tableau_liaison);
-          $(document).ready(get_Tableau_CL);
-          affiche_NC_page_initialisation();
-          get_info_model(#{@id_model});
-          / alert("ok");
       / fin NC_content
       
       / partie haute du footer, bas de la boite projet plus bouton
       #NC_footer_top
-        %a{ :href => "modele" }
+        %a{ :href => "/modele" }
           #NC_footer_bouton_annuler.NC_footer_top_bouton
             Annuler
         #NC_footer_bouton_sauver.NC_footer_top_bouton
           sauvegarde le brouillon
-        #NC_footer_top_centre.NC_footer_top_bouton
-        %a{ :onclick => "previous_stape()", :style => "cursor: pointer;" }
-          #NC_footer_bouton_precedent.NC_footer_top_bouton
-            Précédent
-        %a{ :onclick => "next_stape()", :style => "cursor: pointer;" }
-          #NC_footer_bouton_suivant.NC_footer_top_bouton
-            Suivant
+        
+        #NC_footer_top_init.off
+          %a{ :onclick => "next_stape()", :style => "cursor: pointer;" }
+            #NC_footer_bouton_suivant.NC_footer_top_bouton
+              Suivant
+        #NC_footer_top_suiv.off
+          %a{ :onclick => "previous_stape()", :style => "cursor: pointer;" }
+            #NC_footer_bouton_precedent.NC_footer_top_bouton
+              Précédent
+          %a{ :onclick => "next_stape()", :style => "cursor: pointer;" }
+            #NC_footer_bouton_suivant.NC_footer_top_bouton
+              Suivant
+        #NC_footer_top_valid.on
+          %a{ :onclick => "complete_calcul()", :style => "cursor: pointer;" }
+            #NC_footer_bouton_sauver.NC_footer_top_bouton
+              valider et envoyer
       / fin partie haute du footer
       
       / partie basse du footer, mentions legale...
       #NC_footer
       / fin partie basse du footer
+%script{ :type => "text/javascript" }
+  equal_height_NC_fake();
+  / $(document).ready(get_info_model(#{@id_model}));
+  $(document).ready(get_Tableau_calcul);
+  $(document).ready(get_Tableau_mat);
+  $(document).ready(get_Tableau_liaison);
+  $(document).ready(get_Tableau_CL);
+  affiche_NC_page_initialisation();
+  get_info_model(#{@id_model});
+  displayBlack("on");
+  / alert("ok");

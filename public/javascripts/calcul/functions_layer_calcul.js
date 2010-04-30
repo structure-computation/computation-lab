@@ -6,7 +6,7 @@
 function clone(myArray){
     var newArray = new Array();
     for (var property in myArray){
-        newArray[property] = typeof (myArray[property]) == 'object' ? clone(myArray[property]) : myArray[property]
+        newArray[property] = typeof (myArray[property]) == 'object' || typeof (myArray[property]) == 'Array' ? clone(myArray[property]) : myArray[property]
     } 
     return newArray
 }
@@ -68,7 +68,7 @@ function array2object(array){
     var object = new Object();
     for(var key in array) {
 	var value = array[key];
-	if(typeof value == "Array") { //Custom handling for arrays
+	if(typeof value == "Array" || typeof value == "object") { //Custom handling for arrays
             object[key] = array2object(value);
         } else {
             object[key] = value;
@@ -77,7 +77,31 @@ function array2object(array){
     return object;
 }
 
+//----------------------------------------------------------------------------------------------------------
+// fonctions utiles pour l'affichage des cache noir et des wizard
+//----------------------------------------------------------------------------------------------------------
 
+function displayBlack(interupteur) {
+    var arrLinkId    = new Array('bl_1');
+    var intNbLinkElt = new Number(arrLinkId.length);
+    var strContent   = new String();
+
+    for (i=0; i<intNbLinkElt; i++) {
+        strContent = arrLinkId[i];
+        if ( interupteur == "on" ) {
+            id_black = document.getElementById(strContent);
+	    if(id_black != null){
+		    id_black.className = "black on";
+	    }
+        }
+        if ( interupteur == "off" ) {
+	    id_black = document.getElementById(strContent);
+	    if(id_black != null){
+		    id_black.className = "black off";
+	    }
+        }
+    }   
+}
 // -------------------------------------------------------------------------------------------------------------------------------------------
 // fonctions utiles pour l'affichage des différentes pages :
 // ('page_initialisation', 'page_materiaux', 'page_liaisons', 'page_CL', 'page_options', 'page_multiresolution', 'page_previsions')
@@ -215,71 +239,7 @@ function affich_prop_visu(affich_box){
 		id_top_box_visu_3_prop.className = 'NC_triangle_bas';
 	}
 }
-// visualisation des infos sur un element selectionné
-function info_select(strinfo,num){
-	if(strinfo=='mat' || strinfo=='mat_twin' || strinfo=='piece_twin'){
-		refresh_NC_page_materiaux();
-	}
-	if(strinfo=='liaison' || strinfo=='liaison_twin' || strinfo=='interface_twin'){
-		refresh_NC_page_liaisons();
-	}
-	if(strinfo=='CL' || strinfo=='CLv' || strinfo=='CL_twin' || strinfo=='bord_twin'){
-		refresh_NC_page_CLs();
-	}
-	selected_for_info = [strinfo,num];
-	strContent_14 = new String();
-	strContent_14 = strinfo + '_14_' + num ;
-	var id_14 = document.getElementById(strContent_14);
-	id_14.className = "tableNC_box_4 select";
-	affich_prop_visu('prop');	
-	
-	if(strinfo=='mat'){
-		document.getElementById('NC_top_box_prop').className = 'NC_top_box_center';
-		var num_select = left_tableau_connect[strinfo][num];
-		prop_mat_for_info = Tableau_mat_filter[num_select];
-		prop_mat_affich_info();
-	}
-	if(strinfo=='mat_twin'){
-		active_mat_select(num);
-		document.getElementById('NC_top_box_prop').className = 'NC_top_active_box';
-		var num_select = twin_left_tableau_connect[strinfo][num];
-		prop_mat_for_info = Tableau_mat_select[num_select];
-		prop_mat_affich_info();
-	}
-	if(strinfo=='liaison'){
-		document.getElementById('NC_top_box_prop').className = 'NC_top_box_center';
-		var num_select = left_tableau_connect[strinfo][num];
-		prop_liaison_for_info = Tableau_liaison_filter[num_select];
-		prop_liaison_affich_info();
-	}
-	if(strinfo=='liaison_twin'){
-		active_liaison_select(num);
-		document.getElementById('NC_top_box_prop').className = 'NC_top_active_box';
-		var num_select = twin_left_tableau_connect[strinfo][num];
-		prop_liaison_for_info = Tableau_liaison_select[num_select];
-		prop_liaison_affich_info();
-	}
-	if(strinfo=='CL'){
-		document.getElementById('NC_top_box_prop').className = 'NC_top_box_center';
-		var num_select = left_tableau_connect[strinfo][num];
-		prop_CL_for_info = Tableau_CL[num_select];
-		prop_CL_affich_info();
-	}
-	if(strinfo=='CLv'){
-		document.getElementById('NC_top_box_prop').className = 'NC_top_active_box';
-		var num_select = num;
-		prop_CL_for_info = Tableau_CL_select_volume[num_select];
-		prop_CL_affich_info();
-	}
-	if(strinfo=='CL_twin'){
-		active_CL_select(num);
-		document.getElementById('NC_top_box_prop').className = 'NC_top_active_box';
-		var num_select = twin_left_tableau_connect[strinfo][num];
-		prop_CL_for_info = Tableau_CL_select[num_select];
-		prop_CL_affich_info();
-	}
 
-}
 
 // -------------------------------------------------------------------------------------------------------------------------------------------
 // fonctions permettant l'affichage des tableau dans les colone droite, gauche, et les twin box de la partie active  
@@ -291,29 +251,32 @@ function affiche_Tableau_left(current_tableau,strname,stridentificateur){
 	for(i=0; i<taille_tableau_left; i++) {
 		i_page = i + left_tableau_current_page[strname] * taille_tableau_left;
 		left_tableau_connect[strname][i]=i_page;
-		strContent_1 = new String();
+		strContent_pair = strname + '_pair_' + i;
 		strContent_1 = strname + '_1_' + i;
-		strContent_1a = new String();
 		strContent_1a = strname + '_1a_' + i;
-		strContent_11 = new String();
 		strContent_11 = strname + '_11_' + i;
-		strContent_12 = new String();
 		strContent_12 = strname + '_12_' + i;
-		strContent_14 = new String();
 		strContent_14 = strname + '_14_' + i;
+		var id_pair  = document.getElementById(strContent_pair);
 		var id_1 = document.getElementById(strContent_1);
 		var id_1a = document.getElementById(strContent_1a);
 		var id_11 = document.getElementById(strContent_11);
 		var id_12 = document.getElementById(strContent_12);
 		var id_14 = document.getElementById(strContent_14);
+		id_1.className = "tableNC_box_0 off";
 		if(i_page<taille_Tableau){
 			if(strname=='CLv'){
 				id_1.className = "tableNC_box_0_CLv";
 			}else{
 				id_1.className = "tableNC_box_0 on";
+				if(pair(i)){
+				    id_pair.className = "tableNC_pair";
+				}else{
+				    id_pair.className = "tableNC_impair";
+				}
 			}
 			if(strname=='CL' || strname=='CLv'){	
-				id_11.className = "tableNC_box_1 CL_" + current_tableau[i]['type_picto']	;
+				id_11.className = "tableNC_box_1 CL_" + current_tableau[i]['type_picto'];
 			}else{
 				id_11.className = "tableNC_box_1 "+strname;
 			}
@@ -321,8 +284,6 @@ function affiche_Tableau_left(current_tableau,strname,stridentificateur){
 			strtemp = new String();
 			strtemp = current_tableau[i_page][stridentificateur];
 			remplacerTexte(id_12, strtemp);
-		}else{
-			id_1.className = "tableNC_box_0 off";
 		}
 	}
 	// pour l'affichage des page en bas de la boite
@@ -370,23 +331,27 @@ function affiche_Tableau_twin_left(current_tableau,strname,stridentificateur){
 	for(i=0; i<taille_tableau_twin_left; i++) {
 		i_page = i + twin_left_tableau_current_page[strname] * taille_tableau_twin_left;
 		twin_left_tableau_connect[strname][i]=i_page;
-		strContent_1 = new String();
+		strContent_pair = strname + '_pair_' + i;
 		strContent_1 = strname + '_1_' + i;
-		strContent_1a = new String();
 		strContent_1a = strname + '_1a_' + i;
-		strContent_11 = new String();
 		strContent_11 = strname + '_11_' + i;
-		strContent_12 = new String();
 		strContent_12 = strname + '_12_' + i;
-		strContent_14 = new String();
 		strContent_14 = strname + '_14_' + i;
+		var id_pair  = document.getElementById(strContent_pair);
 		var id_1 = document.getElementById(strContent_1);
 		var id_1a = document.getElementById(strContent_1a);
 		var id_11 = document.getElementById(strContent_11);
 		var id_12 = document.getElementById(strContent_12);
 		var id_14 = document.getElementById(strContent_14);
+		id_1.className = "tableNC_twin_box_0 off";
+		id_pair.className = "tableNC_twin_pair";
 		if(i_page<taille_Tableau){
 			id_1.className = "tableNC_twin_box_0 on";
+			if(pair(i)){
+			    id_pair.className = "tableNC_twin_pair";
+			}else{
+			    id_pair.className = "tableNC_twin_impair";
+			}
 			if(strname=='CL_twin'){
 				id_11.className = "tableNC_box_1 CL_" + current_tableau[i]['type_picto']	;
 			}else{
@@ -396,8 +361,6 @@ function affiche_Tableau_twin_left(current_tableau,strname,stridentificateur){
 			strtemp = new String();
 			strtemp = current_tableau[i_page][stridentificateur];
 			remplacerTexte(id_12, strtemp);
-		}else{
-			id_1.className = "tableNC_twin_box_0 off";
 		}
 	}
 	// pour l'affichage des page en bas de la boite
@@ -446,23 +409,26 @@ function affiche_Tableau_right(current_tableau,strname,stridentificateur){
 	for(i=0; i<taille_tableau_right; i++) {
 		i_page = i + right_tableau_current_page[strname] * taille_tableau_right;
 		right_tableau_connect[strname][i]=i_page;
-		strContent_1 = new String();
+		strContent_pair = strname + '_pair_' + i;
 		strContent_1 = strname + '_1_' + i;
-		strContent_1r = new String();
 		strContent_1r = strname + '_1r_' + i;
-		strContent_11 = new String();
 		strContent_11 = strname + '_11_' + i;
-		strContent_12 = new String();
 		strContent_12 = strname + '_12_' + i;
-		strContent_14 = new String();
 		strContent_14 = strname + '_14_' + i;
+		var id_pair  = document.getElementById(strContent_pair);
 		var id_1 = document.getElementById(strContent_1);
 		var id_1r = document.getElementById(strContent_1a);
 		var id_11 = document.getElementById(strContent_11);
 		var id_12 = document.getElementById(strContent_12);
 		var id_14 = document.getElementById(strContent_14);
+		id_1.className = "tableNC_box_0 off";
 		if(i_page<taille_Tableau){
 			id_1.className = "tableNC_box_0 on";
+			if(pair(i)){
+			    id_pair.className = "tableNC_pair";
+			}else{
+			    id_pair.className = "tableNC_impair";
+			}
 			if(current_tableau[i_page]['group']=='true'){
 				id_11.className = "tableNC_box_1 "+strname;
 			}else if(current_tableau[i_page]['group']!='-1'){
@@ -473,8 +439,6 @@ function affiche_Tableau_right(current_tableau,strname,stridentificateur){
 			strtemp = new String();
 			strtemp = current_tableau[i_page][stridentificateur];
 			remplacerTexte(id_12, strtemp);
-		}else{
-			id_1.className = "tableNC_box_0 off";
 		}
 	}
 	// pour l'affichage des page en bas de la boite
@@ -525,24 +489,27 @@ function affiche_Tableau_twin_right(current_tableau,strname,stridentificateur){
 	for(i=0; i<taille_tableau_twin_right; i++) {
 		i_page = i + twin_right_tableau_current_page[strname] * taille_tableau_twin_right;
 		twin_right_tableau_connect[strname][i]=i_page;
-		strContent_1 = new String();
+		strContent_pair = strname + '_pair_' + i;
 		strContent_1 = strname + '_1_' + i;
-		strContent_1r = new String();
 		strContent_1r = strname + '_1r_' + i;
-		strContent_11 = new String();
 		strContent_11 = strname + '_11_' + i;
-		strContent_12 = new String();
 		strContent_12 = strname + '_12_' + i;
-		strContent_14 = new String();
 		strContent_14 = strname + '_14_' + i;
+		var id_pair  = document.getElementById(strContent_pair);
 		var id_1 = document.getElementById(strContent_1);
 		var id_1r = document.getElementById(strContent_1a);
 		var id_11 = document.getElementById(strContent_11);
 		var id_12 = document.getElementById(strContent_12);
 		var id_14 = document.getElementById(strContent_14);
-		
+		id_1.className = "tableNC_twin_box_0 off";
+		id_pair.className = "tableNC_twin_pair";
 		if(i_page<taille_Tableau){
 			id_1.className = "tableNC_twin_box_0 on";
+			if(pair(i)){
+			    id_pair.className = "tableNC_twin_pair";
+			}else{
+			    id_pair.className = "tableNC_twin_impair";
+			}
 			if(current_tableau[i_page]['group']=='true'){
 				id_11.className = "tableNC_box_1 "+strname;
 				id_14.className = "tableNC_box_4";
@@ -556,8 +523,6 @@ function affiche_Tableau_twin_right(current_tableau,strname,stridentificateur){
 			strtemp = new String();
 			strtemp = current_tableau[i_page][stridentificateur];
 			remplacerTexte(id_12, strtemp);
-		}else{
-			id_1.className = "tableNC_twin_box_0 off";
 		}
 	}
 	// pour l'affichage des page en bas de la boite

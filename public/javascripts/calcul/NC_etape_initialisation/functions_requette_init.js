@@ -1,6 +1,4 @@
 <!--
-
-Tableau_model        =  new Object();
 // traitement en fin de requette pour l'obtention des info du model
 function init_info_model(Tableau_model_temp)
 // function init_Tableau_model(response)
@@ -12,15 +10,25 @@ function init_info_model(Tableau_model_temp)
 	var taille_Tableau=Tableau_model_temp.length;
     	for(i=0; i<taille_Tableau; i++) {
 	    for (var key in Tableau_model_temp[i]) {
-		if(key == 'groups_elem'){
+		if(key == 'mesh'){
+		    Tableau_id_model = Tableau_model_temp[i][key];
+		    //strtemp = $.toJSON(Tableau_pieces);
+		    //alert(strtemp);
+		}
+		else if(key == 'groups_elem'){
 		    Tableau_pieces = Tableau_model_temp[i][key];
 		    //strtemp = $.toJSON(Tableau_pieces);
 		    //alert(strtemp);
 		}
 		else if(key == 'groups_inter'){
 		    Tableau_interfaces = Tableau_model_temp[i][key];
-		    strtemp = $.toJSON(Tableau_interfaces);
-		    alert(strtemp);
+		    //strtemp = $.toJSON(Tableau_interfaces);
+		    //alert(strtemp);
+		}
+		else if(key == 'groups_bord'){
+		    Tableau_bords = Tableau_model_temp[i][key];
+		    //strtemp = $.toJSON(Tableau_interfaces);
+		    //alert(strtemp);
 		}
 	    }
     	}
@@ -34,6 +42,7 @@ function init_info_model(Tableau_model_temp)
     }
     affiche_Tableau_piece();
     affiche_Tableau_interface();
+    affiche_Tableau_bord();
     //object_temp = array2object(Tableau_model); 
     //strtemp = $.toJSON(Tableau_model);
     //alert(strtemp);

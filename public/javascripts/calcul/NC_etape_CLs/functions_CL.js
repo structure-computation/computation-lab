@@ -10,6 +10,9 @@ function affiche_NC_page_CLs(){
 		NC_scroll(NC_current_scroll);
 	}
 	affich_prop_visu('visu');
+	document.getElementById('NC_footer_top_init').className = 'off';
+	document.getElementById('NC_footer_top_suiv').className = 'on';
+	document.getElementById('NC_footer_top_valid').className = 'off';
 	//NC_scroll(NC_current_scroll);
 	//setTimeout("NC_scroll(NC_current_scroll);",1000)
 	//NC_scroll(NC_current_scroll);
@@ -297,23 +300,22 @@ function go_page_CL_select(num){
 }
 
 // supprimer le CLs actif
-function suppr_CL_select(){
-	if(id_actif_CL_select != -1){
-		for(i=0; i<Tableau_bords.length ;i++){
-			if(Tableau_bords[i]['assigned']==Tableau_CL_select[actif_CL_select]['id_select']){
-				Tableau_bords[i]['assigned']='-1';
-				Tableau_bords[i]['group']='-1';
-			}
+function suppr_CL_select(num){
+	active_CL_select(num)
+	for(i=0; i<Tableau_bords.length ;i++){
+		if(Tableau_bords[i]['assigned']==Tableau_CL_select[actif_CL_select]['id_select']){
+			Tableau_bords[i]['assigned']='-1';
+			Tableau_bords[i]['group']='-1';
 		}
-		Tableau_CL_select.splice(actif_CL_select,1);
-		twin_right_tableau_current_page['bord_twin']=0;
-		actif_CL_select = -1;
-		id_actif_CL_select = -1;
-		annuler_bord_filter();
-		affiche_Tableau_CL_select();
-		affiche_Tableau_bord_select();
-		affiche_Tableau_bord();
-	}	
+	}
+	Tableau_CL_select.splice(actif_CL_select,1);
+	twin_right_tableau_current_page['bord_twin']=0;
+	actif_CL_select = -1;
+	id_actif_CL_select = -1;
+	annuler_bord_filter();
+	affiche_Tableau_CL_select();
+	affiche_Tableau_bord_select();
+	affiche_Tableau_bord();
 }
 
 
@@ -388,36 +390,35 @@ function affich_active_bord_select(){
 }
 
 // enlever la bord active de la selection pour le CLs actif_CL_select
-function suppr_bord_select(){
-	if(id_actif_bord_select != -1){
-		if(Tableau_bords_assigned_i[actif_bord_select]['group']=='true'){
-			var taille_groupe = 1;
-			for(i=0; i<Tableau_CL_select[actif_CL_select]['bords'].length ;i++){
-				if(Tableau_CL_select[actif_CL_select]['bords'][i]['group']==Tableau_bords_assigned_i[actif_bord_select]['id']){
-					taille_groupe = taille_groupe+1;
-				}
+function suppr_bord_select(num){
+	active_bord_select(num)
+	if(Tableau_bords_assigned_i[actif_bord_select]['group']=='true'){
+		var taille_groupe = 1;
+		for(i=0; i<Tableau_CL_select[actif_CL_select]['bords'].length ;i++){
+			if(Tableau_CL_select[actif_CL_select]['bords'][i]['group']==Tableau_bords_assigned_i[actif_bord_select]['id']){
+				taille_groupe = taille_groupe+1;
 			}
-			Tableau_bords_assigned_i[actif_bord_select]['assigned']='-1';
-			for(i=0; i<Tableau_bords.length ;i++){
-				if(Tableau_bords[i]['group']==Tableau_bords_assigned_i[actif_bord_select]['id']){
-					Tableau_bords[i]['assigned']='-1';
-					Tableau_bords[i]['group']='-1';
-				}
-			}
-			Tableau_CL_select[actif_CL_select]['bords'].splice(actif_bord_select,taille_groupe);
-		}else{
-			for(i=0; i<Tableau_bords.length ;i++){
-				if(Tableau_bords[i]['id']==Tableau_bords_assigned_i[actif_bord_select]['id']){
-					Tableau_bords[i]['assigned']='-1';
-					Tableau_bords[i]['group']='-1';
-				}
-			}
-			Tableau_CL_select[actif_CL_select]['bords'].splice(actif_bord_select,1);
 		}
-		annuler_bord_filter();
-		affiche_Tableau_bord_select();
-		affiche_Tableau_bord();
-	}	
+		Tableau_bords_assigned_i[actif_bord_select]['assigned']='-1';
+		for(i=0; i<Tableau_bords.length ;i++){
+			if(Tableau_bords[i]['group']==Tableau_bords_assigned_i[actif_bord_select]['id']){
+				Tableau_bords[i]['assigned']='-1';
+				Tableau_bords[i]['group']='-1';
+			}
+		}
+		Tableau_CL_select[actif_CL_select]['bords'].splice(actif_bord_select,taille_groupe);
+	}else{
+		for(i=0; i<Tableau_bords.length ;i++){
+			if(Tableau_bords[i]['id']==Tableau_bords_assigned_i[actif_bord_select]['id']){
+				Tableau_bords[i]['assigned']='-1';
+				Tableau_bords[i]['group']='-1';
+			}
+		}
+		Tableau_CL_select[actif_CL_select]['bords'].splice(actif_bord_select,1);
+	}
+	annuler_bord_filter();
+	affiche_Tableau_bord_select();
+	affiche_Tableau_bord();
 }
 
 

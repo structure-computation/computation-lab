@@ -440,9 +440,21 @@ body
   background: transparent url('../images/NC_footer_bouton_suivant.png') no-repeat left top;
   float: left;
 }
-
-
-
+#NC_footer_top_suiv
+{
+  margin-right: 10px;
+  float: right;
+}
+#NC_footer_top_valid
+{
+  float: right;
+  margin-right: 10px;
+}
+#NC_footer_top_init
+{
+  float: right;
+  margin-right: 10px;
+}
 /*
  * ccs pour la scrollbar
  *
@@ -696,6 +708,19 @@ body
 {
   background: transparent url('../images/NC_pic_info_select.png') no-repeat center center;
 }
+.tableNC_box_suppr
+{
+  width: 12px;
+  height: 20px;
+  background: transparent;
+  border: none;
+  margin-left:5px;
+  font-size: 0.75em;
+  line-height: 19px;
+  color: red;
+  float:right;
+}
+
 /* picto etape initialisation*/
 .tableNC_box_1.calcul
 {
@@ -870,7 +895,12 @@ body
   height:20px ;
   background: transparent url('../images/NC_bouton_jaune_filtre.png') no-repeat center center;
   float:right ;
+  color: #2a3556;
   border:none;
+}
+.NC_filter_button:hover
+{
+  color: black;
 }
 /*
  * ccs pour les titre de conditions limite
@@ -1387,7 +1417,8 @@ body
   margin-top:0px;
   line-height: 18px;
   font-weight: 100;
-  font-size: 0.65em;
+  font-size: 0.85em;
+  text-align: center;
   background: transparent url('../images/NC_bouton_jaune_suppr.png') no-repeat center top;
   color: #2a3556;
 }
@@ -1770,6 +1801,21 @@ div[name="prop_dim_3_in"]
   //background-color: #c4c6d6 ;
 }
 
+.prop_bords_box
+{
+  list-style-type: none;
+  float: left;
+  width: 660px;
+  //height: 20px;
+  background: transparent;
+  line-height: 15px;
+  margin: 2px 0px 0 2px;
+  padding: 4px 0px 10px 4px;
+  //background-color: #c4c6d6 ;
+  border: thin solid #818799;
+  //border-top: thin solid #818799;
+  text-align: left;
+}
 
 
 

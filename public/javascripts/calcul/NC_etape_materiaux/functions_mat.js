@@ -10,6 +10,9 @@ function affiche_NC_page_materiaux(){
 		NC_scroll(NC_current_scroll);
 	}
 	affich_prop_visu('visu');
+	document.getElementById('NC_footer_top_init').className = 'off';
+	document.getElementById('NC_footer_top_suiv').className = 'on';
+	document.getElementById('NC_footer_top_valid').className = 'off';
 	//NC_scroll(NC_current_scroll);
 	//setTimeout("NC_scroll(NC_current_scroll);",1000)
 	//NC_scroll(NC_current_scroll);
@@ -328,23 +331,22 @@ function go_page_mat_select(num){
 }
 
 // supprimer le matériaux actif
-function suppr_mat_select(){
-	if(id_actif_mat_select != -1){
-		for(i=0; i<Tableau_pieces.length ;i++){
-			if(Tableau_pieces[i]['assigned']==Tableau_mat_select[actif_mat_select]['id_select']){
-				Tableau_pieces[i]['assigned']='-1';
-				Tableau_pieces[i]['group']='-1';
-			}
+function suppr_mat_select(num){
+	active_mat_select(num);
+	for(i=0; i<Tableau_pieces.length ;i++){
+		if(Tableau_pieces[i]['assigned']==Tableau_mat_select[actif_mat_select]['id_select']){
+			Tableau_pieces[i]['assigned']='-1';
+			Tableau_pieces[i]['group']='-1';
 		}
-		Tableau_mat_select.splice(actif_mat_select,1);
-		twin_right_tableau_current_page['piece_twin']=0;
-		actif_mat_select = -1;
-		id_actif_mat_select = -1;
-		annuler_piece_filter();
-		affiche_Tableau_mat_select();
-		affiche_Tableau_piece_select();
-		affiche_Tableau_piece();
-	}	
+	}
+	Tableau_mat_select.splice(actif_mat_select,1);
+	twin_right_tableau_current_page['piece_twin']=0;
+	actif_mat_select = -1;
+	id_actif_mat_select = -1;
+	annuler_piece_filter();
+	affiche_Tableau_mat_select();
+	affiche_Tableau_piece_select();
+	affiche_Tableau_piece();
 }
 
 
@@ -418,36 +420,35 @@ function affich_active_piece_select(){
 }
 
 // enlever la piece active de la selection pour le matériaux actif_mat_select
-function suppr_piece_select(){
-	if(id_actif_piece_select != -1){
-		if(Tableau_pieces_assigned_i[actif_piece_select]['group']=='true'){
-			var taille_groupe = 1;
-			for(i=0; i<Tableau_mat_select[actif_mat_select]['pieces'].length ;i++){
-				if(Tableau_mat_select[actif_mat_select]['pieces'][i]['group']==Tableau_pieces_assigned_i[actif_piece_select]['id']){
-					taille_groupe = taille_groupe+1;
-				}
+function suppr_piece_select(num){
+	active_piece_select(num)
+	if(Tableau_pieces_assigned_i[actif_piece_select]['group']=='true'){
+		var taille_groupe = 1;
+		for(i=0; i<Tableau_mat_select[actif_mat_select]['pieces'].length ;i++){
+			if(Tableau_mat_select[actif_mat_select]['pieces'][i]['group']==Tableau_pieces_assigned_i[actif_piece_select]['id']){
+				taille_groupe = taille_groupe+1;
 			}
-			Tableau_pieces_assigned_i[actif_piece_select]['assigned']='-1';
-			for(i=0; i<Tableau_pieces.length ;i++){
-				if(Tableau_pieces[i]['group']==Tableau_pieces_assigned_i[actif_piece_select]['id']){
-					Tableau_pieces[i]['assigned']='-1';
-					Tableau_pieces[i]['group']='-1';
-				}
-			}
-			Tableau_mat_select[actif_mat_select]['pieces'].splice(actif_piece_select,taille_groupe);
-		}else{
-			for(i=0; i<Tableau_pieces.length ;i++){
-				if(Tableau_pieces[i]['id']==Tableau_pieces_assigned_i[actif_piece_select]['id']){
-					Tableau_pieces[i]['assigned']='-1';
-					Tableau_pieces[i]['group']='-1';
-				}
-			}
-			Tableau_mat_select[actif_mat_select]['pieces'].splice(actif_piece_select,1);
 		}
-		annuler_piece_filter();
-		affiche_Tableau_piece_select();
-		affiche_Tableau_piece();
-	}	
+		Tableau_pieces_assigned_i[actif_piece_select]['assigned']='-1';
+		for(i=0; i<Tableau_pieces.length ;i++){
+			if(Tableau_pieces[i]['group']==Tableau_pieces_assigned_i[actif_piece_select]['id']){
+				Tableau_pieces[i]['assigned']='-1';
+				Tableau_pieces[i]['group']='-1';
+			}
+		}
+		Tableau_mat_select[actif_mat_select]['pieces'].splice(actif_piece_select,taille_groupe);
+	}else{
+		for(i=0; i<Tableau_pieces.length ;i++){
+			if(Tableau_pieces[i]['id']==Tableau_pieces_assigned_i[actif_piece_select]['id']){
+				Tableau_pieces[i]['assigned']='-1';
+				Tableau_pieces[i]['group']='-1';
+			}
+		}
+		Tableau_mat_select[actif_mat_select]['pieces'].splice(actif_piece_select,1);
+	}
+	annuler_piece_filter();
+	affiche_Tableau_piece_select();
+	affiche_Tableau_piece();	
 }
 
 

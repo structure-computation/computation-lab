@@ -5,7 +5,7 @@
     .NC_filter{ :style => "width:248px; height:120px" }
     /  <?php include("./contenu/NC_etape_liaisons/NC_filter_interfaces.php");  ?>
     - (0...20).each do |i|
-      .tableNC_impair
+      .tableNC_impair{ :id => "interface_pair_#{i}" }
         .tableNC_box_0{ :id => "interface_1_#{i}" }
           %a{:id => "interface_1a_#{i}", :onclick => "select_interfaces_liaison(#{i})", :style => "cursor: pointer;" }
             .tableNC_box_retrait_10{ :id => "interface_1r_#{i}" }

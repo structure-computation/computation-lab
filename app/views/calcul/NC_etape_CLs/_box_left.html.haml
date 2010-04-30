@@ -37,7 +37,7 @@
     .NC_CL_titre
       Conditions Limites en effort
     - (0...3).each do |i|
-      .tableNC_impair
+      .tableNC_impair{ :id => "CL_pair_#{i}" }
         .tableNC_box_0{ :id => "CL_1_#{i}" }
           %a{ :onclick => "select_CL(#{i})", :style => "cursor: pointer;" }
             .tableNC_box_1{ :id => "CL_11_#{i}" }
@@ -49,7 +49,7 @@
     .NC_CL_titre
       Conditions Limites en déplacement
     - (3...7).each do |i|
-      .tableNC_impair
+      .tableNC_impair{ :id => "CL_pair_#{i}" }
         .tableNC_box_0{ :id => "CL_1_#{i}" }
           %a{ :onclick => "select_CL(#{i})", :style => "cursor: pointer;" }
             .tableNC_box_1{ :id => "CL_11_#{i}" }

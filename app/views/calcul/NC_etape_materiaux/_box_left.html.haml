@@ -5,7 +5,7 @@
     .NC_filter{ :style => "width:248px; height:120px" }
     /  <?php include("./contenu/NC_etape_materiaux/NC_filter_mat.php");  ?>
     - (0...20).each do |i|
-      .tableNC_impair
+      .tableNC_impair{ :id => "mat_pair_#{i}" }
         .tableNC_box_0{ :id => "mat_1_#{i}" }
           %a{ :id => "mat_1a_#{i}", :onclick => "select_mat(#{i})", :style => "cursor: pointer;" }
             .tableNC_box_1{ :id => "mat_11_#{i}" }

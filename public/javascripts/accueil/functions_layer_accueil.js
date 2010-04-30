@@ -106,6 +106,7 @@ function affich_detail_user(){
     var table_detail = user_detail['user'];
     for(key in table_detail){
 	    var strContent_detail_key = 'membre_detail_' + key ;
+	    //alert(strContent_detail_key);
 	    var id_detail_key = document.getElementById(strContent_detail_key);
 	    if(id_detail_key != null){
 		strContent = new String();

@@ -10,20 +10,97 @@ function prop_bloc_affich(name_prop){
 		document.getElementById('prop_materiaux').className = "on";
 		document.getElementById('prop_liaisons').className = "off";
 		document.getElementById('prop_CLs').className = "off";
+		document.getElementById('prop_bords').className = "off";
 	}else if(name_prop=='liaison'){
 		document.getElementById('prop_materiaux').className = "off";
 		document.getElementById('prop_liaisons').className = "on";
 		document.getElementById('prop_CLs').className = "off";
+		document.getElementById('prop_bords').className = "off";
 	}else if(name_prop=='CL'){
 		document.getElementById('prop_materiaux').className = "off";
 		document.getElementById('prop_liaisons').className = "off";
 		document.getElementById('prop_CLs').className = "on";
+		document.getElementById('prop_bords').className = "off";
+	}else if(name_prop=='bord'){
+		document.getElementById('prop_materiaux').className = "off";
+		document.getElementById('prop_liaisons').className = "off";
+		document.getElementById('prop_CLs').className = "off";
+		document.getElementById('prop_bords').className = "on";
 	}
 }
 
 
+// visualisation des infos sur un element selectionné
+function info_select(strinfo,num){
+	if(strinfo=='mat' || strinfo=='mat_twin' || strinfo=='piece_twin'){
+		refresh_NC_page_materiaux();
+	}
+	if(strinfo=='liaison' || strinfo=='liaison_twin' || strinfo=='interface_twin'){
+		refresh_NC_page_liaisons();
+	}
+	if(strinfo=='CL' || strinfo=='CLv' || strinfo=='CL_twin' || strinfo=='bord_twin'){
+		refresh_NC_page_CLs();
+	}
+	selected_for_info = [strinfo,num];
+	strContent_14 = new String();
+	strContent_14 = strinfo + '_14_' + num ;
+	var id_14 = document.getElementById(strContent_14);
+	id_14.className = "tableNC_box_4 select";
+	affich_prop_visu('prop');	
+	
+	if(strinfo=='mat'){
+		document.getElementById('NC_top_box_prop').className = 'NC_top_box_center';
+		var num_select = left_tableau_connect[strinfo][num];
+		prop_mat_for_info = Tableau_mat_filter[num_select];
+		prop_mat_affich_info();
+	}
+	if(strinfo=='mat_twin'){
+		active_mat_select(num);
+		document.getElementById('NC_top_box_prop').className = 'NC_top_active_box';
+		var num_select = twin_left_tableau_connect[strinfo][num];
+		prop_mat_for_info = Tableau_mat_select[num_select];
+		prop_mat_affich_info();
+	}
+	if(strinfo=='liaison'){
+		document.getElementById('NC_top_box_prop').className = 'NC_top_box_center';
+		var num_select = left_tableau_connect[strinfo][num];
+		prop_liaison_for_info = Tableau_liaison_filter[num_select];
+		prop_liaison_affich_info();
+	}
+	if(strinfo=='liaison_twin'){
+		active_liaison_select(num);
+		document.getElementById('NC_top_box_prop').className = 'NC_top_active_box';
+		var num_select = twin_left_tableau_connect[strinfo][num];
+		prop_liaison_for_info = Tableau_liaison_select[num_select];
+		prop_liaison_affich_info();
+	}
+	if(strinfo=='CL'){
+		document.getElementById('NC_top_box_prop').className = 'NC_top_box_center';
+		var num_select = left_tableau_connect[strinfo][num];
+		prop_CL_for_info = Tableau_CL[num_select];
+		prop_CL_affich_info();
+	}
+	if(strinfo=='CLv'){
+		document.getElementById('NC_top_box_prop').className = 'NC_top_active_box';
+		var num_select = num;
+		prop_CL_for_info = Tableau_CL_select_volume[num_select];
+		prop_CL_affich_info();
+	}
+	if(strinfo=='CL_twin'){
+		active_CL_select(num);
+		document.getElementById('NC_top_box_prop').className = 'NC_top_active_box';
+		var num_select = twin_left_tableau_connect[strinfo][num];
+		prop_CL_for_info = Tableau_CL_select[num_select];
+		prop_CL_affich_info();
+	}
+}
 
-
+function create_bord(){
+	affich_prop_visu('prop');
+	document.getElementById('NC_top_box_prop').className = 'NC_top_active_box';
+	Tableau_bords_for_info = clone(Tableau_bords_test);
+	Tableau_bords_affich_info();
+}
 
 // -------------------------------------------------------------------------------------------------------------------------------------------
 // fonctions utiles pour l'affichage des différentes propriété matériaux :
@@ -504,6 +581,113 @@ function prop_CL_change_value(){
 	}
 }
 
+// -------------------------------------------------------------------------------------------------------------------------------------------
+// fonctions utiles pour l'affichage des propriété bords :
+// création de nouveau bords par critere
+// -------------------------------------------------------------------------------------------------------------------------------------------
+function Tableau_bords_affich_info(){
+	str_bord = "prop_bords_";
+	str_bord_list_type = ["is_in","is_on","has_normal"];  // type possible pour les bords
+	
+	// on cahce tout 
+	for(key in str_bord_list_type){
+		str_temp = str_bord + str_bord_list_type[key] ;
+		var id_temp = document.getElementById(str_temp);
+		if(id_temp != null){
+			id_temp.className = "NC_prop_box off";
+		}
+	}
+	// affichage des infos relatives à is_in
+	document.getElementById("prop_bords_type").value = Tableau_bords_for_info["type"];
+	if(Tableau_bords_for_info["type"]=="is_in"){
+		str_bord_type = str_bord + "is_in" ;
+		var id_bord_type = document.getElementById(str_bord_type);
+		if(id_bord_type != null){
+			id_bord_type.className = "NC_prop_box on";
+		}
+		str_bord_list_geometry = ["box","cylindre","sphere"];  // gemoetry possible pour is_in
+		
+		// on cache toutes les info geometry
+		for(key in str_bord_list_geometry){
+			str_temp = str_bord_type + "_" + str_bord_list_geometry[key] ;
+			//alert(str_temp);
+			var id_temp = document.getElementById(str_temp);
+			if(id_temp != null){
+				id_temp.className = "NC_prop_box off";
+			}
+		}
+		// affichage des infos relatives à la géométrie selectionnée
+		document.getElementById("prop_bords_geometry").value = Tableau_bords_for_info["geometry"];
+		if(Tableau_bords_for_info["geometry"]=="box"){
+			str_bord_geometry = str_bord_type + "_box" ;
+			//alert(str_bord_geometry);
+			var id_bord_geometry = document.getElementById(str_bord_geometry);
+			if(id_bord_geometry != null){
+				id_bord_geometry.className = "prop_bords_box on";
+			}
+			for(key in Tableau_bords_for_info){
+				str_temp = str_bord_geometry + "_" + key ;
+				//alert(str_temp);
+				var id_temp = document.getElementById(str_temp);
+				if(id_temp != null){
+					id_temp.value = Tableau_bords_for_info[key]  ;
+				}
+			}
+		}
+	}
+	prop_bloc_affich('bord');
+	equal_height_NC_fake();
+}
 
+//changer les propriétés d'un bord en creation
+function Tableau_bords_for_info_change_type(){
+	Tableau_bords_for_info = clone(Tableau_bords_test);
+	str_temp = "prop_bords_type" ;
+	var id_temp = document.getElementById(str_temp);
+	if(id_temp != null){
+		Tableau_bords_for_info["type"] = id_temp.value ;
+	}
+	Tableau_bords_affich_info();
+}
+//changer les propriétés d'un bord en creation
+function Tableau_bords_for_info_change_geometry(){
+	str_temp = "prop_bords_geometry" ;
+	var id_temp = document.getElementById(str_temp);
+	if(id_temp != null){
+		Tableau_bords_for_info["geometry"] = id_temp.value ;
+	}
+	taille_Tableau_bords = Tableau_bords.length;
+	Tableau_bords_for_info["name"] = Tableau_bords_for_info["type"] + "_" + Tableau_bords_for_info["geometry"] + "_" + taille_Tableau_bords ;
+	Tableau_bords_affich_info();
+}
+
+//changer les propriétés d'un bord en creation
+function Tableau_bords_for_info_change_value(){
+	str_bord = "prop_bords_";
+	str_bord_type = str_bord + Tableau_bords_for_info["type"] ;
+	str_bord_geometry = str_bord_type + "_" + Tableau_bords_for_info["geometry"] ;
+	//alert(str_bord_geometry);
+	for(key in Tableau_bords_for_info){
+		str_temp = str_bord_geometry + "_" + key ;
+		var id_temp = document.getElementById(str_temp);
+		if(id_temp != null){
+			Tableau_bords_for_info[key] = id_temp.value ;
+		}
+	}
+		
+}
+
+function valid_bord(){
+	if(Tableau_bords_for_info["id"]==-1){
+		taille_Tableau_bords = Tableau_bords.length;
+		Tableau_bords_for_info["id"]=taille_Tableau_bords;
+		Tableau_bords[taille_Tableau_bords] = new Array();
+		Tableau_bords[taille_Tableau_bords] = clone(Tableau_bords_for_info);
+		affiche_Tableau_bord();
+	}else{
+		Tableau_bords[Tableau_bords_for_info["id"]] = clone(Tableau_bords_for_info);
+		affiche_Tableau_bord();
+	}
+}
 
 -->

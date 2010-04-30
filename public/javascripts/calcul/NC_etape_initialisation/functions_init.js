@@ -10,6 +10,9 @@ function affiche_NC_page_initialisation(){
 		NC_scroll(NC_current_scroll);
 	}
 	affich_prop_visu('visu');
+	document.getElementById('NC_footer_top_init').className = 'on';
+	document.getElementById('NC_footer_top_suiv').className = 'off';
+	document.getElementById('NC_footer_top_valid').className = 'off';
 }
 
 // rafraichiassement de la page matériaux
