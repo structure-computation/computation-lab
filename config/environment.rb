@@ -13,6 +13,9 @@ Rails::Initializer.run do |config|
 
   # Add additional load paths for your own custom dirs
   # config.load_paths += %W( #{RAILS_ROOT}/extras )
+  
+  # Charge tous les sous repertoires du dossier app/models pour plus de clarete dans l'organisation des mode>
+  config.load_paths += Dir["#{RAILS_ROOT}/app/models/**/**"]
 
   # Specify gems that this application depends on and have them installed with rake gems:install
   # config.gem "bj"
