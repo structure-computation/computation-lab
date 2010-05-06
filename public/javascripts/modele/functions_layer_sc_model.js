@@ -174,16 +174,32 @@ function go_page_model(num){
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-// fonctions utiles pour aller sur la page calcul SCcompute
+// fonctions utiles pour aller sur les pages calcul, resultat ou visualisation de SCcompute
 //---------------------------------------------------------------------------------------------------------------------
 
 
-// afficher le détail d'un modele
+// lancer un calcul sur le model
 function go_calcul(num){
     var num_select = content_tableau_connect['sc_model'][num];
-    var url_php = "/calcul/index?id_model=" + num_select ;
+    var id_model = Tableau_model_filter[num_select]['sc_model']['id'];
+    var url_php = "/calcul/index?id_model=" + id_model ;
     $(location).attr('href',url_php);
-    //$.get(url_php,{ id_model: num_select });
+}
+
+// afficher le détail d'un modele
+function go_detail_model(num){
+    var num_select = content_tableau_connect['sc_model'][num];
+    var id_model = Tableau_model_filter[num_select]['sc_model']['id'];
+    var url_php = "/detail_model/index?id_model=" + id_model ;
+    $(location).attr('href',url_php);
+}
+
+// aller voir les resultats
+function go_resultat(num){
+    var num_select = content_tableau_connect['sc_model'][num];
+    var id_model = Tableau_model_filter[num_select]['sc_model']['id'];
+    var url_php = "/resultat/index?id_model=" + id_model ;
+    $(location).attr('href',url_php);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

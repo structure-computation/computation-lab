@@ -1,0 +1,2 @@
+module DetailModelHelper
+end

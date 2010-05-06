@@ -1,0 +1,38 @@
+/ contenu
+#ModelContent.largeBoxContentCompte1
+  / menu du compte calcul
+  .CompteMenu
+    %ul
+      %li#MenuModelOutils.selected
+        %a{ :onclick => "affich_Outils()", :style => "cursor: pointer;" }
+          Outils
+      %li#MenuModelResultats
+        %a{ :onclick => "affich_Resultats()", :style => "cursor: pointer;" }
+          Résultats
+      %li#MenuModelInformations
+        %a{ :onclick => "affich_Informations()", :style => "cursor: pointer;" }
+          Information
+      %li#MenuModelForum
+        %a{ :onclick => "affich_Forum()", :style => "cursor: pointer;" }
+          Forum
+
+  .CompteContent
+    .CompteContentHeightMin
+    = render :partial => "detail_model/outils/cadre_outils"
+    = render :partial => "detail_model/resultats/cadre_resultats"
+    = render :partial => "detail_model/informations/cadre_informations"
+    = render :partial => "detail_model/forum/cadre_forum"
+    /= render :partial => "company/calcul/decompte_calcul"
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+/ fin menu compte calcul
+/ fin du contenu

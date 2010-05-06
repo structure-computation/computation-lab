@@ -7,29 +7,11 @@ class ModeleController < ApplicationController
   
   def index
     @page = 'SCcompute'
-    # Creation d'un projet et de plusieurs SC_modeles pour tester le comportement du tableau.
-    @project = Project.new(:name => "Nom projet")
-    @modeles = []
-    (1..5).each{ |i|
-      modele =    ScModel.new(:name              => "Nom modele " + i.to_s, :user_id           => 0, 
-                              :project_id        => 0,              :model_file_path   => "/test/modele", 
-                              :image_path        => "/test/image",  :description       => "Modele de test numero " + i.to_s, 
-                              :dimension         => 3,              :ddl_number        => 3, :parts             => 3, 
-                              :interfaces        => 3,              :used_space        => 3, :state             => "none")
-      modele.project = @project
-      @modeles << modele
-    }
-    
+    list_model = ScModel.find(:all, :conditions => {:user_id => current_user.id})
     respond_to do |format|
       format.html {render :layout => true }
-      format.js   {render :json => @modeles.to_json}
-    end
-    
-    # respond_to do |format|
-    #   format.html { render :action => "vue_a_afficher", :layout => false }
-    #   format.xml  { render :xml => @objet_a_renvoyer   }
-    # end
-    
+      format.js   {render :json => list_model.to_json}
+    end 
   end
   
   def create

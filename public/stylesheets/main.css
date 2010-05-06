@@ -516,7 +516,22 @@ body
   margin:0px 25px 0 15px;
 }
 
-
+/*
+ * espace des info (placé au même endroit que les fitre)
+ *
+ */
+#largeBoxInfo
+{
+  background: transparent url('../images/manage_compte1_bg.png') repeat left top;
+  width: 722px;
+  height: 120px;
+  margin: 5px 0px 0 9px;
+  //font-weight: normal;
+  //font-size: 0.75em;
+  //color: #696969;
+  float: left;
+  //text-align: justify;
+}
 /*
  * bouton et placement dans le footer top
  *
@@ -1231,5 +1246,12 @@ body
   background: transparent ;
   float: left;
 }
-
+.contentBoxTable_suppr
+{
+  background: transparent url('../images/croix_suppr.png') no-repeat center center;
+  width: 25px;
+  height: 25px; 
+  margin: 0px 0px 0 5px;
+  float: left;
+}
 

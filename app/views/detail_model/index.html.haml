@@ -1,0 +1,36 @@
+/ Vue Index des resultats.
+/ Liens vers les CSS
+%link{ :href => "/stylesheets/main_detail_model.css", :rel => "stylesheet", :media => "screen" }
+
+/ Javascript particulier a la page resultat
+%script{ :src => "/javascripts/detail_model/functions_layer_detail_model.js" ,   :type => "text/javascript" }
+
+/ wizard création de projet en premier plan
+#content
+  #bl_5.black.off
+  / partie gauche du contenu, raccourci
+  #contentleft
+    .contentheightmin
+    = render :partial => "partials/raccourcis_leftbox"
+    = render :partial => "partials/ajouts_leftbox"
+  / fin partie gauche du contenu
+  
+  / partie droite du contenu, tableaux, informations importantes
+  #contentright
+    #largeBox
+      %h2
+        détail du model
+    #largeBoxcontent
+      / taille minimum du contenu du contenu
+      .contentheightmin
+      / taille minimum du contenu du contenu
+      = render :partial => "info_model"
+      / liste des projet
+      = render :partial => "contenu_model"
+      / fin largeBoxcontent de la liste des projet
+      
+/ fin de #contentright, partie droite du contenu
+%script{ :type => "text/javascript" }
+  $(document).ready(function() {get_Current_model( #{@id_model} )});
+    
+= render :partial => "footer_top"
