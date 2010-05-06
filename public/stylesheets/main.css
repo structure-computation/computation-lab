@@ -545,23 +545,33 @@ body
 #footer_top_2
 {
   width: 270px;
-  height: 49px;
+  height: 39px;
   float: left;
+  line-height: 20px;
   font-weight: normal;
   font-size: 0.75em;
   color: #2a3556;
   vertical-align:middle;
   margin: 0px 0px 0px 30px;
-  padding: 20px 0px 0px 0px;
+  padding: 10px 0px 0px 0px;
 }
 #footer_top_2 a
 {
   //color: #696969;
+  color: #2a3556;
+  
   text-decoration: underline ;
 }
 #footer_top_2 a.page_select
 {
   text-decoration: none ;
+}
+#footer_top_fleche_retour
+{
+  width: 25px;
+  height: 20px;
+  background : transparent url('../images/pic_fleche_retour.png') no-repeat center top;
+  float:left;
 }
 #footer_top_3
 {
