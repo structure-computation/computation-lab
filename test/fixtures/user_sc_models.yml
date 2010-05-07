@@ -1,7 +1,46 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-# one:
-#   column: value
-#
-# two:
-#   column: value
+one:
+  user_id: 792484390    # Bleriot
+  sc_model_id: 51848956    # avion1
+  role: 1    # chef
+
+two:
+  user_id: 792484390    # Bleriot
+  sc_model_id: 113629430    # bateau1
+  role: 1    # chef
+  
+three:
+  user_id: 792484390    # Bleriot
+  sc_model_id: 281110143    # voiture1
+  role: 1    # chef
+  
+four:
+  user_id: 792484390    # Bleriot
+  sc_model_id: 298486374    # avion2
+  role: 1    # chef
+  
+five:
+  user_id: 792484390    # Bleriot
+  sc_model_id: 980190962    # bateau2
+  role: 1    # chef
+  
+six:
+  user_id: 792484390    # Bleriot
+  sc_model_id: 1018350795    # voiture2
+  role: 1    # chef
+
+seven:
+  user_id: 723024631    # linder
+  sc_model_id: 298486374    # avion2
+  role: 2    # standard
+  
+eight:
+  user_id: 723024631    # linder
+  sc_model_id: 980190962    # bateau2
+  role: 2    # standard
+  
+nine:
+  user_id: 723024631    # linder
+  sc_model_id: 1018350795    # voiture2
+  role: 2    # standard

@@ -1,8 +1,8 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-    name: avion
-    user_id: 792484390
+    name: avion1
+    company_id: 674101581    # tf_avionics
     project_id: 
     model_file_path: 
     image_path:
@@ -15,8 +15,8 @@ one:
     state: active
     
 two:
-    name: bateau
-    user_id: 792484390
+    name: bateau1
+    company_id: 674101581    # tf_avionics
     project_id: 
     model_file_path: 
     image_path:
@@ -29,8 +29,8 @@ two:
     state: active
     
 three:
-    name: voiture
-    user_id: 792484390
+    name: voiture1
+    company_id: 674101581    # tf_avionics
     project_id: 
     model_file_path: 
     image_path:
@@ -43,8 +43,8 @@ three:
     state: active
     
 four:
-    name: avion
-    user_id: 1013748183
+    name: avion2      # tf_avionics
+    company_id: 674101581
     project_id: 
     model_file_path: 
     image_path:
@@ -57,8 +57,8 @@ four:
     state: active
     
 five:
-    name: bateau
-    user_id: 992542572
+    name: bateau2
+    company_id: 674101581     # tf_avionics
     project_id: 
     model_file_path: 
     image_path:
@@ -71,8 +71,8 @@ five:
     state: active
     
 six:
-    name: voiture
-    user_id: 723024631
+    name: voiture2      # tf_avionics
+    company_id: 674101581
     project_id: 
     model_file_path: 
     image_path:

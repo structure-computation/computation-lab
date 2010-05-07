@@ -16,6 +16,38 @@ one:
   gpu_allocated: 4
   estimated_calcul_time: 40
 
+
+two:
+  sc_model_id: 51848956
+  user_id: 1
+  result_date: 2009-12-16 23:48:15
+  launch_date: 2009-12-16 23:48:15
+  result_file_path: MyString
+  name: resultat_2 51848956
+  description: MyText
+  ctype: MyString
+  state: MyString
+  cpu_second_used: 1
+  gpu_second_used: 10
+  cpu_allocated: 1
+  gpu_allocated: 4
+  estimated_calcul_time: 40
+  
+three:
+  sc_model_id: 51848956
+  user_id: 1
+  result_date: 2009-12-16 23:48:15
+  launch_date: 2009-12-16 23:48:15
+  result_file_path: MyString
+  name: resultat_3 51848956
+  description: MyText
+  ctype: MyString
+  state: MyString
+  cpu_second_used: 1
+  gpu_second_used: 10
+  cpu_allocated: 1
+  gpu_allocated: 4
+  estimated_calcul_time: 40
 # 
 # two:
 #   sc_model_id: 1

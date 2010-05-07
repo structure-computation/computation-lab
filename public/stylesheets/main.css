@@ -1256,12 +1256,30 @@ body
   background: transparent ;
   float: left;
 }
+.contentBoxTable_visu
+{
+  background: transparent url('../images/LM_visu.png') no-repeat center center;
+  width: 55px;
+  height: 25px; 
+  border-right: thin solid #ffffff;
+  margin: 0px 0px 0 0px;
+  float: left;
+}
+.contentBoxTable_download
+{
+  background: transparent url('../images/download.png') no-repeat center center;
+  width: 55px;
+  height: 25px; 
+  border-right: thin solid #ffffff;
+  margin: 0px 0px 0 0px;
+  float: left;
+}
 .contentBoxTable_suppr
 {
   background: transparent url('../images/croix_suppr.png') no-repeat center center;
   width: 25px;
   height: 25px; 
-  margin: 0px 0px 0 5px;
+  margin: 0px 0px 0 0px;
   float: left;
 }
 

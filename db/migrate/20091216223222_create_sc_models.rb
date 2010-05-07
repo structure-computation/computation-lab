@@ -2,7 +2,7 @@ class CreateScModels < ActiveRecord::Migration
   def self.up
     create_table :sc_models do |t|
       t.string   :name
-      t.integer  :user_id
+      t.integer  :company_id
       t.integer  :project_id
       t.string   :model_file_path
       t.string   :image_path

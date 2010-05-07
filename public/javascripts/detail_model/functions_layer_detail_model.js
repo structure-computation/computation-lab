@@ -11,17 +11,20 @@ var NMcurrent_stape                 =  0;                        // étape pour 
 var Tableau_resultat                   =  new Array();              // tableau des resultats
 var Tableau_resultat_filter            =  new Array();              // tableau des resultats filtres pour l'affichage
 
+var Tableau_utilisateur                   =  new Array();              // tableau des resultats
+var Tableau_utilisateur_filter            =  new Array();              // tableau des resultats filtres pour l'affichage
+
 //initialisation de la taille du tableau pour la box content et de la table de correspondance
 var taille_tableau_content          =  20;                       // taille du tableau dans la content box
 var content_tableau_connect         =  new Array();              // connectivité entre l'id de l'element graphique (div) et l'élément du tableau affiché dedans  
 var content_tableau_current_page    =  new Array();              // numéro de la page du tableau (sert pour la définition de la connectivité)    
 var content_tableau_curseur_page    =  new Array();              // nombre de page du tableau (sert pour l'affichage des page en bas des tableaux)
 var content_tableau_liste_page      =  new Array();              // liste des pages du tableau (sert pour l'affichage des page en bas des tableaux)
-var content_tableau_page            =  new Array('resultat');    // initialisation des pages avec tableau dynamique
+var content_tableau_page            =  new Array('resultat','utilisateur');    // initialisation des pages avec tableau dynamique
 
 var taille_tableau_content_page     =  new Array()               // taille du tableau dans la content box
 taille_tableau_content_page['resultat'] = 20;
-
+taille_tableau_content_page['utilisateur'] = 20;
 
 
 for(i=0; i<content_tableau_page.length ; i++){
@@ -43,8 +46,8 @@ for(i=0; i<content_tableau_page.length ; i++){
 //---------------------------------------------------------------------------------------------------------
 
 function cadres_off(){
-  list_str_id = new Array('CadreInformations', 'CadreResultats', 'CadreOutils', 'CadreForum');
-  list_str_menu_id = new Array('MenuModelInformations', 'MenuModelResultats', 'MenuModelOutils', 'MenuModelForum');
+  list_str_id = new Array('CadreOutils', 'CadreResultats', 'CadreUtilisateurs', 'CadreForum', 'CadreDescription');
+  list_str_menu_id = new Array('MenuModelOutils', 'MenuModelResultats', 'MenuModelUtilisateurs', 'MenuModelForum', 'MenuModelDescription');
   for(i=0; i<list_str_id.length; i++){
     strtemp = list_str_id[i];
     id_off = document.getElementById(strtemp);
@@ -82,12 +85,13 @@ function affich_Resultats(){
   id_selected.className = 'selected';
 }
 
-function affich_Informations(){
+function affich_Utilisateurs(){
+  get_Tableau_utilisateur(Current_model['id']);
   cadres_off();
-  id_on = document.getElementById('CadreInformations');	
+  id_on = document.getElementById('CadreUtilisateurs');	
   id_on.className = 'on';
   
-  id_selected = document.getElementById('MenuModelInformations');	
+  id_selected = document.getElementById('MenuModelUtilisateurs');	
   id_selected.className = 'selected';
 }
 
@@ -100,7 +104,14 @@ function affich_Forum(){
   id_selected.className = 'selected';
 }
 
-
+function affich_Description(){
+  cadres_off();
+  id_on = document.getElementById('CadreDescription');	
+  id_on.className = 'on';
+  
+  id_selected = document.getElementById('MenuModelDescription');	
+  id_selected.className = 'selected';
+}
 
 
 
@@ -125,7 +136,7 @@ function init_Tableau_resultat(Tableau_resultat_temp)
         Tableau_resultat[0]         =  new Array();
         Tableau_resultat[0]['name'] = 'aucun résultat disponnible';
     }
-    alert(array2json(Tableau_resultat));
+    //alert(array2json(Tableau_resultat));
     affiche_Tableau_resultat();
 }
 // requette pour l'obtention du tableau des resultats
@@ -135,11 +146,7 @@ function get_Tableau_resultat(id_model)
     $.getJSON(url_php,{"id_model": id_model},init_Tableau_resultat);
 }
 
-
-//------------------------------------------------------------------------------------------------------
-// fonctions utiles pour l'affichage de la liste des resultats (tableau)
-//------------------------------------------------------------------------------------------------------
-
+// filtre du tableau
 function filtre_Tableau_resultat(){
     Tableau_resultat_filter = Tableau_resultat;
 }
@@ -151,9 +158,61 @@ function affiche_Tableau_resultat(){
     var current_tableau     =  Tableau_resultat_filter;
     var strname             =  'resultat';
     var strnamebdd          =  'calcul_result';
-    var stridentificateur   =  new Array('name','gpu_second_used','gpu_allocated','estimated_calcul_time');
+    var stridentificateur   =  new Array('result_date','name');
     affiche_Tableau_content(current_tableau, strname, strnamebdd, stridentificateur);
 }
+
+
+
+
+//-------------------------------------------------------------------------------------------------
+// fonctions utiles pour l'obtention de la liste des utilisateurs (tableau)
+//-------------------------------------------------------------------------------------------------
+// traitement en fin de requette pour laffichage du tableau des resultats
+function init_Tableau_utilisateur(Tableau_utilisateur_temp)
+{
+    // var Tableau_calcul_temp = eval('[' + response + ']');
+    if (Tableau_utilisateur_temp)
+    {   
+        Tableau_utilisateur = Tableau_utilisateur_temp;
+    }
+    else
+    {
+        Tableau_utilisateur[0]         =  new Array();
+        Tableau_utilisateur[0]['name'] = 'aucun utilisateur disponnible';
+    }
+    //alert(array2json(Tableau_resultat));
+    affiche_Tableau_utilisateur();
+}
+// requette pour l'obtention du tableau des resultats
+function get_Tableau_utilisateur(id_model)
+{ 
+    var url_php = "/detail_model/get_list_utilisateur";
+    $.getJSON(url_php,{"id_model": id_model},init_Tableau_utilisateur);
+}
+
+// filtre du tableau
+function filtre_Tableau_utilisateur(){
+    Tableau_utilisateur_filter = Tableau_utilisateur;
+}
+
+// affichage du tableau decompte calcul
+function affiche_Tableau_utilisateur(){
+    filtre_Tableau_utilisateur();
+    taille_tableau_content  =  taille_tableau_content_page['utilisateur'];
+    var current_tableau     =  Tableau_utilisateur_filter;
+    var strname             =  'utilisateur';
+    var strnamebdd          =  'user';
+    var stridentificateur   =  new Array('email','name','role');
+    affiche_Tableau_content(current_tableau, strname, strnamebdd, stridentificateur);
+}
+
+
+
+
+//------------------------------------------------------------------------------------------------------
+// fonctions utiles pour l'affichage des tableaux
+//------------------------------------------------------------------------------------------------------
 
 
 // affichage des tableau content ('Resultat')

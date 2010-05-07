@@ -182,7 +182,7 @@
 .CompteMenu
 {
   background: transparent;
-  width: 720px;
+  width: 725px;
   //height: 300px;
   margin: 4px 0px 0 1px;
   border: none;
@@ -196,7 +196,7 @@
   height: 25px;
   background: transparent url('../images/projet_menu_bleu.png') no-repeat left top;
   line-height: 26px;
-  margin: 1px 0px 0 1px;
+  margin: 1px 2px 0 1px;
   padding: 0px 0px 0 0px;
   text-align: center;
 }
@@ -368,7 +368,7 @@
   background-color: #b8b9c3;
   border-top: thin solid #ffffff;
   width: 400px ;
-  height: 300px;
+  height: 255px;
   margin: 18px 0px 0 6px;
   float: left;
 }

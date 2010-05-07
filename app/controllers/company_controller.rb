@@ -4,7 +4,7 @@ class CompanyController < ApplicationController
   
   def index
     @page = 'SCmanage' 
-    @current_company = Company.find(@current_user.company_id)
+    @current_company = @current_user.company
     respond_to do |format|
       format.html {render :layout => true }
       format.js   {render :json => @current_company.to_json}
@@ -12,26 +12,22 @@ class CompanyController < ApplicationController
   end
 
   def list_membre
-    @users = User.find(:all, :conditions => {:company_id => session[:current_company_id]})
+    @users = @current_user.company.users
     render :json => @users.to_json
   end
   
-  
   def get_gestionnaire
     #recherche des gestionnaires dans la bdd
-    gestionnaire = User.find(:all, :conditions => {:company_id => session[:current_company_id], :role => "gestionnaire"})
+    gestionnaire = @current_user.company.users.find(:all, :conditions => {:role => "gestionnaire"})
 
     # creation du tableau des gestionnaires réduit a envoyer
     @users = []
     gestionnaire.each{ |gestionnaire_i|
       user = Hash.new
-      user['user'] = Hash.new
-       
+      user['user'] = Hash.new 
       user['user'] = { :id =>gestionnaire_i.id ,:date => gestionnaire_i.created_at.to_date, :email  => gestionnaire_i.email, :name => gestionnaire_i.firstname + " " + gestionnaire_i.lastname }
       @users << user
     } 
-   
-    
     render :json => @users.to_json
   end
   

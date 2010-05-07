@@ -7,7 +7,7 @@ class ModeleController < ApplicationController
   
   def index
     @page = 'SCcompute'
-    list_model = ScModel.find(:all, :conditions => {:user_id => current_user.id})
+    list_model = @current_user.sc_models
     respond_to do |format|
       format.html {render :layout => true }
       format.js   {render :json => list_model.to_json}

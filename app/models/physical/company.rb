@@ -5,5 +5,6 @@ class Company < ActiveRecord::Base
   has_one   :memory_account
   
   has_many  :projects
+  has_many  :sc_models
   
 end

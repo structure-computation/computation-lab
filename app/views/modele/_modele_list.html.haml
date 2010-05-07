@@ -1,26 +1,26 @@
 
 #largeBoxTable_Model
   #largeBoxTable_Model_first
-    #sc_model_0_1.largeBoxTable_Model_0{ :style => "width: 21px;" }
-    #sc_model_0_2.largeBoxTable_Model_0{ :style => "width: 246px;" }
+    .largeBoxTable_Model_0{ :style => "width: 21px;" }
+    .largeBoxTable_Model_0{ :style => "width: 246px;" }
       %p
         Nom
-    #sc_model_0_3.largeBoxTable_Model_0{ :style => "width: 196px;" }
+    .largeBoxTable_Model_0{ :style => "width: 196px;" }
       %p
         Projet
-    #sc_model_0_4.largeBoxTable_Model_0{ :style => "width: 85px;" }
+    .largeBoxTable_Model_0{ :style => "width: 85px;" }
       %p
         Résultats
-    #sc_model_0_5.largeBoxTable_Model_0{ :style => "width: 59px;" }
+    .largeBoxTable_Model_0{ :style => "width: 59px;" }
       %p
         Visu
-    #sc_model_0_6.largeBoxTable_Model_0{ :style => "width: 59px;" }
+    .largeBoxTable_Model_0{ :style => "width: 59px;" }
       %p
         Calcul
-    #sc_model_0_7.largeBoxTable_Model_0{ :style => "width: 21px;" }
+    .largeBoxTable_Model_0{ :style => "width: 21px;" }
     
   - (0...20).each do |i|
-    .largeBoxTable_Model_lign{ :id => "sc_model_lign_#{i}" }
+    .largeBoxTable_Model_lign.off{ :id => "sc_model_lign_#{i}" }
       .largeBoxTable_Model_lign_pair{ :id => "sc_model_pair_#{i}" }
         %a{ :style => "cursor: pointer;", :onclick => "go_detail_model(#{i})" }
           .largeBoxTable_Model_1{ :id => "sc_model_1_#{i}" }

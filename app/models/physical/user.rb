@@ -13,9 +13,9 @@ class User < ActiveRecord::Base
   
   
   has_many    :user_sc_models 
-  has_many    :sc_models    ,  :through => "user_sc_models"
+  has_many    :sc_models    ,  :through => :user_sc_models
 
-  has_many    :user_projects,                                             :dependent => :destroy # Pour les gestionnaires, reattribuer ce projet.
+  has_many    :user_projects,  :dependent => :destroy # Pour les gestionnaires, reattribuer ce projet.
   has_many    :projects,       :through => :user_projects
   has_many    :owned_projects, :through => :user_projects, :source => :task , :conditions => { "user_projects.is_admin"     => true }
   

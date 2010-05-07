@@ -1,29 +1,23 @@
 .contentBoxTable
   .contentBoxTable_first
-    #resultat_0_fleche.contentBoxTable_0{ :style => "width: 25px;" }
-    #resultat_0_1.contentBoxTable_0{ :style => "width: 190px;" }
+    .contentBoxTable_0{ :style => "width: 25px;" }
+    .contentBoxTable_0{ :style => "width: 150px;" }
+      %p
+        Date
+    .contentBoxTable_0{ :style => "width: 395px;" }
       %p
         Nom
-    #resultat_0_2.contentBoxTable_0{ :style => "width: 150px;" }
-      %p
-        temps gpu
-    #resultat_0_3.contentBoxTable_0{ :style => "width: 150px;" }
-      %p
-        nb gpu
-    #resultat_0_4.contentBoxTable_0{ :style => "width: 150px;" }
-      %p
-        temps estimé
-    #resultat_0_6.contentBoxTable_0{ :style => "width: 25px;" }
+    .contentBoxTable_0{ :style => "width: 25px;" }
     
   - (0...20).each do |i|
-    .contentBoxTable_lign{ :id => "resultat_lign_#{i}" }
+    .contentBoxTable_lign.off{ :id => "resultat_lign_#{i}" }
       .contentBoxTable_lign_pair{ :id => "resultat_pair_#{i}" }
         %a{ :style => "cursor: pointer;", :onclick => "affich_detail_resultat(#{i})" }
           .contentBoxTable_fleche
-        .contentBoxTable_2{ :id => "resultat_0_#{i}" , :style => "width: 190px;" }
-        .contentBoxTable_2{ :id => "resultat_1_#{i}" , :style => "width: 150px;" }
-        .contentBoxTable_2{ :id => "resultat_2_#{i}" , :style => "width: 150px;" }
-        .contentBoxTable_2{ :id => "resultat_3_#{i}" , :style => "width: 150px;" }
+        .contentBoxTable_2{ :id => "resultat_0_#{i}" , :style => "width: 150px;" }
+        .contentBoxTable_2{ :id => "resultat_1_#{i}" , :style => "width: 395px;" }
+        .contentBoxTable_visu
+        .contentBoxTable_download
         .contentBoxTable_suppr
   / Fin du tableau de présentation des modèles.
 
