@@ -1,9 +1,10 @@
 class ScModel < ActiveRecord::Base
   
-  belongs_to  :user
   belongs_to  :project
   
   has_many    :calcul_results
+  has_many    :user_sc_models  
+  has_many    :users    ,  :through => "user_sc_models"
   
   def has_result? 
     return (rand(1) > 0.5)
