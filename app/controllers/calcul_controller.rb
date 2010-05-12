@@ -24,39 +24,34 @@ class CalculController < ApplicationController
   end
   
   def calculs
-    @calculs = []
-    (1..15).each{ |i|
-      calcul =    CalculResult.new(:name => "Nom calcul " + i.to_s, :sc_model_id => 0,       :user_id   => 0,
-                                   :result_date  => 0,              :launch_date => 0,       :result_file_path => "/test/modele/calcul",
-                                   :description  => 0,              :ctype        => 'statique',  :state => "test",
-                                   :cpu_second_used  => 0,          :gpu_second_used  => 0,  :cpu_allocated => 0,
-                                   :gpu_allocated    => 0,          :estimated_calcul_time  => 0, :description => 'super description')
-      @calculs << calcul
-    } 
+    @id_model = params[:id_model]
+    current_model = @current_user.sc_models.find(@id_model)
+    @calculs = current_model.calcul_results
     respond_to do |format|
       format.js   {render :json => @calculs.to_json}
     end
   end
   
   def materiaux
-    @materiaux = []
-    (1..25).each{ |i|
-      mat =    Material.new(:name => "Nom calcul " + i.to_s,   :mtype =>  'isotrope',  :comp => 'el pl')                                                 
-      @materiaux << mat
-    }
-    
+#     @materiaux = []
+#     (1..25).each{ |i|
+#       mat =    Material.new(:name => "Nom calcul " + i.to_s,   :mtype =>  'isotrope',  :comp => 'el pl')                                                 
+#       @materiaux << mat
+#     }
+    @materiaux = Material.find(:all)
     respond_to do |format|
       format.js   {render :json => @materiaux.to_json}
     end
   end
   
   def liaisons
-    @liaisons = []
-    (1..25).each{ |i|
-      liaison =    Link.new(:name => "Nom liaison " + i.to_s, :comp_generique => "El", :comp_complexe => "Pl Ca")
-      @liaisons << liaison
-    }
+#     @liaisons = []
+#     (1..25).each{ |i|
+#       liaison =    Link.new(:name => "Nom liaison " + i.to_s, :comp_generique => "El", :comp_complexe => "Pl Ca")
+#       @liaisons << liaison
+#     }
     
+    @liaisons = Link.find(:all)
     respond_to do |format|
       format.js   {render :json => @liaisons.to_json}
     end
@@ -83,9 +78,9 @@ class CalculController < ApplicationController
   end
   
   def create
-    num_model = 1
+    id_model = params[:id_model]
     jsonobject = JSON.parse(params[:file])
-    File.open("#{RAILS_ROOT}/public/test/test_post_calcul_#{num_model}", 'w+') do |f|
+    File.open("#{RAILS_ROOT}/public/test/test_post_calcul_#{id_model}", 'w+') do |f|
         f.write(JSON.pretty_generate(jsonobject))
     end
     render :json => { :result => 'success' }.to_json

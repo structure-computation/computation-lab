@@ -1,7 +1,105 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-# one:
-#   column: value
-#
-# two:
-#   column: value
+one:
+  name : 'metal 1'
+  familly : 'métaux'
+  project_id : -1
+  reference : -1
+  id_select : -1
+  name_select : ''
+  description : 'description'
+  mtype : 'isotrope'
+  comp : 'el'
+  type_num : 0
+  dir_1_x : 1
+  dir_2_x : 0
+  dir_3_x : 0
+  dir_1_y : 0
+  dir_2_y : 1
+  dir_3_y : 0
+  dir_1_z : 0
+  dir_2_z : 0
+  dir_3_z : 1
+  E_1 : 200e9
+  E_2 : 200e9
+  E_3 : 200e9
+  cis_1 : 0
+  cis_2 : 0
+  cis_3 : 0
+  mu_12 : 0.3
+  mu_23 : 0.3
+  mu_31 : 0.3
+  alpha_1 : 0
+  alpha_2 : 0
+  alpha_3 : 0
+  rho : 2e3
+  sigma_p_1 : 200e6
+  sigma_p_2 : 200e6
+  sigma_p_3 : 200e6
+  sigma_r_1 : 300e6
+  sigma_r_2 : 300e6
+  sigma_r_3 : 300e6
+  sigma_e_1 : 200e6
+  sigma_e_2 : 200e6
+  sigma_e_3 : 200e6
+  dp_1 : 200e6
+  dp_2 : 200e6
+  dp_3 : 200e6
+  p_1 : 200e6
+  p_2 : 200e6
+  p_3 : 200e6
+  ed_1 : 200e6
+  ed_2 : 200e6
+  ed_3 : 200e6
+  
+two:
+  name : 'metal 2'
+  familly : 'métaux'
+  project_id : -1
+  reference : -1
+  id_select : -1
+  name_select : ''
+  description : 'description'
+  mtype : 'orthotrope'
+  comp : 'el pl en'
+  type_num : 0
+  dir_1_x : 1
+  dir_2_x : 0
+  dir_3_x : 0
+  dir_1_y : 0
+  dir_2_y : 1
+  dir_3_y : 0
+  dir_1_z : 0
+  dir_2_z : 0
+  dir_3_z : 1
+  E_1 : 200e9
+  E_2 : 200e9
+  E_3 : 200e9
+  cis_1 : 0
+  cis_2 : 0
+  cis_3 : 0
+  mu_12 : 0.3
+  mu_23 : 0.3
+  mu_31 : 0.3
+  alpha_1 : 0
+  alpha_2 : 0
+  alpha_3 : 0
+  rho : 2e3
+  sigma_p_1 : 200e6
+  sigma_p_2 : 200e6
+  sigma_p_3 : 200e6
+  sigma_r_1 : 300e6
+  sigma_r_2 : 300e6
+  sigma_r_3 : 300e6
+  sigma_e_1 : 200e6
+  sigma_e_2 : 200e6
+  sigma_e_3 : 200e6
+  dp_1 : 200e6
+  dp_2 : 200e6
+  dp_3 : 200e6
+  p_1 : 200e6
+  p_2 : 200e6
+  p_3 : 200e6
+  ed_1 : 200e6
+  ed_2 : 200e6
+  ed_3 : 200e6

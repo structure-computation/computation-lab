@@ -5,10 +5,10 @@
 .largeBoxResumeCompte
 {
   background: transparent url('../images/manage_compte_bg.png') repeat-x left top;
-  width: 726px;
-  height: 83px;
-  margin: 15px 0px 0 7px;
-  //border: thin solid #696969;
+  width: 700px;
+  height: 60px;
+  margin: 15px 0px 0 9px;
+  border: thin solid #696969;
   float: left;
 }
 .largeBoxContentCompte
@@ -49,7 +49,7 @@
 {
   background: transparent url('../images/manage_fleche_compte_cote.png') no-repeat center center;
   width: 70px;
-  height: 83px;
+  height: 100%;
   margin: 0px 0px 0 0px;
   border-right: thin solid #696969;
   float: left;
@@ -58,7 +58,7 @@
 {
   background: transparent url('../images/manage_fleche_compte_bas.png') no-repeat center center;
   width: 70px;
-  height: 83px;
+  height: 100%;
   margin: 0px 0px 0 0px;
   border-right: thin solid #696969;
   float: left;
@@ -66,8 +66,8 @@
 .ResumeCompte2
 {
   background: transparent;
-  width: 120px;
-  height: 83px;
+  width: 150px;
+  height: 100%;
   margin: 0px 0px 0 0px;
   border-right: thin solid #696969;
   float: left;
@@ -76,7 +76,7 @@
 {
   background: transparent;
   width: 342px;
-  height: 83px;
+  height: 100%;
   margin: 0px 0px 0 0px;
   border-right: thin solid #696969;
   float: left;
@@ -85,7 +85,7 @@
 {
   background: transparent;
   width: 120px;
-  height: 83px;
+  height: 100%;
   margin: 0px 0px 0 0px;
   border-right: thin solid #696969;
   float: left;
@@ -94,7 +94,7 @@
 {
   background: transparent url('../images/manage_pause_compte.png') no-repeat center center;
   width: 70px;
-  height: 83px;
+  height: 100%;
   margin: 0px 0px 0 0px;
   border: none;
   float: left;
@@ -103,7 +103,7 @@
 {
   background: transparent;
   width: 190px;
-  height: 83px;
+  height: 100%;
   margin: 0px 0px 0 0px;
   border: none;
   float: left;
@@ -139,19 +139,21 @@
 .ResumeCompteText1
 {
   height:20px; 
-  margin:5px 0px 0 15px; 
+  width: 100%;
+  margin:0px 0px 0 10px; 
   line-height: 20px;
   font-weight: 100;
   font-size: 0.85em;
   color: black;
-  text-align:center;
+  text-align:left;
   //border: thin solid #2a3557;
   float:left;
 }
 .ResumeCompteText2
 {
-  height:20px; 
-  margin:5px 0px 0 15px; 
+  height:20px;
+  width: 100%;
+  margin:0px 0px 0 0px; 
   line-height: 20px;
   font-weight: 100;
   font-size: 0.75em;
@@ -240,6 +242,7 @@
   width: 720px;
   //height: 300px;
   margin: 0px 0px 5px 2px;
+  padding: 0px 0px 10px 0px;
   border: thin solid #2a3556;
   float: left;
 }
@@ -257,7 +260,7 @@
 {
   background-color: #2a3556;
   width: 100%;
-  padding-top:10px;
+  padding: 10px 0px 10px 0px;
   float: left;
 }
 .CompteContentFilter1
@@ -267,7 +270,7 @@
   margin: 0px 0px 0px 5px;
   font-weight: normal;
   font-size: 0.65em;
-  color: #f0f0f0;
+  color: #ffd100;
   text-align:right;
   float: left;
 }
@@ -280,13 +283,13 @@
 .CompteContentFilter2
 {
   //width: 270px;
-  height: 31px;
-  margin: 0px 0px 0px 5px;
+  //height: 31px;
+  margin: 0px 0px 0px 10px;
   line-height: 20px;
   font-weight: normal;
   font-size: 0.65em;
-  color: #f0f0f0;
-  text-align:right;
+  color: #ffd100;
+  text-align:left;
   float: left;
 }
 .CompteContentFilter3

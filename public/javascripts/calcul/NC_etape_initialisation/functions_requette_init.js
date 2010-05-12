@@ -88,10 +88,10 @@ function init_Tableau_calcul(Tableau_calcul_temp)
 }
 
 
-function get_Tableau_calcul()
-{	
-	var url_php = "/calcul/calculs";
-    $.getJSON(url_php,init_Tableau_calcul);
+function get_Tableau_calcul(num_model)
+{
+    var url_php = "/calcul/calculs";
+    $.getJSON(url_php,{ id_model: num_model },init_Tableau_calcul);
 }
 
 

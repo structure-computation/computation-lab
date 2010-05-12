@@ -343,7 +343,16 @@ function affich_detail_modele(){
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+// fonctions utiles pour aller sur les pages calcul ou visualisation de SCcompute
+//---------------------------------------------------------------------------------------------------------------------
 
+// lancer un calcul sur le model
+function go_calcul(){
+    var url_php = "/calcul/index?id_model=" + Current_model['id'] ;
+    //alert(Current_model['id']);
+    $(location).attr('href',url_php);
+}
 
 
 

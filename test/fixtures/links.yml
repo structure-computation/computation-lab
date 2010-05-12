@@ -1,7 +1,121 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-# one:
-#   column: value
-#
-# two:
-#   column: value
+one:
+  name : 'soudure parfaite'
+  familly : 'soudure'
+  project_id : -1
+  reference : -1
+  id_select : -1
+  name_select : ''
+  description : 'description'
+  comp_generique : 'Pa'
+  comp_complexe : ''
+  type_num : 0
+  Ep : 0
+  jeux : 0
+  R : 200000
+  f : 0,3
+  Lp : 200000
+  Dp : 0
+  p : 0
+  Lr : 300000
+
+two:
+  name : 'soudure elastique'
+  familly : 'soudure'
+  project_id : -1
+  reference : -1
+  id_select : -1
+  name_select : ''
+  description : 'description'
+  comp_generique : 'El'
+  comp_complexe : ''
+  type_num : 1
+  Ep : 0
+  jeux : 0
+  R : 200000
+  f : 0,3
+  Lp : 200000
+  Dp : 0
+  p : 0
+  Lr : 300000
+  
+three:
+  name : 'contact 0,3'
+  familly : 'contact'
+  project_id : -1
+  reference : -1
+  id_select : -1
+  name_select : ''
+  description : 'description'
+  comp_generique : 'Co'
+  comp_complexe : ''
+  type_num : 2
+  Ep : 0
+  jeux : 0
+  R : 200000
+  f : 0.3
+  Lp : 200000
+  Dp : 0
+  p : 0
+  Lr : 300000
+  
+four:
+  name : 'soudure parfaite cassable'
+  familly : 'soudure'
+  project_id : -1
+  reference : -1
+  id_select : -1
+  name_select : ''
+  description : 'description'
+  comp_generique : 'Pa'
+  comp_complexe : 'Ca'
+  type_num : 0
+  Ep : 0
+  jeux : 0
+  R : 200000
+  f : 0,3
+  Lp : 200000
+  Dp : 0
+  p : 0
+  Lr : 300000
+  
+five:
+  name : 'soudure elastique cassable'
+  familly : 'soudure'
+  project_id : -1
+  reference : -1
+  id_select : -1
+  name_select : ''
+  description : 'description'
+  comp_generique : 'El'
+  comp_complexe : 'Ca'
+  type_num : 0
+  Ep : 0
+  jeux : 0
+  R : 200000
+  f : 0,3
+  Lp : 200000
+  Dp : 0
+  p : 0
+  Lr : 300000
+  
+six:
+  name : 'plastique cassable'
+  familly : 'soudure'
+  project_id : -1
+  reference : -1
+  id_select : -1
+  name_select : ''
+  description : 'description'
+  comp_generique : 'Pa'
+  comp_complexe : 'Pl Ca'
+  type_num : 0
+  Ep : 0
+  jeux : 0
+  R : 200000
+  f : 0,3
+  Lp : 200000
+  Dp : 0
+  p : 0
+  Lr : 300000
