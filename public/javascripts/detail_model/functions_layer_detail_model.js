@@ -114,10 +114,25 @@ function affich_Description(){
 }
 
 
+//-------------------------------------------------------------------------------------------------
+// fonctions utiles pour l'onglet outil
+//-------------------------------------------------------------------------------------------------
+// telecharger le nom et la description du model
+function send_model_mesh()
+{
+    // pour l'envoie du tableau model_new
+    var queryString = $('#sc_model_form').formSerialize();
+    $('#sc_model_form').ajaxSubmit(function(json) {
+	var url_php = "/detail_model/index?id_model=" + Current_model['id'] ;
+	$(location).attr('href',url_php);   
+    });
+}
 
-
-
-
+function refresh_page()
+{
+    var url_php = "/detail_model/index?id_model=" + Current_model['id'] ;
+    $(location).attr('href',url_php);   
+}
 
 
 //-------------------------------------------------------------------------------------------------

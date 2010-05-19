@@ -102,7 +102,7 @@
 .ResumeCompte6
 {
   background: transparent;
-  width: 190px;
+  width: 400px;
   height: 100%;
   margin: 0px 0px 0 0px;
   border: none;
@@ -174,7 +174,19 @@
   text-align:center;
   float:right;
 }
-
+.ResumeCompteBouton1
+{
+  background: transparent url('../images/NC_bouton_jaune_suppr.png') no-repeat top left;
+  height:20px;
+  width: 90px;
+  margin: 0px 25px 0px 0px; 
+  line-height: 20px;
+  font-weight: 100;
+  font-size: 0.65em;
+  color: #2a3556;
+  text-align:center;
+  float:right;
+}
 
 
 /*
@@ -319,8 +331,9 @@
   height: 31px;
   margin: 0px 0px 0px 5px;
   text-align:center;
-  font-size: 0.75em;
+  //font-size: 0.75em;
   line-height:23px;
+  color: #2a3556;
   float: left;
 }
 .CompteContentFilterBoutonJaune img

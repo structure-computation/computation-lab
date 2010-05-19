@@ -22,33 +22,10 @@ class ModeleController < ApplicationController
     render :text => { :result => 'success' }
   end
 
-  def send_info
-    num_model = 1
-    file = params[:fichier]
-    
-    # création des elements a envoyer au calculateur
-    identite_calcul = { :id_societe       => 1,       :id_user    => 1,         :id_projet  => 1, 
-                        :id_model         => 1,       :id_calcul  => 1,         :dimension  => params[:dimension]};
-    priorite_calcul = { :priorite         => 0 };                               
-    mesh            = { :mesh_directory   => "MESH",  :mesh_name  => "mesh",    :extension  => ".bdf"};
-                                                                                
-    model_id        = { :identite_calcul  => identite_calcul,                   :priorite_calcul => priorite_calcul, :mesh => mesh}; 
-    
-    send_data       = { :model_id         => model_id,:fichier    => file.read, :mode       => "create"};
-    
-    # socket d'envoie au serveur
-    socket    = Socket.new( AF_INET, SOCK_STREAM, 0 )
-    sockaddr  = Socket.pack_sockaddr_in( 12346, 'localhost' )
-    socket.connect( sockaddr )
-    socket.write( send_data.to_json )
-    #socket.write( file.read )
-    
-    # reponse du calculateur
-    results = socket.read
-    
-    # envoie de la reponse au client
-    result1 = params[:name]
-    render :text => result1 
+  def new
+    model = @current_user.sc_models.create(:name => params[:name], :dimension => params[:dimension], :description => params[:description], :company => @current_user.company, :state => 'void')
+    #model.save
+    render :text => { :result => 'success' }
   end
   
 end

@@ -301,6 +301,12 @@ function NM_previous_stape(){
     }
 }
 
+// fin du wizard nouveau modele
+function NM_fin_wizard(){
+    displayNewModel('off');
+    get_Tableau_model();
+}
+
 
 // afficher une page et cacher les autres
 function affiche_NM_page(){
@@ -435,30 +441,11 @@ function UploadAsyncrone() {
 // telecharger le nom et la description du model
 function send_new_model_info()
 {
-    // pour l'upload du fichier, on récupère son nom
-//     var files = $("#fichier").attr("files")[0];
-//     var filesName = files.fileName;
-//     var filesSize = files.fileSize;
-//     alert("Uploading: "+filesName+" @ "+filesSize+"bytes");
-
     $("#new_model_pic_wait").ajaxStart(function(){
       $(this).show();
       $("#new_model_pic_ok").hide();
     });
     
-//     var fileName = $("#fichier").val();
-//     $.ajax({
-// 	//url: "/cgi-bin/calculserver.cgi",
-// 	url: "/modele/send_info",
-// 	type: 'POST',
-// 	enctype: 'multipart/form-data',
-//         data: {file: fileName},
-// 	success: function(json) {
-// 	    alert(json);
-// 	    $("#new_model_pic_wait").hide();
-// 	    $("#new_model_pic_ok").show();
-// 	}
-//     });
     // pour l'envoie du tableau model_new
     var param1 = array2object(Tableau_new_model_info);
     var Tableau_new_model_info_post         =  new Object(); 

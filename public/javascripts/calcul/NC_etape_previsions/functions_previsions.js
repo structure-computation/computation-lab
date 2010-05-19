@@ -32,9 +32,9 @@ function complete_calcul(){
 		table_param = ["id","origine","identificateur","name","id_material"];
 		for(j in table_param){
 			if(table_param[j]=="id_material"){
-				groups_elem[i]["id_material"]=Tableau_pieces[i]["assigned"]
+				groups_elem[i]["id_material"]=Tableau_pieces[i]["assigned"];
 			}else{
-				groups_elem[i][table_param[j]]=Tableau_pieces[i][table_param[j]]
+				groups_elem[i][table_param[j]]=Tableau_pieces[i][table_param[j]];
 			}
 		}
 	}
@@ -47,9 +47,9 @@ function complete_calcul(){
 		table_param = ["id","origine","identificateur","name","type","adj_num_group","id_link"];
 		for(j in table_param){
 			if(table_param[j]=="id_link"){
-				groups_inter[i]["id_link"]=Tableau_interfaces[i]["assigned"]
+				groups_inter[i]["id_link"]=Tableau_interfaces[i]["assigned"];
 			}else{
-				groups_inter[i][table_param[j]]=Tableau_interfaces[i][table_param[j]]
+				groups_inter[i][table_param[j]]=Tableau_interfaces[i][table_param[j]];
 			}
 		}
 	}
@@ -62,18 +62,94 @@ function complete_calcul(){
 		table_param = ["id","origine","name","type","geometry","point_1","point_2","id_CL"];
 		for(j in table_param){
 			if(table_param[j]=="id_CL"){
-				groups_edge[i]["id_CL"]=Tableau_bords[i]["assigned"]
+				groups_edge[i]["id_CL"]=Tableau_bords[i]["assigned"];
 			}else if(table_param[j]=="point_1"){
-				groups_edge[i]["point_1"] = Tableau_bords[i]["point_1_x"] + ' ' + Tableau_bords[i]["point_1_y"]
+				groups_edge[i]["point_1"] = Tableau_bords[i]["point_1_x"] + ' ' + Tableau_bords[i]["point_1_y"];
 			}else if(table_param[j]=="point_2"){
-				groups_edge[i]["point_2"] = Tableau_bords[i]["point_2_x"] + ' ' + Tableau_bords[i]["point_2_y"]
+				groups_edge[i]["point_2"] = Tableau_bords[i]["point_2_x"] + ' ' + Tableau_bords[i]["point_2_y"];
 			}else{
-				groups_edge[i][table_param[j]]=Tableau_bords[i][table_param[j]]
+				groups_edge[i][table_param[j]]=Tableau_bords[i][table_param[j]];
 			}
 		}
 	}
 	//alert(array2json(groups_edge));
 
+
+	// Tableau materials
+	var materials = new Array();
+	for(i in Tableau_mat_select){
+		materials[i] = new Array();
+		table_param = ["id","name","type","resolution","groups_elem","elastic_modulus","poisson_ratio","alpha","rho"];
+		for(j in table_param){
+			if(table_param[j]=="resolution"){
+				materials[i]["resolution"]="CP"
+			}else if(table_param[j]=="type"){
+				materials[i]["type"] = Tableau_mat_select[i]["mtype"] ;
+			}else if(table_param[j]=="elastic_modulus"){
+				materials[i]["elastic_modulus"] = Tableau_mat_select[i]["E_1"] ;
+			}else if(table_param[j]=="poisson_ratio"){
+				materials[i]["poisson_ratio"] = Tableau_mat_select[i]["mu_12"] ;
+			}else if(table_param[j]=="alpha"){
+				materials[i]["alpha"] = Tableau_mat_select[i]["alpha_1"] ;
+			}else if(table_param[j]=="groups_elem"){
+				materials[i]["groups_elem"] = '';
+				for(k in Tableau_mat_select[i]["pieces"]){
+					materials[i]["groups_elem"] = materials[i]["groups_elem"] + Tableau_mat_select[i]["pieces"][k]['id'] + ' ';
+				}
+			}else if(table_param[j]=="id"){
+				materials[i]["id"] = Tableau_mat_select[i]["id_select"] ;
+			}else{
+				materials[i][table_param[j]]=Tableau_mat_select[i][table_param[j]]
+			}
+		}
+	}
+	//alert(array2json(materials));
+
+
+	// Tableau proprietes_interfaces
+	var proprietes_interfaces = new Array();
+	for(i in Tableau_liaison_select){
+		proprietes_interfaces[i] = new Array();
+		table_param = ["id","name","type","coef_frottement"];
+		for(j in table_param){
+			if(table_param[j]=="type"){
+				if(Tableau_liaison_select[i]["comp_generique"] == 'Pa'){
+					proprietes_interfaces[i]["type"] = 'parfait';
+				}else if(Tableau_liaison_select[i]["comp_generique"] == 'Co'){
+					proprietes_interfaces[i]["type"] = 'contact';
+				}
+			}else if(table_param[j]=="id"){
+				proprietes_interfaces[i]["id"] = Tableau_liaison_select[i]["id_select"] ;
+			}else if(table_param[j]=="coef_frottement"){
+				proprietes_interfaces[i]["coef_frottement"] = Tableau_liaison_select[i]["f"] ;
+			}else{
+				proprietes_interfaces[i][table_param[j]]=Tableau_liaison_select[i][table_param[j]];
+			}
+		}
+	}
+	//alert(array2json(proprietes_interfaces));
+	
+	// Tableau CL
+	var CL = new Array();
+	for(i in Tableau_CL_select){
+		CL[i] = new Array();
+		table_param = ["id","name","type","fcts_spatiales","fcts_temporelles"];
+		for(j in table_param){
+			if(table_param[j]=="type"){
+				CL[i]["type"] = Tableau_CL_select[i]["bctype"] ;
+			}else if(table_param[j]=="id"){
+				CL[i]["id"] = Tableau_CL_select[i]["id_select"] ;
+			}else if(table_param[j]=="fcts_spatiales"){
+				CL[i]["fcts_spatiales"] = Tableau_CL_select[i]["step"][0]['Fx'] + ';' + Tableau_CL_select[i]["step"][0]['Fy'] ;
+			}else if(table_param[j]=="fcts_temporelles"){
+				CL[i]["fcts_temporelles"] = Tableau_CL_select[i]["step"][0]['ft'] + ';' + Tableau_CL_select[i]["step"][0]['ft'] ;
+			}else{
+				CL[i][table_param[j]]=Tableau_CL_select[i][table_param[j]];
+			}
+		}
+	}
+	//alert(array2json(CL));
+	
 	Tableau_calcul_complet = new Array();
 	// id du model
 	Tableau_calcul_complet['mesh'] = Tableau_id_model;
@@ -82,9 +158,9 @@ function complete_calcul(){
 	Tableau_calcul_complet['groups_inter'] = groups_inter;
 	Tableau_calcul_complet['groups_edge'] = groups_edge;
 	// caractéristique matériaux, liaisons et CLs
-	//Tableau_calcul_complet['materials'] = Tableau_mat_select;
-	//Tableau_calcul_complet['link'] = Tableau_liaison_select;
-	//Tableau_calcul_complet['CL'] = Tableau_CL_select;
+	Tableau_calcul_complet['materials'] = materials;
+	Tableau_calcul_complet['proprietes_interfaces'] = proprietes_interfaces;
+	Tableau_calcul_complet['CL'] = CL;
 	//Tableau_calcul_complet['CL_volume'] = Tableau_CL_select_volume;
 	// options du calcul
 	//Tableau_calcul_complet['options'] = Tableau_option_select;
