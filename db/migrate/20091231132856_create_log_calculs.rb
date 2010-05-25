@@ -3,6 +3,7 @@ class CreateLogCalculs < ActiveRecord::Migration
     create_table :log_calculs do |t|
       t.integer :sc_model_id
       t.integer :user_id
+      t.integer :company_id
       t.integer :calcul_result_id
       t.integer :calcul_account_id
       t.integer :forfait_id

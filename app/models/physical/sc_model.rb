@@ -3,6 +3,8 @@ class ScModel < ActiveRecord::Base
   belongs_to  :company
   belongs_to  :project
   
+  has_one     :log_calcul
+  
   has_many    :forum_sc_models
   has_many    :calcul_results
   has_many    :user_sc_models  

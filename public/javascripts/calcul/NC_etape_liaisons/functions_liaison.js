@@ -4,6 +4,7 @@
 
 // affichage de la page liaisons
 function affiche_NC_page_liaisons(){
+     if(NC_current_step >= 3){
 	NC_current_page = 'page_liaisons';
 	affiche_NC_page('on','on');
 	if(NC_current_scroll=='right'){
@@ -16,6 +17,9 @@ function affiche_NC_page_liaisons(){
 	//NC_scroll(NC_current_scroll);
 	//setTimeout("NC_scroll(NC_current_scroll);",1000)
 	//NC_scroll(NC_current_scroll);
+    }else{
+	alert('vous devez valider les étapes précédentes pour accéder à cette page');
+    }
 }
 
 // rafraichiassement de la page liaisons

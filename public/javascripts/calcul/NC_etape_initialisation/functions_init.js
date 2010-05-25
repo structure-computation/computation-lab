@@ -172,11 +172,12 @@ function pair(nombre)
 
 // affichage de la partie haute de la boite active init
 function affiche_Tableau_init_select(){
-	
+	//alert(array2json(Tableau_init_select));
 	for(key in Tableau_init_select){
+		
 		var strContent_init_key = 'init_' + key ;
 		var id_init_key = document.getElementById(strContent_init_key);
-		if(key == 'ref'){
+		if(key == 'id'){
 			if(id_init_key != null){
 				remplacerTexte(id_init_key, Tableau_init_select[key]);
 			}

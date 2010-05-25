@@ -1,5 +1,7 @@
 class CalculController < ApplicationController
   require 'json'
+  require 'socket'
+  include Socket::Constants
   before_filter :login_required
   
   def index
@@ -8,15 +10,11 @@ class CalculController < ApplicationController
     respond_to do |format|
       format.html {render :layout => false }
     end 
-    # respond_to do |format|
-    #   format.html { render :action => "vue_a_afficher", :layout => false }
-    #   format.xml  { render :xml => @objet_a_renvoyer   }
-    # end   
   end
   
   def info_model
     id_model = params[:id_model]  
-    fic =File.open("/home/jeremie/code/test/model_#{id_model}/mesh.txt",'r')
+    fic =File.open("/home/scproduction/MODEL/model_#{id_model}/mesh.txt",'r')
     
     respond_to do |format|
       format.js   {render :json => JSON.parse(fic.read).to_json}
@@ -33,11 +31,6 @@ class CalculController < ApplicationController
   end
   
   def materiaux
-#     @materiaux = []
-#     (1..25).each{ |i|
-#       mat =    Material.new(:name => "Nom calcul " + i.to_s,   :mtype =>  'isotrope',  :comp => 'el pl')                                                 
-#       @materiaux << mat
-#     }
     @materiaux = Material.find(:all)
     respond_to do |format|
       format.js   {render :json => @materiaux.to_json}
@@ -45,12 +38,6 @@ class CalculController < ApplicationController
   end
   
   def liaisons
-#     @liaisons = []
-#     (1..25).each{ |i|
-#       liaison =    Link.new(:name => "Nom liaison " + i.to_s, :comp_generique => "El", :comp_complexe => "Pl Ca")
-#       @liaisons << liaison
-#     }
-    
     @liaisons = Link.find(:all)
     respond_to do |format|
       format.js   {render :json => @liaisons.to_json}
@@ -77,6 +64,18 @@ class CalculController < ApplicationController
     end
   end
   
+  def new
+    @id_model = params[:id_model]
+    @current_model = @current_user.sc_models.find(@id_model)
+    @current_calcul = @current_model.calcul_results.create(:name => params[:name], :description => params[:description], :state => 'temp')
+    @current_calcul.user = @current_user
+    @current_calcul.save
+    
+    respond_to do |format|
+      format.js   {render :json => @current_calcul.to_json}
+    end
+  end
+  
   def create
     id_model = params[:id_model]
     jsonobject = JSON.parse(params[:file])
@@ -86,4 +85,50 @@ class CalculController < ApplicationController
     render :json => { :result => 'success' }.to_json
   end
 
+  def send_calcul
+    @id_model = params[:id_model]
+    @id_calcul = params[:id_calcul]
+    current_model = @current_user.sc_models.find(@id_model)
+    current_calcul = current_model.calcul_results.find(@id_calcul)
+    #file = params[:file]
+    jsonobject = JSON.parse(params[:file])
+    file = JSON.pretty_generate(jsonobject)
+    # création des elements a envoyer au calculateur
+    send_data  = { :id_model => @id_model, :id_calcul => @id_calcul, :dimension => current_model.dimension ,:fichier => file, :mode => "compute"};
+    
+    # socket d'envoie au serveur
+    socket    = Socket.new( AF_INET, SOCK_STREAM, 0 )
+    sockaddr  = Socket.pack_sockaddr_in( 12346, 'localhost' )
+    socket.connect( sockaddr )
+    socket.write( send_data.to_json )
+    #socket.write( file.read )
+    
+    # reponse du calculateur
+    results = socket.read
+    current_calcul.state = 'in_process'
+    current_calcul.save
+    
+    # envoie de la reponse au client
+    #render :text => results
+  end
+  
+  def calcul_valid
+    @id_model = params[:id_model]
+    @id_calcul = params[:id_calcul]
+    @time = params[:time]
+    current_model = ScModel.find(@id_model)
+    current_calcul = current_model.calcul_results.find(@id_calcul)
+    
+    current_calcul.state = 'finish'
+    
+    current_calcul.build_log_calcul(:calcul_time => @time, :log_type => 'compute')
+    current_calcul.log_calcul.user = current_calcul.user
+    current_calcul.log_calcul.company = current_model.company
+    
+    current_calcul.save
+    current_calcul.log_calcul.save
+    
+    #render :text => { :result => 'success' }
+  end
+  
 end

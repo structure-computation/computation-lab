@@ -4,6 +4,7 @@
 
 // affichage de la page matériaux
 function affiche_NC_page_options(){
+     if(NC_current_step >= 5){
 	affich_prop_visu('visu');
 	NC_current_page = 'page_options';
 	affiche_NC_page('off','off');
@@ -14,6 +15,9 @@ function affiche_NC_page_options(){
 	document.getElementById('NC_footer_top_init').className = 'off';
 	document.getElementById('NC_footer_top_suiv').className = 'on';
 	document.getElementById('NC_footer_top_valid').className = 'off';
+    }else{
+	alert('vous devez valider les étapes précédentes pour accéder à cette page');
+    }
 }
 
 // affichage des boites d'option

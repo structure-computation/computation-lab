@@ -8,7 +8,7 @@ class Project < ActiveRecord::Base
               
   has_many    :sc_models
   has_many    :tasks
-  has_many    :log_calculs
+  #has_many    :log_calculs
   
   # has_many :forums
 end

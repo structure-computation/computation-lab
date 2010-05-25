@@ -64,7 +64,7 @@ class DetailModelController < ApplicationController
     
     # reponse du calculateur
     results = socket.read
-    current_model.state = 'in_charge'
+    current_model.state = 'in_process'
     current_model.save
     
     # envoie de la reponse au client
@@ -73,17 +73,21 @@ class DetailModelController < ApplicationController
   
   def mesh_valid
     @id_model = params[:id_model]
+    @time = params[:time]
     current_model = ScModel.find(@id_model)
     jsonobject = JSON.parse(params[:json])
-    File.open("#{RAILS_ROOT}/public/test/test_post_create_#{@id_model}", 'w+') do |f|
-      for key in jsonobject[0] do
-        f.write(jsonobject[0]['mesh']['nb_groups_elem'])
-      end
-    end
+
     current_model.parts = jsonobject[0]['mesh']['nb_groups_elem']
     current_model.interfaces = jsonobject[0]['mesh']['nb_groups_inter']
     current_model.state = 'active'
+    
+    current_model.build_log_calcul(:calcul_time => @time, :log_type => 'create')
+    current_model.log_calcul.user = current_model.users.find(:first)
+    current_model.log_calcul.company = current_model.company
+    
     current_model.save
+    current_model.log_calcul.save
+    
     render :text => { :result => 'success' }
   end
   

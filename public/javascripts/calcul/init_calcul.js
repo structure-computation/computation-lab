@@ -3,9 +3,10 @@
 // initialisation de l'ensemble des variable utile pour la mise en page (affichage) 
 // -------------------------------------------------------------------------------------------------------------------------------------------
 // pour le début ------------
+var model_id = '' ; 					// identite du modele courant
 var NC_current_scroll = 'left';				// état de la scrollbar horizontale
 var NC_current_page = 'page_initialisation';		// page courante
-var NC_current_step = 6;				// étape courante
+var NC_current_step = 1;				// étape courante
 var selected_for_info = new Array(); 			// élément selectionné pour affichage dans la boite prop
 var NC_current_prop_visu = 'visu';			// visu ou prop selon la boite que l'on affiche
 var current_box_prop_state = 'off';			// display ou non de la boite propriété

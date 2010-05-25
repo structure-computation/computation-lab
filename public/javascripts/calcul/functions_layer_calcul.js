@@ -109,18 +109,34 @@ function displayBlack(interupteur) {
 
 function next_stape(){
 	if(NC_current_page == 'page_options'){
+		if (NC_current_step < 6){
+			 NC_current_step = 6;
+		}
 		affiche_NC_page_previsions();
 	}
 	else if(NC_current_page == 'page_CLs'){
+		if (NC_current_step < 5){
+			 NC_current_step = 5;
+		}
 		affiche_NC_page_options();
 	}
 	else if(NC_current_page == 'page_liaisons'){
+		if (NC_current_step < 4){
+			 NC_current_step = 4;
+		}
 		affiche_NC_page_CLs();
 	}
 	else if(NC_current_page == 'page_materiaux'){
+		if (NC_current_step < 3){
+			 NC_current_step = 3;
+		}
 		affiche_NC_page_liaisons();
 	}
 	else if(NC_current_page == 'page_initialisation'){
+		if (NC_current_step < 2){
+			 NC_current_step = 2;
+			 get_new_calculresult(model_id);
+		}
 		affiche_NC_page_materiaux();
 	}
 }

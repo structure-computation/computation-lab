@@ -4,6 +4,7 @@
 
 // affichage de la page matériaux
 function affiche_NC_page_previsions(){
+     if(NC_current_step >= 6){
 	affich_prop_visu('visu');
 	NC_current_page = 'page_previsions';
 	affiche_NC_page('off','off');
@@ -13,6 +14,9 @@ function affiche_NC_page_previsions(){
 	document.getElementById('NC_footer_top_init').className = 'off';
 	document.getElementById('NC_footer_top_suiv').className = 'off';
 	document.getElementById('NC_footer_top_valid').className = 'on';
+    }else{
+	alert('vous devez valider les étapes précédentes pour accéder à cette page');
+    }
 }
 
 
@@ -29,7 +33,7 @@ function complete_calcul(){
 	var groups_elem = new Array();
 	for(i in Tableau_pieces){
 		groups_elem[i] = new Array();
-		table_param = ["id","origine","identificateur","name","id_material"];
+		table_param = ["id","origine","identificateur","name","id_material","assigned","group"];
 		for(j in table_param){
 			if(table_param[j]=="id_material"){
 				groups_elem[i]["id_material"]=Tableau_pieces[i]["assigned"];
@@ -44,7 +48,7 @@ function complete_calcul(){
 	var groups_inter = new Array();
 	for(i in Tableau_interfaces){
 		groups_inter[i] = new Array();
-		table_param = ["id","origine","identificateur","name","type","adj_num_group","id_link"];
+		table_param = ["id","origine","identificateur","name","type","adj_num_group","id_link","assigned","group"];
 		for(j in table_param){
 			if(table_param[j]=="id_link"){
 				groups_inter[i]["id_link"]=Tableau_interfaces[i]["assigned"];
@@ -59,7 +63,7 @@ function complete_calcul(){
 	var groups_edge = new Array();
 	for(i in Tableau_bords){
 		groups_edge[i] = new Array();
-		table_param = ["id","origine","name","type","geometry","point_1","point_2","id_CL"];
+		table_param = ["id","origine","name","type","geometry","point_1","point_2","id_CL","assigned","group"];
 		for(j in table_param){
 			if(table_param[j]=="id_CL"){
 				groups_edge[i]["id_CL"]=Tableau_bords[i]["assigned"];
@@ -172,15 +176,14 @@ function complete_calcul(){
 	var send_calcul = new Object();
 	send_calcul['file']=fichier_calcul;
 	send_calcul['id_model']=model_id;
+	send_calcul['id_calcul']=Tableau_init_select['id'];
 	
 	$.ajax({
-	    url: "/calcul/create",
+	    url: "/calcul/send_calcul",
 	    type: 'POST',
 	    data: send_calcul,
 	    success: function(json) {
 		alert(json);
-// 		$("#new_model_pic_wait").hide();
-// 		$("#new_model_pic_ok").show();
 	    }
 	});
 }
