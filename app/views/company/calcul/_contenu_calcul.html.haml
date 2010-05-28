@@ -4,16 +4,16 @@
   .CompteMenu
     %ul
       %li#CCMUtilisation.selected
-        %a{ :onclick => "affich_utilisation_calcul()", :style => "cursor: pointer;" }
+        %a{ :onclick => "compte_calcul_affich_Utilisation()", :style => "cursor: pointer;" }
           Décompte
       %li#CCMDescription
-        %a{ :onclick => "affich_description_calcul()", :style => "cursor: pointer;" }
+        %a{ :onclick => "compte_calcul_affich_Description()", :style => "cursor: pointer;" }
           Description
 
   .CompteContent
     .CompteContentHeightMin
-    = render :partial => "company/calcul/filtre_decompte_calcul"
-    = render :partial => "company/calcul/decompte_calcul"
+    = render :partial => "company/calcul/cadre_utilisation"
+    = render :partial => "company/calcul/cadre_description"
   
   
   

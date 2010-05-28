@@ -2,7 +2,7 @@ class CalculController < ApplicationController
   require 'json'
   require 'socket'
   include Socket::Constants
-  before_filter :login_required
+  before_filter :login_required , :except => :calcul_valid
   
   def index
     @page = 'SCcompute'
@@ -14,10 +14,10 @@ class CalculController < ApplicationController
   
   def info_model
     id_model = params[:id_model]  
-    fic =File.open("/home/scproduction/MODEL/model_#{id_model}/mesh.txt",'r')
+    fic =File.open("/home/scproduction/MODEL/model_#{id_model}/MESH/mesh.txt",'r')
     
     respond_to do |format|
-      format.js   {render :json => JSON.parse(fic.read).to_json}
+      format.js   {render :json => fic.read}
     end
   end
   
@@ -109,7 +109,7 @@ class CalculController < ApplicationController
     current_calcul.save
     
     # envoie de la reponse au client
-    #render :text => results
+    render :text => results
   end
   
   def calcul_valid

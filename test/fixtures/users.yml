@@ -1,6 +1,6 @@
 
 mbleriot:
-  company_id:       674101581 # tf_avionics
+  company_id:       674101581   #tf_avionics
   firstname:        Michel
   lastname:         Bleriot
   telephone:        +33 5 12 34 56 78
@@ -19,7 +19,7 @@ mbleriot:
   
 #
 jlinder:
-  company_id:       674101581 # tf_avionics
+  company_id:       674101581  #tf_avionics
   firstname:        Jean
   lastname:         linder
   telephone:        +33 5 12 34 56 78
@@ -38,7 +38,7 @@ jlinder:
 
 #
 mleroy:
-  company_id:       674101581 # tf_avionics
+  company_id:       674101581  #tf_avionics
   firstname:        Marc
   lastname:         Leroy
   telephone:        +33 5 12 34 56 78
@@ -57,7 +57,7 @@ mleroy:
 
 #
 fcolac:
-  company_id:       674101581 # tf_avionics
+  company_id:       674101581  #tf_avionics
   firstname:        François
   lastname:         Colac
   telephone:        +33 5 12 34 56 78
@@ -76,7 +76,7 @@ fcolac:
   
 #
 gselec:
-  company_id:       725745063                             #be_civil
+  company_id:       725745063   #be_civil
   firstname:        Gilles
   lastname:         Selec
   telephone:        +33 5 12 34 56 78
@@ -95,7 +95,7 @@ gselec:
 
 #
 htrasset:
-  company_id:       725745063                             #be_civil
+  company_id:       725745063   #be_civil
   firstname:        Herve
   lastname:         Trasset
   telephone:        +33 1 23 45 67 89

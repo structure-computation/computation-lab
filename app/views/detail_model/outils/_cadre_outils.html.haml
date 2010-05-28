@@ -3,6 +3,7 @@
   -if @current_model.state == 'void'
     = render :partial => "detail_model/outils/filtre_charger_model"
   -if @current_model.state == 'in_process'
+    /= render :partial => "detail_model/outils/filtre_charger_model"
     = render :partial => "detail_model/outils/filtre_model_in_charge"
   -if @current_model.state == 'active'
     = render :partial => "detail_model/outils/filtre_outil_list"

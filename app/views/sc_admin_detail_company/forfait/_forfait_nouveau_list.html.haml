@@ -1,0 +1,41 @@
+.newBoxTable
+  .newBoxTable_first
+    .newBoxTable_0{ :style => "width: 29px;" }
+    .newBoxTable_0{ :style => "width: 100px;" }
+      %p
+        Nom
+    .newBoxTable_0{ :style => "width: 100px;" }
+      %p
+        Prix
+    .newBoxTable_0{ :style => "width: 150px;" }
+      %p
+        Jetons
+    .newBoxTable_0{ :style => "width: 150px;" }
+      %p
+        Jetons tempons
+    .newBoxTable_0{ :style => "width: 135px;" }
+      %p
+        prix unitaire
+    
+  - (0...8).each do |i|
+    .newBoxTable_lign{ :id => "new_forfait_lign_#{i}" }
+      .newBoxTable_lign_pair{ :id => "new_forfait_pair_#{i}" }
+        .newBoxTable_1{ :id => "new_forfait_select_#{i}", :style => "width: 29px;" }
+          %input{:id => "new_forfait_check_#{i}", :type => "checkbox", :onclick => "select_new_forfait(#{i})" }  
+        .newBoxTable_2{ :id => "new_forfait_0_#{i}", :style => "width: 100px;" }
+        .newBoxTable_2{ :id => "new_forfait_1_#{i}", :style => "width: 100px;" }
+        .newBoxTable_2{ :id => "new_forfait_2_#{i}", :style => "width: 150px;" }
+        .newBoxTable_2{ :id => "new_forfait_3_#{i}", :style => "width: 150px;" }
+        .newBoxTable_2{ :id => "new_forfait_4_#{i}", :style => "width: 138px;" }
+          
+
+.NM_bleu{ :style => "width: 600px; height: 25px;  margin: 10px 0px 0 63px;" }
+  %a.page_select{ :onclick => "go_page_new_forfait('first')", :style => "cursor: pointer;" }
+    %img{:src=>"/images/page_moins.png", :style=>"vertical-align:middle;"}
+  page
+  - (0...5).each do |i|
+    %a{ :id => "new_forfait_page_#{i}", :onclick => "go_page_new_forfait(#{i})", :style => "cursor: pointer;" }
+      #{i}
+  %a.page_select{ :onclick => "go_page_new_forfait('end')", :style => "cursor: pointer;" }
+    %img{:src=>"/images/page_plus.png", :style=>"vertical-align:middle;"}
+    

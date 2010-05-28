@@ -1,0 +1,57 @@
+#CCCadreDescription.off
+  .margeText1
+  .zoneText1
+    Les forfait de calcul vous permettent d'utiliser à la demande les outils et la puissance de calcul de Structure Computation (maillage de vos modèles, calcul de structures...). Vous pouvez cumuler plusieurs forfait qui s'activerons les un après les autres. 
+  .zoneText1
+    Votre forfait actuel : 
+  .zoneText1
+    %table{ :style => "margin: 0px 0px 0 10px;" }
+      %tr
+        %td.cadre{ :style => "width: 160px;" }
+          Report de jetons
+        %td.cadre{ :style => "width: 160px;" }
+          Jetons standards
+        %td.cadre{ :style => "width: 160px;" }
+          Jetons tampons
+        %td.cadre{ :style => "width: 160px;" }
+          Date d'échéance
+      %tr
+        %td.gras#calcul_account_report_jeton
+          100
+        %td.gras#calcul_account_base_jeton
+          500 
+        %td.gras#calcul_account_base_jeton_tempon
+          100
+        %td.gras#calcul_account_end_date
+          10-12-2010
+   
+  .zoneText1
+    Votre utilisation actuelle :
+  .zoneText1
+    %table{ :style => "margin: 0px 0px 0 10px;" }
+      %tr
+        %td.cadre{ :style => "width: 160px;" }
+          solde de jetons standards
+        %td.cadre{ :style => "width: 160px;" }
+          Jetons utilisé
+        %td.cadre{ :style => "width: 325px;" }
+
+      %tr
+        %td.gras#calcul_account_solde_jeton
+          600 
+        %td.gras#calcul_account_used_jeton
+          100
+        %td
+          .ResumeCompte3GreenBar{ :style => "margin: 0px 0px 0 0px;" }
+            .ResumeCompte3GreenBarDebut
+            .ResumeCompte3GreenBarMilieu#calcul_account_progress_bar
+            .ResumeCompte3GreenBarFin
+
+  .zoneText2
+    .gras
+      Description :  
+    Nos forfaits de jetons de calcul vous permettent une mâitrise complète de vos côut de simulation. Plusieurs forfaits sont à votre disposition : 500, 1000, 2000, 5000 ou 10 000 jetons. Les jetons permettent d'utiliser tous nos logiciels fonctionnant sur les calculateurs GPU : Dépot et maillage de modèles, calcul de structure linéaire et non linéaires... les jeton vous erons décomté en fonction du type de calcul que vous effectuez. Par exemple un calcul de structures de 5 minutes = 20 jetons (jetons décomptés par tranche de 15 secondes), un dépot de modèle avec maillage vaut 5 jetons (montant fixe pour chaque dépots). Vous pouvez retrouver le détail de toute nos prestations dans les conditions générales d'utilisation.    
+    
+  %a{:style => "cursor: pointer;", :onclick => "displayNewForfait('on')" }
+    .largeBoxFilterBoutonJaune
+      Nouveaux forfait

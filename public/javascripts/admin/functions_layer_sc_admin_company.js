@@ -182,6 +182,14 @@ function go_page_company(num){
 // fonctions utiles pour l'affichage du detail d'une company
 //---------------------------------------------------------------------------------------------------------------------
 
+// afficher le détail d'un modele
+function go_detail_company(num){
+    var num_select = content_tableau_connect['company'][num];
+    var id_company = Tableau_company_filter[num_select]['company']['id'];
+    var url_php = "/sc_admin_detail_company/index?id_company=" + id_company ;
+    $(location).attr('href',url_php);
+}
+
 
 // afficher le détail d'une company
 function affich_detail_company(num){

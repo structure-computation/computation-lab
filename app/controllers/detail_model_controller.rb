@@ -51,9 +51,9 @@ class DetailModelController < ApplicationController
     priorite_calcul = { :priorite => 0 };                               
     mesh            = { :mesh_directory => "MESH", :mesh_name  => "mesh", :extension  => ".bdf"};
     
-    model_id        = { :identite_calcul => identite_calcul, :priorite_calcul => priorite_calcul, :mesh => mesh}; 
+    json_model        = { :identite_calcul => identite_calcul, :priorite_calcul => priorite_calcul, :mesh => mesh}; 
     
-    send_data       = { :model_id => model_id,:fichier => file.read, :mode => "create"};
+    send_data       = { :id_user => @current_user.id, :json_model => json_model,:fichier => file.read, :mode => "create"};
     
     # socket d'envoie au serveur
     socket    = Socket.new( AF_INET, SOCK_STREAM, 0 )
@@ -72,21 +72,22 @@ class DetailModelController < ApplicationController
   end
   
   def mesh_valid
+    @id_user = params[:id_user]
     @id_model = params[:id_model]
     @time = params[:time]
-    current_model = ScModel.find(@id_model)
+    @current_user = User.find(@id_user)
+    @current_model = ScModel.find(@id_model)
     jsonobject = JSON.parse(params[:json])
 
-    current_model.parts = jsonobject[0]['mesh']['nb_groups_elem']
-    current_model.interfaces = jsonobject[0]['mesh']['nb_groups_inter']
-    current_model.state = 'active'
+    @current_model.parts = jsonobject[0]['mesh']['nb_groups_elem']
+    @current_model.interfaces = jsonobject[0]['mesh']['nb_groups_inter']
+    @current_model.state = 'active'
     
-    current_model.build_log_calcul(:calcul_time => @time, :log_type => 'create')
-    current_model.log_calcul.user = current_model.users.find(:first)
-    current_model.log_calcul.company = current_model.company
+    @calcul_result = @current_model.calcul_results.build(:calcul_time => @time, :ctype => 'create', :state => 'finish', :gpu_allocated => 1) 
+    @calcul_result.user = @current_user
     
-    current_model.save
-    current_model.log_calcul.save
+    @current_model.save
+    @calcul_result.save
     
     render :text => { :result => 'success' }
   end

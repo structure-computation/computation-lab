@@ -15,22 +15,24 @@ function init_info_model(Tableau_model_temp)
     	for(i=0; i<taille_Tableau; i++) {
 	    for (var key in Tableau_model_temp[i]) {
 		if(key == 'mesh'){
-		    Tableau_id_model = Tableau_model_temp[i][key];
+		    Tableau_id_model = Tableau_model[i][key];
+		    //alert(Tableau_id_model);
 		    //strtemp = $.toJSON(Tableau_pieces);
 		    //alert(strtemp);
 		}
 		else if(key == 'groups_elem'){
-		    Tableau_pieces = Tableau_model_temp[i][key];
+		    Tableau_pieces = Tableau_model[i][key];
+		    //alert($.toJSON(Tableau_pieces));
 		    //strtemp = $.toJSON(Tableau_pieces);
 		    //alert(strtemp);
 		}
 		else if(key == 'groups_inter'){
-		    Tableau_interfaces = Tableau_model_temp[i][key];
+		    Tableau_interfaces = Tableau_model[i][key];
 		    //strtemp = $.toJSON(Tableau_interfaces);
 		    //alert(strtemp);
 		}
 		else if(key == 'groups_bord'){
-		    Tableau_bords = Tableau_model_temp[i][key];
+		    Tableau_bords = Tableau_model[i][key];
 		    //strtemp = $.toJSON(Tableau_interfaces);
 		    //alert(strtemp);
 		}
@@ -125,6 +127,7 @@ function init_new_calculresult(new_calculresult_temp)
     {
         Tableau_init_select['id'] = 'nouveau calcul';
     }
+    alert(Tableau_init_select['id']);
     affiche_Tableau_init_select();
 }
 

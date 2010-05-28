@@ -4,12 +4,13 @@ class CreateSoldeCalculAccounts < ActiveRecord::Migration
       t.integer :calcul_account_id
       t.integer :log_calcul_id
       t.integer :credit_id
-      t.string :solde_type
-      t.float :credit_jeton
-      t.float :credit_jeton_tempon
-      t.float :debit_jeton
-      t.float :solde_jeton
-      t.float :solde_jeton_tempon
+      t.string  :solde_type
+      t.integer :credit_jeton
+      t.integer :credit_jeton_tempon
+      t.integer :debit_jeton
+      t.integer :debit_jeton_tempon
+      t.integer :solde_jeton
+      t.integer :solde_jeton_tempon
       t.timestamps
     end
   end

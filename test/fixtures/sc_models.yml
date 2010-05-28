@@ -2,7 +2,7 @@
 
 one:
     name: avion1
-    company_id: 674101581    # tf_avionics
+    company_id: 674101581   #tf_avionics
     project_id: 
     model_file_path: 
     image_path:
@@ -16,7 +16,7 @@ one:
     
 two:
     name: bateau1
-    company_id: 674101581    # tf_avionics
+    company_id: 674101581   #tf_avionics
     project_id: 
     model_file_path: 
     image_path:
@@ -30,7 +30,7 @@ two:
     
 three:
     name: voiture1
-    company_id: 674101581    # tf_avionics
+    company_id: 674101581   #tf_avionics
     project_id: 
     model_file_path: 
     image_path:
@@ -43,8 +43,8 @@ three:
     state: active
     
 four:
-    name: avion2      # tf_avionics
-    company_id: 674101581
+    name: avion2 
+    company_id: 674101581   #tf_avionics
     project_id: 
     model_file_path: 
     image_path:
@@ -58,7 +58,7 @@ four:
     
 five:
     name: bateau2
-    company_id: 674101581     # tf_avionics
+    company_id: 674101581   #tf_avionics
     project_id: 
     model_file_path: 
     image_path:
@@ -71,8 +71,8 @@ five:
     state: active
     
 six:
-    name: voiture2      # tf_avionics
-    company_id: 674101581
+    name: voiture2  
+    company_id:  674101581   #tf_avionics
     project_id: 
     model_file_path: 
     image_path:

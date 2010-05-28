@@ -1,0 +1,38 @@
+/ contenu
+#ModelContent.largeBoxContentCompte1
+  / menu du compte calcul
+  .CompteMenu
+    %ul
+      %li#MenuCompanyAbonnement.selected
+        %a{ :onclick => "affich_Abonnement()", :style => "cursor: pointer;" }
+          Abonnement
+      %li#MenuCompanyForfait
+        %a{ :onclick => "affich_Forfait()", :style => "cursor: pointer;" }
+          Forfait
+      %li#MenuCompanyGestionnaires
+        %a{ :onclick => "affich_Gestionnaires()", :style => "cursor: pointer;" }
+          Gestionnaires
+      %li#MenuCompanyDescription
+        %a{ :onclick => "affich_Description()", :style => "cursor: pointer;" }
+          Description
+
+  .CompteContent
+    .CompteContentHeightMin
+    = render :partial => "sc_admin_detail_company/abonnement/cadre_abonnement"
+    = render :partial => "sc_admin_detail_company/forfait/cadre_forfait"
+    = render :partial => "sc_admin_detail_company/gestionnaires/cadre_gestionnaires"
+    = render :partial => "sc_admin_detail_company/description/cadre_description"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+/ fin menu compte calcul
+/ fin du contenu

@@ -13,10 +13,15 @@
       Modifier
     .ResumeCompte3GreenBar
       .ResumeCompte3GreenBarDebut
-      .ResumeCompte3GreenBarMilieu{ :style => "width: 1px ;" }
+      .ResumeCompte3GreenBarMilieu#calcul_account_info_progress_bar
       .ResumeCompte3GreenBarFin
     .ResumeCompteText2
       utilisation du forfait : 
+      %span#calcul_account_info_used_jeton
+        100
+      \/
+      %span#calcul_account_info_base_jeton
+        500
   .ResumeCompte4
     .ResumeCompteText1{ :style => "width: 90px;" }
     .ResumeCompteText1{ :style => "width: 90px;" }

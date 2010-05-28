@@ -3,12 +3,13 @@ class ScModel < ActiveRecord::Base
   belongs_to  :company
   belongs_to  :project
   
-  has_one     :log_calcul
-  
-  has_many    :forum_sc_models
-  has_many    :calcul_results
   has_many    :user_sc_models  
   has_many    :users    ,  :through => :user_sc_models
+  
+  has_many    :calcul_results
+  #has_many    :log_calcul ,  :through => :calcul_results
+  
+  has_many    :forum_sc_models
   
   def has_result? 
     return (rand(1) > 0.5)

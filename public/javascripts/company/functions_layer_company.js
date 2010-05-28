@@ -39,28 +39,6 @@ for(i=0; i<content_tableau_page.length ; i++){
 // affichage des contenu a partir de fleches
 //-----------------------------------------------------------------------------------------------------------
 
-var bool_affiche_compte_calcul = false ;
-
-function affich_contenu_compte_calcul(){
-	if(!bool_affiche_compte_calcul){
-		get_Tableau_solde_calcul();
-		// switch du contenu
-		$('#CompteCalculContent').slideDown("slow");
-		// bouton afficher
-		id_fleche_compte_calcul = document.getElementById('CompteCalculFleche');	
-		id_fleche_compte_calcul.className = 'ResumeCompte1Selected';
-		bool_affiche_compte_calcul = true ;
-	}
-	else if(bool_affiche_compte_calcul){
-		// switch du contenu
-		$('#CompteCalculContent').slideUp("slow");
-		// bouton afficher
-		id_fleche_compte_calcul = document.getElementById('CompteCalculFleche');	
-		id_fleche_compte_calcul.className = 'ResumeCompte1';
-		bool_affiche_compte_calcul = false ;
-	}
-}
-
 var bool_affiche_compte_abonnement = false ;
 
 function affich_contenu_compte_abonnement(){
@@ -183,60 +161,6 @@ function affich_detail_company(){
   id_not_selected.className = '';
   id_selected = document.getElementById('PCMDetail');	
   id_selected.className = 'selected';
-}
-
-//------------------------------------------------------------------------------------------------------
-// fonctions utiles pour l'affichage de le solde du compte calcul
-//------------------------------------------------------------------------------------------------------
-// traitement en fin de requette pour laffichage du tableau des materials
-function init_Tableau_solde_calcul(Tableau_solde_calcul_temp)
-{
-    //alert(Tableau_solde_calcul_temp);
-    // var Tableau_calcul_temp = eval('[' + response + ']');
-    if (Tableau_solde_calcul_temp)
-    {   
-        Tableau_solde_calcul = Tableau_solde_calcul_temp;
-    }
-    else
-    {
-        Tableau_solde_calcul[0]         =  new Array();
-        Tableau_solde_calcul[0]['solde_type'] = 'aucune entrée';
-    }
-    affiche_Tableau_solde_calcul();
-}
-// requette pour l'obtention du tableau des materials
-function get_Tableau_solde_calcul()
-{ 
-    var url_php = "/company/get_solde";
-    $.getJSON(url_php,[],init_Tableau_solde_calcul);
-}
-
-function filtre_Tableau_solde_calcul(){
-    Tableau_solde_calcul_filter = Tableau_solde_calcul;
-}
-
-// affichage du tableau decompte calcul
-function affiche_Tableau_solde_calcul(){
-    taille_tableau_content  =  taille_tableau_content_page['solde_calcul'];
-    filtre_Tableau_solde_calcul();
-    var current_tableau     =  Tableau_solde_calcul_filter;
-    var strname             =  'solde_calcul';
-    var strnamebdd          =  'solde_calcul_account';
-    var stridentificateur   =  new Array('created_at','solde_type','debit_jeton','credit_jeton','solde_jeton');
-    affiche_Tableau_content(current_tableau, strname, strnamebdd, stridentificateur);
-}
-
-// affiche la page num pour le decompte calcul
-function go_page_solde_calcul(num){
-    if(num=='first'){
-        content_tableau_current_page['solde_calcul'] = 0;
-    }else if(num=='end'){
-        content_tableau_current_page['solde_calcul'] = content_tableau_liste_page['solde_calcul'].length-1;
-    }else{
-        var num_page = num + content_tableau_curseur_page['solde_calcul'];
-        content_tableau_current_page['solde_calcul'] = content_tableau_liste_page['solde_calcul'][num_page]-1;    
-    }
-    affiche_Tableau_solde_calcul();
 }
 
 //------------------------------------------------------------------------------------------------------

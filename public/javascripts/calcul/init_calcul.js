@@ -15,7 +15,7 @@ var problem_dimension = 3;				// dimension du problème
 
 
 // pour la page initialisation------------
-var Tableau_model  =  new Object();			// tableau venant de SCcreate
+var Tableau_model  = new Array();			// tableau venant de SCcreate
 var Tableau_calcul = new Array();  			// tableau des calcul pour l'initialisation 
 var calcul_select = -1;					// numéro du calcul sélectionné
 var id_calcul_select = -1;				// id de l'element graphique pour le calcul sélectionné

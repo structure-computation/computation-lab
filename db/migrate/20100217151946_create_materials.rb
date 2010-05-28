@@ -9,7 +9,7 @@ class CreateMaterials < ActiveRecord::Migration
 	  t.integer  :id_select
       t.string   :name_select
       t.text     :description
-	  t.string   :mtype                      # type de materiaux : isotrope, orthotrope
+	  t.string   :mtype                     # type de materiaux : isotrope, orthotrope
 	  t.string   :comp                      # mot cle : el, pl, en, vi  (elastique, plastique, endomageable, visqueux)
 	  t.integer  :type_num					# reference du type de materiaux, tous les materiaux de ce type on les meme champs de proprietes
 	  t.float    :dir_1_x					# composante des direction principales

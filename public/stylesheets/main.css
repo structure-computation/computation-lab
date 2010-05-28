@@ -437,8 +437,8 @@ body
   width: 722px;
   height: 120px;
   margin: 5px 0px 0 9px;
-  font-weight: normal;
-  font-size: 0.75em;
+  //font-weight: normal;
+  //font-size: 0.75em;
   color: #696969;
   float: left;
   text-align: justify;
@@ -447,6 +447,8 @@ body
 {
   width: 240px;
   height: 110px;
+  font-weight: normal;
+  font-size: 0.75em;
   margin: 0px 0px 0 25px;
   float: left;
   line-height: 25px;
@@ -455,6 +457,8 @@ body
 {
   width: 420px;
   height: 60px;
+  font-weight: normal;
+  font-size: 0.75em;
   margin: 0px 0px 0 35px;
   line-height: 23px;
   float: left;
@@ -464,6 +468,8 @@ body
 {
   //width: 230px;
   height: 24px;
+  font-weight: normal;
+  font-size: 0.75em;
   margin: 5px 0px 0px 5px;
   font-weight: normal;
   text-align:left;
@@ -473,6 +479,8 @@ body
 {
   //width: 230px;
   height: 24px;
+  font-weight: normal;
+  font-size: 0.75em;
   margin: 5px 0px 0px 5px;
   font-weight: normal;
   text-align:left;
@@ -482,6 +490,8 @@ body
 {
   //width: 230px;
   height: 25px;
+  font-weight: normal;
+  font-size: 0.75em;
   margin: 0px 35px 0px 5px;
   font-weight: normal;
   text-align:right;
@@ -505,10 +515,18 @@ body
   width: 232px;
   height: 32px;
   margin: 0px 30px 0 0px;
-  line-height: 32px;
+  line-height: 28px;
+  color: #2a3556;
+  text-align: center;
+  font-weight: normal;
+  font-size: 0.80em;
   color: #2a3556;
   background: transparent url('../images/filter_button_jaune.png') no-repeat right top;
   float:right;
+}
+.largeBoxFilterBoutonJaune:hover
+{
+  color: black;
 }
 .largeBoxFilterBoutonJaune img
 {
@@ -1284,3 +1302,54 @@ body
   float: left;
 }
 
+
+/*
+ * zones de texte
+ *
+ */
+
+.margeText1
+{
+  width: 100%;
+  height: 10px;
+  float:left;
+}
+.zoneText1
+{
+  width: 100%;
+  line-height: 15px;
+  padding: 5px 15px 5px 15px;
+  text-align: left;
+  font-size: 0.80em;
+  font-weight: normal;
+  //color: #e5e5e5;
+  color:#2a3557;
+  float:left;
+}
+.zoneText2
+{
+  width: 94%;
+  line-height: 15px;
+  margin: 5px 15px 5px 15px;
+  padding: 5px 5px 5px 5px;
+  text-align: left;
+  font-size: 0.80em;
+  font-weight: normal;
+  background-color: #ffffff;
+  border : thin solid #2a3557;
+  //color: #e5e5e5;
+  color:#2a3557;
+  float:left;
+}
+.gras
+{
+  font-weight: bold;
+}
+.cadre
+{
+  //margin: 5px 15px 5px 15px;
+  //padding: 0px 5px 0px 5px;
+  text-align: left;
+  border-bottom : thin solid #2a3557;
+  //color: #e5e5e5;
+}

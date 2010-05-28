@@ -5,6 +5,7 @@ class CompanyController < ApplicationController
   def index
     @page = 'SCmanage' 
     @current_company = @current_user.company
+    @id_company = @current_company.id
     respond_to do |format|
       format.html {render :layout => true }
       format.js   {render :json => @current_company.to_json}
@@ -51,4 +52,14 @@ class CompanyController < ApplicationController
     } 
     render :json => @factures.to_json
   end
+  
+  def get_calcul_account
+    @id_company = params[:id_company]
+    @current_company = Company.find(@id_company)
+    @calcul_account = @current_company.calcul_account
+    respond_to do |format|
+      format.js   {render :json => @calcul_account.to_json}
+    end 
+  end
+  
 end

@@ -1,0 +1,448 @@
+/* -----------------------------------------------------------------------------------------------------
+ * pour la page manage 
+ * -----------------------------------------------------------------------------------------------------
+*/
+.largeBoxResumeCompte
+{
+  background: transparent url('../images/manage_compte_bg.png') repeat-x left top;
+  width: 700px;
+  height: 60px;
+  margin: 15px 0px 0 9px;
+  border: thin solid #696969;
+  float: left;
+}
+.largeBoxContentCompte
+{
+  background: transparent url('../images/manage_compte1_bg.png') repeat left top;
+  width: 726px;
+  //height: 500px;
+  margin: 0px 0px 0 7px;
+  //border: thin solid #696969;
+  border-top: thin solid #696969;
+  float: left;
+}
+.largeBoxResumeCompte1
+{
+  background: transparent url('../images/manage_compte_bg.png') repeat-x left top;
+  width: 726px;
+  height: 83px;
+  margin: 15px 0px 0 3px;
+  //border: thin solid #696969;
+  float: left;
+}
+.largeBoxContentCompte1
+{
+  //background: transparent url('../images/manage_compte1_bg.png') repeat left top;
+  width: 726px;
+  //height: 500px;
+  margin: 0px 0px 0 7px;
+  //border: thin solid #696969;
+  //border-top: thin solid #696969;
+  float: left;
+}
+
+/*
+ * resume pour un compte
+ *
+ */
+.ResumeCompte1
+{
+  background: transparent url('../images/manage_fleche_compte_cote.png') no-repeat center center;
+  width: 70px;
+  height: 100%;
+  margin: 0px 0px 0 0px;
+  border-right: thin solid #696969;
+  float: left;
+}
+.ResumeCompte1Selected
+{
+  background: transparent url('../images/manage_fleche_compte_bas.png') no-repeat center center;
+  width: 70px;
+  height: 100%;
+  margin: 0px 0px 0 0px;
+  border-right: thin solid #696969;
+  float: left;
+}
+.ResumeCompte2
+{
+  background: transparent;
+  width: 150px;
+  height: 100%;
+  margin: 0px 0px 0 0px;
+  border-right: thin solid #696969;
+  float: left;
+}
+.ResumeCompte3
+{
+  background: transparent;
+  width: 342px;
+  height: 100%;
+  margin: 0px 0px 0 0px;
+  border-right: thin solid #696969;
+  float: left;
+}
+.ResumeCompte4
+{
+  background: transparent;
+  width: 120px;
+  height: 100%;
+  margin: 0px 0px 0 0px;
+  border-right: thin solid #696969;
+  float: left;
+}
+.ResumeCompte5
+{
+  background: transparent url('../images/manage_pause_compte.png') no-repeat center center;
+  width: 70px;
+  height: 100%;
+  margin: 0px 0px 0 0px;
+  border: none;
+  float: left;
+}
+.ResumeCompte6
+{
+  background: transparent;
+  width: 400px;
+  height: 100%;
+  margin: 0px 0px 0 0px;
+  border: none;
+  float: left;
+}
+.ResumeCompte3GreenBar
+{
+  background: transparent url('../images/greybar.png') no-repeat top left;
+  width: 306px;
+  height: 18px;
+  margin: 5px 0px 0 15px;
+  float: left;
+}
+.ResumeCompte3GreenBarDebut
+{
+  background: transparent url('../images/greenbar_debut.png') no-repeat top left;
+  width: 6px;
+  height: 18px;
+  float: left;
+}
+.ResumeCompte3GreenBarMilieu
+{
+  background: transparent url('../images/greenbar_milieu.png') repeat-x left top;
+  height: 18px;
+  float: left;
+}
+.ResumeCompte3GreenBarFin
+{
+  background: transparent url('../images/greenbar_fin.png') no-repeat top left;
+  width: 6px;
+  height: 18px;
+  float: left;
+}
+.ResumeCompteText1
+{
+  height:20px; 
+  width: 100%;
+  margin:0px 0px 0 10px; 
+  line-height: 20px;
+  font-weight: 100;
+  font-size: 0.85em;
+  color: black;
+  text-align:left;
+  //border: thin solid #2a3557;
+  float:left;
+}
+.ResumeCompteText2
+{
+  height:20px;
+  width: 100%;
+  margin:0px 0px 0 0px; 
+  line-height: 20px;
+  font-weight: 100;
+  font-size: 0.75em;
+  color: #696969;
+  text-align:center;
+  float:left;
+}
+.ResumeCompteBouton
+{
+  background: transparent url('../images/manage_bouton_jaune.png') no-repeat top left;
+  height:20px;
+  width: 90px;
+  margin: 5px 25px 0px 0px; 
+  line-height: 20px;
+  font-weight: 100;
+  font-size: 0.65em;
+  color: #2a3556;
+  text-align:center;
+  float:right;
+}
+.ResumeCompteBouton1
+{
+  background: transparent url('../images/NC_bouton_jaune_suppr.png') no-repeat top left;
+  height:20px;
+  width: 90px;
+  margin: 0px 25px 0px 0px; 
+  line-height: 20px;
+  font-weight: 100;
+  font-size: 0.65em;
+  color: #2a3556;
+  text-align:center;
+  float:right;
+}
+
+
+/*
+ * menu pour le contenu d'un compte
+ *
+ */
+.CompteMenu
+{
+  background: transparent;
+  width: 725px;
+  //height: 300px;
+  margin: 4px 0px 0 1px;
+  border: none;
+  float: left;
+}
+.CompteMenu li
+{
+  list-style-type: none;
+  float: left;
+  width: 142px;
+  height: 25px;
+  background: transparent url('../images/projet_menu_bleu.png') no-repeat left top;
+  line-height: 26px;
+  margin: 1px 2px 0 1px;
+  padding: 0px 0px 0 0px;
+  text-align: center;
+}
+
+.CompteMenu li.selected
+{
+  background: transparent url('../images/projet_menu_selected.png') no-repeat left top;
+}
+
+.CompteMenu li a
+{
+  font-size: 0.80em;
+  font-weight: normal;
+  color: #e5e5e5;
+  text-decoration: none;
+  display: block;
+}
+
+.CompteMenu li.selected a
+{
+  color: #2a3556;
+}
+
+.CompteMenu li a:hover
+{
+  color: #ffdb00;
+}
+
+.CompteMenu li.selected a:hover
+{
+  color: #2a3556;
+}
+
+/*
+ * menu pour le contenu d'un compte
+ *
+ */
+.CompteContent
+{
+  background: #f0f0f0;
+  width: 720px;
+  //height: 300px;
+  margin: 0px 0px 5px 2px;
+  padding: 0px 0px 10px 0px;
+  border: thin solid #2a3556;
+  float: left;
+}
+.CompteContentHeightMin
+{
+  height: 335px;
+  float: left;
+}
+
+/*
+ * filtre pour le compte
+ *
+ */
+.CompteContentFilter
+{
+  background-color: #2a3556;
+  width: 100%;
+  padding: 10px 0px 10px 0px;
+  float: left;
+}
+.CompteContentFilter1
+{
+  width: 230px;
+  height: 31px;
+  margin: 0px 0px 0px 5px;
+  font-weight: normal;
+  font-size: 0.65em;
+  color: #ffd100;
+  text-align:right;
+  float: left;
+}
+.CompteContentFilter1 a
+{
+  font-weight: normal;
+  color: #f0f0f0;
+  text-decoration: underline;
+}
+.CompteContentFilter2
+{
+  //width: 270px;
+  //height: 31px;
+  margin: 0px 0px 0px 10px;
+  line-height: 20px;
+  font-weight: normal;
+  font-size: 0.65em;
+  color: #ffd100;
+  text-align:left;
+  float: left;
+}
+.CompteContentFilter3
+{
+  width: 190px;
+  height: 31px;
+  margin: 0px 0px 0px 5px;
+  font-weight: normal;
+  font-size: 0.65em;
+  color: #f0f0f0;
+  text-align:right;
+  float: left;
+}
+
+.CompteContentFilter2 input[type="text"], .CompteContentFilter3 input[type="text"]
+{ 
+  //height: 20px;
+  width: 90%; 
+  float:left;
+  border: none;
+}
+
+.CompteContentFilterBoutonJaune
+{
+  background : transparent url('../images/button_jaune_filtre_tache.png') no-repeat right top;
+  width: 230px;
+  height: 31px;
+  margin: 0px 0px 0px 5px;
+  text-align:center;
+  //font-size: 0.75em;
+  line-height:23px;
+  color: #2a3556;
+  float: left;
+}
+.CompteContentFilterBoutonJaune img
+{
+  vertical-align:top;
+  border:none;
+  margin:3px 25px 0 0px;
+}
+.CompteContentFilterBoutonJaune a
+{
+  font-weight: normal;
+  color: #2a3556;
+  text-decoration: none;
+  display: block;
+}
+.CompteContentFilterBoutonJaune a:hover
+{
+  //font-style:italic;
+  //color: #2a3556;
+  color: blach;
+  
+} 
+
+/*
+ * cadre pour les details model, membres...
+ *
+ */
+
+.DetailCadreModelTitre {
+  width: 710px ;
+  height: 20;
+  margin: 5px 0px 0 5px;
+  text-align: center;
+  color: #2a3556;
+  font-size: 1em;
+  text-decoration: underline;
+  float: left;
+}
+
+.DetailCadreModel1 {
+  width: 677px ;
+  //height: 380px;
+  font-size: 0.8em;
+  margin: 8px 0px 0 20px;
+  float: left;
+}
+.DetailCadreModel2 {
+  background-color: #b8b9c3;
+  border-top: thin solid #ffffff;
+  width: 400px ;
+  height: 255px;
+  margin: 18px 0px 0 6px;
+  float: left;
+}
+.DetailCadreModelMarge {
+  height: 10px;
+  width: 675px ;
+  float: left;
+}
+
+.DetailCadreModelLigne {
+  border-top: thin solid #ffffff;
+  height: 25px;
+  width: 675px ;
+  margin: 0px 0px 0 0px;
+  //font-weight: normal;
+  //font-size: 0.75em;
+  float: left;
+}
+.DetailCadreModelCase1 {
+  //border-top: thin solid #ffffff;
+  background-color: #9297a8;
+  color: #ffffff;
+  padding: 0px 0px 0 5px;
+  line-height: 22px;
+  height: 25px;
+  width: 175px ;
+  float: left;
+}
+.DetailCadreModelCase2 {
+  //border: thin solid #ffffff;
+  background-color: #b8b9c3;
+  padding: 0px 0px 0 5px;
+  line-height: 22px;
+  height: 25px;
+  width: 490px ;
+  float: left;
+}
+
+.DetailCadreModelDescriptionTop {
+  background-color: #9297a8;
+  width: 270px ;
+  height: 25px;
+  margin: 2px 0px 0 0px;
+  padding-left: 5px;
+  line-height: 22px;
+  color: #ffffff;
+  float: left;
+}
+.DetailCadreModelDescription {
+  background-color: #b8b9c3;
+  width: 266px ;
+  height: 133px;
+  margin: 2px 0px 0 0px;
+  padding: 4px 4px 2px 5px;
+  //padding-right: 4px;
+  font-weight: normal;
+  //font-size: 0.75em;
+  float: left;
+}
+
+

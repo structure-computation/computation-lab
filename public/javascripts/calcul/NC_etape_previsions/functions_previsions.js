@@ -154,7 +154,7 @@ function complete_calcul(){
 	}
 	//alert(array2json(CL));
 	
-	Tableau_calcul_complet = new Array();
+	Tableau_calcul_complet = new Object();
 	// id du model
 	Tableau_calcul_complet['mesh'] = Tableau_id_model;
 	// geometrie du model
@@ -177,6 +177,7 @@ function complete_calcul(){
 	send_calcul['file']=fichier_calcul;
 	send_calcul['id_model']=model_id;
 	send_calcul['id_calcul']=Tableau_init_select['id'];
+	alert(Tableau_init_select['id']);
 	
 	$.ajax({
 	    url: "/calcul/send_calcul",

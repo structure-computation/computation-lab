@@ -185,8 +185,8 @@ function filtre_Tableau_pieces(){
 	Tableau_pieces_assigned = new Array();
 	Tableau_pieces_not_assigned = new Array(); 
 	for(i=0; i<Tableau_pieces.length ;i++){
-		if(Tableau_pieces[i]['assigned']=='-1'){
-			Tableau_pieces[i]['group']='-1';
+		if(Tableau_pieces[i]['assigned']==-1){
+			Tableau_pieces[i]['group']=-1;
 			Tableau_pieces_not_assigned[Tableau_pieces_not_assigned.length]=Tableau_pieces[i];
 		}else{
 			Tableau_pieces_assigned[Tableau_pieces_assigned.length]=Tableau_pieces[i];

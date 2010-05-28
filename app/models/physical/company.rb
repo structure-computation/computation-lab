@@ -6,5 +6,5 @@ class Company < ActiveRecord::Base
   
   has_many  :projects
   has_many  :sc_models
-  has_many  :log_calculs
+  has_many  :solde_calcul_accounts,  :through => :calcul_account
 end
