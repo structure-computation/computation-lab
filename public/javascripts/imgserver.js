@@ -339,7 +339,7 @@ function draw_img_on_canvas( canvas ) {
 function update_img_src( canvas ) { // draw_canvas
     // englobing sphere
     if ( canvas.cam_data.R <= 0 ) {
-        send_async_xml_http_request( address_php + "?mode=get_RC&s=" + canvas.cam_data.img_session_id, function( rep ) {
+        send_async_xml_http_request( address_php + "?mode=get_RC&s=" + canvas.cam_data.img_session_id + "&model_id=" + model_id, function( rep ) {
             eval( rep ); // canvas.cam_data.R = ...; canvas.cam_data.C = ...;
             update_img_src( canvas );
         } );
@@ -534,10 +534,10 @@ function img_init( canvas ) {
     canvas.onmousedown  = img_mouse_down;
     canvas.onmouseup    = img_mouse_up;
     canvas.onmousewheel = img_mouse_wheel;
-
+    alert(array2json(Tableau_id_model));
     // start new session. When ready, draw img
     //alert(address_php + "?mode=newsession&w=" + canvas.width + "&h=" + canvas.height);
-    send_async_xml_http_request( address_php + "?mode=newsession&w=" + canvas.width + "&h=" + canvas.height, function( rep ) {
+    send_async_xml_http_request( address_php + "?mode=newsession&w=" + canvas.width + "&h=" + canvas.height + "&model_id=" + model_id + "&model_dim=" + dim_model , function( rep ) {
         canvas.cam_data.img_session_id = rep;
         update_img_src( canvas );
     } );

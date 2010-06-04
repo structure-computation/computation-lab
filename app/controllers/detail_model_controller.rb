@@ -18,7 +18,7 @@ class DetailModelController < ApplicationController
   def get_list_resultat
     @id_model = params[:id_model]
     current_model = @current_user.sc_models.find(@id_model)
-    list_resultats = current_model.calcul_results
+    list_resultats = current_model.calcul_results.find(:all, :conditions => {:state => "finish"})
     respond_to do |format|
       format.js   {render :json => list_resultats.to_json}
     end 
@@ -72,24 +72,17 @@ class DetailModelController < ApplicationController
   end
   
   def mesh_valid
-    @id_user = params[:id_user]
     @id_model = params[:id_model]
-    @time = params[:time]
-    @current_user = User.find(@id_user)
     @current_model = ScModel.find(@id_model)
-    jsonobject = JSON.parse(params[:json])
-
-    @current_model.parts = jsonobject[0]['mesh']['nb_groups_elem']
-    @current_model.interfaces = jsonobject[0]['mesh']['nb_groups_inter']
-    @current_model.state = 'active'
-    
-    @calcul_result = @current_model.calcul_results.build(:calcul_time => @time, :ctype => 'create', :state => 'finish', :gpu_allocated => 1) 
-    @calcul_result.user = @current_user
-    
-    @current_model.save
-    @calcul_result.save
-    
+    @current_model.mesh_valid(params[:id_user],params[:time],params[:json])
     render :text => { :result => 'success' }
   end
   
+  def download
+    @id_model = params[:id_model]
+    @id_resultat = params[:id_resultat]
+    name_file = '/home/scproduction/MODEL/model_' + @id_model + '/calcul_' + @id_resultat + '/resultat_0_0.vtu'
+    send_file name_file
+  end
+ 
 end

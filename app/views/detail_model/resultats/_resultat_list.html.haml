@@ -17,7 +17,8 @@
         .contentBoxTable_2{ :id => "resultat_0_#{i}" , :style => "width: 150px;" }
         .contentBoxTable_2{ :id => "resultat_1_#{i}" , :style => "width: 395px;" }
         .contentBoxTable_visu
-        .contentBoxTable_download
+        %a{ :style => "cursor: pointer;", :onclick => "download_resultat(#{i})" }
+          .contentBoxTable_download
         .contentBoxTable_suppr
   / Fin du tableau de présentation des modèles.
 

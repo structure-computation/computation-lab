@@ -130,12 +130,14 @@
       / fin partie basse du footer
 %script{ :type => "text/javascript" }
   model_id = #{@id_model};
+  dim_model = #{@dim_model};
+  $(document).ready(function() {get_info_model( #{@id_model} )});
   equal_height_NC_fake();
   $(document).ready(function() {get_Tableau_calcul( #{@id_model} )});
   $(document).ready(get_Tableau_mat);
   $(document).ready(get_Tableau_liaison);
   $(document).ready(get_Tableau_CL);
-  $(document).ready(function() {get_info_model( #{@id_model} )});
   affiche_NC_page_initialisation();
+  $(document).ready( function() { img_init( document.getElementById("mainimg") ); } );
   displayBlack("on");
   / alert("ok");

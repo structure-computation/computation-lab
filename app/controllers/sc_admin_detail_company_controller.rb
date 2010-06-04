@@ -44,4 +44,14 @@ class ScAdminDetailCompanyController < ApplicationController
     end 
   end
   
+  def valid_new_forfait
+    @id_company = params[:id_company]
+    @current_company = Company.find(@id_company)
+    @calcul_account = @current_company.calcul_account
+    @calcul_account.add_forfait(params[:id_forfait])
+    respond_to do |format|
+      format.js   {render :json => { :result => 'success' }}
+    end 
+  end
+  
 end

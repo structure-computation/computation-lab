@@ -72,9 +72,9 @@ var id_actif_interface_select = -1;			// id de l'element graphique interface sé
 // pour la page CLs------------
 var Tableau_CL = new Array();  				// tableau des CLs 
 var Tableau_CL_step = new Array();  			// tableau des motif pour chaque step d'une CL
-Tableau_CL_step['Fx'] = 0;
-Tableau_CL_step['Fy'] = 0;
-Tableau_CL_step['Fz'] = 0;
+Tableau_CL_step['Fx'] = "0";
+Tableau_CL_step['Fy'] = "0";
+Tableau_CL_step['Fz'] = "0";
 Tableau_CL_step['ft'] = 1;
 
 
@@ -95,23 +95,23 @@ var id_actif_bord_select = -1;				// id de l'element graphique bord sélectionn�
 var Tableau_bords_test = new Array();  			// tableau d'initialisation pour la creation des bors (static, c'est le format du tableau)
 var Tableau_bords_for_info = new Array();  			// tableau d'initialisation pour la creation des bors (celui sur lequel on travail)
 Tableau_bords_test["id"]=-1;
-Tableau_bords_test["origine"]="from_interface";
+Tableau_bords_test["origine"]="from_php";
 Tableau_bords_test["assigned"]=-1;
 Tableau_bords_test["group"]=-1;
 Tableau_bords_test["type"]="";				// is_in, is_on, has_normal
 Tableau_bords_test["geometry"]="";			// box, crecle, cylindre, sphere...
 Tableau_bords_test["name"]="";				// nom pour le calcul
 Tableau_bords_test["description"]="";			// nom pour le calcul
-Tableau_bords_test["point_1_x"]="";
-Tableau_bords_test["point_1_y"]="";
-Tableau_bords_test["point_1_z"]="";
-Tableau_bords_test["point_2_x"]="";
-Tableau_bords_test["point_2_y"]="";
-Tableau_bords_test["point_2_z"]="";
-Tableau_bords_test["point_3_x"]="";
-Tableau_bords_test["point_3_y"]="";
-Tableau_bords_test["point_3_z"]="";
-Tableau_bords_test["rayon"]="";
+Tableau_bords_test["point_1_x"]=0;
+Tableau_bords_test["point_1_y"]=0;
+Tableau_bords_test["point_1_z"]=0;
+Tableau_bords_test["point_2_x"]=0;
+Tableau_bords_test["point_2_y"]=0;
+Tableau_bords_test["point_2_z"]=0;
+Tableau_bords_test["point_3_x"]=0;
+Tableau_bords_test["point_3_y"]=0;
+Tableau_bords_test["point_3_z"]=0;
+Tableau_bords_test["rayon"]=0;
 Tableau_bords_test["id_CL"]=-1;
 
 

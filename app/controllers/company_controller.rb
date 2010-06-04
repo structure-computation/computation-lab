@@ -35,11 +35,7 @@ class CompanyController < ApplicationController
   
   def get_solde
     # Creation d'une liste fictive d'opération.
-    @soldes = []
-    (1..18).each{ |i|
-      solde =    SoldeCalculAccount.new( :created_at  => i.to_s+"/03/2010", :solde_type => "calcul_"+i.to_s,  :debit_jeton => "25", :credit_jeton => "20", :solde_jeton => i.to_s )
-      @soldes << solde
-    } 
+    @soldes = @current_user.company.solde_calcul_accounts.find(:all)
     render :json => @soldes.to_json
   end
   

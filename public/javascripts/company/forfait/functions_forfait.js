@@ -108,7 +108,7 @@ function affiche_Tableau_solde_calcul(){
     var current_tableau     =  Tableau_solde_calcul_filter;
     var strname             =  'solde_calcul';
     var strnamebdd          =  'solde_calcul_account';
-    var stridentificateur   =  new Array('created_at','solde_type','debit_jeton','credit_jeton','solde_jeton');
+    var stridentificateur   =  new Array('created_at','solde_type','debit_jeton','credit_jeton','solde_jeton','solde_jeton_tempon');
     affiche_Tableau_content(current_tableau, strname, strnamebdd, stridentificateur);
 }
 

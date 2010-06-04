@@ -20,29 +20,67 @@
       = render :partial => "sc_admin_detail_company/forfait/forfait_nouveau_list"
     / page fichier et description
     #NM_page_fichier
-      %div{:style => "width: 7px; height: 330px; float:left;" }
-      /= render :partial => "material_nouveau_prop"
+      /%div{:style => "width: 7px; height: 330px; float:left;" }
+      .NM_bleu{ :style => "width: 600px; height: 20px;  margin: 10px 0px 0 63px;" }
+        Forfait selectionné : 
+      .gras#forfait_name.NM_bleu{ :style => "width: 600px; height: 20px;  margin: 0px 0px 0 63px;" }
+        nom
+      .zoneText1
+        %table{ :style => "margin: 0px 0px 0 10px;" }
+          %tr
+            %td.cadre{ :style => "width: 160px;" }
+              Jetons standards
+            %td.cadre{ :style => "width: 160px;" }
+              Jetons tampons
+            %td.cadre{ :style => "width: 160px;" }
+              durrée de validité (mois)
+            %td.cadre{ :style => "width: 160px;" }
+              prix (Euros)
+          %tr
+            %td.gras#forfait_nb_jetons
+              100
+            %td.gras#forfait_nb_jetons_tempon
+              500 
+            %td.gras#forfait_validity
+              6 mois
+            %td.gras#forfait_price
+              900
  
     / page résumé
     #NM_page_resume
       .NM_bleu{ :style => "width: 730px; height: 40px;  margin: 0px 0px 0 3px;" }
       .NM_fond_resume{ :style => "width: 730px; margin: 0px 0px 0 3px;" }
-        .NM_text_1{ :style => "width:200px;" }
-          Nom du matériau :
-        .NM_text_1{ :style => "width:500px;" }
-          %p#new_material_resume_name
-        .NM_text_1{ :style => "width:200px;" }
-          Famille du matériau :
-        .NM_text_1{ :style => "width:500px;" }
-          %p#new_material_resume_familly
-        .NM_text_1{ :style => "width:200px;" }
-          Description :
-        .NM_text_1{ :style => "width:500px; height:100px;" }
-          %p#new_material_resume_description
-      %div{:style => "width: 300px; margin: 20px 0px 0 213px; float:left;" }
+        .gras#resume_name.NM_bleu{ :style => "width: 600px; height: 20px;  margin: 0px 0px 0 63px;" }
+          nom
+        .zoneText1
+          %table{ :style => "margin: 0px 0px 0 10px;" }
+            %tr
+              %td.cadre{ :style => "width: 160px;" }
+                Jetons standards
+              %td.cadre{ :style => "width: 160px;" }
+                Jetons tampons
+              %td.cadre{ :style => "width: 160px;" }
+                durrée de validité (jours)
+              %td.cadre{ :style => "width: 160px;" }
+                prix (Euros)
+            %tr
+              %td.gras#resume_nb_jetons
+                100
+              %td.gras#resume_nb_jetons_tempon
+                500 
+              %td.gras#resume_validity
+                6 mois
+              %td.gras#resume_price
+                900
+      
+      #new_forfait_pic_ok.on{:style => "width: 300px; margin: 20px 0px 0 213px; float:left;" }
         .wiz_pic_ok
         .NM_bleu{ :style => "width: 200px; height:20px; margin: 25px 0px 25px 20px;" }
-          Matériau déposé avec succès
+          Nouveau forfait validé
+      #new_forfait_pic_wait.off{:style => "width: 300px; margin: 20px 0px 0 213px; float:left;" }
+        .wiz_pic_wait
+        .NM_bleu{ :style => "width: 200px; height:20px; margin: 25px 0px 25px 20px;" }
+          Nouveau forfait en cours de validation
 
   #New_wiz_layer_bas
     #wiz_annul.on{:style => "float: left;" }

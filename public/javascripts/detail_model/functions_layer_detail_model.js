@@ -177,7 +177,13 @@ function affiche_Tableau_resultat(){
     affiche_Tableau_content(current_tableau, strname, strnamebdd, stridentificateur);
 }
 
-
+// telecharger le resultat
+function download_resultat(num){
+    var num_select = content_tableau_connect['resultat'][num];
+    var id_resultat = Tableau_resultat_filter[num_select]['calcul_result']['id'];
+    var url_php = "/detail_model/download?id_model=" + model_id + "&id_resultat=" + id_resultat ;
+    $(location).attr('href',url_php);  
+}
 
 
 //-------------------------------------------------------------------------------------------------

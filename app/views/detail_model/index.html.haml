@@ -31,6 +31,7 @@
       
 / fin de #contentright, partie droite du contenu
 %script{ :type => "text/javascript" }
+  model_id = #{@id_model};
   $(document).ready(function() {get_Current_model( #{@id_model} )});
     
 = render :partial => "footer_top"

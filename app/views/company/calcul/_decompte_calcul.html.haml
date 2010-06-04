@@ -3,7 +3,7 @@
     .contentBoxTable_0{ :style => "width: 190px;" }
       %p
         Date                   
-    .contentBoxTable_0{ :style => "width: 200px;" }
+    .contentBoxTable_0{ :style => "width: 100px;" }
       %p
         Type 
     .contentBoxTable_0{ :style => "width: 100px;" }
@@ -15,15 +15,19 @@
     .contentBoxTable_0{ :style => "width: 100px;" }
       %p
         Solde
+    .contentBoxTable_0{ :style => "width: 100px;" }
+      %p
+        Solde tempon
     
   - (0...10).each do |i|
     .contentBoxTable_lign{ :id => "solde_calcul_lign_#{i}" }
       .contentBoxTable_lign_pair{ :id => "solde_calcul_pair_#{i}" }
         .contentBoxTable_1{ :id => "solde_calcul_0_#{i}", :style => "width: 190px;" }
-        .contentBoxTable_2{ :id => "solde_calcul_1_#{i}", :style => "width: 200px;" }
+        .contentBoxTable_2{ :id => "solde_calcul_1_#{i}", :style => "width: 100px;" }
         .contentBoxTable_2{ :id => "solde_calcul_2_#{i}", :style => "width: 100px;" }
         .contentBoxTable_2{ :id => "solde_calcul_3_#{i}", :style => "width: 100px;" }
-        .contentBoxTable_4{ :id => "solde_calcul_4_#{i}", :style => "width: 100px;" }
+        .contentBoxTable_2{ :id => "solde_calcul_4_#{i}", :style => "width: 100px;" }
+        .contentBoxTable_4{ :id => "solde_calcul_5_#{i}", :style => "width: 100px;" }
   / Fin du tableau de présentation des modèles.
 
 .NM_bleu{ :style => "width: 600px; height: 25px;  margin: 10px 0px 0 63px;" }

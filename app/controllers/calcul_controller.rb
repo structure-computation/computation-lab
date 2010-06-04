@@ -7,6 +7,8 @@ class CalculController < ApplicationController
   def index
     @page = 'SCcompute'
     @id_model = params[:id_model]
+    current_model = @current_user.sc_models.find(@id_model)
+    @dim_model = current_model.dimension
     respond_to do |format|
       format.html {render :layout => false }
     end 
@@ -115,20 +117,13 @@ class CalculController < ApplicationController
   def calcul_valid
     @id_model = params[:id_model]
     @id_calcul = params[:id_calcul]
-    @time = params[:time]
-    current_model = ScModel.find(@id_model)
-    current_calcul = current_model.calcul_results.find(@id_calcul)
+
+    @current_model = ScModel.find(@id_model)
+    @current_calcul = @current_model.calcul_results.find(@id_calcul)
     
-    current_calcul.state = 'finish'
+    @current_calcul.calcul_valid(params[:time]) 
     
-    current_calcul.build_log_calcul(:calcul_time => @time, :log_type => 'compute')
-    current_calcul.log_calcul.user = current_calcul.user
-    current_calcul.log_calcul.company = current_model.company
-    
-    current_calcul.save
-    current_calcul.log_calcul.save
-    
-    #render :text => { :result => 'success' }
+    render :text => { :result => 'success' }
   end
   
 end

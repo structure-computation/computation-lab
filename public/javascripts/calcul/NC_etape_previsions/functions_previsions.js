@@ -51,7 +51,13 @@ function complete_calcul(){
 		table_param = ["id","origine","identificateur","name","type","adj_num_group","id_link","assigned","group"];
 		for(j in table_param){
 			if(table_param[j]=="id_link"){
-				groups_inter[i]["id_link"]=Tableau_interfaces[i]["assigned"];
+				if(Tableau_interfaces[i]["assigned"]=='-1'){
+					groups_inter[i]["id_link"]=parseFloat(Tableau_interfaces[i]["assigned"]);
+				}else{
+					groups_inter[i]["id_link"]=Tableau_interfaces[i]["assigned"];
+				}
+			}else if(table_param[j]=="assigned"){
+				groups_inter[i][table_param[j]] = parseFloat(Tableau_interfaces[i][table_param[j]]);
 			}else{
 				groups_inter[i][table_param[j]]=Tableau_interfaces[i][table_param[j]];
 			}
@@ -63,14 +69,18 @@ function complete_calcul(){
 	var groups_edge = new Array();
 	for(i in Tableau_bords){
 		groups_edge[i] = new Array();
-		table_param = ["id","origine","name","type","geometry","point_1","point_2","id_CL","assigned","group"];
+		table_param = ["id","origine","name","type","geometry","point_1_x","point_1_y","point_2_x","point_2_y","id_CL","assigned","group"];
 		for(j in table_param){
 			if(table_param[j]=="id_CL"){
-				groups_edge[i]["id_CL"]=Tableau_bords[i]["assigned"];
-			}else if(table_param[j]=="point_1"){
-				groups_edge[i]["point_1"] = Tableau_bords[i]["point_1_x"] + ' ' + Tableau_bords[i]["point_1_y"];
-			}else if(table_param[j]=="point_2"){
-				groups_edge[i]["point_2"] = Tableau_bords[i]["point_2_x"] + ' ' + Tableau_bords[i]["point_2_y"];
+				if(Tableau_bords[i]["assigned"]=='-1'){
+					groups_edge[i]["id_CL"]=parseFloat(Tableau_bords[i]["assigned"]);
+				}else{
+					groups_edge[i]["id_CL"]=Tableau_bords[i]["assigned"];
+				}
+			}else if(table_param[j].match("point")){
+				groups_edge[i][table_param[j]] = parseFloat(Tableau_bords[i][table_param[j]]);
+			}else if(table_param[j]=="assigned"){
+				groups_edge[i][table_param[j]] = parseFloat(Tableau_bords[i][table_param[j]]);
 			}else{
 				groups_edge[i][table_param[j]]=Tableau_bords[i][table_param[j]];
 			}
@@ -83,25 +93,29 @@ function complete_calcul(){
 	var materials = new Array();
 	for(i in Tableau_mat_select){
 		materials[i] = new Array();
-		table_param = ["id","name","type","resolution","groups_elem","elastic_modulus","poisson_ratio","alpha","rho"];
+		table_param = ["id","groups_elem","mtype","comp","resolution","name","elastic_modulus","poisson_ratio","alpha","rho"];
 		for(j in table_param){
 			if(table_param[j]=="resolution"){
 				materials[i]["resolution"]="CP"
-			}else if(table_param[j]=="type"){
-				materials[i]["type"] = Tableau_mat_select[i]["mtype"] ;
+			}else if(table_param[j]=="mtype"){
+				materials[i]["mtype"] = Tableau_mat_select[i]["mtype"] ;
+			}else if(table_param[j]=="comp"){
+				materials[i]["comp"] = "elastique" ;
 			}else if(table_param[j]=="elastic_modulus"){
-				materials[i]["elastic_modulus"] = Tableau_mat_select[i]["E_1"] ;
+				materials[i]["elastic_modulus"] = parseFloat(Tableau_mat_select[i]["E_1"]) ;
 			}else if(table_param[j]=="poisson_ratio"){
-				materials[i]["poisson_ratio"] = Tableau_mat_select[i]["mu_12"] ;
+				materials[i]["poisson_ratio"] = parseFloat(Tableau_mat_select[i]["mu_12"]) ;
+			}else if(table_param[j]=="rho"){
+				materials[i]["rho"] = parseFloat(Tableau_mat_select[i]["rho"]) ;
 			}else if(table_param[j]=="alpha"){
-				materials[i]["alpha"] = Tableau_mat_select[i]["alpha_1"] ;
+				materials[i]["alpha"] = parseFloat(Tableau_mat_select[i]["alpha_1"]) ;
 			}else if(table_param[j]=="groups_elem"){
 				materials[i]["groups_elem"] = '';
 				for(k in Tableau_mat_select[i]["pieces"]){
 					materials[i]["groups_elem"] = materials[i]["groups_elem"] + Tableau_mat_select[i]["pieces"][k]['id'] + ' ';
 				}
 			}else if(table_param[j]=="id"){
-				materials[i]["id"] = Tableau_mat_select[i]["id_select"] ;
+				materials[i]["id"] = parseFloat(Tableau_mat_select[i]["id_select"]) ;
 			}else{
 				materials[i][table_param[j]]=Tableau_mat_select[i][table_param[j]]
 			}
@@ -111,7 +125,7 @@ function complete_calcul(){
 
 
 	// Tableau proprietes_interfaces
-	var proprietes_interfaces = new Array();
+	var liaisons = new Array();
 	for(i in Tableau_liaison_select){
 		proprietes_interfaces[i] = new Array();
 		table_param = ["id","name","type","coef_frottement"];
@@ -125,7 +139,7 @@ function complete_calcul(){
 			}else if(table_param[j]=="id"){
 				proprietes_interfaces[i]["id"] = Tableau_liaison_select[i]["id_select"] ;
 			}else if(table_param[j]=="coef_frottement"){
-				proprietes_interfaces[i]["coef_frottement"] = Tableau_liaison_select[i]["f"] ;
+				proprietes_interfaces[i]["coef_frottement"] = parseFloat(Tableau_liaison_select[i]["f"]) ;
 			}else{
 				proprietes_interfaces[i][table_param[j]]=Tableau_liaison_select[i][table_param[j]];
 			}
@@ -137,16 +151,20 @@ function complete_calcul(){
 	var CL = new Array();
 	for(i in Tableau_CL_select){
 		CL[i] = new Array();
-		table_param = ["id","name","type","fcts_spatiales","fcts_temporelles"];
+		table_param = ["id","name","type","fct_spatiale_x","fct_spatiale_y","fct_temporelle_x","fct_temporelle_y"];
 		for(j in table_param){
 			if(table_param[j]=="type"){
 				CL[i]["type"] = Tableau_CL_select[i]["bctype"] ;
 			}else if(table_param[j]=="id"){
 				CL[i]["id"] = Tableau_CL_select[i]["id_select"] ;
-			}else if(table_param[j]=="fcts_spatiales"){
-				CL[i]["fcts_spatiales"] = Tableau_CL_select[i]["step"][0]['Fx'] + ';' + Tableau_CL_select[i]["step"][0]['Fy'] ;
-			}else if(table_param[j]=="fcts_temporelles"){
-				CL[i]["fcts_temporelles"] = Tableau_CL_select[i]["step"][0]['ft'] + ';' + Tableau_CL_select[i]["step"][0]['ft'] ;
+			}else if(table_param[j]=="fct_spatiale_x"){
+				CL[i]["fct_spatiale_x"] = Tableau_CL_select[i]["step"][0]['Fx'] ;
+			}else if(table_param[j]=="fct_spatiale_y"){
+				CL[i]["fct_spatiale_y"] = Tableau_CL_select[i]["step"][0]['Fy'] ;
+			}else if(table_param[j]=="fct_temporelle_x"){
+				CL[i]["fct_temporelle_x"] = parseFloat(Tableau_CL_select[i]["step"][0]['ft']) ;
+			}else if(table_param[j]=="fct_temporelle_y"){
+				CL[i]["fct_temporelle_y"] = parseFloat(Tableau_CL_select[i]["step"][0]['ft']) ;
 			}else{
 				CL[i][table_param[j]]=Tableau_CL_select[i][table_param[j]];
 			}
@@ -163,7 +181,7 @@ function complete_calcul(){
 	Tableau_calcul_complet['groups_edge'] = groups_edge;
 	// caractéristique matériaux, liaisons et CLs
 	Tableau_calcul_complet['materials'] = materials;
-	Tableau_calcul_complet['proprietes_interfaces'] = proprietes_interfaces;
+	Tableau_calcul_complet['links'] = liaisons;
 	Tableau_calcul_complet['CL'] = CL;
 	//Tableau_calcul_complet['CL_volume'] = Tableau_CL_select_volume;
 	// options du calcul

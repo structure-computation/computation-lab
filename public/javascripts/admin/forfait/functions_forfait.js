@@ -5,6 +5,114 @@
 var Tableau_forfait_list            =  new Array();              // tableau des forfait
 var Tableau_forfait             =  new Array();              // forfait selectionner
 
+
+//---------------------------------------------------------------------------------------------------------------------
+// fonctions utiles pour l'affichage d'un nouveau forfait
+//---------------------------------------------------------------------------------------------------------------------
+
+//---------------------------------------------------------------------------------------------------------
+// wizard de nouveau forfait
+//---------------------------------------------------------------------------------------------------------
+
+function displayNewForfait(interupteur) {
+    displayBlack(interupteur);
+    document.getElementById('New_wiz_layer').className = interupteur;
+    NMcurrent_stape = 'page_information';
+    affiche_Tableau_forfait_list();
+    document.getElementById('wiz_annul').className    =  'on' ;
+    document.getElementById('wiz_suiv').className    =  'on' ;
+    document.getElementById('wiz_valid').className    =  'off' ;
+    document.getElementById('wiz_fin').className    =  'off' ;
+    affiche_NM_page();
+}
+
+// afficher la page suivante ou la page precedente
+function NM_next_stape(){
+    if(NMcurrent_stape == 'page_information'){
+        NMcurrent_stape      = 'page_fichier';
+	affich_detail_forfait();
+	document.getElementById('wiz_annul').className    =  'on' ;
+	document.getElementById('wiz_suiv').className    =  'off' ;
+	document.getElementById('wiz_valid').className    =  'on' ;
+	document.getElementById('wiz_fin').className    =  'off' ;
+        affiche_NM_page();
+    }
+    else if(NMcurrent_stape == 'page_fichier'){
+	send_new_forfait_info();
+        NMcurrent_stape = 'page_resume';
+	document.getElementById('wiz_annul').className    =  'off' ;
+	document.getElementById('wiz_suiv').className    =  'off' ;
+	document.getElementById('wiz_valid').className    =  'off' ;
+	document.getElementById('wiz_fin').className    =  'on' ;
+        affiche_NM_page();
+    }  
+}
+function NM_previous_stape(){
+    if(NMcurrent_stape == 'page_fichier'){
+        NMcurrent_stape = 'page_information';
+	document.getElementById('wiz_annul').className    =  'on' ;
+	document.getElementById('wiz_suiv').className    =  'on' ;
+	document.getElementById('wiz_valid').className    =  'off' ;
+	document.getElementById('wiz_fin').className    =  'off' ;
+        affiche_NM_page();
+    }
+    else if(NMcurrent_stape == 'page_resume'){
+        NMcurrent_stape      = 'page_fichier';
+	document.getElementById('wiz_annul').className    =  'on' ;
+	document.getElementById('wiz_suiv').className    =  'off' ;
+	document.getElementById('wiz_valid').className    =  'on' ;
+	document.getElementById('wiz_fin').className    =  'off' ;
+        affiche_NM_page();
+    }
+}
+
+// afficher une page et cacher les autres
+function affiche_NM_page(){
+    var affiche_on  = NMcurrent_stape;
+    var affiche_off = new Array('page_information', 'page_fichier', 'page_resume');
+    var taille_off  = new Number(affiche_off.length);
+    
+    // on cache tout
+    var className   = "actif";
+    if(NMcurrent_stape == 'page_information'){
+        NMcurrent_stage = 0;
+    }
+    else if(NMcurrent_stape == 'page_fichier'){
+        NMcurrent_stage = 1;
+    }
+    else if(NMcurrent_stape == 'page_resume'){
+        NMcurrent_stage = 2;
+    }
+
+    for(i_off=0; i_off<taille_off; i_off++){
+        if(i_off >= NMcurrent_stage){
+            var className = "";
+        }
+        strContent_PB_page      =  'NM_PB_' + affiche_off[i_off] ;
+        var id_PB_page          =  document.getElementById(strContent_PB_page);
+        id_PB_page.className    =  className ;
+    }
+    
+    for(i_off=0; i_off<taille_off; i_off++){
+        strContent_page =  new String();
+        strContent_page =  'NM_' + affiche_off[i_off] ;
+        var id_page     =  document.getElementById(strContent_page);
+        if(id_page!=null){
+            id_page.className = "off";
+        }
+    }
+    // on affiche les éléments de la bonne page
+    strContent_PB_page      = 'NM_PB_' + affiche_on ;
+    var id_PB_page          = document.getElementById(strContent_PB_page);
+    id_PB_page.className    = "select";
+    
+    strContent_page         = new String();
+    strContent_page         = 'NM_' + affiche_on ;
+    if(id_page = document.getElementById(strContent_page)){
+        id_page.className   = "on";
+    }
+}
+
 //-------------------------------------------------------------------------------------------------
 // fonctions utiles pour l'obtention de la liste des forfaits
 //-------------------------------------------------------------------------------------------------
@@ -45,6 +153,7 @@ function affiche_Tableau_forfait_list(){
     var strnamebdd          =  'forfait';
     var stridentificateur   =  new Array('name','price','nb_jetons','nb_jetons_tempon','price_jeton');
     affiche_Tableau_new(current_tableau, strname, strnamebdd, stridentificateur);
+    select_new_forfait(0);
 }
 
 
@@ -140,114 +249,6 @@ function go_page_new_forfait(num){
 }
 
 
-//---------------------------------------------------------------------------------------------------------------------
-// fonctions utiles pour l'affichage d'un nouveau forfait
-//---------------------------------------------------------------------------------------------------------------------
-
-//---------------------------------------------------------------------------------------------------------
-// wizard de nouveau forfait
-//---------------------------------------------------------------------------------------------------------
-
-function displayNewForfait(interupteur) {
-    displayBlack(interupteur);
-    document.getElementById('New_wiz_layer').className = interupteur;
-    NMcurrent_stape = 'page_information';
-    affiche_Tableau_forfait_list();
-    document.getElementById('wiz_annul').className    =  'on' ;
-    document.getElementById('wiz_suiv').className    =  'on' ;
-    document.getElementById('wiz_valid').className    =  'off' ;
-    document.getElementById('wiz_fin').className    =  'off' ;
-    affiche_NM_page();
-}
-
-// afficher la page suivante ou la page precedente
-function NM_next_stape(){
-    if(NMcurrent_stape == 'page_information'){
-        NMcurrent_stape      = 'page_fichier';
-	//affich_new_material();
-	document.getElementById('wiz_annul').className    =  'on' ;
-	document.getElementById('wiz_suiv').className    =  'off' ;
-	document.getElementById('wiz_valid').className    =  'on' ;
-	document.getElementById('wiz_fin').className    =  'off' ;
-        affiche_NM_page();
-    }
-    else if(NMcurrent_stape == 'page_fichier'){
-	//affich_new_material_resume();
-        NMcurrent_stape = 'page_resume';
-	document.getElementById('wiz_annul').className    =  'off' ;
-	document.getElementById('wiz_suiv').className    =  'off' ;
-	document.getElementById('wiz_valid').className    =  'off' ;
-	document.getElementById('wiz_fin').className    =  'on' ;
-        affiche_NM_page();
-    }  
-}
-function NM_previous_stape(){
-    if(NMcurrent_stape == 'page_fichier'){
-        NMcurrent_stape = 'page_information';
-	document.getElementById('wiz_annul').className    =  'on' ;
-	document.getElementById('wiz_suiv').className    =  'on' ;
-	document.getElementById('wiz_valid').className    =  'off' ;
-	document.getElementById('wiz_fin').className    =  'off' ;
-        affiche_NM_page();
-    }
-    else if(NMcurrent_stape == 'page_resume'){
-        NMcurrent_stape      = 'page_fichier';
-	document.getElementById('wiz_annul').className    =  'on' ;
-	document.getElementById('wiz_suiv').className    =  'off' ;
-	document.getElementById('wiz_valid').className    =  'on' ;
-	document.getElementById('wiz_fin').className    =  'off' ;
-        affiche_NM_page();
-    }
-}
-
-// afficher une page et cacher les autres
-function affiche_NM_page(){
-    var affiche_on  = NMcurrent_stape;
-    var affiche_off = new Array('page_information', 'page_fichier', 'page_resume');
-    var taille_off  = new Number(affiche_off.length);
-    
-    // on cache tout
-    var className   = "actif";
-    if(NMcurrent_stape == 'page_information'){
-        NMcurrent_stage = 0;
-    }
-    else if(NMcurrent_stape == 'page_fichier'){
-        NMcurrent_stage = 1;
-    }
-    else if(NMcurrent_stape == 'page_resume'){
-        NMcurrent_stage = 2;
-    }
-
-    for(i_off=0; i_off<taille_off; i_off++){
-        if(i_off >= NMcurrent_stage){
-            var className = "";
-        }
-        strContent_PB_page      =  'NM_PB_' + affiche_off[i_off] ;
-        var id_PB_page          =  document.getElementById(strContent_PB_page);
-        id_PB_page.className    =  className ;
-    }
-    
-    for(i_off=0; i_off<taille_off; i_off++){
-        strContent_page =  new String();
-        strContent_page =  'NM_' + affiche_off[i_off] ;
-        var id_page     =  document.getElementById(strContent_page);
-        if(id_page!=null){
-            id_page.className = "off";
-        }
-    }
-    // on affiche les éléments de la bonne page
-    strContent_PB_page      = 'NM_PB_' + affiche_on ;
-    var id_PB_page          = document.getElementById(strContent_PB_page);
-    id_PB_page.className    = "select";
-    
-    strContent_page         = new String();
-    strContent_page         = 'NM_' + affiche_on ;
-    if(id_page = document.getElementById(strContent_page)){
-        id_page.className   = "on";
-    }
-}
-
-
 // selectionner (activer) un matériaux de la liste pour creer un nouveau materiaux
 function select_new_forfait(num){
 	var new_forfait_select = content_tableau_connect['new_forfait'][num];
@@ -261,9 +262,54 @@ function select_new_forfait(num){
 			id_check.checked=false;
 		}
 	}
-	alert(array2json(Tableau_forfait));
+	//alert(array2json(Tableau_forfait));
+}
+
+// afficher le détail d'un forfait
+function affich_detail_forfait(){
+    var table_detail = Tableau_forfait['forfait'];
+    //afficher le detail d'un model
+    //alert(array2json(Tableau_forfait));
+    for(key in table_detail){
+	    var strContent_detail_key = 'forfait_' + key ;
+	    var strContent_resume_key = 'resume_' + key ;
+	    //alert(strContent_detail_key);
+	    var id_detail_key = document.getElementById(strContent_detail_key);
+	    var id_resume_key = document.getElementById(strContent_resume_key);
+	    if(id_detail_key != null){
+		strContent = new String();
+		strContent = table_detail[key];
+		remplacerTexte(id_detail_key, strContent);
+	    }
+	    if(id_resume_key != null){
+		strContent = new String();
+		strContent = table_detail[key];
+		remplacerTexte(id_resume_key, strContent);
+	    }
+    }
 }
 
 
+//-------------------------------------------------------------------------------------------------
+// fonctions utiles pour l'obtention de la liste des forfaits
+//-------------------------------------------------------------------------------------------------
+
+// requette pour l'obtention du tableau des resultats
+function ok_new_forfait_info(result)
+{
+	alert(result);
+	document.getElementById('new_forfait_pic_wait').classname = 'off';
+	document.getElementById('new_forfait_pic_ok').classname = 'on';
+	get_current_calcul_account(Current_company['id']);
+}
+
+
+function send_new_forfait_info()
+{ 
+    document.getElementById('new_forfait_pic_wait').classname = 'on';
+    document.getElementById('new_forfait_pic_ok').classname = 'off';
+    var url_php = "/sc_admin_detail_company/valid_new_forfait";
+    $.getJSON(url_php,{"id_company": Current_company['id'], "id_forfait":Tableau_forfait['forfait']['id']},ok_new_forfait_info);
+}
 
 -->
