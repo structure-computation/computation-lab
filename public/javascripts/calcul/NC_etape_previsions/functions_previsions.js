@@ -195,7 +195,7 @@ function complete_calcul(){
 	send_calcul['file']=fichier_calcul;
 	send_calcul['id_model']=model_id;
 	send_calcul['id_calcul']=Tableau_init_select['id'];
-	alert(Tableau_init_select['id']);
+	//alert(Tableau_init_select['id']);
 	
 	$.ajax({
 	    url: "/calcul/send_calcul",

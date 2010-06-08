@@ -534,7 +534,7 @@ function img_init( canvas ) {
     canvas.onmousedown  = img_mouse_down;
     canvas.onmouseup    = img_mouse_up;
     canvas.onmousewheel = img_mouse_wheel;
-    alert(array2json(Tableau_id_model));
+    //alert(array2json(Tableau_id_model));
     // start new session. When ready, draw img
     //alert(address_php + "?mode=newsession&w=" + canvas.width + "&h=" + canvas.height);
     send_async_xml_http_request( address_php + "?mode=newsession&w=" + canvas.width + "&h=" + canvas.height + "&model_id=" + model_id + "&model_dim=" + dim_model , function( rep ) {

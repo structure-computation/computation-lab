@@ -127,7 +127,7 @@ function init_new_calculresult(new_calculresult_temp)
     {
         Tableau_init_select['id'] = 'nouveau calcul';
     }
-    alert(Tableau_init_select['id']);
+    //alert(Tableau_init_select['id']);
     affiche_Tableau_init_select();
 }
 

@@ -58,6 +58,7 @@ class DetailModelController < ApplicationController
     # socket d'envoie au serveur
     socket    = Socket.new( AF_INET, SOCK_STREAM, 0 )
     sockaddr  = Socket.pack_sockaddr_in( 12346, 'localhost' )
+    #sockaddr  = Socket.pack_sockaddr_in( 12346, 'sc2.ens-cachan.fr' )
     socket.connect( sockaddr )
     socket.write( send_data.to_json )
     #socket.write( file.read )
@@ -81,8 +82,25 @@ class DetailModelController < ApplicationController
   def download
     @id_model = params[:id_model]
     @id_resultat = params[:id_resultat]
-    name_file = '/home/scproduction/MODEL/model_' + @id_model + '/calcul_' + @id_resultat + '/resultat_0_0.vtu'
-    send_file name_file
+    #name_file = '/home/scproduction/MODEL/model_' + @id_model + '/calcul_' + @id_resultat + '/resultat_0_0.vtu'
+    
+    send_data  = { :id_model => @id_model, :id_resultat => @id_resultat, :mode => "download"};
+    
+    # socket d'envoie au serveur
+    socket    = Socket.new( AF_INET, SOCK_STREAM, 0 )
+    sockaddr  = Socket.pack_sockaddr_in( 12346, 'localhost' )
+    #sockaddr  = Socket.pack_sockaddr_in( 12346, 'sc2.ens-cachan.fr' )
+    socket.connect( sockaddr )
+    socket.write( send_data.to_json )
+    
+    # reponse du calculateur
+    results = socket.read
+    
+    # envoie du fichier en telechargement
+    name_resultats = 'result_' + @id_resultat + '.vtu'
+    send_data results, :filename => name_resultats
+
+    #send_file name_file
   end
  
 end
