@@ -54,4 +54,29 @@ class ScAdminDetailCompanyController < ApplicationController
     end 
   end
   
+  def get_list_abonnement
+    @abonnement = Abonnement.find(:all)
+    respond_to do |format|
+      format.js   {render :json => @abonnement.to_json}
+    end 
+  end
+  
+  def get_memory_account
+    @id_company = params[:id_company]
+    @current_company = Company.find(@id_company)
+    @memory_account = @current_company.memory_account
+    respond_to do |format|
+      format.js   {render :json => @memory_account.to_json}
+    end 
+  end
+  
+  def valid_new_abonnement
+    @id_company = params[:id_company]
+    @current_company = Company.find(@id_company)
+    @memory_account = @current_company.memory_account
+    @memory_account.add_abonnement(params[:id_abonnement])
+    respond_to do |format|
+      format.js   {render :json => { :result => 'success' }}
+    end 
+  end
 end

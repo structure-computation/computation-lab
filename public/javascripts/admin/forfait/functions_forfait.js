@@ -4,6 +4,7 @@
 // initialisation des type de forfaits possible pour l'achat d'un nouveau forfait
 var Tableau_forfait_list            =  new Array();              // tableau des forfait
 var Tableau_forfait             =  new Array();              // forfait selectionner
+var Tableau_forfait_filter            =  new Array();              // forfait selectionner
 
 
 //---------------------------------------------------------------------------------------------------------------------

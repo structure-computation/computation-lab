@@ -23,13 +23,13 @@
               Accueil
           %a{ :href => "/company" }
             %li#mSCmanage
-              SC manage
+              Ma société
           /%a{ :href => "/project" }
           /  %li#mSCproject
           /    SC project
           %a{ :href => "/modele" }
             %li#mSCcompute
-              SC compute
+              Mes modèles
       - if @page == 'SCmanage' 
         %ul
           %a{ :href => "/accueil" }
@@ -37,13 +37,13 @@
               Accueil
           %a{ :href => "/company" }
             %li#mSCmanage.selected
-              SC manage
+              Ma société
           /%li#mSCproject
           /  %a{ :href => "/project" }
           /    SC project
           %a{ :href => "/modele" }
             %li#mSCcompute
-              SC compute
+              Mes modèles
       - if @page == 'SC project' 
         %ul
           %a{ :href => "/accueil" }
@@ -51,13 +51,13 @@
               Accueil
           %a{ :href => "/company" }
             %li#mSCmanage
-              SC manage
+              Ma société
           /%a{ :href => "/project" }
           /  %li#mSCproject.selected
           /    SC project
           %a{ :href => "/modele" }
             %li#mSCcompute
-              SC compute
+              Mes modèles
       - if @page == 'SCcompute' 
         %ul
           %li#mAccueil
@@ -65,12 +65,12 @@
               Accueil
           %li#mSCmanage
             %a{ :href => "/company" }
-              SC manage
+              Ma société
           /%a{ :href => "/project" }
           /  %li#mSCproject
           /    SC project
           %a{ :href => "/modele" }
             %li#mSCcompute.selected
-              SC compute
+              Mes modèles
 
 / fin partie header

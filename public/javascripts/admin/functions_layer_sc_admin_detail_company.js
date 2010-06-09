@@ -6,6 +6,7 @@
 
 var Current_company                   =  new Array();              // company courrante
 var Current_calcul_account             =  new Array();              // calcul account courrant
+var Current_memory_account             =  new Array();              // memory account courrant
 
 var NMcurrent_stape                 =  0;                        // étape pour le wizzard nouveau resultat
 
@@ -18,11 +19,12 @@ var content_tableau_connect         =  new Array();              // connectivit�
 var content_tableau_current_page    =  new Array();              // numéro de la page du tableau (sert pour la définition de la connectivité)    
 var content_tableau_curseur_page    =  new Array();              // nombre de page du tableau (sert pour l'affichage des page en bas des tableaux)
 var content_tableau_liste_page      =  new Array();              // liste des pages du tableau (sert pour l'affichage des page en bas des tableaux)
-var content_tableau_page            =  new Array('gestionnaire','new_forfait');    // initialisation des pages avec tableau dynamique
+var content_tableau_page            =  new Array('gestionnaire','new_forfait','new_abonnement');    // initialisation des pages avec tableau dynamique
 
 var taille_tableau_content_page     =  new Array()               // taille du tableau dans la content box
 taille_tableau_content_page['gestionnaire'] = 20;
 taille_tableau_content_page['new_forfait'] = 8;
+taille_tableau_content_page['new_abonnement'] = 8;
 
 
 for(i=0; i<content_tableau_page.length ; i++){
@@ -335,6 +337,71 @@ function affich_detail_calcul_account(){
     var max_jeton = Current_calcul_account['report_jeton'] + Current_calcul_account['base_jeton'] + 1;
     var used_jeton = Current_calcul_account['used_jeton'];
     var taille_actuelle= used_jeton * taille_max / max_jeton;
+    
+    progress_bar.style.width = taille_actuelle + 'px'; 
+    info_progress_bar.style.width = taille_actuelle + 'px'; 
+    //alert(progress_bar.style.width);
+}
+
+
+//---------------------------------------------------------------------------------------------------------
+// fonctions utiles pour l'affichage du detail du memory account
+//---------------------------------------------------------------------------------------------------------
+
+// traitement en fin de requette pour laffichage du memory account
+function init_current_memory_account(Current_memory_account_temp)
+{
+    // var Tableau_calcul_temp = eval('[' + response + ']');
+    if (Current_memory_account_temp)
+    {   
+        Current_memory_account = Current_memory_account_temp['memory_account'];
+    }
+    //alert('ok');
+    //alert(array2json(Current_company));
+    affich_detail_memory_account();
+}
+// requette pour l'obtention du tableau des resultats
+function get_current_memory_account(id_company)
+{ 
+    var url_php = "/sc_admin_detail_company/get_memory_account";
+    $.getJSON(url_php,{"id_company": id_company},init_current_memory_account);
+}
+
+
+
+// afficher le détail d'une company
+function affich_detail_memory_account(){
+    var table_detail = Current_memory_account;
+    //afficher le detail d'un model
+    for(key in table_detail){
+	    var strContent_detail_key = 'memory_account_' + key ;
+	    var strContent_info_key = 'memory_account_info_' + key ;
+	    var id_detail_key = document.getElementById(strContent_detail_key);
+	    var id_info_key = document.getElementById(strContent_info_key);
+	    if(id_detail_key != null){
+		strContent = new String();
+		strContent = table_detail[key];
+		remplacerTexte(id_detail_key, strContent);
+	    }
+	    if(id_info_key != null){
+		strContent = new String();
+		if(key=='base_jeton'){
+			strContent = table_detail[key] + 10;
+			
+		}else{
+			strContent = table_detail[key];
+		}
+		remplacerTexte(id_info_key, strContent);
+	    }
+    }
+    // taille de la progress_bar
+    var progress_bar = document.getElementById('memory_account_progress_bar'); 
+    var info_progress_bar = document.getElementById('memory_account_info_progress_bar');
+    
+    var taille_max= 294;
+    var max_memory = Current_memory_account['assigned_memory'] + 1;
+    var used_memory = Current_memory_account['used_memory'];
+    var taille_actuelle= used_memory * taille_max / max_memory;
     
     progress_bar.style.width = taille_actuelle + 'px'; 
     info_progress_bar.style.width = taille_actuelle + 'px'; 

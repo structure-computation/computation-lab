@@ -9,12 +9,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100506222841) do
+ActiveRecord::Schema.define(:version => 20100609205039) do
 
   create_table "abonnements", :force => true do |t|
     t.string   "name"
     t.float    "price"
-    t.integer  "Assigned_memory"
+    t.integer  "assigned_memory"
     t.integer  "security_level"
     t.integer  "nb_max_user"
     t.string   "state"
@@ -165,6 +165,16 @@ ActiveRecord::Schema.define(:version => 20100506222841) do
     t.datetime "updated_at"
   end
 
+  create_table "log_abonnements", :force => true do |t|
+    t.integer  "memory_account_id"
+    t.integer  "abonnement_id"
+    t.integer  "assigned_memory"
+    t.integer  "price"
+    t.date     "abonnement_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "log_calculs", :force => true do |t|
     t.integer  "calcul_result_id"
     t.integer  "calcul_account_id"
@@ -236,11 +246,12 @@ ActiveRecord::Schema.define(:version => 20100506222841) do
 
   create_table "memory_accounts", :force => true do |t|
     t.integer  "company_id"
-    t.integer  "abonnement_id"
     t.text     "description"
     t.date     "inscription_date"
     t.date     "end_date"
     t.string   "type"
+    t.integer  "assigned_memory"
+    t.float    "used_memory"
     t.string   "status"
     t.datetime "created_at"
     t.datetime "updated_at"

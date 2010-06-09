@@ -15,15 +15,15 @@
         %td.cadre{ :style => "width: 365px;" }
           utilisation actuelle
       %tr
-        %td.gras
+        %td.gras#memory_account_assigned_memory
           500 
-        %td.gras
+        %td.gras#memory_account_end_date
           10-12-2010
-        %td
+        %td.gras#memory_account_used_memory
           100
           .ResumeCompte3GreenBar{ :style => "margin: 0px 0px 0 0px;" }
             .ResumeCompte3GreenBarDebut
-            .ResumeCompte3GreenBarMilieu{ :style => "width: 110px ;" }
+            .ResumeCompte3GreenBarMilieu#memory_account_progress_bar
             .ResumeCompte3GreenBarFin
 
   .margeText1
@@ -33,6 +33,6 @@
       Description :  
     Les modèles et les calculs effectués par vos ingénieurs peuvent générés des données prenant beaucoup d'espace mémoire. Dans le cadre de votre abonnement annuel, nous mettons à votre disposition un espace mémoire minimum. En cas de dépassement, l'espace supplémentaire utilisé vous sera facturé 0,3 Euros\/giga\/moi. Vous pouvez à tous moments modifier votre abonnement mémoire en contactant notre serv ice clientelle. 
    
-  %a{ :href => "#", :onclick => "displayNewCompany('on')" }
+  %a{ :href => "#", :onclick => "displayNewAbonnement('on')" }
     .largeBoxFilterBoutonJaune
       modifier l'abonnement
