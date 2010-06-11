@@ -5,6 +5,7 @@
 / Javascript particulier a la page societe
 %script{ :src => "/javascripts/company/functions_layer_company.js" ,   :type => "text/javascript" }
 %script{ :src => "/javascripts/company/forfait/functions_forfait.js" ,   :type => "text/javascript" }
+%script{ :src => "/javascripts/company/abonnement/functions_abonnement.js" ,   :type => "text/javascript" }
 / wizard création de projet en premier plan
 #content
   #bl_5.black.off
@@ -14,8 +15,8 @@
   / partie gauche du contenu, raccourci
   #contentleft
     /.contentheightmin
-    = render :partial => "partials/raccourcis_comptes_leftbox"
-    = render :partial => "partials/raccourcis_membres_leftbox"
+    = render :partial => "partials/raccourcis_company"
+    = render :partial => "context_leftbox"
   / fin partie gauche du contenu
   
   / partie droite du contenu, tableaux, informations importantes
@@ -30,9 +31,6 @@
       /compte de calcul
       = render :partial => "company/calcul/resume_calcul"
       = render :partial => "company/calcul/contenu_calcul"
-      /liste des facture
-      = render :partial => "company/facture/resume_facture"
-      = render :partial => "company/facture/contenu_facture"
 
     #largeBox
       %h2
@@ -45,6 +43,7 @@
   / fin de #contentright, partie droite du contenu
 %script{ :type => "text/javascript" }
   $(document).ready(function() {get_current_calcul_account( #{@id_company} )});
+  $(document).ready(function() {get_current_memory_account( #{@id_company} )});
   
 =javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery?
   

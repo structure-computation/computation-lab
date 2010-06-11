@@ -1,0 +1,44 @@
+.DetailCadre{ :style => "height: 420px;" }
+  .DetailCadreModelTitre
+    Membre
+    %span#membre_detail_name
+      nom
+  .DetailCadreModel1
+    .DetailCadreModelMarge
+    .DetailCadreModelLigne
+      .DetailCadreModelCase1
+        email
+      .DetailCadreModelCase2#membre_detail_email
+        j.bellec@structure-computation.com
+    .DetailCadreModelLigne
+      .DetailCadreModelCase1
+        Nom
+      .DetailCadreModelCase2#membre_detail_lastname
+        Bellec
+    .DetailCadreModelLigne
+      .DetailCadreModelCase1
+        Prenom
+      .DetailCadreModelCase2#membre_detail_firstname
+        jérémie
+    .DetailCadreModelLigne
+      .DetailCadreModelCase1
+        Droits
+      .DetailCadreModelCase2#membre_detail_role
+        ingénieur
+
+    .DetailCadreModelMarge
+    .DetailCadreModelLigne
+      .DetailCadreModelCase1
+        Statut
+      .DetailCadreModelCase2#membre_detail_state
+        actif
+    .DetailCadreModelLigne  
+      .DetailCadreModelCase1
+        date d'arrivée
+      .DetailCadreModelCase2#membre_detail_created_at
+        01\/03\/2009
+  
+.DetailFermeture
+  %a{:style => "cursor: pointer;", :onclick => "ferme_detail_facture()" }
+    .DetailTextFermeture
+      Fermer le détail

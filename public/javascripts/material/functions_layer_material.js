@@ -70,19 +70,37 @@ function filtre_Tableau_material(){
     Tableau_material_filter = Tableau_material;
 }
 
-// affichage du tableau des materials
+// affichage du tableau membre
 function affiche_Tableau_material(){
     taille_tableau_content  =  taille_tableau_content_page['material'];
     filtre_Tableau_material();
     var current_tableau     =  Tableau_material_filter;
     var strname             =  'material';
-    // var stridentificateur   =  new Array('name','project','new_results','résults');
-    var stridentificateur   =  new Array('name','name','mtype','comp');
-    affiche_Tableau_content(current_tableau, strname, stridentificateur);
+    var strnamebdd          =  'material';
+    var stridentificateur   =  new Array('name','familly','mtype','comp');
+    affiche_Tableau_content(current_tableau, strname, strnamebdd, stridentificateur);
 }
 
+// affiche la page num pour la liste des materials
+function go_page_material(num){
+    if(num=='first'){
+        content_tableau_current_page['material'] = 0;
+    }else if(num=='end'){
+        content_tableau_current_page['material'] = content_tableau_liste_page['material'].length-1;
+    }else{
+        var num_page = num + content_tableau_curseur_page['material'];
+        content_tableau_current_page['material'] = content_tableau_liste_page['material'][num_page]-1;    
+    }
+    affiche_Tableau_material();
+}
+
+//------------------------------------------------------------------------------------------------------
+// fonctions generique pour l'affichage d'un tableau
+//------------------------------------------------------------------------------------------------------
+
+
 // affichage des tableau content ('LM_material')
-function affiche_Tableau_content(current_tableau, strname, stridentificateur){
+function affiche_Tableau_content(current_tableau, strname, strnamebdd, stridentificateur){
     var taille_Tableau=current_tableau.length;
     for(i=0; i<taille_tableau_content; i++) {
         i_page = i + content_tableau_current_page[strname] * taille_tableau_content;
@@ -90,16 +108,15 @@ function affiche_Tableau_content(current_tableau, strname, stridentificateur){
         
         strContent_lign = strname + '_lign_' + i;
 	strContent_pair = strname + '_pair_' + i;
-        strContent_2 = strname + '_2_' + i;
-        strContent_3 = strname + '_3_' + i;
-        strContent_4 = strname + '_4_' + i;
-	strContent_5 = strname + '_5_' + i;
-        var id_lign  = document.getElementById(strContent_lign);
+	//alert(strContent_lign);
+	var id_lign  = document.getElementById(strContent_lign);
 	var id_pair  = document.getElementById(strContent_pair);
-        var id_2     = document.getElementById(strContent_2);
-        var id_3     = document.getElementById(strContent_3);
-        var id_4     = document.getElementById(strContent_4);
-	var id_5     = document.getElementById(strContent_5);
+	strContent =  new Array();
+	idContent =  new Array();
+	for(j=0; j<stridentificateur.length; j++) {
+	      strContent[j] = strname + '_' + j + '_' + i;
+	      idContent[j] = document.getElementById(strContent[j]);
+	}
         
         if(i_page<taille_Tableau){
             id_lign.className = "largeBoxTable_lign on";
@@ -108,14 +125,11 @@ function affiche_Tableau_content(current_tableau, strname, stridentificateur){
 	    }else{
 		id_pair.className = "largeBoxTable_lign_impair";
 	    }
-            strtemp_2 = current_tableau[i_page]['material'][stridentificateur[0]];
-            strtemp_3 = current_tableau[i_page]['material'][stridentificateur[1]];
-            strtemp_4 = current_tableau[i_page]['material'][stridentificateur[2]];
-	    strtemp_5 = current_tableau[i_page]['material'][stridentificateur[3]];
-            remplacerTexte(id_2, strtemp_2);
-            remplacerTexte(id_3, strtemp_3);
-            remplacerTexte(id_4, strtemp_4);
-	    remplacerTexte(id_5, strtemp_5);
+	    strtemp =  new Array();
+	    for(j=0; j<stridentificateur.length; j++) {
+		  strtemp[j] = current_tableau[i_page][strnamebdd][stridentificateur[j]];
+		  remplacerTexte(idContent[j], strtemp[j]);
+	    }
         }else{
             id_lign.className = "largeBoxTable_lign off";
         }
@@ -156,18 +170,6 @@ function affiche_Tableau_content(current_tableau, strname, stridentificateur){
     }  
 }
 
-// affiche la page num pour la liste des materials
-function go_page_material(num){
-    if(num=='first'){
-        content_tableau_current_page['material'] = 0;
-    }else if(num=='end'){
-        content_tableau_current_page['material'] = content_tableau_liste_page['material'].length-1;
-    }else{
-        var num_page = num + content_tableau_curseur_page['material'];
-        content_tableau_current_page['material'] = content_tableau_liste_page['material'][num_page]-1;    
-    }
-    affiche_Tableau_material();
-}
 
 //---------------------------------------------------------------------------------------------------------------------
 // fonctions utiles pour l'affichage du detail d'un materiaux

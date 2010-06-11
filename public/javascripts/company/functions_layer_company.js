@@ -9,6 +9,8 @@ var Tableau_facture	                   =  new Array();              // tableau d
 var Tableau_facture_filter  	           =  new Array();              // tableau du solde calcul filtres pour l'affichage
 var Tableau_gestionnaire	           =  new Array();              // tableau du solde calcul
 var Company_detail			   =  new Array();              // detail de la company
+var Current_calcul_account		   =  new Array();              // detail du calcul account
+var Current_memory_account		   =  new Array();              // detail du memory account
 
 
 //initialisation de la taille du tableau pour la box content et de la table de correspondance
@@ -17,10 +19,9 @@ var content_tableau_connect         =  new Array();              // connectivit�
 var content_tableau_current_page    =  new Array();              // numéro de la page du tableau (sert pour la définition de la connectivité)    
 var content_tableau_curseur_page    =  new Array();              // nombre de page du tableau (sert pour l'affichage des page en bas des tableaux)
 var content_tableau_liste_page      =  new Array();              // liste des pages du tableau (sert pour l'affichage des page en bas des tableaux)
-var content_tableau_page            =  new Array('solde_calcul','facture','gestionnaire');    // initialisation des pages avec tableau dynamique
+var content_tableau_page            =  new Array('solde_calcul','gestionnaire');    // initialisation des pages avec tableau dynamique
 var taille_tableau_content_page     =  new Array()               // taille du tableau dans la content box
 taille_tableau_content_page['solde_calcul'] = 10;
-taille_tableau_content_page['facture'] = 10;
 taille_tableau_content_page['gestionnaire'] = 10;
 
 
@@ -38,49 +39,6 @@ for(i=0; i<content_tableau_page.length ; i++){
 //-----------------------------------------------------------------------------------------------------------
 // affichage des contenu a partir de fleches
 //-----------------------------------------------------------------------------------------------------------
-
-var bool_affiche_compte_abonnement = false ;
-
-function affich_contenu_compte_abonnement(){
-	if(!bool_affiche_compte_abonnement){
-		// switch du contenu
-		$('#CompteAbonnementContent').slideDown("slow");
-		// bouton afficher
-		id_fleche_compte_abonnement = document.getElementById('CompteAbonnementFleche');	
-		id_fleche_compte_abonnement.className = 'ResumeCompte1Selected';
-		bool_affiche_compte_abonnement = true ;
-	}
-	else if(bool_affiche_compte_abonnement){
-		// switch du contenu
-		$('#CompteAbonnementContent').slideUp("slow");
-		// bouton afficher
-		id_fleche_compte_abonnement = document.getElementById('CompteAbonnementFleche');	
-		id_fleche_compte_abonnement.className = 'ResumeCompte1';
-		bool_affiche_compte_abonnement = false ;
-	}
-}
-
-var bool_affiche_factures = false ;
-
-function affich_contenu_factures(){
-	if(!bool_affiche_factures){
-		get_Tableau_facture();
-		// switch du contenu
-		$('#FactureContent').slideDown("slow");
-		// bouton afficher
-		id_fleche_compte_abonnement = document.getElementById('FactureFleche');	
-		id_fleche_compte_abonnement.className = 'ResumeCompte1Selected';
-		bool_affiche_factures = true ;
-	}
-	else if(bool_affiche_factures){
-		// switch du contenu
-		$('#FactureContent').slideUp("slow");
-		// bouton afficher
-		id_fleche_compte_abonnement = document.getElementById('FactureFleche');	
-		id_fleche_compte_abonnement.className = 'ResumeCompte1';
-		bool_affiche_factures = false ;
-	}
-}
 
 var bool_affiche_profil_company = false ;
 
@@ -103,35 +61,6 @@ function affich_contenu_profil_company(){
 		bool_affiche_profil_company = false ;
 	}
 }
-
-//-----------------------------------------------------------------------------------------------------------
-// dans le contenu de la liste des facture
-//-----------------------------------------------------------------------------------------------------------
-
-function affich_liste_facture(){
-  id_off = document.getElementById('FCDetail');	
-  id_off.className = 'CompteContent off';
-  id_on = document.getElementById('FCListe');	
-  id_on.className = 'CompteContent on';
-  
-  id_not_selected = document.getElementById('FMDetail');	
-  id_not_selected.className = '';
-  id_selected = document.getElementById('FMListe');	
-  id_selected.className = 'selected';
-}
-
-function affich_detail_facture(){
-  id_off = document.getElementById('FCListe');	
-  id_off.className = 'CompteContent off';
-  id_on = document.getElementById('FCDetail');	
-  id_on.className = 'CompteContent on';
-  
-  id_not_selected = document.getElementById('FMListe');	
-  id_not_selected.className = '';
-  id_selected = document.getElementById('FMDetail');	
-  id_selected.className = 'selected';
-}
-
 
 
 //-----------------------------------------------------------------------------------------------------------
@@ -163,65 +92,6 @@ function affich_detail_company(){
   id_selected.className = 'selected';
 }
 
-//------------------------------------------------------------------------------------------------------
-// fonctions utiles pour l'affichage de la liste des factures
-//------------------------------------------------------------------------------------------------------
-
-// traitement en fin de requette pour laffichage du tableau des materials
-function init_Tableau_facture(Tableau_facture_temp)
-{
-    //alert(Tableau_facture_temp);
-    // var Tableau_calcul_temp = eval('[' + response + ']');
-    if (Tableau_facture_temp)
-    {   
-        Tableau_facture = Tableau_facture_temp;
-    }
-    else
-    {
-        Tableau_facture[0]         =  new Array();
-        Tableau_facture[0]['total'] = 'aucune facture';
-    }
-    affiche_Tableau_facture();
-}
-// requette pour l'obtention du tableau des materials
-function get_Tableau_facture()
-{ 
-    var url_php = "/company/get_facture";
-    $.getJSON(url_php,[],init_Tableau_facture);
-}
-
-function filtre_Tableau_facture(){
-    Tableau_facture_filter = Tableau_facture;
-    var taille_Tableau=Tableau_facture_filter.length;
-    for(i=0; i<taille_Tableau; i++) {
-       Tableau_facture_filter[i]['facture']['numero'] = 'numéro_' + i ;
-    }
-}
-
-// affichage du tableau decompte calcul
-function affiche_Tableau_facture(){
-    //alert(Tableau_facture[0]['facture']['created_at']);
-    taille_tableau_content  =  taille_tableau_content_page['facture'];
-    filtre_Tableau_facture();
-    var current_tableau     =  Tableau_facture_filter;
-    var strname             =  'facture';
-    var strnamebdd          =  'facture';
-    var stridentificateur   =  new Array('created_at','numero','total_calcul','total_memory','total');
-    affiche_Tableau_content(current_tableau, strname, strnamebdd, stridentificateur);
-}
-
-// affiche la page num pour le decompte calcul
-function go_page_facture(num){
-    if(num=='first'){
-        content_tableau_current_page['facture'] = 0;
-    }else if(num=='end'){
-        content_tableau_current_page['facture'] = content_tableau_liste_page['facture'].length-1;
-    }else{
-        var num_page = num + content_tableau_curseur_page['facture'];
-        content_tableau_current_page['facture'] = content_tableau_liste_page['facture'][num_page]-1;    
-    }
-    affiche_Tableau_facture();
-}
 
 //------------------------------------------------------------------------------------------------------
 // fonctions utiles pour l'affichage de la liste des gestionnaires

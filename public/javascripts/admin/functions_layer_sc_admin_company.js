@@ -16,11 +16,17 @@ var content_tableau_curseur_page    =  new Array();              // nombre de pa
 var content_tableau_liste_page      =  new Array();              // liste des pages du tableau (sert pour l'affichage des page en bas des tableaux)
 var content_tableau_page            =  new Array('company');    // initialisation des pages avec tableau dynamique
 
+var taille_tableau_content_page     =  new Array()               // taille du tableau dans la content box
+taille_tableau_content_page['company'] = 20;
+
+
+
 for(i=0; i<content_tableau_page.length ; i++){
-    content_tableau_connect[content_tableau_page[i]] = new Array(taille_tableau_content);
+    content_tableau_connect[content_tableau_page[i]] = new Array(taille_tableau_content_page[content_tableau_page[i]]);
     content_tableau_current_page[content_tableau_page[i]] = 0;
     content_tableau_curseur_page[content_tableau_page[i]] = 0;
     content_tableau_liste_page[content_tableau_page[i]] = [1];
+    taille_tableau_content = taille_tableau_content_page[content_tableau_page[i]];
     for(j=0; j<taille_tableau_content ; j++){
         content_tableau_connect[content_tableau_page[i]][j]=j;
     }
@@ -79,19 +85,38 @@ function filtre_Tableau_company(){
     Tableau_company_filter = Tableau_company;
 }
 
-// affichage du tableau des companys
+
+// affichage du tableau membre
 function affiche_Tableau_company(){
-    taille_tableau_content  =  20;
+    taille_tableau_content  =  taille_tableau_content_page['company'];
     filtre_Tableau_company();
     var current_tableau     =  Tableau_company_filter;
     var strname             =  'company';
-    // var stridentificateur   =  new Array('name','project','new_results','résults');
-    var stridentificateur   =  new Array('name','name','city','country');
-    affiche_Tableau_content(current_tableau, strname, stridentificateur);
+    var strnamebdd          =  'company';
+    var stridentificateur   =  new Array('name','created_at','city','country');
+    affiche_Tableau_content(current_tableau, strname, strnamebdd, stridentificateur);
 }
 
-// affichage des tableau content ('LM_company')
-function affiche_Tableau_content(current_tableau, strname, stridentificateur){
+// affiche la page num pour la liste des companys
+function go_page_company(num){
+    if(num=='first'){
+        content_tableau_current_page['company'] = 0;
+    }else if(num=='end'){
+        content_tableau_current_page['company'] = content_tableau_liste_page['company'].length-1;
+    }else{
+        var num_page = num + content_tableau_curseur_page['company'];
+        content_tableau_current_page['company'] = content_tableau_liste_page['company'][num_page]-1;    
+    }
+    affiche_Tableau_company();
+}
+
+
+//------------------------------------------------------------------------------------------------------
+// fonctions generique pour l'affichage d'un tableau
+//------------------------------------------------------------------------------------------------------
+
+
+function affiche_Tableau_content(current_tableau, strname, strnamebdd, stridentificateur){
     var taille_Tableau=current_tableau.length;
     for(i=0; i<taille_tableau_content; i++) {
         i_page = i + content_tableau_current_page[strname] * taille_tableau_content;
@@ -99,34 +124,30 @@ function affiche_Tableau_content(current_tableau, strname, stridentificateur){
         
         strContent_lign = strname + '_lign_' + i;
 	strContent_pair = strname + '_pair_' + i;
-        strContent_2 = strname + '_2_' + i;
-        strContent_3 = strname + '_3_' + i;
-        strContent_4 = strname + '_4_' + i;
-	strContent_5 = strname + '_5_' + i;
-        var id_lign  = document.getElementById(strContent_lign);
+	//alert(strContent_lign);
+	var id_lign  = document.getElementById(strContent_lign);
 	var id_pair  = document.getElementById(strContent_pair);
-        var id_2     = document.getElementById(strContent_2);
-        var id_3     = document.getElementById(strContent_3);
-        var id_4     = document.getElementById(strContent_4);
-	var id_5     = document.getElementById(strContent_5);
+	strContent =  new Array();
+	idContent =  new Array();
+	for(j=0; j<stridentificateur.length; j++) {
+	      strContent[j] = strname + '_' + j + '_' + i;
+	      idContent[j] = document.getElementById(strContent[j]);
+	}
         
         if(i_page<taille_Tableau){
-            id_lign.className = "largeBoxTable_Company_lign on";
+            id_lign.className = "largeBoxTable_lign on";
 	    if(pair(i)){
-		id_pair.className = "largeBoxTable_Company_lign_pair";
+		id_pair.className = "largeBoxTable_lign_pair";
 	    }else{
-		id_pair.className = "largeBoxTable_Company_lign_impair";
+		id_pair.className = "largeBoxTable_lign_impair";
 	    }
-            strtemp_2 = current_tableau[i_page]['company'][stridentificateur[0]];
-            strtemp_3 = current_tableau[i_page]['company'][stridentificateur[1]];
-            strtemp_4 = current_tableau[i_page]['company'][stridentificateur[2]];
-	    strtemp_5 = current_tableau[i_page]['company'][stridentificateur[3]];
-            remplacerTexte(id_2, strtemp_2);
-            remplacerTexte(id_3, strtemp_3);
-            remplacerTexte(id_4, strtemp_4);
-	    remplacerTexte(id_5, strtemp_5);
+	    strtemp =  new Array();
+	    for(j=0; j<stridentificateur.length; j++) {
+		  strtemp[j] = current_tableau[i_page][strnamebdd][stridentificateur[j]];
+		  remplacerTexte(idContent[j], strtemp[j]);
+	    }
         }else{
-            id_lign.className = "largeBoxTable_Company_lign off";
+            id_lign.className = "largeBoxTable_lign off";
         }
     }
     // pour l'affichage des page en bas de la boite
@@ -165,18 +186,8 @@ function affiche_Tableau_content(current_tableau, strname, stridentificateur){
     }  
 }
 
-// affiche la page num pour la liste des companys
-function go_page_company(num){
-    if(num=='first'){
-        content_tableau_current_page['company'] = 0;
-    }else if(num=='end'){
-        content_tableau_current_page['company'] = content_tableau_liste_page['company'].length-1;
-    }else{
-        var num_page = num + content_tableau_curseur_page['company'];
-        content_tableau_current_page['company'] = content_tableau_liste_page['company'][num_page]-1;    
-    }
-    affiche_Tableau_company();
-}
+
+
 
 //---------------------------------------------------------------------------------------------------------------------
 // fonctions utiles pour l'affichage du detail d'une company

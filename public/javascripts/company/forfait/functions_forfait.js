@@ -190,5 +190,15 @@ function affich_detail_calcul_account(){
     //alert(progress_bar.style.width);
 }
 
+//---------------------------------------------------------------------------------------------------------
+// fonctions utiles pour la modification du compte
+//---------------------------------------------------------------------------------------------------------
+
+
+
+function modif_compte_calcul(){
+    alert("Pour toute modification, \n veuillez contacter nos conseillés");
+}
+
 
 -->

@@ -1303,6 +1303,165 @@ body
 }
 
 
+
+/*
+ * tableau pour les listes dans les pages facture... largebox
+ *
+ */
+ 
+.largeBoxTable
+{
+  //height: 230px;
+  width: 725px;
+  margin: 13px 0px 0 9px; 
+  float: left;
+}
+ 
+.largeBoxTable_first
+{
+  border: none;
+  background : transparent url('../images/tableau_header_Bg.png') repeat-x left top;
+  height: 35px;
+  width: 722px;
+  line-height: 30px;
+  font-size: 0.75em;
+  font-style: bold;
+  text-align: left;
+  //font-weight: normal;
+  //border-bottom: thin solid #ffffff;
+  color: #ffffff;
+  float: left;
+}
+.largeBoxTable_0
+{
+  margin: 0px 0px 0 5px;
+  height: 35px; 
+  background: transparent ;
+  float: left;
+}
+.largeBoxTable_0 p 
+{
+   vertical-align: middle; 
+   //display: inline;
+}
+
+.largeBoxTable_lign
+{
+  width: 723px;
+  height: 35px;
+  //border-bottom: thin solid #3d4993;
+  //border-bottom: thin solid #efefef;
+  line-height: 33px;
+  font-weight: 100;
+  font-size: 0.75em;
+  color: black;
+  background: transparent ;
+  float:left;
+}
+.largeBoxTable_lign a
+{
+  color: #2a3556;
+  text-aligned:center;
+  text-decoration:none;
+}
+
+.largeBoxTable_lign_pair
+{	
+  width: 723px;
+  height: 35px;
+  background-color: #b8b9c3 ;
+  float:left;
+}
+.largeBoxTable_lign_impair
+{
+  width: 723px;
+  height: 35px;
+  background-color: #cacbd5 ;
+  float:left;
+}
+.largeBoxTable_lign_pair:hover, .contentBoxTable_lign_impair:hover
+{
+  background-color: #9297a8 ;
+  color: #ffffff;
+}
+.largeBoxTable_fleche
+{
+  width: 25px;
+  height: 35px; 
+  background: transparent url('../images/fleche.png') no-repeat center center;
+  border-right: thin solid #ffffff;
+  float: left;
+}
+.largeBoxTable_fleche:hover
+{
+  background: transparent url('../images/LM_fleche_select.png') no-repeat center center;
+}
+.largeBoxTable_1
+{
+  height: 25px; 
+  background: transparent ;
+  border-right: thin solid #ffffff;
+  float: left;
+}
+.largeBoxTable_2
+{
+  height: 35px; 
+  margin: 0px 0px 0 5px;
+  background: transparent ;
+  border-right: thin solid #ffffff;
+  float: left;
+}
+.largeBoxTable_3
+{
+  height: 35px; 
+  margin: 0px 0px 0 5px;
+  background: transparent ;
+  float: left;
+}
+.largeBoxTable_4
+{
+  height: 35px; 
+  margin: 0px 0px 0 5px;
+  background: transparent ;
+  float: left;
+}
+.largeBoxTable_visu
+{
+  background: transparent url('../images/LM_visu.png') no-repeat center center;
+  width: 55px;
+  height: 35px; 
+  border-right: thin solid #ffffff;
+  margin: 0px 0px 0 5px;
+  float: left;
+}
+.largeBoxTable_compute
+{
+  background: transparent url('../images/LM_compute.png') no-repeat center center;
+  width: 55px;
+  height: 35px; 
+  border-right: thin solid #ffffff;
+  margin: 0px 0px 0 5px;
+  float: left;
+}
+.largeBoxTable_download
+{
+  background: transparent url('../images/download.png') no-repeat center center;
+  width: 55px;
+  height: 35px; 
+  border-right: thin solid #ffffff;
+  margin: 0px 0px 0 0px;
+  float: left;
+}
+.largeBoxTable_suppr
+{
+  background: transparent url('../images/croix_suppr.png') no-repeat center center;
+  width: 25px;
+  height: 35px; 
+  border-right: thin solid #ffffff;
+  margin: 0px 0px 0 0px;
+  float: left;
+}
+
 /*
  * zones de texte
  *

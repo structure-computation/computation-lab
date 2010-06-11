@@ -14,9 +14,8 @@
   / partie gauche du contenu, raccourci
   #contentleft
     /.contentheightmin
-    = render :partial => "partials/raccourcis_comptes_leftbox"
-    = render :partial => "partials/raccourcis_membres_leftbox"
-  / fin partie gauche du contenu
+    = render :partial => "partials/raccourcis_accueil"
+    = render :partial => "context_leftbox"
   
   / partie droite du contenu, tableaux, informations importantes
   #contentright
@@ -27,7 +26,7 @@
       /outil de calcul
       = render :partial => "resume_SC_Compute"
       /outil de gestion de projet
-      = render :partial => "resume_SC_Project"
+      /= render :partial => "resume_SC_Project"
       /outil de gestion des compte
       = render :partial => "resume_SC_Manage"
       

@@ -1,29 +1,28 @@
-
-#largeBoxTable_Membre
-  #largeBoxTable_Membre_first
-    #membre_0_1.largeBoxTable_Membre_0{ :style => "width: 21px;" }
-    #membre_0_2.largeBoxTable_Membre_0{ :style => "width: 246px;" }
+.largeBoxTable
+  .largeBoxTable_first
+    .largeBoxTable_0{ :style => "width: 25px;" }
+    .largeBoxTable_0{ :style => "width: 246px;" }
       %p
-        Mail
-    #membre_0_3.largeBoxTable_Membre_0{ :style => "width: 196px;" }
+        Mail                   
+    .largeBoxTable_0{ :style => "width: 193px;" }
       %p
-        Nom
-    #membre_0_4.largeBoxTable_Membre_0{ :style => "width: 148px;" }
+        Nom 
+    .largeBoxTable_0{ :style => "width: 148px;" }
       %p
         Rôle
-    #membre_0_5.largeBoxTable_Membre_0{ :style => "width: 60px;" }
+    .largeBoxTable_0{ :style => "width: 60px;" }
       %p
         Statut
-    #membre_0_6.largeBoxTable_Membre_0{ :style => "width: 21px;" }
     
   - (0...20).each do |i|
-    .largeBoxTable_Membre_lign{ :id => "membre_lign_#{i}" }
-      .largeBoxTable_Membre_lign_pair{ :id => "membre_pair_#{i}" }
+    .largeBoxTable_lign.off{ :id => "membre_lign_#{i}" }
+      .largeBoxTable_lign_pair{ :id => "membre_pair_#{i}" }
         %a{ :style => "cursor: pointer;", :onclick => "affich_detail_membre(#{i})" }
-          .largeBoxTable_Membre_1{ :id => "membre_1_#{i}" }
-        .largeBoxTable_Membre_2{ :id => "membre_2_#{i}" }
-        .largeBoxTable_Membre_3{ :id => "membre_3_#{i}" }
-        .largeBoxTable_Membre_4{ :id => "membre_4_#{i}" }
-        .largeBoxTable_Membre_5{ :id => "membre_5_#{i}" }
-        .largeBoxTable_Membre_6{ :id => "membre_6_#{i}" }
+          .largeBoxTable_fleche
+        .largeBoxTable_2{ :id => "membre_0_#{i}", :style => "width: 246px;" }
+        .largeBoxTable_2{ :id => "membre_1_#{i}", :style => "width: 193px;" }
+        .largeBoxTable_2{ :id => "membre_2_#{i}", :style => "width: 148px;" }
+        .largeBoxTable_2{ :id => "membre_3_#{i}", :style => "width: 60px;" }
+        .largeBoxTable_suppr
   / Fin du tableau de présentation des modèles.
+

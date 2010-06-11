@@ -1,0 +1,34 @@
+.largeBoxTable
+  .largeBoxTable_first
+    .largeBoxTable_0{ :style => "width: 25px;" }
+    .largeBoxTable_0{ :style => "width: 161px;" }
+      %p
+        Date                   
+    .largeBoxTable_0{ :style => "width: 100px;" }
+      %p
+        Numéro 
+    .largeBoxTable_0{ :style => "width: 100px;" }
+      %p
+        Type
+    .largeBoxTable_0{ :style => "width: 100px;" }
+      %p
+        Abonnement
+    .largeBoxTable_0{ :style => "width: 100px;" }
+      %p
+        Forfait
+    .largeBoxTable_0{ :style => "width: 100px;" }
+      %p
+        Total
+    
+  - (0...10).each do |i|
+    .largeBoxTable_lign.off{ :id => "facture_lign_#{i}" }
+      .largeBoxTable_lign_pair{ :id => "facture_pair_#{i}" }
+        %a{ :style => "cursor: pointer;", :onclick => "affich_detail_facture(#{i})" }
+          .largeBoxTable_fleche
+        .largeBoxTable_2{ :id => "facture_0_#{i}", :style => "width: 161px;" }
+        .largeBoxTable_2{ :id => "facture_1_#{i}", :style => "width: 100px;" }
+        .largeBoxTable_2{ :id => "facture_2_#{i}", :style => "width: 100px;" }
+        .largeBoxTable_2{ :id => "facture_3_#{i}", :style => "width: 100px;" }
+        .largeBoxTable_2{ :id => "facture_4_#{i}", :style => "width: 100px;" }
+        .largeBoxTable_2{ :id => "facture_5_#{i}", :style => "width: 100px;" }
+  / Fin du tableau de présentation des modèles.

@@ -9,8 +9,9 @@
   .ResumeCompte3
     .ResumeCompteText1
       Jetons de calcul
-    .ResumeCompteBouton
-      Modifier
+    %a{ :style => "cursor: pointer;", :onclick => "modif_compte_calcul()" } 
+      .ResumeCompteBouton
+        Nouveau
     .ResumeCompte3GreenBar
       .ResumeCompte3GreenBarDebut
       .ResumeCompte3GreenBarMilieu#calcul_account_info_progress_bar

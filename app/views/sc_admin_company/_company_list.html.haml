@@ -1,28 +1,28 @@
-#largeBoxTable_Company
-  #largeBoxTable_Company_first
-    #Company_0_1.largeBoxTable_Company_0{ :style => "width: 21px;" }
-    #Company_0_2.largeBoxTable_Company_0{ :style => "width: 246px;" }
+.largeBoxTable
+  .largeBoxTable_first
+    .largeBoxTable_0{ :style => "width: 25px;" }
+    .largeBoxTable_0{ :style => "width: 246px;" }
       %p
-        Nom
-    #Company_0_3.largeBoxTable_Company_0{ :style => "width: 199px;" }
+        Nom                   
+    .largeBoxTable_0{ :style => "width: 210px;" }
       %p
-        Famille
-    #Company_0_4.largeBoxTable_Company_0{ :style => "width: 100px;" }
+        Date 
+    .largeBoxTable_0{ :style => "width: 100px;" }
       %p
-        générique
-    #Company_0_5.largeBoxTable_Company_0{ :style => "width: 100px;" }
+        Ville
+    .largeBoxTable_0{ :style => "width: 100px;" }
       %p
-        complexe
-    #Company_0_6.largeBoxTable_Company_0{ :style => "width: 21px;" }
+        Pays
     
   - (0...20).each do |i|
-    .largeBoxTable_Company_lign{ :id => "company_lign_#{i}" }
-      .largeBoxTable_Company_lign_pair{ :id => "company_pair_#{i}" }
+    .largeBoxTable_lign.off{ :id => "company_lign_#{i}" }
+      .largeBoxTable_lign_pair{ :id => "company_pair_#{i}" }
         %a{ :style => "cursor: pointer;", :onclick => "go_detail_company(#{i})" }
-          .largeBoxTable_Company_1{ :id => "company_1_#{i}" }
-        .largeBoxTable_Company_2{ :id => "company_2_#{i}" }
-        .largeBoxTable_Company_3{ :id => "company_3_#{i}" }
-        .largeBoxTable_Company_4{ :id => "company_4_#{i}" }
-        .largeBoxTable_Company_5{ :id => "company_5_#{i}" }
-        .largeBoxTable_Company_6{ :id => "company_6_#{i}" }
+          .largeBoxTable_fleche
+        .largeBoxTable_2{ :id => "company_0_#{i}", :style => "width: 246px;" }
+        .largeBoxTable_2{ :id => "company_1_#{i}", :style => "width: 201px;" }
+        .largeBoxTable_2{ :id => "company_2_#{i}", :style => "width: 100px;" }
+        .largeBoxTable_2{ :id => "company_3_#{i}", :style => "width: 100px;" }
+        .largeBoxTable_suppr
   / Fin du tableau de présentation des modèles.
+

@@ -12,14 +12,20 @@
   .ResumeCompte3
     .ResumeCompteText1
       Abbonnement annuel
-    .ResumeCompteBouton
-      Modifier
+    %a{ :style => "cursor: pointer;", :onclick => "modif_compte_abonnement()" } 
+      .ResumeCompteBouton
+        Modifier
     .ResumeCompte3GreenBar
       .ResumeCompte3GreenBarDebut
-      .ResumeCompte3GreenBarMilieu{ :style => "width: 1px ;" }
+      .ResumeCompte3GreenBarMilieu#memory_account_info_progress_bar
       .ResumeCompte3GreenBarFin
     .ResumeCompteText2
       utilisation de la mémoire : 
+      %span#memory_account_info_used_memory
+        100
+      \/
+      %span#memory_account_info_assigned_memory
+        500
   .ResumeCompte4
     .ResumeCompteText1{ :style => "width: 90px;" }
     .ResumeCompteText1{ :style => "width: 90px;" }

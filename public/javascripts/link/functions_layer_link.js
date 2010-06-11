@@ -70,19 +70,36 @@ function filtre_Tableau_link(){
     Tableau_link_filter = Tableau_link;
 }
 
-// affichage du tableau des links
+// affichage du tableau membre
 function affiche_Tableau_link(){
-    taille_tableau_content  =  20;
+    taille_tableau_content  =  taille_tableau_content_page['link'];
     filtre_Tableau_link();
     var current_tableau     =  Tableau_link_filter;
     var strname             =  'link';
-    // var stridentificateur   =  new Array('name','project','new_results','résults');
-    var stridentificateur   =  new Array('name','name','comp_generique','comp_complexe');
-    affiche_Tableau_content(current_tableau, strname, stridentificateur);
+    var strnamebdd          =  'link';
+    var stridentificateur   =  new Array('name','family','comp_generique','comp_complexe');
+    affiche_Tableau_content(current_tableau, strname, strnamebdd, stridentificateur);
 }
 
-// affichage des tableau content ('LM_link')
-function affiche_Tableau_content(current_tableau, strname, stridentificateur){
+// affiche la page num pour la liste des links
+function go_page_link(num){
+    if(num=='first'){
+        content_tableau_current_page['link'] = 0;
+    }else if(num=='end'){
+        content_tableau_current_page['link'] = content_tableau_liste_page['link'].length-1;
+    }else{
+        var num_page = num + content_tableau_curseur_page['link'];
+        content_tableau_current_page['link'] = content_tableau_liste_page['link'][num_page]-1;    
+    }
+    affiche_Tableau_link();
+}
+
+//------------------------------------------------------------------------------------------------------
+// fonctions generique pour l'affichage d'un tableau
+//------------------------------------------------------------------------------------------------------
+
+
+function affiche_Tableau_content(current_tableau, strname, strnamebdd, stridentificateur){
     var taille_Tableau=current_tableau.length;
     for(i=0; i<taille_tableau_content; i++) {
         i_page = i + content_tableau_current_page[strname] * taille_tableau_content;
@@ -90,34 +107,30 @@ function affiche_Tableau_content(current_tableau, strname, stridentificateur){
         
         strContent_lign = strname + '_lign_' + i;
 	strContent_pair = strname + '_pair_' + i;
-        strContent_2 = strname + '_2_' + i;
-        strContent_3 = strname + '_3_' + i;
-        strContent_4 = strname + '_4_' + i;
-	strContent_5 = strname + '_5_' + i;
-        var id_lign  = document.getElementById(strContent_lign);
+	//alert(strContent_lign);
+	var id_lign  = document.getElementById(strContent_lign);
 	var id_pair  = document.getElementById(strContent_pair);
-        var id_2     = document.getElementById(strContent_2);
-        var id_3     = document.getElementById(strContent_3);
-        var id_4     = document.getElementById(strContent_4);
-	var id_5     = document.getElementById(strContent_5);
+	strContent =  new Array();
+	idContent =  new Array();
+	for(j=0; j<stridentificateur.length; j++) {
+	      strContent[j] = strname + '_' + j + '_' + i;
+	      idContent[j] = document.getElementById(strContent[j]);
+	}
         
         if(i_page<taille_Tableau){
-            id_lign.className = "largeBoxTable_Link_lign on";
+            id_lign.className = "largeBoxTable_lign on";
 	    if(pair(i)){
-		id_pair.className = "largeBoxTable_Link_lign_pair";
+		id_pair.className = "largeBoxTable_lign_pair";
 	    }else{
-		id_pair.className = "largeBoxTable_Link_lign_impair";
+		id_pair.className = "largeBoxTable_lign_impair";
 	    }
-            strtemp_2 = current_tableau[i_page]['link'][stridentificateur[0]];
-            strtemp_3 = current_tableau[i_page]['link'][stridentificateur[1]];
-            strtemp_4 = current_tableau[i_page]['link'][stridentificateur[2]];
-	    strtemp_5 = current_tableau[i_page]['link'][stridentificateur[3]];
-            remplacerTexte(id_2, strtemp_2);
-            remplacerTexte(id_3, strtemp_3);
-            remplacerTexte(id_4, strtemp_4);
-	    remplacerTexte(id_5, strtemp_5);
+	    strtemp =  new Array();
+	    for(j=0; j<stridentificateur.length; j++) {
+		  strtemp[j] = current_tableau[i_page][strnamebdd][stridentificateur[j]];
+		  remplacerTexte(idContent[j], strtemp[j]);
+	    }
         }else{
-            id_lign.className = "largeBoxTable_Link_lign off";
+            id_lign.className = "largeBoxTable_lign off";
         }
     }
     // pour l'affichage des page en bas de la boite
@@ -156,18 +169,7 @@ function affiche_Tableau_content(current_tableau, strname, stridentificateur){
     }  
 }
 
-// affiche la page num pour la liste des links
-function go_page_link(num){
-    if(num=='first'){
-        content_tableau_current_page['link'] = 0;
-    }else if(num=='end'){
-        content_tableau_current_page['link'] = content_tableau_liste_page['link'].length-1;
-    }else{
-        var num_page = num + content_tableau_curseur_page['link'];
-        content_tableau_current_page['link'] = content_tableau_liste_page['link'][num_page]-1;    
-    }
-    affiche_Tableau_link();
-}
+
 
 // -------------------------------------------------------------------------------------------------------------------------------------------
 // fonctions utiles pour l'affichage des différentes propriété liaisons :

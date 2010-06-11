@@ -39,22 +39,21 @@ class CompanyController < ApplicationController
     render :json => @soldes.to_json
   end
   
-  def get_facture
-    # Creation d'une liste fictive d'opération.
-    @factures = []
-    (1..18).each{ |i|
-      facture =    Facture.new( :created_at  => i.to_s+"/03/2010", :total_calcul => "25", :total_memory => "20", :total => "45" )
-      @factures << facture
-    } 
-    render :json => @factures.to_json
-  end
-  
   def get_calcul_account
     @id_company = params[:id_company]
     @current_company = Company.find(@id_company)
     @calcul_account = @current_company.calcul_account
     respond_to do |format|
       format.js   {render :json => @calcul_account.to_json}
+    end 
+  end
+  
+  def get_memory_account
+    @id_company = params[:id_company]
+    @current_company = Company.find(@id_company)
+    @memory_account = @current_company.memory_account
+    respond_to do |format|
+      format.js   {render :json => @memory_account.to_json}
     end 
   end
   
