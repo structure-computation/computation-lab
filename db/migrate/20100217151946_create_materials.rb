@@ -3,12 +3,11 @@ class CreateMaterials < ActiveRecord::Migration
     create_table :materials do |t|
 	  t.string   :name
 	  t.string   :familly
-      t.integer  :user_id
-      t.integer  :project_id
-      t.integer  :reference
+	  t.integer  :company_id
+	  t.integer  :reference
 	  t.integer  :id_select
-      t.string   :name_select
-      t.text     :description
+	  t.string   :name_select
+	  t.text     :description
 	  t.string   :mtype                     # type de materiaux : isotrope, orthotrope
 	  t.string   :comp                      # mot cle : el, pl, en, vi  (elastique, plastique, endomageable, visqueux)
 	  t.integer  :type_num					# reference du type de materiaux, tous les materiaux de ce type on les meme champs de proprietes
@@ -27,9 +26,9 @@ class CreateMaterials < ActiveRecord::Migration
 	  t.float    :cis_1
 	  t.float    :cis_2
 	  t.float    :cis_3
-	  t.float    :mu_12
-	  t.float    :mu_23
-	  t.float    :mu_31
+	  t.float    :nu_12
+	  t.float    :nu_23
+	  t.float    :nu_13
 	  t.float    :alpha_1
 	  t.float    :alpha_2
 	  t.float    :alpha_3
@@ -43,13 +42,13 @@ class CreateMaterials < ActiveRecord::Migration
 	  t.float    :sigma_e_1					# limite d'endomagement dans les trois directions
 	  t.float    :sigma_e_2
 	  t.float    :sigma_e_3
-	  t.float    :dp_1						# pente de plasticité
-	  t.float    :dp_2
-	  t.float    :dp_3
-	  t.float    :p_1						# deformation plastique
+	  t.float    :H_1					# pente de plasticité hardening
+	  t.float    :H_2
+	  t.float    :H_3
+	  t.float    :p_1					# deformation plastique cumulé
 	  t.float    :p_2
 	  t.float    :p_3
-	  t.float    :ed_1						# coefficient d'endomagement
+	  t.float    :ed_1					# endomagement cimumlé
 	  t.float    :ed_2
 	  t.float    :ed_3
 

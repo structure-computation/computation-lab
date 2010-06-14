@@ -6,5 +6,18 @@ class Company < ActiveRecord::Base
   
   has_many  :projects
   has_many  :sc_models
+  has_many  :materials
+  has_many  :links
   has_many  :solde_calcul_accounts,  :through => :calcul_account
+  
+  
+  def init_account()
+    current_calcul_account = self.create_calcul_account
+    current_calcul_account.init
+    
+    current_memory_account = self.create_memory_account
+    current_memory_account.init
+  end
+  
+  
 end

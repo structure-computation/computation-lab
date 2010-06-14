@@ -3,6 +3,14 @@ class MemoryAccount < ActiveRecord::Base
   belongs_to :company
   has_many   :log_abonnements
   
+  # initialisation d'un nouveau compte lors de la création d'une nouvelle company
+  def init()
+    self.assigned_memory = 0
+    self.status = 'pause'
+    self.inscription_date = Date.today
+    self.used_memory = 0
+    self.save
+  end
   
   # nouvel abonnement sur ce compte
   def add_abonnement(id_abonnement)

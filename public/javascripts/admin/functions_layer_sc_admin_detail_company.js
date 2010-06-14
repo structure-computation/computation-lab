@@ -321,7 +321,7 @@ function affich_detail_calcul_account(){
 	    if(id_info_key != null){
 		strContent = new String();
 		if(key=='base_jeton'){
-			strContent = table_detail[key] + table_detail['report_jeton'] + 10;
+			strContent = table_detail[key] + table_detail['report_jeton'];
 			
 		}else{
 			strContent = table_detail[key];

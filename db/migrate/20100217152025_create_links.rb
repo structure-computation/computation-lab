@@ -3,12 +3,11 @@ class CreateLinks < ActiveRecord::Migration
     create_table :links do |t|
 	  t.string   :name
 	  t.string   :familly
-      t.integer  :user_id
-      t.integer  :project_id
-      t.integer  :reference
+	  t.integer  :company_id
+	  t.integer  :reference
 	  t.integer  :id_select
-      t.string   :name_select
-      t.text     :description
+	  t.string   :name_select
+	  t.text     :description
 	  t.string   :comp_generique            # mots cles : pa, el, co  (parfaite, elastique, contact)
 	  t.string   :comp_complexe             # mots cles : pl, ca      (plastque, cassable)
 	  t.integer  :type_num					# reference du type de liaison, toutes les liaisons de ce type on les memes champs de proprietes

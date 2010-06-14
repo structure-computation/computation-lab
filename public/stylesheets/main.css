@@ -1379,7 +1379,7 @@ body
   background-color: #cacbd5 ;
   float:left;
 }
-.largeBoxTable_lign_pair:hover, .contentBoxTable_lign_impair:hover
+.largeBoxTable_lign_pair:hover, .largeBoxTable_lign_impair:hover
 {
   background-color: #9297a8 ;
   color: #ffffff;

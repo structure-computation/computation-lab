@@ -57,4 +57,15 @@ class CompanyController < ApplicationController
     end 
   end
   
+  def create_user
+    @current_company = @current_user.company
+    @user = @current_company.users.create(params[:user])
+    if @user.errors.empty? 
+      UserMailer.deliver_signup_notification(@user)
+      render :text => "l'utilsateur un message a été envoyé à l'utilisateur"
+    else
+      render :text => "We couldn't set up that account, sorry.  Please try again, or contact an admin (link is above)."
+    end
+  end
+  
 end

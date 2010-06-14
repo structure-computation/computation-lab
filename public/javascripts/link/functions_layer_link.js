@@ -638,10 +638,11 @@ function send_new_link()
     $.ajax({
 	url: "/link/create",
 	type: 'POST',
-	dataType: 'text',
+	dataType: 'json',
 	data: $.toJSON(Tableau_new_link_post),
 	contentType: 'application/json; charset=utf-8',
 	success: function(json) {
+	    alert(json);
 	     $("#new_link_pic_wait").hide();
 	     $("#new_link_pic_ok").show();
 	}

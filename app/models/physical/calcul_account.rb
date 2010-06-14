@@ -5,6 +5,19 @@ class CalculAccount < ActiveRecord::Base
   has_many   :solde_calcul_accounts
   has_many   :credits
 
+  # initialisation d'un nouveau compte lors de la création d'une nouvelle company
+  def init()
+    self.report_jeton = 0
+    self.base_jeton = 0
+    self.base_jeton_tempon = 0
+    self.used_jeton = 0
+    self.used_jeton_tempon = 0
+    self.solde_jeton = 0
+    self.solde_jeton_tempon = 0
+    self.status = 'pause'
+    self.save
+  end
+  
   # nouveau forfait sur ce compte
   def add_forfait(id_forfait)
     forfait = Forfait.find(id_forfait)
@@ -41,6 +54,7 @@ class CalculAccount < ActiveRecord::Base
     #derniere mise a jour des info du compte et sauvegarde
     self.solde_jeton = current_solde.solde_jeton
     self.solde_jeton_tempon = current_solde.solde_jeton_tempon
+    self.status = 'active'
     current_solde.save
     current_credit.save
     self.save

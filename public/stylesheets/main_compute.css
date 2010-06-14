@@ -1533,6 +1533,8 @@ body
   background: transparent url('../images/NC_bouton_visu_09.png') no-repeat left top;
 }
 
+
+
 /*
  * ccs pour les boite propriété
  *
@@ -1754,7 +1756,7 @@ div[name="prop_dim_0"]
   width:165px; 
   margin: 0px 0px 0 5px;
   float:left;
-  border-right : thin solid #ffffff;
+  //border-right : thin solid #ffffff;
   //background-color: #efefef ;
 }
 div[name="prop_dim_1"]
@@ -1763,8 +1765,8 @@ div[name="prop_dim_1"]
   margin: 0px 0px 0 0px;
   float:left;
   padding: 0px 0px 2px 0px;
-  border-right : thin solid #ffffff;
-  background-color: #c4c6d6 ;
+  border-right : thin solid #c4c6d6;
+  //background-color: #c4c6d6 ;
 }
 div[name="prop_dim_2"]
 {
@@ -1772,15 +1774,15 @@ div[name="prop_dim_2"]
   margin: 0px 0px 0 0px;
   padding: 0px 0px 2px 0px;
   float:left;
-  border-right : thin solid #ffffff;
-  background-color: #c4c6d6 ;
+  border-right : thin solid #c4c6d6;
+  //background-color: #c4c6d6 ;
 }
 div[name="prop_dim_2_in"]
 {
   width:162px; 
   margin: 0px 0px 0 0px;
   float:left;
-  //border-right : thin solid #ffffff;
+  //border-right : thin solid #c4c6d6;
   //background-color: #c4c6d6 ;
 }
 div[name="prop_dim_3"]
@@ -1789,8 +1791,8 @@ div[name="prop_dim_3"]
   margin: 0px 0px 0 0px;
   float:left;
   padding: 0px 0px 2px 0px;
-  border-right : thin solid #ffffff;
-  background-color: #c4c6d6 ;
+  border-right : thin solid #c4c6d6;
+  //background-color: #c4c6d6 ;
 }
 div[name="prop_dim_3_in"]
 {

@@ -3,7 +3,7 @@
 one:
   name : 'soudure parfaite'
   familly : 'soudure'
-  project_id : -1
+  company_id : -1
   reference : -1
   id_select : -1
   name_select : ''
@@ -23,7 +23,7 @@ one:
 two:
   name : 'soudure elastique'
   familly : 'soudure'
-  project_id : -1
+  company_id : -1
   reference : -1
   id_select : -1
   name_select : ''
@@ -43,7 +43,7 @@ two:
 three:
   name : 'contact 0,3'
   familly : 'contact'
-  project_id : -1
+  company_id : -1
   reference : -1
   id_select : -1
   name_select : ''
@@ -63,7 +63,7 @@ three:
 four:
   name : 'soudure parfaite cassable'
   familly : 'soudure'
-  project_id : -1
+  company_id : -1
   reference : -1
   id_select : -1
   name_select : ''
@@ -83,7 +83,7 @@ four:
 five:
   name : 'soudure elastique cassable'
   familly : 'soudure'
-  project_id : -1
+  company_id : -1
   reference : -1
   id_select : -1
   name_select : ''
@@ -103,7 +103,7 @@ five:
 six:
   name : 'plastique cassable'
   familly : 'soudure'
-  project_id : -1
+  company_id : -1
   reference : -1
   id_select : -1
   name_select : ''

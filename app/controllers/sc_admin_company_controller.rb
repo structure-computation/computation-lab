@@ -12,10 +12,8 @@ class ScAdminCompanyController < ApplicationController
   end
   
   def create
-    num_model = 1
-    File.open("#{RAILS_ROOT}/public/test/company_#{num_model}", 'w+') do |f|
-        f.write(params.to_json)
-    end
+    @new_company = Company.create(params[:company])
+    @new_company.init_account
     render :json => { :result => 'success' }
   end
 end

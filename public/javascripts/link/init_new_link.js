@@ -157,7 +157,7 @@ Tableau_link_new_list[0]               =  new Array();
 Tableau_link_new_list[0]["name"]='Nouvelle liaison';
 Tableau_link_new_list[0]["familly"]='soudure';
 //Tableau_link_new_list[0]["user_id"
-Tableau_link_new_list[0]["project_id"]=-1;
+Tableau_link_new_list[0]["company_id"]=-1;
 Tableau_link_new_list[0]["reference"]=-1;
 Tableau_link_new_list[0]["id_select"]=-1;
 Tableau_link_new_list[0]["name_select"]='';
@@ -179,7 +179,7 @@ Tableau_link_new_list[1]               =  new Array();
 Tableau_link_new_list[1]["name"]='Nouvelle liaison';
 Tableau_link_new_list[1]["familly"]='soudure';
 //Tableau_link_new_list[0]["user_id"
-Tableau_link_new_list[1]["project_id"]=-1;
+Tableau_link_new_list[1]["company_id"]=-1;
 Tableau_link_new_list[1]["reference"]=-1;
 Tableau_link_new_list[1]["id_select"]=-1;
 Tableau_link_new_list[1]["name_select"]='';
@@ -201,7 +201,7 @@ Tableau_link_new_list[2]               =  new Array();
 Tableau_link_new_list[2]["name"]='Nouvelle liaison';
 Tableau_link_new_list[2]["familly"]='soudure';
 //Tableau_link_new_list[0]["user_id"
-Tableau_link_new_list[2]["project_id"]=-1;
+Tableau_link_new_list[2]["company_id"]=-1;
 Tableau_link_new_list[2]["reference"]=-1;
 Tableau_link_new_list[2]["id_select"]=-1;
 Tableau_link_new_list[2]["name_select"]='';
@@ -224,7 +224,7 @@ Tableau_link_new_list[3]               =  new Array();
 Tableau_link_new_list[3]["name"]='Nouvelle liaison';
 Tableau_link_new_list[3]["familly"]='soudure';
 //Tableau_link_new_list[3]["user_id"
-Tableau_link_new_list[3]["project_id"]=-1;
+Tableau_link_new_list[3]["company_id"]=-1;
 Tableau_link_new_list[3]["reference"]=-1;
 Tableau_link_new_list[3]["id_select"]=-1;
 Tableau_link_new_list[3]["name_select"]='';
@@ -246,7 +246,7 @@ Tableau_link_new_list[4]               =  new Array();
 Tableau_link_new_list[4]["name"]='Nouvelle liaison';
 Tableau_link_new_list[4]["familly"]='soudure';
 //Tableau_link_new_list[0]["user_id"
-Tableau_link_new_list[4]["project_id"]=-1;
+Tableau_link_new_list[4]["company_id"]=-1;
 Tableau_link_new_list[4]["reference"]=-1;
 Tableau_link_new_list[4]["id_select"]=-1;
 Tableau_link_new_list[4]["name_select"]='';
@@ -268,7 +268,7 @@ Tableau_link_new_list[5]               =  new Array();
 Tableau_link_new_list[5]["name"]='Nouvelle liaison';
 Tableau_link_new_list[5]["familly"]='soudure';
 //Tableau_link_new_list[0]["user_id"
-Tableau_link_new_list[5]["project_id"]=-1;
+Tableau_link_new_list[5]["company_id"]=-1;
 Tableau_link_new_list[5]["reference"]=-1;
 Tableau_link_new_list[5]["id_select"]=-1;
 Tableau_link_new_list[5]["name_select"]='';

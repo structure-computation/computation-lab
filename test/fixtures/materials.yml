@@ -3,7 +3,7 @@
 one:
   name : 'metal 1'
   familly : 'métaux'
-  project_id : -1
+  company_id : -1
   reference : -1
   id_select : -1
   name_select : ''
@@ -26,9 +26,9 @@ one:
   cis_1 : 0
   cis_2 : 0
   cis_3 : 0
-  mu_12 : 0.3
-  mu_23 : 0.3
-  mu_31 : 0.3
+  nu_12 : 0.3
+  nu_23 : 0.3
+  nu_13 : 0.3
   alpha_1 : 0
   alpha_2 : 0
   alpha_3 : 0
@@ -42,9 +42,9 @@ one:
   sigma_e_1 : 200e6
   sigma_e_2 : 200e6
   sigma_e_3 : 200e6
-  dp_1 : 200e6
-  dp_2 : 200e6
-  dp_3 : 200e6
+  H_1 : 200e6
+  H_2 : 200e6
+  H_3 : 200e6
   p_1 : 200e6
   p_2 : 200e6
   p_3 : 200e6
@@ -55,7 +55,7 @@ one:
 two:
   name : 'metal 2'
   familly : 'métaux'
-  project_id : -1
+  company_id : -1
   reference : -1
   id_select : -1
   name_select : ''
@@ -78,9 +78,9 @@ two:
   cis_1 : 0
   cis_2 : 0
   cis_3 : 0
-  mu_12 : 0.3
-  mu_23 : 0.3
-  mu_31 : 0.3
+  nu_12 : 0.3
+  nu_23 : 0.3
+  nu_13 : 0.3
   alpha_1 : 0
   alpha_2 : 0
   alpha_3 : 0
@@ -94,9 +94,9 @@ two:
   sigma_e_1 : 200e6
   sigma_e_2 : 200e6
   sigma_e_3 : 200e6
-  dp_1 : 200e6
-  dp_2 : 200e6
-  dp_3 : 200e6
+  H_1 : 200e6
+  H_2 : 200e6
+  H_3 : 200e6
   p_1 : 200e6
   p_2 : 200e6
   p_3 : 200e6

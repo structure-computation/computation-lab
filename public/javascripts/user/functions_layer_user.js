@@ -249,7 +249,7 @@ function NM_next_stape(){
         affiche_NM_page();
     }
     else if(NMcurrent_stape == 'page_fichier'){
-        //send_new_membre();
+        send_new_membre();
         NMcurrent_stape = 'page_resume';
 	affich_new_membre_resume();
 	document.getElementById('wiz_annul').className    =  'off' ;
@@ -369,14 +369,16 @@ function affich_new_membre_resume(){
 // telecharger le nom et la description du membre
 function send_new_membre()
 {
+    alert(array2json(Tableau_new_membre));
     var param1 = array2object(Tableau_new_membre);
     var Tableau_new_membre_post         =  new Object(); 
     Tableau_new_membre_post['user'] =  new Object(); 
     Tableau_new_membre_post['user'] = param1;
     $.ajax({
-	url: "/user/create",
+	//url: "/company/create_user",
+	url: "/users/create",
 	type: 'POST',
-	dataType: 'json',
+	dataType: 'text',
 	data: $.toJSON(Tableau_new_membre_post),
 	contentType: 'application/json; charset=utf-8',
 	success: function(json) {

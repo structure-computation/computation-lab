@@ -112,6 +112,7 @@
           Un email a été envoyé avec succès au gestionnaire 
           qui est en attente de validation
 
+
   #New_wiz_layer_bas
     #wiz_annul.on{:style => "float: left;" }
       %a{ :style => "cursor: pointer;", :onclick => "displayNewCompany('off')" } 
@@ -121,12 +122,16 @@
       %a{ :onclick => "NM_next_stape()", :style => "cursor: pointer;" } 
         .New_footer_bouton_suivant.New_footer_top_bouton{ :style => "margin-right:5px;" }
           Suivant
+
+    #wiz_valid.off{:style => "float: right;" }
+      %a{ :onclick => "NM_next_stape()", :style => "cursor: pointer;" } 
+        .New_footer_bouton_suivant.New_footer_top_bouton{ :style => "margin-right:5px;" }
+          Valider
       %a{ :onclick => "NM_previous_stape()", :style => "cursor: pointer;" } 
         .New_footer_bouton_precedent.New_footer_top_bouton
           Précédent
 
-    #wiz_valid.off{:style => "float: right;" }
-      %a{ :onclick => "displayNewCompany('off')", :style => "cursor: pointer;" }
+    #wiz_fin.off{:style => "float: right;" }
+      %a{ :onclick => "NM_fin_wizard()", :style => "cursor: pointer;" }
         .New_create_bouton_jaune{ :style => "margin-right:5px;" }
-          Valider
-
+          Terminer

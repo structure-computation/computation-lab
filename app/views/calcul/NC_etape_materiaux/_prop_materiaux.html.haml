@@ -179,8 +179,8 @@
         .NC_prop_box_text_1{ :style => "width:160px;" }
       .NC_prop_box_text_1{ :style => "width:160px;" }
         Module d'Young :
-      .NC_prop_box_text_1{ :style => "width:160px;" }
-        Module de cisaillement :
+      /       .NC_prop_box_text_1{ :style => "width:160px;" }
+      /         Module de cisaillement :
       .NC_prop_box_text_1{ :style => "width:160px;" }
         Coefficient de poisson :
       .NC_prop_box_text_1{ :style => "width:160px;" }
@@ -195,14 +195,14 @@
           E1 =
       .NC_prop_box_text_1{ :style => "width:100px;" }
         %input#prop_mat_E_1{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
+      /       .NC_prop_box_text_1{ :style => "width:50px;" }
+      /         %p
+      /           c1 =
+      /       .NC_prop_box_text_1{ :style => "width:100px;" }
+      /         %input#prop_mat_cis_1{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
       .NC_prop_box_text_1{ :style => "width:50px;" }
         %p
-          c1 =
-      .NC_prop_box_text_1{ :style => "width:100px;" }
-        %input#prop_mat_cis_1{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
-      .NC_prop_box_text_1{ :style => "width:50px;" }
-        %p
-          mu12 =
+          nu12 =
       .NC_prop_box_text_1{ :style => "width:100px;" }
         %input#prop_mat_mu_12{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
       .NC_prop_box_text_1{ :style => "width:50px;" }
@@ -220,14 +220,14 @@
           E2 =
       .NC_prop_box_text_1{ :style => "width:100px;" }
         %input#prop_mat_E_2{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
+      /       .NC_prop_box_text_1{ :style => "width:50px;" }
+      /         %p
+      /           c2 =
+      /       .NC_prop_box_text_1{ :style => "width:100px;" }
+      /         %input#prop_mat_cis_2{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
       .NC_prop_box_text_1{ :style => "width:50px;" }
         %p
-          c2 =
-      .NC_prop_box_text_1{ :style => "width:100px;" }
-        %input#prop_mat_cis_2{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
-      .NC_prop_box_text_1{ :style => "width:50px;" }
-        %p
-          mu23 =
+          nu23 =
       .NC_prop_box_text_1{ :style => "width:100px;" }
         %input#prop_mat_mu_23{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
       .NC_prop_box_text_1{ :style => "width:50px;" }
@@ -245,14 +245,14 @@
           E3 =
       .NC_prop_box_text_1{ :style => "width:100px;" }
         %input#prop_mat_E_3{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
+      /       .NC_prop_box_text_1{ :style => "width:50px;" }
+      /         %p
+      /           c3 =
+      /       .NC_prop_box_text_1{ :style => "width:100px;" }
+      /         %input#prop_mat_cis_3{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
       .NC_prop_box_text_1{ :style => "width:50px;" }
         %p
-          c3 =
-      .NC_prop_box_text_1{ :style => "width:100px;" }
-        %input#prop_mat_cis_3{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
-      .NC_prop_box_text_1{ :style => "width:50px;" }
-        %p
-          mu31 =
+          nu13 =
       .NC_prop_box_text_1{ :style => "width:100px;" }
         %input#prop_mat_mu_31{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
       .NC_prop_box_text_1{ :style => "width:50px;" }
@@ -284,7 +284,7 @@
         %input#prop_mat_sigma_p_1{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
       .NC_prop_box_text_1{ :style => "width:50px;" }
         %p
-          dp1 =
+          H1 =
       .NC_prop_box_text_1{ :style => "width:100px;" }
         %input#prop_mat_dp_1{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
       .NC_prop_box_text_1{ :style => "width:50px;" }
@@ -304,7 +304,7 @@
         %input#prop_mat_sigma_p_2{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
       .NC_prop_box_text_1{ :style => "width:50px;" }
         %p
-          dp2 =
+          H2 =
       .NC_prop_box_text_1{ :style => "width:100px;" }
         %input#prop_mat_dp_2{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
       .NC_prop_box_text_1{ :style => "width:50px;" }
@@ -324,7 +324,7 @@
         %input#prop_mat_sigma_p_3{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
       .NC_prop_box_text_1{ :style => "width:50px;" }
         %p
-          dp3 =
+          H3 =
       .NC_prop_box_text_1{ :style => "width:100px;" }
         %input#prop_mat_dp_3{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
       .NC_prop_box_text_1{ :style => "width:50px;" }

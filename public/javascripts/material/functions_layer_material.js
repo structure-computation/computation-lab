@@ -55,10 +55,32 @@ function init_Tableau_material(Tableau_material_temp)
     affiche_Tableau_material();
 }
 // requette pour l'obtention du tableau des materials
-function get_Tableau_material()
+function get_Tableau_material_standard()
 { 
-    var url_php = "/material/index";
+    var url_php = "/material/get_standard_material";
     $.getJSON(url_php,[],init_Tableau_material);
+}
+
+function get_Tableau_material_company()
+{ 
+    var url_php = "/material/get_company_material";
+    $.getJSON(url_php,[],init_Tableau_material);
+}
+
+function filtre_material_change_owner(){
+	var list_owner; 
+	var strContent_info_key = 'filtre_material_owner' ;
+	var id_info_key = document.getElementById(strContent_info_key);
+	if(id_info_key != null){
+		list_owner = id_info_key.value ;
+	}
+	if(list_owner == 'standard'){
+		get_Tableau_material_standard();
+		id_info_key.value = "standard";
+	}else if(list_owner == 'company'){
+		get_Tableau_material_company();
+		id_info_key.value = "company";
+	}
 }
 
 
@@ -93,6 +115,9 @@ function go_page_material(num){
     }
     affiche_Tableau_material();
 }
+
+
+
 
 //------------------------------------------------------------------------------------------------------
 // fonctions generique pour l'affichage d'un tableau
@@ -368,7 +393,7 @@ function prop_mat_affich_info(prop_mat_for_info){
 //---------------------------------------------------------------------------------------------------------------------
 
 //---------------------------------------------------------------------------------------------------------
-// wizard de creation model
+// wizard de creation material
 //---------------------------------------------------------------------------------------------------------
 
 function displayNewMaterial(interupteur) {
@@ -396,8 +421,7 @@ function NM_next_stape(){
         affiche_NM_page();
     }
     else if(NMcurrent_stape == 'page_fichier'){
-        //send_new_model_info();
-	//send_new_material();
+	send_new_material();
 	affich_new_material_resume();
         NMcurrent_stape = 'page_resume';
 	document.getElementById('wiz_annul').className    =  'off' ;
@@ -477,7 +501,8 @@ function affiche_NM_page(){
 // afficher le détail d'un materiaux
 function affich_new_material(){
     var table_detail = Tableau_material_new;
-    new_mat_affich_info(table_detail);               // dans init_new 
+    //alert(array2json(Tableau_material_new));
+    new_mat_affich_info(table_detail);               
 }
 
 // afficher une page et cacher les autres pour les propriété materiaux
