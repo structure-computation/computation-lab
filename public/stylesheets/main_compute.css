@@ -1417,7 +1417,7 @@ body
   margin-top:0px;
   line-height: 18px;
   font-weight: 100;
-  font-size: 0.85em;
+  font-size: 0.65em;
   text-align: center;
   background: transparent url('../images/NC_bouton_jaune_suppr.png') no-repeat center top;
   color: #2a3556;
@@ -1584,7 +1584,7 @@ body
 .NC_prop_box_text_1
 {
   height:22px; 
-  margin:3px 0 0 5px; 
+  margin:3px 0 5px 5px; 
   line-height: 18px;
   text-align:right;
   //border: thin solid #2a3557;

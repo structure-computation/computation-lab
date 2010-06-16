@@ -29,6 +29,12 @@ Tableau_init_time_step_temp['PdT'] = 1;
 Tableau_init_time_step_temp['nb_PdT'] = 1;
 Tableau_init_time_step_temp['Tf'] = 1;
 
+var new_Tableau_init_select =  new Array();		// tableu new calcul select
+    new_Tableau_init_select['name'] = 'Nouveau calcul';
+    new_Tableau_init_select['description'] = 'Description';
+    new_Tableau_init_select['ctype'] = 'statique';
+    new_Tableau_init_select['id'] = -1;
+
 // pour la page matériaux------------
 var Tableau_mat = new Array();  			// tableau des matériaux 
 var compteur_mat_select = 0;				// compteur pour l'attribution des id_select

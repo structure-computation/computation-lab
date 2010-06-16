@@ -18,7 +18,7 @@ class DetailModelController < ApplicationController
   def get_list_resultat
     @id_model = params[:id_model]
     current_model = @current_user.sc_models.find(@id_model)
-    list_resultats = current_model.calcul_results.find(:all, :conditions => {:state => "finish"})
+    list_resultats = current_model.calcul_results.find(:all, :conditions => {:log_type => "compute", :state => "finish"})
     respond_to do |format|
       format.js   {render :json => list_resultats.to_json}
     end 

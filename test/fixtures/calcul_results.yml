@@ -8,6 +8,7 @@ one:
   name: resultat_1 51848956
   description: MyText
   ctype: MyString
+  log_type: MyString
   state: MyString
   #cpu_second_used: 1
   #gpu_second_used: 10
@@ -24,6 +25,7 @@ two:
   name: resultat_2 51848956
   description: MyText
   ctype: MyString
+  log_type: MyString
   state: MyString
   gpu_allocated: 4
   estimated_calcul_time: 40
@@ -37,6 +39,7 @@ three:
   name: resultat_3 51848956
   description: MyText
   ctype: MyString
+  log_type: MyString
   state: MyString
   gpu_allocated: 4
   estimated_calcul_time: 40

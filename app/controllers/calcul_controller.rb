@@ -39,7 +39,7 @@ class CalculController < ApplicationController
   def calculs
     @id_model = params[:id_model]
     current_model = @current_user.sc_models.find(@id_model)
-    @calculs = current_model.calcul_results
+    @calculs = current_model.calcul_results.find(:all, :conditions => {:log_type => "compute"})
     respond_to do |format|
       format.js   {render :json => @calculs.to_json}
     end
@@ -82,13 +82,29 @@ class CalculController < ApplicationController
   def new
     @id_model = params[:id_model]
     @current_model = @current_user.sc_models.find(@id_model)
-    @current_calcul = @current_model.calcul_results.create(:name => params[:name], :description => params[:description], :state => 'temp')
+    @id_calcul = params[:id_calcul]
+    @current_calcul = @current_model.calcul_results.create(:name => params[:name], :description => params[:description], :state => 'temp', :ctype => 'statique', :log_type => 'compute')
     @current_calcul.user = @current_user
     @current_calcul.save
+    render :json => @current_calcul.to_json
+  end
+  
+  def get_brouillon
+    @id_model = params[:id_model]
+    @current_model = @current_user.sc_models.find(@id_model)
+    @id_calcul = params[:id_calcul]
     
-    respond_to do |format|
-      format.js   {render :json => @current_calcul.to_json}
-    end
+    # création des elements a envoyer au calculateur
+    send_data  = { :id_model => @id_model, :id_calcul => @id_calcul, :mode => "info_brouillon"};
+    # socket d'envoie au serveur
+    socket    = Socket.new( AF_INET, SOCK_STREAM, 0 )
+    sockaddr  = Socket.pack_sockaddr_in( 12346, 'localhost' )
+    #sockaddr  = Socket.pack_sockaddr_in( 12346, 'sc2.ens-cachan.fr' )
+    socket.connect( sockaddr )
+    socket.write( send_data.to_json )
+    # reponse du calculateur
+    results = socket.read
+    render :json => results
   end
   
   def create
@@ -100,6 +116,31 @@ class CalculController < ApplicationController
     render :json => { :result => 'success' }.to_json
   end
 
+  def send_brouillon
+    @id_model = params[:id_model]
+    @id_calcul = params[:id_calcul]
+    current_model = @current_user.sc_models.find(@id_model)
+    #file = params[:file]
+    jsonobject = JSON.parse(params[:file])
+    file = JSON.pretty_generate(jsonobject)
+    # création des elements a envoyer au calculateur
+    send_data  = { :id_model => @id_model, :id_calcul => @id_calcul, :dimension => current_model.dimension ,:fichier => file, :mode => "brouillon"};
+    
+    # socket d'envoie au serveur
+    socket    = Socket.new( AF_INET, SOCK_STREAM, 0 )
+    sockaddr  = Socket.pack_sockaddr_in( 12346, 'localhost' )
+    #sockaddr  = Socket.pack_sockaddr_in( 12346, 'sc2.ens-cachan.fr' )
+    socket.connect( sockaddr )
+    socket.write( send_data.to_json )
+    #socket.write( file.read )
+    
+    # reponse du calculateur
+    results = socket.read
+    
+    # envoie de la reponse au client
+    render :text => results
+  end
+  
   def send_calcul
     @id_model = params[:id_model]
     @id_calcul = params[:id_calcul]

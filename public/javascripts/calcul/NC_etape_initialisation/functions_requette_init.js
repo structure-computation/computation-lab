@@ -11,8 +11,10 @@ function init_info_model(Tableau_model_temp)
     if (Tableau_model_temp)
     {   
         Tableau_model = Tableau_model_temp ;
+	//alert(array2json(Tableau_model))
 	var taille_Tableau=Tableau_model_temp.length;
     	for(i=0; i<taille_Tableau; i++) {
+	    //alert(Object.prototype.toString.apply(Tableau_model_temp[i]));
 	    for (var key in Tableau_model_temp[i]) {
 		if(key == 'mesh'){
 		    Tableau_id_model = Tableau_model[i][key];
@@ -71,31 +73,21 @@ function init_Tableau_calcul(Tableau_calcul_temp)
 // function init_Tableau_model(response)
 {
     // var Tableau_calcul_temp = eval('[' + response + ']');
-    if (Tableau_calcul_temp)
-    {   
+    if (Tableau_calcul_temp){   
         var taille_Tableau=Tableau_calcul_temp.length;
     	for(i=0; i<taille_Tableau; i++) {
     		Tableau_calcul[i]=Tableau_calcul_temp[i]['calcul_result'];
     	}
-    }
-    else
-    {
+    }else{
 	Tableau_calcul[0]         =  new Array();
-        Tableau_calcul[0]['calcul_result']         =  new Array();
-        Tableau_calcul[0]['calcul_result']['name'] = 'nouveau calcul';
-	Tableau_calcul[0]['calcul_result']['ctype'] = 'statique';
-	Tableau_calcul[0]['calcul_result']['description'] = 'nouvelle description';
-	Tableau_calcul[0]['calcul_result']['id'] = 'à définir';
     }
     //strtemp = array2json(Tableau_calcul); 
     //strtemp = Tableau_calcul[0]['name']; 
     //var id_test = document.getElementById("textetest"); 
     //remplacerTexte(id_test, strtemp);
     affiche_Tableau_calcul();
-    Tableau_init_select['name'] = 'nouveau calcul';
-    Tableau_init_select['description'] = 'première description';
-    Tableau_init_select['id'] = 'à définir';
-    Tableau_init_time_step[0]=Tableau_init_time_step_temp;
+    Tableau_init_select=clone(new_Tableau_init_select);
+    Tableau_init_time_step[0]=clone(Tableau_init_time_step_temp);
     affiche_Tableau_init_select();
 }
 
@@ -122,6 +114,7 @@ function init_new_calculresult(new_calculresult_temp)
 	new_calculresult = new_calculresult_temp;
 	//alert(array2json(new_calculresult['calcul_result']));
 	Tableau_init_select = new_calculresult_temp['calcul_result'];
+	
     }
     else
     {
@@ -131,14 +124,102 @@ function init_new_calculresult(new_calculresult_temp)
     affiche_Tableau_init_select();
 }
 
-function get_new_calculresult(num_model)
+// traitement en fin de requette pour l'obtention de l'identité du calcul
+function load_brouillon(brouillon_temp)
+// function init_Tableau_model(response)
 {
-    var url_php = "/calcul/new";
+    // var Tableau_calcul_temp = eval('[' + response + ']');
+    if (brouillon_temp)
+    {   
+	Tableau_model = brouillon_temp ;
+	//alert(array2json(Tableau_model['mesh']))
+	var taille_Tableau=Tableau_model.length;
+	//alert(taille_Tableau)
+	for (var key in Tableau_model) {
+	    if(key == 'mesh'){
+		Tableau_id_model = Tableau_model[key];
+		NC_current_step = Tableau_id_model['NC_current_step'] ;
+		//alert('mesh');
+	    }
+	    else if(key == 'groups_elem'){
+		Tableau_pieces = Tableau_model[key];
+		//alert('groups_elem');
+	    }
+	    else if(key == 'groups_inter'){
+		Tableau_interfaces = Tableau_model[key];
+		//alert('groups_inter');
+	    }
+	    else if(key == 'groups_edge'){
+		Tableau_bords = Tableau_model[key];
+		//alert('groups_edge');
+	    }
+	    else if(key == 'materials'){
+		Tableau_mat_select = Tableau_model[key];
+		//alert(array2json(Tableau_model[key]));
+		objet_temp = array2object(Tableau_model[key]);
+		//alert($.toJSON(Tableau_model[key]));
+	    }
+	    else if(key == 'links'){
+		Tableau_liaison_select = Tableau_model[key];
+		//alert('links');
+	    }
+	    else if(key == 'CL'){
+		Tableau_CL_select = Tableau_model[key];
+		//alert('CL');
+	    }
+	    else if(key == 'CL_volume'){
+		Tableau_CL_select_volume = Tableau_model[key];
+		//alert('CL_volume');
+	    }
+	    else if(key == 'time_step'){
+		Tableau_init_time_step = Tableau_model[key];
+		//alert('CL_volume');
+	    }
+	    else if(key == 'options'){
+		Tableau_option_select = Tableau_model[key];
+		//alert('CL_volume');
+	    }
+	    else if(key == 'groupe_pieces'){
+		groupe_pieces = Tableau_model[key];
+		//alert('CL_volume');
+	    }
+	    else if(key == 'groupe_interfaces'){
+		groupe_interfaces = Tableau_model[key];
+		//alert('CL_volume');
+	    }
+	    else if(key == 'groupe_bords'){
+		groupe_bords = Tableau_model[key];
+		//alert('CL_volume');
+	    }
+	}
+    }
+    else
+    {
+        alert('pas de brouillon');
+    }
+    refresh_NC_page_materiaux();
+    refresh_NC_page_liaisons();
+    refresh_NC_page_CLs();
+    affiche_NC_page_materiaux();
+    
+    //alert(Tableau_init_select['id']);
+}
+
+function get_new_calculresult(num_model)
+{  
     data = new Object();
     data['id_model'] = num_model;
     data['name'] = Tableau_init_select['name'];
     data['description'] = Tableau_init_select['description'];
-    $.getJSON(url_php,data,init_new_calculresult);
+    data['id_calcul'] = Tableau_init_select['id'];
+    
+    if(Tableau_init_select['id'] == -1){
+	var url_php = "/calcul/new";
+	$.getJSON(url_php,data,init_new_calculresult);
+    }else{
+	var url_php = "/calcul/get_brouillon";
+	$.getJSON(url_php,data,load_brouillon);
+    }
 }
 
 -->

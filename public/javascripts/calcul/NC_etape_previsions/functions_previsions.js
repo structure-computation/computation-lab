@@ -69,7 +69,7 @@ function complete_calcul(){
 	var groups_edge = new Array();
 	for(i in Tableau_bords){
 		groups_edge[i] = new Array();
-		table_param = ["id","origine","name","type","geometry","point_1_x","point_1_y","point_2_x","point_2_y","id_CL","assigned","group"];
+		table_param = ["id","origine","name","type","geometry","point_1_x","point_1_y","point_1_z","point_2_x","point_2_y","point_2_z","id_CL","assigned","group"];
 		for(j in table_param){
 			if(table_param[j]=="id_CL"){
 				if(Tableau_bords[i]["assigned"]=='-1'){
@@ -104,7 +104,7 @@ function complete_calcul(){
 			}else if(table_param[j]=="elastic_modulus"){
 				materials[i]["elastic_modulus"] = parseFloat(Tableau_mat_select[i]["E_1"]) ;
 			}else if(table_param[j]=="poisson_ratio"){
-				materials[i]["poisson_ratio"] = parseFloat(Tableau_mat_select[i]["mu_12"]) ;
+				materials[i]["poisson_ratio"] = parseFloat(Tableau_mat_select[i]["nu_12"]) ;
 			}else if(table_param[j]=="rho"){
 				materials[i]["rho"] = parseFloat(Tableau_mat_select[i]["rho"]) ;
 			}else if(table_param[j]=="alpha"){
@@ -151,7 +151,7 @@ function complete_calcul(){
 	var CL = new Array();
 	for(i in Tableau_CL_select){
 		CL[i] = new Array();
-		table_param = ["id","name","type","fct_spatiale_x","fct_spatiale_y","fct_temporelle_x","fct_temporelle_y"];
+		table_param = ["id","name","type","fct_spatiale_x","fct_spatiale_y","fct_spatiale_z","fct_temporelle_x","fct_temporelle_y","fct_temporelle_z"];
 		for(j in table_param){
 			if(table_param[j]=="type"){
 				CL[i]["type"] = Tableau_CL_select[i]["bctype"] ;
@@ -161,10 +161,14 @@ function complete_calcul(){
 				CL[i]["fct_spatiale_x"] = Tableau_CL_select[i]["step"][0]['Fx'] ;
 			}else if(table_param[j]=="fct_spatiale_y"){
 				CL[i]["fct_spatiale_y"] = Tableau_CL_select[i]["step"][0]['Fy'] ;
+			}else if(table_param[j]=="fct_spatiale_z"){
+				CL[i]["fct_spatiale_z"] = Tableau_CL_select[i]["step"][0]['Fz'] ;
 			}else if(table_param[j]=="fct_temporelle_x"){
 				CL[i]["fct_temporelle_x"] = parseFloat(Tableau_CL_select[i]["step"][0]['ft']) ;
 			}else if(table_param[j]=="fct_temporelle_y"){
 				CL[i]["fct_temporelle_y"] = parseFloat(Tableau_CL_select[i]["step"][0]['ft']) ;
+			}else if(table_param[j]=="fct_temporelle_z"){
+				CL[i]["fct_temporelle_z"] = parseFloat(Tableau_CL_select[i]["step"][0]['ft']) ;
 			}else{
 				CL[i][table_param[j]]=Tableau_CL_select[i][table_param[j]];
 			}
@@ -208,7 +212,54 @@ function complete_calcul(){
 }
 
 
+function complete_brouillon(){
 
+	Tableau_id_model['NC_current_step'] = NC_current_step;
+	Tableau_calcul_complet = new Array();
+	// id du model
+	Tableau_calcul_complet['mesh'] = Tableau_id_model;
+	// geometrie du model
+	Tableau_calcul_complet['groups_elem'] = Tableau_pieces;
+	//alert(array2json(Tableau_pieces));
+	Tableau_calcul_complet['groups_inter'] = Tableau_interfaces;
+	Tableau_calcul_complet['groups_edge'] =Tableau_bords;
+	// caractéristique matériaux, liaisons et CLs
+	Tableau_calcul_complet['materials'] = Tableau_mat_select;
+	Tableau_calcul_complet['links'] = Tableau_liaison_select;
+	Tableau_calcul_complet['CL'] = Tableau_CL_select;
+	Tableau_calcul_complet['CL_volume'] = Tableau_CL_select_volume;
+	Tableau_calcul_complet['time_step'] = Tableau_init_time_step;
+	Tableau_calcul_complet['options'] = Tableau_option_select;
+	
+	// pour l'affichage dans l'interface
+	Tableau_calcul_complet['groupe_pieces'] = groupe_pieces;
+	Tableau_calcul_complet['groupe_interfaces'] = groupe_interfaces;
+	Tableau_calcul_complet['groupe_bords'] = groupe_bords;
+	// options du calcul
+	//Tableau_calcul_complet['options'] = Tableau_option_select;
+	
+	//alert(array2json(Tableau_CL_select_volume));
+	// génértion du json calcul complet
+	//Object_calcul_complet = new Object();
+	//Object_calcul_complet = array2object(Tableau_calcul_complet);
+	//fichier_calcul = $.toJSON(Object_calcul_complet);
+	fichier_calcul = array2json(Tableau_calcul_complet);
+	//alert(fichier_calcul);
+	var send_brouillon = new Object();
+	send_brouillon['file']=fichier_calcul;
+	send_brouillon['id_model']=model_id;
+	send_brouillon['id_calcul']=Tableau_init_select['id'];
+	//alert(Tableau_init_select['id']);
+	
+	$.ajax({
+	    url: "/calcul/send_brouillon",
+	    type: 'POST',
+	    data: send_brouillon,
+	    success: function(json) {
+		alert(json);
+	    }
+	});
+}
 
 
 

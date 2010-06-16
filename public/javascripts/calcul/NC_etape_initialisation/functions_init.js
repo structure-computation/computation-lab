@@ -1,3 +1,5 @@
+
+
 // -------------------------------------------------------------------------------------------------------------------------------------------
 // fonctions utiles pour la page entière 
 // -------------------------------------------------------------------------------------------------------------------------------------------
@@ -124,28 +126,30 @@ function affiche_Tableau_calcul(){
 function select_calcul(num){
 	var num_select = left_tableau_connect['calcul'][num];
 	calcul_select = num_select ;
+	Tableau_init_select = clone(Tableau_calcul_filter[num_select]);
+	//alert(array2json(Tableau_init_select));
 	id_calcul_select = num ;
 	affich_calcul_select();
+	affiche_Tableau_init_select();
 }
 
 // afficher le matériaux actif dans la twin box left
 function affich_calcul_select(){
-	if(id_calcul_select != -1){
-		var taille_Tableau_calcul = Tableau_calcul_filter.length;
-		for(i=0;i<taille_Tableau_calcul;i++){
-			strContent_1 = new String();
-			strContent_1 = 'calcul_1_' + i;
-			var id_active = document.getElementById(strContent_1);
-			if(id_active.className != "tableNC_box_0 off"){
-				if(i==id_calcul_select){
-					id_active.className = "tableNC_box_0_active on";
-				}else{
-					id_active.className = "tableNC_box_0 on";
-				}
+	var taille_Tableau_calcul = Tableau_calcul_filter.length;
+	for(i=0;i<taille_Tableau_calcul;i++){
+		strContent_1 = new String();
+		strContent_1 = 'calcul_1_' + i;
+		var id_active = document.getElementById(strContent_1);
+		if(id_active.className != "tableNC_box_0 off"){
+			if(i==id_calcul_select){
+				id_active.className = "tableNC_box_0_active on";
+			}else{
+				id_active.className = "tableNC_box_0 on";
 			}
 		}
 	}
 }
+
 // affiche la page num pour la bibliothèque calcul
 function go_page_calcul(num){
 	if(num=='first'){
@@ -159,6 +163,13 @@ function go_page_calcul(num){
 	affiche_Tableau_calcul();
 }
 
+// reinitialiser le calcul 
+function select_new_calcul(){
+	Tableau_init_select = clone(new_Tableau_init_select);
+	id_calcul_select = -1 ;
+	affich_calcul_select();
+	affiche_Tableau_init_select();
+}
 
 
 // -------------------------------------------------------------------------------------------------------------------------------------------
@@ -181,8 +192,9 @@ function affiche_Tableau_init_select(){
 			if(id_init_key != null){
 				remplacerTexte(id_init_key, Tableau_init_select[key]);
 			}
-		}else if(id_init_key != null && key == 'ctype'){
+		}else if(key == 'ctype'){
 			id_init_key.value = Tableau_init_select[key];
+			//alert(Tableau_init_select[key]);
 			if(Tableau_init_select[key]=='statique'){
 				document.getElementById('NC_init_non_statique').className = 'off';
 			}else{
@@ -245,7 +257,7 @@ function Tableau_init_change_value(){
 	for(key in Tableau_init_select){
 		var strContent_init_key = 'init_' + key ;
 		var id_init_key = document.getElementById(strContent_init_key);
-		if(id_init_key != null && key != 'ref'){
+		if(id_init_key != null && key != 'id'){
 			Tableau_init_select[key]  = id_init_key.value ;
 		}
 	}

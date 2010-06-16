@@ -129,8 +129,9 @@
           %input#prop_mat_dir_3_z{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
           
   #prop_mat_generique.NC_prop_box.on
-    .NC_prop_box_text_1{ :style => "width:160px;" }
-      Masse volumique :
+    %div{ :name => "prop_dim_0" }
+      .NC_prop_box_text_1{ :style => "width:160px;" }
+        Masse volumique :
     .NC_prop_box_text_1{ :style => "width:50px;" }
       %p
         m1 =
@@ -204,7 +205,7 @@
         %p
           nu12 =
       .NC_prop_box_text_1{ :style => "width:100px;" }
-        %input#prop_mat_mu_12{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
+        %input#prop_mat_nu_12{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
       .NC_prop_box_text_1{ :style => "width:50px;" }
         %p
           Sr1 =
@@ -229,7 +230,7 @@
         %p
           nu23 =
       .NC_prop_box_text_1{ :style => "width:100px;" }
-        %input#prop_mat_mu_23{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
+        %input#prop_mat_nu_23{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
       .NC_prop_box_text_1{ :style => "width:50px;" }
         %p
           Sr2 =
@@ -254,7 +255,7 @@
         %p
           nu13 =
       .NC_prop_box_text_1{ :style => "width:100px;" }
-        %input#prop_mat_mu_31{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
+        %input#prop_mat_nu_13{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
       .NC_prop_box_text_1{ :style => "width:50px;" }
         %p
           Sr3 =
@@ -286,7 +287,7 @@
         %p
           H1 =
       .NC_prop_box_text_1{ :style => "width:100px;" }
-        %input#prop_mat_dp_1{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
+        %input#prop_mat_H_1{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
       .NC_prop_box_text_1{ :style => "width:50px;" }
         %p
           p1 =
@@ -306,7 +307,7 @@
         %p
           H2 =
       .NC_prop_box_text_1{ :style => "width:100px;" }
-        %input#prop_mat_dp_2{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
+        %input#prop_mat_H_2{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
       .NC_prop_box_text_1{ :style => "width:50px;" }
         %p
           p2 =
@@ -326,7 +327,7 @@
         %p
           H3 =
       .NC_prop_box_text_1{ :style => "width:100px;" }
-        %input#prop_mat_dp_3{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
+        %input#prop_mat_H_3{ :type => "text", :value => "100", :onKeyup => "prop_mat_change_value()" }
       .NC_prop_box_text_1{ :style => "width:50px;" }
         %p
           p3 =

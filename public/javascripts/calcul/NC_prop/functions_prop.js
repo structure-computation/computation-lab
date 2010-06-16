@@ -261,12 +261,13 @@ function prop_mat_affich_info(){
 	prop_mat_affich('info');
 	
 	// on rempli les propriété du matériaux
+	//alert(prop_mat_for_info['id_select']);
 	for(key in prop_mat_for_info){
 		var strContent_prop_key = 'prop_mat_' + key ;
 		var id_prop_key = document.getElementById(strContent_prop_key);
 		if(id_prop_key != null){
 			id_prop_key.value = prop_mat_for_info[key] ;
-			if(isNaN(prop_mat_for_info['id_select'])){
+			if(prop_mat_for_info['id_select']== null){
 				id_prop_key.disabled = true;
 			}else{ 
 				id_prop_key.disabled = false;
@@ -423,7 +424,7 @@ function prop_liaison_affich_info(){
 		var id_prop_key = document.getElementById(strContent_prop_key);
 		if(id_prop_key != null){
 			id_prop_key.value = prop_liaison_for_info[key] ;
-			if(isNaN(prop_liaison_for_info['id_select'])){
+			if(prop_liaison_for_info['id_select'] == null){
 				id_prop_key.disabled = true;
 			}else{ 
 				id_prop_key.disabled = false;
@@ -433,7 +434,7 @@ function prop_liaison_affich_info(){
 			var strContent_prop_key_bis = 'prop_liaison_bis_' + key ;
 			var id_prop_key_bis = document.getElementById(strContent_prop_key_bis);
 			id_prop_key_bis.value = prop_liaison_for_info[key] ;
-			if(isNaN(prop_liaison_for_info['id_select'])){
+			if(prop_liaison_for_info['id_select'] == null){
 				id_prop_key_bis.disabled = true;
 			}else{ 
 				id_prop_key_bis.disabled = false;

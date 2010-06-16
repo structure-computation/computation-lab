@@ -105,8 +105,9 @@
         %a{ :href => "/modele" }
           #NC_footer_bouton_annuler.NC_footer_top_bouton
             Annuler
-        #NC_footer_bouton_sauver.NC_footer_top_bouton
-          sauvegarde le brouillon
+        %a{ :onclick => "complete_brouillon()", :style => "cursor: pointer;" }
+          #NC_footer_bouton_sauver.NC_footer_top_bouton
+            sauvegarde le brouillon
         
         #NC_footer_top_init.off
           %a{ :onclick => "next_stape()", :style => "cursor: pointer;" }
@@ -138,6 +139,6 @@
   $(document).ready(get_Tableau_liaison);
   $(document).ready(get_Tableau_CL);
   affiche_NC_page_initialisation();
-  $(document).ready( function() { img_init( document.getElementById("mainimg") ); } );
+  /$(document).ready( function() { img_init( document.getElementById("mainimg") ); } );
   displayBlack("on");
   / alert("ok");

@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(:version => 20100609205039) do
     t.string   "name"
     t.text     "description"
     t.string   "ctype"
+    t.string   "log_type"
     t.string   "state"
     t.integer  "gpu_allocated"
     t.integer  "estimated_calcul_time"

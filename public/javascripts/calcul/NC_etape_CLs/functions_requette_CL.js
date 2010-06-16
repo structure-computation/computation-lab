@@ -12,14 +12,18 @@ function init_Tableau_CL(Tableau_CL_temp)
 		Tableau_CL_select_volume[taille_Tableau_CL_select_volume]=new Array();
 		Tableau_CL_select_volume[taille_Tableau_CL_select_volume]=clone(Tableau_CL_temp[j]['boundary_condition']);
 		Tableau_CL_select_volume[taille_Tableau_CL_select_volume]['select'] = false;
-		Tableau_CL_select_volume[taille_Tableau_CL_select_volume]['step'] = Tableau_init_time_step_temp ;
+		//Tableau_CL_select_volume[taille_Tableau_CL_select_volume]['step'] = clone(Tableau_init_time_step_temp) ;
+		Tableau_CL_select_volume[taille_Tableau_CL_select_volume]['step'] = new Array();
+		Tableau_CL_select_volume[taille_Tableau_CL_select_volume]['step'][0]=clone(Tableau_CL_step);
     	}
     	for(j=3; j<Tableau_CL_temp.length ;j++){
 		var taille_Tableau_CL = Tableau_CL.length;
 		Tableau_CL[taille_Tableau_CL]=new Array();
 		Tableau_CL[taille_Tableau_CL]=clone(Tableau_CL_temp[j]['boundary_condition']);
 		Tableau_CL[taille_Tableau_CL]['id_select'] = '';
-		Tableau_CL[taille_Tableau_CL]['step'] = Tableau_init_time_step_temp;
+		//Tableau_CL[taille_Tableau_CL]['step'] = clone(Tableau_init_time_step_temp);
+		Tableau_CL[taille_Tableau_CL]['step'] = new Array();
+		Tableau_CL[taille_Tableau_CL]['step'][0]=clone(Tableau_CL_step);
 	}
     }
     else

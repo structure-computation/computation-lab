@@ -5,7 +5,7 @@ one:
   familly : 'soudure'
   company_id : -1
   reference : -1
-  id_select : -1
+  id_select : 
   name_select : ''
   description : 'description'
   comp_generique : 'Pa'
@@ -25,7 +25,7 @@ two:
   familly : 'soudure'
   company_id : -1
   reference : -1
-  id_select : -1
+  id_select : 
   name_select : ''
   description : 'description'
   comp_generique : 'El'
@@ -45,7 +45,7 @@ three:
   familly : 'contact'
   company_id : -1
   reference : -1
-  id_select : -1
+  id_select : 
   name_select : ''
   description : 'description'
   comp_generique : 'Co'
@@ -65,7 +65,7 @@ four:
   familly : 'soudure'
   company_id : -1
   reference : -1
-  id_select : -1
+  id_select : 
   name_select : ''
   description : 'description'
   comp_generique : 'Pa'
@@ -85,7 +85,7 @@ five:
   familly : 'soudure'
   company_id : -1
   reference : -1
-  id_select : -1
+  id_select : 
   name_select : ''
   description : 'description'
   comp_generique : 'El'
@@ -105,7 +105,7 @@ six:
   familly : 'soudure'
   company_id : -1
   reference : -1
-  id_select : -1
+  id_select : 
   name_select : ''
   description : 'description'
   comp_generique : 'Pa'

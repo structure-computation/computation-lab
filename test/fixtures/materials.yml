@@ -5,7 +5,7 @@ one:
   familly : 'métaux'
   company_id : -1
   reference : -1
-  id_select : -1
+  id_select : 
   name_select : ''
   description : 'description'
   mtype : 'isotrope'
@@ -20,9 +20,9 @@ one:
   dir_1_z : 0
   dir_2_z : 0
   dir_3_z : 1
-  E_1 : 200e9
-  E_2 : 200e9
-  E_3 : 200e9
+  E_1 : 200e3
+  E_2 : 200e3
+  E_3 : 200e3
   cis_1 : 0
   cis_2 : 0
   cis_3 : 0
@@ -33,31 +33,31 @@ one:
   alpha_2 : 0
   alpha_3 : 0
   rho : 2e3
-  sigma_p_1 : 200e6
-  sigma_p_2 : 200e6
-  sigma_p_3 : 200e6
-  sigma_r_1 : 300e6
-  sigma_r_2 : 300e6
-  sigma_r_3 : 300e6
-  sigma_e_1 : 200e6
-  sigma_e_2 : 200e6
-  sigma_e_3 : 200e6
-  H_1 : 200e6
-  H_2 : 200e6
-  H_3 : 200e6
-  p_1 : 200e6
-  p_2 : 200e6
-  p_3 : 200e6
-  ed_1 : 200e6
-  ed_2 : 200e6
-  ed_3 : 200e6
+  sigma_p_1 : 200
+  sigma_p_2 : 200
+  sigma_p_3 : 200
+  sigma_r_1 : 300
+  sigma_r_2 : 300
+  sigma_r_3 : 300
+  sigma_e_1 : 200
+  sigma_e_2 : 200
+  sigma_e_3 : 200
+  H_1 : 200
+  H_2 : 200
+  H_3 : 200
+  p_1 : 200
+  p_2 : 200
+  p_3 : 200
+  ed_1 : 200
+  ed_2 : 200
+  ed_3 : 200
   
 two:
   name : 'metal 2'
   familly : 'métaux'
   company_id : -1
   reference : -1
-  id_select : -1
+  id_select : 
   name_select : ''
   description : 'description'
   mtype : 'orthotrope'
@@ -72,9 +72,9 @@ two:
   dir_1_z : 0
   dir_2_z : 0
   dir_3_z : 1
-  E_1 : 200e9
-  E_2 : 200e9
-  E_3 : 200e9
+  E_1 : 200e3
+  E_2 : 200e3
+  E_3 : 200e3
   cis_1 : 0
   cis_2 : 0
   cis_3 : 0
@@ -85,21 +85,21 @@ two:
   alpha_2 : 0
   alpha_3 : 0
   rho : 2e3
-  sigma_p_1 : 200e6
-  sigma_p_2 : 200e6
-  sigma_p_3 : 200e6
-  sigma_r_1 : 300e6
-  sigma_r_2 : 300e6
-  sigma_r_3 : 300e6
-  sigma_e_1 : 200e6
-  sigma_e_2 : 200e6
-  sigma_e_3 : 200e6
-  H_1 : 200e6
-  H_2 : 200e6
-  H_3 : 200e6
-  p_1 : 200e6
-  p_2 : 200e6
-  p_3 : 200e6
-  ed_1 : 200e6
-  ed_2 : 200e6
-  ed_3 : 200e6
+  sigma_p_1 : 200
+  sigma_p_2 : 200
+  sigma_p_3 : 200
+  sigma_r_1 : 300
+  sigma_r_2 : 300
+  sigma_r_3 : 300
+  sigma_e_1 : 200
+  sigma_e_2 : 200
+  sigma_e_3 : 200
+  H_1 : 200
+  H_2 : 200
+  H_3 : 200
+  p_1 : 200
+  p_2 : 200
+  p_3 : 200
+  ed_1 : 200
+  ed_2 : 200
+  ed_3 : 200

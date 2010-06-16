@@ -4,6 +4,9 @@ class CalculResult < ActiveRecord::Base
   belongs_to  :sc_model
   has_one     :log_calcul
   
+  #state = ['temp', 'in_process', 'finish']
+  #log_type = ['create', 'compute']
+  
   def calcul_valid(calcul_time) 
     #mise à jour du résultat de calcul
     self.calcul_time = calcul_time
