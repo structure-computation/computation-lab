@@ -38,7 +38,7 @@ function info_select(strinfo,num){
 	if(strinfo=='liaison' || strinfo=='liaison_twin' || strinfo=='interface_twin'){
 		refresh_NC_page_liaisons();
 	}
-	if(strinfo=='CL' || strinfo=='CLv' || strinfo=='CL_twin' || strinfo=='bord_twin'){
+	if(strinfo=='CL' || strinfo=='CLv' || strinfo=='CL_twin' || strinfo=='bord'){
 		refresh_NC_page_CLs();
 	}
 	selected_for_info = [strinfo,num];
@@ -92,6 +92,12 @@ function info_select(strinfo,num){
 		var num_select = twin_left_tableau_connect[strinfo][num];
 		prop_CL_for_info = Tableau_CL_select[num_select];
 		prop_CL_affich_info();
+	}
+	if(strinfo=='bord'){
+		document.getElementById('NC_top_box_prop').className = 'NC_top_active_box';
+		var num_select = right_tableau_connect[strinfo][num];
+		Tableau_bords_for_info = Tableau_bords_filter[num_select];
+		Tableau_bords_affich_info();
 	}
 }
 
@@ -657,8 +663,7 @@ function Tableau_bords_for_info_change_geometry(){
 	if(id_temp != null){
 		Tableau_bords_for_info["geometry"] = id_temp.value ;
 	}
-	taille_Tableau_bords = Tableau_bords.length;
-	Tableau_bords_for_info["name"] = Tableau_bords_for_info["type"] + "_" + Tableau_bords_for_info["geometry"] + "_" + taille_Tableau_bords ;
+	Tableau_bords_for_info["name"] = Tableau_bords_for_info["type"] + "_" + Tableau_bords_for_info["geometry"] + "_" + compteur_bords_test ;
 	Tableau_bords_affich_info();
 }
 
@@ -680,14 +685,18 @@ function Tableau_bords_for_info_change_value(){
 
 function valid_bord(){
 	if(Tableau_bords_for_info["id"]==-1){
+		Tableau_bords_for_info["id"]=compteur_bords_test;
+		compteur_bords_test =+ 1;
 		taille_Tableau_bords = Tableau_bords.length;
-		Tableau_bords_for_info["id"]=taille_Tableau_bords;
 		Tableau_bords[taille_Tableau_bords] = new Array();
 		Tableau_bords[taille_Tableau_bords] = clone(Tableau_bords_for_info);
 		affiche_Tableau_bord();
+		//alert(taille_Tableau_bords);
+		//alert(array2json(Tableau_bords));
 	}else{
 		Tableau_bords[Tableau_bords_for_info["id"]] = clone(Tableau_bords_for_info);
 		affiche_Tableau_bord();
+		//alert('else');
 	}
 }
 

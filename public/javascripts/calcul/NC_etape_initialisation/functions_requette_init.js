@@ -88,7 +88,7 @@ function init_Tableau_calcul(Tableau_calcul_temp)
     affiche_Tableau_calcul();
     Tableau_init_select=clone(new_Tableau_init_select);
     Tableau_init_time_step[0]=clone(Tableau_init_time_step_temp);
-    affiche_Tableau_init_select();
+    //affiche_Tableau_init_select();
 }
 
 
@@ -136,59 +136,66 @@ function load_brouillon(brouillon_temp)
 	var taille_Tableau=Tableau_model.length;
 	//alert(taille_Tableau)
 	for (var key in Tableau_model) {
-	    if(key == 'mesh'){
-		Tableau_id_model = Tableau_model[key];
-		NC_current_step = Tableau_id_model['NC_current_step'] ;
+	    if(key == 'state'){
+		    NC_current_step = Tableau_model[key]['NC_current_step'];
+		    compteur_mat_select = Tableau_model[key]['compteur_mat_select'];
+		    compteur_liaison_select = Tableau_model[key]['compteur_liaison_select'];
+		    compteur_CL_select = Tableau_model[key]['compteur_CL_select'];
+		    compteur_bords_test = Tableau_model[key]['compteur_bords_test'];
+	    }
+	    else if(key == 'mesh'){
+		Tableau_id_model = object2array(Tableau_model[key]);
 		//alert('mesh');
 	    }
 	    else if(key == 'groups_elem'){
-		Tableau_pieces = Tableau_model[key];
+		Tableau_pieces = object2array(Tableau_model[key]);
 		//alert('groups_elem');
 	    }
 	    else if(key == 'groups_inter'){
-		Tableau_interfaces = Tableau_model[key];
+		Tableau_interfaces = object2array(Tableau_model[key]);
 		//alert('groups_inter');
 	    }
 	    else if(key == 'groups_edge'){
-		Tableau_bords = Tableau_model[key];
-		//alert('groups_edge');
+		Tableau_bords = object2array(Tableau_model[key]);
+		//alert(Tableau_bords);
+		//alert(Object.prototype.toString.apply(Tableau_bords));
 	    }
 	    else if(key == 'materials'){
-		Tableau_mat_select = Tableau_model[key];
+		Tableau_mat_select = object2array(Tableau_model[key]);
 		//alert(array2json(Tableau_model[key]));
-		objet_temp = array2object(Tableau_model[key]);
+		//objet_temp = array2object(Tableau_model[key]);
 		//alert($.toJSON(Tableau_model[key]));
 	    }
 	    else if(key == 'links'){
-		Tableau_liaison_select = Tableau_model[key];
+		Tableau_liaison_select = object2array(Tableau_model[key]);
 		//alert('links');
 	    }
 	    else if(key == 'CL'){
-		Tableau_CL_select = Tableau_model[key];
+		Tableau_CL_select = object2array(Tableau_model[key]);
 		//alert('CL');
 	    }
 	    else if(key == 'CL_volume'){
-		Tableau_CL_select_volume = Tableau_model[key];
+		Tableau_CL_select_volume = object2array(Tableau_model[key]);
 		//alert('CL_volume');
 	    }
 	    else if(key == 'time_step'){
-		Tableau_init_time_step = Tableau_model[key];
+		Tableau_init_time_step = object2array(Tableau_model[key]);
 		//alert('CL_volume');
 	    }
 	    else if(key == 'options'){
-		Tableau_option_select = Tableau_model[key];
+		Tableau_option_select = object2array(Tableau_model[key]);
 		//alert('CL_volume');
 	    }
 	    else if(key == 'groupe_pieces'){
-		groupe_pieces = Tableau_model[key];
+		groupe_pieces = object2array(Tableau_model[key]);
 		//alert('CL_volume');
 	    }
 	    else if(key == 'groupe_interfaces'){
-		groupe_interfaces = Tableau_model[key];
+		groupe_interfaces = object2array(Tableau_model[key]);
 		//alert('CL_volume');
 	    }
 	    else if(key == 'groupe_bords'){
-		groupe_bords = Tableau_model[key];
+		groupe_bords = object2array(Tableau_model[key]);
 		//alert('CL_volume');
 	    }
 	}

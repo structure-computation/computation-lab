@@ -1054,7 +1054,7 @@ body
 }
 .NC_active_box_init_text_2
 {
-  height:60px; 
+  height:130px; 
   margin:5px 0 0 5px; 
   line-height: 18px;
   font-weight: 100;
@@ -1066,10 +1066,10 @@ body
 }
 .NC_active_box_init_text_2 textarea
 { 
-  width: 500px;
-  height:50px;  
+  width: 100%;
+  height:95%;  
   float:left;
-  font-size: 0.8em;
+  font-size: 0.9em;
   font-family: Verdana, Arial, Helvetica, sans-serif;
   //border: none;
 }
@@ -1415,14 +1415,31 @@ body
   height:20px;
   width:100px;
   margin-top:0px;
-  line-height: 18px;
+  line-height: 20px;
   font-weight: 100;
   font-size: 0.65em;
   text-align: center;
   background: transparent url('../images/NC_bouton_jaune_suppr.png') no-repeat center top;
   color: #2a3556;
 }
+.NC_bottom_page_3
+{
+  height:20px;
+  width:100px;
+  margin-top:0px;
+  line-height: 20px;
+  font-weight: 100;
+  font-size: 0.95em;
+  text-align: center;
+  background: transparent url('../images/NC_bouton_jaune_suppr.png') no-repeat center top;
+  color: #2a3556;
+}
 .NC_bottom_page_2 a
+{
+  color: #2a3556;
+  text-decoration:none;
+}
+.NC_bottom_page_3 a
 {
   color: #2a3556;
   text-decoration:none;

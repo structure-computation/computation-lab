@@ -193,63 +193,15 @@ function affiche_Tableau_init_select(){
 				remplacerTexte(id_init_key, Tableau_init_select[key]);
 			}
 		}else if(key == 'ctype'){
-			id_init_key.value = Tableau_init_select[key];
-			//alert(Tableau_init_select[key]);
-			if(Tableau_init_select[key]=='statique'){
-				document.getElementById('NC_init_non_statique').className = 'off';
-			}else{
-				document.getElementById('NC_init_non_statique').className = 'on';
-			}
+			id_init_key.value = Tableau_init_select[key] ;
+			id_schema_temp_key = document.getElementById('schema_temp_ctype');
+			remplacerTexte(id_schema_temp_key, Tableau_init_select[key]);
 		}else if(id_init_key != null && key != 'step'){
 			id_init_key.value = Tableau_init_select[key] ;
 		}
 	}
 	affiche_Tableau_init_time_step();
-}
-
-// affichage du tableau des step de chargement de la boite active init
-function affiche_Tableau_init_time_step(){
-	for(i=0;i<20;i++){
-		// on affiche la ligne line_step de la page init
-		var strContent_init_step_line = 'init_line_step_' + i ;
-		var id_init_step_line = document.getElementById(strContent_init_step_line);
-		// on affiche le lignes prop_CL_step de la page prop_CL
-		var strContent_prop_CL_step = 'prop_CL_step_' + i ;
-		var id_prop_CL_step = document.getElementsByName(strContent_prop_CL_step);
-		
-		if(i<Tableau_init_time_step.length){
-			for(nstep=0; nstep<id_prop_CL_step.length; nstep++){
-				id_prop_CL_step[nstep].className = 'NC_prop_line_top on' ;
-			}
-			if(pair(i)){
-				id_init_step_line.className = "NC_init_table_step_lign pair";
-			}else{
-				id_init_step_line.className = "NC_init_table_step_lign impair";
-			}
-			Tableau_init_time_step[i]['name'] = 'step_' + i ;
-			if(i == 0){
-				Tableau_init_time_step[i]['Ti'] = 0 ;
-			}else{
-				Tableau_init_time_step[i]['Ti'] = Tableau_init_time_step[i-1]['Tf'] ;
-			}
-			Tableau_init_time_step[i]['Tf'] = Tableau_init_time_step[i]['Ti'] + Tableau_init_time_step[i]['PdT'] *  Tableau_init_time_step[i]['nb_PdT'];
-			
-			
-			for(key in Tableau_init_time_step[i]){
-				var strContent_init_step_key = 'init_step_' + key + '_' + i ;
-				var id_init_step_key = document.getElementById(strContent_init_step_key);
-				if(id_init_step_key != null){
-					id_init_step_key.value = Tableau_init_time_step[i][key] ;
-				}
-			}
-		}else{
-			id_init_step_line.className = "NC_init_table_step_lign off";
-			for(nstep=0; nstep<id_prop_CL_step.length; nstep++){
-				id_prop_CL_step[nstep].className = 'NC_prop_line_top off' ;
-			}
-		}
-	}
-	equal_height_NC_fake();	
+	//alert('affiche_Tableau_init_time_step 1');
 }
 
 // mise a jour des valeur du tableau par l'utilisateur
@@ -262,54 +214,18 @@ function Tableau_init_change_value(){
 		}
 	}
 	
-	for(i=0;i<Tableau_init_time_step.length;i++){
-		for(key in Tableau_init_time_step[i]){
-			var strContent_init_step_key = 'init_step_' + key + '_' + i ;
-			var id_init_step_key = document.getElementById(strContent_init_step_key);
-			if(id_init_step_key != null){
-				Tableau_init_time_step[i][key] = id_init_step_key.value ;
-			}
-		}
-	}
+// 	for(i=0;i<Tableau_init_time_step.length;i++){
+// 		for(key in Tableau_init_time_step[i]){
+// 			var strContent_init_step_key = 'init_step_' + key + '_' + i ;
+// 			var id_init_step_key = document.getElementById(strContent_init_step_key);
+// 			if(id_init_step_key != null){
+// 				Tableau_init_time_step[i][key] = id_init_step_key.value ;
+// 			}
+// 		}
+// 	}
 	affiche_Tableau_init_select();	
 }
 
-// ajout d'un step par l'utilisateur
-function Tableau_init_add_step(){
-	taille_Tableau_init_time_step = Tableau_init_time_step.length ;
-	Tableau_init_time_step[taille_Tableau_init_time_step] = new Array();
-	if(taille_Tableau_init_time_step>0){
-		Tableau_init_time_step[taille_Tableau_init_time_step] = clone(Tableau_init_time_step[taille_Tableau_init_time_step-1]);
-	}else{
-		Tableau_init_time_step[taille_Tableau_init_time_step] = clone(Tableau_init_time_step_temp);
-	}
-	
-	// ajout du step de chargement à touts les CL
-	for(i=0;i<Tableau_CL_select_volume.length;i++){
-		//test1=array2json(Tableau_CL_select_volume[i]);
-		//alert(test1);
-		Tableau_CL_select_volume[i]['step'][taille_Tableau_init_time_step] = clone(Tableau_CL_step);
-	}
-	for(i=0;i<Tableau_CL_select.length;i++){
-		Tableau_CL_select[i]['step'][taille_Tableau_init_time_step] = clone(Tableau_CL_step);
-	}
-	
-	affiche_Tableau_init_time_step();	
-}
-// suppression d'un step par l'utilisateur
-function Tableau_init_suppr_step(step_select){
-	Tableau_init_time_step.splice(step_select,1);
-	
-	// suppression du step de chargement à touts les CL
-	for(i=0;i<Tableau_CL_select_volume.length;i++){
-		Tableau_CL_select_volume[i]['step'].splice(step_select,1);
-	}
-	for(i=0;i<Tableau_CL_select.length;i++){
-		Tableau_CL_select[i]['step'].splice(step_select,1);
-	}
-	
-	affiche_Tableau_init_time_step();	
-}
 
 
 

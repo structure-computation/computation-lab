@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100609205039) do
+ActiveRecord::Schema.define(:version => 20100617151630) do
 
   create_table "abonnements", :force => true do |t|
     t.string   "name"
@@ -124,6 +124,18 @@ ActiveRecord::Schema.define(:version => 20100609205039) do
     t.integer  "facture_month"
     t.integer  "facture_year"
     t.date     "facture_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "files_sc_models", :force => true do |t|
+    t.integer  "sc_model_id"
+    t.integer  "user_id"
+    t.datetime "depot_date"
+    t.string   "name"
+    t.text     "description"
+    t.string   "state"
+    t.float    "size"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -83,7 +83,7 @@ Tableau_CL_step['Fy'] = "0";
 Tableau_CL_step['Fz'] = "0";
 Tableau_CL_step['ft'] = 1;
 
-
+var current_state_box_schema_temp = 'on';		// états d'affichage des boite active de la page option
 var compteur_CL_select = 0;				// compteur pour l'attribution des id_select
 
 var Tableau_bords_assigned = new Array();  		// tableau des bords assignées a une CL
@@ -99,6 +99,7 @@ var actif_bord_select = -1;             		// bord sélectionné actif pour la su
 var id_actif_bord_select = -1;				// id de l'element graphique bord sélectionné actif
 
 var Tableau_bords_test = new Array();  			// tableau d'initialisation pour la creation des bors (static, c'est le format du tableau)
+var compteur_bords_test = 0;				// compteur pour l'attribution des id_select
 var Tableau_bords_for_info = new Array();  			// tableau d'initialisation pour la creation des bors (celui sur lequel on travail)
 Tableau_bords_test["id"]=-1;
 Tableau_bords_test["origine"]="from_php";

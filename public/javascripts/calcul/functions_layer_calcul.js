@@ -94,6 +94,18 @@ function array2object(array){
     }
     return object;
 }
+function object2array(object){
+    var array = new Array();
+    for(var key in object) {
+	var value = object[key];
+	if(typeof value == "Array" || typeof value == "object") { //Custom handling for arrays
+            array[key] = object2array(value);
+        } else {
+            array[key] = value;
+        }
+    }
+    return array;
+}
 
 //----------------------------------------------------------------------------------------------------------
 // fonctions utiles pour l'affichage des cache noir et des wizard

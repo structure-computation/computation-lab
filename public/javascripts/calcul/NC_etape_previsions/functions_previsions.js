@@ -213,9 +213,17 @@ function complete_calcul(){
 
 
 function complete_brouillon(){
-
-	Tableau_id_model['NC_current_step'] = NC_current_step;
+	// tableau représentatn l'etat courant de l'interface
+	var Tableau_current_stape_interface = new Array();
+	Tableau_current_stape_interface['NC_current_step'] = NC_current_step;
+	Tableau_current_stape_interface['compteur_mat_select'] = compteur_mat_select;
+	Tableau_current_stape_interface['compteur_liaison_select'] = compteur_liaison_select;
+	Tableau_current_stape_interface['compteur_CL_select'] = compteur_CL_select;
+	Tableau_current_stape_interface['compteur_bords_test'] = compteur_bords_test;
+	
 	Tableau_calcul_complet = new Array();
+	// etat de l'interface
+	Tableau_calcul_complet['state'] = Tableau_current_stape_interface;
 	// id du model
 	Tableau_calcul_complet['mesh'] = Tableau_id_model;
 	// geometrie du model

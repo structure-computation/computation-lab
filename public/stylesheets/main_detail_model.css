@@ -446,3 +446,114 @@
 }
 
 
+/*
+ * menu wizard l'ajout d'un abbonnement anuel
+ *
+ */ 
+#NU_wiz_layer
+{
+	width: 736px ;
+	height: 420px ;
+	position: absolute;
+	z-index: 20;
+	margin: 50px 0 0 105px; 
+}
+#NU_wiz_layer_top
+{
+	background: transparent url('../images/create_projet_top.png') no-repeat left top;
+	width: 736px ;
+	height: 27px ;
+	text-align: center;
+	font-size: 0.80em;
+	color: #ffffff;
+	line-height:25px;
+	
+	float: left ;
+}
+#NU_wiz_layer_milieu
+{
+	background: transparent url('../images/create_projet_milieu.png') repeat-y left top;
+	width: 736px ;
+	height: 360px ;
+	float: left ;
+}
+#NU_wiz_layer_bas
+{
+	background: transparent url('../images/create_projet_bas.png') no-repeat left top;
+	width: 736px ;
+	height: 36px ;
+	float: left ;
+}
+
+#NU_wiz_menu
+{
+  width: 730px;
+  height: 27px;
+  background: transparent;
+  float: left ;
+  margin: 5px 0px 0 3px;
+}
+
+#NU_PB_page_information, #NU_PB_page_fichier
+{
+  width: 240px;
+  padding-right:0px;
+  height: 30px;
+  line-height: 26px;
+  text-align: center;
+  position: absolute;
+  font-size: 0.80em;
+  font-weight: normal;
+  color: #e5e5e5;
+  //color:#2a3557;
+  text-decoration: none;
+  background: transparent url('../images/NM_progressbar_bg_gris.png') no-repeat right top;
+  margin: 0px 0px 0 4px;	
+}
+#NU_PB_page_information.actif, #NU_PB_page_fichier.actif
+{
+  background: transparent url('../images/NM_progressbar_bg_bleu.png') no-repeat right top;
+}
+#NU_PB_page_information.actif:hover, #NU_PB_page_fichier.actif:hover
+{
+  color: #ffdb00;
+}
+#NU_PB_page_information.select, #NU_PB_page_fichier.select
+{
+  background: transparent url('../images/NM_progressbar_bg_jaune.png') no-repeat right top;
+  color:#2a3557;
+}
+
+#NU_PB_page_resume
+{
+  width: 290px;
+  padding-right:0px;
+  height: 30px;
+  line-height: 26px;
+  text-align: center;
+  position: absolute;
+  font-size: 0.80em;
+  font-weight: normal;
+  color: #e5e5e5;
+  //color:#2a3557;
+  text-decoration: none;
+  background: transparent url('../images/NM_progressbar_bg_gris_1.png') no-repeat left top;
+  margin: 0px 0px 0 4px;	
+}
+#NU_PB_page_resume.actif
+{
+  background: transparent url('../images/NM_progressbar_bg_bleu_1.png') no-repeat left top;
+}
+#NU_PB_page_resume.actif:hover
+{
+  color: #ffdb00;
+}
+
+#NU_PB_page_resume.select
+{
+  background: transparent url('../images/NM_progressbar_bg_jaune_1.png') no-repeat left top;
+  color:#2a3557;
+}
+
+
+

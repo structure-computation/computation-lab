@@ -20,11 +20,12 @@ var content_tableau_connect         =  new Array();              // connectivit�
 var content_tableau_current_page    =  new Array();              // numéro de la page du tableau (sert pour la définition de la connectivité)    
 var content_tableau_curseur_page    =  new Array();              // nombre de page du tableau (sert pour l'affichage des page en bas des tableaux)
 var content_tableau_liste_page      =  new Array();              // liste des pages du tableau (sert pour l'affichage des page en bas des tableaux)
-var content_tableau_page            =  new Array('resultat','utilisateur');    // initialisation des pages avec tableau dynamique
+var content_tableau_page            =  new Array('resultat','utilisateur','new_utilisateur');    // initialisation des pages avec tableau dynamique
 
 var taille_tableau_content_page     =  new Array()               // taille du tableau dans la content box
 taille_tableau_content_page['resultat'] = 20;
 taille_tableau_content_page['utilisateur'] = 20;
+taille_tableau_content_page['new_utilisateur'] = 20;
 
 
 for(i=0; i<content_tableau_page.length ; i++){
