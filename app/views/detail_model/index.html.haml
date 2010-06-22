@@ -37,5 +37,6 @@
 %script{ :type => "text/javascript" }
   model_id = #{@id_model};
   $(document).ready(function() {get_Current_model( #{@id_model} )});
+  $(document).ready(function() {get_Tableau_utilisateur_new_list()});
     
 = render :partial => "footer_top"

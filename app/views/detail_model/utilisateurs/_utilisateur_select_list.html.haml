@@ -1,0 +1,30 @@
+.newBoxTable
+  .newBoxTable_first
+    .newBoxTable_0{ :style => "width: 190px;" }
+      %p
+        Nom
+    .newBoxTable_0{ :style => "width: 310px;" }
+      %p
+        Email
+    .newBoxTable_0{ :style => "width: 179px;" }
+      %p
+        Rôle
+    
+  - (0...8).each do |i|
+    .newBoxTable_lign{ :id => "select_utilisateur_lign_#{i}" }
+      .newBoxTable_lign_pair{ :id => "select_utilisateur_pair_#{i}" }
+        .newBoxTable_2{ :id => "select_utilisateur_0_#{i}", :style => "width: 190px;" }
+        .newBoxTable_2{ :id => "select_utilisateur_1_#{i}", :style => "width: 310px;" }
+        .newBoxTable_2{ :id => "select_utilisateur_2_#{i}", :style => "width: 179px;" }
+          
+
+.NM_bleu{ :style => "width: 600px; height: 25px;  margin: 10px 0px 0 63px;" }
+  %a.page_select{ :onclick => "go_page_select_utilisateur('first')", :style => "cursor: pointer;" }
+    %img{:src=>"/images/page_moins.png", :style=>"vertical-align:middle;"}
+  page
+  - (0...5).each do |i|
+    %a{ :id => "select_utilisateur_page_#{i}", :onclick => "go_page_select_utilisateur(#{i})", :style => "cursor: pointer;" }
+      #{i}
+  %a.page_select{ :onclick => "go_page_select_utilisateur('end')", :style => "cursor: pointer;" }
+    %img{:src=>"/images/page_plus.png", :style=>"vertical-align:middle;"}
+    

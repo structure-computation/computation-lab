@@ -2,10 +2,11 @@
 
 
 // initialisation des type de utilisateurs possible pour l'achat d'un nouveau utilisateur
-var Tableau_utilisateur_list            =  new Array();              // tableau des utilisateur
-var Tableau_utilisateur             =  new Array();              // utilisateur selectionner
+var Tableau_utilisateur_new_list            =  new Array();              // tableau des utilisateur
+var Tableau_utilisateur_new             =  new Array();              // utilisateur selectionner
 var NUcurrent_stape			= 'page_information';
-Tableau_utilisateur_filter         =  new Array();              // utilisateur selectionner
+Tableau_utilisateur_new_filter         =  new Array();              // utilisateur selectionner
+Tableau_utilisateur_select_filter = new Array();
 //---------------------------------------------------------------------------------------------------------------------
 // fonctions utiles pour l'affichage d'un nouveau utilisateur
 //---------------------------------------------------------------------------------------------------------------------
@@ -18,7 +19,7 @@ function displayNewUtilisateur(interupteur) {
     displayBlack(interupteur);
     document.getElementById('NU_wiz_layer').className = interupteur;
     NUcurrent_stape = 'page_information';
-    //affiche_Tableau_utilisateur_list();
+    get_Tableau_utilisateur_new_list();
     document.getElementById('NU_wiz_annul').className    =  'on' ;
     document.getElementById('NU_wiz_suiv').className    =  'on' ;
     document.getElementById('NU_wiz_valid').className    =  'off' ;
@@ -30,7 +31,7 @@ function displayNewUtilisateur(interupteur) {
 function NU_next_stape(){
     if(NUcurrent_stape == 'page_information'){
         NUcurrent_stape      = 'page_fichier';
-	affich_detail_utilisateur();
+	affiche_Tableau_utilisateur_select_list();
 	document.getElementById('NU_wiz_annul').className    =  'on' ;
 	document.getElementById('NU_wiz_suiv').className    =  'off' ;
 	document.getElementById('NU_wiz_valid').className    =  'on' ;
@@ -117,43 +118,48 @@ function affiche_NU_page(){
 // fonctions utiles pour l'obtention de la liste des utilisateurs
 //-------------------------------------------------------------------------------------------------
 // traitement en fin de requette pour laffichage du tableau des resultats
-function init_Tableau_utilisateur_list(Tableau_utilisateur_temp)
+function init_Tableau_utilisateur_new_list(Tableau_utilisateur_new_temp)
 {
     // var Tableau_calcul_temp = eval('[' + response + ']');
-    if (Tableau_utilisateur_temp)
+    if (Tableau_utilisateur_new_temp)
     {   
-        Tableau_utilisateur_list = Tableau_utilisateur_temp;
+        Tableau_utilisateur_new_list = Tableau_utilisateur_new_temp;
+	for(i in Tableau_utilisateur_new_list){
+	    Tableau_utilisateur_new_list[i]['user']['select'] = false;
+	    Tableau_utilisateur_new_list[i]['user']['droit'] = 'gestion';
+	    //alert(array2json(Tableau_utilisateur_new_list[i]['user']));
+	}
     }
     else
     {
-        Tableau_utilisateur_list[0]         =  new Array();
-        Tableau_utilisateur_list[0]['name'] = 'aucun résultat disponnible';
+        Tableau_utilisateur_new_list[0]         =  new Array();
+        Tableau_utilisateur_new_list[0]['name'] = 'aucun résultat disponnible';
     }
-    //alert(array2json(Tableau_utilisateur_list));
-    affiche_Tableau_utilisateur_list();
+    //alert(array2json(Tableau_utilisateur_new_list));
+    affiche_Tableau_utilisateur_new_list();
 }
 // requette pour l'obtention du tableau des resultats
-function get_Tableau_utilisateur_list()
+function get_Tableau_utilisateur_new_list()
 { 
-    var url_php = "/sc_admin_detail_company/get_list_utilisateur";
-    $.getJSON(url_php,{},init_Tableau_utilisateur_list);
+    var url_php = "/detail_model/get_list_utilisateur_new";
+    $.getJSON(url_php,{},init_Tableau_utilisateur_new_list);
 }
 
 // filtre du tableau
-function filtre_Tableau_utilisateur_list(){
-    Tableau_utilisateur_filter = Tableau_utilisateur_list;
+function filtre_Tableau_utilisateur_new_list(){
+    Tableau_utilisateur_new_filter = Tableau_utilisateur_new_list;
 }
 
 // affichage du tableau decompte memory
-function affiche_Tableau_utilisateur_list(){
-    filtre_Tableau_utilisateur_list();
+function affiche_Tableau_utilisateur_new_list(){
+    filtre_Tableau_utilisateur_new_list();
     taille_tableau_content  =  taille_tableau_content_page['new_utilisateur'];
-    var current_tableau     =  Tableau_utilisateur_filter;
+    var current_tableau     =  Tableau_utilisateur_new_filter;
     var strname             =  'new_utilisateur';
-    var strnamebdd          =  'utilisateur';
-    var stridentificateur   =  new Array('name','price','Assigned_memory','security_level');
+    var strnamebdd          =  'user';
+    var stridentificateur   =  new Array('name','email','role');
     affiche_Tableau_new(current_tableau, strname, strnamebdd, stridentificateur);
-    select_new_utilisateur(0);
+    select_new_utilisateur(-1);
 }
 
 
@@ -167,31 +173,79 @@ function go_page_new_utilisateur(num){
         var num_page = num + content_tableau_curseur_page['new_utilisateur'];
         content_tableau_current_page['new_utilisateur'] = content_tableau_liste_page['new_utilisateur'][num_page]-1;    
     }
-    affiche_Tableau_utilisateur_list();
+    affiche_Tableau_utilisateur_new_list();
 }
 
 
-// selectionner (activer) un matériaux de la liste pour creer un nouveau materiaux
+// selectionner (activer) un ou plusieurs utilsateurs de la liste 
 function select_new_utilisateur(num){
-	var new_utilisateur_select = content_tableau_connect['new_utilisateur'][num];
-	Tableau_utilisateur = clone(Tableau_utilisateur_list[new_utilisateur_select]);
-	for(i=0; i<taille_tableau_content_page['new_utilisateur'] ;i++){
-		strContent_check = 'new_utilisateur_check_' + i;
+	if(num == -1){
+		for(i=0; i<content_tableau_connect['new_utilisateur'].length ;i++){
+			strContent_check = 'new_utilisateur_check_' + i;
+			id_check = document.getElementById(strContent_check);
+			if(id_check != null){
+				id_check.checked=false;
+			}
+		}
+		for(i in Tableau_utilisateur_new_list){
+		    Tableau_utilisateur_new_list[i]['user']['select'] = false;
+		}
+	}else{
+		var new_utilisateur_select = content_tableau_connect['new_utilisateur'][num];
+		strContent_check = 'new_utilisateur_check_' + num;
 		id_check = document.getElementById(strContent_check);
-		if(i==new_utilisateur_select){
-			id_check.checked=true;
-		}else{
+		if(Tableau_utilisateur_new_filter[new_utilisateur_select]['user']['select']){
+			Tableau_utilisateur_new_filter[new_utilisateur_select]['user']['select']=false;
 			id_check.checked=false;
+		}else{
+			Tableau_utilisateur_new_filter[new_utilisateur_select]['user']['select']=true;
+			id_check.checked=true;
 		}
 	}
-	//alert(array2json(Tableau_utilisateur));
 }
 
+// filtre du tableau
+function filtre_Tableau_utilisateur_select_list(){
+	Tableau_utilisateur_select_filter = new Array();
+	num_select = 0;
+	for(i in Tableau_utilisateur_new_list){
+		if(Tableau_utilisateur_new_list[i]['user']['select']){
+			Tableau_utilisateur_select_filter[num_select] = Tableau_utilisateur_new_list[i];
+			num_select += 1;
+		}
+	}
+}
+
+// affichage du tableau decompte memory
+function affiche_Tableau_utilisateur_select_list(){
+    filtre_Tableau_utilisateur_select_list();
+    taille_tableau_content  =  taille_tableau_content_page['select_utilisateur'];
+    var current_tableau     =  Tableau_utilisateur_select_filter;
+    var strname             =  'select_utilisateur';
+    var strnamebdd          =  'user';
+    var stridentificateur   =  new Array('name','email','role');
+    affiche_Tableau_new(current_tableau, strname, strnamebdd, stridentificateur);
+}
+
+// affiche la page num pour la liste des utilisateur
+function go_page_select_utilisateur(num){
+    if(num=='first'){
+        content_tableau_current_page['select_utilisateur'] = 0;
+    }else if(num=='end'){
+        content_tableau_current_page['select_utilisateur'] = content_tableau_liste_page['select_utilisateur'].length-1;
+    }else{
+        var num_page = num + content_tableau_curseur_page['select_utilisateur'];
+        content_tableau_current_page['select_utilisateur'] = content_tableau_liste_page['select_utilisateur'][num_page]-1;    
+    }
+    affiche_Tableau_utilisateur_select_list();
+}
+
+
 // afficher le détail d'un utilisateur
-function affich_detail_utilisateur(){
-    var table_detail = Tableau_utilisateur['utilisateur'];
+function affich_detail_utilisateur_new(){
+    var table_detail = Tableau_utilisateur_new['utilisateur'];
     //afficher le detail d'un model
-    //alert(array2json(Tableau_utilisateur));
+    //alert(array2json(Tableau_utilisateur_new));
     for(key in table_detail){
 	    var strContent_detail_key = 'utilisateur_' + key ;
 	    var strContent_resume_key = 'resume_utilisateur_' + key ;
@@ -222,16 +276,18 @@ function ok_new_utilisateur_info(result)
 	alert(result);
 	document.getElementById('new_utilisateur_pic_wait').classname = 'off';
 	document.getElementById('new_utilisateur_pic_ok').classname = 'on';
-	get_current_memory_account(Current_company['id']);
+	affich_Utilisateurs();
 }
 
 
 function send_new_utilisateur_info()
 { 
+    send_info = array2json(Tableau_utilisateur_select_filter);
+    alert(send_info);
     document.getElementById('new_utilisateur_pic_wait').classname = 'on';
     document.getElementById('new_utilisateur_pic_ok').classname = 'off';
-    var url_php = "/sc_admin_detail_company/valid_new_utilisateur";
-    $.getJSON(url_php,{"id_company": Current_company['id'], "id_utilisateur":Tableau_utilisateur['utilisateur']['id']},ok_new_utilisateur_info);
+    var url_php = "/detail_model/valid_new_utilisateur";
+    $.get(url_php,{"id_model": model_id, "file":send_info},ok_new_utilisateur_info);
 }
 
 

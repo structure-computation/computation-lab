@@ -24,7 +24,7 @@ class DetailModelController < ApplicationController
     end 
   end
   
-   def get_list_utilisateur
+  def get_list_utilisateur
     @id_model = params[:id_model]
     current_model = @current_user.sc_models.find(@id_model)
     list_role_utilisateurs = current_model.user_sc_models
@@ -39,6 +39,40 @@ class DetailModelController < ApplicationController
     respond_to do |format|
       format.js   {render :json => @users.to_json}
     end 
+  end
+  
+  def get_list_utilisateur_new
+    @current_company = @current_user.company
+    list_utilisateur_new = @current_company.users
+    @users = []
+    list_utilisateur_new.each{ |utilisateur_i| 
+      user = Hash.new
+      user['user'] = Hash.new 
+      user['user'] = { :id => utilisateur_i.id, :email  => utilisateur_i.email, :name => utilisateur_i.firstname + " " + utilisateur_i.lastname, :role => utilisateur_i.role }
+      @users << user
+    }
+    # list_utilisateurs = current_model.users
+    respond_to do |format|
+      format.js   {render :json => @users.to_json}
+    end 
+  end
+  
+  def valid_new_utilisateur
+    @id_model = params[:id_model]
+    @current_model = @current_user.sc_models.find(@id_model)
+    @current_company = @current_model.company
+    jsonobject = JSON.parse(params[:file])
+    num_user = 0
+    jsonobject.each{ |utilisateur_i| 
+            user = @current_company.users.find(utilisateur_i['user']['id']) 
+            if(@current_model.users.exists?(user.id))
+            else
+		@current_model.users << user
+		num_user += 1
+            end
+    }
+    # list_utilisateurs = current_model.users
+    render :text => 'membres correstement ajoutés au modèle'
   end
   
   def send_mesh

@@ -1,6 +1,6 @@
 #NU_wiz_layer.off
   #NU_wiz_layer_top
-    Nouvel abonnement
+    Ajouter un accès membre vers ce modèle
   #NU_wiz_layer_milieu
     #NU_wiz_menu
       %a{ :onclick => "()" } 
@@ -23,38 +23,21 @@
       /%div{:style => "width: 7px; height: 330px; float:left;" }
       .NM_bleu{ :style => "width: 600px; height: 20px;  margin: 10px 0px 0 63px;" }
         Membres selectionnés : 
+      = render :partial => "detail_model/utilisateurs/utilisateur_select_list"
  
     / page résumé
     #NU_page_resume
       .NM_bleu{ :style => "width: 730px; height: 40px;  margin: 0px 0px 0 3px;" }
       .NM_fond_resume{ :style => "width: 730px; margin: 0px 0px 0 3px;" }
-        .gras#resume_name.NM_bleu{ :style => "width: 600px; height: 20px;  margin: 0px 0px 0 63px;" }
-          nom
-        .zoneText1
-          %table{ :style => "margin: 0px 0px 0 10px;" }
-            %tr
-              %td.cadre{ :style => "width: 200px;" }
-              Espace mémoire
-              %td.cadre{ :style => "width: 200px;" }
-                Double identification
-              %td.cadre{ :style => "width: 200px;" }
-                prix (Euros)
-            %tr
-              %td.gras#resume_abonnement_Assigned_memory
-                100
-              %td.gras#resume_abonnement_security_level
-                500 
-              %td.gras#resume_abonnement_price
-                900
       
-      #new_abonnement_pic_ok.on{:style => "width: 300px; margin: 20px 0px 0 213px; float:left;" }
+      #new_utilisateur_pic_ok.on{:style => "width: 300px; margin: 20px 0px 0 213px; float:left;" }
         .wiz_pic_ok
         .NM_bleu{ :style => "width: 200px; height:20px; margin: 25px 0px 25px 20px;" }
-          Nouvel abonnement validé
-      #new_abonnement_pic_wait.off{:style => "width: 300px; margin: 20px 0px 0 213px; float:left;" }
+          Nouveaux utilisateurs validés
+      #new_utilisateur_pic_wait.off{:style => "width: 300px; margin: 20px 0px 0 213px; float:left;" }
         .wiz_pic_wait
         .NM_bleu{ :style => "width: 200px; height:20px; margin: 25px 0px 25px 20px;" }
-          Nouvel abonnement en cours de validation
+          Nouveaux utilisateurs en cours de validation
 
   #NU_wiz_layer_bas
     #NU_wiz_annul.on{:style => "float: left;" }
