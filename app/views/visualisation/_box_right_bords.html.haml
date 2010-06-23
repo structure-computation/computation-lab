@@ -1,0 +1,22 @@
+#page_righ_bord.NC_box.off
+  .NC_filter{ :style => "width:248px; height:120px" }
+    Liste des pièces pour ce modèle
+  /  <?php include("./contenu/NC_etape_CLs/NC_filter_bords.php");  ?>
+  - (0...20).each do |i|
+    .tableNC_impair{ :id => "bord_pair_#{i}" }
+      .tableNC_box_lign{ :id => "bord_lign_#{i}" }
+        %a{:onclick => "select_bords(#{i})", :style => "cursor: pointer;" }
+          .tableNC_box_picto{ :id => "bord_picto_#{i}" }
+          .tableNC_box_2{ :id => "bord_0_#{i}" }
+        %a{ :onclick => "visu_bord_select(#{i})", :style => "cursor: pointer;" }
+          .tableNC_box_visu{ :id => "bord_visu_#{i}" }
+
+  .NC_filter{ :style => "width:248px; height:20px" }
+    .NC_bottom_page_1.right
+      %a.page_select{ :onclick => "go_page_bord('first')", :style => "cursor: pointer;" }
+        <
+      page
+      - (0...5).each do |i|
+        %a{ :id => "bord_page_#{i}", :onclick => "go_page_bord(#{i})", :style => "cursor: pointer;" }
+          #{i}
+      %a.page_select{ :onclick => "go_page_bord('end')", :style => "cursor: pointer;" }

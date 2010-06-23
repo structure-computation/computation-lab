@@ -377,6 +377,12 @@ function go_calcul(){
     $(location).attr('href',url_php);
 }
 
+// visualiser le model
+function go_visu(){
+    var url_php = "/visualisation/index?id_model=" + Current_model['id'] ;
+    //alert(Current_model['id']);
+    $(location).attr('href',url_php);
+}
 
 
 -->

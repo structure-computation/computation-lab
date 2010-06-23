@@ -197,6 +197,15 @@ function go_calcul(num){
     $(location).attr('href',url_php);
 }
 
+// visualiser le model
+function go_visu(num){
+    var num_select = content_tableau_connect['sc_model'][num];
+    var id_model = Tableau_model_filter[num_select]['sc_model']['id'];
+    var url_php = "/visualisation/index?id_model=" + id_model ;
+    $(location).attr('href',url_php);
+}
+
+
 // afficher le détail d'un modele
 function go_detail_model(num){
     var num_select = content_tableau_connect['sc_model'][num];

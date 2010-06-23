@@ -1,0 +1,920 @@
+/* reset default style */
+body, div, h1, h2, h3, p, ul, li
+{
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+div.clearline
+{
+  clear: both;
+}
+
+/* 
+ * Mise en page globale du site
+ * Elements : body, conteneur, header, content, footer
+ *
+ */
+
+body
+{
+  background-color: #f8f8f8;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 100%;
+  color: black;
+  line-height: 1;
+  text-align: center;
+  margin-top: 10px;
+}
+
+#conteneur
+{
+  background: transparent;
+  width: 946px;
+  margin: 0 auto;
+}
+
+/* header ---------------------  */ 
+#header_top
+{
+  background: transparent url('../images/header_bg.png') repeat-x left top;
+  width: 940px;
+  height: 83px;
+  text-align: left;
+  float: left;
+}
+#content
+{
+  width: 945px;
+  text-align: left;
+  background: transparent url('../images/conteneur_milieu.png') repeat-y left top;
+  float: left;
+}
+.black
+{ 
+	position: absolute;
+	z-index: 10;
+	width:940px ;
+	height:100% ;
+	background-color: black;
+	filter: Alpha(opacity=50);
+	-moz-opacity: .50;
+	-khtml-opacity: 0.50;
+	opacity: .50;
+}
+
+/*
+ * Css pour la société et l'identité de l'utilisateur
+ *
+ */
+#header_top_logo
+{
+  background: transparent url('../images/header_logo.png') no-repeat top left;
+  width: 280px;
+  padding : 10px 0px 0 0px;
+  height: 46px;
+  text-align: left;
+  float: left;
+}
+#header_top_societe
+{
+  width: 200px;
+  height: 46px;
+  text-align: right;
+  padding : 10px 0px 0 0px;
+  margin : 0px 10px 0 0px;
+  color: #e5e5e5;
+  font-size: 0.80em;
+  font-weight: normal;
+  float: right;
+}
+#header_top_temp
+{
+  width: 10px;
+  height: 46px;
+  background: transparent url('../images/header_bg_separateur.png') no-repeat top left;
+  float: right;
+}
+#header_top_user
+{
+  width: 125px;
+  height: 46px;
+  text-align: right;
+  padding : 10px 0px 0 0px;
+  color: #e5e5e5;
+  font-size: 0.80em;
+  font-weight: normal;
+  float: right;
+}
+#header_top_cadena
+{
+  width: 43px;
+  height: 46px;
+  padding : 10px 0px 0 0px;
+  margin : 0px 10px 0 0px;
+  background: transparent url('../images/header_cadena.png') no-repeat top left;
+  float: right;
+}
+
+
+/*
+ * Css pour le menu
+ *
+ */
+
+#menu
+{
+  width: 550px;
+  height: 35px;
+  background: transparent;
+  float: left ;
+  margin: 0px 0px 0 1px;
+}
+
+#menu li
+{
+  list-style-type: none;
+  float: left;
+  width: 125px;
+  height: 25px;
+  background: transparent url('../images/header_menu.png') no-repeat left top;
+  line-height: 15px;
+  margin: 0px 0px 0 0px;
+  padding: 5px 0px 0 0px;
+  text-align: center;
+}
+
+#menu li.selected
+{
+  background: transparent url('../images/header_menu_selected.png') no-repeat left top;
+}
+
+#menu li a
+{
+  font-size: 0.80em;
+  font-weight: normal;
+  color: #e5e5e5;
+  text-decoration: none;
+  display: block;
+}
+
+#menu li.selected a
+{
+  color: #2a3556;
+}
+
+#menu li a:hover
+{
+  color: #ffdb00;
+}
+
+#menu li.selected a:hover
+{
+  color: #2a3556;
+}
+
+/*
+ * ccs pour les class on et off
+ *
+ */
+
+.on {
+	display: block;
+}
+.off {
+	display: none;
+}
+
+/* NC_contenu ---------------------  */ 
+#NC_content_top
+{
+  width: 945px;
+  height: 29px;
+  text-align: left;
+  background: transparent url('../images/NC_bg_content_top.png') no-repeat left top;
+  float: left;
+ }
+
+#NC_content
+{
+  width: 945px;
+  background: transparent url('../images/NC_bg_content_middle.png') repeat-y left top;
+  padding:5px 0px 2px 0px;
+  float: left;
+ }
+  
+/* content ---------------------  */ 
+#NC_contentmarge
+{
+  width: 4px;
+  height: 497px;
+  background: transparent ;
+  float: left;
+}
+#NC_contentleft
+{
+  //border: thin solid #646464; 
+  width: 250px;
+  margin: 0px 2px 0px 2px;
+  background: transparent ;
+  //background-color: #f0f0f0 ;
+  float: left;
+}
+#NC_contentcenter
+{
+  position: absolute;
+  //border: thin solid #2a3556;
+  width: 674px;
+  margin: 0px 2px 0px 260px;
+  background: transparent;
+  background-color: #ffffff ;
+  z-index: 20;
+  //float: left;
+}
+
+#NC_contentright
+{
+  width: 250px;
+  //border: thin solid #646464;
+  margin: 0px 12px 0px 2px;
+  background: transparent;
+  //background-color: #f0f0f0 ;
+  float: right;
+}
+#NC_contentscrollbar
+{
+  width: 945px;
+  height: 27px;
+  background: transparent;
+  float: left;
+ }
+.contentheightmin
+{
+  height: 567px;
+  background: transparent ;
+  float: left;
+}
+.contentheightmin_1
+{
+  height: 570px;
+  background: transparent ;
+  float: left;
+}
+
+
+/* footer ---------------------  */
+#NC_footer_top
+{
+  width: 945px;
+  text-align: left;
+  padding-top:1px;
+  background: transparent url('../images/NC_bg_footer_top.png') repeat-y left top;
+  float: left;
+}
+#NC_footer
+{
+  background: transparent url('../images/NC_bg_footer.png') no-repeat top left;
+  height: 12px;
+  width: 945px;
+  float: left;
+}
+#NC_footer a
+{
+  position: absolute;
+  right: 18px;
+  text-decoration: underline;
+}
+
+#NC_footer a:hover
+{
+  text-decoration: none;
+}
+
+/*
+ * Css pour les boutons du footer
+ *
+ */
+.NC_footer_top_bouton
+{
+  font-size: 0.80em;
+  font-weight: normal;
+  text-align: center;
+  line-height: 32px;
+  color:#2a3557;
+}
+#NC_footer_bouton_annuler
+{
+  width: 125px;
+  height: 32px;
+  background: transparent url('../images/NC_footer_bouton_annuler.png') no-repeat right top;
+  float: left;
+}
+#NC_footer_bouton_sauver
+{
+  width: 198px;
+  height: 32px;
+  background: transparent url('../images/NC_footer_bouton_sauver.png') no-repeat left top;
+  float: left;
+}
+#NC_footer_top_centre
+{
+  width: 370px;
+  height: 32px;
+  background: transparent ;
+  float: left;
+}
+#NC_footer_bouton_precedent
+{
+  width: 121px;
+  height: 32px;
+  background: transparent url('../images/NC_footer_bouton_precedent.png') no-repeat left top;
+  float: left;
+}
+#NC_footer_bouton_suivant
+{
+  width: 121px;
+  height: 32px;
+  background: transparent url('../images/NC_footer_bouton_suivant.png') no-repeat left top;
+  float: left;
+}
+#NC_footer_top_suiv
+{
+  margin-right: 10px;
+  float: right;
+}
+#NC_footer_top_valid
+{
+  float: right;
+  margin-right: 10px;
+}
+#NC_footer_top_init
+{
+  float: right;
+  margin-right: 10px;
+}
+/*
+ * ccs pour la scrollbar
+ *
+ */
+#NC_scrollbar
+{
+  width: 929px;
+  height: 27px;
+  margin: 0px 0px 0px 5px;
+  background: transparent url('../images/NC_bg_scrollbar.png') no-repeat left top;
+  float: left;
+ }
+#NC_marge_scrollbar
+{
+  width: 255px;
+  height: 27px;
+  float: left;
+ }
+ #NC_slider_scrollbar_1
+{
+  width: 22px;
+  height: 27px;
+  background: transparent url('../images/NC_slider_scrollbar_1.png') no-repeat left top;
+  float: left;
+ }
+#NC_slider_scrollbar
+{
+  width: 630px;
+  height: 27px;
+  background: transparent url('../images/NC_slider_scrollbar_middle.png') repeat-x left top;
+  float: left;
+ }
+#NC_slider_scrollbar_2
+{
+  width: 21px;
+  height: 27px;
+  background: transparent url('../images/NC_slider_scrollbar_2.png') no-repeat left top;
+  float: left;
+ }
+ 
+/*
+ * ccs pour les boites
+ *
+ */ 
+.NC_top_box
+{
+  width: 100%;
+  height: 27px;
+  line-height: 25px;
+  font-weight: 100;
+  font-size: 0.85em;
+  color: #ffffff;
+  background: transparent url('../images/NC_top_box.png') repeat-x left top;
+  float: left;
+}
+.NC_top_box_center
+{
+  width: 672px;
+  height: 27px;
+  margin: 0px 1px 0 1px;
+  line-height: 25px;
+  font-weight: 100;
+  font-size: 0.85em;
+  color: #ffffff;
+  //background: transparent url('../images/NC_top_box.png') repeat-x left top;
+  background-color: #646464 ;
+  float: left;
+}
+.NC_top_box_center a
+{
+  font-weight: 100;
+  font-size: 0.75em;
+  color: #ffffff;
+  text-decoration:underline;
+}
+.NC_top_active_box
+{
+  width: 672px;
+  height: 27px;
+  margin: 0px 1px 0 1px;
+  line-height: 25px;
+  font-weight: 100;
+  font-size: 0.85em;
+  color: #ffffff;
+  background: transparent url('../images/NC_bg_top_active_box.png') repeat-x left top;
+  float: left;
+}
+.NC_top_active_twin_box
+{
+  width: 335px;
+  height: 27px;
+  margin: 0px 0px 0 1px;
+  line-height: 25px;
+  font-weight: 100;
+  font-size: 0.85em;
+  color: #ffffff;
+  background: transparent url('../images/NC_bg_top_active_box.png') repeat-x left top;
+  float: left;
+}
+.NC_box
+{
+  width: 248px;
+  border: thin solid #646464; 
+  border-top: thin solid #ffffff; 
+  height: 540px;
+  //background: transparent;
+  float: left;
+}
+.NC_box_visu
+{
+  width: 672px;
+  //height: 567px;
+  margin: 0px 1px 0 1px;
+  float: left;
+}
+
+.NC_triangle_bas
+{
+  float: left; 
+  width: 70px; 
+  height: 27px;
+  background: transparent url('../images/NC_pic_triangle_bas.png') no-repeat center center;
+}
+.NC_triangle_cote
+{
+  float: left; 
+  width: 70px; 
+  height: 27px;
+  background: transparent url('../images/NC_pic_triangle_cote.png') no-repeat center center;
+}
+
+/*
+ * ccs pour les tableau droite et gauche
+ *
+ */
+.tableNC_pair
+{
+  width: 248px;
+  height: 20px;
+  background-color: #f3f5f5 ;
+  border: none;
+  float:left;
+}
+.tableNC_impair
+{
+  width: 248px;
+  height: 20px;
+  background-color: #efefef ;
+  border: none;
+  float:left;
+}
+.tableNC_box_lign
+{
+  width: 248px;
+  height: 20px;
+  background: transparent;
+  float:left;
+}
+.tableNC_box_lign_active
+{
+  width: 246px;
+  height: 18px;
+  background: transparent;
+  float:left;
+  border: thin solid #2a3557; 
+}
+.tableNC_box_lign:hover 
+{
+  background-color: #c3c5d5 ;	
+}
+.tableNC_box_retrait_10
+{
+  margin-left: 10px;
+}
+.tableNC_box_1
+{
+  width: 36px;
+  height: 20px;
+  border: none;
+  float:left;
+}
+.tableNC_box_2
+{
+  width: 152px;
+  height: 20px;
+  line-height: 19px;
+  font-weight: 100;
+  font-size: 0.75em;
+  color: #696969;
+  text-align:left;
+  background: transparent;
+  border: none;
+  float:left;
+}
+.tableNC_box_picto
+{
+  width: 36px;
+  height: 20px;
+  border: none;
+  float:left;
+}
+.tableNC_box_visu
+{
+  width: 24px;
+  height: 20px;
+  background: transparent url('../images/NC_pic_visu.png') no-repeat center center;
+  border: none;
+  float:right;
+}
+.tableNC_box_info
+{
+  width: 24px;
+  height: 20px;
+  background: transparent url('../images/NC_pic_info.png') no-repeat center center;
+  border: none;
+  float:right;
+}
+.tableNC_box_info.select
+{
+  background: transparent url('../images/NC_pic_info_select.png') no-repeat center center;
+}
+.tableNC_box_suppr
+{
+  width: 12px;
+  height: 20px;
+  background: transparent;
+  border: none;
+  margin-left:5px;
+  font-size: 0.75em;
+  line-height: 19px;
+  color: red;
+  float:right;
+}
+
+.tableNC_box_radio_select
+{
+  width: 40px;
+  height: 20px;
+  background: transparent url('../images/NC_pic_radio_select.png') no-repeat center center;
+  float: left;
+}
+.tableNC_box_radio_select.actif
+{
+  background: transparent url('../images/NC_pic_radio_select_actif.png') no-repeat center center;
+}
+
+.tableNC_box_check_select
+{
+  width: 40px;
+  height: 20px;
+  margin: 0px 0px 0 0px;
+  background: transparent url('../images/NC_pic_check_select.png') no-repeat center center;
+  float: left;
+}
+.tableNC_box_check_select.actif
+{
+  background: transparent url('../images/NC_pic_check_select_actif.png') no-repeat center center;
+}
+
+
+/* picto etape piece*/
+.tableNC_box_picto.piece
+{
+  background: transparent url('../images/NC_pic_piece.png') no-repeat center center;
+}
+/* picto etape interface*/
+.tableNC_box_picto.interface
+{
+  background: transparent url('../images/NC_pic_interface.png') no-repeat center center;
+}
+/* picto etape bord*/
+.tableNC_box_picto.bord
+{
+  background: transparent url('../images/NC_pic_bord.png') no-repeat center center;
+}
+/*
+ * ccs pour les filtres droite et gauche
+ *
+ */ 
+.NC_filter
+{
+  background-color: #818799 ;
+  border: none;
+  float:left;
+}
+.NC_filter_i
+{
+  width:248px ; 
+  height:25px ;
+  line-height: 23px;
+  font-weight: 100;
+  font-size: 0.75em;
+  color: #ffffff;
+  background: transparent ;
+  border: none ;
+  float:left ;
+}
+.NC_filter_affich
+{
+  width:238px ; 
+  height:20px ;
+  text-align: right;
+  line-height: 19px;
+  font-weight: 100;
+  font-size: 0.75em;
+  color: #ffffff;
+  background: transparent ;
+  border: none ;
+  float:left ;
+}
+.NC_filter_affich a
+{
+  text-decoration: none;
+  font-size: 0.80em;
+  color: #ffffff;
+}
+.NC_filter_valid
+{
+  width:248px ; 
+  height:20px ;
+  line-height: 19px;
+  color: #2a3556;
+  font-weight: 100;
+  font-size: 0.65em;
+  background: transparent ;
+  border: none ;
+  float:left ;
+}
+.NC_filter_valid a
+{
+  color: #2a3556;
+  text-aligned:center;
+  text-decoration:none;
+}
+.NC_todo
+{
+  width:248px ; 
+  height:120px ;
+  background: transparent ;
+  border: none ;
+  float:left ;
+}
+.NC_todo_i
+{
+  width:248px ; 
+  height:50px ;
+  line-height: 19px;
+  font-weight: 100;
+  font-size: 0.75em;
+  color: #ffffff;
+  background: transparent ;
+  border: none ;
+  float:left ;
+}
+.NC_filter_choice
+{
+  width:230px ; 
+  height:16px ;
+  line-height: 16px;
+  border:none ;
+  padding-top: 0px; 
+  vertical-aligned: top;
+  margin-top: 5px ;
+}
+.NC_filter_button
+{
+  width:169px ; 
+  height:20px ;
+  background: transparent url('../images/NC_bouton_jaune_filtre.png') no-repeat center center;
+  float:right ;
+  color: #2a3556;
+  border:none;
+}
+.NC_filter_button:hover
+{
+  color: black;
+}
+
+/*
+ * ccs pour les titre de conditions limite
+ *
+ */
+.NC_CL_titre 
+{
+  width:248px; 
+  height:22px;
+  float:left;
+  line-height: 19px;
+  font-weight: 100;
+  font-size: 0.75em;
+  color: #ffffff;
+  background: transparent url('../images/NC_top_box.png') repeat-x left top;
+  border:none;
+}
+
+
+.NC_bottom_page_1
+{
+  height:18px;
+  line-height: 18px;
+  font-weight: 120;
+  font-size: 0.65em;
+  color: #ffffff;
+  background: transparent;
+}
+.NC_bottom_page_1 a
+{
+  color: #ffffff;
+}
+
+.left
+{
+  float: left;
+}
+.right
+{
+  float: right;
+}
+
+/*
+ * ccs pour les bouton de visualisation
+ *
+ */ 
+.NC_box_content_visu
+{
+  width: 670px;
+  border: thin solid #646464; 
+  border-top: thin solid #ffffff;
+  //height: 277px;
+  font-weight: 100;
+  font-size: 0.65em;
+  color: #ffffff;
+  //background: transparent;
+  background-color: #A1A1A1 ;
+  float: left;
+} 
+.NC_espace_bouton_visu
+{
+  height:31px;
+  width:100%;
+  background-color: #646464 ;
+  float:left;
+}
+.NC_bouton_visu_01
+{
+  height:31px;
+  width:31px;
+  float:left;
+  background: transparent url('../images/NC_bouton_visu_01.png') no-repeat left top;
+}
+.NC_bouton_visu_02
+{
+  height:31px;
+  width:31px;
+  float:left;
+  background: transparent url('../images/NC_bouton_visu_02.png') no-repeat left top;
+}
+.NC_bouton_visu_03
+{
+  height:31px;
+  width:31px;
+  float:left;
+  background: transparent url('../images/NC_bouton_visu_03.png') no-repeat left top;
+}
+.NC_bouton_visu_04
+{
+  height:31px;
+  width:31px;
+  float:left;
+  background: transparent url('../images/NC_bouton_visu_04.png') no-repeat left top;
+}
+.NC_bouton_visu_05
+{
+  height:31px;
+  width:31px;
+  float:left;
+  background: transparent url('../images/NC_bouton_visu_05.png') no-repeat left top;
+}
+.NC_bouton_visu_06
+{
+  height:31px;
+  width:31px;
+  float:left;
+  background: transparent url('../images/NC_bouton_visu_06.png') no-repeat left top;
+}
+.NC_bouton_visu_07
+{
+  height:31px;
+  width:31px;
+  float:left;
+  background: transparent url('../images/NC_bouton_visu_07.png') no-repeat left top;
+}
+.NC_bouton_visu_08
+{
+  height:31px;
+  width:31px;
+  float:left;
+  background: transparent url('../images/NC_bouton_visu_08.png') no-repeat left top;
+}
+.NC_bouton_visu_09
+{
+  height:31px;
+  width:31px;
+  float:left;
+  background: transparent url('../images/NC_bouton_visu_09.png') no-repeat left top;
+}
+
+/*
+ * menu pour le contenu d'un compte
+ *
+ */ 
+ 
+.NC_top_box_Menu
+{
+  background: transparent;
+  width: 100%;
+  height: 27px;
+  line-height: 25px;
+  font-weight: 100;
+  font-size: 0.85em;
+  color: #ffffff;
+  //background: transparent url('../images/NC_top_box.png') repeat-x left top;
+  float: left;
+}
+.NC_top_box_Menu li
+{
+  list-style-type: none;
+  float: left;
+  //width: 82px;
+  height: 27px;
+  background: transparent url('../images/NC_top_box.png') repeat-x left top;
+  line-height: 25px;
+  padding: 0px 0px 0 0px;
+  text-align: center;
+}
+
+.NC_top_box_Menu li.selected
+{
+  background: transparent url('../images/NC_bg_top_active_box.png') repeat-x left top;
+  color: #ffdb00;
+}
+
+.NC_top_box_Menu li a
+{
+  font-size: 0.80em;
+  font-weight: normal;
+  color: #e5e5e5;
+  text-decoration: none;
+  display: block;
+}
+
+.NC_top_box_Menu li.selected a
+{
+  color: #ffdb00;
+}
+
+.NC_top_box_Menu li a:hover
+{
+  color: #ffdb00;
+}
+
+.NC_top_box_Menu li.selected a:hover
+{
+  color: #ffdb00;
+}

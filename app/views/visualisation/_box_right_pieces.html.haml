@@ -1,0 +1,23 @@
+#page_righ_piece.NC_box.on
+  .NC_filter{ :style => "width:248px; height:120px" }
+    Liste des pièces pour ce modèle
+  /  <?php include("./contenu/NC_etape_CLs/NC_filter_pieces.php");  ?>
+  - (0...20).each do |i|
+    .tableNC_impair{ :id => "piece_pair_#{i}" }
+      .tableNC_box_lign{ :id => "piece_lign_#{i}" }
+        %a{:onclick => "select_pieces(#{i})", :style => "cursor: pointer;" }
+          .tableNC_box_picto{ :id => "piece_picto_#{i}" }
+          .tableNC_box_2{ :id => "piece_0_#{i}" }
+        %a{ :onclick => "visu_piece_select(#{i})", :style => "cursor: pointer;" }
+          .tableNC_box_visu{ :id => "piece_visu_#{i}" }
+
+  .NC_filter{ :style => "width:248px; height:20px" }
+    .NC_bottom_page_1.right
+      %a.page_select{ :onclick => "go_page_piece('first')", :style => "cursor: pointer;" }
+        <
+      page
+      - (0...5).each do |i|
+        %a{ :id => "piece_page_#{i}", :onclick => "go_page_piece(#{i})", :style => "cursor: pointer;" }
+          #{i}
+      %a.page_select{ :onclick => "go_page_piece('end')", :style => "cursor: pointer;" }
+        >

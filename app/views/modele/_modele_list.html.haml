@@ -26,7 +26,8 @@
         .largeBoxTable_2{ :id => "sc_model_0_#{i}", :style => "width: 246px;" }
         .largeBoxTable_2{ :id => "sc_model_1_#{i}", :style => "width: 190px;" }
         .largeBoxTable_2{ :id => "sc_model_2_#{i}", :style => "width: 85px;" }
-        .largeBoxTable_visu{ :style => "width: 60px;" }
+        %a{ :style => "cursor: pointer;", :onclick => "go_visu(#{i})" }
+          .largeBoxTable_visu{ :style => "width: 60px;" }
         %a{ :style => "cursor: pointer;", :onclick => "go_calcul(#{i})" }
           .largeBoxTable_compute{ :style => "width: 60px;" }
         .largeBoxTable_suppr
