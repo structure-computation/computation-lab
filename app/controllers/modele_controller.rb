@@ -8,9 +8,16 @@ class ModeleController < ApplicationController
   def index
     @page = 'SCcompute'
     list_model = @current_user.sc_models
+    @model_list = []
+    list_model.each{ |model_i|
+      model = Hash.new
+      model['sc_model'] = Hash.new 
+      model['sc_model'] = {:id =>model_i.id ,:project => "hors projet", :name => model_i.name, :state  => model_i.state, :results => model_i.calcul_results.find(:all, :conditions => {:log_type => "compute", :state => "finish"}).size}
+      @model_list << model
+    } 
     respond_to do |format|
       format.html {render :layout => true }
-      format.js   {render :json => list_model.to_json}
+      format.js   {render :json => @model_list.to_json}
     end 
   end
   

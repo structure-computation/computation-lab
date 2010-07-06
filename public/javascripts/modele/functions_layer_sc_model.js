@@ -89,7 +89,7 @@ function affiche_Tableau_model(){
     var current_tableau     =  Tableau_model_filter;
     var strname             =  'sc_model';
     var strnamebdd          =  'sc_model';
-    var stridentificateur   =  new Array('name','project','résults');
+    var stridentificateur   =  new Array('name','project','results');
     affiche_Tableau_content(current_tableau, strname, strnamebdd, stridentificateur);
 }
 
@@ -192,17 +192,25 @@ function affiche_Tableau_content(current_tableau, strname, strnamebdd, stridenti
 // lancer un calcul sur le model
 function go_calcul(num){
     var num_select = content_tableau_connect['sc_model'][num];
-    var id_model = Tableau_model_filter[num_select]['sc_model']['id'];
-    var url_php = "/calcul/index?id_model=" + id_model ;
-    $(location).attr('href',url_php);
+    if(Tableau_model_filter[num_select]['sc_model']['state'] != "active"){
+	alert("Vous devez d'abord déposer votre maillage");
+    }else{
+	var id_model = Tableau_model_filter[num_select]['sc_model']['id'];
+	var url_php = "/calcul/index?id_model=" + id_model ;
+	$(location).attr('href',url_php);
+    }
 }
 
 // visualiser le model
 function go_visu(num){
     var num_select = content_tableau_connect['sc_model'][num];
-    var id_model = Tableau_model_filter[num_select]['sc_model']['id'];
-    var url_php = "/visualisation/index?id_model=" + id_model ;
-    $(location).attr('href',url_php);
+    if(Tableau_model_filter[num_select]['sc_model']['state'] != "active"){
+	alert("Vous devez d'abord déposer votre maillage");
+    }else{
+	var id_model = Tableau_model_filter[num_select]['sc_model']['id'];
+	var url_php = "/visualisation/index?id_model=" + id_model ;
+	$(location).attr('href',url_php);
+    }
 }
 
 

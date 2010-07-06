@@ -16,24 +16,12 @@ class CalculController < ApplicationController
   
   def info_model
     @id_model = params[:id_model]  
-    # création des elements a envoyer au calculateur
-    send_data  = { :id_model => @id_model, :mode => "info_model"};
     
-    # socket d'envoie au serveur
-    socket    = Socket.new( AF_INET, SOCK_STREAM, 0 )
-    sockaddr  = Socket.pack_sockaddr_in( 12346, 'localhost' )
-    #sockaddr  = Socket.pack_sockaddr_in( 12346, 'sc2.ens-cachan.fr' )
-    socket.connect( sockaddr )
-    socket.write( send_data.to_json )
+    # lecture du fichier sur le disque
+    path_to_file = "/home/scproduction/MODEL/model_#{@id_model}/MESH/mesh.txt"
+    results = File.read(path_to_file)
     
-    # reponse du calculateur
-    results = socket.read
-    
-    #fic =File.open("/home/scproduction/MODEL/model_#{id_model}/MESH/mesh.txt",'r')
-    
-    respond_to do |format|
-      format.js   {render :json => results}
-    end
+    render :json => results
   end
   
   def calculs
@@ -94,48 +82,34 @@ class CalculController < ApplicationController
     @current_model = @current_user.sc_models.find(@id_model)
     @id_calcul = params[:id_calcul]
     
-    # création des elements a envoyer au calculateur
-    send_data  = { :id_model => @id_model, :id_calcul => @id_calcul, :mode => "info_brouillon"};
-    # socket d'envoie au serveur
-    socket    = Socket.new( AF_INET, SOCK_STREAM, 0 )
-    sockaddr  = Socket.pack_sockaddr_in( 12346, 'localhost' )
-    #sockaddr  = Socket.pack_sockaddr_in( 12346, 'sc2.ens-cachan.fr' )
-    socket.connect( sockaddr )
-    socket.write( send_data.to_json )
-    # reponse du calculateur
-    results = socket.read
+    # lecture du fichier sur le disque
+    path_to_file = "/home/scproduction/MODEL/model_#{@id_model}/calcul_#{@id_calcul}/brouillon.json"
+    results = File.read(path_to_file)
+    
     render :json => results
-  end
-  
-  def create
-    id_model = params[:id_model]
-    jsonobject = JSON.parse(params[:file])
-    File.open("#{RAILS_ROOT}/public/test/test_post_calcul_#{id_model}", 'w+') do |f|
-        f.write(JSON.pretty_generate(jsonobject))
-    end
-    render :json => { :result => 'success' }.to_json
   end
 
   def send_brouillon
     @id_model = params[:id_model]
     @id_calcul = params[:id_calcul]
     current_model = @current_user.sc_models.find(@id_model)
-    #file = params[:file]
+#     file = params[:file]
     jsonobject = JSON.parse(params[:file])
     file = JSON.pretty_generate(jsonobject)
-    # création des elements a envoyer au calculateur
-    send_data  = { :id_model => @id_model, :id_calcul => @id_calcul, :dimension => current_model.dimension ,:fichier => file, :mode => "brouillon"};
     
-    # socket d'envoie au serveur
-    socket    = Socket.new( AF_INET, SOCK_STREAM, 0 )
-    sockaddr  = Socket.pack_sockaddr_in( 12346, 'localhost' )
-    #sockaddr  = Socket.pack_sockaddr_in( 12346, 'sc2.ens-cachan.fr' )
-    socket.connect( sockaddr )
-    socket.write( send_data.to_json )
-    #socket.write( file.read )
-    
-    # reponse du calculateur
-    results = socket.read
+    # on enregistre le fichier sur le disque et on change les droit pour que le serveur de calcul y ait acces
+    path_to_model = "/home/scproduction/MODEL/model_#{@id_model}"
+    path_to_calcul = "/home/scproduction/MODEL/model_#{@id_model}/calcul_#{@id_calcul}"
+ 
+    Dir.mkdir(path_to_model, 0777) unless File.exists?(path_to_model)
+    Dir.mkdir(path_to_calcul, 0777) unless File.exists?(path_to_calcul)
+
+    path_to_file = path_to_calcul + "/brouillon.json"
+    File.open(path_to_file, 'w+') do |f|
+        f.write(file)
+    end
+    File.chmod 0777, path_to_calcul
+    results = "brouillon sauvegardé"
     
     # envoie de la reponse au client
     render :text => results
@@ -149,8 +123,22 @@ class CalculController < ApplicationController
     #file = params[:file]
     jsonobject = JSON.parse(params[:file])
     file = JSON.pretty_generate(jsonobject)
+    
+    # on enregistre le fichier sur le disque et on change les droit pour que le serveur de calcul y ait acces
+    path_to_model = "/home/scproduction/MODEL/model_#{@id_model}"
+    path_to_calcul = "/home/scproduction/MODEL/model_#{@id_model}/calcul_#{@id_calcul}"
+ 
+    Dir.mkdir(path_to_model, 0777) unless File.exists?(path_to_model)
+    Dir.mkdir(path_to_calcul, 0777) unless File.exists?(path_to_calcul)
+
+    path_to_file = path_to_calcul + "/calcul.json"
+    File.open(path_to_file, 'w+') do |f|
+        f.write(file)
+    end
+    File.chmod 0777, path_to_calcul
+    
     # création des elements a envoyer au calculateur
-    send_data  = { :id_model => @id_model, :id_calcul => @id_calcul, :dimension => current_model.dimension ,:fichier => file, :mode => "compute"};
+    send_data  = { :id_model => @id_model, :id_calcul => @id_calcul, :dimension => current_model.dimension , :mode => "compute"};
     
     # socket d'envoie au serveur
     socket    = Socket.new( AF_INET, SOCK_STREAM, 0 )
