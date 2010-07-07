@@ -230,6 +230,19 @@ function go_resultat(num){
     $(location).attr('href',url_php);
 }
 
+// effacer un modele
+function resultat_delete(resultat){
+    alert(resultat);
+    get_Tableau_model();
+}
+
+function delete_model(num){
+    var num_select = content_tableau_connect['sc_model'][num];
+    var id_model = Tableau_model_filter[num_select]['sc_model']['id'];
+    var url_php = "/modele/delete";
+    $.get(url_php,{"id_model": id_model},resultat_delete);
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 // fonctions utiles pour l'affichage du detail d'un modele
 //---------------------------------------------------------------------------------------------------------------------

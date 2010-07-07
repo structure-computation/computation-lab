@@ -11,8 +11,9 @@ one:
     ddl_number: 10000
     parts: 10
     interfaces: 20
-    used_space:
+    used_memory: 0
     state: active
+    deleted_at:
     
 two:
     name: bateau1
@@ -25,8 +26,9 @@ two:
     ddl_number: 10000
     parts: 20
     interfaces: 30
-    used_space:
+    used_memory: 0
     state: active
+    deleted_at:
     
 three:
     name: voiture1
@@ -39,8 +41,9 @@ three:
     ddl_number: 20000
     parts: 30
     interfaces: 10
-    used_space:
+    used_memory: 0
     state: active
+    deleted_at:
     
 four:
     name: avion2 
@@ -53,8 +56,9 @@ four:
     ddl_number: 10000
     parts: 10
     interfaces: 20
-    used_space:
+    used_memory: 0
     state: active
+    deleted_at:
     
 five:
     name: bateau2
@@ -67,8 +71,9 @@ five:
     ddl_number: 10000
     parts: 20
     interfaces: 30
-    used_space:
+    used_memory: 0
     state: active
+    deleted_at:
     
 six:
     name: voiture2  
@@ -81,5 +86,7 @@ six:
     ddl_number: 20000
     parts: 30
     interfaces: 10
-    used_space:
+    used_memory: 0
     state: active
+    deleted_at:
+    

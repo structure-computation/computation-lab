@@ -34,5 +34,17 @@ class ModeleController < ApplicationController
     #model.save
     render :text => { :result => 'success' }
   end
+ 
+  def delete
+    @id_model = params[:id_model]
+    @current_model = @current_user.sc_models.find(@id_model)
+    if(@current_model.test_delete?)
+      @current_model.delete_model()
+      render :text => "le modèle à bien été supprimé"
+    else
+      render :text => "Pour supprimer un modèle vous devez d'abord télécharger l'ensemble des résultats"
+    end
+  end
+  
   
 end

@@ -135,10 +135,13 @@ class DetailModelController < ApplicationController
   def download
     @id_model = params[:id_model]
     @id_resultat = params[:id_resultat]
+    @current_model = ScModel.find(@id_model)
+    @current_resultat = @current_model.calcul_results.find(@id_resultat)
     name_file = '/home/scproduction/MODEL/model_' + @id_model + '/calcul_' + @id_resultat + '/resultat_0_0.vtu'
     name_resultats = 'result_' + @id_resultat + '.vtu'
     send_file name_file, :filename => name_resultats
     
+    @current_resultat.state = 'downloaded'
 #     send_data  = { :id_model => @id_model, :id_resultat => @id_resultat, :mode => "download"};
 #     
 #     # socket d'envoie au serveur

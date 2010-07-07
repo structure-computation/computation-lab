@@ -265,7 +265,7 @@ body
 
 #menu li.selected
 {
-  font-size: 0.80em;
+  //font-size: 0.80em;
   font-weight: normal;
   color: #e5e5e5;
   text-decoration: none;
@@ -283,7 +283,7 @@ body
 
 #menu li.selected a
 {
-  font-size: 0.80em;
+  //font-size: 0.80em;
   font-weight: normal;
   color: #2a3556;
   text-decoration: none;

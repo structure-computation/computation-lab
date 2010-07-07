@@ -97,8 +97,8 @@ class CalculAccount < ActiveRecord::Base
     current_solde.solde_jeton_tempon = self.solde_jeton_tempon - current_solde.debit_jeton_tempon
     
     #mise a jour des info du compte et sauvegarde
-    self.used_jeton += self.used_jeton + current_solde.debit_jeton
-    self.used_jeton_tempon += self.used_jeton_tempon+ current_solde.debit_jeton_tempon
+    self.used_jeton += current_solde.debit_jeton
+    self.used_jeton_tempon += current_solde.debit_jeton_tempon
     self.solde_jeton = current_solde.solde_jeton
     self.solde_jeton_tempon = current_solde.solde_jeton_tempon
     current_solde.save
@@ -143,8 +143,8 @@ class CalculAccount < ActiveRecord::Base
     current_solde.solde_jeton_tempon = self.solde_jeton_tempon - current_solde.debit_jeton_tempon
     
     #mise a jour des info du compte et sauvegarde
-    self.used_jeton += self.used_jeton + current_solde.debit_jeton
-    self.used_jeton_tempon += self.used_jeton_tempon+ current_solde.debit_jeton_tempon
+    self.used_jeton += current_solde.debit_jeton
+    self.used_jeton_tempon += current_solde.debit_jeton_tempon
     self.solde_jeton = current_solde.solde_jeton
     self.solde_jeton_tempon = current_solde.solde_jeton_tempon
     current_solde.save

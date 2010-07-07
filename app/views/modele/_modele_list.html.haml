@@ -30,7 +30,8 @@
           .largeBoxTable_visu{ :style => "width: 60px;" }
         %a{ :style => "cursor: pointer;", :onclick => "go_calcul(#{i})" }
           .largeBoxTable_compute{ :style => "width: 60px;" }
-        .largeBoxTable_suppr
+        %a{ :style => "cursor: pointer;", :onclick => "delete_model(#{i})" }
+          .largeBoxTable_suppr
   / Fin du tableau de présentation des modèles.
 
 

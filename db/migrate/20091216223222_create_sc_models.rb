@@ -11,9 +11,9 @@ class CreateScModels < ActiveRecord::Migration
       t.integer  :ddl_number     # Degres de liberté
       t.integer  :parts          # nb de pièces
       t.integer  :interfaces     # nb de liaisons        
-      t.integer  :used_space
-      t.string   :state          # Etat du modele : En cours de tlc, téléchargé, en cours de maillage, maillé, prêt à l'emploi, fermé, pause.
-      
+      t.integer  :used_memory
+      t.string   :state          # Etat du modele : void, in_process, active, deleted, 
+      t.datetime :deleted_at
 
       t.timestamps
     end

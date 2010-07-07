@@ -19,6 +19,7 @@ class CreateCalculResults < ActiveRecord::Migration
       t.integer   :gpu_allocated
       t.integer   :estimated_calcul_time
       t.integer   :calcul_time
+      t.integer   :used_memory
 
       t.timestamps
     end

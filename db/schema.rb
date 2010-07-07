@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(:version => 20100617151630) do
     t.integer  "gpu_allocated"
     t.integer  "estimated_calcul_time"
     t.integer  "calcul_time"
+    t.integer  "used_memory"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -291,8 +292,9 @@ ActiveRecord::Schema.define(:version => 20100617151630) do
     t.integer  "ddl_number"
     t.integer  "parts"
     t.integer  "interfaces"
-    t.integer  "used_space"
+    t.integer  "used_memory"
     t.string   "state"
+    t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
