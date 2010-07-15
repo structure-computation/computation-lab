@@ -34,8 +34,8 @@ class MemoryAccount < ActiveRecord::Base
   end
   
   def get_used_memory()
-    used_memory =0
-    list_sc_models = self.company.sc_models.find(:all)
+    used_memory = 0
+    list_sc_models = self.company.sc_models.find(:all, :conditions => {:state => "active"})
     list_sc_models.each{ |model_i|
        used_memory += (model_i.used_memory/10000)*0.01          
     }

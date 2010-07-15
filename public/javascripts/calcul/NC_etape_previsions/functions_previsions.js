@@ -69,7 +69,7 @@ function complete_calcul(){
 	var groups_edge = new Array();
 	for(i in Tableau_bords){
 		groups_edge[i] = new Array();
-		table_param = ["id","origine","name","type","geometry","point_1_x","point_1_y","point_1_z","point_2_x","point_2_y","point_2_z","id_CL","assigned","group"];
+		table_param = ["id","origine","name","type","id_CL","assigned","group","pdirection_x","pdirection_y","pdirection_z","geometry","radius","point_1_x","point_1_y","point_1_z","point_2_x","point_2_y","point_2_z"];
 		for(j in table_param){
 			if(table_param[j]=="id_CL"){
 				if(Tableau_bords[i]["assigned"]=='-1'){
@@ -79,8 +79,12 @@ function complete_calcul(){
 				}
 			}else if(table_param[j].match("point")){
 				groups_edge[i][table_param[j]] = parseFloat(Tableau_bords[i][table_param[j]]);
+			}else if(table_param[j].match("pdirection")){
+				groups_edge[i][table_param[j]] = parseFloat(Tableau_bords[i][table_param[j]]);
 			}else if(table_param[j]=="assigned"){
 				groups_edge[i][table_param[j]] = parseFloat(Tableau_bords[i][table_param[j]]);
+			}else if(table_param[j]=="radius"){
+				groups_edge[i][table_param[j]] = parseFloat(Tableau_bords[i]["rayon"]);
 			}else{
 				groups_edge[i][table_param[j]]=Tableau_bords[i][table_param[j]];
 			}
@@ -93,31 +97,112 @@ function complete_calcul(){
 	var materials = new Array();
 	for(i in Tableau_mat_select){
 		materials[i] = new Array();
-		table_param = ["id","groups_elem","mtype","comp","resolution","name","elastic_modulus","poisson_ratio","alpha","rho"];
+		table_param = ["id","mtype","comp","resolution","name","elastic_modulus","poisson_ratio","alpha","rho","viscosite","E1","E2","E3","G12","G13","G23","nu12","nu13","nu23","alpha_1","alpha_2","alpha_3","dir_1_x","dir_1_y","dir_1_z","dir_2_x","dir_2_y","dir_2_z","dir_3_x","dir_3_y","dir_3_z","Yo","Ysp","Yop","Yc","Ycp","b"];
 		for(j in table_param){
-			if(table_param[j]=="resolution"){
+			if(table_param[j]=="id"){
+				materials[i]["id"] = parseFloat(Tableau_mat_select[i]["id_select"]) ;
+			}else if(table_param[j]=="resolution"){
 				materials[i]["resolution"]="CP"
 			}else if(table_param[j]=="mtype"){
 				materials[i]["mtype"] = Tableau_mat_select[i]["mtype"] ;
 			}else if(table_param[j]=="comp"){
-				materials[i]["comp"] = "elastique" ;
-			}else if(table_param[j]=="elastic_modulus"){
-				materials[i]["elastic_modulus"] = parseFloat(Tableau_mat_select[i]["E_1"]) ;
+					materials[i]["comp"] = "";
+				if (Tableau_mat_select[i]["comp"].match('el')){
+					materials[i]["comp"] += "elastique ";
+				}if (Tableau_mat_select[i]["comp"].match('pl')){
+					materials[i]["comp"] += "plastique ";
+				}if (Tableau_mat_select[i]["comp"].match('en')){
+					materials[i]["comp"] += "endommageable ";
+				}if (Tableau_mat_select[i]["comp"].match('en')){
+					materials[i]["comp"] += "endommageable ";
+				}
+			}
+			
+			else if(table_param[j]=="elastic_modulus"){
+				materials[i]["elastic_modulus"] = Tableau_mat_select[i]["E_1"].toString() ;
 			}else if(table_param[j]=="poisson_ratio"){
-				materials[i]["poisson_ratio"] = parseFloat(Tableau_mat_select[i]["nu_12"]) ;
+				materials[i]["poisson_ratio"] = Tableau_mat_select[i]["nu_12"].toString() ;
 			}else if(table_param[j]=="rho"){
-				materials[i]["rho"] = parseFloat(Tableau_mat_select[i]["rho"]) ;
+				materials[i]["rho"] = Tableau_mat_select[i]["rho"].toString() ;
 			}else if(table_param[j]=="alpha"){
-				materials[i]["alpha"] = parseFloat(Tableau_mat_select[i]["alpha_1"]) ;
-			}else if(table_param[j]=="groups_elem"){
+				materials[i]["alpha"] = Tableau_mat_select[i]["alpha_1"].toString() ;
+			}
+			
+			else if(table_param[j]=="E1"){
+				materials[i][table_param[j]] = Tableau_mat_select[i]["E_1"].toString();
+			}else if(table_param[j]=="E2"){
+				materials[i][table_param[j]] = Tableau_mat_select[i]["E_2"].toString();
+			}else if(table_param[j]=="E3"){
+				materials[i][table_param[j]] = Tableau_mat_select[i]["E_3"].toString();
+			}
+			
+			else if(table_param[j]=="G12"){
+				materials[i][table_param[j]] = Tableau_mat_select[i]["cis_1"].toString();
+			}else if(table_param[j]=="G13"){
+				materials[i][table_param[j]] = Tableau_mat_select[i]["cis_2"].toString();
+			}else if(table_param[j]=="G23"){
+				materials[i][table_param[j]] = Tableau_mat_select[i]["cis_3"].toString();
+			}
+			
+			else if(table_param[j]=="nu12"){
+				materials[i][table_param[j]] = Tableau_mat_select[i]["nu_12"].toString();
+			}else if(table_param[j]=="nu13"){
+				materials[i][table_param[j]] = Tableau_mat_select[i]["nu_23"].toString();
+			}else if(table_param[j]=="nu23"){
+				materials[i][table_param[j]] = Tableau_mat_select[i]["nu_13"].toString();
+			}
+			
+			else if(table_param[j]=="alpha_1"){
+				materials[i][table_param[j]] = Tableau_mat_select[i]["alpha_1"].toString();
+			}else if(table_param[j]=="alpha_2"){
+				materials[i][table_param[j]] = Tableau_mat_select[i]["alpha_2"].toString();
+			}else if(table_param[j]=="alpha_3"){
+				materials[i][table_param[j]] = Tableau_mat_select[i]["alpha_3"].toString();
+			}
+			
+			else if(table_param[j]=="dir_1_x"){
+				materials[i][table_param[j]] = Tableau_mat_select[i]["dir_1_x"].toString();
+			}else if(table_param[j]=="dir_1_y"){
+				materials[i][table_param[j]] = Tableau_mat_select[i]["dir_1_y"].toString();
+			}else if(table_param[j]=="dir_1_z"){
+				materials[i][table_param[j]] = Tableau_mat_select[i]["dir_1_z"].toString();
+			}else if(table_param[j]=="dir_2_x"){
+				materials[i][table_param[j]] = Tableau_mat_select[i]["dir_2_x"].toString();
+			}else if(table_param[j]=="dir_2_y"){
+				materials[i][table_param[j]] = Tableau_mat_select[i]["dir_2_y"].toString();
+			}else if(table_param[j]=="dir_2_z"){
+				materials[i][table_param[j]] = Tableau_mat_select[i]["dir_2_z"].toString();
+			}else if(table_param[j]=="dir_3_x"){
+				materials[i][table_param[j]] = Tableau_mat_select[i]["dir_3_x"].toString();
+			}else if(table_param[j]=="dir_3_y"){
+				materials[i][table_param[j]] = Tableau_mat_select[i]["dir_3_y"].toString();
+			}else if(table_param[j]=="dir_3_z"){
+				materials[i][table_param[j]] = Tableau_mat_select[i]["dir_3_z"].toString();
+			}
+			
+			else if(table_param[j]=="Yo"){
+				materials[i][table_param[j]] = "";
+			}else if(table_param[j]=="Ysp"){
+				materials[i][table_param[j]] = "";
+			}else if(table_param[j]=="Yop"){
+				materials[i][table_param[j]] = "";
+			}else if(table_param[j]=="Yc"){
+				materials[i][table_param[j]] = "";
+			}else if(table_param[j]=="Ycp"){
+				materials[i][table_param[j]] = "";
+			}else if(table_param[j]=="b"){
+				groups_edge[i][table_param[j]] = "";
+			}
+			
+			else if(table_param[j]=="groups_elem"){
 				materials[i]["groups_elem"] = '';
 				for(k in Tableau_mat_select[i]["pieces"]){
 					materials[i]["groups_elem"] = materials[i]["groups_elem"] + Tableau_mat_select[i]["pieces"][k]['id'] + ' ';
 				}
-			}else if(table_param[j]=="id"){
-				materials[i]["id"] = parseFloat(Tableau_mat_select[i]["id_select"]) ;
-			}else{
-				materials[i][table_param[j]]=Tableau_mat_select[i][table_param[j]]
+			}
+			
+			else{
+				materials[i][table_param[j]]=Tableau_mat_select[i][table_param[j]];
 			}
 		}
 	}
@@ -137,9 +222,9 @@ function complete_calcul(){
 					proprietes_interfaces[i]["type"] = 'contact';
 				}
 			}else if(table_param[j]=="id"){
-				proprietes_interfaces[i]["id"] = Tableau_liaison_select[i]["id_select"] ;
+				proprietes_interfaces[i]["id"] = parseFloat(Tableau_liaison_select[i]["id_select"]) ;
 			}else if(table_param[j]=="coef_frottement"){
-				proprietes_interfaces[i]["coef_frottement"] = parseFloat(Tableau_liaison_select[i]["f"]) ;
+				proprietes_interfaces[i]["coef_frottement"] = Tableau_liaison_select[i]["f"].toString() ;
 			}else{
 				proprietes_interfaces[i][table_param[j]]=Tableau_liaison_select[i][table_param[j]];
 			}
@@ -158,17 +243,17 @@ function complete_calcul(){
 			}else if(table_param[j]=="id"){
 				CL[i]["id"] = Tableau_CL_select[i]["id_select"] ;
 			}else if(table_param[j]=="fct_spatiale_x"){
-				CL[i]["fct_spatiale_x"] = Tableau_CL_select[i]["step"][0]['Fx'] ;
+				CL[i]["fct_spatiale_x"] = Tableau_CL_select[i]["step"][0]['Fx'].toString();
 			}else if(table_param[j]=="fct_spatiale_y"){
-				CL[i]["fct_spatiale_y"] = Tableau_CL_select[i]["step"][0]['Fy'] ;
+				CL[i]["fct_spatiale_y"] = Tableau_CL_select[i]["step"][0]['Fy'].toString();
 			}else if(table_param[j]=="fct_spatiale_z"){
-				CL[i]["fct_spatiale_z"] = Tableau_CL_select[i]["step"][0]['Fz'] ;
+				CL[i]["fct_spatiale_z"] = Tableau_CL_select[i]["step"][0]['Fz'].toString();
 			}else if(table_param[j]=="fct_temporelle_x"){
-				CL[i]["fct_temporelle_x"] = parseFloat(Tableau_CL_select[i]["step"][0]['ft']) ;
+				CL[i]["fct_temporelle_x"] = Tableau_CL_select[i]["step"][0]['ft'].toString() ;
 			}else if(table_param[j]=="fct_temporelle_y"){
-				CL[i]["fct_temporelle_y"] = parseFloat(Tableau_CL_select[i]["step"][0]['ft']) ;
+				CL[i]["fct_temporelle_y"] = Tableau_CL_select[i]["step"][0]['ft'].toString() ;
 			}else if(table_param[j]=="fct_temporelle_z"){
-				CL[i]["fct_temporelle_z"] = parseFloat(Tableau_CL_select[i]["step"][0]['ft']) ;
+				CL[i]["fct_temporelle_z"] = Tableau_CL_select[i]["step"][0]['ft'].toString() ;
 			}else{
 				CL[i][table_param[j]]=Tableau_CL_select[i][table_param[j]];
 			}

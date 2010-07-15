@@ -140,21 +140,22 @@ class CalculController < ApplicationController
     # création des elements a envoyer au calculateur
     send_data  = { :id_model => @id_model, :id_calcul => @id_calcul, :dimension => current_model.dimension , :mode => "compute"};
     
-    # socket d'envoie au serveur
-    socket    = Socket.new( AF_INET, SOCK_STREAM, 0 )
-    sockaddr  = Socket.pack_sockaddr_in( 12346, 'localhost' )
-    #sockaddr  = Socket.pack_sockaddr_in( 12346, 'sc2.ens-cachan.fr' )
-    socket.connect( sockaddr )
-    socket.write( send_data.to_json )
-    #socket.write( file.read )
-    
-    # reponse du calculateur
-    results = socket.read
-    current_calcul.state = 'in_process'
-    current_calcul.save
-    
-    # envoie de la reponse au client
-    render :text => results
+#     # socket d'envoie au serveur
+#     socket    = Socket.new( AF_INET, SOCK_STREAM, 0 )
+#     sockaddr  = Socket.pack_sockaddr_in( 12346, 'localhost' )
+#     #sockaddr  = Socket.pack_sockaddr_in( 12346, 'sc2.ens-cachan.fr' )
+#     socket.connect( sockaddr )
+#     socket.write( send_data.to_json )
+#     #socket.write( file.read )
+#     
+#     # reponse du calculateur
+#     results = socket.read
+#     current_calcul.state = 'in_process'
+#     current_calcul.save
+#     
+#     # envoie de la reponse au client
+#     render :text => results
+    render :text => "fichier calcul enregistré"
   end
   
   def calcul_valid

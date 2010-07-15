@@ -12,7 +12,7 @@ one:
     parts: 10
     interfaces: 20
     used_memory: 0
-    state: active
+    state: "void"
     deleted_at:
     
 two:
@@ -27,7 +27,7 @@ two:
     parts: 20
     interfaces: 30
     used_memory: 0
-    state: active
+    state: "void"
     deleted_at:
     
 three:
@@ -42,7 +42,7 @@ three:
     parts: 30
     interfaces: 10
     used_memory: 0
-    state: active
+    state: "void"
     deleted_at:
     
 four:
@@ -57,7 +57,7 @@ four:
     parts: 10
     interfaces: 20
     used_memory: 0
-    state: active
+    state: "void"
     deleted_at:
     
 five:
@@ -72,7 +72,7 @@ five:
     parts: 20
     interfaces: 30
     used_memory: 0
-    state: active
+    state: "void"
     deleted_at:
     
 six:
@@ -87,6 +87,6 @@ six:
     parts: 30
     interfaces: 10
     used_memory: 0
-    state: active
+    state: "void"
     deleted_at:
     
