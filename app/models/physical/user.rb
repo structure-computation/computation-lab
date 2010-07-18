@@ -71,6 +71,16 @@ class User < ActiveRecord::Base
   def email=(value)
     write_attribute :email, (value ? value.downcase : nil)
   end
+  
+  # Le mot de passe n'est necessaire que si l'utilisateur est "actif".
+  # TODO: Autoriser explicitement les etats dans le quel l'utilisateur peut ne pas avoir de mot de passe.
+  def password_required?
+    if (self.active?)
+      crypted_password.blank? || !password.blank?
+    else
+      false
+    end
+  end
 
   protected
     
