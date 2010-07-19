@@ -28,6 +28,7 @@ function affiche_NC_page_previsions(){
 
 function complete_calcul(){
 
+	complete_brouillon();
 	// traitement des tableaux pour les mettre au bon format
 	// Tableau groups_elem
 	var groups_elem = new Array();
