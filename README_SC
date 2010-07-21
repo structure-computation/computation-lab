@@ -1,0 +1,50 @@
+Pour passer de la version locale à la version sur SC1 et SC2.
+
+
+Il y'a trois fichiers à modifier dans app/controllers :
+  - calcul_controller.rb
+  - visualisation_controller.rb
+  - detail_model_controller.rb
+
+Les modifications à effectuer sont les suivantes :
+
+  - dans calcul_controller.rb :
+dans info_model :
+    décommenter #path_to_file = "/mnt/sc2/Developpement/MODEL/model_#{@id_model}/MESH/mesh.txt"
+    commenter   path_to_file = "/home/scproduction/MODEL/model_#{@id_model}/MESH/mesh.txt"
+
+dans get_brouillon :
+    décommenter #path_to_file = "/mnt/sc2/Developpement/MODEL/model_#{@id_model}/calcul_#{@id_calcul}/brouillon.json"
+    commenter   path_to_file = "/home/scproduction/MODEL/model_#{@id_model}/calcul_#{@id_calcul}/brouillon.json"
+    
+dans send_brouillon :
+    décommenter #path_to_model = "/mnt/sc2/Developpement/MODEL/model_#{@id_model}"
+		#path_to_calcul = "/mnt/sc2/Developpement/MODEL/model_#{@id_model}/calcul_#{@id_calcul}"
+    commenter   path_to_model = "/home/scproduction/MODEL/model_#{@id_model}"
+		path_to_calcul = "/home/scproduction/MODEL/model_#{@id_model}/calcul_#{@id_calcul}"
+
+dans send_calcul :
+    décommenter #path_to_model = "/mnt/sc2/Developpement/MODEL/model_#{@id_model}"
+		#path_to_calcul = "/mnt/sc2/Developpement/MODEL/model_#{@id_model}/calcul_#{@id_calcul}"
+    commenter   path_to_model = "/home/scproduction/MODEL/model_#{@id_model}"
+		path_to_calcul = "/home/scproduction/MODEL/model_#{@id_model}/calcul_#{@id_calcul}"
+ 
+
+  - dans visualisation_controller.rb :
+dans info_model :
+    décommenter #path_to_file = "/mnt/sc2/Developpement/MODEL/model_#{@id_model}/MESH/mesh.txt"
+    commenter   path_to_file = "/home/scproduction/MODEL/model_#{@id_model}/MESH/mesh.txt"
+    
+  - dans detail_model_controller.rb :
+dans send_mesh :
+    décommenter #path_to_model = "/mnt/sc2/Developpement/MODEL/model_#{@id_model}"
+		#path_to_mesh = "/mnt/sc2/Developpement/MODEL/model_#{@id_model}/MESH"
+    commenter   path_to_model = "/home/scproduction/MODEL/model_#{@id_model}"
+		path_to_mesh = "/home/scproduction/MODEL/model_#{@id_model}/MESH"
+
+dans download :
+    décommenter #name_file = '/mnt/sc2/Developpement/MODEL/model_' + @id_model + '/calcul_' + @id_resultat + '/resultat_0_0.vtu'
+    commenter   name_file = '/home/scproduction/MODEL/model_' + @id_model + '/calcul_' + @id_resultat + '/resultat_0_0.vtu'
+
+Attention, ce n'est pas fini, il faut aussi faire des modification dans CalculServer, ImgServer et SC_code 
+

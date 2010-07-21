@@ -81,6 +81,8 @@ class DetailModelController < ApplicationController
     
     # on enregistre les fichier sur le disque et on change les droit pour que le serveur de calcul y ai acces
     file = params[:fichier]
+    #path_to_model = "/mnt/sc2/Developpement/MODEL/model_#{@id_model}"
+    #path_to_mesh = "/mnt/sc2/Developpement/MODEL/model_#{@id_model}/MESH"
     path_to_model = "/home/scproduction/MODEL/model_#{@id_model}"
     path_to_mesh = "/home/scproduction/MODEL/model_#{@id_model}/MESH"
  
@@ -96,7 +98,7 @@ class DetailModelController < ApplicationController
     # création du fichier json_model 
     identite_calcul = { :id_societe => current_model.company.id, :id_user => @current_user.id,         :id_projet => '', :id_model => current_model.id, :id_calcul => '', :dimension  => current_model.dimension};
     priorite_calcul = { :priorite => 0 };                               
-    mesh            = { :mesh_directory => "MESH", :mesh_name  => "mesh", :extension  => ".bdf"};
+    mesh            = { :mesh_directory => path_to_mesh, :mesh_name  => "mesh", :extension  => ".bdf"};
     
     json_model        = { :identite_calcul => identite_calcul, :priorite_calcul => priorite_calcul, :mesh => mesh}; 
     
@@ -137,28 +139,13 @@ class DetailModelController < ApplicationController
     @id_resultat = params[:id_resultat]
     @current_model = ScModel.find(@id_model)
     @current_resultat = @current_model.calcul_results.find(@id_resultat)
+    
+    #name_file = '/mnt/sc2/Developpement/MODEL/model_' + @id_model + '/calcul_' + @id_resultat + '/resultat_0_0.vtu'
     name_file = '/home/scproduction/MODEL/model_' + @id_model + '/calcul_' + @id_resultat + '/resultat_0_0.vtu'
     name_resultats = 'result_' + @id_resultat + '.vtu'
     send_file name_file, :filename => name_resultats
     
     @current_resultat.state = 'downloaded'
-#     send_data  = { :id_model => @id_model, :id_resultat => @id_resultat, :mode => "download"};
-#     
-#     # socket d'envoie au serveur
-#     socket    = Socket.new( AF_INET, SOCK_STREAM, 0 )
-#     sockaddr  = Socket.pack_sockaddr_in( 12346, 'localhost' )
-#     #sockaddr  = Socket.pack_sockaddr_in( 12346, 'sc2.ens-cachan.fr' )
-#     socket.connect( sockaddr )
-#     socket.write( send_data.to_json )
-#     
-#     # reponse du calculateur
-#     results = socket.read
-#     
-#     # envoie du fichier en telechargement
-#     name_resultats = 'result_' + @id_resultat + '.vtu'
-#     send_data results, :filename => name_resultats
-
-    
   end
  
 end
