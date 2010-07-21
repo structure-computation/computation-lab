@@ -20,6 +20,16 @@
         Description :
       .NC_active_box_init_text_2{ :style => "width:510px;" }
         %textarea#init_description{ :onKeyup => "Tableau_init_change_value()" }
+      - if @dim_model == 2
+        .NC_active_box_init_text_1{ :style => "width:130px;" }
+          Calcul :
+        .NC_active_box_init_text_1{ :style => "width:250px;" }
+          %select#init_ctype{ :onChange => "Tableau_init_change_value()" }
+            %option{ :value => "CP" }
+              Contraintes planes
+            %option{ :value => "DP" }
+              Déformations planes
+        .NC_active_box_init_text_1{ :style => "width:265px;" }
       .NC_active_box_init_text_1{ :style => "width:130px;" }
         Type :
       .NC_active_box_init_text_1{ :style => "width:250px;" }
@@ -31,7 +41,6 @@
           %option{ :value => "dynamique" }
             dynamique
       .NC_active_box_init_text_1{ :style => "width:265px;" }
-
 /     #NC_init_non_statique.off
 /       .NC_init_table_step
 /         .NC_init_table_step_1

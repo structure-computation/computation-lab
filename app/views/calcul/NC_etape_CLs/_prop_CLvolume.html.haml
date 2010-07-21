@@ -1,0 +1,137 @@
+#prop_CLvolume.off
+  .NC_prop_box_titre{ :style => "height:50px" }
+    .NC_prop_box_text_0{ :style => "width:130px;" }
+      Type :
+    #prop_CLv_top_name.NC_prop_box_text_2{ :style => "width:400px;" }
+      CL 1
+    .NC_prop_box_text_0{ :style => "width:130px;" }
+      S'applique sur :
+    .NC_prop_box_text_0{ :style => "width:400px;" }
+      #prop_CLv_top_apply_on.NC_prop_box_text_1_in
+
+
+  #prop_CLv_poids.NC_prop_box.on
+    - (0...20).each do |i|
+      .NC_prop_line_top{ :name => "prop_CL_step_#{i}" }
+        %div{ :name => "prop_dim_0" }
+          .NC_prop_box_text_1{ :style => "width:160px;" }
+            Gravité :
+        %div{ :name => "prop_dim_1", :style => "width:488px;" }
+          .NC_prop_box_text_1{ :style => "width:50px;" }
+            %p
+              G =
+          .NC_prop_box_text_1{ :style => "width:317px;" }
+            %input{:id => "prop_CLv_poids_gravity_#{i}", :type => "text", :value => "100", :onKeyup => "prop_CLv_poids_change_value()" }
+        %div{ :name => "prop_dim_0" }
+          .NC_prop_box_text_1{ :style => "width:160px;" }
+            Direction verticale :
+        %div{ :name => "prop_dim_1" }
+          .NC_prop_box_text_1{ :style => "width:50px;" }
+            %p
+              Dx =
+          .NC_prop_box_text_1{ :style => "width:100px;" }
+            %input{:id => "prop_CLv_poids_pdirection_x_#{i}", :type => "text", :value => "100", :onKeyup => "prop_CLv_poids_change_value()" }
+        %div{ :name => "prop_dim_2" }
+          .NC_prop_box_text_1{ :style => "width:50px;" }
+            %p
+              Dy =
+          .NC_prop_box_text_1{ :style => "width:100px;" }
+            %input{:id => "prop_CLv_poids_pdirection_y_#{i}", :type => "text", :value => "100", :onKeyup => "prop_CLv_poids_change_value()" }
+        %div{ :name => "prop_dim_3" }
+          .NC_prop_box_text_1{ :style => "width:50px;" }
+            %p
+              Dz =
+          .NC_prop_box_text_1{ :style => "width:100px;" }
+            %input{:id => "prop_CLv_poids_pdirection_z_#{i}", :type => "text", :value => "100", :onKeyup => "prop_CLv_poids_change_value()" }
+    
+
+  #prop_CLv_acceleration.NC_prop_box.on
+    - (0...20).each do |i|
+      .NC_prop_line_top{ :name => "prop_CL_step_#{i}" }
+        %div{ :name => "prop_dim_0" }
+          .NC_prop_box_text_1{ :style => "width:160px;" }
+            Gamma :
+        %div{ :name => "prop_dim_1", :style => "width:488px;" }
+          .NC_prop_box_text_1{ :style => "width:50px;" }
+            %p
+              G =
+          .NC_prop_box_text_1{ :style => "width:317px;" }
+            %input{:id => "prop_CLv_acceleration_gravity_#{i}", :type => "text", :value => "100", :onKeyup => "prop_CLv_poids_change_value()" }
+        %div{ :name => "prop_dim_0" }
+          .NC_prop_box_text_1{ :style => "width:160px;" }
+            Direction :
+        %div{ :name => "prop_dim_1" }
+          .NC_prop_box_text_1{ :style => "width:50px;" }
+            %p
+              Dx =
+          .NC_prop_box_text_1{ :style => "width:100px;" }
+            %input{:id => "prop_CLv_acceleration_pdirection_x_#{i}", :type => "text", :value => "100", :onKeyup => "prop_CLv_poids_change_value()" }
+        %div{ :name => "prop_dim_2" }
+          .NC_prop_box_text_1{ :style => "width:50px;" }
+            %p
+              Dy =
+          .NC_prop_box_text_1{ :style => "width:100px;" }
+            %input{:id => "prop_CLv_acceleration_pdirection_y_#{i}", :type => "text", :value => "100", :onKeyup => "prop_CLv_poids_change_value()" }
+        %div{ :name => "prop_dim_3" }
+          .NC_prop_box_text_1{ :style => "width:50px;" }
+            %p
+              Dz =
+          .NC_prop_box_text_1{ :style => "width:100px;" }
+            %input{:id => "prop_CLv_acceleration_pdirection_z_#{i}", :type => "text", :value => "100", :onKeyup => "prop_CLv_poids_change_value()" }
+
+
+  #prop_CLv_centrifuge.NC_prop_box.on
+    - (0...20).each do |i|
+      .NC_prop_line_top{ :name => "prop_CL_step_#{i}" }
+        %div{ :name => "prop_dim_0" }
+          .NC_prop_box_text_1{ :style => "width:160px;" }
+            vitesse de rotation :
+        %div{ :name => "prop_dim_1", :style => "width:488px;" }
+          .NC_prop_box_text_1{ :style => "width:50px;" }
+            %p
+              W =
+          .NC_prop_box_text_1{ :style => "width:317px;" }
+            %input{:id => "prop_CLv_centrifuge_wrotation_#{i}", :type => "text", :value => "100", :onKeyup => "prop_CLv_poids_change_value()" }
+        %div{ :name => "prop_dim_0" }
+          .NC_prop_box_text_1{ :style => "width:160px;" }
+            Direction de l'axe :
+        %div{ :name => "prop_dim_1" }
+          .NC_prop_box_text_1{ :style => "width:50px;" }
+            %p
+              Dx =
+          .NC_prop_box_text_1{ :style => "width:100px;" }
+            %input{:id => "prop_CLv_centrifuge_pdirection_x_#{i}", :type => "text", :value => "100", :onKeyup => "prop_CLv_poids_change_value()" }
+        %div{ :name => "prop_dim_2" }
+          .NC_prop_box_text_1{ :style => "width:50px;" }
+            %p
+              Dy =
+          .NC_prop_box_text_1{ :style => "width:100px;" }
+            %input{:id => "prop_CLv_centrifuge_pdirection_y_#{i}", :type => "text", :value => "100", :onKeyup => "prop_CLv_poids_change_value()" }
+        %div{ :name => "prop_dim_3" }
+          .NC_prop_box_text_1{ :style => "width:50px;" }
+            %p
+              Dz =
+          .NC_prop_box_text_1{ :style => "width:100px;" }
+            %input{:id => "prop_CLv_centrifuge_pdirection_z_#{i}", :type => "text", :value => "100", :onKeyup => "prop_CLv_poids_change_value()" }
+    
+        %div{ :name => "prop_dim_0" }
+          .NC_prop_box_text_1{ :style => "width:160px;" }
+            Point de l'axe :
+        %div{ :name => "prop_dim_1" }
+          .NC_prop_box_text_1{ :style => "width:50px;" }
+            %p
+              Px =
+          .NC_prop_box_text_1{ :style => "width:100px;" }
+            %input{:id => "prop_CLv_centrifuge_point_1_x_#{i}", :type => "text", :value => "100", :onKeyup => "prop_CLv_poids_change_value()" }
+        %div{ :name => "prop_dim_2" }
+          .NC_prop_box_text_1{ :style => "width:50px;" }
+            %p
+              Py =
+          .NC_prop_box_text_1{ :style => "width:100px;" }
+            %input{:id => "prop_CLv_centrifuge_point_1_y_#{i}", :type => "text", :value => "100", :onKeyup => "prop_CLv_poids_change_value()" }
+        %div{ :name => "prop_dim_3" }
+          .NC_prop_box_text_1{ :style => "width:50px;" }
+            %p
+              Pz =
+          .NC_prop_box_text_1{ :style => "width:100px;" }
+            %input{:id => "prop_CLv_centrifuge_point_1_z_#{i}", :type => "text", :value => "100", :onKeyup => "prop_CLv_poids_change_value()" }

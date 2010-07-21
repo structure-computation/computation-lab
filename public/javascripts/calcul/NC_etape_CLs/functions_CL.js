@@ -234,6 +234,22 @@ function select_bords_CL(num){
 	}
 }
 
+// ajout d'une bord aux CLs selectionné actif
+function suppr_bord(num){
+	var num_select = right_tableau_connect['bord'][num];
+	// si on supprime une seule bord
+	id_suppr = Tableau_bords_filter[num_select]["id"];
+	for(i=0; i<Tableau_bords.length ;i++){
+		if(Tableau_bords[i]['id']==id_suppr){
+			Tableau_bords.splice(i,1);
+			break;
+		}
+	}
+	affiche_Tableau_bord();
+	create_bord();
+}
+
+
 // affiche la page num pour la liste des bords
 function go_page_bord(num){
 	if(num=='first'){
@@ -474,10 +490,10 @@ function Tableau_init_add_step(){
 	for(i=0;i<Tableau_CL_select_volume.length;i++){
 		//test1=array2json(Tableau_CL_select_volume[i]);
 		//alert(test1);
-		Tableau_CL_select_volume[i]['step'][taille_Tableau_init_time_step] = clone(Tableau_CL_step);
+		Tableau_CL_select_volume[i]['step'][taille_Tableau_init_time_step] = clone(Tableau_CL_select_volume[i]['step'][taille_Tableau_init_time_step-1]);
 	}
 	for(i=0;i<Tableau_CL_select.length;i++){
-		Tableau_CL_select[i]['step'][taille_Tableau_init_time_step] = clone(Tableau_CL_step);
+		Tableau_CL_select[i]['step'][taille_Tableau_init_time_step] = clone(Tableau_CL_select[i]['step'][taille_Tableau_init_time_step-1]);//clone(Tableau_CL_step)
 	}
 	
 	affiche_Tableau_init_time_step();
@@ -486,14 +502,18 @@ function Tableau_init_add_step(){
 
 // suppression d'un step par l'utilisateur
 function Tableau_init_suppr_step(step_select){
-	Tableau_init_time_step.splice(step_select,1);
-	
-	// suppression du step de chargement à touts les CL
-	for(i=0;i<Tableau_CL_select_volume.length;i++){
-		Tableau_CL_select_volume[i]['step'].splice(step_select,1);
-	}
-	for(i=0;i<Tableau_CL_select.length;i++){
-		Tableau_CL_select[i]['step'].splice(step_select,1);
+	if(step_select == 0){
+		alert('vous ne pouvez pas supprimer le premier step de chargement');
+	}else{
+		Tableau_init_time_step.splice(step_select,1);
+		
+		// suppression du step de chargement à touts les CL
+		for(i=0;i<Tableau_CL_select_volume.length;i++){
+			Tableau_CL_select_volume[i]['step'].splice(step_select,1);
+		}
+		for(i=0;i<Tableau_CL_select.length;i++){
+			Tableau_CL_select[i]['step'].splice(step_select,1);
+		}
 	}
 	
 	affiche_Tableau_init_time_step();
