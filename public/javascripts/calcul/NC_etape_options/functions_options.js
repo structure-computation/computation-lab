@@ -111,7 +111,7 @@ function select_option(str){
 				id_active = document.getElementById(str_temp);
 				if(id_active != null){
 					id_active.value = Tableau_option_select[key];
-					id_active.disabled = true;
+					id_active.disabled = false;
 				}
 			}
 		}
