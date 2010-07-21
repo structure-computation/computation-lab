@@ -38,6 +38,10 @@ Rails::Initializer.run do |config|
   # config.active_record.observers = :cacher, :garbage_collector, :forum_observer
   config.active_record.observers = :user_observer
   
+  # Configuration de l'envoi des mails
+  config.action_mailer.delivery_method    = :sendmail
+  config.action_mailer.perform_deliveries = true
+  
 
   # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
   # Run "rake -D time" for a list of tasks for finding time zone names.
