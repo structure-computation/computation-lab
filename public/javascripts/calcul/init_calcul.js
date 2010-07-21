@@ -10,7 +10,7 @@ var NC_current_step = 1;				// étape courante
 var selected_for_info = new Array(); 			// élément selectionné pour affichage dans la boite prop
 var NC_current_prop_visu = 'visu';			// visu ou prop selon la boite que l'on affiche
 var current_box_prop_state = 'off';			// display ou non de la boite propriété
-var problem_dimension = 3;				// dimension du problème
+var dim_model = 3 ;				// dimension du problème
 //var requete = null;
 
 
@@ -33,6 +33,7 @@ var new_Tableau_init_select =  new Array();		// tableu new calcul select
     new_Tableau_init_select['name'] = 'Nouveau calcul';
     new_Tableau_init_select['description'] = 'Description';
     new_Tableau_init_select['ctype'] = 'statique';
+    new_Tableau_init_select['D2type'] = 'DP';
     new_Tableau_init_select['id'] = -1;
 
 // pour la page matériaux------------
@@ -121,7 +122,8 @@ Tableau_bords_test["point_2_z"]=0;
 Tableau_bords_test["point_3_x"]=0;
 Tableau_bords_test["point_3_y"]=0;
 Tableau_bords_test["point_3_z"]=0;
-Tableau_bords_test["rayon"]=0;
+Tableau_bords_test["radius"]=0;
+Tableau_bords_test["equation"]=0;
 Tableau_bords_test["id_CL"]=-1;
 
 
@@ -137,6 +139,9 @@ Tableau_option_test['LATIN_conv']=0,01;
 Tableau_option_test['LATIN_nb_iter']=150;
 Tableau_option_test['PREC_nb_niveaux']=1;
 Tableau_option_test['PREC_erreur']=30;
+Tableau_option_test['PREC_boite'] = new Array();   	// type (prec_max ou prec_min); boite
+Tableau_option_test['Crack'] = new Array();   	// taille, direction (normale), point d'encrage
+Tableau_option_test['Dissipation'] = 'off';		// taille, direction (normale), point d'encrage
 
 var Tableau_option_normal = new Array();	    	// options mode test
 Tableau_option_normal['mode']='normal';
@@ -145,6 +150,9 @@ Tableau_option_normal['LATIN_conv']=0,0001;
 Tableau_option_normal['LATIN_nb_iter']=250;
 Tableau_option_normal['PREC_nb_niveaux']=4;
 Tableau_option_normal['PREC_erreur']=20;
+Tableau_option_normal['PREC_boite'] = new Array();   	// type (prec_max ou prec_min); boite
+Tableau_option_normal['Crack'] = new Array();   	// taille, direction (normale), point d'encrage
+Tableau_option_normal['Dissipation'] = 'off';		// taille, direction (normale), point d'encrage
 
 var Tableau_option_expert = new Array();	    	// options mode test
 Tableau_option_expert['mode']='expert';
@@ -155,7 +163,7 @@ Tableau_option_expert['PREC_nb_niveaux']=4;
 Tableau_option_expert['PREC_erreur']=20;
 Tableau_option_expert['PREC_boite'] = new Array();   	// type (prec_max ou prec_min); boite
 Tableau_option_expert['Crack'] = new Array();   	// taille, direction (normale), point d'encrage
-Tableau_option_expert['Diisipation'] = 'off';		// taille, direction (normale), point d'encrage
+Tableau_option_expert['Dissipation'] = 'off';		// taille, direction (normale), point d'encrage
 
 
 //initialisation de la taille des tableau pour les left box et des table de correspondance

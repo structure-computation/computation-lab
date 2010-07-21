@@ -71,7 +71,7 @@ class CalculController < ApplicationController
     @id_model = params[:id_model]
     @current_model = @current_user.sc_models.find(@id_model)
     @id_calcul = params[:id_calcul]
-    @current_calcul = @current_model.calcul_results.create(:name => params[:name], :description => params[:description], :state => 'temp', :ctype => 'statique', :log_type => 'compute')
+    @current_calcul = @current_model.calcul_results.create(:name => params[:name], :description => params[:description], :state => 'temp', :ctype =>params[:ctype], :D2type => params[:D2type], :log_type => 'compute')
     @current_calcul.user = @current_user
     @current_calcul.save
     render :json => @current_calcul.to_json

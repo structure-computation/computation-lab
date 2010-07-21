@@ -89,8 +89,11 @@ function select_option(str){
 				str_temp = new String();
 				str_temp = 'opt_' + key;
 				id_active = document.getElementById(str_temp);
-				id_active.value = Tableau_option_select[key];
-				id_active.disabled = true;
+				if(id_active != null){
+					id_active.value = Tableau_option_select[key];
+					id_active.disabled = true;
+				}
+				
 			}
 		}
 		affich_option(str);
@@ -106,8 +109,10 @@ function select_option(str){
 				str_temp = new String();
 				str_temp = 'opt_' + key;
 				id_active = document.getElementById(str_temp);
-				id_active.value = Tableau_option_select[key];
-				id_active.disabled = false;
+				if(id_active != null){
+					id_active.value = Tableau_option_select[key];
+					id_active.disabled = true;
+				}
 			}
 		}
 		affich_option(str);

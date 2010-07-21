@@ -1,0 +1,43 @@
+.NC_top_active_box{ :style => "margin-top:3px;" }
+  %div{ :style => "float: left; width: 70px; height: 27px;" }
+  %div{ :style => "float: left; width: 532px; height: 27px;" }
+    Schéma temporel : 
+    %span#schema_temp_ctype{ :style => "color:red;" }
+  %a{ :onclick => "affich_box_schema_temp()", :style => "cursor: pointer;" }
+    #NC_page_CLs_non_statique_triangle.NC_triangle_bas
+
+#NC_page_CLs_non_statique.NC_active_box
+  .NC_init_table_step
+    .NC_init_table_step_1
+    .NC_init_table_step_2
+      Temps initial
+    .NC_init_table_step_2
+      Pas de Temps (PdT)
+    .NC_init_table_step_2
+      Nombre de PdT
+    .NC_init_table_step_2
+      Temps final
+      
+  - (0...20).each do |i|
+    .NC_init_table_step_lign.off{ :id => "init_line_step_#{i}" }
+      .NC_init_table_step_1
+        %input{ :id => "init_step_name_#{i}", :type => "text", :value => "0,01", :disabled => "true", :onKeyup => "Tableau_init_change_value()" }
+      .NC_init_table_step_2
+        %input{ :id => "init_step_Ti_#{i}", :type => "text", :value => "0,01", :disabled => "true", :onKeyup => "Tableau_init_change_value()" }
+          s
+      .NC_init_table_step_2
+        %input{ :id => "init_step_PdT_#{i}", :type => "text", :value => "0,01", :onKeyup => "Tableau_init_change_value()" }
+          s
+      .NC_init_table_step_2
+        %input{ :id => "init_step_nb_PdT_#{i}", :type => "text", :value => "0,01", :onKeyup => "Tableau_init_change_value()" }
+          s
+      .NC_init_table_step_2
+        %input{ :id => "init_step_Tf_#{i}", :type => "text", :value => "0,01", :disabled => "true", :onKeyup => "Tableau_init_change_value()" }
+          s
+      - if #{i}!=0
+        %a{ :onclick => "Tableau_init_suppr_step(#{i})", :style => "cursor: pointer;" }
+          .NC_init_table_step_3
+    
+  .NC_init_table_step_lign
+    %a.NC_filter_button{ :onclick => "Tableau_init_add_step()", :style => "cursor: pointer;" }
+      ajouter un step

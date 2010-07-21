@@ -5,7 +5,7 @@
 // ------------------------------------------------------------------------------------------------------------
 var model_id = '' ; 					// identite du modele courant
 var NC_current_scroll = 'left';				// état de la scrollbar horizontale
-var problem_dimension = 3;				// dimension du problème
+var dim_model = 3;				// dimension du problème
 
 var Tableau_model                   =  new Array();              // tableau des info du modèle
 

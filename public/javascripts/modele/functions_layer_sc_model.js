@@ -37,9 +37,9 @@ var Tableau_new_model_info  =  new Array();
 Tableau_new_model_info['id_user'] = 'test';
 Tableau_new_model_info['id_company'] = 'test';
 Tableau_new_model_info['id_project'] = 'test';
-Tableau_new_model_info['name'] = 'super';
+Tableau_new_model_info['name'] = '';
 Tableau_new_model_info['dimension'] = 'test';
-Tableau_new_model_info['description'] = 'description cool';
+Tableau_new_model_info['description'] = '';
 
 
 

@@ -7,7 +7,8 @@ one:
   launch_date: 2009-12-16 23:48:15
   name: resultat_1 51848956
   description: MyText
-  ctype: MyString
+  ctype: statique
+  D2type: CP
   log_type: MyString
   state: MyString
   #cpu_second_used: 1
@@ -25,7 +26,8 @@ two:
   launch_date: 2009-12-16 23:48:15
   name: resultat_2 51848956
   description: MyText
-  ctype: MyString
+  ctype: statique
+  D2type: CP
   log_type: MyString
   state: MyString
   gpu_allocated: 4
@@ -40,7 +42,8 @@ three:
   launch_date: 2009-12-16 23:48:15
   name: resultat_3 51848956
   description: MyText
-  ctype: MyString
+  ctype: statique
+  D2type: CP
   log_type: MyString
   state: MyString
   gpu_allocated: 4

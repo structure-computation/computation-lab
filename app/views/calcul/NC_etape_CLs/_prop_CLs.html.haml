@@ -25,34 +25,35 @@
       /  acceleration
       - (0...20).each do |i|
         .NC_prop_line_top{ :name => "prop_CL_step_#{i}" }
-          / acceleration
-          %div{ :name => "prop_dim_0" }
-            .NC_prop_box_text_1{ :style => "width:160px;" }
-              fonction spaciale (x,y,z) :
-          %div{ :name => "prop_dim_1" }
-            .NC_prop_box_text_1{ :style => "width:50px;" }
-              %p
-                Fx =
-            .NC_prop_box_text_1{ :style => "width:100px;" }
-              %input{:id => "prop_CL_Fx_#{i}", :type => "text", :value => "100", :onKeyup => "prop_CL_change_value()" }
-          %div{ :name => "prop_dim_2" }
-            .NC_prop_box_text_1{ :style => "width:50px;" }
-              %p
-                Fy =
-            .NC_prop_box_text_1{ :style => "width:100px;" }
-              %input{:id => "prop_CL_Fy_#{i}", :type => "text", :value => "100", :onKeyup => "prop_CL_change_value()" }
-          %div{ :name => "prop_dim_3" }
-            .NC_prop_box_text_1{ :style => "width:50px;" }
-              %p
-                Fz =
-            .NC_prop_box_text_1{ :style => "width:100px;" }
-              %input{:id => "prop_CL_Fz_#{i}", :type => "text", :value => "100", :onKeyup => "prop_CL_change_value()" }
-          %div{ :name => "prop_dim_0" }
-            .NC_prop_box_text_1{ :style => "width:160px;" }
-              fonction temporelle (t) :
-          %div{ :name => "prop_dim_1", :style => "width:488px;" }
-            .NC_prop_box_text_1{ :style => "width:50px;" }
-              %p
-                ft =
-            .NC_prop_box_text_1{ :style => "width:317px;" }
-              %input{:id => "prop_CL_ft_#{i}", :type => "text", :value => "100", :onKeyup => "prop_CL_change_value()" }
+          .NC_prop_line
+            %div{ :name => "prop_dim_0" }
+              .NC_prop_box_text_1{ :style => "width:160px;" }
+                fonction spaciale (x,y,z) :
+            %div{ :name => "prop_dim_1" }
+              .NC_prop_box_text_1{ :style => "width:50px;" }
+                %p
+                  Fx =
+              .NC_prop_box_text_1{ :style => "width:100px;" }
+                %input{:id => "prop_CL_Fx_#{i}", :type => "text", :value => "100", :onKeyup => "prop_CL_change_value()" }
+            %div{ :name => "prop_dim_2" }
+              .NC_prop_box_text_1{ :style => "width:50px;" }
+                %p
+                  Fy =
+              .NC_prop_box_text_1{ :style => "width:100px;" }
+                %input{:id => "prop_CL_Fy_#{i}", :type => "text", :value => "100", :onKeyup => "prop_CL_change_value()" }
+            %div{ :name => "prop_dim_3" }
+              .NC_prop_box_text_1{ :style => "width:50px;" }
+                %p
+                  Fz =
+              .NC_prop_box_text_1{ :style => "width:100px;" }
+                %input{:id => "prop_CL_Fz_#{i}", :type => "text", :value => "100", :onKeyup => "prop_CL_change_value()" }
+          .NC_prop_line
+            %div{ :name => "prop_dim_0" }
+              .NC_prop_box_text_1{ :style => "width:160px;" }
+                fonction temporelle (t) :
+            %div{ :name => "prop_dim_1", :style => "width:488px;" }
+              .NC_prop_box_text_1{ :style => "width:50px;" }
+                %p
+                  ft =
+              .NC_prop_box_text_1{ :style => "width:317px;" }
+                %input{:id => "prop_CL_ft_#{i}", :type => "text", :value => "100", :onKeyup => "prop_CL_change_value()" }

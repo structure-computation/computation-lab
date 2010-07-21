@@ -8,6 +8,7 @@ class CreateCalculResults < ActiveRecord::Migration
       t.string    :name
       t.text      :description
       t.string    :ctype			# statique, quasistatique, dynamique
+      t.string    :D2type			# CP ou DP
       t.string    :log_type			# compute, create 
 #      t.integer   :timestep              non repris : parametres du calcul.
 #      t.integer   :timestep_numbers

@@ -219,6 +219,8 @@ function get_new_calculresult(num_model)
     data['name'] = Tableau_init_select['name'];
     data['description'] = Tableau_init_select['description'];
     data['id_calcul'] = Tableau_init_select['id'];
+    data['ctype'] = Tableau_init_select['ctype'];
+    data['D2type'] = Tableau_init_select['D2type'];
     
     if(Tableau_init_select['id'] == -1){
 	var url_php = "/calcul/new";
