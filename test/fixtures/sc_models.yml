@@ -1,92 +1,92 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-    name: avion1
-    company_id: 674101581   #tf_avionics
-    project_id: 
-    model_file_path: 
-    image_path:
-    description: "premier model d'avion"
-    dimension: 2
-    ddl_number: 10000
-    parts: 10
-    interfaces: 20
-    used_memory: 0
-    state: "void"
-    deleted_at:
-    
-two:
-    name: bateau1
-    company_id: 674101581   #tf_avionics
-    project_id: 
-    model_file_path: 
-    image_path:
-    description: "premier model de bateau"
-    dimension: 2
-    ddl_number: 10000
-    parts: 20
-    interfaces: 30
-    used_memory: 0
-    state: "void"
-    deleted_at:
-    
-three:
-    name: voiture1
-    company_id: 674101581   #tf_avionics
-    project_id: 
-    model_file_path: 
-    image_path:
-    description: "premier model de voiture"
-    dimension: 2
-    ddl_number: 20000
-    parts: 30
-    interfaces: 10
-    used_memory: 0
-    state: "void"
-    deleted_at:
-    
-four:
-    name: avion2 
-    company_id: 674101581   #tf_avionics
-    project_id: 
-    model_file_path: 
-    image_path:
-    description: "premier model d'avion"
-    dimension: 2
-    ddl_number: 10000
-    parts: 10
-    interfaces: 20
-    used_memory: 0
-    state: "void"
-    deleted_at:
-    
-five:
-    name: bateau2
-    company_id: 674101581   #tf_avionics
-    project_id: 
-    model_file_path: 
-    image_path:
-    description: "premier model de bateau"
-    dimension: 2
-    ddl_number: 10000
-    parts: 20
-    interfaces: 30
-    used_memory: 0
-    state: "void"
-    deleted_at:
-    
-six:
-    name: voiture2  
-    company_id:  674101581   #tf_avionics
-    project_id: 
-    model_file_path: 
-    image_path:
-    description: "premier model de voiture"
-    dimension: 2
-    ddl_number: 20000
-    parts: 30
-    interfaces: 10
-    used_memory: 0
-    state: "void"
-    deleted_at:
+# one:
+#     name: avion1
+#     company_id: 674101581   #tf_avionics
+#     project_id: 
+#     model_file_path: 
+#     image_path:
+#     description: "premier model d'avion"
+#     dimension: 2
+#     ddl_number: 10000
+#     parts: 10
+#     interfaces: 20
+#     used_memory: 0
+#     state: "void"
+#     deleted_at:
+#     
+# two:
+#     name: bateau1
+#     company_id: 674101581   #tf_avionics
+#     project_id: 
+#     model_file_path: 
+#     image_path:
+#     description: "premier model de bateau"
+#     dimension: 2
+#     ddl_number: 10000
+#     parts: 20
+#     interfaces: 30
+#     used_memory: 0
+#     state: "void"
+#     deleted_at:
+#     
+# three:
+#     name: voiture1
+#     company_id: 674101581   #tf_avionics
+#     project_id: 
+#     model_file_path: 
+#     image_path:
+#     description: "premier model de voiture"
+#     dimension: 2
+#     ddl_number: 20000
+#     parts: 30
+#     interfaces: 10
+#     used_memory: 0
+#     state: "void"
+#     deleted_at:
+#     
+# four:
+#     name: avion2 
+#     company_id: 674101581   #tf_avionics
+#     project_id: 
+#     model_file_path: 
+#     image_path:
+#     description: "premier model d'avion"
+#     dimension: 2
+#     ddl_number: 10000
+#     parts: 10
+#     interfaces: 20
+#     used_memory: 0
+#     state: "void"
+#     deleted_at:
+#     
+# five:
+#     name: bateau2
+#     company_id: 674101581   #tf_avionics
+#     project_id: 
+#     model_file_path: 
+#     image_path:
+#     description: "premier model de bateau"
+#     dimension: 2
+#     ddl_number: 10000
+#     parts: 20
+#     interfaces: 30
+#     used_memory: 0
+#     state: "void"
+#     deleted_at:
+#     
+# six:
+#     name: voiture2  
+#     company_id:  674101581   #tf_avionics
+#     project_id: 
+#     model_file_path: 
+#     image_path:
+#     description: "premier model de voiture"
+#     dimension: 2
+#     ddl_number: 20000
+#     parts: 30
+#     interfaces: 10
+#     used_memory: 0
+#     state: "void"
+#     deleted_at:
     

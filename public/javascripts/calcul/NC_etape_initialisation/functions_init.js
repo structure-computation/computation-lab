@@ -192,6 +192,10 @@ function affiche_Tableau_init_select(){
 			if(id_init_key != null){
 				remplacerTexte(id_init_key, Tableau_init_select[key]);
 			}
+		}else if(key == 'name'){
+			id_init_key.value = Tableau_init_select[key] ;
+			var id_content_top = document.getElementById("NC_content_top");
+			remplacerTexte(id_content_top, Tableau_init_select[key]);
 		}else if(key == 'ctype'){
 			id_init_key.value = Tableau_init_select[key] ;
 // 			id_schema_temp_key = document.getElementById('schema_temp_ctype');

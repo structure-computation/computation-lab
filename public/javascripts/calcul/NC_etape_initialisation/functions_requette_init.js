@@ -122,6 +122,7 @@ function init_new_calculresult(new_calculresult_temp)
     }
     //alert(Tableau_init_select['id']);
     affiche_Tableau_init_select();
+    complete_brouillon(false);
 }
 
 // traitement en fin de requette pour l'obtention de l'identité du calcul
@@ -131,8 +132,16 @@ function load_brouillon(brouillon_temp)
     // var Tableau_calcul_temp = eval('[' + response + ']');
     if (brouillon_temp)
     {   
-	Tableau_model = brouillon_temp ;
-	//alert(array2json(Tableau_model['mesh']))
+	//alert(array2json(brouillon_temp['calcul']['calcul_result']));
+	// si c'est un nouveau calcul, on enregistre un brouillon
+	enregistrer_brouillon = true;
+	if(Tableau_init_select['state']=='temp'){
+		enregistrer_brouillon = false;
+	}
+	Tableau_model = brouillon_temp['brouillon'] ;
+	Tableau_init_select = brouillon_temp['calcul']['calcul_result'];
+	affiche_Tableau_init_select();
+	
 	var taille_Tableau=Tableau_model.length;
 	//alert(taille_Tableau)
 	for (var key in Tableau_model) {
@@ -199,6 +208,10 @@ function load_brouillon(brouillon_temp)
 		//alert('CL_volume');
 	    }
 	}
+	if(enregistrer_brouillon){ // on enregistre un brouillon si c'est un nouveau calcul
+		complete_brouillon(false);
+	}
+	
     }
     else
     {

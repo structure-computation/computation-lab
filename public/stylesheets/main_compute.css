@@ -191,7 +191,10 @@ body
 {
   width: 945px;
   height: 29px;
-  text-align: left;
+  text-align: center;
+  color: #ffffff;
+  line-height: 25px;
+  font-size: 0.80em;
   background: transparent url('../images/NC_bg_content_top.png') no-repeat left top;
   float: left;
  }

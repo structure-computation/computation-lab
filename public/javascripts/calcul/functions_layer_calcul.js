@@ -166,9 +166,8 @@ function next_stape(){
 		if (NC_current_step < 2){
 			 NC_current_step = 2;
 			 get_new_calculresult(model_id);
-		}else{
-			affiche_NC_page_materiaux();
 		}
+		affiche_NC_page_materiaux();
 	}
 }
 function previous_stape(){

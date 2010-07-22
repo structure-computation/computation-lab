@@ -28,7 +28,7 @@ function affiche_NC_page_previsions(){
 
 function complete_calcul(){
 
-	complete_brouillon();
+	complete_brouillon(false);
 	// traitement des tableaux pour les mettre au bon format
 	// Tableau groups_elem
 	var groups_elem = new Array();
@@ -213,21 +213,21 @@ function complete_calcul(){
 	// Tableau proprietes_interfaces
 	var liaisons = new Array();
 	for(i in Tableau_liaison_select){
-		proprietes_interfaces[i] = new Array();
+		liaisons[i] = new Array();
 		table_param = ["id","name","type","coef_frottement"];
 		for(j in table_param){
 			if(table_param[j]=="type"){
 				if(Tableau_liaison_select[i]["comp_generique"] == 'Pa'){
-					proprietes_interfaces[i]["type"] = 'parfait';
+					liaisons[i]["type"] = 'parfait';
 				}else if(Tableau_liaison_select[i]["comp_generique"] == 'Co'){
-					proprietes_interfaces[i]["type"] = 'contact';
+					liaisons[i]["type"] = 'contact';
 				}
 			}else if(table_param[j]=="id"){
-				proprietes_interfaces[i]["id"] = parseFloat(Tableau_liaison_select[i]["id_select"]) ;
+				liaisons[i]["id"] = parseFloat(Tableau_liaison_select[i]["id_select"]) ;
 			}else if(table_param[j]=="coef_frottement"){
-				proprietes_interfaces[i]["coef_frottement"] = Tableau_liaison_select[i]["f"].toString() ;
+				liaisons[i]["coef_frottement"] = Tableau_liaison_select[i]["f"].toString() ;
 			}else{
-				proprietes_interfaces[i][table_param[j]]=Tableau_liaison_select[i][table_param[j]];
+				liaisons[i][table_param[j]]=Tableau_liaison_select[i][table_param[j]];
 			}
 		}
 	}
@@ -359,7 +359,7 @@ function complete_calcul(){
 }
 
 
-function complete_brouillon(){
+function complete_brouillon(interupteur){
 	// tableau représentatn l'etat courant de l'interface
 	var Tableau_current_stape_interface = new Array();
 	Tableau_current_stape_interface['NC_current_step'] = NC_current_step;
@@ -411,7 +411,9 @@ function complete_brouillon(){
 	    type: 'POST',
 	    data: send_brouillon,
 	    success: function(json) {
-		alert(json);
+		if(interupteur){
+			alert(json);
+		}
 	    }
 	});
 }

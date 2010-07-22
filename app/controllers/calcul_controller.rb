@@ -73,6 +73,7 @@ class CalculController < ApplicationController
     @id_calcul = params[:id_calcul]
     @current_calcul = @current_model.calcul_results.create(:name => params[:name], :description => params[:description], :state => 'temp', :ctype =>params[:ctype], :D2type => params[:D2type], :log_type => 'compute')
     @current_calcul.user = @current_user
+    @current_calcul.name = "calcul_#{@current_calcul.id}"
     @current_calcul.save
     render :json => @current_calcul.to_json
   end
@@ -81,12 +82,27 @@ class CalculController < ApplicationController
     @id_model = params[:id_model]
     @current_model = @current_user.sc_models.find(@id_model)
     @id_calcul = params[:id_calcul]
+    @current_calcul = @current_model.calcul_results.find(@id_calcul)
     
     # lecture du fichier sur le disque
     path_to_file = "#{SC_MODEL_ROOT}/model_#{@id_model}/calcul_#{@id_calcul}/brouillon.json"
     results = File.read(path_to_file)
+    jsonobject = JSON.parse(results)
     
-    render :json => results
+    if(@current_calcul.state == 'temp')
+      send_data  = {:calcul => @current_calcul, :brouillon => jsonobject}
+      render :json => send_data.to_json
+    else
+      @new_calcul = @current_model.calcul_results.create(:name => params[:name], :description => params[:description], :state => 'temp', :ctype =>params[:ctype], :D2type => params[:D2type], :log_type => 'compute')
+      @new_calcul.user = @current_user
+      if (@new_calcul.name == @current_calcul.name)
+	@new_calcul.name = "calcul_#{@new_calcul.id}" 
+      end
+      @new_calcul.save
+      send_data  = {:calcul => @new_calcul, :brouillon => jsonobject}
+      render :json => send_data.to_json
+    end
+      
   end
 
   def send_brouillon
@@ -138,7 +154,7 @@ class CalculController < ApplicationController
     File.chmod 0777, path_to_calcul
     
     # création des elements a envoyer au calculateur
-    send_data  = { :id_model => @id_model, :id_calcul => @id_calcul, :dimension => current_model.dimension , :mode => "compute"};
+    send_data  = { :id_model => @id_model, :id_calcul => @id_calcul, :dimension => current_model.dimension , :mode => "compute"}
     
     # socket d'envoie au serveur
     socket    = Socket.new( AF_INET, SOCK_STREAM, 0 )
