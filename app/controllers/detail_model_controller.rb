@@ -96,7 +96,7 @@ class DetailModelController < ApplicationController
     # création du fichier json_model 
     identite_calcul = { :id_societe => current_model.company.id, :id_user => @current_user.id,         :id_projet => '', :id_model => current_model.id, :id_calcul => '', :dimension  => current_model.dimension};
     priorite_calcul = { :priorite => 0 };                               
-    mesh            = { :mesh_directory => path_to_mesh, :mesh_name  => "mesh", :extension  => ".bdf"};
+    mesh            = { :mesh_directory => "MESH", :mesh_name  => "mesh", :extension  => ".bdf"};
     
     json_model        = { :identite_calcul => identite_calcul, :priorite_calcul => priorite_calcul, :mesh => mesh}; 
     

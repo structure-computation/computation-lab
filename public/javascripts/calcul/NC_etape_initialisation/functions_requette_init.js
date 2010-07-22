@@ -88,7 +88,7 @@ function init_Tableau_calcul(Tableau_calcul_temp)
     affiche_Tableau_calcul();
     Tableau_init_select=clone(new_Tableau_init_select);
     Tableau_init_time_step[0]=clone(Tableau_init_time_step_temp);
-    //affiche_Tableau_init_select();
+    affiche_Tableau_init_select();
 }
 
 

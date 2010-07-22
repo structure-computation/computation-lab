@@ -123,7 +123,7 @@ Tableau_bords_test["point_3_x"]=0;
 Tableau_bords_test["point_3_y"]=0;
 Tableau_bords_test["point_3_z"]=0;
 Tableau_bords_test["radius"]=0;
-Tableau_bords_test["equation"]=0;
+Tableau_bords_test["equation"]="0";
 Tableau_bords_test["id_CL"]=-1;
 
 

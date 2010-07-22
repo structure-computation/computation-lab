@@ -42,7 +42,7 @@ class ScModel < ActiveRecord::Base
   
   def get_used_memory()
     dirsize =0
-    path_to_model = "/home/scproduction/MODEL/model_#{self.id}"
+    path_to_model = "#{SC_MODEL_ROOT}/model_#{self.id}"
     Find.find(path_to_model) do |f| 
       dirsize += File.stat(f).size 
     end 

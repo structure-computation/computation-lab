@@ -197,7 +197,9 @@ function affiche_Tableau_init_select(){
 // 			id_schema_temp_key = document.getElementById('schema_temp_ctype');
 // 			remplacerTexte(id_schema_temp_key, Tableau_init_select[key]);
 		}else if(key == 'D2type'){
-			id_init_key.value = Tableau_init_select[key] ;
+			if(id_init_key != null){
+				id_init_key.value = Tableau_init_select[key] ;
+			}
 		}else if(id_init_key != null && key != 'step'){
 			id_init_key.value = Tableau_init_select[key] ;
 		}

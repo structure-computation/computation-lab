@@ -76,18 +76,16 @@ function complete_calcul(){
 				if(Tableau_bords[i]["assigned"]=='-1'){
 					groups_edge[i]["id_CL"]=parseFloat(Tableau_bords[i]["assigned"]);
 				}else{
-					groups_edge[i]["id_CL"]=Tableau_bords[i]["assigned"];
+					groups_edge[i]["id_CL"]=parseFloat(Tableau_bords[i]["assigned"]);
 				}
 			}else if(table_param[j].match("point")){
-				groups_edge[i][table_param[j]] = parseFloat(Tableau_bords[i][table_param[j]]);
+				groups_edge[i][table_param[j]] = Tableau_bords[i][table_param[j]].toString();
 			}else if(table_param[j].match("pdirection")){
-				groups_edge[i][table_param[j]] = parseFloat(Tableau_bords[i][table_param[j]]);
+				groups_edge[i][table_param[j]] = Tableau_bords[i][table_param[j]].toString();
 			}else if(table_param[j]=="assigned"){
 				groups_edge[i][table_param[j]] = parseFloat(Tableau_bords[i][table_param[j]]);
-			}else if(table_param[j]=="radius"){
-				groups_edge[i][table_param[j]] = parseFloat(Tableau_bords[i]["rayon"]);
 			}else{
-				groups_edge[i][table_param[j]]=Tableau_bords[i][table_param[j]];
+				groups_edge[i][table_param[j]]=Tableau_bords[i][table_param[j]].toString();
 			}
 		}
 	}
@@ -237,12 +235,20 @@ function complete_calcul(){
 	var CL = new Array();
 	for(i in Tableau_CL_select){
 		CL[i] = new Array();
-		table_param = ["id","name","type","fct_spatiale_x","fct_spatiale_y","fct_spatiale_z","fct_temporelle_x","fct_temporelle_y","fct_temporelle_z"];
+		table_param = ["id","name","type","step"];
 		for(j in table_param){
 			if(table_param[j]=="type"){
 				CL[i]["type"] = Tableau_CL_select[i]["bctype"] ;
 			}else if(table_param[j]=="id"){
 				CL[i]["id"] = Tableau_CL_select[i]["id_select"] ;
+			}else if(table_param[j]=="step"){
+				CL[i]["step"] = new Array();
+				CL[i]["step"] = Tableau_CL_select[i]["step"] ;
+				for(num_step in CL[i]["step"]){
+					for(key1 in CL[i]["step"][num_step]){
+						CL[i]["step"][num_step][key1] = CL[i]["step"][num_step][key1].toString() ;
+					}
+				}
 			}else if(table_param[j]=="fct_spatiale_x"){
 				CL[i]["fct_spatiale_x"] = Tableau_CL_select[i]["step"][0]['Fx'].toString();
 			}else if(table_param[j]=="fct_spatiale_y"){

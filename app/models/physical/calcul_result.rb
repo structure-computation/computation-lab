@@ -24,9 +24,9 @@ class CalculResult < ActiveRecord::Base
   def get_used_memory()
     dirsize =0
     if(self.ctype == 'create')
-      path_to_calcul = "/home/scproduction/MODEL/model_#{self.sc_model.id}/MESH"
+      path_to_calcul = "#{SC_MODEL_ROOT}/model_#{self.sc_model.id}/MESH"
     else
-      path_to_calcul = "/home/scproduction/MODEL/model_#{self.sc_model.id}/calcul_#{self.id}"
+      path_to_calcul = "#{SC_MODEL_ROOT}/model_#{self.sc_model.id}/calcul_#{self.id}"
     end
     Find.find(path_to_calcul) do |f| 
       dirsize += File.stat(f).size 
