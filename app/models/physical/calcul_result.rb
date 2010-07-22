@@ -14,6 +14,7 @@ class CalculResult < ActiveRecord::Base
     self.state = 'finish'
     self.result_date = Time.now
     self.gpu_allocated = 1
+    self.name = "calcul_#{self.id}" 
     self.get_used_memory()
     #self.save
     
