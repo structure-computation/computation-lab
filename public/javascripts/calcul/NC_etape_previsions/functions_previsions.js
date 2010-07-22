@@ -72,7 +72,9 @@ function complete_calcul(){
 		groups_edge[i] = new Array();
 		table_param = ["id","origine","name","type","id_CL","assigned","group","pdirection_x","pdirection_y","pdirection_z","geometry","radius","equation","point_1_x","point_1_y","point_1_z","point_2_x","point_2_y","point_2_z"];
 		for(j in table_param){
-			if(table_param[j]=="id_CL"){
+			if(table_param[j]=="id"){
+				groups_edge[i][table_param[j]] = parseFloat(Tableau_bords[i][table_param[j]]);
+			}else if(table_param[j]=="id_CL"){
 				if(Tableau_bords[i]["assigned"]=='-1'){
 					groups_edge[i]["id_CL"]=parseFloat(Tableau_bords[i]["assigned"]);
 				}else{
@@ -101,7 +103,7 @@ function complete_calcul(){
 			if(table_param[j]=="id"){
 				materials[i]["id"] = parseFloat(Tableau_mat_select[i]["id_select"]) ;
 			}else if(table_param[j]=="resolution"){
-				materials[i]["resolution"]="CP"
+				materials[i]["resolution"]=Tableau_init_select['D2type'].toString() ;
 			}else if(table_param[j]=="mtype"){
 				materials[i]["mtype"] = Tableau_mat_select[i]["mtype"] ;
 			}else if(table_param[j]=="comp"){
@@ -235,7 +237,7 @@ function complete_calcul(){
 	var CL = new Array();
 	for(i in Tableau_CL_select){
 		CL[i] = new Array();
-		table_param = ["id","name","type","step"];
+		table_param = ["id","name","type","step","fct_spatiale_x","fct_spatiale_y","fct_spatiale_z","fct_temporelle_x","fct_temporelle_y","fct_temporelle_z",];
 		for(j in table_param){
 			if(table_param[j]=="type"){
 				CL[i]["type"] = Tableau_CL_select[i]["bctype"] ;
@@ -250,17 +252,17 @@ function complete_calcul(){
 					}
 				}
 			}else if(table_param[j]=="fct_spatiale_x"){
-				CL[i]["fct_spatiale_x"] = Tableau_CL_select[i]["step"][0]['Fx'].toString();
+				CL[i]["fct_spatiale_x"] = Tableau_CL_select[i]["step"][0]['fct_spatiale_x'].toString();
 			}else if(table_param[j]=="fct_spatiale_y"){
-				CL[i]["fct_spatiale_y"] = Tableau_CL_select[i]["step"][0]['Fy'].toString();
+				CL[i]["fct_spatiale_y"] = Tableau_CL_select[i]["step"][0]['fct_spatiale_y'].toString();
 			}else if(table_param[j]=="fct_spatiale_z"){
-				CL[i]["fct_spatiale_z"] = Tableau_CL_select[i]["step"][0]['Fz'].toString();
+				CL[i]["fct_spatiale_z"] = Tableau_CL_select[i]["step"][0]['fct_spatiale_z'].toString();
 			}else if(table_param[j]=="fct_temporelle_x"){
-				CL[i]["fct_temporelle_x"] = Tableau_CL_select[i]["step"][0]['ft'].toString() ;
+				CL[i]["fct_temporelle_x"] = Tableau_CL_select[i]["step"][0]['fct_temporelle_x'].toString() ;
 			}else if(table_param[j]=="fct_temporelle_y"){
-				CL[i]["fct_temporelle_y"] = Tableau_CL_select[i]["step"][0]['ft'].toString() ;
+				CL[i]["fct_temporelle_y"] = Tableau_CL_select[i]["step"][0]['fct_temporelle_x'].toString() ;
 			}else if(table_param[j]=="fct_temporelle_z"){
-				CL[i]["fct_temporelle_z"] = Tableau_CL_select[i]["step"][0]['ft'].toString() ;
+				CL[i]["fct_temporelle_z"] = Tableau_CL_select[i]["step"][0]['fct_temporelle_x'].toString() ;
 			}else{
 				CL[i][table_param[j]]=Tableau_CL_select[i][table_param[j]];
 			}

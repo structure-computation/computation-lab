@@ -705,7 +705,7 @@ function prop_CL_select_affich_info(){
 	id_prop_CL.className = 'NC_prop_box on';
 	
 	
-	// on rempli le cartouche top de la liaison pour info
+	// on rempli le cartouche top de la CL pour info
 	for(key in prop_CL_for_info){
 		if(key=='ref'){
 			//prop_CL_affich(prop_CL_for_info[key]);
@@ -732,9 +732,11 @@ function prop_CL_select_affich_info(){
 				for(key_step in prop_CL_for_info[key][i_step]){
 					var strContent_prop_key = 'prop_CL_' + key_step + '_' + i_step;
 					//alert(strContent_prop_key);
-					var id_prop_key = document.getElementById(strContent_prop_key);	
-					id_prop_key.value =  prop_CL_for_info[key][i_step][key_step] ;
-					id_prop_key.disabled = false;
+					var id_prop_key = document.getElementById(strContent_prop_key);
+					if(id_prop_key != null){
+						id_prop_key.value =  prop_CL_for_info[key][i_step][key_step] ;
+						id_prop_key.disabled = false;
+					}
 				}
 			}
 		}else{

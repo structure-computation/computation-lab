@@ -79,10 +79,12 @@ var id_actif_interface_select = -1;			// id de l'element graphique interface sé
 // pour la page CLs------------
 var Tableau_CL = new Array();  				// tableau des CLs 
 var Tableau_CL_step = new Array();  			// tableau des motif pour chaque step d'une CL
-Tableau_CL_step['Fx'] = "0";
-Tableau_CL_step['Fy'] = "0";
-Tableau_CL_step['Fz'] = "0";
-Tableau_CL_step['ft'] = 1;
+Tableau_CL_step['fct_spatiale_x'] = "0";
+Tableau_CL_step['fct_spatiale_y'] = "0";
+Tableau_CL_step['fct_spatiale_z'] = "0";
+Tableau_CL_step['fct_temporelle_x'] = 1;
+Tableau_CL_step['fct_temporelle_y'] = 1;
+Tableau_CL_step['fct_temporelle_z'] = 1;
 
 var current_state_box_schema_temp = 'on';		// états d'affichage des boite active de la page option
 var compteur_CL_select = 0;				// compteur pour l'attribution des id_select
@@ -135,33 +137,36 @@ for(i=0; i<6; i++){
 var Tableau_option_test = new Array();	    		// options mode test
 Tableau_option_test['mode']='test';
 Tableau_option_test['nb_option']=0;
-Tableau_option_test['LATIN_conv']=0,01;
+Tableau_option_test['LATIN_conv']=0.01;
 Tableau_option_test['LATIN_nb_iter']=150;
 Tableau_option_test['PREC_nb_niveaux']=1;
 Tableau_option_test['PREC_erreur']=30;
 Tableau_option_test['PREC_boite'] = new Array();   	// type (prec_max ou prec_min); boite
+Tableau_option_test['PREC_nb_decoupe'] = 2 ;  	// découpage des elements 
 Tableau_option_test['Crack'] = new Array();   	// taille, direction (normale), point d'encrage
 Tableau_option_test['Dissipation'] = 'off';		// taille, direction (normale), point d'encrage
 
 var Tableau_option_normal = new Array();	    	// options mode test
 Tableau_option_normal['mode']='normal';
 Tableau_option_normal['nb_option']=2;
-Tableau_option_normal['LATIN_conv']=0,0001;
+Tableau_option_normal['LATIN_conv']=0.0001;
 Tableau_option_normal['LATIN_nb_iter']=250;
 Tableau_option_normal['PREC_nb_niveaux']=4;
 Tableau_option_normal['PREC_erreur']=20;
 Tableau_option_normal['PREC_boite'] = new Array();   	// type (prec_max ou prec_min); boite
+Tableau_option_normal['PREC_nb_decoupe'] = 2 ;  	// découpage des elements 
 Tableau_option_normal['Crack'] = new Array();   	// taille, direction (normale), point d'encrage
 Tableau_option_normal['Dissipation'] = 'off';		// taille, direction (normale), point d'encrage
 
 var Tableau_option_expert = new Array();	    	// options mode test
 Tableau_option_expert['mode']='expert';
 Tableau_option_expert['nb_option']=5;
-Tableau_option_expert['LATIN_conv']=0,0001;
+Tableau_option_expert['LATIN_conv']=0.0001;
 Tableau_option_expert['LATIN_nb_iter']=250;
 Tableau_option_expert['PREC_nb_niveaux']=4;
 Tableau_option_expert['PREC_erreur']=20;
 Tableau_option_expert['PREC_boite'] = new Array();   	// type (prec_max ou prec_min); boite
+Tableau_option_expert['PREC_nb_decoupe'] = 2 ;  	// découpage des elements 
 Tableau_option_expert['Crack'] = new Array();   	// taille, direction (normale), point d'encrage
 Tableau_option_expert['Dissipation'] = 'off';		// taille, direction (normale), point d'encrage
 
