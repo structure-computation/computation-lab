@@ -80,11 +80,9 @@ class DetailModelController < ApplicationController
     current_model = @current_user.sc_models.find(@id_model)
     
     # on enregistre les fichier sur le disque et on change les droit pour que le serveur de calcul y ai acces
-    file = params[:fichier]
-    #path_to_model = "/mnt/sc2/Developpement/MODEL/model_#{@id_model}"
-    #path_to_mesh = "/mnt/sc2/Developpement/MODEL/model_#{@id_model}/MESH"
-    path_to_model = "/home/scproduction/MODEL/model_#{@id_model}"
-    path_to_mesh = "/home/scproduction/MODEL/model_#{@id_model}/MESH"
+    file = params[:fichier] 
+    path_to_model = "#{SC_MODEL_ROOT}/model_#{@id_model}"
+    path_to_mesh = "#{SC_MODEL_ROOT}/model_#{@id_model}/MESH"
  
     Dir.mkdir(path_to_model, 0777) unless File.exists?(path_to_model)
     Dir.mkdir(path_to_mesh, 0777) unless File.exists?(path_to_mesh)
@@ -139,9 +137,7 @@ class DetailModelController < ApplicationController
     @id_resultat = params[:id_resultat]
     @current_model = ScModel.find(@id_model)
     @current_resultat = @current_model.calcul_results.find(@id_resultat)
-    
-    #name_file = '/mnt/sc2/Developpement/MODEL/model_' + @id_model + '/calcul_' + @id_resultat + '/resultat_0_0.vtu'
-    name_file = '/home/scproduction/MODEL/model_' + @id_model + '/calcul_' + @id_resultat + '/resultat_0_0.vtu'
+    name_file = "#{SC_MODEL_ROOT}/model_" + @id_model + "/calcul_" + @id_resultat + "/resultat_0_0.vtu"
     name_resultats = 'result_' + @id_resultat + '.vtu'
     send_file name_file, :filename => name_resultats
     

@@ -16,7 +16,7 @@ Rails::Initializer.run do |config|
   
   # Charge tous les sous repertoires du dossier app/models pour plus de clarete dans l'organisation des mode>
   config.load_paths += Dir["#{RAILS_ROOT}/app/models/**/**"]
-
+  
   # Specify gems that this application depends on and have them installed with rake gems:install
   # config.gem "bj"
   # config.gem "hpricot", :version => '0.6', :source => "http://code.whytheluckystiff.net"

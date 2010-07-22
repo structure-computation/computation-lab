@@ -18,8 +18,7 @@ class CalculController < ApplicationController
     @id_model = params[:id_model]  
     
     # lecture du fichier sur le disque
-    #path_to_file = "/mnt/sc2/Developpement/MODEL/model_#{@id_model}/MESH/mesh.txt"
-    path_to_file = "/home/scproduction/MODEL/model_#{@id_model}/MESH/mesh.txt"
+    path_to_file = "#{SC_MODEL_ROOT}/model_#{@id_model}/MESH/mesh.txt"
     results = File.read(path_to_file)
     
     render :json => results
@@ -84,8 +83,7 @@ class CalculController < ApplicationController
     @id_calcul = params[:id_calcul]
     
     # lecture du fichier sur le disque
-    #path_to_file = "/mnt/sc2/Developpement/MODEL/model_#{@id_model}/calcul_#{@id_calcul}/brouillon.json"
-    path_to_file = "/home/scproduction/MODEL/model_#{@id_model}/calcul_#{@id_calcul}/brouillon.json"
+    path_to_file = "#{SC_MODEL_ROOT}/model_#{@id_model}/calcul_#{@id_calcul}/brouillon.json"
     results = File.read(path_to_file)
     
     render :json => results
@@ -100,10 +98,8 @@ class CalculController < ApplicationController
     file = JSON.pretty_generate(jsonobject)
     
     # on enregistre le fichier sur le disque et on change les droit pour que le serveur de calcul y ait acces
-    #path_to_model = "/mnt/sc2/Developpement/MODEL/model_#{@id_model}"
-    #path_to_calcul = "/mnt/sc2/Developpement/MODEL/model_#{@id_model}/calcul_#{@id_calcul}"
-    path_to_model = "/home/scproduction/MODEL/model_#{@id_model}"
-    path_to_calcul = "/home/scproduction/MODEL/model_#{@id_model}/calcul_#{@id_calcul}"
+    path_to_model = "#{SC_MODEL_ROOT}/model_#{@id_model}"
+    path_to_calcul = "#{SC_MODEL_ROOT}/model_#{@id_model}/calcul_#{@id_calcul}"
  
     Dir.mkdir(path_to_model, 0777) unless File.exists?(path_to_model)
     Dir.mkdir(path_to_calcul, 0777) unless File.exists?(path_to_calcul)
@@ -129,10 +125,8 @@ class CalculController < ApplicationController
     file = JSON.pretty_generate(jsonobject)
     
     # on enregistre le fichier sur le disque et on change les droit pour que le serveur de calcul y ait acces
-    #path_to_model = "/mnt/sc2/Developpement/MODEL/model_#{@id_model}"
-    #path_to_calcul = "/mnt/sc2/Developpement/MODEL/model_#{@id_model}/calcul_#{@id_calcul}"
-    path_to_model = "/home/scproduction/MODEL/model_#{@id_model}"
-    path_to_calcul = "/home/scproduction/MODEL/model_#{@id_model}/calcul_#{@id_calcul}"
+    path_to_model = "#{SC_MODEL_ROOT}/model_#{@id_model}"
+    path_to_calcul = "#{SC_MODEL_ROOT}/model_#{@id_model}/calcul_#{@id_calcul}"
  
     Dir.mkdir(path_to_model, 0777) unless File.exists?(path_to_model)
     Dir.mkdir(path_to_calcul, 0777) unless File.exists?(path_to_calcul)
