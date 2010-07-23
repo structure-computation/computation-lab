@@ -26,3 +26,16 @@ compte_actif_be_civil:
   used_jeton: 0
   used_jeton_tempon: 0
   
+compte_actif_sc_admin:
+  company_id: 240607020   #sc_admin
+  start_date: 2010-01-01
+  end_date: 2010-12-31
+  status: active
+  report_jeton: 0
+  base_jeton: 0
+  base_jeton_tempon: 0
+  solde_jeton: 0
+  solde_jeton_tempon: 0
+  used_jeton: 0
+  used_jeton_tempon: 0
+  
