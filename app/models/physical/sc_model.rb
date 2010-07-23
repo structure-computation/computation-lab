@@ -1,6 +1,8 @@
 class ScModel < ActiveRecord::Base
   require 'json'
   require 'find'
+  require 'socket'
+  include Socket::Constants
   
   belongs_to  :company
   belongs_to  :project
@@ -18,6 +20,61 @@ class ScModel < ActiveRecord::Base
     return (rand(1) > 0.5)
   end
   
+  def send_mesh(params,current_user)
+    # on enregistre les fichier sur le disque et on change les droit pour que le serveur de calcul y ai acces
+    file = params[:fichier] 
+    name = file.original_filename
+    if name.match(/.bdf/)
+      extension = ".bdf"
+    elsif name.match(/.avs/)
+      extension = ".avs"
+    else
+      results = "type de fichier de maillage non reconnu"
+      return results
+    end
+    
+    path_to_model = "#{SC_MODEL_ROOT}/model_#{self.id}"
+    path_to_mesh = "#{SC_MODEL_ROOT}/model_#{self.id}/MESH"
+    Dir.mkdir(path_to_model, 0777) unless File.exists?(path_to_model)
+    Dir.mkdir(path_to_mesh, 0777) unless File.exists?(path_to_mesh)
+    path_to_file = path_to_mesh + "/mesh" + extension
+    File.open(path_to_file, 'w+') do |f|
+        f.write(file.read)
+    end
+    File.chmod 0777, path_to_mesh
+
+    # création du fichier json_model 
+    identite_calcul = { :id_societe => self.company.id, :id_user => current_user.id, :id_projet => '', :id_model => self.id, :id_calcul => '', :dimension  => self.dimension};
+    priorite_calcul = { :priorite => 0 };                               
+    mesh = { :mesh_directory => "MESH", :mesh_name  => "mesh", :extension  => extension};
+    json_model = { :identite_calcul => identite_calcul, :priorite_calcul => priorite_calcul, :mesh => mesh}; 
+    
+    # enregistrement sur le disque
+    path_to_json_model = path_to_mesh + "/model_id.json"
+    File.open(path_to_json_model, 'w+') do |f|
+        f.write(JSON.pretty_generate(json_model))
+    end
+    
+    # envoi de la requette de création de model au serveur de calcul
+    send_data = { :id_user => current_user.id, :mode => "create", :identite_calcul => identite_calcul };   
+    # socket d'envoie au serveur
+    socket    = Socket.new( AF_INET, SOCK_STREAM, 0 )
+    sockaddr  = Socket.pack_sockaddr_in( SC_CALCUL_PORT, SC_CALCUL_SERVER )
+    socket.connect( sockaddr )
+    socket.write( send_data.to_json )
+    
+    # reponse du calculateur
+    results = socket.read
+    self.change_state('in_process')
+    self.save
+    
+    # on retourne le resultats
+    return results
+    
+  end
+  
+  
+  
   def mesh_valid(id_user,calcul_time,json)
     current_user = User.find(id_user)
     jsonobject = JSON.parse(json)
@@ -25,7 +82,8 @@ class ScModel < ActiveRecord::Base
     #mise à jour des infos modèle
     self.parts = jsonobject[0]['mesh']['nb_groups_elem']
     self.interfaces = jsonobject[0]['mesh']['nb_groups_inter']
-    self.state = 'active'
+    self.sst_number = jsonobject[0]['mesh']['nb_sst']
+    self.change_state('active')
     self.get_used_memory()
     #self.save
     
@@ -79,10 +137,17 @@ class ScModel < ActiveRecord::Base
   
   def delete_model()
     self.users.clear
-    self.state = 'deleted'
+    self.change_state('deleted')
     self.deleted_at = Time.now
     #self.used_memory = 0
     self.save
+  end
+  
+   def change_state(state)
+    #mise à jour dde l'état du sc_model
+    #state possibles : void, in_process, active, deleted, 
+    self.state = state
+    #self.save
   end
   
 end

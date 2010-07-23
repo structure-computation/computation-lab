@@ -4,6 +4,11 @@
 SC_MODEL_ROOT = "/share/sc2/Developpement/MODEL"
 #SC_MODEL_ROOT = "/home/scproduction/MODEL"
 
+# info sur le serveur de calcul en developpement
+SC_CALCUL_SERVER = "localhost"
+SC_CALCUL_PORT = 12346
+
+
 # In the development environment your application's code is reloaded on
 # every request.  This slows down response time but is perfect for development
 # since you don't have to restart the webserver when you make code changes.

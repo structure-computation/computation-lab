@@ -5,6 +5,7 @@
 // affichage de la page matériaux
 function affiche_NC_page_previsions(){
      if(NC_current_step >= 6){
+	complete_brouillon(false,true);
 	affich_prop_visu('visu');
 	NC_current_page = 'page_previsions';
 	affiche_NC_page('off','off');
@@ -26,9 +27,7 @@ function affiche_NC_page_previsions(){
 // fonction util pour la validation et la génération du fichier json de calcul
 // -------------------------------------------------------------------------------------------------------------------------------------------
 
-function complete_calcul(){
-
-	complete_brouillon(false);
+function lance_calcul(){
 	// traitement des tableaux pour les mettre au bon format
 	// Tableau groups_elem
 	var groups_elem = new Array();
@@ -359,7 +358,7 @@ function complete_calcul(){
 }
 
 
-function complete_brouillon(interupteur){
+function complete_brouillon(interupteur, prevision){
 	// tableau représentatn l'etat courant de l'interface
 	var Tableau_current_stape_interface = new Array();
 	Tableau_current_stape_interface['NC_current_step'] = NC_current_step;
@@ -371,13 +370,15 @@ function complete_brouillon(interupteur){
 	Tableau_calcul_complet = new Array();
 	// etat de l'interface
 	Tableau_calcul_complet['state'] = Tableau_current_stape_interface;
+	
 	// id du model
 	Tableau_calcul_complet['mesh'] = Tableau_id_model;
+	
 	// geometrie du model
 	Tableau_calcul_complet['groups_elem'] = Tableau_pieces;
-	//alert(array2json(Tableau_pieces));
 	Tableau_calcul_complet['groups_inter'] = Tableau_interfaces;
 	Tableau_calcul_complet['groups_edge'] =Tableau_bords;
+	
 	// caractéristique matériaux, liaisons et CLs
 	Tableau_calcul_complet['materials'] = Tableau_mat_select;
 	Tableau_calcul_complet['links'] = Tableau_liaison_select;
@@ -393,13 +394,9 @@ function complete_brouillon(interupteur){
 	// options du calcul
 	Tableau_calcul_complet['options'] = Tableau_option_select;
 	
-	//alert(array2json(Tableau_CL_select_volume));
-	// génértion du json calcul complet
-	//Object_calcul_complet = new Object();
-	//Object_calcul_complet = array2object(Tableau_calcul_complet);
-	//fichier_calcul = $.toJSON(Object_calcul_complet);
+	// json
 	fichier_calcul = array2json(Tableau_calcul_complet);
-	//alert(fichier_calcul);
+
 	var send_brouillon = new Object();
 	send_brouillon['file']=fichier_calcul;
 	send_brouillon['id_model']=model_id;
@@ -414,9 +411,78 @@ function complete_brouillon(interupteur){
 		if(interupteur){
 			alert(json);
 		}
+		if(prevision){
+			get_Tableau_previsions_calcul();
+		}
 	    }
 	});
 }
 
 
+// -------------------------------------------------------------------------------------------------
+// obtention des previsions de temps de calcul et de l'autorisation de calculer
+// -------------------------------------------------------------------------------------------------
 
+// traitement en fin de requette pour l'obtention du tableau des previsions et l'authorisation
+function init_Tableau_previsions_calcul(Tableau_previsions_calcul_temp)
+// function init_Tableau_model(response)
+{
+    // var Tableau_calcul_temp = eval('[' + response + ']');
+    if (Tableau_previsions_calcul_temp){   
+        Tableau_previsions_calcul = Tableau_previsions_calcul_temp;
+    }
+    alert(array2json(Tableau_previsions_calcul_temp));
+    affiche_Tableau_previsions_calcul();
+}
+
+function get_Tableau_previsions_calcul()
+{
+	alert("dans get_Tableau_previsions_calcul");
+	var send_data = new Object();
+	send_data['id_model']=model_id;
+	send_data['id_calcul']=Tableau_init_select['id'];
+	
+	$.ajax({
+	    url: "/calcul/compute_previsions",
+	    dataType: 'json',
+	    type: 'POST',
+	    data: send_data,
+	    success: function(json) {
+		init_Tableau_previsions_calcul(json);
+	    }
+	});
+}
+
+// afficher lee prévisions de calcul
+function affiche_Tableau_previsions_calcul(){
+	for(key in Tableau_previsions_calcul){
+		if(key == 'launch_autorisation'){
+			str_prevision = new String();
+			str_prevision = 'NC_footer_bouton_lancer';
+			var id_prevision = document.getElementById(str_prevision);
+			if(Tableau_previsions_calcul[key]){
+				remplacerTexte(id_prevision, "valider et envoyer");
+			}else{
+				remplacerTexte(id_prevision, "lancement non autorisé");
+			}
+		}else{
+			str_prevision = new String();
+			str_prevision = 'prevision_' + key;
+			var id_prevision = document.getElementById(str_prevision);
+			if(id_prevision != null){
+				remplacerTexte(id_prevision, Tableau_previsions_calcul[key]);
+			}
+		}
+	}
+}
+
+// -------------------------------------------------------------------------------------------------------------------------------------------
+// fonction util pour la validation du calcul
+// -------------------------------------------------------------------------------------------------------------------------------------------
+function complete_calcul(){
+	if(Tableau_previsions_calcul['launch_autorisation']){
+		lance_calcul();
+	}else{
+		alert("vous n'avez pas assez de jetons sur votre compte pour lancer ce calcul")
+	}
+}

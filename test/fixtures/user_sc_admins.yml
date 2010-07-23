@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+
+one:
+  user_id:          440946503   #jbellec
+  sc_admin_id:      980190962   #sc_admin
+# one:
+#   column: value
+#
+# two:
+#   column: value

@@ -1,10 +1,7 @@
 class DetailModelController < ApplicationController
-  require 'socket'
   require 'json'
-  include Socket::Constants
   before_filter :login_required,  :except => :mesh_valid
 
-  
   def index
     @page = 'SCcompute'
     @id_model = params[:id_model]
@@ -76,58 +73,14 @@ class DetailModelController < ApplicationController
   end
   
   def send_mesh
-    @id_model = params[:id_model]
-    current_model = @current_user.sc_models.find(@id_model)
-    
-    # on enregistre les fichier sur le disque et on change les droit pour que le serveur de calcul y ai acces
-    file = params[:fichier] 
-    path_to_model = "#{SC_MODEL_ROOT}/model_#{@id_model}"
-    path_to_mesh = "#{SC_MODEL_ROOT}/model_#{@id_model}/MESH"
- 
-    Dir.mkdir(path_to_model, 0777) unless File.exists?(path_to_model)
-    Dir.mkdir(path_to_mesh, 0777) unless File.exists?(path_to_mesh)
-
-    path_to_file = path_to_mesh + "/mesh.bdf"
-    File.open(path_to_file, 'w+') do |f|
-        f.write(file.read)
-    end
-    File.chmod 0777, path_to_mesh
-
-    # création du fichier json_model 
-    identite_calcul = { :id_societe => current_model.company.id, :id_user => @current_user.id,         :id_projet => '', :id_model => current_model.id, :id_calcul => '', :dimension  => current_model.dimension};
-    priorite_calcul = { :priorite => 0 };                               
-    mesh            = { :mesh_directory => "MESH", :mesh_name  => "mesh", :extension  => ".bdf"};
-    
-    json_model        = { :identite_calcul => identite_calcul, :priorite_calcul => priorite_calcul, :mesh => mesh}; 
-    
-    path_to_json_model = path_to_mesh + "/model_id.json"
-    File.open(path_to_json_model, 'w+') do |f|
-        f.write(JSON.pretty_generate(json_model))
-    end
-    
-    # envoi de la requette de création de model au serveur de calcul
-    send_data       = { :id_user => @current_user.id, :mode => "create", :identite_calcul => identite_calcul };
-    
-    # socket d'envoie au serveur
-    socket    = Socket.new( AF_INET, SOCK_STREAM, 0 )
-    sockaddr  = Socket.pack_sockaddr_in( 12346, 'localhost' )
-    #sockaddr  = Socket.pack_sockaddr_in( 12346, 'sc2.ens-cachan.fr' )
-    socket.connect( sockaddr )
-    socket.write( send_data.to_json )
-    #socket.write( file.read )
-    
-    # reponse du calculateur
-    results = socket.read
-    current_model.state = 'in_process'
-    current_model.save
-    
+    current_model = @current_user.sc_models.find(params[:id_model])
+    results = current_model.send_mesh(params,@current_user)
     # envoie de la reponse au client
     render :text => results
   end
   
   def mesh_valid
-    @id_model = params[:id_model]
-    @current_model = ScModel.find(@id_model)
+    @current_model = ScModel.find(params[:id_model])
     @current_model.mesh_valid(params[:id_user],params[:time],params[:json])
     render :text => { :result => 'success' }
   end
@@ -141,7 +94,7 @@ class DetailModelController < ApplicationController
     name_resultats = 'result_' + @id_resultat + '.vtu'
     send_file name_file, :filename => name_resultats
     
-    @current_resultat.state = 'downloaded'
+    @current_resultat.change_state('downloaded') 
   end
  
 end

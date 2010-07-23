@@ -262,5 +262,11 @@ var groupe_bords = new Array();				// groupe d bord, ('id','name','group','type'
 
 var Tableau_option_select = Tableau_option_test;	// options selectionnées pour le calcul par défaut sur test
 
+var Tableau_previsions_calcul =  new Array();		// prevision de calcul
+Tableau_previsions_calcul["launch_autorisation"] = false
+Tableau_previsions_calcul["gpu_allocated"] = "en cours de calcul"
+Tableau_previsions_calcul["estimated_calcul_time"] = "en cours de calcul"
+Tableau_previsions_calcul["estimated_debit_jeton"] = "en cours de calcul"
+
 var Tableau_calcul_complet = new Object();  		// tableau decrivant l'integralite du calcul
 -->

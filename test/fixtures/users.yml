@@ -1,4 +1,22 @@
-
+jbellec:
+  company_id:       240607020   #sc_admin
+  firstname:        Jérémie
+  lastname:         Bellec
+  telephone:        +33 6 03 72 40 20
+  email:            j.bellec@structure-computation.com
+  role:             gestionnaire
+  salt:             ac3478d69a3c81fa62e60f5c3696165a4e5e6ac4 # SHA1('0')
+  crypted_password: f874291d44ac044a67d09b6a8a657716af47d5ec # 'monkey'
+  remember_token:
+  remember_token_expires_at:
+  activation_code:
+  activated_at:
+  state:            active
+  deleted_at:
+  # created_at:      
+  # updated_at:  
+  
+  
 mbleriot:
   company_id:       674101581   #tf_avionics
   firstname:        Michel

@@ -122,7 +122,7 @@ function init_new_calculresult(new_calculresult_temp)
     }
     //alert(Tableau_init_select['id']);
     affiche_Tableau_init_select();
-    complete_brouillon(false);
+    complete_brouillon(false,false);
 }
 
 // traitement en fin de requette pour l'obtention de l'identité du calcul
@@ -209,7 +209,7 @@ function load_brouillon(brouillon_temp)
 	    }
 	}
 	if(enregistrer_brouillon){ // on enregistre un brouillon si c'est un nouveau calcul
-		complete_brouillon(false);
+		complete_brouillon(false,false);
 	}
 	
     }

@@ -12,6 +12,10 @@
     #header_top_temp
     #header_top_societe
       #{session[:current_company_name]}
+      - if(@current_user.company.id == 240607020)
+        %br
+        %a{:href => "/sc_admin_company", :style => "font-size: 0.75em; color : #b8b9c3; text-decoration: underline ;" }
+          administration
     
     
     /#bl_2.black.off

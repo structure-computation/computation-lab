@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100617151630) do
+ActiveRecord::Schema.define(:version => 20100723134000) do
 
   create_table "abonnements", :force => true do |t|
     t.string   "name"
@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(:version => 20100617151630) do
     t.string   "D2type"
     t.string   "log_type"
     t.string   "state"
+    t.boolean  "launch_autorisation",   :default => false
     t.integer  "gpu_allocated"
     t.integer  "estimated_calcul_time"
     t.integer  "calcul_time"
@@ -82,7 +83,7 @@ ActiveRecord::Schema.define(:version => 20100617151630) do
     t.string   "division"
     t.string   "TVA"
     t.integer  "siren"
-    t.integer  "admin_user_id"
+    t.integer  "user_sc_admin_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -282,6 +283,12 @@ ActiveRecord::Schema.define(:version => 20100617151630) do
     t.datetime "updated_at"
   end
 
+  create_table "sc_admins", :force => true do |t|
+    t.integer  "company_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "sc_models", :force => true do |t|
     t.string   "name"
     t.integer  "company_id"
@@ -290,7 +297,7 @@ ActiveRecord::Schema.define(:version => 20100617151630) do
     t.string   "image_path"
     t.text     "description"
     t.integer  "dimension"
-    t.integer  "ddl_number"
+    t.integer  "sst_number"
     t.integer  "parts"
     t.integer  "interfaces"
     t.integer  "used_memory"
@@ -332,6 +339,13 @@ ActiveRecord::Schema.define(:version => 20100617151630) do
     t.integer  "user_id"
     t.integer  "project_id"
     t.integer  "is_admin"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "user_sc_admins", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "sc_admin_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -422,6 +422,13 @@ body
   background: transparent url('../images/NC_footer_bouton_sauver.png') no-repeat left top;
   float: left;
 }
+#NC_footer_bouton_lancer
+{
+  width: 198px;
+  height: 32px;
+  background: transparent url('../images/NC_footer_bouton_sauver.png') no-repeat left top;
+  float: left;
+}
 #NC_footer_top_centre
 {
   width: 370px;
@@ -1370,7 +1377,32 @@ body
   background: transparent url('../images/NC_pic_triangle_info.png') no-repeat left top;
   float: left;
 }
-
+.NC_active_box_prevision_i
+{
+  width: 240px;
+  height: 25px;
+  margin: 5px 0px 0 0px; 
+  line-height: 25px;
+  font-weight: 100;
+  font-size: 0.75em;
+  color: #696969;
+  text-align:right;
+  background: transparent;
+  float: left;
+}
+.NC_active_box_prevision_j
+{
+  width: 160px;
+  height: 25px;
+  margin: 5px 0px 0 5px; 
+  line-height: 25px;
+  font-weight: 100;
+  font-size: 0.75em;
+  color: #696969;
+  text-align:left;
+  background: transparent;
+  float: left;
+}
 /*
  * ccs pour les bottom active box
  *
