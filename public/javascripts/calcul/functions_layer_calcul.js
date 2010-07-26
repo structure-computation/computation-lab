@@ -166,9 +166,8 @@ function next_stape(){
 		if (NC_current_step < 2){
 			 NC_current_step = 2;
 			 get_new_calculresult(model_id);
-		}else{
-			affiche_NC_page_materiaux();
 		}
+		affiche_NC_page_materiaux();
 	}
 }
 function previous_stape(){
@@ -486,6 +485,10 @@ function affiche_Tableau_right(current_tableau,strname,stridentificateur){
 			strtemp = new String();
 			strtemp = current_tableau[i_page][stridentificateur];
 			remplacerTexte(id_12, strtemp);
+			
+			if(strname=='bord'){
+				id_14.className = "tableNC_box_4";
+			}
 		}
 	}
 	// pour l'affichage des page en bas de la boite
@@ -570,6 +573,10 @@ function affiche_Tableau_twin_right(current_tableau,strname,stridentificateur){
 			strtemp = new String();
 			strtemp = current_tableau[i_page][stridentificateur];
 			remplacerTexte(id_12, strtemp);
+			
+			if(strname=='bord_twin'){
+				id_14.className = "tableNC_box_4";
+			}
 		}
 	}
 	// pour l'affichage des page en bas de la boite

@@ -9,7 +9,7 @@ class CreateCompanies < ActiveRecord::Migration
       t.string :division
       t.string :TVA
       t.integer :siren
-      t.integer :admin_user_id
+      t.integer :user_sc_admin_id
 
       t.timestamps
     end

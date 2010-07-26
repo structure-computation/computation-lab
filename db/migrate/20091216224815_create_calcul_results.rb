@@ -8,11 +8,13 @@ class CreateCalculResults < ActiveRecord::Migration
       t.string    :name
       t.text      :description
       t.string    :ctype			# statique, quasistatique, dynamique
+      t.string    :D2type			# CP ou DP
       t.string    :log_type			# compute, create 
 #      t.integer   :timestep              non repris : parametres du calcul.
 #      t.integer   :timestep_numbers
 #      t.integer   :timestep_total_time
       t.string    :state                    # Brouillon, en demande, en cours, réalisé, téléchargé(indisp pour être effacé).
+      t.boolean   :launch_autorisation   ,:default => 0 # autorisation ou non de lancer le calcul true ou false
       #t.integer   :cpu_second_used
       #t.integer   :gpu_second_used
       #t.integer   :cpu_allocated

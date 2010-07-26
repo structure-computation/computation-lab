@@ -1,6 +1,6 @@
 class ScAdminDetailCompanyController < ApplicationController
-  
   before_filter :login_required
+  before_filter :valid_admin_user
   
   def index
     @page = 'SCadmin'

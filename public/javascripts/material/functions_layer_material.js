@@ -267,7 +267,7 @@ function prop_mat_affich(name_prop){
 function prop_mat_affich_info(prop_mat_for_info){
 	// prop_mat_for_info est le matériaux sélectionné
 	// on rempli le cartouche top du matériaux pour info
-	problem_dimension = 3;
+	dim_model = 3;
 	for(key in prop_mat_for_info){
 		if(key=='name'){
 			var strContent_prop_key = 'prop_mat_top_' + key ;
@@ -313,7 +313,7 @@ function prop_mat_affich_info(prop_mat_for_info){
 					str_dim_in = 'prop_dim_' + dim + '_in';
 					id_dim_in = document.getElementsByName(str_dim_in);
 					var strClass = 'on';
-					if(dim > problem_dimension) strClass = "off";
+					if(dim > dim_model) strClass = "off";
 					for(n2=0;n2<id_dim.length;n2++){
 						id_dim[n2].className = strClass ;
 					}
@@ -545,7 +545,7 @@ function new_mat_affich(name_prop){
 function new_mat_affich_info(new_mat_for_info){
 	// new_mat_for_info est le matériaux sélectionné
 	// on rempli le cartouche top du matériaux pour info
-	problem_dimension = 3;
+	dim_model = 3;
 	for(key in new_mat_for_info){
 		if(key=='mtype'){
 			var strContent_prop_isotrope = 'new_mat_top_isotrope' ;
@@ -577,7 +577,7 @@ function new_mat_affich_info(new_mat_for_info){
 					str_dim_in = 'prop_dim_' + dim + '_in';
 					id_dim_in = document.getElementsByName(str_dim_in);
 					var strClass = 'on';
-					if(dim > problem_dimension) strClass = "off";
+					if(dim > dim_model) strClass = "off";
 					for(n2=0;n2<id_dim.length;n2++){
 						id_dim[n2].className = strClass ;
 					}

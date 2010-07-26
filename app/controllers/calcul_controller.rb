@@ -18,7 +18,7 @@ class CalculController < ApplicationController
     @id_model = params[:id_model]  
     
     # lecture du fichier sur le disque
-    path_to_file = "/home/scproduction/MODEL/model_#{@id_model}/MESH/mesh.txt"
+    path_to_file = "#{SC_MODEL_ROOT}/model_#{@id_model}/MESH/mesh.txt"
     results = File.read(path_to_file)
     
     render :json => results
@@ -71,91 +71,43 @@ class CalculController < ApplicationController
     @id_model = params[:id_model]
     @current_model = @current_user.sc_models.find(@id_model)
     @id_calcul = params[:id_calcul]
-    @current_calcul = @current_model.calcul_results.create(:name => params[:name], :description => params[:description], :state => 'temp', :ctype => 'statique', :log_type => 'compute')
+    @current_calcul = @current_model.calcul_results.create(:name => params[:name], :description => params[:description], :state => 'temp', :ctype =>params[:ctype], :D2type => params[:D2type], :log_type => 'compute')
     @current_calcul.user = @current_user
+    @current_calcul.name = "brouillon_#{@current_calcul.id}"
     @current_calcul.save
     render :json => @current_calcul.to_json
   end
   
   def get_brouillon
-    @id_model = params[:id_model]
-    @current_model = @current_user.sc_models.find(@id_model)
-    @id_calcul = params[:id_calcul]
-    
-    # lecture du fichier sur le disque
-    path_to_file = "/home/scproduction/MODEL/model_#{@id_model}/calcul_#{@id_calcul}/brouillon.json"
-    results = File.read(path_to_file)
-    
-    render :json => results
+    @current_model = @current_user.sc_models.find(params[:id_model])
+    @current_calcul = @current_model.calcul_results.find(params[:id_calcul])
+    send_data = @current_calcul.get_brouillon(params,@current_user)
+    # envoie de la reponse au client
+    render :json => send_data.to_json
   end
 
   def send_brouillon
-    @id_model = params[:id_model]
-    @id_calcul = params[:id_calcul]
-    current_model = @current_user.sc_models.find(@id_model)
-#     file = params[:file]
-    jsonobject = JSON.parse(params[:file])
-    file = JSON.pretty_generate(jsonobject)
-    
-    # on enregistre le fichier sur le disque et on change les droit pour que le serveur de calcul y ait acces
-    path_to_model = "/home/scproduction/MODEL/model_#{@id_model}"
-    path_to_calcul = "/home/scproduction/MODEL/model_#{@id_model}/calcul_#{@id_calcul}"
- 
-    Dir.mkdir(path_to_model, 0777) unless File.exists?(path_to_model)
-    Dir.mkdir(path_to_calcul, 0777) unless File.exists?(path_to_calcul)
-
-    path_to_file = path_to_calcul + "/brouillon.json"
-    File.open(path_to_file, 'w+') do |f|
-        f.write(file)
-    end
-    File.chmod 0777, path_to_calcul
-    results = "brouillon sauvegardé"
-    
+    @current_model = @current_user.sc_models.find(params[:id_model])
+    @current_calcul = @current_model.calcul_results.find(params[:id_calcul])
+    results = @current_calcul.save_brouillon(params)
     # envoie de la reponse au client
     render :text => results
   end
   
   def send_calcul
-    @id_model = params[:id_model]
-    @id_calcul = params[:id_calcul]
-    current_model = @current_user.sc_models.find(@id_model)
-    current_calcul = current_model.calcul_results.find(@id_calcul)
-    #file = params[:file]
-    jsonobject = JSON.parse(params[:file])
-    file = JSON.pretty_generate(jsonobject)
-    
-    # on enregistre le fichier sur le disque et on change les droit pour que le serveur de calcul y ait acces
-    path_to_model = "/home/scproduction/MODEL/model_#{@id_model}"
-    path_to_calcul = "/home/scproduction/MODEL/model_#{@id_model}/calcul_#{@id_calcul}"
- 
-    Dir.mkdir(path_to_model, 0777) unless File.exists?(path_to_model)
-    Dir.mkdir(path_to_calcul, 0777) unless File.exists?(path_to_calcul)
-
-    path_to_file = path_to_calcul + "/calcul.json"
-    File.open(path_to_file, 'w+') do |f|
-        f.write(file)
-    end
-    File.chmod 0777, path_to_calcul
-    
-    # création des elements a envoyer au calculateur
-    send_data  = { :id_model => @id_model, :id_calcul => @id_calcul, :dimension => current_model.dimension , :mode => "compute"};
-    
-#     # socket d'envoie au serveur
-#     socket    = Socket.new( AF_INET, SOCK_STREAM, 0 )
-#     sockaddr  = Socket.pack_sockaddr_in( 12346, 'localhost' )
-#     #sockaddr  = Socket.pack_sockaddr_in( 12346, 'sc2.ens-cachan.fr' )
-#     socket.connect( sockaddr )
-#     socket.write( send_data.to_json )
-#     #socket.write( file.read )
-#     
-#     # reponse du calculateur
-#     results = socket.read
-#     current_calcul.state = 'in_process'
-#     current_calcul.save
-#     
-#     # envoie de la reponse au client
-#     render :text => results
-    render :text => "fichier calcul enregistré"
+    @current_model = @current_user.sc_models.find(params[:id_model])
+    @current_calcul = @current_model.calcul_results.find(params[:id_calcul])
+    results = @current_calcul.send_calcul(params)
+    # envoie de la reponse au client
+    render :text => results
+  end
+  
+  def compute_previsions
+    @current_model = @current_user.sc_models.find(params[:id_model])
+    @current_calcul = @current_model.calcul_results.find(params[:id_calcul])
+    send_data = @current_calcul.compute_previsions()
+    # envoie de la reponse au client
+    render :text => send_data.to_json
   end
   
   def calcul_valid

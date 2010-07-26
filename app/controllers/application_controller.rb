@@ -7,6 +7,16 @@ class ApplicationController < ActionController::Base
 
   include AuthenticatedSystem
   
+  def valid_admin_user
+    admin_company = ScAdmin.find(:first)
+    admin_user = admin_company.user_sc_admins.find(:first, :conditions => {:user_id => @current_user.id})
+    if admin_user
+      
+    else
+      redirect_back_or_default('/accueil')
+    end
+  end
+  
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
 end

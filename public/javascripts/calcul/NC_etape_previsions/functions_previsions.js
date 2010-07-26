@@ -5,6 +5,7 @@
 // affichage de la page matériaux
 function affiche_NC_page_previsions(){
      if(NC_current_step >= 6){
+	complete_brouillon(false,true);
 	affich_prop_visu('visu');
 	NC_current_page = 'page_previsions';
 	affiche_NC_page('off','off');
@@ -26,8 +27,7 @@ function affiche_NC_page_previsions(){
 // fonction util pour la validation et la génération du fichier json de calcul
 // -------------------------------------------------------------------------------------------------------------------------------------------
 
-function complete_calcul(){
-
+function lance_calcul(){
 	// traitement des tableaux pour les mettre au bon format
 	// Tableau groups_elem
 	var groups_elem = new Array();
@@ -69,24 +69,24 @@ function complete_calcul(){
 	var groups_edge = new Array();
 	for(i in Tableau_bords){
 		groups_edge[i] = new Array();
-		table_param = ["id","origine","name","type","id_CL","assigned","group","pdirection_x","pdirection_y","pdirection_z","geometry","radius","point_1_x","point_1_y","point_1_z","point_2_x","point_2_y","point_2_z"];
+		table_param = ["id","origine","name","type","id_CL","assigned","group","pdirection_x","pdirection_y","pdirection_z","geometry","radius","equation","point_1_x","point_1_y","point_1_z","point_2_x","point_2_y","point_2_z"];
 		for(j in table_param){
-			if(table_param[j]=="id_CL"){
+			if(table_param[j]=="id"){
+				groups_edge[i][table_param[j]] = parseFloat(Tableau_bords[i][table_param[j]]);
+			}else if(table_param[j]=="id_CL"){
 				if(Tableau_bords[i]["assigned"]=='-1'){
 					groups_edge[i]["id_CL"]=parseFloat(Tableau_bords[i]["assigned"]);
 				}else{
-					groups_edge[i]["id_CL"]=Tableau_bords[i]["assigned"];
+					groups_edge[i]["id_CL"]=parseFloat(Tableau_bords[i]["assigned"]);
 				}
 			}else if(table_param[j].match("point")){
-				groups_edge[i][table_param[j]] = parseFloat(Tableau_bords[i][table_param[j]]);
+				groups_edge[i][table_param[j]] = Tableau_bords[i][table_param[j]].toString();
 			}else if(table_param[j].match("pdirection")){
-				groups_edge[i][table_param[j]] = parseFloat(Tableau_bords[i][table_param[j]]);
+				groups_edge[i][table_param[j]] = Tableau_bords[i][table_param[j]].toString();
 			}else if(table_param[j]=="assigned"){
 				groups_edge[i][table_param[j]] = parseFloat(Tableau_bords[i][table_param[j]]);
-			}else if(table_param[j]=="radius"){
-				groups_edge[i][table_param[j]] = parseFloat(Tableau_bords[i]["rayon"]);
 			}else{
-				groups_edge[i][table_param[j]]=Tableau_bords[i][table_param[j]];
+				groups_edge[i][table_param[j]]=Tableau_bords[i][table_param[j]].toString();
 			}
 		}
 	}
@@ -102,7 +102,7 @@ function complete_calcul(){
 			if(table_param[j]=="id"){
 				materials[i]["id"] = parseFloat(Tableau_mat_select[i]["id_select"]) ;
 			}else if(table_param[j]=="resolution"){
-				materials[i]["resolution"]="CP"
+				materials[i]["resolution"]=Tableau_init_select['D2type'].toString() ;
 			}else if(table_param[j]=="mtype"){
 				materials[i]["mtype"] = Tableau_mat_select[i]["mtype"] ;
 			}else if(table_param[j]=="comp"){
@@ -212,21 +212,21 @@ function complete_calcul(){
 	// Tableau proprietes_interfaces
 	var liaisons = new Array();
 	for(i in Tableau_liaison_select){
-		proprietes_interfaces[i] = new Array();
+		liaisons[i] = new Array();
 		table_param = ["id","name","type","coef_frottement"];
 		for(j in table_param){
 			if(table_param[j]=="type"){
 				if(Tableau_liaison_select[i]["comp_generique"] == 'Pa'){
-					proprietes_interfaces[i]["type"] = 'parfait';
+					liaisons[i]["type"] = 'parfait';
 				}else if(Tableau_liaison_select[i]["comp_generique"] == 'Co'){
-					proprietes_interfaces[i]["type"] = 'contact';
+					liaisons[i]["type"] = 'contact';
 				}
 			}else if(table_param[j]=="id"){
-				proprietes_interfaces[i]["id"] = parseFloat(Tableau_liaison_select[i]["id_select"]) ;
+				liaisons[i]["id"] = parseFloat(Tableau_liaison_select[i]["id_select"]) ;
 			}else if(table_param[j]=="coef_frottement"){
-				proprietes_interfaces[i]["coef_frottement"] = Tableau_liaison_select[i]["f"].toString() ;
+				liaisons[i]["coef_frottement"] = Tableau_liaison_select[i]["f"].toString() ;
 			}else{
-				proprietes_interfaces[i][table_param[j]]=Tableau_liaison_select[i][table_param[j]];
+				liaisons[i][table_param[j]]=Tableau_liaison_select[i][table_param[j]];
 			}
 		}
 	}
@@ -236,27 +236,88 @@ function complete_calcul(){
 	var CL = new Array();
 	for(i in Tableau_CL_select){
 		CL[i] = new Array();
-		table_param = ["id","name","type","fct_spatiale_x","fct_spatiale_y","fct_spatiale_z","fct_temporelle_x","fct_temporelle_y","fct_temporelle_z"];
+		table_param = ["id","name","type","step","fct_spatiale_x","fct_spatiale_y","fct_spatiale_z","fct_temporelle_x","fct_temporelle_y","fct_temporelle_z",];
 		for(j in table_param){
 			if(table_param[j]=="type"){
 				CL[i]["type"] = Tableau_CL_select[i]["bctype"] ;
 			}else if(table_param[j]=="id"){
 				CL[i]["id"] = Tableau_CL_select[i]["id_select"] ;
+			}else if(table_param[j]=="step"){
+				CL[i]["step"] = new Array();
+				CL[i]["step"] = Tableau_CL_select[i]["step"] ;
+				for(num_step in CL[i]["step"]){
+					for(key1 in CL[i]["step"][num_step]){
+						CL[i]["step"][num_step][key1] = CL[i]["step"][num_step][key1].toString() ;
+					}
+				}
 			}else if(table_param[j]=="fct_spatiale_x"){
-				CL[i]["fct_spatiale_x"] = Tableau_CL_select[i]["step"][0]['Fx'].toString();
+				CL[i]["fct_spatiale_x"] = Tableau_CL_select[i]["step"][0]['fct_spatiale_x'].toString();
 			}else if(table_param[j]=="fct_spatiale_y"){
-				CL[i]["fct_spatiale_y"] = Tableau_CL_select[i]["step"][0]['Fy'].toString();
+				CL[i]["fct_spatiale_y"] = Tableau_CL_select[i]["step"][0]['fct_spatiale_y'].toString();
 			}else if(table_param[j]=="fct_spatiale_z"){
-				CL[i]["fct_spatiale_z"] = Tableau_CL_select[i]["step"][0]['Fz'].toString();
+				CL[i]["fct_spatiale_z"] = Tableau_CL_select[i]["step"][0]['fct_spatiale_z'].toString();
 			}else if(table_param[j]=="fct_temporelle_x"){
-				CL[i]["fct_temporelle_x"] = Tableau_CL_select[i]["step"][0]['ft'].toString() ;
+				CL[i]["fct_temporelle_x"] = Tableau_CL_select[i]["step"][0]['fct_temporelle_x'].toString() ;
 			}else if(table_param[j]=="fct_temporelle_y"){
-				CL[i]["fct_temporelle_y"] = Tableau_CL_select[i]["step"][0]['ft'].toString() ;
+				CL[i]["fct_temporelle_y"] = Tableau_CL_select[i]["step"][0]['fct_temporelle_x'].toString() ;
 			}else if(table_param[j]=="fct_temporelle_z"){
-				CL[i]["fct_temporelle_z"] = Tableau_CL_select[i]["step"][0]['ft'].toString() ;
+				CL[i]["fct_temporelle_z"] = Tableau_CL_select[i]["step"][0]['fct_temporelle_x'].toString() ;
 			}else{
 				CL[i][table_param[j]]=Tableau_CL_select[i][table_param[j]];
 			}
+		}
+	}
+	//alert(array2json(CL));
+	
+	
+	// Tableau CLvolume
+	var CLvolume = new Array();
+	for(i in Tableau_CL_select_volume){
+		CLvolume[i] = new Array();
+		table_param = ["ref","name","type","step","select"];
+		for(j in table_param){
+			if(table_param[j]=="type"){
+				CLvolume[i]["type"] = Tableau_CL_select_volume[i]["bctype"] ;
+			}else if(table_param[j]=="ref"){
+				CLvolume[i]["ref"] = Tableau_CL_select_volume[i]["ref"] ;
+			}else if(table_param[j]=="select"){
+				CLvolume[i]["select"] = Tableau_CL_select_volume[i]["select"].toString() ;
+			}else if(table_param[j]=="step"){
+				CLvolume[i]["step"] = new Array();
+				CLvolume[i]["step"] = Tableau_CL_select_volume[i]["step"] ;
+				for(num_step in CLvolume[i]["step"]){
+					for(key1 in CLvolume[i]["step"][num_step]){
+						CLvolume[i]["step"][num_step][key1] = CLvolume[i]["step"][num_step][key1].toString() ;
+					}
+				}
+			}else{
+				CLvolume[i][table_param[j]]=Tableau_CL_select_volume[i][table_param[j]];
+			}
+		}
+	}
+	//alert(array2json(CL));
+	
+	
+	// Tableau Option
+	var Options = new Array();
+	table_param = ["mode","nb_option","LATIN_conv","LATIN_nb_iter","PREC_nb_niveaux","PREC_erreur","PREC_boite","Crack","Dissipation","Temp_statique","2D_resolution"];
+	for(j in table_param){
+		if(table_param[j]=="LATIN_conv"){
+			Options[table_param[j]] = Tableau_option_select[table_param[j]].toString();
+		}else if(table_param[j]=="LATIN_nb_iter"){
+			Options[table_param[j]] = Tableau_option_select[table_param[j]].toString();
+		}else if(table_param[j]=="PREC_nb_niveaux"){
+			Options[table_param[j]] = Tableau_option_select[table_param[j]].toString();
+		}else if(table_param[j]=="PREC_erreur"){
+			Options[table_param[j]] = Tableau_option_select[table_param[j]].toString();
+		}else if(table_param[j]=="Dissipation"){
+			Options[table_param[j]] = Tableau_option_select[table_param[j]].toString();
+		}else if(table_param[j]=="2D_resolution"){
+			Options["2D_resolution"] = Tableau_init_select['D2type'].toString() ;
+		}else if(table_param[j]=="Temp_statique"){
+			Options["Temp_statique"] = Tableau_init_select['ctype'].toString() ;
+		}else{
+			Options[table_param[j]] = Tableau_option_select[table_param[j]];
 		}
 	}
 	//alert(array2json(CL));
@@ -272,9 +333,9 @@ function complete_calcul(){
 	Tableau_calcul_complet['materials'] = materials;
 	Tableau_calcul_complet['links'] = liaisons;
 	Tableau_calcul_complet['CL'] = CL;
-	//Tableau_calcul_complet['CL_volume'] = Tableau_CL_select_volume;
+	Tableau_calcul_complet['CLvolume'] = CLvolume;
 	// options du calcul
-	//Tableau_calcul_complet['options'] = Tableau_option_select;
+	Tableau_calcul_complet['options'] = Options;
 	
 	// génértion du json calcul complet
 	Object_calcul_complet = new Object();
@@ -297,7 +358,7 @@ function complete_calcul(){
 }
 
 
-function complete_brouillon(){
+function complete_brouillon(interupteur, prevision){
 	// tableau représentatn l'etat courant de l'interface
 	var Tableau_current_stape_interface = new Array();
 	Tableau_current_stape_interface['NC_current_step'] = NC_current_step;
@@ -309,13 +370,15 @@ function complete_brouillon(){
 	Tableau_calcul_complet = new Array();
 	// etat de l'interface
 	Tableau_calcul_complet['state'] = Tableau_current_stape_interface;
+	
 	// id du model
 	Tableau_calcul_complet['mesh'] = Tableau_id_model;
+	
 	// geometrie du model
 	Tableau_calcul_complet['groups_elem'] = Tableau_pieces;
-	//alert(array2json(Tableau_pieces));
 	Tableau_calcul_complet['groups_inter'] = Tableau_interfaces;
 	Tableau_calcul_complet['groups_edge'] =Tableau_bords;
+	
 	// caractéristique matériaux, liaisons et CLs
 	Tableau_calcul_complet['materials'] = Tableau_mat_select;
 	Tableau_calcul_complet['links'] = Tableau_liaison_select;
@@ -329,15 +392,11 @@ function complete_brouillon(){
 	Tableau_calcul_complet['groupe_interfaces'] = groupe_interfaces;
 	Tableau_calcul_complet['groupe_bords'] = groupe_bords;
 	// options du calcul
-	//Tableau_calcul_complet['options'] = Tableau_option_select;
+	Tableau_calcul_complet['options'] = Tableau_option_select;
 	
-	//alert(array2json(Tableau_CL_select_volume));
-	// génértion du json calcul complet
-	//Object_calcul_complet = new Object();
-	//Object_calcul_complet = array2object(Tableau_calcul_complet);
-	//fichier_calcul = $.toJSON(Object_calcul_complet);
+	// json
 	fichier_calcul = array2json(Tableau_calcul_complet);
-	//alert(fichier_calcul);
+
 	var send_brouillon = new Object();
 	send_brouillon['file']=fichier_calcul;
 	send_brouillon['id_model']=model_id;
@@ -349,10 +408,81 @@ function complete_brouillon(){
 	    type: 'POST',
 	    data: send_brouillon,
 	    success: function(json) {
-		alert(json);
+		if(interupteur){
+			alert(json);
+		}
+		if(prevision){
+			get_Tableau_previsions_calcul();
+		}
 	    }
 	});
 }
 
 
+// -------------------------------------------------------------------------------------------------
+// obtention des previsions de temps de calcul et de l'autorisation de calculer
+// -------------------------------------------------------------------------------------------------
 
+// traitement en fin de requette pour l'obtention du tableau des previsions et l'authorisation
+function init_Tableau_previsions_calcul(Tableau_previsions_calcul_temp)
+// function init_Tableau_model(response)
+{
+    // var Tableau_calcul_temp = eval('[' + response + ']');
+    if (Tableau_previsions_calcul_temp){   
+        Tableau_previsions_calcul = Tableau_previsions_calcul_temp;
+    }
+    alert(array2json(Tableau_previsions_calcul_temp));
+    affiche_Tableau_previsions_calcul();
+}
+
+function get_Tableau_previsions_calcul()
+{
+	alert("dans get_Tableau_previsions_calcul");
+	var send_data = new Object();
+	send_data['id_model']=model_id;
+	send_data['id_calcul']=Tableau_init_select['id'];
+	
+	$.ajax({
+	    url: "/calcul/compute_previsions",
+	    dataType: 'json',
+	    type: 'POST',
+	    data: send_data,
+	    success: function(json) {
+		init_Tableau_previsions_calcul(json);
+	    }
+	});
+}
+
+// afficher lee prévisions de calcul
+function affiche_Tableau_previsions_calcul(){
+	for(key in Tableau_previsions_calcul){
+		if(key == 'launch_autorisation'){
+			str_prevision = new String();
+			str_prevision = 'NC_footer_bouton_lancer';
+			var id_prevision = document.getElementById(str_prevision);
+			if(Tableau_previsions_calcul[key]){
+				remplacerTexte(id_prevision, "valider et envoyer");
+			}else{
+				remplacerTexte(id_prevision, "lancement non autorisé");
+			}
+		}else{
+			str_prevision = new String();
+			str_prevision = 'prevision_' + key;
+			var id_prevision = document.getElementById(str_prevision);
+			if(id_prevision != null){
+				remplacerTexte(id_prevision, Tableau_previsions_calcul[key]);
+			}
+		}
+	}
+}
+
+// -------------------------------------------------------------------------------------------------------------------------------------------
+// fonction util pour la validation du calcul
+// -------------------------------------------------------------------------------------------------------------------------------------------
+function complete_calcul(){
+	if(Tableau_previsions_calcul['launch_autorisation']){
+		lance_calcul();
+	}else{
+		alert("vous n'avez pas assez de jetons sur votre compte pour lancer ce calcul")
+	}
+}

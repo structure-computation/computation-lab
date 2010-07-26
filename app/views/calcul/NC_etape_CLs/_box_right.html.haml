@@ -19,11 +19,15 @@
           %a{:id => "bord_1a_#{i}", :onclick => "select_bords_CL(#{i})", :style => "cursor: pointer;" }
             .tableNC_box_retrait_10{ :id => "bord_1r_#{i}" }
             .tableNC_box_1{ :id => "bord_11_#{i}" }
-            .tableNC_box_2{ :id => "bord_12_#{i}" }
+            .tableNC_box_2{ :id => "bord_12_#{i}", :style => "width: 120px;" }
+          %a{ :onclick => "suppr_bord(#{i})", :style => "cursor: pointer;" }
+            .tableNC_box_suppr
+              x
           %a{ :onclick => "visu_bord_select(#{i})", :style => "cursor: pointer;" }
             .tableNC_box_3{ :id => "bord_13_#{i}" }
           %a{ :onclick => "info_select('bord',#{i})", :style => "cursor: pointer;" }
             .tableNC_box_4{ :id => "bord_14_#{i}" }
+          
 
     .NC_filter{ :style => "width:248px; height:20px" }
       .NC_bottom_page_1.right

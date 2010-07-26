@@ -1,5 +1,14 @@
 # Settings specified here will take precedence over those in config/environment.rb
 
+# chemin d'acces pour l'enregistrement des models
+SC_MODEL_ROOT = "/share/sc2/Production/MODEL"
+
+# info sur le serveur de calcul en developpement
+SC_CALCUL_SERVER = "sc2.ens-cachan.fr"
+SC_CALCUL_PORT = 12348
+
+
+
 # The production environment is meant for finished, "live" apps.
 # Code is not reloaded between requests
 config.cache_classes = true

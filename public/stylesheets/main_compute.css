@@ -191,7 +191,10 @@ body
 {
   width: 945px;
   height: 29px;
-  text-align: left;
+  text-align: center;
+  color: #ffffff;
+  line-height: 25px;
+  font-size: 0.80em;
   background: transparent url('../images/NC_bg_content_top.png') no-repeat left top;
   float: left;
  }
@@ -419,6 +422,13 @@ body
   background: transparent url('../images/NC_footer_bouton_sauver.png') no-repeat left top;
   float: left;
 }
+#NC_footer_bouton_lancer
+{
+  width: 198px;
+  height: 32px;
+  background: transparent url('../images/NC_footer_bouton_sauver.png') no-repeat left top;
+  float: left;
+}
 #NC_footer_top_centre
 {
   width: 370px;
@@ -578,13 +588,14 @@ body
   //font-size: 0.65em;
   //color: #ffffff;
   margin: 0px 1px 0 1px;
+  padding: 0px 0px 3px 0px;
   background: transparent;
   background-color: #f3f5f5 ;
   float: left;
 }
 .NC_box_prop_height_min
 {
-  height: 277px;
+  height: 274px;
   float: left;
 }
 .NC_triangle_bas
@@ -1019,6 +1030,7 @@ body
 {
   width: 670px;
   background-color: #efefef ;
+  padding:0 0 3px 0; 
   float: left;
 }
 .NC_active_box_init_text_1
@@ -1054,7 +1066,7 @@ body
 }
 .NC_active_box_init_text_2
 {
-  height:130px; 
+  height:100px; 
   margin:5px 0 0 5px; 
   line-height: 18px;
   font-weight: 100;
@@ -1365,7 +1377,32 @@ body
   background: transparent url('../images/NC_pic_triangle_info.png') no-repeat left top;
   float: left;
 }
-
+.NC_active_box_prevision_i
+{
+  width: 240px;
+  height: 25px;
+  margin: 5px 0px 0 0px; 
+  line-height: 25px;
+  font-weight: 100;
+  font-size: 0.75em;
+  color: #696969;
+  text-align:right;
+  background: transparent;
+  float: left;
+}
+.NC_active_box_prevision_j
+{
+  width: 160px;
+  height: 25px;
+  margin: 5px 0px 0 5px; 
+  line-height: 25px;
+  font-weight: 100;
+  font-size: 0.75em;
+  color: #696969;
+  text-align:left;
+  background: transparent;
+  float: left;
+}
 /*
  * ccs pour les bottom active box
  *
@@ -1601,7 +1638,7 @@ body
 .NC_prop_box_text_1
 {
   height:22px; 
-  margin:3px 0 5px 5px; 
+  margin:3px 0 2px 5px; 
   line-height: 18px;
   text-align:right;
   //border: thin solid #2a3557;
@@ -1617,7 +1654,7 @@ body
 }
 .NC_prop_box_text_1 input[type="text"]
 { 
-  width: 75%; 
+  width: 85%; 
   float:left;
   //border: none;
 }
@@ -1635,7 +1672,7 @@ body
 .NC_prop_box_text_2
 {
   height:22px; 
-  margin:0px 0 0 5px; 
+  margin:0px 0 0px 5px; 
   line-height: 18px;
   //font-weight: 100;
   //font-size: 0.75em;
@@ -1655,7 +1692,7 @@ body
 .NC_prop_box_text_3
 {
   height:50px; 
-  margin:3px 0 0 5px; 
+  margin:3px 0 2px 5px; 
   //padding:0 0 0 3px;
   line-height: 15px;
   text-align:left;
@@ -1708,6 +1745,12 @@ body
   float: left;
 }
 
+.NC_prop_line
+{
+  width: 100%;
+  background: transparent;
+  float: left;
+}
 /*
  * Css pour le menu prop_mat
  *
@@ -1782,7 +1825,7 @@ div[name="prop_dim_1"]
   margin: 0px 0px 0 0px;
   float:left;
   padding: 0px 0px 2px 0px;
-  border-right : thin solid #c4c6d6;
+  //border-right : thin solid #c4c6d6;
   //background-color: #c4c6d6 ;
 }
 div[name="prop_dim_2"]
@@ -1791,7 +1834,7 @@ div[name="prop_dim_2"]
   margin: 0px 0px 0 0px;
   padding: 0px 0px 2px 0px;
   float:left;
-  border-right : thin solid #c4c6d6;
+  //border-right : thin solid #c4c6d6;
   //background-color: #c4c6d6 ;
 }
 div[name="prop_dim_2_in"]
@@ -1808,7 +1851,7 @@ div[name="prop_dim_3"]
   margin: 0px 0px 0 0px;
   float:left;
   padding: 0px 0px 2px 0px;
-  border-right : thin solid #c4c6d6;
+  //border-right : thin solid #c4c6d6;
   //background-color: #c4c6d6 ;
 }
 div[name="prop_dim_3_in"]

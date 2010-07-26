@@ -1,5 +1,12 @@
 # Settings specified here will take precedence over those in config/environment.rb
 
+# chemin d'acces pour l'enregistrement des models
+SC_MODEL_ROOT = "/share/sc2/Test/MODEL"
+
+# info sur le serveur de calcul en developpement
+SC_CALCUL_SERVER = "sc2.ens-cachan.fr"
+SC_CALCUL_PORT = 12347
+
 # The test environment is used exclusively to run your application's
 # test suite.  You never need to work with it otherwise.  Remember that
 # your test database is "scratch space" for the test suite and is wiped

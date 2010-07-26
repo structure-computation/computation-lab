@@ -18,7 +18,7 @@ class VisualisationController < ApplicationController
     @id_model = params[:id_model]  
     
     # lecture du fichier sur le disque
-    path_to_file = "/home/scproduction/MODEL/model_#{@id_model}/MESH/mesh.txt"
+    path_to_file = "#{SC_MODEL_ROOT}/model_#{@id_model}/MESH/mesh.txt"
     results = File.read(path_to_file)
     
     render :json => results

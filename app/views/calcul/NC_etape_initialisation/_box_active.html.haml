@@ -7,11 +7,11 @@
       #NC_top_box_init.NC_triangle_bas
 
   #NC_init_active_box.NC_active_box
-    .NC_active_box_init{ :style => "height:231px" }
+    .NC_active_box_init
       .NC_active_box_init_text_1{ :style => "width:130px;" }
         Nom du calcul :
       .NC_active_box_init_text_1{ :style => "width:250px;" }
-        %input#init_name{ :type => "text", :value => "premier calcul", :onKeyup => "Tableau_init_change_value()" }
+        %input#init_name{ :type => "text", :value => "premier calcul", :disabled => "true", :onKeyup => "Tableau_init_change_value()" }
       .NC_active_box_init_text_1{ :style => "width:245px;" }
         Référence :
         %span#init_id
@@ -20,6 +20,16 @@
         Description :
       .NC_active_box_init_text_2{ :style => "width:510px;" }
         %textarea#init_description{ :onKeyup => "Tableau_init_change_value()" }
+      - if @dim_model == 2
+        .NC_active_box_init_text_1{ :style => "width:130px;" }
+          Calcul :
+        .NC_active_box_init_text_1{ :style => "width:250px;" }
+          %select#init_D2type{ :onChange => "Tableau_init_change_value()" }
+            %option{ :value => "CP" }
+              Contraintes planes
+            %option{ :value => "DP" }
+              Déformations planes
+        .NC_active_box_init_text_1{ :style => "width:265px;" }
       .NC_active_box_init_text_1{ :style => "width:130px;" }
         Type :
       .NC_active_box_init_text_1{ :style => "width:250px;" }
@@ -29,44 +39,8 @@
           %option{ :value => "quasistatique" }
             quasistatique
           %option{ :value => "dynamique" }
-            dynamique
-      .NC_active_box_init_text_1{ :style => "width:265px;" }
-
-/     #NC_init_non_statique.off
-/       .NC_init_table_step
-/         .NC_init_table_step_1
-/         .NC_init_table_step_2
-/           Temps initial
-/         .NC_init_table_step_2
-/           Pas de Temps (PdT)
-/         .NC_init_table_step_2
-/           Nombre de PdT
-/         .NC_init_table_step_2
-/           Temps final
-/           
-/       - (0...20).each do |i|
-/         .NC_init_table_step_lign.off{ :id => "init_line_step_#{i}" }
-/           .NC_init_table_step_1
-/             %input{ :id => "init_step_name_#{i}", :type => "text", :value => "0,01", :disabled => "true", :onKeyup => "Tableau_init_change_value()" }
-/           .NC_init_table_step_2
-/             %input{ :id => "init_step_Ti_#{i}", :type => "text", :value => "0,01", :disabled => "true", :onKeyup => "Tableau_init_change_value()" }
-/               s
-/           .NC_init_table_step_2
-/             %input{ :id => "init_step_PdT_#{i}", :type => "text", :value => "0,01", :onKeyup => "Tableau_init_change_value()" }
-/               s
-/           .NC_init_table_step_2
-/             %input{ :id => "init_step_nb_PdT_#{i}", :type => "text", :value => "0,01", :onKeyup => "Tableau_init_change_value()" }
-/               s
-/           .NC_init_table_step_2
-/             %input{ :id => "init_step_Tf_#{i}", :type => "text", :value => "0,01", :disabled => "true", :onKeyup => "Tableau_init_change_value()" }
-/               s
-/           - if #{i}!=0
-/             %a{ :onclick => "Tableau_init_suppr_step(#{i})", :style => "cursor: pointer;" }
-/               .NC_init_table_step_3
-/         
-/       .NC_init_table_step_lign
-/         %a.NC_filter_button{ :onclick => "Tableau_init_add_step()", :style => "cursor: pointer;" }
-/           ajouter un step
+            dynamique  
+    = render :partial => "calcul/NC_etape_initialisation/box_active_time_step"
           
 / %script{ :type => "text/javascript" }
 /   $(document).ready(get_Tableau_init);

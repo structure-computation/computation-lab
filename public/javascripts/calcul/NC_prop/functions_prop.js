@@ -5,26 +5,54 @@
 // ('mat', 'liaison', 'CL')
 // -------------------------------------------------------------------------------------------------------------------------------------------
 
+// on cache les propriété de dim 3 quand on est en dim = 2
+function hide_dim_3(){
+	if(dim_model==2){
+		str_dim3 = 'prop_dim_3';
+		str_dim3_in = 'prop_dim_3_in';
+		id_dim3 = document.getElementsByName(str_dim3);
+		id_dim3_in = document.getElementsByName(str_dim3_in);
+		var strClass = 'off';
+		for(n3=0;n3<id_dim3.length;n3++){
+			id_dim3[n3].className = strClass ;
+		}
+		for(n3=0;n3<id_dim3_in.length;n3++){
+			id_dim3_in[n3].className = strClass ;
+		}
+	}	
+}
+
 function prop_bloc_affich(name_prop){
+	hide_dim_3();
 	if(name_prop=='mat'){
 		document.getElementById('prop_materiaux').className = "on";
 		document.getElementById('prop_liaisons').className = "off";
 		document.getElementById('prop_CLs').className = "off";
+		document.getElementById('prop_CLvolume').className = "off";
 		document.getElementById('prop_bords').className = "off";
 	}else if(name_prop=='liaison'){
 		document.getElementById('prop_materiaux').className = "off";
 		document.getElementById('prop_liaisons').className = "on";
 		document.getElementById('prop_CLs').className = "off";
+		document.getElementById('prop_CLvolume').className = "off";
 		document.getElementById('prop_bords').className = "off";
 	}else if(name_prop=='CL'){
 		document.getElementById('prop_materiaux').className = "off";
 		document.getElementById('prop_liaisons').className = "off";
 		document.getElementById('prop_CLs').className = "on";
+		document.getElementById('prop_CLvolume').className = "off";
+		document.getElementById('prop_bords').className = "off";
+	}else if(name_prop=='CLv'){
+		document.getElementById('prop_materiaux').className = "off";
+		document.getElementById('prop_liaisons').className = "off";
+		document.getElementById('prop_CLs').className = "off";
+		document.getElementById('prop_CLvolume').className = "on";
 		document.getElementById('prop_bords').className = "off";
 	}else if(name_prop=='bord'){
 		document.getElementById('prop_materiaux').className = "off";
 		document.getElementById('prop_liaisons').className = "off";
 		document.getElementById('prop_CLs').className = "off";
+		document.getElementById('prop_CLvolume').className = "off";
 		document.getElementById('prop_bords').className = "on";
 	}
 }
@@ -38,7 +66,7 @@ function info_select(strinfo,num){
 	if(strinfo=='liaison' || strinfo=='liaison_twin' || strinfo=='interface_twin'){
 		refresh_NC_page_liaisons();
 	}
-	if(strinfo=='CL' || strinfo=='CLv' || strinfo=='CL_twin' || strinfo=='bord'){
+	if(strinfo=='CL' || strinfo.match('CLv') || strinfo=='CL_twin' || strinfo=='bord' || strinfo=='bord_twin'){
 		refresh_NC_page_CLs();
 	}
 	selected_for_info = [strinfo,num];
@@ -84,19 +112,32 @@ function info_select(strinfo,num){
 		document.getElementById('NC_top_box_prop').className = 'NC_top_active_box';
 		var num_select = num;
 		prop_CL_for_info = Tableau_CL_select_volume[num_select];
-		prop_CL_affich_info();
+		
+		if(num_select == 0){  //le poids
+			prop_CLv_affich_info('poids');
+		}else if(num_select == 1){ //l'accéleration
+			prop_CLv_affich_info('acceleration');
+		}else if(num_select == 2){ //les efforts centrifuges
+			prop_CLv_affich_info('centrifuge');
+		}
 	}
 	if(strinfo=='CL_twin'){
 		active_CL_select(num);
 		document.getElementById('NC_top_box_prop').className = 'NC_top_active_box';
 		var num_select = twin_left_tableau_connect[strinfo][num];
 		prop_CL_for_info = Tableau_CL_select[num_select];
-		prop_CL_affich_info();
+		prop_CL_select_affich_info();
 	}
 	if(strinfo=='bord'){
 		document.getElementById('NC_top_box_prop').className = 'NC_top_active_box';
 		var num_select = right_tableau_connect[strinfo][num];
 		Tableau_bords_for_info = Tableau_bords_filter[num_select];
+		Tableau_bords_affich_info();
+	}
+	if(strinfo=='bord_twin'){
+		document.getElementById('NC_top_box_prop').className = 'NC_top_active_box';
+		var num_select = twin_right_tableau_connect[strinfo][num];
+		Tableau_bords_for_info = Tableau_bords_assigned_i[num_select];
 		Tableau_bords_affich_info();
 	}
 }
@@ -201,7 +242,7 @@ function prop_mat_affich_info(){
 					str_dim_in = 'prop_dim_' + dim + '_in';
 					id_dim_in = document.getElementsByName(str_dim_in);
 					var strClass = 'on';
-					if(dim > problem_dimension) strClass = "off";
+					if(dim > dim_model) strClass = "off";
 					for(n2=0;n2<id_dim.length;n2++){
 						id_dim[n2].className = strClass ;
 					}
@@ -475,6 +516,94 @@ function prop_liaison_change_f_bis(){
 // fonctions utiles pour l'affichage des propriété CLs :
 // ('volume', 'depl','effort')
 // -------------------------------------------------------------------------------------------------------------------------------------------
+// afficher les propriété de la CLv_poids à visualiser 
+function prop_CLv_affich_info(strinfo){
+	// prop_liaison_for_info est la liaison sélectionné
+	// on affiche les elements en fonction de la dimention du probleme
+	//alert(array2json(prop_CL_for_info));
+	for(dim=2; dim<=3; dim++){
+		str_dim = 'prop_dim_' + dim;
+		id_dim = document.getElementsByName(str_dim);
+		str_dim_in = 'prop_dim_' + dim + '_in';
+		id_dim_in = document.getElementsByName(str_dim_in);
+		var strClass = 'on';
+		if(dim > dim_model) strClass = "off";
+		for(n2=0;n2<id_dim.length;n2++){
+			id_dim[n2].className = strClass ;
+		}
+		for(n2=0;n2<id_dim_in.length;n2++){
+			id_dim_in[n2].className = strClass ;
+		}
+	}
+	// on affiche les infos sur la CLv poids
+	var id_prop_CLv_poids = document.getElementById('prop_CLv_poids');
+	var id_prop_CLv_acceleration = document.getElementById('prop_CLv_acceleration');
+	var id_prop_CLv_centrifuge = document.getElementById('prop_CLv_centrifuge');
+	if (strinfo == 'poids'){
+		id_prop_CLv_poids.className = 'NC_prop_box on';
+		id_prop_CLv_acceleration.className = 'NC_prop_box off';
+		id_prop_CLv_centrifuge.className = 'NC_prop_box off';
+	}if (strinfo == 'acceleration'){
+		id_prop_CLv_poids.className = 'NC_prop_box off';
+		id_prop_CLv_acceleration.className = 'NC_prop_box on';
+		id_prop_CLv_centrifuge.className = 'NC_prop_box off';
+	}if (strinfo == 'centrifuge'){
+		id_prop_CLv_poids.className = 'NC_prop_box off';
+		id_prop_CLv_acceleration.className = 'NC_prop_box off';
+		id_prop_CLv_centrifuge.className = 'NC_prop_box on';
+	}
+
+	// on rempli le cartouche top de la liaison pour info
+	for(key in prop_CL_for_info){
+		if(key=='ref'){
+			//prop_CL_affich(prop_CL_for_info[key]);
+		}else if(key=='name'){
+			var strContent_prop_key = 'prop_CLv_top_' + key ;
+			var id_prop_key = document.getElementById(strContent_prop_key);
+			if(id_prop_key != null){
+				remplacerTexte(id_prop_key, prop_CL_for_info[key]);
+			}
+		}else if(key=='bctype'){
+			var strContent_prop_key = 'prop_CLv_top_apply_on' ;
+			var id_prop_key = document.getElementById(strContent_prop_key);
+			var str_apply_on = new String();
+			str_apply_on = "toutes les pièces du modèle";
+			if(id_prop_key != null){
+				remplacerTexte(id_prop_key, str_apply_on);
+			}
+		}else if(key=='step'){
+			//alert(key);
+			var nb_step = prop_CL_for_info[key].length ;
+			//alert(nb_step);
+			for(i_step=0; i_step<nb_step; i_step++){
+				for(key_step in prop_CL_for_info[key][i_step]){
+					var strContent_prop_key = 'prop_CLv_' + strinfo + '_' + key_step + '_' + i_step;
+					//alert(strContent_prop_key);
+					var id_prop_key = document.getElementById(strContent_prop_key);
+					id_prop_key.value =  prop_CL_for_info[key][i_step][key_step] ;
+					id_prop_key.disabled = false;
+				}
+			}
+		}
+	}
+	prop_bloc_affich('CLv');
+}
+//changer les propriétés d'une CLv
+function prop_CLv_change_value(strinfo){ //strinfo = poids, acceleration ou centrifuge
+	for(key in prop_CL_for_info){
+		if(key=='step'){
+			var nb_step = prop_CL_for_info[key].length ;
+			for(i_step=0; i_step<nb_step; i_step++){
+				for(key_step in prop_CL_for_info[key][i_step]){
+					var strContent_prop_key = 'prop_CLv_' + strinfo + '_' + key_step + '_' + i_step;
+					var id_prop_key = document.getElementById(strContent_prop_key);	
+					prop_CL_for_info[key][i_step][key_step] = id_prop_key.value ;		
+				}
+			}
+		}
+	}
+}
+
 
 // afficher un type de CL et cacher les autres
 function prop_CL_affich(name_prop){
@@ -501,22 +630,22 @@ function prop_CL_affich(name_prop){
 	if(id_prop_page != null){
 		id_prop_page.className = className_page ;
 	}
-	
 	equal_height_NC_fake();	
 }
 
 
-// afficher les propriété de la CL à visualiser 
+// afficher les propriété de la CL_select à visualiser 
 function prop_CL_affich_info(){
 	// prop_liaison_for_info est la liaison sélectionné
 	// on affiche les elements en fonction de la dimention du probleme
+	//alert(array2json(prop_CL_for_info));
 	for(dim=2; dim<=3; dim++){
 		str_dim = 'prop_dim_' + dim;
 		id_dim = document.getElementsByName(str_dim);
 		str_dim_in = 'prop_dim_' + dim + '_in';
 		id_dim_in = document.getElementsByName(str_dim_in);
 		var strClass = 'on';
-		if(dim > problem_dimension) strClass = "off";
+		if(dim > dim_model) strClass = "off";
 		for(n2=0;n2<id_dim.length;n2++){
 			id_dim[n2].className = strClass ;
 		}
@@ -524,7 +653,59 @@ function prop_CL_affich_info(){
 			id_dim_in[n2].className = strClass ;
 		}
 	}
-	// on rempli le cartouche top de la liaison pour info
+	// on cache les autres infos sur cette CL car elle n'est pas selectionnée
+	var strContent_prop_CL = 'prop_CL_generique';
+	var id_prop_CL = document.getElementById(strContent_prop_CL);
+	id_prop_CL.className = 'NC_prop_box off';
+
+	for(key in prop_CL_for_info){
+		if(key=='name'){
+			var strContent_prop_key = 'prop_CL_top_' + key ;
+			var id_prop_key = document.getElementById(strContent_prop_key);
+			if(id_prop_key != null){
+				remplacerTexte(id_prop_key, prop_CL_for_info[key]);
+			}
+		}else if(key=='bctype'){
+			var strContent_prop_key = 'prop_CL_top_apply_on' ;
+			var id_prop_key = document.getElementById(strContent_prop_key);
+			var str_apply_on = new String();
+			str_apply_on = "des bords (choisir les bords dans la liste de droite)";
+			if(id_prop_key != null){
+				remplacerTexte(id_prop_key, str_apply_on);
+			}
+		}
+	}
+	prop_bloc_affich('CL');
+}
+
+
+// afficher les propriété de la CL_select à visualiser 
+function prop_CL_select_affich_info(){
+	// prop_liaison_for_info est la liaison sélectionné
+	// on affiche les elements en fonction de la dimention du probleme
+	//alert(array2json(prop_CL_for_info));
+	for(dim=2; dim<=3; dim++){
+		str_dim = 'prop_dim_' + dim;
+		id_dim = document.getElementsByName(str_dim);
+		str_dim_in = 'prop_dim_' + dim + '_in';
+		id_dim_in = document.getElementsByName(str_dim_in);
+		var strClass = 'on';
+		if(dim > dim_model) strClass = "off";
+		for(n2=0;n2<id_dim.length;n2++){
+			id_dim[n2].className = strClass ;
+		}
+		for(n2=0;n2<id_dim_in.length;n2++){
+			id_dim_in[n2].className = strClass ;
+		}
+	}
+	
+	// on affiche les autres infos sur cette CL car elle est selectionnée
+	var strContent_prop_CL = 'prop_CL_generique';
+	var id_prop_CL = document.getElementById(strContent_prop_CL);
+	id_prop_CL.className = 'NC_prop_box on';
+	
+	
+	// on rempli le cartouche top de la CL pour info
 	for(key in prop_CL_for_info){
 		if(key=='ref'){
 			//prop_CL_affich(prop_CL_for_info[key]);
@@ -542,7 +723,7 @@ function prop_CL_affich_info(){
 			else str_apply_on = "des bords (choisir les bords dans la liste de droite)";
 			if(id_prop_key != null){
 				remplacerTexte(id_prop_key, str_apply_on);
-			}	
+			}
 		}else if(key=='step'){
 			//alert(key);
 			var nb_step = prop_CL_for_info[key].length ;
@@ -551,8 +732,11 @@ function prop_CL_affich_info(){
 				for(key_step in prop_CL_for_info[key][i_step]){
 					var strContent_prop_key = 'prop_CL_' + key_step + '_' + i_step;
 					//alert(strContent_prop_key);
-					var id_prop_key = document.getElementById(strContent_prop_key);	
-					id_prop_key.value =  prop_CL_for_info[key][i_step][key_step] ;		
+					var id_prop_key = document.getElementById(strContent_prop_key);
+					if(id_prop_key != null){
+						id_prop_key.value =  prop_CL_for_info[key][i_step][key_step] ;
+						id_prop_key.disabled = false;
+					}
 				}
 			}
 		}else{
@@ -560,6 +744,7 @@ function prop_CL_affich_info(){
 			var id_prop_key = document.getElementById(strContent_prop_key);
 			if(id_prop_key != null){
 				id_prop_key.value = prop_CL_for_info[key] ;
+				id_prop_key.disabled = false;
 			}
 		}
 	}		
@@ -606,40 +791,48 @@ function Tableau_bords_affich_info(){
 	}
 	// affichage des infos relatives à is_in
 	document.getElementById("prop_bords_type").value = Tableau_bords_for_info["type"];
+	str_bord_type = str_bord + Tableau_bords_for_info["type"] ;
+	var id_bord_type = document.getElementById(str_bord_type);
+	if(id_bord_type != null){
+		id_bord_type.className = "NC_prop_box on";
+	}
+	str_bord_list_geometry = new Array();
 	if(Tableau_bords_for_info["type"]=="is_in"){
-		str_bord_type = str_bord + "is_in" ;
-		var id_bord_type = document.getElementById(str_bord_type);
-		if(id_bord_type != null){
-			id_bord_type.className = "NC_prop_box on";
+		str_bord_list_geometry = ["box","cylinder","sphere"];  // geometry possible pour is_in
+	}else if(Tableau_bords_for_info["type"]=="is_on"){
+		str_bord_list_geometry = ["plan","disc","cylinder","sphere","equation"];  // geometry possible pour is_on
+	}
+	
+	// on cache toutes les info geometry
+	for(key in str_bord_list_geometry){
+		str_temp = str_bord_type + "_" + str_bord_list_geometry[key] ;
+		//alert(str_temp);
+		var id_temp = document.getElementById(str_temp);
+		if(id_temp != null){
+			id_temp.className = "NC_prop_box off";
 		}
-		str_bord_list_geometry = ["box","cylindre","sphere"];  // gemoetry possible pour is_in
-		
-		// on cache toutes les info geometry
-		for(key in str_bord_list_geometry){
-			str_temp = str_bord_type + "_" + str_bord_list_geometry[key] ;
-			//alert(str_temp);
-			var id_temp = document.getElementById(str_temp);
-			if(id_temp != null){
-				id_temp.className = "NC_prop_box off";
-			}
-		}
-		// affichage des infos relatives à la géométrie selectionnée
-		document.getElementById("prop_bords_geometry").value = Tableau_bords_for_info["geometry"];
-		if(Tableau_bords_for_info["geometry"]=="box"){
-			str_bord_geometry = str_bord_type + "_box" ;
-			//alert(str_bord_geometry);
-			var id_bord_geometry = document.getElementById(str_bord_geometry);
-			if(id_bord_geometry != null){
-				id_bord_geometry.className = "prop_bords_box on";
-			}
-			for(key in Tableau_bords_for_info){
-				str_temp = str_bord_geometry + "_" + key ;
-				//alert(str_temp);
-				var id_temp = document.getElementById(str_temp);
-				if(id_temp != null){
-					id_temp.value = Tableau_bords_for_info[key]  ;
-				}
-			}
+	}
+	// affichage des infos relatives à la géométrie selectionnée
+	str_temp_geometry = "prop_bords_" + Tableau_bords_for_info["type"] + "_geometry";
+	id_temp_geometry = document.getElementById(str_temp_geometry);
+	//alert(str_temp_geometry);
+	if(id_temp_geometry != null){
+		id_temp_geometry.value = Tableau_bords_for_info["geometry"];
+	}
+	str_bord_geometry = str_bord_type + "_" + Tableau_bords_for_info["geometry"];
+	//alert(str_bord_geometry);
+	var id_bord_geometry = document.getElementById(str_bord_geometry);
+	if(id_bord_geometry != null){
+		id_bord_geometry.className = "prop_bords_box on";
+	}
+	
+	// affichage des propriété de la géométrie selectionnée
+	for(key in Tableau_bords_for_info){
+		str_temp = str_bord_geometry + "_" + key ;
+		//alert(str_temp);
+		var id_temp = document.getElementById(str_temp);
+		if(id_temp != null){
+			id_temp.value = Tableau_bords_for_info[key]  ;
 		}
 	}
 	prop_bloc_affich('bord');
@@ -658,7 +851,8 @@ function Tableau_bords_for_info_change_type(){
 }
 //changer les propriétés d'un bord en creation
 function Tableau_bords_for_info_change_geometry(){
-	str_temp = "prop_bords_geometry" ;
+	str_temp = "prop_bords_"+ Tableau_bords_for_info["type"] + "_geometry" ;
+	//alert(str_temp);
 	var id_temp = document.getElementById(str_temp);
 	if(id_temp != null){
 		Tableau_bords_for_info["geometry"] = id_temp.value ;
@@ -672,9 +866,9 @@ function Tableau_bords_for_info_change_value(){
 	str_bord = "prop_bords_";
 	str_bord_type = str_bord + Tableau_bords_for_info["type"] ;
 	str_bord_geometry = str_bord_type + "_" + Tableau_bords_for_info["geometry"] ;
-	//alert(str_bord_geometry);
 	for(key in Tableau_bords_for_info){
 		str_temp = str_bord_geometry + "_" + key ;
+		//if(key == 'pdirection_z') alert(str_temp);
 		var id_temp = document.getElementById(str_temp);
 		if(id_temp != null){
 			Tableau_bords_for_info[key] = id_temp.value ;
@@ -686,7 +880,7 @@ function Tableau_bords_for_info_change_value(){
 function valid_bord(){
 	if(Tableau_bords_for_info["id"]==-1){
 		Tableau_bords_for_info["id"]=compteur_bords_test;
-		compteur_bords_test =+ 1;
+		compteur_bords_test += 1;
 		taille_Tableau_bords = Tableau_bords.length;
 		Tableau_bords[taille_Tableau_bords] = new Array();
 		Tableau_bords[taille_Tableau_bords] = clone(Tableau_bords_for_info);
@@ -698,6 +892,25 @@ function valid_bord(){
 		affiche_Tableau_bord();
 		//alert('else');
 	}
+}
+function duplic_bord(){
+	// Tableau_bords_temp est un tableau reinitialisé
+	Tableau_bords_temp = new Array(); 
+	Tableau_bords_temp = clone(Tableau_bords_for_info);
+	Tableau_bords_temp["id"]=compteur_bords_test;
+	compteur_bords_test += 1;
+	Tableau_bords_temp["name"] = Tableau_bords_temp["type"] + "_" + Tableau_bords_temp["geometry"] + "_" + compteur_bords_test ;
+	Tableau_bords_temp["assigned"]=-1;
+	Tableau_bords_temp["group"]=-1;
+	Tableau_bords_temp["id_CL"]=-1;
+	
+	taille_Tableau_bords = Tableau_bords.length;
+	Tableau_bords[taille_Tableau_bords] = new Array();
+	Tableau_bords[taille_Tableau_bords] = clone(Tableau_bords_temp);
+	affiche_Tableau_bord();
+	info_select('bord',Tableau_bords_filter.length-1);
+	//alert(taille_Tableau_bords);
+	//alert(array2json(Tableau_bords[taille_Tableau_bords]));
 }
 
 -->

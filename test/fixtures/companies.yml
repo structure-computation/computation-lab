@@ -9,6 +9,7 @@ tf_avionics:
   division: Calcul
   TVA: FR12345678910
   siren: 123456789
+  user_sc_admin_id: 980190962
   created_at: <%= 2.year.since.to_s %>
 
 be_civil:
@@ -20,4 +21,17 @@ be_civil:
   division: -
   TVA: FR10987654321
   siren: 987654321
+  user_sc_admin_id: 980190962
+  created_at: <%= 1.year.since.to_s %>
+  
+sc_admin:
+  name: Structure Computation
+  address: 86 rue de Paris
+  city: Orsay
+  zipcode: 91400
+  country: France
+  division: -
+  TVA: FR10987654321
+  siren: 987654321
+  user_sc_admin_id: 980190962
   created_at: <%= 1.year.since.to_s %>

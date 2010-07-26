@@ -20,3 +20,12 @@ compte_actif_be_civil:
     type:
     status: "active"
 
+compte_actif_sc_admin:
+    company_id: 240607020   #sc_admin
+    description:
+    inscription_date:
+    assigned_memory: 0
+    end_date: 2010-12-31
+    used_memory: 0
+    type:
+    status: "active"

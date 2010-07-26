@@ -1,0 +1,14 @@
+Pour passer de la version locale à la version sur SC1 et SC2.
+
+
+Il n y a qu'un fichier à modifier :
+  - config/environments/development.rb
+
+La modification à effectuer est la suivante :
+
+    décommenter #SC_MODEL_ROOT = "/share/sc2/Developpement/MODEL"
+    commenter   SC_MODEL_ROOT = "/home/scproduction/MODEL"
+
+
+Attention, ce n'est pas fini, il faut aussi faire des modification dans CalculServer, ImgServer et SC_code 
+
