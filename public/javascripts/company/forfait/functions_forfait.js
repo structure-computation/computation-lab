@@ -176,6 +176,14 @@ function affich_detail_calcul_account(){
 		remplacerTexte(id_info_key, strContent);
 	    }
     }
+    
+    // affichage de la progress_bar
+    var greybar = document.getElementById('calcul_account_info_greybar'); 
+    var redbar = document.getElementById('calcul_account_info_redbar'); 
+    
+    greybar.className = 'ResumeCompte3GreenBar on';
+    redbar.className = 'ResumeCompte3RedBar off';
+    
     // taille de la progress_bar
     var progress_bar = document.getElementById('calcul_account_progress_bar'); 
     var info_progress_bar = document.getElementById('calcul_account_info_progress_bar');
@@ -184,6 +192,12 @@ function affich_detail_calcul_account(){
     var max_jeton = Current_calcul_account['report_jeton'] + Current_calcul_account['base_jeton'] + 1;
     var used_jeton = Current_calcul_account['used_jeton'];
     var taille_actuelle= used_jeton * taille_max / max_jeton ;
+    if(taille_actuelle>taille_max){
+        // on affiche la barre rouge
+	greybar.className = 'ResumeCompte3GreenBar off';
+	redbar.className = 'ResumeCompte3RedBar on';
+	taille_actuelle=taille_max;
+    }
     
     progress_bar.style.width = taille_actuelle + 'px'; 
     info_progress_bar.style.width = taille_actuelle + 'px'; 

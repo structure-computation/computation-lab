@@ -431,13 +431,13 @@ function init_Tableau_previsions_calcul(Tableau_previsions_calcul_temp)
     if (Tableau_previsions_calcul_temp){   
         Tableau_previsions_calcul = Tableau_previsions_calcul_temp;
     }
-    alert(array2json(Tableau_previsions_calcul_temp));
+    //alert(array2json(Tableau_previsions_calcul_temp));
     affiche_Tableau_previsions_calcul();
 }
 
 function get_Tableau_previsions_calcul()
 {
-	alert("dans get_Tableau_previsions_calcul");
+	//alert("dans get_Tableau_previsions_calcul");
 	var send_data = new Object();
 	send_data['id_model']=model_id;
 	send_data['id_calcul']=Tableau_init_select['id'];

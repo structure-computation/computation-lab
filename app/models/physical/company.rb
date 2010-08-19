@@ -9,6 +9,7 @@ class Company < ActiveRecord::Base
   has_many  :materials
   has_many  :links
   has_many  :solde_calcul_accounts,  :through => :calcul_account
+  has_many  :factures
   
   belongs_to  :user_sc_admin
   

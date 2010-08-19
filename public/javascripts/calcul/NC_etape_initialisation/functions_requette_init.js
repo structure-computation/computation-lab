@@ -18,6 +18,7 @@ function init_info_model(Tableau_model_temp)
 	    for (var key in Tableau_model_temp[i]) {
 		if(key == 'mesh'){
 		    Tableau_id_model = Tableau_model[i][key];
+		    Tableau_id_model["mesh_name"] = Tableau_id_model["mesh_name"];
 		    //alert(Tableau_id_model);
 		    //strtemp = $.toJSON(Tableau_pieces);
 		    //alert(strtemp);

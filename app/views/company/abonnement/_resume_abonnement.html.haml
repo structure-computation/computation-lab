@@ -15,10 +15,11 @@
     %a{ :style => "cursor: pointer;", :onclick => "modif_compte_abonnement()" } 
       .ResumeCompteBouton
         Modifier
-    .ResumeCompte3GreenBar
+    #memory_account_info_greybar.ResumeCompte3GreenBar.on
       .ResumeCompte3GreenBarDebut
       .ResumeCompte3GreenBarMilieu#memory_account_info_progress_bar
       .ResumeCompte3GreenBarFin
+    #memory_account_info_redbar.ResumeCompte3RedBar.off
     .ResumeCompteText2
       utilisation de la mémoire : 
       %span#memory_account_info_used_memory

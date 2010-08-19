@@ -76,6 +76,13 @@ function affich_detail_memory_account(){
 		remplacerTexte(id_info_key, strContent);
 	    }
     }
+    // affichage de la progress_bar
+    var greybar = document.getElementById('memory_account_info_greybar'); 
+    var redbar = document.getElementById('memory_account_info_redbar'); 
+    
+    greybar.className = 'ResumeCompte3GreenBar on';
+    redbar.className = 'ResumeCompte3RedBar off';
+    
     // taille de la progress_bar
     var progress_bar = document.getElementById('memory_account_progress_bar'); 
     var info_progress_bar = document.getElementById('memory_account_info_progress_bar');
@@ -84,6 +91,12 @@ function affich_detail_memory_account(){
     var max_memory = Current_memory_account['assigned_memory'] + 1;
     var used_memory = Current_memory_account['used_memory'];
     var taille_actuelle= used_memory * taille_max / max_memory;
+    if(taille_actuelle>taille_max){
+        // on affiche la barre rouge
+	greybar.className = 'ResumeCompte3GreenBar off';
+	redbar.className = 'ResumeCompte3RedBar on';
+	taille_actuelle=taille_max;
+    }
     
     progress_bar.style.width = taille_actuelle + 'px'; 
     info_progress_bar.style.width = taille_actuelle + 'px'; 

@@ -108,6 +108,14 @@
   border: none;
   float: left;
 }
+.ResumeCompte3RedBar
+{
+  background: transparent url('../images/redbar.png') no-repeat top left;
+  width: 306px;
+  height: 18px;
+  margin: 5px 0px 0 15px;
+  float: left;
+}
 .ResumeCompte3GreenBar
 {
   background: transparent url('../images/greybar.png') no-repeat top left;

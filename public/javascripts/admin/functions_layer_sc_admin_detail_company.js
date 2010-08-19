@@ -337,6 +337,7 @@ function affich_detail_calcul_account(){
     var max_jeton = Current_calcul_account['report_jeton'] + Current_calcul_account['base_jeton'] + 1;
     var used_jeton = Current_calcul_account['used_jeton'];
     var taille_actuelle= used_jeton * taille_max / max_jeton;
+    if(taille_actuelle>taille_max){taille_actuelle=taille_max;}
     
     progress_bar.style.width = taille_actuelle + 'px'; 
     info_progress_bar.style.width = taille_actuelle + 'px'; 
@@ -402,6 +403,7 @@ function affich_detail_memory_account(){
     var max_memory = Current_memory_account['assigned_memory'] + 1;
     var used_memory = Current_memory_account['used_memory'];
     var taille_actuelle= used_memory * taille_max / max_memory;
+    if(taille_actuelle>taille_max){taille_actuelle=taille_max;}
     
     progress_bar.style.width = taille_actuelle + 'px'; 
     info_progress_bar.style.width = taille_actuelle + 'px'; 
