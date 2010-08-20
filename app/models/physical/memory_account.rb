@@ -18,10 +18,13 @@ class MemoryAccount < ActiveRecord::Base
     
     #construction de la ligne de log_abonnement
     current_log_abonnement = self.log_abonnements.build()
-    current_log_abonnement.abonnement = abonnement
-    current_log_abonnement.assigned_memory = abonnement.assigned_memory
-    current_log_abonnement.price = abonnement.price
-    current_log_abonnement.abonnement_date = Date.today 
+    current_log_abonnement.new_log_abonnement_and_facture(id_abonnement)
+  end
+  
+  # valider l'abonnement sur ce compte
+  def valid_log_abonnement(id_log_abonnement)
+    current_log_abonnement = self.log_abonnements.find(id_log_abonnement)
+    abonnement = current_log_abonnement.abonnement
     
     #mise a jour des info du compte 
     self.end_date = Date.today + 1.year
@@ -29,7 +32,6 @@ class MemoryAccount < ActiveRecord::Base
     self.status = 'active'  
     
     #derniere mise a jour des info du compte et sauvegarde
-    current_log_abonnement.save
     self.save
   end
   

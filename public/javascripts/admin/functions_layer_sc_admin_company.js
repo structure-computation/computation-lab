@@ -193,7 +193,7 @@ function affiche_Tableau_content(current_tableau, strname, strnamebdd, stridenti
 // fonctions utiles pour l'affichage du detail d'une company
 //---------------------------------------------------------------------------------------------------------------------
 
-// afficher le détail d'un modele
+// afficher le détail d'une company
 function go_detail_company(num){
     var num_select = content_tableau_connect['company'][num];
     var id_company = Tableau_company_filter[num_select]['company']['id'];

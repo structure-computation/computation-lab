@@ -11,7 +11,10 @@ var Current_memory_account             =  new Array();              // memory ac
 var NMcurrent_stape                 =  0;                        // étape pour le wizzard nouveau resultat
 
 var Tableau_gestionnaires              =  new Array();              // tableau des gestionnaires
-var Tableau_gestionnaires_filter            =  new Array();              // tableau des resultats filtres pour l'affichage
+var Tableau_gestionnaires_filter            =  new Array();              // tableau des gestionnaires filtres pour l'affichage
+
+var Tableau_factures	             =  new Array();              // tableau des factures
+var Tableau_factures_filter            =  new Array();         // tableau des factures filtres 
 
 //initialisation de la taille du tableau pour la box content et de la table de correspondance
 var taille_tableau_content          =  20;                       // taille du tableau dans la content box
@@ -19,9 +22,10 @@ var content_tableau_connect         =  new Array();              // connectivit�
 var content_tableau_current_page    =  new Array();              // numéro de la page du tableau (sert pour la définition de la connectivité)    
 var content_tableau_curseur_page    =  new Array();              // nombre de page du tableau (sert pour l'affichage des page en bas des tableaux)
 var content_tableau_liste_page      =  new Array();              // liste des pages du tableau (sert pour l'affichage des page en bas des tableaux)
-var content_tableau_page            =  new Array('gestionnaire','new_forfait','new_abonnement');    // initialisation des pages avec tableau dynamique
+var content_tableau_page            =  new Array('facture','gestionnaire','new_forfait','new_abonnement');    // initialisation des pages avec tableau dynamique
 
 var taille_tableau_content_page     =  new Array()               // taille du tableau dans la content box
+taille_tableau_content_page['facture'] = 20;
 taille_tableau_content_page['gestionnaire'] = 20;
 taille_tableau_content_page['new_forfait'] = 8;
 taille_tableau_content_page['new_abonnement'] = 8;
@@ -38,14 +42,23 @@ for(i=0; i<content_tableau_page.length ; i++){
     }
 }
 
+//---------------------------------------------------------------------------------------------------------
+// pour rafraichir la page
+//---------------------------------------------------------------------------------------------------------
+function refresh_page(){
+	get_Tableau_factures(Current_company['id']);
+	get_current_memory_account(Current_company['id']);
+	get_current_calcul_account(Current_company['id']);
+}
+
 
 //---------------------------------------------------------------------------------------------------------
 // pour l'affichage des différent onglet du modele
 //---------------------------------------------------------------------------------------------------------
 
 function cadres_off(){
-  list_str_id = new Array('CadreAbonnement', 'CadreForfait', 'CadreGestionnaires', 'CadreDescription');
-  list_str_menu_id = new Array('MenuCompanyAbonnement', 'MenuCompanyForfait', 'MenuCompanyGestionnaires', 'MenuCompanyDescription');
+  list_str_id = new Array('CadreFactures','CadreAbonnement', 'CadreForfait', 'CadreGestionnaires', 'CadreDescription');
+  list_str_menu_id = new Array('MenuCompanyFactures','MenuCompanyAbonnement', 'MenuCompanyForfait', 'MenuCompanyGestionnaires', 'MenuCompanyDescription');
   for(i=0; i<list_str_id.length; i++){
     strtemp = list_str_id[i];
     id_off = document.getElementById(strtemp);
@@ -62,6 +75,16 @@ function cadres_off(){
       id_not_selected.className = '';
     }
   }
+}
+
+function affich_Factures(){
+  get_Tableau_factures(Current_company['id']);
+  cadres_off();
+  id_on = document.getElementById('CadreFactures');	
+  id_on.className = 'on';
+  
+  id_selected = document.getElementById('MenuCompanyFactures');	
+  id_selected.className = 'selected';
 }
 
 function affich_Abonnement(){
@@ -103,9 +126,9 @@ function affich_Description(){
 
 
 //-------------------------------------------------------------------------------------------------
-// fonctions utiles pour l'obtention de la liste des resultats (tableau)
+// fonctions utiles pour l'obtention de la liste des gestionnaires (tableau)
 //-------------------------------------------------------------------------------------------------
-// traitement en fin de requette pour laffichage du tableau des resultats
+// traitement en fin de requette pour laffichage du tableau des gestionnaires
 function init_Tableau_gestionnaires(Tableau_gestionnaires_temp)
 {
     // var Tableau_calcul_temp = eval('[' + response + ']');
@@ -121,7 +144,7 @@ function init_Tableau_gestionnaires(Tableau_gestionnaires_temp)
     //alert(array2json(Tableau_resultat));
     affiche_Tableau_gestionnaires();
 }
-// requette pour l'obtention du tableau des resultats
+// requette pour l'obtention du tableau des gestionnaires
 function get_Tableau_gestionnaires(id_company)
 { 
     var url_php = "/sc_admin_detail_company/get_list_gestionnaires";
@@ -133,7 +156,7 @@ function filtre_Tableau_gestionnaires(){
     Tableau_gestionnaires_filter = Tableau_gestionnaires;
 }
 
-// affichage du tableau decompte calcul
+// affichage du tableau des gestionnaires
 function affiche_Tableau_gestionnaires(){
     filtre_Tableau_gestionnaires();
     taille_tableau_content  =  taille_tableau_content_page['gestionnaire'];
@@ -142,6 +165,116 @@ function affiche_Tableau_gestionnaires(){
     var strnamebdd          =  'user';
     var stridentificateur   =  new Array('email','name');
     affiche_Tableau_content(current_tableau, strname, strnamebdd, stridentificateur);
+}
+
+// affiche la page num pour la liste des gestionnaires
+function go_page_gestionnaires(num){
+    if(num=='first'){
+        content_tableau_current_page['gestionnaire'] = 0;
+    }else if(num=='end'){
+        content_tableau_current_page['gestionnaire'] = content_tableau_liste_page['gestionnaire'].length-1;
+    }else{
+        var num_page = num + content_tableau_curseur_page['gestionnaire'];
+        content_tableau_current_page['gestionnaire'] = content_tableau_liste_page['gestionnaire'][num_page]-1;    
+    }
+    affiche_Tableau_gestionnaires();
+}
+
+//-------------------------------------------------------------------------------------------------
+// fonctions utiles pour l'obtention de la liste des factures
+//-------------------------------------------------------------------------------------------------
+// traitement en fin de requette pour laffichage du tableau des factures
+function init_Tableau_factures(Tableau_factures_temp)
+{
+    if (Tableau_factures_temp)
+    {   
+        Tableau_factures = Tableau_factures_temp;
+    }
+    else
+    {
+        Tableau_factures[0]         =  new Array();
+        Tableau_factures[0]['ref'] = 'aucune facture';
+    }
+    //alert(array2json(Tableau_resultat));
+    affiche_Tableau_factures();
+}
+// requette pour l'obtention du tableau des factures
+function get_Tableau_factures(id_company)
+{ 
+    var url_php = "/sc_admin_detail_company/get_list_factures";
+    $.getJSON(url_php,{"id_company": id_company},init_Tableau_factures);
+}
+
+// filtre du tableau
+function filtre_Tableau_factures(){
+    Tableau_factures_filter = Tableau_factures;
+}
+
+// affichage du tableau des factures
+function affiche_Tableau_factures(){
+    filtre_Tableau_factures();
+    taille_tableau_content  =  taille_tableau_content_page['facture'];
+    var current_tableau     =  Tableau_factures_filter;
+    var strname             =  'facture';
+    var strnamebdd          =  'facture';
+    var stridentificateur   =  new Array('ref','total_price_HT','total_price_TTC','statut');
+    affiche_Tableau_content(current_tableau, strname, strnamebdd, stridentificateur);
+    supp_affiche_Tableau_factures();
+}
+
+
+// supplément pour l'affichage du tableau des factures
+function supp_affiche_Tableau_factures(){
+    for(i=0; i<taille_tableau_content_page['facture']; i++) {
+        i_page = i + content_tableau_current_page['facture'] * taille_tableau_content_page['facture'];
+	taille_Tableau=Tableau_factures_filter.length;
+	if(i_page<taille_Tableau){
+		if(Tableau_factures_filter[i_page]['facture']['statut']=='unpaid'){
+			strContent_4 = 'facture_4_' + i;
+			id_4  = document.getElementById(strContent_4);
+			id_4.className = "contentBoxTable_3 on";
+			strContent_pair = 'facture_pair_' + i;
+			id_pair  = document.getElementById(strContent_pair);
+			if(pair(i)){
+			    id_pair.className = "contentBoxTable_lign_pair textred";
+			}else{
+			    id_pair.className = "contentBoxTable_lign_impair textred";
+			}
+		}else if(Tableau_factures_filter[i_page]['facture']['statut']=='paid'){
+			strContent_4 = 'facture_4_' + i;
+			id_4  = document.getElementById(strContent_4);
+			id_4.className = "contentBoxTable_3 off";
+		}
+	}
+    }
+}
+
+// affiche la page num pour la liste des gestionnaires
+function go_page_facture(num){
+    if(num=='first'){
+        content_tableau_current_page['facture'] = 0;
+    }else if(num=='end'){
+        content_tableau_current_page['facture'] = content_tableau_liste_page['facture'].length-1;
+    }else{
+        var num_page = num + content_tableau_curseur_page['facture'];
+        content_tableau_current_page['facture'] = content_tableau_liste_page['facture'][num_page]-1;    
+    }
+    affiche_Tableau_factures();
+}
+
+// valider une facture et ajouter les credit de calcul ou l'espace memoire
+function valid_facture(num){
+    var num_select = content_tableau_connect['facture'][num];
+    var id_company = Tableau_factures_filter[num_select]['facture']['company_id'];
+    var id_facture = Tableau_factures_filter[num_select]['facture']['id'];
+    var url_php = "/sc_admin_detail_company/valid_facture";
+    $.get(url_php,{"id_company": id_company, "id_facture": id_facture},fin_valid_facture);
+}
+
+// valider une facture et ajouter les credit de calcul ou l'espace memoire
+function fin_valid_facture(reponse){
+    refresh_page();
+    alert(reponse);
 }
 
 
@@ -219,21 +352,6 @@ function affiche_Tableau_content(current_tableau, strname, strnamebdd, stridenti
             id_page.className = '';
         }
     }  
-}
-
-
-
-// affiche la page num pour la liste des gestionnaires
-function go_page_gestionnaires(num){
-    if(num=='first'){
-        content_tableau_current_page['gestionnaire'] = 0;
-    }else if(num=='end'){
-        content_tableau_current_page['gestionnaire'] = content_tableau_liste_page['gestionnaire'].length-1;
-    }else{
-        var num_page = num + content_tableau_curseur_page['gestionnaire'];
-        content_tableau_current_page['gestionnaire'] = content_tableau_liste_page['gestionnaire'][num_page]-1;    
-    }
-    affiche_Tableau_gestionnaires();
 }
 
 

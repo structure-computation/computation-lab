@@ -1,43 +1,157 @@
-.DetailCadre{ :style => "height: 420px;" }
-  .DetailCadreModelTitre
-    Membre
-    %span#membre_detail_name
-      nom
-  .DetailCadreModel1
-    .DetailCadreModelMarge
-    .DetailCadreModelLigne
-      .DetailCadreModelCase1
-        email
-      .DetailCadreModelCase2#membre_detail_email
-        j.bellec@structure-computation.com
-    .DetailCadreModelLigne
-      .DetailCadreModelCase1
-        Nom
-      .DetailCadreModelCase2#membre_detail_lastname
-        Bellec
-    .DetailCadreModelLigne
-      .DetailCadreModelCase1
-        Prenom
-      .DetailCadreModelCase2#membre_detail_firstname
-        jérémie
-    .DetailCadreModelLigne
-      .DetailCadreModelCase1
-        Droits
-      .DetailCadreModelCase2#membre_detail_role
-        ingénieur
+.DetailCadre{ :style => "height: 550px;" }
+  .DetailCadreModelLogo
 
-    .DetailCadreModelMarge
-    .DetailCadreModelLigne
+  .DetailCadreModelRefFacture
+    .DetailCadreModelLigne20
+      %span.bluegras
+        Référence :
+      %span#facture_detail_ref
+        \-
+    .DetailCadreModelLigne20
+      %span.bluegras
+        Date :
+      %span#facture_detail_date
+        \-
+    .DetailCadreModelLigne20
+      %span.bluegras
+        Statut :
+      %span#facture_detail_statut
+        \-
+
+
+  .DetailCadreModelRefCompany
+    .DetailCadreModelLigne15
+      #{@current_user.firstname} #{@current_user.lastname}
+    .DetailCadreModelLigne15
+      #{@current_company.name}
+    .DetailCadreModelLigne15
+      #{@current_company.division}
+    .DetailCadreModelLigne15
+      #{@current_company.address}
+    .DetailCadreModelLigne15
+      #{@current_company.zipcode}, #{@current_company.city}
+    .DetailCadreModelLigne15
+      #{@current_company.country}
+    
+
+
+  .DetailCadreModel1
+    .DetailCadreModelLigne20
       .DetailCadreModelCase1
-        Statut
-      .DetailCadreModelCase2#membre_detail_state
-        actif
-    .DetailCadreModelLigne  
+        € TTC
       .DetailCadreModelCase1
-        date d'arrivée
-      .DetailCadreModelCase2#membre_detail_created_at
-        01\/03\/2009
-  
+        € TVA
+      .DetailCadreModelCase1
+        € HT
+
+  .DetailCadreModel1#facture_detail_type_calcul
+    .DetailCadreModelLigne15
+      .DetailCadreModelCase2
+        %span.bluegras
+          Forfait de calcul :
+        %span#facture_detail_forfait_name
+          \-
+      .DetailCadreModelCase1.blue#facture_detail_price_calcul_TTC
+        2000
+      .DetailCadreModelCase1.blue#facture_detail_price_calcul_TVA
+        19,6
+      .DetailCadreModelCase1.blue#facture_detail_price_calcul_HT
+        2400
+
+    .DetailCadreModelLigne13
+      .DetailCadreModelCase3
+        Nombre de jetons standard : 
+        %span#facture_detail_forfait_nb_jetons
+          \-
+      .DetailCadreModelCase1.blue
+        \-
+      .DetailCadreModelCase1.blue
+        \-
+      .DetailCadreModelCase1.blue
+        \-
+    .DetailCadreModelLigne13
+      .DetailCadreModelCase3
+        Nombre de jetons tampons : 
+        %span#facture_detail_forfait_nb_jetons_tempon
+          \-
+      .DetailCadreModelCase1.blue
+        \-
+      .DetailCadreModelCase1.blue
+        \-
+      .DetailCadreModelCase1.blue
+        \-
+    .DetailCadreModelLigne13
+      .DetailCadreModelCase3
+        Durée de validité (mois) : 
+        %span#facture_detail_forfait_validity
+          \-
+      .DetailCadreModelCase1.blue
+        \-
+      .DetailCadreModelCase1.blue
+        \-
+      .DetailCadreModelCase1.blue
+        \-
+
+
+  .DetailCadreModel1#facture_detail_type_memoire 
+    .DetailCadreModelLigne15
+      .DetailCadreModelCase2
+        %span.bluegras
+          Abonnement espace mémoire : 
+        %span#facture_detail_abonnement_name
+          \-
+      .DetailCadreModelCase1.blue#facture_detail_price_memory_TTC
+        2000
+      .DetailCadreModelCase1.blue#facture_detail_price_memory_TVA
+        19,6
+      .DetailCadreModelCase1.blue#facture_detail_price_memory_HT
+        2400
+
+    .DetailCadreModelLigne13
+      .DetailCadreModelCase3
+        mémoire assigné :
+        %span#facture_detail_abonnement_assigned_memory
+          \-
+      .DetailCadreModelCase1.blue
+        \-
+      .DetailCadreModelCase1.blue
+        \-
+      .DetailCadreModelCase1.blue
+        \-
+    .DetailCadreModelLigne13
+      .DetailCadreModelCase3
+        niveau de sécurité : 
+        %span#facture_detail_abonnement_security_level
+          \-
+      .DetailCadreModelCase1.blue
+        \-
+      .DetailCadreModelCase1.blue
+        \-
+      .DetailCadreModelCase1.blue
+        \-
+    .DetailCadreModelLigne13
+      .DetailCadreModelCase3
+        nombre d'utilisateurs maximum : 
+        %span#facture_detail_abonnement_nb_max_user
+          \-
+      .DetailCadreModelCase1.blue
+        \-
+      .DetailCadreModelCase1.blue
+        \-
+      .DetailCadreModelCase1.blue
+        \-
+  .DetailCadreModel1 
+    .DetailCadreModelLigne20
+    .DetailCadreModelLigne20_top
+      .DetailCadreModelCase4.bluegras
+        Total
+      .DetailCadreModelCase1.bluegras#facture_detail_total_price_TTC
+        2000
+      .DetailCadreModelCase1.bluegras#facture_detail_total_price_TVA
+        19,6
+      .DetailCadreModelCase1.bluegras#facture_detail_total_price_HT
+        2400
+
 .DetailFermeture
   %a{:style => "cursor: pointer;", :onclick => "ferme_detail_facture()" }
     .DetailTextFermeture

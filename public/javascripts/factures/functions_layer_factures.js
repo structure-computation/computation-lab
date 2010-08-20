@@ -38,7 +38,7 @@ for(i=0; i<content_tableau_page.length ; i++){
 // traitement en fin de requette pour laffichage du tableau des materials
 function init_Tableau_facture(Tableau_facture_temp)
 {
-    //alert(Tableau_facture_temp);
+    //alert(array2json(Tableau_facture_temp));
     // var Tableau_calcul_temp = eval('[' + response + ']');
     if (Tableau_facture_temp)
     {   
@@ -60,10 +60,10 @@ function get_Tableau_facture()
 
 function filtre_Tableau_facture(){
     Tableau_facture_filter = Tableau_facture;
-    var taille_Tableau=Tableau_facture_filter.length;
-    for(i=0; i<taille_Tableau; i++) {
-       Tableau_facture_filter[i]['facture']['numero'] = 'numéro_' + i ;
-    }
+//     var taille_Tableau=Tableau_facture_filter.length;
+//     for(i=0; i<taille_Tableau; i++) {
+//        Tableau_facture_filter[i]['facture']['numero'] = 'numéro_' + i ;
+//     }
 }
 
 // affichage du tableau decompte calcul
@@ -74,9 +74,37 @@ function affiche_Tableau_facture(){
     var current_tableau     =  Tableau_facture_filter;
     var strname             =  'facture';
     var strnamebdd          =  'facture';
-    var stridentificateur   =  new Array('created_at','numero','type','total_calcul','total_memory','total');
+    var stridentificateur   =  new Array('ref','facture_type','total_price_HT','total_price_TTC','statut');
     affiche_Tableau_content(current_tableau, strname, strnamebdd, stridentificateur);
+    supp_affiche_Tableau_factures();
 }
+
+// supplément pour l'affichage du tableau des factures
+function supp_affiche_Tableau_factures(){
+    for(i=0; i<taille_tableau_content_page['facture']; i++) {
+        i_page = i + content_tableau_current_page['facture'] * taille_tableau_content_page['facture'];
+	taille_Tableau=Tableau_facture_filter.length;
+	if(i_page<taille_Tableau){
+		if(Tableau_facture_filter[i_page]['facture']['statut']=='unpaid'){
+// 			strContent_4 = 'facture_4_' + i;
+// 			id_4  = document.getElementById(strContent_4);
+// 			id_4.className = "contentBoxTable_3 on";
+			strContent_pair = 'facture_pair_' + i;
+			id_pair  = document.getElementById(strContent_pair);
+			if(pair(i)){
+			    id_pair.className = "largeBoxTable_lign_pair textred";
+			}else{
+			    id_pair.className = "largeBoxTable_lign_impair textred";
+			}
+// 		}else if(Tableau_factures_filter[i_page]['facture']['statut']=='paid'){
+// 			strContent_4 = 'facture_4_' + i;
+// 			id_4  = document.getElementById(strContent_4);
+// 			id_4.className = "contentBoxTable_3 off";
+		}
+	}
+    }
+}
+
 
 // affiche la page num pour le decompte calcul
 function go_page_facture(num){
@@ -175,7 +203,7 @@ function affiche_Tableau_content(current_tableau, strname, strnamebdd, stridenti
 // afficher le détail d'un facture
 function affich_detail_facture(num){
     var num_select = content_tableau_connect['facture'][num];
-    var table_detail = Tableau_facture_filter[num_select]['user'];
+    var table_detail = Tableau_facture_filter[num_select]['facture'];
     //test1=array2json(table_detail);
     //alert(test1);
     //afficher le detail d'un facture
@@ -183,11 +211,46 @@ function affich_detail_facture(num){
 	    var strContent_detail_key = 'facture_detail_' + key ;
 	    var id_detail_key = document.getElementById(strContent_detail_key);
 	    if(id_detail_key != null){
-		strContent = new String();
-		strContent = table_detail[key];
-		//id_detail_key.value = Tableau_facture_filter[num_select][key] ;
+		if(key == 'statut'){
+			if(table_detail[key] == 'paid'){strContent = 'payée';}
+			else if(table_detail[key] == 'unpaid'){strContent = 'en attente de paiement';}
+		}else{
+			strContent = table_detail[key];
+		}
 		remplacerTexte(id_detail_key, strContent);
+		
 	    }
+    }
+    
+    id_calcul = document.getElementById("facture_detail_type_calcul");
+    id_memoire = document.getElementById("facture_detail_type_memoire");
+    if(table_detail['facture_type'] == 'calcul'){
+	id_calcul.className = 'DetailCadreModel1 on';
+	id_memoire.className = 'DetailCadreModel1 off';
+	var table_detail_forfait = Tableau_facture_filter[num_select]['forfait'];
+	for(key in table_detail_forfait){
+		var strContent_detail_key = 'facture_detail_forfait_' + key ;
+	      // alert(strContent_detail_key);
+		var id_detail_key = document.getElementById(strContent_detail_key);
+		if(id_detail_key != null){
+		    strContent = new String();
+		    strContent = table_detail_forfait[key];
+		    remplacerTexte(id_detail_key, strContent);
+		}
+	}
+    }else if(table_detail['facture_type'] == 'memoire'){
+	id_calcul.className = 'DetailCadreModel1 off';
+	id_memoire.className = 'DetailCadreModel1 on';
+	var table_detail_abonnement = Tableau_facture_filter[num_select]['abonnement'];
+	for(key in table_detail_abonnement){
+		var strContent_detail_key = 'facture_detail_abonnement_' + key ;
+		var id_detail_key = document.getElementById(strContent_detail_key);
+		if(id_detail_key != null){
+		    strContent = new String();
+		    strContent = table_detail_abonnement[key];
+		    remplacerTexte(id_detail_key, strContent);
+		}
+	}
     }
  
     strModelListe = 'FactureListe';    

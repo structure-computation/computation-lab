@@ -28,6 +28,15 @@ class ScAdminDetailCompanyController < ApplicationController
     end 
   end
   
+  def get_list_factures
+    @id_company = params[:id_company]
+    @current_company = Company.find(@id_company)
+    @factures = @current_company.factures.find(:all)
+    respond_to do |format|
+      format.js   {render :json => @factures.to_json}
+    end 
+  end
+  
   def get_list_forfait
     @forfait = Forfait.find(:all)
     respond_to do |format|
@@ -77,6 +86,15 @@ class ScAdminDetailCompanyController < ApplicationController
     @memory_account.add_abonnement(params[:id_abonnement])
     respond_to do |format|
       format.js   {render :json => { :result => 'success' }}
-    end 
+    end
+  end
+  
+  def valid_facture
+    @id_company = params[:id_company]
+    @current_company = Company.find(@id_company)
+    @id_facture = params[:id_facture]
+    @current_facture = @current_company.factures.find(@id_facture)
+    @current_facture.valid_facture()
+    render :text => "crédit alloués"
   end
 end

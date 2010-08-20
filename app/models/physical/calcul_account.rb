@@ -24,11 +24,13 @@ class CalculAccount < ActiveRecord::Base
     
     #construction de la ligne de credit
     current_credit = self.credits.build()
-    current_credit.forfait = forfait
-    current_credit.nb_jetons = forfait.nb_jetons
-    current_credit.nb_jetons_tempon = forfait.nb_jetons_tempon
-    current_credit.price = forfait.price
-    current_credit.credit_date = Date.today 
+    current_credit.new_credit_and_facture(id_forfait)
+  end
+  
+   # validation du credit après paiement de la facture
+  def valid_credit(id_credit)
+    current_credit = self.credits.find(id_credit)
+    forfait = current_credit.forfait
     
     #mise a jour des info du compte
     self.start_date = Date.today 
@@ -56,7 +58,6 @@ class CalculAccount < ActiveRecord::Base
     self.solde_jeton_tempon = current_solde.solde_jeton_tempon
     self.status = 'active'
     current_solde.save
-    current_credit.save
     self.save
   end
   

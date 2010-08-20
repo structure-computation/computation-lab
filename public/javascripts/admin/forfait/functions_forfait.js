@@ -298,7 +298,7 @@ function affich_detail_forfait(){
 // requette pour l'obtention du tableau des resultats
 function ok_new_forfait_info(result)
 {
-	alert(result);
+	//alert(result);
 	document.getElementById('new_forfait_pic_wait').classname = 'off';
 	document.getElementById('new_forfait_pic_ok').classname = 'on';
 	get_current_calcul_account(Current_company['id']);

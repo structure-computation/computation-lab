@@ -3,7 +3,10 @@
   / menu du compte calcul
   .CompteMenu
     %ul
-      %li#MenuCompanyAbonnement.selected
+      %li#MenuCompanyFactures.selected
+        %a{ :onclick => "affich_Factures()", :style => "cursor: pointer;" }
+          Factures
+      %li#MenuCompanyAbonnement
         %a{ :onclick => "affich_Abonnement()", :style => "cursor: pointer;" }
           Abonnement
       %li#MenuCompanyForfait
@@ -18,6 +21,7 @@
 
   .CompteContent
     .CompteContentHeightMin
+    = render :partial => "sc_admin_detail_company/factures/cadre_factures"
     = render :partial => "sc_admin_detail_company/abonnement/cadre_abonnement"
     = render :partial => "sc_admin_detail_company/forfait/cadre_forfait"
     = render :partial => "sc_admin_detail_company/gestionnaires/cadre_gestionnaires"

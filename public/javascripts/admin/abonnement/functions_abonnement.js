@@ -219,7 +219,7 @@ function affich_detail_abonnement(){
 // requette pour l'obtention du tableau des resultats
 function ok_new_abonnement_info(result)
 {
-	alert(result);
+	//alert(result);
 	document.getElementById('new_abonnement_pic_wait').classname = 'off';
 	document.getElementById('new_abonnement_pic_ok').classname = 'on';
 	get_current_memory_account(Current_company['id']);
