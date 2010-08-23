@@ -5,8 +5,8 @@ jbellec:
   telephone:        +33 6 03 72 40 20
   email:            j.bellec@structure-computation.com
   role:             gestionnaire
-  salt:             ac3478d69a3c81fa62e60f5c3696165a4e5e6ac4 # SHA1('0')
-  crypted_password: f874291d44ac044a67d09b6a8a657716af47d5ec # 'monkey'
+  salt:             2880364ddecfe17b3551d077db9c0d5de7b024b7 # SHA1('0')
+  crypted_password: c6dcc183fb752f0162726b5028832bf1f5848020 # 'monkey'
   remember_token:
   remember_token_expires_at:
   activation_code:
@@ -24,8 +24,8 @@ mbleriot:
   telephone:        +33 5 12 34 56 78
   email:            mb@tf.structure-computation.com
   role:             gestionnaire
-  salt:             ac3478d69a3c81fa62e60f5c3696165a4e5e6ac4 # SHA1('0')
-  crypted_password: f874291d44ac044a67d09b6a8a657716af47d5ec # 'monkey'
+  salt:             2880364ddecfe17b3551d077db9c0d5de7b024b7 # SHA1('0')
+  crypted_password: c6dcc183fb752f0162726b5028832bf1f5848020 # 'monkey'
   remember_token:
   remember_token_expires_at:
   activation_code:
@@ -43,8 +43,8 @@ jlinder:
   telephone:        +33 5 12 34 56 78
   email:            jl@tf.structure-computation.com
   role:             gestionnaire
-  salt:             ac3478d69a3c81fa62e60f5c3696165a4e5e6ac4 # SHA1('0')
-  crypted_password: f874291d44ac044a67d09b6a8a657716af47d5ec # 'monkey'
+  salt:             2880364ddecfe17b3551d077db9c0d5de7b024b7 # SHA1('0')
+  crypted_password: c6dcc183fb752f0162726b5028832bf1f5848020 # 'monkey'
   remember_token:
   remember_token_expires_at:
   activation_code:
@@ -62,8 +62,8 @@ mleroy:
   telephone:        +33 5 12 34 56 78
   email:            ml@tf.structure-computation.com
   role:             ingenieur
-  salt:             ac3478d69a3c81fa62e60f5c3696165a4e5e6ac4 # SHA1('0')
-  crypted_password: f874291d44ac044a67d09b6a8a657716af47d5ec # 'monkey'
+  salt:             2880364ddecfe17b3551d077db9c0d5de7b024b7 # SHA1('0')
+  crypted_password: c6dcc183fb752f0162726b5028832bf1f5848020 # 'monkey'
   remember_token:
   remember_token_expires_at:
   activation_code:
@@ -81,8 +81,8 @@ fcolac:
   telephone:        +33 5 12 34 56 78
   email:            fc@tf.structure-computation.com
   role:             ingenieur
-  salt:             ac3478d69a3c81fa62e60f5c3696165a4e5e6ac4 # SHA1('0')
-  crypted_password: f874291d44ac044a67d09b6a8a657716af47d5ec # 'monkey'
+  salt:             2880364ddecfe17b3551d077db9c0d5de7b024b7 # SHA1('0')
+  crypted_password: c6dcc183fb752f0162726b5028832bf1f5848020 # 'monkey'
   remember_token:
   remember_token_expires_at:
   activation_code:
@@ -100,8 +100,8 @@ gselec:
   telephone:        +33 5 12 34 56 78
   email:            gd@bec.structure-computation.com
   role:             gestionnaire
-  salt:             ac3478d69a3c81fa62e60f5c3696165a4e5e6ac4 # SHA1('0')
-  crypted_password: f874291d44ac044a67d09b6a8a657716af47d5ec # 'monkey'
+  salt:             2880364ddecfe17b3551d077db9c0d5de7b024b7 # SHA1('0')
+  crypted_password: c6dcc183fb752f0162726b5028832bf1f5848020 # 'monkey'
   remember_token:
   remember_token_expires_at:
   activation_code:
@@ -119,8 +119,8 @@ htrasset:
   telephone:        +33 1 23 45 67 89
   email:            ht@bec.structure-computation.com
   role:             ingenieur
-  salt:             ac3478d69a3c81fa62e60f5c3696165a4e5e6ac4 # SHA1('0')
-  crypted_password: f874291d44ac044a67d09b6a8a657716af47d5ec # 'monkey'
+  salt:             2880364ddecfe17b3551d077db9c0d5de7b024b7 # SHA1('0')
+  crypted_password: c6dcc183fb752f0162726b5028832bf1f5848020 # 'monkey'
   remember_token:
   remember_token_expires_at:
   activation_code:

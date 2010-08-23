@@ -35,9 +35,11 @@ class User < ActiveRecord::Base
   # validates_uniqueness_of   :login
   # validates_format_of       :login,    :with => Authentication.login_regex, :message => Authentication.bad_login_message
 
+  validates_presence_of     :firstname
   validates_format_of       :firstname,     :with => Authentication.name_regex,  :message => Authentication.bad_name_message, :allow_nil => true
   validates_length_of       :firstname,     :maximum => 100
   
+  validates_presence_of     :lastname
   validates_format_of       :lastname,     :with => Authentication.name_regex,  :message => Authentication.bad_name_message, :allow_nil => true
   validates_length_of       :lastname,     :maximum => 100
 
@@ -64,7 +66,7 @@ class User < ActiveRecord::Base
   def self.authenticate(email, password)
     return nil if email.blank? || password.blank?
     u = find_in_state :first, :active, :conditions => {:email => email.downcase} # need to get the salt
-    #u && u.authenticated?(password) ? u : nil
+    u && u.authenticated?(password) ? u : nil
   end
 
 
