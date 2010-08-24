@@ -12,5 +12,11 @@
     %a.page_select{ :onclick => "go_page_facture('end')", :style => "cursor: pointer;" }
       %img{:src=>"/images/page_plus.png", :style=>"vertical-align:middle;"}
       
-  #footer_top_3
+  #footer_top_3.off
+    #model_bouton_jaune{ :style => "margin:5px 0px 0px 170px" }
+      %ul
+        %li
+          %a{ :href => "#", :onclick => "download_facture()" }
+            %img{ :src => "/images/NC_pic_pdf.png" }
+            télécharger la facture
 / fin partie haute du footer

@@ -7,6 +7,7 @@ var NMcurrent_stape                 =  0;                        // étape pour 
 
 var Tableau_facture                   =  new Array();              // tableau des factures
 var Tableau_facture_filter            =  new Array();              // tableau des factures filtres pour l'affichage
+var current_facture_num	              =  -1;                       // numéro de la facture courrante dans Tableau_facture_filter
 
 //initialisation de la taille du tableau pour la box content et de la table de correspondance
 var taille_tableau_content          =  20;                       // taille du tableau dans la content box
@@ -203,6 +204,7 @@ function affiche_Tableau_content(current_tableau, strname, strnamebdd, stridenti
 // afficher le détail d'un facture
 function affich_detail_facture(num){
     var num_select = content_tableau_connect['facture'][num];
+    current_facture_num = num_select;
     var table_detail = Tableau_facture_filter[num_select]['facture'];
     //test1=array2json(table_detail);
     //alert(test1);
@@ -259,6 +261,10 @@ function affich_detail_facture(num){
     strModelDetail = 'FactureDetail';    
     IdModelDetail  = document.getElementById(strModelDetail);
     IdModelDetail.className = "on";
+    strfooter_top_3 = 'footer_top_3';    
+    Idfooter_top_3  = document.getElementById(strfooter_top_3);
+    Idfooter_top_3.className = "on";
+    
     //setTimeout($('#ModelListe').slideUp("slow"),1250);
 }
 // fermer le détail d'un facturee
@@ -269,8 +275,23 @@ function ferme_detail_facture(){
     trModelListe = 'FactureListe';    
     IdModelListe     = document.getElementById(strModelListe);
     IdModelListe.className = "on";
+    strfooter_top_3 = 'footer_top_3';    
+    Idfooter_top_3  = document.getElementById(strfooter_top_3);
+    Idfooter_top_3.className = "off";
     //setTimeout($('#ModelDetail').slideUp("slow"),1250);
     
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+// fonctions utiles pour le téléchargement d'une facture
+//---------------------------------------------------------------------------------------------------------------------
+
+function download_facture(){
+    //alert(current_facture_num);
+    var id_facture = Tableau_facture_filter[current_facture_num]['facture']['id'];
+    var url_php = "/factures/download_facture?id_facture=" + id_facture ;
+    $(location).attr('href',url_php);  
+}
+
 
 -->
