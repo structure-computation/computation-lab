@@ -2,6 +2,7 @@
 
 # chemin d'acces pour l'enregistrement des models
 SC_MODEL_ROOT = "/share/sc2/Test/MODEL"
+SC_FACTURE_ROOT = "/share/sc2/Test/FACTURE"
 
 # info sur le serveur de calcul en developpement
 SC_CALCUL_SERVER = "sc2.ens-cachan.fr"

@@ -2,6 +2,7 @@
 
 # chemin d'acces pour l'enregistrement des models
 SC_MODEL_ROOT = "/share/sc2/Developpement/MODEL"
+SC_FACTURE_ROOT = "/share/sc2/Developpement/FACTURE"
 #SC_MODEL_ROOT = "/home/scproduction/MODEL"
 
 # info sur le serveur de calcul en developpement

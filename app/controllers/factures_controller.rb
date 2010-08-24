@@ -38,6 +38,14 @@ class FacturesController < ApplicationController
   def download_facture
     @current_company = @current_user.company
     @current_facture = @current_company.factures.find(params[:id_facture])
+    name_file = "#{SC_FACTURE_ROOT}/facture_" + params[:id_facture] + ".pdf"
+    name_facture = 'Facture_' + @current_facture.ref.to_s() + '.pdf'
+    send_file name_file, :filename => name_facture
+  end
+  
+  def generate_pdf_facture
+    @current_company = @current_user.company
+    @current_facture = @current_company.factures.find(params[:id_facture])
     @current_gestionnaire = @current_company.users.find(:first, :conditions => {:role => "gestionnaire"})
     prawnto :inline => false
     prawnto :prawn => { 
