@@ -169,6 +169,18 @@
   text-align:left;
   float:left;
 }
+.ResumeCompteText4
+{
+  height:20px; 
+  width: 90%;
+  margin:5px 0px 0 40px; 
+  line-height: 20px;
+  font-weight: bold;
+  font-size: 1.1em;
+  color: #2a3556;
+  text-align:left;
+  float:left;
+}
 .ResumeCompteBouton
 {
   background: transparent url('../images/manage_bouton_jaune.png') no-repeat top left;
