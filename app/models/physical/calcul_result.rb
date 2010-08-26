@@ -2,8 +2,7 @@ class CalculResult < ActiveRecord::Base
   require 'find'
   require 'json'
   require 'socket'
-  require 'open-uri'
-
+  
   include Socket::Constants
   
   belongs_to  :user         # utilisateur ayant lance le calcul
@@ -19,7 +18,7 @@ class CalculResult < ActiveRecord::Base
     
     # on enregistre le fichier sur le disque et on change les droit pour que le serveur de calcul y ait acces
     path_to_model = "#{SC_MODEL_ROOT}/model_#{self.sc_model.id}"
-    path_to_calcul = "#{SC_MODEL_ROOT}/model_#{self.sc_model.id}/calcul#{self.id}"
+    path_to_calcul = "#{SC_MODEL_ROOT}/model_#{self.sc_model.id}/calcul_#{self.id}"
  
     Dir.mkdir(path_to_model, 0777) unless File.exists?(path_to_model)
     Dir.mkdir(path_to_calcul, 0777) unless File.exists?(path_to_calcul)
@@ -53,7 +52,7 @@ class CalculResult < ActiveRecord::Base
     
     # on enregistre le fichier sur le disque et on change les droit pour que le serveur de calcul y ait acces
     path_to_model = "#{SC_MODEL_ROOT}/model_#{self.sc_model.id}"
-    path_to_calcul = "#{SC_MODEL_ROOT}/model_#{self.sc_model.id}/calcul#{self.id}"
+    path_to_calcul = "#{SC_MODEL_ROOT}/model_#{self.sc_model.id}/calcul_#{self.id}"
  
     Dir.mkdir(path_to_model, 0777) unless File.exists?(path_to_model)
     Dir.mkdir(path_to_calcul, 0777) unless File.exists?(path_to_calcul)
@@ -71,7 +70,7 @@ class CalculResult < ActiveRecord::Base
   end
   
   def get_brouillon(params,current_user) # lecture du fichier brouillon sur le disque
-    path_to_file = "#{SC_MODEL_ROOT}/model_#{self.sc_model.id}/calcul#{self.id}/brouillon.txt"
+    path_to_file = "#{SC_MODEL_ROOT}/model_#{self.sc_model.id}/calcul_#{self.id}/brouillon.txt"
     results = File.read(path_to_file)
     jsonobject = JSON.parse(results)
     
@@ -92,7 +91,7 @@ class CalculResult < ActiveRecord::Base
   
   def compute_previsions() # calcul des prevision de temps de calcul et autorisation de calcul
     # récupération du brouillon
-    path_to_file = "#{SC_MODEL_ROOT}/model_#{self.sc_model.id}/calcul#{self.id}/brouillon.txt"
+    path_to_file = "#{SC_MODEL_ROOT}/model_#{self.sc_model.id}/calcul_#{self.id}/brouillon.txt"
     results = File.read(path_to_file)
     jsonobject = JSON.parse(results)
     
@@ -145,7 +144,7 @@ class CalculResult < ActiveRecord::Base
     if(self.ctype == 'create')
       path_to_calcul = "#{SC_MODEL_ROOT}/model_#{self.sc_model.id}/MESH"
     else
-      path_to_calcul = "#{SC_MODEL_ROOT}/model_#{self.sc_model.id}/calcul#{self.id}"
+      path_to_calcul = "#{SC_MODEL_ROOT}/model_#{self.sc_model.id}/calcul_#{self.id}"
     end
     Find.find(path_to_calcul) do |f| 
       dirsize += File.stat(f).size 
