@@ -2,6 +2,8 @@ class CalculResult < ActiveRecord::Base
   require 'find'
   require 'json'
   require 'socket'
+  require 'open-uri'
+
   include Socket::Constants
   
   belongs_to  :user         # utilisateur ayant lance le calcul
