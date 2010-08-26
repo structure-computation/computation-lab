@@ -57,7 +57,8 @@ class CalculResult < ActiveRecord::Base
     Dir.mkdir(path_to_calcul, 0777) unless File.exists?(path_to_calcul)
     File.chmod 0777, path_to_calcul
     
-    path_to_file = path_to_calcul + "/brouillon.json"
+    path_to_file = path_to_calcul + "/brouillon.txt"
+    
     File.open(path_to_file, 'w+') do |f|
         f.write(file)
     end
@@ -68,7 +69,7 @@ class CalculResult < ActiveRecord::Base
   end
   
   def get_brouillon(params,current_user) # lecture du fichier brouillon sur le disque
-    path_to_file = "#{SC_MODEL_ROOT}/model_#{self.sc_model.id}/calcul_#{self.id}/brouillon.json"
+    path_to_file = "#{SC_MODEL_ROOT}/model_#{self.sc_model.id}/calcul_#{self.id}/brouillon.txt"
     results = File.read(path_to_file)
     jsonobject = JSON.parse(results)
     
@@ -89,7 +90,7 @@ class CalculResult < ActiveRecord::Base
   
   def compute_previsions() # calcul des prevision de temps de calcul et autorisation de calcul
     # récupération du brouillon
-    path_to_file = "#{SC_MODEL_ROOT}/model_#{self.sc_model.id}/calcul_#{self.id}/brouillon.json"
+    path_to_file = "#{SC_MODEL_ROOT}/model_#{self.sc_model.id}/calcul_#{self.id}/brouillon.txt"
     results = File.read(path_to_file)
     jsonobject = JSON.parse(results)
     
