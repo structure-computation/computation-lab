@@ -1,0 +1,49 @@
+#Delete_wiz_layer.Delete_wiz_layer.off
+  .Delete_wiz_layer_top
+    Suppression d'un modèle
+  .Delete_wiz_layer_milieu
+    .NM_bleu{ :style => "width: 730px; height: 70px;  margin: 0px 0px 0 3px;" }
+    .NM_fond_resume{ :style => "width: 730px; margin: 0px 0px 0 3px;" }
+      .NM_text_1{ :style => "width:200px;" }
+        Nom du modèle :
+      .NM_text_1{ :style => "width:500px;" }
+        %p#sc_model_delete_name
+      .NM_text_1{ :style => "width:200px;" }
+        Description :
+      .NM_text_1{ :style => "width:500px; height:100px;" }
+        %p#sc_model_delete_description
+    #Delete_model_pic.on{:style => "width: 450px; margin: 20px 0px 0 213px; float:left;" }
+      .wiz_pic_attention
+      .NM_bleu{ :style => "width: 300px; height:20px; margin: 25px 0px 25px 20px;" }
+        Pour supprimer ce modèle appuyez sur Supprimer. Attention, ce modèle ne pourra être supprimé que si l'ensemble des résultats on été téléchargé.
+
+    #Delete_model_pic_wait.off{:style => "width: 300px; margin: 20px 0px 0 213px; float:left;" }
+      .wiz_pic_wait
+      .NM_bleu{ :style => "width: 200px; height:20px; margin: 25px 0px 25px 20px;" }
+        Modèle en cours de suppression
+
+    #Delete_model_pic_ok.off{:style => "width: 300px; margin: 20px 0px 0 213px; float:left;" }
+      .wiz_pic_ok
+      .NM_bleu{ :style => "width: 200px; height:20px; margin: 25px 0px 25px 20px;" }
+        Modèle Supprimé !
+
+    #Delete_model_pic_failed.off{:style => "width: 450px; margin: 20px 0px 0 213px; float:left;" }
+      .wiz_pic_attention
+      .NM_bleu{ :style => "width: 300px; height:20px; margin: 25px 0px 25px 20px;" }
+        Ce modèle n'a pas pu être supprimé !
+
+  .Delete_wiz_layer_bas
+    #Delete_wiz_annul.on.left
+      %a{ :style => "cursor: pointer;", :onclick => "displayDeleteModel('off')" } 
+        .New_create_bouton_jaune
+          Annuler
+
+    #Delete_wiz_delete.off.right
+      %a{ :style => "cursor: pointer;", :onclick => "valid_delete_model()"  }
+        .Delete_footer_bouton_suivant
+          Supprimer
+
+    #Delete_wiz_close.on.right
+      %a{ :style => "cursor: pointer;", :onclick => "displayDeleteModel('off')" } 
+        .New_create_bouton_jaune
+          fermer

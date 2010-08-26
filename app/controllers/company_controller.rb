@@ -57,14 +57,14 @@ class CompanyController < ApplicationController
     end 
   end
   
-  def create_user
+  def delete_user
     @current_company = @current_user.company
-    @user = @current_company.users.create(params[:user])
-    if @user.errors.empty? 
-      UserMailer.deliver_signup_notification(@user)
-      render :text => "l'utilsateur un message a été envoyé à l'utilisateur"
+    @user = @current_company.users.find(params[:id_membre])
+    if(@user && @user.id == @current_user.id)
+      render :text => "false " + @user.id.to_s() + "  " + @current_user.id.to_s()
     else
-      render :text => "We couldn't set up that account, sorry.  Please try again, or contact an admin (link is above)."
+      @user.delete!
+      render :text => "true" + @user.id.to_s() + "  " + @current_user.id.to_s()
     end
   end
   

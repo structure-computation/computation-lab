@@ -680,6 +680,60 @@ body
  * ccs pour les wizard
  *
  */
+ /*
+ * wizard suppression de model
+ *
+ */
+.Delete_wiz_layer
+{
+	width: 736px ;
+	height: 420px ;
+	position: absolute;
+	z-index: 20;
+	margin: 50px 0 0 105px; 
+}
+.Delete_wiz_layer_top
+{
+	background: transparent url('../images/delete_projet_top.png') no-repeat left top;
+	width: 736px ;
+	height: 27px ;
+	text-align: center;
+	font-size: 0.80em;
+	color: #ffffff;
+	line-height:25px;
+	
+	float: left ;
+}
+.Delete_wiz_layer_milieu
+{
+	background: transparent url('../images/delete_projet_milieu.png') repeat-y left top;
+	width: 736px ;
+	height: 360px ;
+	float: left ;
+}
+.Delete_wiz_layer_bas
+{
+	background: transparent url('../images/delete_projet_bas.png') no-repeat left top;
+	width: 736px ;
+	height: 36px ;
+	float: left ;
+}
+ 
+.Delete_footer_bouton_suivant
+{
+  width: 118px;
+  height: 29px;
+  color:#ffffff;
+  font-size: 0.80em;
+  font-weight: normal;
+  text-align: center;
+  margin: 3px 5px 0 0px; 
+  line-height: 27px;
+  background: transparent url('../images/delete_button_suivant.png') no-repeat left top;
+  float: right;
+}
+ 
+ 
 /*
  * wizard création de model
  *
@@ -723,7 +777,7 @@ body
 	background: transparent url('../images/create_button_jaune.png') no-repeat left top;
 	width: 118px ;
 	height: 29px ;
-	margin: 3px 0 0 5px;
+	margin: 3px 5px 0 5px;
 	color: #2a3556;
 	text-decoration: none;
 	text-align: center;
@@ -776,6 +830,13 @@ body
   background: transparent url('../images/ajax-loader1.gif') no-repeat center center;
   float: left;
 }
+.wiz_pic_attention
+{
+  width: 92px;
+  height: 84px;
+  background: transparent url('../images/wizar_pic_attention.png') no-repeat center center;
+  float: left;
+}
 .ProgressBar 
 { 
   width: 100px; 
@@ -803,6 +864,12 @@ body
   left: 10px; 
 }
 
+.right{
+  float:right;
+}
+.left{
+  float:left;
+}
 /*
  * pages wizard css des textes
  *
@@ -817,7 +884,7 @@ body
   font-weight: normal;
   //color: #e5e5e5;
   color:#2a3557;
-  float:left	
+  float:left;
 }
 .page_select
 {

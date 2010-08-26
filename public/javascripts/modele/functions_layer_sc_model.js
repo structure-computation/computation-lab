@@ -32,6 +32,9 @@ for(i=0; i<content_tableau_page.length ; i++){
     }
 }
 
+// numero du model selectionné pour la suppression
+var num_delete_model = -1;
+
 // initialisation du tableau des info sur le nouveau modele
 var Tableau_new_model_info  =  new Array();
 Tableau_new_model_info['id_user'] = 'test';
@@ -230,19 +233,6 @@ function go_resultat(num){
     $(location).attr('href',url_php);
 }
 
-// effacer un modele
-function resultat_delete(resultat){
-    alert(resultat);
-    get_Tableau_model();
-}
-
-function delete_model(num){
-    var num_select = content_tableau_connect['sc_model'][num];
-    var id_model = Tableau_model_filter[num_select]['sc_model']['id'];
-    var url_php = "/modele/delete";
-    $.get(url_php,{"id_model": id_model},resultat_delete);
-}
-
 //---------------------------------------------------------------------------------------------------------------------
 // fonctions utiles pour l'affichage du detail d'un modele
 //---------------------------------------------------------------------------------------------------------------------
@@ -282,6 +272,71 @@ function ferme_detail_modele(){
     IdModelListe.className = "on";
     //setTimeout($('#ModelDetail').slideUp("slow"),1250);
     
+}
+
+//---------------------------------------------------------------------------------------------------------
+// wizard de suppression model
+//---------------------------------------------------------------------------------------------------------
+
+// affichage du cache noir et du wizard suppression
+function displayDeleteModel(interupteur) {
+    displayBlack(interupteur);
+    document.getElementById('Delete_wiz_layer').className = "Delete_wiz_layer " + interupteur;
+    
+    document.getElementById('Delete_model_pic').className    =  'on' ;
+    document.getElementById('Delete_model_pic_wait').className    =  'off' ;
+    document.getElementById('Delete_model_pic_ok').className    =  'off' ;
+    document.getElementById('Delete_model_pic_failed').className    =  'off' ;
+    
+    document.getElementById('Delete_wiz_annul').className    =  'left on' ;
+    document.getElementById('Delete_wiz_delete').className    =  'right on' ;
+    document.getElementById('Delete_wiz_close').className    =  'right off' ;
+}
+
+// fonction appellé à partir du tableau des modèles
+function delete_model(num){
+    var num_select = content_tableau_connect['sc_model'][num];
+    num_delete_model = num_select;
+    var id_model = Tableau_model_filter[num_select]['sc_model']['id'];
+    displayDeleteModel('on');
+    var table_detail = Tableau_model_filter[num_select]['sc_model'];
+    for(key in table_detail){
+	    var strContent_detail_key = 'sc_model_delete_' + key ;
+	    var id_detail_key = document.getElementById(strContent_detail_key);
+	    if(id_detail_key != null){
+		strContent = new String();
+		strContent = table_detail[key];
+		//id_detail_key.value = Tableau_model_filter[num_select][key] ;
+		remplacerTexte(id_detail_key, strContent);
+	    }
+    }
+}
+
+// validation de la suppression
+function valid_delete_model(){
+    var id_model = Tableau_model_filter[num_delete_model]['sc_model']['id'];
+    
+    document.getElementById('Delete_model_pic').className    =  'off' ;
+    document.getElementById('Delete_model_pic_wait').className    =  'on' ;
+    
+    document.getElementById('Delete_wiz_delete').className    =  'right off' ;
+    document.getElementById('Delete_wiz_close').className    =  'right on' ;
+    
+    var url_php = "/modele/delete";
+    $.get(url_php,{"id_model": id_model},resultat_delete);
+}
+
+// résultat de la requette de suppression
+function resultat_delete(resultat){
+    document.getElementById('Delete_model_pic_wait').className    =  'off' ;
+    if(resultat = "true"){
+      document.getElementById('Delete_model_pic_ok').className    =  'on' ;
+      document.getElementById('Delete_model_pic_failed').className    =  'off' ;  
+      get_Tableau_model();
+    }else if(resultat = "false"){
+      document.getElementById('Delete_model_pic_ok').className    =  'off' ;
+      document.getElementById('Delete_model_pic_failed').className    =  'on' ;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------

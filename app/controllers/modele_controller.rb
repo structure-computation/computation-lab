@@ -40,9 +40,9 @@ class ModeleController < ApplicationController
     @current_model = @current_user.sc_models.find(@id_model)
     if(@current_model.test_delete?)
       @current_model.delete_model()
-      render :text => "le modèle à bien été supprimé"
+      render :text => "true"
     else
-      render :text => "Pour supprimer un modèle vous devez d'abord télécharger l'ensemble des résultats"
+      render :text => "false"
     end
   end
   

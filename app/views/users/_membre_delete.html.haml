@@ -1,0 +1,54 @@
+#Delete_wiz_layer.Delete_wiz_layer.off
+  .Delete_wiz_layer_top
+    Suppression d'un membre
+  .Delete_wiz_layer_milieu
+    .NM_bleu{ :style => "width: 730px; height: 70px;  margin: 0px 0px 0 3px;" }
+    .NM_fond_resume{ :style => "width: 730px; margin: 0px 0px 0 3px;" }
+      .NM_text_1{ :style => "width:200px;" }
+        Nom :
+      .NM_text_1{ :style => "width:500px;" }
+        %p#membre_delete_lastname
+      .NM_text_1{ :style => "width:200px;" }
+        Prénom :
+      .NM_text_1{ :style => "width:500px;" }
+        %p#membre_delete_firstname
+      .NM_text_1{ :style => "width:200px;" }
+        email :
+      .NM_text_1{ :style => "width:500px;" }
+        %p#membre_delete_email
+
+    #Delete_membre_pic.on{:style => "width: 450px; margin: 20px 0px 0 213px; float:left;" }
+      .wiz_pic_attention
+      .NM_bleu{ :style => "width: 300px; height:20px; margin: 25px 0px 25px 20px;" }
+        Pour supprimer ce membre appuyez sur Supprimer. Attention, vous ne pouvez pas vous supprimer !
+
+    #Delete_membre_pic_wait.off{:style => "width: 300px; margin: 20px 0px 0 213px; float:left;" }
+      .wiz_pic_wait
+      .NM_bleu{ :style => "width: 200px; height:20px; margin: 25px 0px 25px 20px;" }
+        Membre en cours de suppression
+
+    #Delete_membre_pic_ok.off{:style => "width: 300px; margin: 20px 0px 0 213px; float:left;" }
+      .wiz_pic_ok
+      .NM_bleu{ :style => "width: 200px; height:20px; margin: 25px 0px 25px 20px;" }
+        Membre supprimé !
+
+    #Delete_membre_pic_failed.off{:style => "width: 450px; margin: 20px 0px 0 213px; float:left;" }
+      .wiz_pic_attention
+      .NM_bleu{ :style => "width: 300px; height:20px; margin: 25px 0px 25px 20px;" }
+        Ce membre n'a pas pu être supprimé !
+
+  .Delete_wiz_layer_bas
+    #Delete_wiz_annul.on.left
+      %a{ :style => "cursor: pointer;", :onclick => "displayDeleteMembre('off')" } 
+        .New_create_bouton_jaune
+          Annuler
+
+    #Delete_wiz_delete.off.right
+      %a{ :style => "cursor: pointer;", :onclick => "valid_delete_membre()"  }
+        .Delete_footer_bouton_suivant
+          Supprimer
+
+    #Delete_wiz_close.on.right
+      %a{ :style => "cursor: pointer;", :onclick => "displayDeleteMembre('off')" } 
+        .New_create_bouton_jaune
+          fermer

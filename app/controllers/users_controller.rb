@@ -56,7 +56,7 @@ class UsersController < ApplicationController
       redirect_back_or_default('/')
     end
   end
-
+  
   def suspend
     @user.suspend! 
     redirect_to users_path
@@ -68,8 +68,16 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user.delete!
-    redirect_to users_path
+#     @current_company = @current_user.company
+#     @user = @current_company.users.find(params[:id_membre])
+    if(@user && @user.id == @current_user.id)
+      render :text => "false " + @user.id.to_s() + "  " + @current_user.id.to_s()
+    else
+      @user.delete!
+      render :text => "true" + @user.id.to_s() + "  " + @current_user.id.to_s()
+    end
+#     @user.delete!
+#     redirect_to users_path
   end
 
   def purge

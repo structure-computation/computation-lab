@@ -31,6 +31,9 @@ for(i=0; i<content_tableau_page.length ; i++){
     }
 }
 
+// numero du membre selectionné pour la suppression
+var num_delete_membre = -1;
+
 // initialisation du tableau des info sur le nouveau membree
 var Tableau_new_membre  =  new Array();
 Tableau_new_membre['email'] = 'bellec@lmt.ens-cachan.fr';
@@ -81,7 +84,7 @@ function affiche_Tableau_membre(){
     var current_tableau     =  Tableau_membre_filter;
     var strname             =  'membre';
     var strnamebdd          =  'user';
-    var stridentificateur   =  new Array('email','firstname','role');
+    var stridentificateur   =  new Array('email','firstname','role','state');
     affiche_Tableau_content(current_tableau, strname, strnamebdd, stridentificateur);
 }
 
@@ -217,6 +220,73 @@ function ferme_detail_membre(){
     IdModelListe.className = "on";
     //setTimeout($('#ModelDetail').slideUp("slow"),1250);
     
+}
+
+//---------------------------------------------------------------------------------------------------------
+// wizard de suppression d'un membre
+//---------------------------------------------------------------------------------------------------------
+
+// affichage du cache noir et du wizard suppression
+function displayDeleteMembre(interupteur) {
+    displayBlack(interupteur);
+    document.getElementById('Delete_wiz_layer').className = "Delete_wiz_layer " + interupteur;
+    
+    document.getElementById('Delete_membre_pic').className    =  'on' ;
+    document.getElementById('Delete_membre_pic_wait').className    =  'off' ;
+    document.getElementById('Delete_membre_pic_ok').className    =  'off' ;
+    document.getElementById('Delete_membre_pic_failed').className    =  'off' ;
+    
+    document.getElementById('Delete_wiz_annul').className    =  'left on' ;
+    document.getElementById('Delete_wiz_delete').className    =  'right on' ;
+    document.getElementById('Delete_wiz_close').className    =  'right off' ;
+}
+
+// fonction appellé à partir du tableau des modèles
+function delete_membre(num){
+    var num_select = content_tableau_connect['membre'][num];
+    num_delete_membre = num_select;
+    var id_membre = Tableau_membre_filter[num_select]['user']['id'];
+    displayDeleteMembre('on');
+    var table_detail = Tableau_membre_filter[num_select]['user'];
+    for(key in table_detail){
+	    var strContent_detail_key = 'membre_delete_' + key ;
+	    var id_detail_key = document.getElementById(strContent_detail_key);
+	    if(id_detail_key != null){
+		strContent = new String();
+		strContent = table_detail[key];
+		//id_detail_key.value = Tableau_membre_filter[num_select][key] ;
+		remplacerTexte(id_detail_key, strContent);
+	    }
+    }
+}
+
+// validation de la suppression
+function valid_delete_membre(){
+    var id_membre = Tableau_membre_filter[num_delete_membre]['user']['id'];
+    
+    document.getElementById('Delete_membre_pic').className    =  'off' ;
+    document.getElementById('Delete_membre_pic_wait').className    =  'on' ;
+    
+    document.getElementById('Delete_wiz_delete').className    =  'right off' ;
+    document.getElementById('Delete_wiz_close').className    =  'right on' ;
+    
+    var url_php = "/company/delete_user";
+//     var url_php = "/users/destroy";
+    $.get(url_php,{"id_membre": id_membre},resultat_delete);
+}
+
+// résultat de la requette de suppression
+function resultat_delete(resultat){
+    document.getElementById('Delete_membre_pic_wait').className    =  'off' ;
+    //alert(resultat);
+    if(resultat.match("true")){
+      document.getElementById('Delete_membre_pic_ok').className    =  'on' ;
+      document.getElementById('Delete_membre_pic_failed').className    =  'off' ;  
+      get_Tableau_membre();
+    }else if(resultat.match("false")){
+      document.getElementById('Delete_membre_pic_ok').className    =  'off' ;
+      document.getElementById('Delete_membre_pic_failed').className    =  'on' ;
+    }
 }
 
 
@@ -374,7 +444,7 @@ function send_new_membre()
     var Tableau_new_membre_post         =  new Object(); 
     Tableau_new_membre_post['user'] =  new Object(); 
     Tableau_new_membre_post['user'] = param1;
-    alert(array2json(Tableau_new_membre_post));
+    //alert(array2json(Tableau_new_membre_post));
     $.ajax({
 	//url: "/company/create_user",
 	url: "/users/create",
@@ -383,7 +453,8 @@ function send_new_membre()
 	data: $.toJSON(param1),
 	contentType: 'application/json; charset=utf-8',
 	success: function(json) {
-	    alert(json);
+	    //alert(json);
+	    get_Tableau_membre();
 	}
     });
 

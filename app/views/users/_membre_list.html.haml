@@ -23,6 +23,7 @@
         .largeBoxTable_2{ :id => "membre_1_#{i}", :style => "width: 193px;" }
         .largeBoxTable_2{ :id => "membre_2_#{i}", :style => "width: 148px;" }
         .largeBoxTable_2{ :id => "membre_3_#{i}", :style => "width: 60px;" }
-        .largeBoxTable_suppr
+        %a{ :style => "cursor: pointer;", :onclick => "delete_membre(#{i})" }
+          .largeBoxTable_suppr
   / Fin du tableau de présentation des modèles.
 
