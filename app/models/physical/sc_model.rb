@@ -38,12 +38,13 @@ class ScModel < ActiveRecord::Base
     Dir.mkdir(path_to_model, 0777) unless File.exists?(path_to_model)
     Dir.mkdir(path_to_mesh, 0777) unless File.exists?(path_to_mesh)
     path_to_file = path_to_mesh + "/mesh" + extension
+    File.chmod 0777, path_to_model
+    File.chmod 0777, path_to_mesh
+    
     File.open(path_to_file, 'w+') do |f|
         f.write(file.read)
     end
-    File.chmod 0777, path_to_model
-    File.chmod 0777, path_to_mesh
-
+    
     # création du fichier json_model 
     identite_calcul = { :id_societe => self.company.id, :id_user => current_user.id, :id_projet => '', :id_model => self.id, :id_calcul => '', :dimension  => self.dimension};
     priorite_calcul = { :priorite => 0 };                               

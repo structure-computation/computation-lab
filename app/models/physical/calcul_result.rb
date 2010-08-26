@@ -27,6 +27,7 @@ class CalculResult < ActiveRecord::Base
         f.write(file)
     end
     File.chmod 0777, path_to_calcul
+    File.chmod 0777, path_to_file
     
     # création des elements a envoyer au calculateur
     send_data  = { :id_model => self.sc_model.id, :id_calcul => self.id, :dimension => self.sc_model.dimension , :mode => "compute"}
@@ -54,12 +55,13 @@ class CalculResult < ActiveRecord::Base
  
     Dir.mkdir(path_to_model, 0777) unless File.exists?(path_to_model)
     Dir.mkdir(path_to_calcul, 0777) unless File.exists?(path_to_calcul)
-
+    File.chmod 0777, path_to_calcul
+    
     path_to_file = path_to_calcul + "/brouillon.json"
     File.open(path_to_file, 'w+') do |f|
         f.write(file)
     end
-    File.chmod 0777, path_to_calcul
+    File.chmod 0777, path_to_file
     
     results = "brouillon sauvegardé"
     return results
