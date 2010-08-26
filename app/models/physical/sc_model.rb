@@ -42,6 +42,7 @@ class ScModel < ActiveRecord::Base
         f.write(file.read)
     end
     File.chmod 0777, path_to_model
+    File.chmod 0777, path_to_mesh
 
     # création du fichier json_model 
     identite_calcul = { :id_societe => self.company.id, :id_user => current_user.id, :id_projet => '', :id_model => self.id, :id_calcul => '', :dimension  => self.dimension};
