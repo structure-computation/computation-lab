@@ -8,8 +8,17 @@
 
   #NC_options_active_box_1.NC_active_box_opt_1
     %form{ :name => "form_opt_1" }
-      .NC_active_box_opt_i
+      .NC_active_box_opt_j{ :style => "margin-left: 0px;"}
       .NC_active_box_opt_j
+        multiechelle :
+      .NC_active_box_opt_j{ :style => "margin-left: 0px;"}
+        %a{ :onclick => "change_opt_LATIN_multiechelle_value(1)", :style => "cursor: pointer;" }
+          #opt_LATIN_multiechelle_actif.NC_box_radio_select.actif 
+        on  
+      .NC_active_box_opt_j{ :style => "margin-left: 0px;"}
+        %a{ :onclick => "change_opt_LATIN_multiechelle_value(0)", :style => "cursor: pointer;" }
+          #opt_LATIN_multiechelle_inactif.NC_box_radio_select
+        off  
       .NC_active_box_opt_i
         Nombre d'itération maximum :
       .NC_active_box_opt_j

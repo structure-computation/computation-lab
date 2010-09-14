@@ -85,6 +85,8 @@ function select_option(str){
 		Tableau_option_select = Tableau_option_test;
 		for(key in Tableau_option_select){
 			if(key == 'mode' || key == 'nb_option'){
+			}else if(key == 'LATIN_multiechelle'){
+				change_opt_LATIN_multiechelle_value(Tableau_option_select[key]);
 			}else{
 				str_temp = new String();
 				str_temp = 'opt_' + key;
@@ -105,6 +107,8 @@ function select_option(str){
 		Tableau_option_select = Tableau_option_normal;
 		for(key in Tableau_option_select){
 			if(key == 'mode' || key == 'nb_option'){
+			}else if(key == 'LATIN_multiechelle'){
+				change_opt_LATIN_multiechelle_value(Tableau_option_select[key]);
 			}else{
 				str_temp = new String();
 				str_temp = 'opt_' + key;
@@ -134,4 +138,22 @@ function change_opt_value(key){
 	id_active = document.getElementById(str_temp);
 	Tableau_option_select[key] = id_active.value ;
 	affich_option(Tableau_option_select['mode']);
+}
+
+function change_opt_LATIN_multiechelle_value(interupteur){
+	if(Tableau_option_select["mode"] == 'test'){
+		interupteur = 1;
+	}
+	id_active = document.getElementById("opt_LATIN_multiechelle_actif");
+	id_inactive = document.getElementById("opt_LATIN_multiechelle_inactif");
+	if(interupteur==1){
+		Tableau_option_select["LATIN_multiechelle"] = 1 ;
+		id_active.className = "NC_box_radio_select actif";
+		id_inactive.className = "NC_box_radio_select";
+	}else if(interupteur==0){
+		Tableau_option_select["LATIN_multiechelle"] = 0 ;
+		id_active.className = "NC_box_radio_select";
+		id_inactive.className = "NC_box_radio_select actif";
+	}
+
 }
