@@ -54,13 +54,13 @@ class CalculController < ApplicationController
     @CLs[2] = BoundaryCondition.new(:ref=>'v2', :type_picto=>'centrifuge',   :bctype=>'volume', :name=>'effort centrifuge')
 	
 	@CLs[3] = BoundaryCondition.new(:ref=>'e0', :type_picto=>'effort',   :bctype=>'effort', :name=>'force')
-	@CLs[4] = BoundaryCondition.new(:ref=>'e1', :type_picto=>'effort',   :bctype=>'effort', :name=>'force normale')
-	@CLs[5] = BoundaryCondition.new(:ref=>'e2', :type_picto=>'effort',   :bctype=>'effort', :name=>'pression')
+	@CLs[4] = BoundaryCondition.new(:ref=>'e1', :type_picto=>'effort',   :bctype=>'effort_normal', :name=>'force normale')
+	@CLs[5] = BoundaryCondition.new(:ref=>'e2', :type_picto=>'effort',   :bctype=>'pression', :name=>'pression')
 	
-	@CLs[6] = BoundaryCondition.new(:ref=>'d0', :type_picto=>'depl',   :bctype=>'depl', :name=>'déplacement nul')
+	@CLs[6] = BoundaryCondition.new(:ref=>'d0', :type_picto=>'depl',   :bctype=>'depl_nul', :name=>'déplacement nul')
 	@CLs[7] = BoundaryCondition.new(:ref=>'d1', :type_picto=>'depl',   :bctype=>'depl', :name=>'déplacement imposé')
-	@CLs[8] = BoundaryCondition.new(:ref=>'d2', :type_picto=>'depl',   :bctype=>'depl', :name=>'déplacement normal imposé')
-	@CLs[9] = BoundaryCondition.new(:ref=>'d3', :type_picto=>'depl',   :bctype=>'depl', :name=>'symétrie')
+	@CLs[8] = BoundaryCondition.new(:ref=>'d2', :type_picto=>'depl',   :bctype=>'depl_normal', :name=>'déplacement normal imposé')
+	@CLs[9] = BoundaryCondition.new(:ref=>'d3', :type_picto=>'depl',   :bctype=>'sym', :name=>'symétrie')
 	    
     respond_to do |format|
       format.js   {render :json => @CLs.to_json}

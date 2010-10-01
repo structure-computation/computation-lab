@@ -70,7 +70,7 @@ four:
   description : 'description'
   comp_generique : 'Pa'
   comp_complexe : 'Ca'
-  type_num : 0
+  type_num : 3
   Ep : 0
   jeux : 0
   R : 200000
@@ -90,7 +90,7 @@ five:
   description : 'description'
   comp_generique : 'El'
   comp_complexe : 'Ca'
-  type_num : 0
+  type_num : 4
   Ep : 0
   jeux : 0
   R : 200000
@@ -110,7 +110,7 @@ six:
   description : 'description'
   comp_generique : 'Pa'
   comp_complexe : 'Pl Ca'
-  type_num : 0
+  type_num : 5
   Ep : 0
   jeux : 0
   R : 200000

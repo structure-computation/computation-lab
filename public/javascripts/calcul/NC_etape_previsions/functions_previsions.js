@@ -97,12 +97,14 @@ function lance_calcul(){
 	var materials = new Array();
 	for(i in Tableau_mat_select){
 		materials[i] = new Array();
-		table_param = ["id","mtype","comp","resolution","name","elastic_modulus","poisson_ratio","alpha","rho","viscosite","E1","E2","E3","G12","G13","G23","nu12","nu13","nu23","alpha_1","alpha_2","alpha_3","dir_1_x","dir_1_y","dir_1_z","dir_2_x","dir_2_y","dir_2_z","dir_3_x","dir_3_y","dir_3_z","Yo","Ysp","Yop","Yc","Ycp","b"];
+		table_param = ["id","type_num","mtype","comp","resolution","name","elastic_modulus","poisson_ratio","alpha","rho","viscosite","E1","E2","E3","G12","G13","G23","nu12","nu13","nu23","alpha_1","alpha_2","alpha_3","dir_1_x","dir_1_y","dir_1_z","dir_2_x","dir_2_y","dir_2_z","dir_3_x","dir_3_y","dir_3_z","Yo","Ysp","Yop","Yc","Ycp","b"];
 		for(j in table_param){
 			if(table_param[j]=="id"){
 				materials[i]["id"] = parseFloat(Tableau_mat_select[i]["id_select"]) ;
 			}else if(table_param[j]=="resolution"){
 				materials[i]["resolution"]=Tableau_init_select['D2type'].toString() ;
+			}else if(table_param[j]=="type_num"){
+				materials[i]["type_num"] = parseFloat(Tableau_mat_select[i]["type_num"]) ;
 			}else if(table_param[j]=="mtype"){
 				materials[i]["mtype"] = Tableau_mat_select[i]["mtype"] ;
 			}else if(table_param[j]=="comp"){
@@ -111,8 +113,6 @@ function lance_calcul(){
 					materials[i]["comp"] += "elastique ";
 				}if (Tableau_mat_select[i]["comp"].match('pl')){
 					materials[i]["comp"] += "plastique ";
-				}if (Tableau_mat_select[i]["comp"].match('en')){
-					materials[i]["comp"] += "endommageable ";
 				}if (Tableau_mat_select[i]["comp"].match('en')){
 					materials[i]["comp"] += "endommageable ";
 				}
@@ -213,7 +213,7 @@ function lance_calcul(){
 	var liaisons = new Array();
 	for(i in Tableau_liaison_select){
 		liaisons[i] = new Array();
-		table_param = ["id","name","type","coef_frottement"];
+		table_param = ["id","type_num","name","type","comp_complexe","coef_frottement","Ep","jeux","R","Lp","Dp","p","Lr",];
 		for(j in table_param){
 			if(table_param[j]=="type"){
 				if(Tableau_liaison_select[i]["comp_generique"] == 'Pa'){
@@ -223,10 +223,12 @@ function lance_calcul(){
 				}
 			}else if(table_param[j]=="id"){
 				liaisons[i]["id"] = parseFloat(Tableau_liaison_select[i]["id_select"]) ;
+			}else if(table_param[j]=="type_num"){
+				liaisons[i]["type_num"] = parseFloat(Tableau_liaison_select[i]["type_num"]) ;
 			}else if(table_param[j]=="coef_frottement"){
 				liaisons[i]["coef_frottement"] = Tableau_liaison_select[i]["f"].toString() ;
 			}else{
-				liaisons[i][table_param[j]]=Tableau_liaison_select[i][table_param[j]];
+				liaisons[i][table_param[j]]=Tableau_liaison_select[i][table_param[j]].toString();
 			}
 		}
 	}
