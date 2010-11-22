@@ -191,7 +191,7 @@ function lance_calcul(){
 			}else if(table_param[j]=="Ycp"){
 				materials[i][table_param[j]] = "";
 			}else if(table_param[j]=="b"){
-				groups_edge[i][table_param[j]] = "";
+				materials[i][table_param[j]] = "";
 			}
 			
 			else if(table_param[j]=="groups_elem"){
@@ -299,6 +299,21 @@ function lance_calcul(){
 	}
 	//alert(array2json(CL));
 	
+	// Tableau Time_step
+	var Time_step = new Array();
+    for(i in Tableau_init_time_step ){
+        Time_step[i] = new Array();
+        table_param = ["id","PdT","name","nb_PdT","Tf","Ti"];
+        for(j in table_param){
+            if(table_param[j]=="name"){
+                Time_step[i][table_param[j]] = Tableau_init_time_step[i][table_param[j]].toString();
+            }else if(table_param[j]=="id"){
+                Time_step[i][table_param[j]] = parseFloat(i);
+            }else{
+                Time_step[i][table_param[j]] = parseFloat(Tableau_init_time_step[i][table_param[j]]);
+            }
+        }
+    }
 	
 	// Tableau Option
 	var Options = new Array();
@@ -336,6 +351,8 @@ function lance_calcul(){
 	Tableau_calcul_complet['links'] = liaisons;
 	Tableau_calcul_complet['CL'] = CL;
 	Tableau_calcul_complet['CLvolume'] = CLvolume;
+    // paramètres temporels et multirésolution
+    Tableau_calcul_complet['time_step'] = Time_step;
 	// options du calcul
 	Tableau_calcul_complet['options'] = Options;
 	
