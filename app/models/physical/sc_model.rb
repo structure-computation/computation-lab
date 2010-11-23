@@ -57,17 +57,17 @@ class ScModel < ActiveRecord::Base
         f.write(JSON.pretty_generate(json_model))
     end
     
-    # envoi de la requette de création de model au serveur de calcul
-    send_data = { :id_user => current_user.id, :mode => "create", :identite_calcul => identite_calcul };   
-    # socket d'envoie au serveur
-    socket    = Socket.new( AF_INET, SOCK_STREAM, 0 )
-    sockaddr  = Socket.pack_sockaddr_in( SC_CALCUL_PORT, SC_CALCUL_SERVER )
-    socket.connect( sockaddr )
-    socket.write( send_data.to_json )
-    
-    # reponse du calculateur
-    results = socket.read
-    self.change_state('in_process')
+#     # envoi de la requette de création de model au serveur de calcul
+#     send_data = { :id_user => current_user.id, :mode => "create", :identite_calcul => identite_calcul };   
+#     # socket d'envoie au serveur
+#     socket    = Socket.new( AF_INET, SOCK_STREAM, 0 )
+#     sockaddr  = Socket.pack_sockaddr_in( SC_CALCUL_PORT, SC_CALCUL_SERVER )
+#     socket.connect( sockaddr )
+#     socket.write( send_data.to_json )
+#     
+#     # reponse du calculateur
+#     results = socket.read
+    self.change_state('uploaded')
     self.save
     
     # on retourne le resultats
@@ -76,10 +76,13 @@ class ScModel < ActiveRecord::Base
   end
   
   
-  
-  def mesh_valid(id_user,calcul_time,json)
+  #def mesh_valid(id_user,calcul_time,json)
+  def mesh_valid(id_user,calcul_time)
     current_user = User.find(id_user)
-    jsonobject = JSON.parse(json)
+    path_to_file = "#{SC_MODEL_ROOT}/model_#{self.id}/MESH/mesh.txt"
+    results = File.read(path_to_file)
+    jsonobject = JSON.parse(results)
+    #jsonobject = JSON.parse(json)
     
     #mise à jour des infos modèle
     self.parts = jsonobject[0]['mesh']['nb_groups_elem']

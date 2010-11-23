@@ -30,18 +30,18 @@ class CalculResult < ActiveRecord::Base
     File.chmod 0777, path_to_calcul
     File.chmod 0777, path_to_file
     
-    # création des elements a envoyer au calculateur
-    send_data  = { :id_model => self.sc_model.id, :id_calcul => self.id, :dimension => self.sc_model.dimension , :mode => "compute"}
-    
-    # socket d'envoie au serveur
-    socket    = Socket.new( AF_INET, SOCK_STREAM, 0 )
-    sockaddr  = Socket.pack_sockaddr_in( SC_CALCUL_PORT, SC_CALCUL_SERVER ) #variables d'environnement
-    socket.connect( sockaddr )
-    socket.write( send_data.to_json )
-    
-    # reponse du calculateur
-    results = socket.read
-    self.change_state('in_process') 
+#     # création des elements a envoyer au calculateur
+#     send_data  = { :id_model => self.sc_model.id, :id_calcul => self.id, :dimension => self.sc_model.dimension , :mode => "compute"}
+#     
+#     # socket d'envoie au serveur
+#     socket    = Socket.new( AF_INET, SOCK_STREAM, 0 )
+#     sockaddr  = Socket.pack_sockaddr_in( SC_CALCUL_PORT, SC_CALCUL_SERVER ) #variables d'environnement
+#     socket.connect( sockaddr )
+#     socket.write( send_data.to_json )
+#     
+#     # reponse du calculateur
+#     results = socket.read
+    self.change_state('uploaded') 
     self.save
     return results
   end
