@@ -266,7 +266,7 @@ body
 #menu li.selected
 {
   //font-size: 0.80em;
-  font-weight: normal;
+  font-weight: bold;
   color: #e5e5e5;
   text-decoration: none;
   background: transparent url('../images/header_menu_selected.png') no-repeat left top;
@@ -275,7 +275,7 @@ body
 #menu li a
 {
   font-size: 0.80em;
-  font-weight: normal;
+  font-weight: bold;
   color: #e5e5e5;
   text-decoration: none;
   display: block;
@@ -284,7 +284,7 @@ body
 #menu li.selected a
 {
   //font-size: 0.80em;
-  font-weight: normal;
+  font-weight: bold;
   color: #2a3556;
   text-decoration: none;
 }

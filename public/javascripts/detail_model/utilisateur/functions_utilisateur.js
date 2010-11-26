@@ -273,7 +273,7 @@ function affich_detail_utilisateur_new(){
 // requette pour l'obtention du tableau des resultats
 function ok_new_utilisateur_info(result)
 {
-	alert(result);
+	//alert(result);
 	document.getElementById('new_utilisateur_pic_wait').classname = 'off';
 	document.getElementById('new_utilisateur_pic_ok').classname = 'on';
 	affich_Utilisateurs();
@@ -283,7 +283,7 @@ function ok_new_utilisateur_info(result)
 function send_new_utilisateur_info()
 { 
     send_info = array2json(Tableau_utilisateur_select_filter);
-    alert(send_info);
+    //alert(send_info);
     document.getElementById('new_utilisateur_pic_wait').classname = 'on';
     document.getElementById('new_utilisateur_pic_ok').classname = 'off';
     var url_php = "/detail_model/valid_new_utilisateur";

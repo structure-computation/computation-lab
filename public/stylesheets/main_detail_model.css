@@ -223,7 +223,7 @@
 .CompteMenu li a
 {
   font-size: 0.80em;
-  font-weight: normal;
+  font-weight: bold;
   color: #e5e5e5;
   text-decoration: none;
   display: block;

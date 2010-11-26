@@ -309,6 +309,10 @@ function lance_calcul(){
                 Time_step[i][table_param[j]] = Tableau_init_time_step[i][table_param[j]].toString();
             }else if(table_param[j]=="id"){
                 Time_step[i][table_param[j]] = parseFloat(i);
+            }else if(table_param[j]=="nb_PdT"){
+                Time_step[i][table_param[j]] = Tableau_init_time_step[i][table_param[j]].toString();
+            }else if(table_param[j]=="PdT"){
+                Time_step[i][table_param[j]] = Tableau_init_time_step[i][table_param[j]].toString();
             }else{
                 Time_step[i][table_param[j]] = parseFloat(Tableau_init_time_step[i][table_param[j]]);
             }
