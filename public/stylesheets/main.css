@@ -6,6 +6,11 @@ body, div, h1, h2, h3, p, ul, li
   position: relative;
 }
 
+a
+{
+  text-decoration: none;
+}
+
 div.clearline
 {
   clear: both;
@@ -247,6 +252,7 @@ body
   background: transparent;
   float: left ;
   margin: 0px 0px 0 1px;
+  text-decoration: none;
 }
 
 #menu li
@@ -265,11 +271,18 @@ body
 
 #menu li.selected
 {
-  //font-size: 0.80em;
+  /*font-size: 0.80em;*/
   font-weight: bold;
   color: #e5e5e5;
   text-decoration: none;
   background: transparent url('../images/header_menu_selected.png') no-repeat left top;
+}
+
+#menu li.selected a
+{
+  font-weight: bold;
+  color: #2a3556;
+  text-decoration: none;
 }
 
 #menu li a
@@ -281,22 +294,18 @@ body
   display: block;
 }
 
-#menu li.selected a
-{
-  //font-size: 0.80em;
-  font-weight: bold;
-  color: #2a3556;
-  text-decoration: none;
-}
+
 
 #menu li a:hover
 {
   color: #ffdb00;
+  text-decoration: none;
 }
 
 #menu li.selected a:hover
 {
   color: #2a3556;
+  text-decoration: none;
 }
 
 

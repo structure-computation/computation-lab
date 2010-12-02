@@ -375,9 +375,19 @@ function lance_calcul(){
 	    type: 'POST',
 	    data: send_calcul,
 	    success: function(json) {
-		alert(json);
+            alert("Demande de calcul envoyée. Vous allez être redirigé vers la page du modèle");
+            var url_php = "/detail_model/index?id_model=" + model_id ;
+            $(location).attr('href',url_php);
+            
 	    }
 	});
+}
+
+// afficher le détail d'un modele
+function go_detail_model(num){
+    var num_select = content_tableau_connect['sc_model'][num];
+    var id_model = Tableau_model_filter[num_select]['sc_model']['id'];
+   
 }
 
 

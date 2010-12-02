@@ -43,6 +43,7 @@ class CalculResult < ActiveRecord::Base
 #     results = socket.read
     self.change_state('uploaded') 
     self.save
+    results = "Demande de calcul envoyée"
     return results
   end
 

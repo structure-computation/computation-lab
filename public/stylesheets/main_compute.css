@@ -6,6 +6,11 @@ body, div, h1, h2, h3, p, ul, li
   position: relative;
 }
 
+a
+{
+  text-decoration: none;
+}
+
 div.clearline
 {
   clear: both;
