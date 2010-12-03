@@ -118,10 +118,11 @@ class CalculResult < ActiveRecord::Base
     else					#si il y a assez de jetons
       self.launch_autorisation = true
     end
-    self.save
-    
     #TEMP
     self.launch_autorisation = true
+    self.save
+    
+    
     
     send_data  = {:launch_autorisation => self.launch_autorisation, :gpu_allocated => self.gpu_allocated, :estimated_calcul_time => self.estimated_calcul_time, :estimated_debit_jeton => @estimated_debit_jeton}
     
