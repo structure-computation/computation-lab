@@ -1,34 +1,28 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
 <!DOCTYPE KDevPrjSession>
 <KDevPrjSession>
- <DocsAndViews NumberOfDocuments="9" >
-  <Doc0 NumberOfViews="1" URL="file:///var/www/SC_Interface/public/javascripts/imgserver.js" >
-   <View0 Encoding="" line="5" Type="Source" />
-  </Doc0>
-  <Doc1 NumberOfViews="1" URL="file:///var/www/SC_Interface/app/views/modele/index.html.haml" >
+ <DocsAndViews NumberOfDocuments="7" >
+  <Doc0 NumberOfViews="1" URL="file:///var/www/SC_Interface/app/controllers/modele_controller.rb" >
    <View0 Encoding="" line="33" Type="Source" />
+  </Doc0>
+  <Doc1 NumberOfViews="1" URL="file:///var/www/SC_Interface/app/views/modele/_modele_new.html.haml" >
+   <View0 Encoding="" line="44" Type="Source" />
   </Doc1>
-  <Doc2 NumberOfViews="1" URL="file:///var/www/SC_Interface/app/views/sessions/new.html.haml" >
-   <View0 Encoding="" line="8" Type="Source" />
+  <Doc2 NumberOfViews="1" URL="file:///var/www/SC_Interface/app/views/calcul/index.html.haml" >
+   <View0 Encoding="" line="0" Type="Source" />
   </Doc2>
-  <Doc3 NumberOfViews="1" URL="file:///var/www/SC_Interface/app/views/modele/_modele_new.html.haml" >
-   <View0 Encoding="" line="42" Type="Source" />
+  <Doc3 NumberOfViews="1" URL="file:///var/www/SC_Interface/app/views/calcul/_nc_box_propriete.html.haml" >
+   <View0 Encoding="" line="0" Type="Source" />
   </Doc3>
-  <Doc4 NumberOfViews="1" URL="file:///var/www/SC_Interface/app/views/sessions/_session_new.html.haml" >
-   <View0 Encoding="" line="12" Type="Source" />
+  <Doc4 NumberOfViews="1" URL="file:///var/www/SC_Interface/app/views/calcul/_nc_box_visu.html.haml" >
+   <View0 Encoding="" line="0" Type="Source" />
   </Doc4>
-  <Doc5 NumberOfViews="1" URL="file:///var/www/SC_Interface/app/views/layouts/_a_CORRIGER_footer_top.html.haml" >
+  <Doc5 NumberOfViews="1" URL="file:///var/www/SC_Interface/app/views/calcul/_progressbar.html.haml" >
    <View0 Encoding="" line="0" Type="Source" />
   </Doc5>
-  <Doc6 NumberOfViews="1" URL="file:///var/www/SC_Interface/public/javascripts/functions_layer_LM.js" >
-   <View0 Encoding="" line="45" Type="Source" />
+  <Doc6 NumberOfViews="1" URL="file:///var/www/SC_Interface/app/views/modele/_modele_nouveau.html.haml" >
+   <View0 Encoding="" line="47" Type="Source" />
   </Doc6>
-  <Doc7 NumberOfViews="1" URL="file:///var/www/SC_Interface/app/controllers/sessions_controller.rb" >
-   <View0 Encoding="" line="0" Type="Source" />
-  </Doc7>
-  <Doc8 NumberOfViews="1" URL="file:///var/www/SC_Interface/app/controllers/users_controller.rb" >
-   <View0 Encoding="" line="0" Type="Source" />
-  </Doc8>
  </DocsAndViews>
  <pluginList>
   <kdevbookmarks>

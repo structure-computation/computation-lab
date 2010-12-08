@@ -513,9 +513,10 @@ function affiche_Tableau_previsions_calcul(){
 // fonction util pour la validation du calcul
 // -------------------------------------------------------------------------------------------------------------------------------------------
 function complete_calcul(){
-	if(Tableau_previsions_calcul['launch_autorisation']){
-		lance_calcul();
-	}else{
-		alert("vous n'avez pas assez de jetons sur votre compte pour lancer ce calcul")
-	}
+    lance_calcul();
+// 	if(Tableau_previsions_calcul['launch_autorisation']){
+// 		lance_calcul();
+// 	}else{
+// 		alert("vous n'avez pas assez de jetons sur votre compte pour lancer ce calcul")
+// 	}
 }
