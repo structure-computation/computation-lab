@@ -4,7 +4,7 @@
 
 // affichage de la page matériaux
 function affiche_NC_page_previsions(){
-     if(NC_current_step >= 6){
+     if(NC_current_step >= 7){
 	complete_brouillon(false,true);
 	affich_prop_visu('visu');
 	NC_current_page = 'page_previsions';

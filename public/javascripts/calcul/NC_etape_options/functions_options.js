@@ -4,19 +4,19 @@
 
 // affichage de la page matériaux
 function affiche_NC_page_options(){
-     if(NC_current_step >= 5){
-	affich_prop_visu('visu');
-	NC_current_page = 'page_options';
-	affiche_NC_page('off','off');
-	if(NC_current_scroll=='right'){
-		NC_scroll(NC_current_scroll);
-	}
-	select_option(Tableau_option_select['mode']);
-	document.getElementById('NC_footer_top_init').className = 'off';
-	document.getElementById('NC_footer_top_suiv').className = 'on';
-	document.getElementById('NC_footer_top_valid').className = 'off';
+    if(NC_current_step >= 6){
+        affich_prop_visu('visu');
+        NC_current_page = 'page_options';
+        affiche_NC_page('off','off');
+        if(NC_current_scroll=='right'){
+            NC_scroll(NC_current_scroll);
+        }
+        select_option(Tableau_option_select['mode']);
+        document.getElementById('NC_footer_top_init').className = 'off';
+        document.getElementById('NC_footer_top_suiv').className = 'on';
+        document.getElementById('NC_footer_top_valid').className = 'off';
     }else{
-	alert('vous devez valider les étapes précédentes pour accéder à cette page');
+        alert('vous devez valider les étapes précédentes pour accéder à cette page');
     }
 }
 

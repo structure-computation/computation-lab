@@ -4,13 +4,14 @@
   #page_calcul_12.NC_box
     .NC_filter{ :style => "width:248px; height:120px" }
       .NC_active_box_init_text_1{ :style => "width:90%;" }
-      %select#init_ctype{ :onChange => "Tableau_schema_temp_change_value()" }
-        %option{ :value => "statique" }
-          statique
-        %option{ :value => "quasistatique" }
-          quasistatique
-        %option{ :value => "dynamique" }
-          dynamique  
+      .NC_active_box_init_text_1{ :style => "width:90%;" }
+        %select#init_ctype{ :onChange => "Tableau_schema_temp_change_value()" }
+          %option{ :value => "statique" }
+            statique
+          %option{ :value => "quasistatique" }
+            quasistatique
+          %option{ :value => "dynamique" }
+            dynamique  
     /  <?php include("./contenu/NC_etape_initialisation/NC_filter_calcul.php");  ?>
     - (0...20).each do |i|
       .tableNC_impair{ :id => "temps_pair_#{i}" }

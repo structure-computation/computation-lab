@@ -4,7 +4,7 @@
 
 // affichage de la page CLs
 function affiche_NC_page_CLs(){
-    if(NC_current_step >= 4){
+    if(NC_current_step >= 5){
 	NC_current_page = 'page_CLs';
 	affiche_NC_page('on','on');
 	if(NC_current_scroll=='right'){

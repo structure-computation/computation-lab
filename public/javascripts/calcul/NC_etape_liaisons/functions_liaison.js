@@ -4,7 +4,7 @@
 
 // affichage de la page liaisons
 function affiche_NC_page_liaisons(){
-     if(NC_current_step >= 3){
+     if(NC_current_step >= 4){
 	NC_current_page = 'page_liaisons';
 	affiche_NC_page('on','on');
 	if(NC_current_scroll=='right'){

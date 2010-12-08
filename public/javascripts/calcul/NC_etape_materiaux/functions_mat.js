@@ -4,7 +4,7 @@
 
 // affichage de la page matériaux
 function affiche_NC_page_materiaux(){
-    if(NC_current_step >= 2){
+    if(NC_current_step >= 3){
 	NC_current_page = 'page_materiaux';
 	affiche_NC_page('on','on');
 	if(NC_current_scroll=='right'){
