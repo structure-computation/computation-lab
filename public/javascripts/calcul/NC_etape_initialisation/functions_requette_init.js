@@ -190,7 +190,7 @@ function load_brouillon(brouillon_temp)
 	    }
 	    else if(key == 'time_step'){
 		Tableau_init_time_step = object2array(Tableau_model[key]);
-		//alert('CL_volume');
+		//alert('time_step');
 	    }
 	    else if(key == 'options'){
 		Tableau_option_select = object2array(Tableau_model[key]);
@@ -221,8 +221,7 @@ function load_brouillon(brouillon_temp)
     refresh_NC_page_materiaux();
     refresh_NC_page_liaisons();
     refresh_NC_page_CLs();
-    affiche_NC_page_materiaux();
-    
+    affiche_NC_page_temporelle();
     //alert(Tableau_init_select['id']);
 }
 

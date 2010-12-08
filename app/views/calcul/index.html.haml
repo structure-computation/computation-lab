@@ -20,6 +20,7 @@
     %script{ :src => "/javascripts/texteutils.js", :type => "text/javascript" }
     %script{ :src => "/javascripts/calcul/NC_etape_initialisation/functions_init.js", :type => "text/javascript" }
     %script{ :src => "/javascripts/calcul/NC_etape_initialisation/functions_requette_init.js", :type => "text/javascript" }
+    %script{ :src => "/javascripts/calcul/NC_etape_temporelle/functions_temporelle.js", :type => "text/javascript" }
     %script{ :src => "/javascripts/calcul/NC_etape_materiaux/functions_mat.js", :type => "text/javascript" }
     %script{ :src => "/javascripts/calcul/NC_etape_materiaux/functions_requette_mat.js", :type => "text/javascript" }
     %script{ :src => "/javascripts/calcul/NC_etape_liaisons/functions_liaison.js", :type => "text/javascript" }
@@ -54,6 +55,7 @@
           / hauteur minimum du contenu
           .contentheightmin
           = render :partial => "calcul/NC_etape_initialisation/box_left"
+          = render :partial => "calcul/NC_etape_temporelle/box_left"
           = render :partial => "calcul/NC_etape_materiaux/box_left"
           = render :partial => "calcul/NC_etape_liaisons/box_left"
           = render :partial => "calcul/NC_etape_CLs/box_left"
@@ -73,6 +75,7 @@
           = render :partial => "calcul/nc_box_visu"	
           = render :partial => "calcul/nc_box_propriete"
           = render :partial => "calcul/NC_etape_initialisation/box_active"
+          = render :partial => "calcul/NC_etape_temporelle/box_active"
           = render :partial => "calcul/NC_etape_materiaux/box_active"
           = render :partial => "calcul/NC_etape_liaisons/box_active"
           = render :partial => "calcul/NC_etape_CLs/box_active"

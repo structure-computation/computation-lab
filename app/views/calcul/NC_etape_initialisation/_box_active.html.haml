@@ -7,7 +7,7 @@
       #NC_top_box_init.NC_triangle_bas
 
   #NC_init_active_box.NC_active_box
-    .NC_active_box_init
+    .NC_active_box_init{ :style => "height:228px" }
       .NC_active_box_init_text_1{ :style => "width:130px;" }
         Nom du calcul :
       .NC_active_box_init_text_1{ :style => "width:250px;" }
@@ -30,17 +30,17 @@
             %option{ :value => "DP" }
               Déformations planes
         .NC_active_box_init_text_1{ :style => "width:265px;" }
-      .NC_active_box_init_text_1{ :style => "width:130px;" }
-        Type :
-      .NC_active_box_init_text_1{ :style => "width:250px;" }
-        %select#init_ctype{ :onChange => "Tableau_init_change_value()" }
-          %option{ :value => "statique" }
-            statique
-          %option{ :value => "quasistatique" }
-            quasistatique
-          %option{ :value => "dynamique" }
-            dynamique  
-    = render :partial => "calcul/NC_etape_initialisation/box_active_time_step"
+/       .NC_active_box_init_text_1{ :style => "width:130px;" }
+/         Type :
+/       .NC_active_box_init_text_1{ :style => "width:250px;" }
+/         %select#init_ctype{ :onChange => "Tableau_init_change_value()" }
+/           %option{ :value => "statique" }
+/             statique
+/           %option{ :value => "quasistatique" }
+/             quasistatique
+/           %option{ :value => "dynamique" }
+/             dynamique  
+/     = render :partial => "calcul/NC_etape_initialisation/box_active_time_step"
           
 / %script{ :type => "text/javascript" }
 /   $(document).ready(get_Tableau_init);

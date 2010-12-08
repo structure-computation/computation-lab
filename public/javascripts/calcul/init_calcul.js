@@ -17,10 +17,10 @@ var dim_model = 3 ;				// dimension du problème
 // pour la page initialisation------------
 var Tableau_model  = new Array();			// tableau venant de SCcreate
 var Tableau_calcul = new Array();  			// tableau des calcul pour l'initialisation 
-var calcul_select = -1;					// numéro du calcul sélectionné
-var id_calcul_select = -1;				// id de l'element graphique pour le calcul sélectionné
-var Tableau_calcul_filter = new Array();  		// tableau des calcul filtrés (à partir de Tableau_calcul) à afficher
-var calcul_filter = new Array('','');  			// filtres pour les calcul
+var calcul_select = -1;					    // numéro du calcul sélectionné
+var id_calcul_select = -1;				    // id de l'element graphique pour le calcul sélectionné
+var Tableau_calcul_filter = new Array();  	// tableau des calcul filtrés (à partir de Tableau_calcul) à afficher
+var calcul_filter = new Array('','');  		    	// filtres pour les calcul
 var current_state_active_box_init = 'on';    		// affichage de la boite active initialisation
 var Tableau_init_time_step_temp = new Array();		// tableau des step calcul définis à l'initialisation et repris dans le CLs
 Tableau_init_time_step_temp['name'] = 'step_0';
@@ -78,7 +78,7 @@ var id_actif_interface_select = -1;			// id de l'element graphique interface sé
 
 // pour la page CLs------------
 var Tableau_CL = new Array();  				// tableau des CLs 
-var Tableau_CL_step = new Array();  			// tableau des motif pour chaque step d'une CL
+var Tableau_CL_step = new Array();  		// tableau des motif pour chaque step d'une CL
 Tableau_CL_step['fct_spatiale_x'] = "0";
 Tableau_CL_step['fct_spatiale_y'] = "0";
 Tableau_CL_step['fct_spatiale_z'] = "0";

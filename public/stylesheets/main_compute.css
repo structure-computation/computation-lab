@@ -224,7 +224,7 @@ body
 /*Css pour la progress bar ------------------*/ 
 #NC_PB_page_initialisation
 {
-  width: 170px;
+  width: 150px;
   padding-right:0px;
   height: 30px;
   line-height: 30px;
@@ -251,9 +251,9 @@ body
   color:#2a3557;
 }
 
-#NC_PB_page_materiaux, #NC_PB_page_liaisons, #NC_PB_page_CLs, #NC_PB_page_options, #NC_PB_page_multiresolution
+#NC_PB_page_temporelle, #NC_PB_page_materiaux, #NC_PB_page_liaisons, #NC_PB_page_CLs, #NC_PB_page_options, #NC_PB_page_multiresolution
 {
-  width: 185px;
+  width: 160px;
   padding-right:0px;
   height: 30px;
   line-height: 30px;
@@ -267,15 +267,15 @@ body
   background: transparent url('../images/NC_progressbar_bg_gris.png') no-repeat right top;
   margin: 0px 0px 0 4px;	
 }
-#NC_PB_page_options.actif, #NC_PB_page_multiresolution.actif, #NC_PB_page_materiaux.actif, #NC_PB_page_liaisons.actif, #NC_PB_page_CLs.actif
+#NC_PB_page_temporelle.actif, #NC_PB_page_options.actif, #NC_PB_page_multiresolution.actif, #NC_PB_page_materiaux.actif, #NC_PB_page_liaisons.actif, #NC_PB_page_CLs.actif
 {
   background: transparent url('../images/NC_progressbar_bg_bleu.png') no-repeat right top;
 }
-#NC_PB_page_options.actif:hover, #NC_PB_page_multiresolution.actif:hover, #NC_PB_page_materiaux.actif:hover, #NC_PB_page_liaisons.actif:hover, #NC_PB_page_CLs.actif:hover
+#NC_PB_page_temporelle.actif:hover, #NC_PB_page_options.actif:hover, #NC_PB_page_multiresolution.actif:hover, #NC_PB_page_materiaux.actif:hover, #NC_PB_page_liaisons.actif:hover, #NC_PB_page_CLs.actif:hover
 {
   color: #ffdb00;
 }
-#NC_PB_page_materiaux.select, #NC_PB_page_liaisons.select, #NC_PB_page_CLs.select, #NC_PB_page_options.select, #NC_PB_page_multiresolution.select
+#NC_PB_page_temporelle.select, #NC_PB_page_materiaux.select, #NC_PB_page_liaisons.select, #NC_PB_page_CLs.select, #NC_PB_page_options.select, #NC_PB_page_multiresolution.select
 {
   background: transparent url('../images/NC_progressbar_bg_jaune.png') no-repeat right top;
    color:#2a3557;

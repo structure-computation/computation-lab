@@ -575,7 +575,7 @@ function prop_CLv_affich_info(strinfo){
 			//alert(key);
 			var nb_step = prop_CL_for_info[key].length ;
 			//alert(nb_step);
-			for(i_step=0; i_step<nb_step; i_step++){
+			for(var i_step=0; i_step<nb_step; i_step++){
 				for(key_step in prop_CL_for_info[key][i_step]){
 					var strContent_prop_key = 'prop_CLv_' + strinfo + '_' + key_step + '_' + i_step;
 					//alert(strContent_prop_key);
@@ -593,11 +593,13 @@ function prop_CLv_change_value(strinfo){ //strinfo = poids, acceleration ou cent
 	for(key in prop_CL_for_info){
 		if(key=='step'){
 			var nb_step = prop_CL_for_info[key].length ;
-			for(i_step=0; i_step<nb_step; i_step++){
+			for(var i_step=0; i_step<nb_step; i_step++){
 				for(key_step in prop_CL_for_info[key][i_step]){
 					var strContent_prop_key = 'prop_CLv_' + strinfo + '_' + key_step + '_' + i_step;
 					var id_prop_key = document.getElementById(strContent_prop_key);	
-					prop_CL_for_info[key][i_step][key_step] = id_prop_key.value ;		
+                    if(id_prop_key != null){
+                        prop_CL_for_info[key][i_step][key_step] = id_prop_key.value ;       
+                    }
 				}
 			}
 		}
@@ -728,7 +730,7 @@ function prop_CL_select_affich_info(){
 			//alert(key);
 			var nb_step = prop_CL_for_info[key].length ;
 			//alert(nb_step);
-			for(i_step=0; i_step<nb_step; i_step++){
+			for(var i_step=0; i_step<nb_step; i_step++){
 				for(key_step in prop_CL_for_info[key][i_step]){
 					var strContent_prop_key = 'prop_CL_' + key_step + '_' + i_step;
 					//alert(strContent_prop_key);
@@ -756,11 +758,14 @@ function prop_CL_change_value(){
 	for(key in prop_CL_for_info){
 		if(key=='step'){
 			var nb_step = prop_CL_for_info[key].length ;
-			for(i_step=0; i_step<nb_step; i_step++){
+			for(var i_step = 0; i_step<nb_step; i_step++){
+                //alert(i_step);
 				for(key_step in prop_CL_for_info[key][i_step]){
 					var strContent_prop_key = 'prop_CL_' + key_step + '_' + i_step;
 					var id_prop_key = document.getElementById(strContent_prop_key);	
-					prop_CL_for_info[key][i_step][key_step] = id_prop_key.value ;		
+                    if(id_prop_key != null){
+                        prop_CL_for_info[key][i_step][key_step] = id_prop_key.value ;       
+                    }
 				}
 			}
 		}else{

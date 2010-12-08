@@ -139,40 +139,49 @@ function displayBlack(interupteur) {
 
 function next_stape(){
 	if(NC_current_page == 'page_options'){
-		if (NC_current_step < 6){
-			 NC_current_step = 6;
+		if (NC_current_step < 7){
+			 NC_current_step = 7;
 		}
 		affiche_NC_page_previsions();
 	}
 	else if(NC_current_page == 'page_CLs'){
-		if (NC_current_step < 5){
-			 NC_current_step = 5;
-		}
+		if (NC_current_step < 6){
+             NC_current_step = 6;
+        }
 		affiche_NC_page_options();
 	}
 	else if(NC_current_page == 'page_liaisons'){
-		if (NC_current_step < 4){
-			 NC_current_step = 4;
-		}
+		if (NC_current_step < 5){
+             NC_current_step = 5;
+        }
 		affiche_NC_page_CLs();
 	}
 	else if(NC_current_page == 'page_materiaux'){
-		if (NC_current_step < 3){
-			 NC_current_step = 3;
-		}
+		if (NC_current_step < 4){
+             NC_current_step = 4;
+        }
 		affiche_NC_page_liaisons();
 	}
-	else if(NC_current_page == 'page_initialisation'){
-		if (NC_current_step < 2){
-			 NC_current_step = 2;
-			 get_new_calculresult(model_id);
-		}
+	else if(NC_current_page == 'page_temporelle'){
+		if (NC_current_step < 3){
+             NC_current_step = 3;
+        }
 		affiche_NC_page_materiaux();
 	}
+	else if(NC_current_page == 'page_initialisation'){
+        if (NC_current_step < 2){
+             NC_current_step = 2;
+             get_new_calculresult(model_id);
+        }
+        affiche_NC_page_temporelle();
+    }
 }
 function previous_stape(){
+    if(NC_current_page == 'page_temporelle'){
+        affiche_NC_page_initialisation();
+    }
 	if(NC_current_page == 'page_materiaux'){
-		affiche_NC_page_initialisation();
+		affiche_NC_page_temporelle();
 	}
 	else if(NC_current_page == 'page_liaisons'){
 		affiche_NC_page_materiaux();
@@ -202,7 +211,7 @@ function affiche_NC_page(scrollbar_state,box_prop_state){
 	
 	var affiche_on = NC_current_page;
 	//var affiche_off = new Array('page_initialisation', 'page_materiaux', 'page_liaisons', 'page_CLs', 'page_options', 'page_multiresolution', 'page_previsions');
-	var affiche_off = new Array('page_initialisation', 'page_materiaux', 'page_liaisons', 'page_CLs', 'page_options', 'page_previsions');
+	var affiche_off = new Array('page_initialisation', 'page_temporelle', 'page_materiaux', 'page_liaisons', 'page_CLs', 'page_options', 'page_previsions');
 	var taille_off = new Number(affiche_off.length);
 	// var taille_off = 1;
 	
@@ -218,7 +227,7 @@ function affiche_NC_page(scrollbar_state,box_prop_state){
 		id_PB_page.className = className ;
 	}
 	
-	var taille_off = 6;
+	var taille_off = 7;
 	for(i_off=0; i_off<taille_off; i_off++){
 		for(i=0; i<3; i++) {
 			strContent_page = new String();

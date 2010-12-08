@@ -418,6 +418,7 @@ function complete_brouillon(interupteur, prevision){
 	Tableau_calcul_complet['CL'] = Tableau_CL_select;
 	Tableau_calcul_complet['CL_volume'] = Tableau_CL_select_volume;
 	Tableau_calcul_complet['time_step'] = Tableau_init_time_step;
+    //alert(array2json(Tableau_init_time_step));
 	Tableau_calcul_complet['options'] = Tableau_option_select;
 	
 	// pour l'affichage dans l'interface
