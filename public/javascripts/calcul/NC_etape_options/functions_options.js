@@ -136,7 +136,7 @@ function select_option(str){
 function change_opt_value(key){
 	str_temp = 'opt_' + key;
 	id_active = document.getElementById(str_temp);
-	Tableau_option_select[key] = id_active.value ;
+	Tableau_option_select[key] = parseFloat(id_active.value) ;
 	affich_option(Tableau_option_select['mode']);
 }
 
