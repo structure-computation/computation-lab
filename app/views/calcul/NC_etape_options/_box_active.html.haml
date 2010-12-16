@@ -25,6 +25,17 @@
         %input#opt_LATIN_nb_iter{ :type => "text", :value => "300", :onKeyup => "change_opt_value('LATIN_nb_iter')" }
       .NC_active_box_opt_i
       .NC_active_box_opt_j
+      /       .NC_active_box_opt_j{ :style => "margin-left: 0px;"}   
+      /       .NC_active_box_opt_j
+      /         Architecture :
+      /       .NC_active_box_opt_j{ :style => "margin-left: 0px;"}
+      /         %a{ :onclick => "change_opt_architecture('cpu')", :style => "cursor: pointer;" }
+      /           #opt_architecture_cpu.NC_box_radio_select.actif 
+      /         CPU  
+      /       .NC_active_box_opt_j{ :style => "margin-left: 0px;"}
+      /         %a{ :onclick => "change_opt_architecture('gpu')", :style => "cursor: pointer;" }
+      /           #opt_architecture_gpu.NC_box_radio_select
+      /         GPU
       .NC_active_box_opt_i
         taux de convergence de la méthode :
       .NC_active_box_opt_j

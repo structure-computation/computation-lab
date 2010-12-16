@@ -146,6 +146,7 @@ Tableau_option_test['PREC_boite'] = new Array();   	// type (prec_max ou prec_mi
 Tableau_option_test['PREC_nb_decoupe'] = 2 ;  	// découpage des elements 
 Tableau_option_test['Crack'] = new Array();   	// taille, direction (normale), point d'encrage
 Tableau_option_test['Dissipation'] = 'off';		// taille, direction (normale), point d'encrage
+// Tableau_option_test['architecture'] = 'cpu';     // résolution sur cpu ou gpu
 
 var Tableau_option_normal = new Array();	    	// options mode test
 Tableau_option_normal['mode']='normal';
@@ -159,6 +160,7 @@ Tableau_option_normal['PREC_boite'] = new Array();   	// type (prec_max ou prec_
 Tableau_option_normal['PREC_nb_decoupe'] = 2 ;  	// découpage des elements 
 Tableau_option_normal['Crack'] = new Array();   	// taille, direction (normale), point d'encrage
 Tableau_option_normal['Dissipation'] = 'off';		// taille, direction (normale), point d'encrage
+// Tableau_option_normal['architecture'] = 'cpu';     // résolution sur cpu ou gpu
 
 var Tableau_option_expert = new Array();	    	// options mode test
 Tableau_option_expert['mode']='expert';
@@ -172,6 +174,7 @@ Tableau_option_expert['PREC_boite'] = new Array();   	// type (prec_max ou prec_
 Tableau_option_expert['PREC_nb_decoupe'] = 2 ;  	// découpage des elements 
 Tableau_option_expert['Crack'] = new Array();   	// taille, direction (normale), point d'encrage
 Tableau_option_expert['Dissipation'] = 'off';		// taille, direction (normale), point d'encrage
+// Tableau_option_expert['architecture'] = 'cpu';     // résolution sur cpu ou gpu
 
 
 //initialisation de la taille des tableau pour les left box et des table de correspondance

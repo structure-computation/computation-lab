@@ -117,7 +117,7 @@ class CalculController < ApplicationController
     @current_model = ScModel.find(@id_model)
     @current_calcul = @current_model.calcul_results.find(@id_calcul)
     
-    @current_calcul.calcul_valid(params[:time]) 
+    @current_calcul.calcul_valid(params) 
     
     render :text => { :result => 'success' }
   end

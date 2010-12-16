@@ -82,7 +82,7 @@ class DetailModelController < ApplicationController
   def mesh_valid
     @current_model = ScModel.find(params[:id_model])
     #@current_model.mesh_valid(params[:id_user],params[:time],params[:json])
-    @current_model.mesh_valid(params[:id_user],params[:time])
+    @current_model.mesh_valid(params)
     render :text => { :result => 'success' }
   end
   

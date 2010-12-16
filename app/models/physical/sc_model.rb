@@ -77,29 +77,37 @@ class ScModel < ActiveRecord::Base
   
   
   #def mesh_valid(id_user,calcul_time,json)
-  def mesh_valid(id_user,calcul_time)
+  def mesh_valid(params)
+    id_user=params[:id_user]
+    calcul_time=params[:time]
+    calcul_state = Integer(params[:state])
     current_user = User.find(id_user)
-    path_to_file = "#{SC_MODEL_ROOT}/model_#{self.id}/MESH/mesh.txt"
-    results = File.read(path_to_file)
-    jsonobject = JSON.parse(results)
-    #jsonobject = JSON.parse(json)
     
-    #mise à jour des infos modèle
-    self.parts = jsonobject[0]['mesh']['nb_groups_elem']
-    self.interfaces = jsonobject[0]['mesh']['nb_groups_inter']
-    self.sst_number = jsonobject[0]['mesh']['nb_sst']
-    self.change_state('active')
-    self.get_used_memory()
-    #self.save
-    
-    #mise à jour du résultat de calcul
-    @calcul_result = self.calcul_results.build(:calcul_time => calcul_time, :ctype => 'create', :state => 'uploaded', :gpu_allocated => 1) 
-    @calcul_result.user = current_user
-    @calcul_result.result_date = Time.now
-    @calcul_result.save
-    
-    #mise à jour du compte de calcul
-    self.company.calcul_account.log_model(@calcul_result.id)
+    if(calcul_state == 0) #si le calcul est arrivé au bout
+      path_to_file = "#{SC_MODEL_ROOT}/model_#{self.id}/MESH/mesh.txt"
+      results = File.read(path_to_file)
+      jsonobject = JSON.parse(results)
+      #jsonobject = JSON.parse(json)
+      
+      #mise à jour des infos modèle
+      self.parts = jsonobject[0]['mesh']['nb_groups_elem']
+      self.interfaces = jsonobject[0]['mesh']['nb_groups_inter']
+      self.sst_number = jsonobject[0]['mesh']['nb_sst']
+      self.change_state('active')
+      self.get_used_memory()
+      #self.save
+      
+      #mise à jour du résultat de calcul
+      @calcul_result = self.calcul_results.build(:calcul_time => calcul_time, :ctype => 'create', :state => 'finish', :gpu_allocated => 1) 
+      @calcul_result.user = current_user
+      @calcul_result.result_date = Time.now
+      @calcul_result.save
+      
+      #mise à jour du compte de calcul
+      self.company.calcul_account.log_model(@calcul_result.id)
+    else
+      self.change_state('void')
+    end
     
   end
   

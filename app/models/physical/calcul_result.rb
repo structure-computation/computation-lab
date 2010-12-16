@@ -99,7 +99,7 @@ class CalculResult < ActiveRecord::Base
     #calcul des prévisions
     @estimated_calcul_points = self.sc_model.dimension * self.sc_model.dimension * self.sc_model.sst_number * jsonobject['options']['LATIN_nb_iter'] * jsonobject['time_step'].length 
     self.gpu_allocated = (self.sc_model.dimension * self.sc_model.dimension * self.sc_model.sst_number * 0.00001).ceil
-    self.estimated_calcul_time = @estimated_calcul_points * 0.00001
+    self.estimated_calcul_time = @estimated_calcul_points * 0.00001 * 0.07
     @estimated_debit_jeton = ((self.estimated_calcul_time * self.gpu_allocated)/15).ceil+1
         
     #autorisation de calcul
@@ -129,19 +129,29 @@ class CalculResult < ActiveRecord::Base
     return send_data 
   end
   
-  def calcul_valid(calcul_time) 
+  def calcul_valid(params) 
+    calcul_time = params[:time]
+    calcul_state = Integer(params[:state])
     #mise à jour du résultat de calcul
     self.calcul_time = calcul_time
     self.result_date = Time.now
     self.gpu_allocated = 1
     self.name = "calcul_#{self.id}" 
     
-    self.change_state('finish')
+    if(calcul_state == 0) #si le calcul est arrivé au bout
+      self.change_state('finish')
+    else
+      self.change_state('echec')
+    end
+    #debugger
+    
     self.get_used_memory()
     #self.save
     
     #mise à jour du compte de calcul
-    self.sc_model.company.calcul_account.log_calcul(self.id)
+    if(calcul_state == 0)
+      self.sc_model.company.calcul_account.log_calcul(self.id)
+    end
   end
   
   def get_used_memory()

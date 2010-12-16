@@ -155,5 +155,22 @@ function change_opt_LATIN_multiechelle_value(interupteur){
 		id_active.className = "NC_box_radio_select";
 		id_inactive.className = "NC_box_radio_select actif";
 	}
+}
+
+function change_opt_architecture(type){
+    if(Tableau_option_select["mode"] == 'test'){
+        type = 'cpu';
+    }
+    id_cpu = document.getElementById("opt_architecture_cpu");
+    id_gpu = document.getElementById("opt_architecture_gpu");
+    if(type=='cpu'){
+        Tableau_option_select["architecture"] = type ;
+        id_cpu.className = "NC_box_radio_select actif";
+        id_gpu.className = "NC_box_radio_select";
+    }else if(type=='gpu'){
+        Tableau_option_select["architecture"] = type ;
+        id_cpu.className = "NC_box_radio_select";
+        id_gpu.className = "NC_box_radio_select actif";
+    }
 
 }

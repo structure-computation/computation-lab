@@ -238,7 +238,8 @@ function lance_calcul(){
 	var CL = new Array();
 	for(i in Tableau_CL_select){
 		CL[i] = new Array();
-		table_param = ["id","name","type","step","fct_spatiale_x","fct_spatiale_y","fct_spatiale_z","fct_temporelle_x","fct_temporelle_y","fct_temporelle_z",];
+		//table_param = ["id","name","type","step","fct_spatiale_x","fct_spatiale_y","fct_spatiale_z","fct_temporelle_x","fct_temporelle_y","fct_temporelle_z"];
+        table_param = ["id","name","type","step"];
 		for(j in table_param){
 			if(table_param[j]=="type"){
 				CL[i]["type"] = Tableau_CL_select[i]["bctype"] ;
@@ -252,18 +253,18 @@ function lance_calcul(){
 						CL[i]["step"][num_step][key1] = CL[i]["step"][num_step][key1].toString() ;
 					}
 				}
-			}else if(table_param[j]=="fct_spatiale_x"){
-				CL[i]["fct_spatiale_x"] = Tableau_CL_select[i]["step"][0]['fct_spatiale_x'].toString();
-			}else if(table_param[j]=="fct_spatiale_y"){
-				CL[i]["fct_spatiale_y"] = Tableau_CL_select[i]["step"][0]['fct_spatiale_y'].toString();
-			}else if(table_param[j]=="fct_spatiale_z"){
-				CL[i]["fct_spatiale_z"] = Tableau_CL_select[i]["step"][0]['fct_spatiale_z'].toString();
-			}else if(table_param[j]=="fct_temporelle_x"){
-				CL[i]["fct_temporelle_x"] = Tableau_CL_select[i]["step"][0]['fct_temporelle_x'].toString() ;
-			}else if(table_param[j]=="fct_temporelle_y"){
-				CL[i]["fct_temporelle_y"] = Tableau_CL_select[i]["step"][0]['fct_temporelle_x'].toString() ;
-			}else if(table_param[j]=="fct_temporelle_z"){
-				CL[i]["fct_temporelle_z"] = Tableau_CL_select[i]["step"][0]['fct_temporelle_x'].toString() ;
+// 			}else if(table_param[j]=="fct_spatiale_x"){
+// 				CL[i]["fct_spatiale_x"] = Tableau_CL_select[i]["step"][0]['fct_spatiale_x'].toString();
+// 			}else if(table_param[j]=="fct_spatiale_y"){
+// 				CL[i]["fct_spatiale_y"] = Tableau_CL_select[i]["step"][0]['fct_spatiale_y'].toString();
+// 			}else if(table_param[j]=="fct_spatiale_z"){
+// 				CL[i]["fct_spatiale_z"] = Tableau_CL_select[i]["step"][0]['fct_spatiale_z'].toString();
+// 			}else if(table_param[j]=="fct_temporelle_x"){
+// 				CL[i]["fct_temporelle_x"] = Tableau_CL_select[i]["step"][0]['fct_temporelle_x'].toString() ;
+// 			}else if(table_param[j]=="fct_temporelle_y"){
+// 				CL[i]["fct_temporelle_y"] = Tableau_CL_select[i]["step"][0]['fct_temporelle_x'].toString() ;
+// 			}else if(table_param[j]=="fct_temporelle_z"){
+// 				CL[i]["fct_temporelle_z"] = Tableau_CL_select[i]["step"][0]['fct_temporelle_x'].toString() ;
 			}else{
 				CL[i][table_param[j]]=Tableau_CL_select[i][table_param[j]];
 			}
@@ -321,7 +322,7 @@ function lance_calcul(){
 	
 	// Tableau Option
 	var Options = new Array();
-	table_param = ["mode","nb_option","LATIN_conv","LATIN_nb_iter","PREC_nb_niveaux","PREC_erreur","PREC_boite","Crack","Dissipation","Temp_statique","2D_resolution"];
+	table_param = ["mode","nb_option","LATIN_conv","LATIN_nb_iter","PREC_nb_niveaux","PREC_erreur","PREC_boite","Crack","Dissipation","Temp_statique","2D_resolution", "LATIN_multiechelle", "architecture"];
 	for(j in table_param){
 		if(table_param[j]=="LATIN_conv"){
 			Options[table_param[j]] = Tableau_option_select[table_param[j]].toString();
@@ -333,7 +334,9 @@ function lance_calcul(){
 			Options[table_param[j]] = Tableau_option_select[table_param[j]].toString();
 		}else if(table_param[j]=="Dissipation"){
 			Options[table_param[j]] = Tableau_option_select[table_param[j]].toString();
-		}else if(table_param[j]=="2D_resolution"){
+		}else if(table_param[j]=="LATIN_multiechelle"){
+            Options[table_param[j]] = Tableau_option_select[table_param[j]].toString() ;
+        }else if(table_param[j]=="2D_resolution"){
 			Options["2D_resolution"] = Tableau_init_select['D2type'].toString() ;
 		}else if(table_param[j]=="Temp_statique"){
 			Options["Temp_statique"] = Tableau_init_select['ctype'].toString() ;
@@ -368,6 +371,7 @@ function lance_calcul(){
 	send_calcul['file']=fichier_calcul;
 	send_calcul['id_model']=model_id;
 	send_calcul['id_calcul']=Tableau_init_select['id'];
+//     send_calcul['arch']= Tableau_option_select['architecture'];
 	//alert(Tableau_init_select['id']);
 	
 	$.ajax({
