@@ -165,7 +165,15 @@ function get_Tableau_resultat(id_model)
 
 // filtre du tableau
 function filtre_Tableau_resultat(){
-    Tableau_resultat_filter = Tableau_resultat;
+    //Tableau_resultat_filter = Tableau_resultat;
+    Tableau_resultat_filter = new Array();
+    for(i=0; i<Tableau_resultat.length; i++) {
+       if(Tableau_resultat[i]['calcul_result']['state']=='temp'){
+          //Tableau_resultat_filter.push(Tableau_resultat[i]);
+       }else{
+          Tableau_resultat_filter.push(Tableau_resultat[i]);
+       }
+    }
 }
 
 // affichage du tableau decompte calcul
@@ -177,14 +185,54 @@ function affiche_Tableau_resultat(){
     var strnamebdd          =  'calcul_result';
     var stridentificateur   =  new Array('result_date','name');
     affiche_Tableau_content(current_tableau, strname, strnamebdd, stridentificateur);
+    complete_affiche_Tableau_resultat(current_tableau, strname, strnamebdd);
+}
+
+// complément pour l'affichage des résultats. changement de couleur en fonction du status... 
+function complete_affiche_Tableau_resultat(current_tableau, strname, strnamebdd){
+    var taille_Tableau=current_tableau.length;
+    for(i=0; i<taille_tableau_content; i++) {
+        i_page = i + content_tableau_current_page[strname] * taille_tableau_content;
+        content_tableau_connect[strname][i]=i_page;
+        
+        strContent_lign = strname + '_lign_' + i;
+	strContent_pair = strname + '_pair_' + i;
+	strContent = 'resultat_4_' + i;
+	//alert(strContent_lign);
+	var id_lign  = document.getElementById(strContent_lign);
+	var id_pair  = document.getElementById(strContent_pair);
+	var idContent = document.getElementById(strContent);
+        
+        if(i_page<taille_Tableau){
+            id_lign.className = "contentBoxTable_lign on";
+            if(current_tableau[i_page][strnamebdd]['state']=='in_process'){
+                id_pair.className = "contentBoxTable_lign_in_process";
+                strtemp = 'process' ;
+                remplacerTexte(idContent, strtemp);
+            }else if(current_tableau[i_page][strnamebdd]['state']=='echec'){
+                id_pair.className = "contentBoxTable_lign_echec";
+                strtemp = 'echec' ;
+                remplacerTexte(idContent, strtemp);
+            }else{
+                strtemp = '' ;
+                remplacerTexte(idContent, strtemp);
+            }
+        }else{
+            id_lign.className = "contentBoxTable_lign off";
+        }
+    }
 }
 
 // telecharger le resultat
 function download_resultat(num){
     var num_select = content_tableau_connect['resultat'][num];
     var id_resultat = Tableau_resultat_filter[num_select]['calcul_result']['id'];
-    var url_php = "/detail_model/download?id_model=" + model_id + "&id_resultat=" + id_resultat ;
-    $(location).attr('href',url_php);  
+    if(Tableau_resultat_filter[num_select]['calcul_result']['state']=='finish'){
+        var url_php = "/detail_model/download?id_model=" + model_id + "&id_resultat=" + id_resultat ;
+        $(location).attr('href',url_php);  
+    }else{
+        alert('aucun résultat à télécharger');
+    }
 }
 
 

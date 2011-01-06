@@ -1313,6 +1313,20 @@ body
   background-color: #f0f0f0 ;
   float:left;
 }
+.contentBoxTable_lign_in_process
+{
+  width: 720px;
+  height: 25px;
+  background-color: #8fff8c ;
+  float:left;
+}
+.contentBoxTable_lign_echec
+{
+  width: 720px;
+  height: 25px;
+  background-color: #ff9d9d ;
+  float:left;
+}
 .contentBoxTable_lign_pair:hover, .contentBoxTable_lign_impair:hover
 {
   background-color: #9297a8 ;
@@ -1375,6 +1389,7 @@ body
   height: 25px; 
   border-right: thin solid #ffffff;
   margin: 0px 0px 0 0px;
+  text-align: center;
   float: left;
 }
 .contentBoxTable_suppr
