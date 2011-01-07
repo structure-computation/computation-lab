@@ -329,11 +329,11 @@ function valid_delete_model(){
 // résultat de la requette de suppression
 function resultat_delete(resultat){
     document.getElementById('Delete_model_pic_wait').className    =  'off' ;
-    if(resultat = "true"){
+    if(resultat == "true"){
       document.getElementById('Delete_model_pic_ok').className    =  'on' ;
       document.getElementById('Delete_model_pic_failed').className    =  'off' ;  
       get_Tableau_model();
-    }else if(resultat = "false"){
+    }else if(resultat == "false"){
       document.getElementById('Delete_model_pic_ok').className    =  'off' ;
       document.getElementById('Delete_model_pic_failed').className    =  'on' ;
     }

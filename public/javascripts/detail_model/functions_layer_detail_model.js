@@ -40,7 +40,8 @@ for(i=0; i<content_tableau_page.length ; i++){
     }
 }
 
-
+// numero du calcul(resultat) selectionné pour la suppression
+var num_delete_resultat = -1;
 
 
 //---------------------------------------------------------------------------------------------------------
@@ -168,7 +169,7 @@ function filtre_Tableau_resultat(){
     //Tableau_resultat_filter = Tableau_resultat;
     Tableau_resultat_filter = new Array();
     for(i=0; i<Tableau_resultat.length; i++) {
-       if(Tableau_resultat[i]['calcul_result']['state']=='temp'){
+       if(Tableau_resultat[i]['calcul_result']['state']=='temp' || Tableau_resultat[i]['calcul_result']['state']=='deleted'){
           //Tableau_resultat_filter.push(Tableau_resultat[i]);
        }else{
           Tableau_resultat_filter.push(Tableau_resultat[i]);
@@ -232,6 +233,71 @@ function download_resultat(num){
         $(location).attr('href',url_php);  
     }else{
         alert('aucun résultat à télécharger');
+    }
+}
+
+
+//---------------------------------------------------------------------------------------------------------
+// wizard de suppression du resultat ou calcul
+//---------------------------------------------------------------------------------------------------------
+
+// affichage du cache noir et du wizard suppression
+function displayDeleteResultat(interupteur) {
+    displayBlack(interupteur);
+    document.getElementById('Delete_wiz_layer_resultat').className = "Delete_wiz_layer " + interupteur;
+    
+    document.getElementById('Delete_model_pic').className    =  'on' ;
+    document.getElementById('Delete_model_pic_wait').className    =  'off' ;
+    document.getElementById('Delete_model_pic_ok').className    =  'off' ;
+    document.getElementById('Delete_model_pic_failed').className    =  'off' ;
+    
+    document.getElementById('Delete_wiz_annul').className    =  'left on' ;
+    document.getElementById('Delete_wiz_delete').className    =  'right on' ;
+    document.getElementById('Delete_wiz_close').className    =  'right off' ;
+}
+
+// fonction appellé à partir du tableau des modèles
+function delete_resultat(num){
+    var num_select = content_tableau_connect['resultat'][num];
+    num_delete_resultat = num_select;
+    var id_resultat = Tableau_resultat_filter[num_select]['calcul_result']['id'];
+    displayDeleteResultat('on');
+    var table_detail = Tableau_resultat_filter[num_select]['calcul_result'];
+    for(key in table_detail){
+        var strContent_detail_key = 'resultat_delete_' + key ;
+        var id_detail_key = document.getElementById(strContent_detail_key);
+        if(id_detail_key != null){
+            strContent = new String();
+            strContent = table_detail[key];
+            //id_detail_key.value = Tableau_model_filter[num_select][key] ;
+            remplacerTexte(id_detail_key, strContent);
+        }
+    }
+}
+
+// validation de la suppression
+function valid_delete_resultat(){
+    var id_resultat = Tableau_resultat_filter[num_delete_resultat]['calcul_result']['id'];
+    document.getElementById('Delete_model_pic').className    =  'off' ;
+    document.getElementById('Delete_model_pic_wait').className    =  'on' ;
+    
+    document.getElementById('Delete_wiz_delete').className    =  'right off' ;
+    document.getElementById('Delete_wiz_close').className    =  'right on' ;
+    
+    var url_php = "/detail_model/delete_resultat";
+    $.get(url_php,{"id_model": model_id, "id_resultat": id_resultat},resultat_delete);
+}
+
+// résultat de la requette de suppression
+function resultat_delete(resultat){
+    document.getElementById('Delete_model_pic_wait').className    =  'off' ;
+    if(resultat == "true"){
+      document.getElementById('Delete_model_pic_ok').className    =  'on' ;
+      document.getElementById('Delete_model_pic_failed').className    =  'off' ;  
+      get_Tableau_resultat(model_id);
+    }else if(resultat == "false"){
+      document.getElementById('Delete_model_pic_ok').className    =  'off' ;
+      document.getElementById('Delete_model_pic_failed').className    =  'on' ;
     }
 }
 

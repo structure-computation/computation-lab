@@ -19,7 +19,8 @@
         .contentBoxTable_visu
         %a{ :style => "cursor: pointer;", :onclick => "download_resultat(#{i})" }
           .contentBoxTable_download{ :id => "resultat_4_#{i}" }
-        .contentBoxTable_suppr
+        %a{ :style => "cursor: pointer;", :onclick => "delete_resultat(#{i})" }
+          .contentBoxTable_suppr
   / Fin du tableau de présentation des modèles.
 
 .NM_bleu{ :style => "width: 600px; height: 25px;  margin: 10px 0px 0 63px;" }

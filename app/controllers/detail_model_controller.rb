@@ -98,5 +98,18 @@ class DetailModelController < ApplicationController
     
     @current_resultat.change_state('downloaded') 
   end
+  
+  def delete_resultat
+    @id_model = params[:id_model]
+    @id_resultat = params[:id_resultat]
+    @current_model = @current_user.sc_models.find(@id_model)
+    @current_calcul = @current_model.calcul_results.find(@id_resultat)
+    if(@current_calcul.test_delete?)
+      @current_calcul.delete_calcul()
+      render :text => "true"
+    else
+      render :text => "false"
+    end
+  end
  
 end

@@ -98,7 +98,7 @@ class ScModel < ActiveRecord::Base
       #self.save
       
       #mise à jour du résultat de calcul
-      @calcul_result = self.calcul_results.build(:calcul_time => calcul_time, :ctype => 'create', :state => 'finish', :gpu_allocated => 1) 
+      @calcul_result = self.calcul_results.build(:calcul_time => calcul_time, :log_type => 'create', :state => 'finish', :gpu_allocated => 1) 
       @calcul_result.user = current_user
       @calcul_result.result_date = Time.now
       @calcul_result.save

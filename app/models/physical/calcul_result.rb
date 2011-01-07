@@ -169,6 +169,21 @@ class CalculResult < ActiveRecord::Base
     self.sc_model.get_used_memory()
   end
   
+  def test_delete?
+    value_to_return = true
+    if(self.state == 'finish' || self.state == 'in_process')
+        value_to_return = false
+    end
+    return value_to_return
+  end
+  
+  def delete_calcul()
+    self.change_state('deleted')
+    self.updated_at = Time.now
+    #self.used_memory = 0
+    self.save
+  end
+  
   def change_state(state)
     #mise à jour dde l'état du calcul_result
     #state = ['temp', 'in_process', 'finish','downloaded','failed','uploaded']
