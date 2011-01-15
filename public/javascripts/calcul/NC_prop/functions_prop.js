@@ -903,11 +903,11 @@ function duplic_bord(){
 	Tableau_bords_temp = new Array(); 
 	Tableau_bords_temp = clone(Tableau_bords_for_info);
 	Tableau_bords_temp["id"]=compteur_bords_test;
-	compteur_bords_test += 1;
 	Tableau_bords_temp["name"] = Tableau_bords_temp["type"] + "_" + Tableau_bords_temp["geometry"] + "_" + compteur_bords_test ;
 	Tableau_bords_temp["assigned"]=-1;
 	Tableau_bords_temp["group"]=-1;
 	Tableau_bords_temp["id_CL"]=-1;
+	compteur_bords_test += 1;
 	
 	taille_Tableau_bords = Tableau_bords.length;
 	Tableau_bords[taille_Tableau_bords] = new Array();
