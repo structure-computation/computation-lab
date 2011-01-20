@@ -365,3 +365,14 @@
   float:left;
 }
 
+.DetailCadreLink {
+  height: 10px;
+  width: 200px ;
+  float: left;
+}
+
+.DetailCadreLink a {
+  color: blue;
+  text-decoration: underline;
+}
+

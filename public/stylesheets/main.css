@@ -41,11 +41,11 @@ body
 }
 
 /* header ---------------------  */ 
-#header_top
+#header
 {
   background: transparent url('../images/header_bg.png') repeat-x left top;
   width: 940px;
-  height: 83px;
+  height: 90px;
   text-align: left;
   float: left;
 }
@@ -193,9 +193,10 @@ body
  */
 #header_top_logo
 {
-  background: transparent url('../images/header_logo.png') no-repeat top left;
+  background: transparent url('../images/Logo_StructureComputation_gris.png') no-repeat top left;
   width: 280px;
-  padding : 10px 0px 0 0px;
+  margin: 7px 0px 0 11px;
+  padding: 10px 0px 0 0px;
   height: 46px;
   text-align: left;
   float: left;
@@ -247,12 +248,13 @@ body
 
 #menu
 {
-  width: 550px;
-  height: 35px;
+  width: 940px;
+  height: 25px;
   background: transparent;
   float: left ;
-  margin: 0px 0px 0 1px;
+  margin: 0px 0px 0 0px;
   text-decoration: none;
+  border-bottom: 3px solid #515783;
 }
 
 #menu li
@@ -263,7 +265,7 @@ body
   height: 25px;
   background: transparent url('../images/header_menu.png') no-repeat left top;
   line-height: 15px;
-  margin: 0px 0px 0 0px;
+  margin: 0px 0px 0 1px;
   padding: 5px 0px 0 0px;
   text-align: center;
   text-decoration: none;

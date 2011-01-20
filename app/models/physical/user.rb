@@ -74,6 +74,26 @@ class User < ActiveRecord::Base
     write_attribute :email, (value ? value.downcase : nil)
   end
   
+  def firstname=(value)
+    write_attribute :firstname, (value ? value.downcase : nil)
+  end
+  
+  def lastname=(value)
+    write_attribute :lastname, (value ? value.downcase : nil)
+  end
+  
+  def change_detail(params)
+    self.firstname = params[:firstname]
+    self.lastname = params[:lastname]
+    self.save
+  end
+  
+  def change_mdp(params)
+    self.password = params[:new_password]
+    self.password_confirmation = params[:password_confirmation]
+    self.save
+  end
+  
   # Le mot de passe n'est necessaire que si l'utilisateur est "actif".
   # TODO: Autoriser explicitement les etats dans le quel l'utilisateur peut ne pas avoir de mot de passe.
   def password_required?

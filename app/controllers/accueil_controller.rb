@@ -16,4 +16,21 @@ class AccueilController < ApplicationController
       format.js   {render :json => @current_user.to_json}
     end
   end
+  
+  
+  def change_detail
+    @current_user.change_detail(params)
+    render :text => 'success'
+  end
+  
+  def change_mdp
+    user = @current_user.authenticated?(params[:password]) 
+    if user
+      @current_user.update_attributes(:password => params[:new_password], :password_confirmation => params[:password_confirmation])
+      render :text => 'success'
+    else
+      render :text => 'failed'
+    end
+  end
+  
 end

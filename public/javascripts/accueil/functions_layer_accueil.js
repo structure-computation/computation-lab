@@ -28,6 +28,9 @@ for(i=0; i<content_tableau_page.length ; i++){
     }
 }
 
+user_change_detail  =  new Array();              // initialisation des info changement detail user
+user_change_mdp     =  new Array();              // initialisation des info changement mdp user
+
 //-----------------------------------------------------------------------------------------------------------
 // affichage des contenu a partir de fleches
 //-----------------------------------------------------------------------------------------------------------
@@ -35,6 +38,7 @@ for(i=0; i<content_tableau_page.length ; i++){
 var bool_affiche_user_detail = false ;
 
 function affich_contenu_profil_user(){
+        get_user_detail();
 	if(!bool_affiche_user_detail){
 		// switch du contenu
 		$('#ProfilUserContent').slideDown("slow");
@@ -92,7 +96,7 @@ function init_user_detail(user_temp)
         user_detail['name'] = 'aucun membre';
     }
     affich_detail_user();
-    affich_contenu_profil_user();
+//     affich_contenu_profil_user();
 }
 // requette pour l'obtention du tableau des membres
 function get_user_detail()
@@ -103,6 +107,12 @@ function get_user_detail()
 
 // afficher le détail d'un membre
 function affich_detail_user(){
+    id_detail_user = document.getElementById('Box_detail_user');
+    id_change_detail_user = document.getElementById('Box_change_detail_user'); 
+    id_change_mdp_user = document.getElementById('Box_change_mdp_user');       
+    id_detail_user.className = 'on';
+    id_change_detail_user.className = 'off';
+    id_change_mdp_user.className = 'off';
     var table_detail = user_detail['user'];
     for(key in table_detail){
 	    var strContent_detail_key = 'membre_detail_' + key ;
@@ -115,6 +125,131 @@ function affich_detail_user(){
 	    }
     }
 }
+
+// afficher le changement de détail d'un membre
+function affich_change_detail_user(){
+    user_change_detail = clone(user_detail['user']);
+    id_detail_user = document.getElementById('Box_detail_user');
+    id_change_detail_user = document.getElementById('Box_change_detail_user'); 
+    id_change_mdp_user = document.getElementById('Box_change_mdp_user');       
+    id_detail_user.className = 'off';
+    id_change_detail_user.className = 'on';
+    id_change_mdp_user.className = 'off';
+    for(key in user_change_detail){
+        var strContent_detail_key = 'membre_detail_change_' + key ;
+        //alert(strContent_detail_key);
+        var id_detail_key = document.getElementById(strContent_detail_key);
+        if(id_detail_key != null){
+            strContent = new String();
+            strContent = user_change_detail[key];
+            remplacerTexte(id_detail_key, strContent);
+        }
+    }
+    for(key in user_change_detail){
+        var strContent_detail_key = 'membre_change_' + key ;
+        //alert(strContent_detail_key);
+        var id_detail_key = document.getElementById(strContent_detail_key);
+        if(id_detail_key != null){
+            strContent = new String();
+            strContent = user_change_detail[key];
+            id_detail_key.value = strContent ;
+        }
+    }
+}
+
+//changer les info d'un user
+function user_detail_change_value(){
+      for(key in user_change_detail){
+              var strContent_info_key = 'membre_change_' + key ;
+              var id_info_key = document.getElementById(strContent_info_key);
+              if(id_info_key != null){
+                      user_change_detail[key] = id_info_key.value ;
+              }
+      }   
+}
+
+// valider les changement d'info d'un user
+function user_detail_change_valid()
+{
+//     alert(array2json(Tableau_new_membre));
+    var param1 = array2object(user_change_detail);
+    $.ajax({
+        url: "/accueil/change_detail",
+        type: 'POST',
+        dataType: 'text',
+        data: $.toJSON(param1),
+        contentType: 'application/json; charset=utf-8',
+        success: function(json) {
+            //alert(json);
+            get_user_detail();
+        }
+    });
+
+}
+
+
+// afficher le changement de mdp d'un membre
+function affich_change_mdp_user(){
+    user_change_mdp['password'] = '';
+    user_change_mdp['new_password'] = '';
+    user_change_mdp['password_confirmation'] = '';
+    id_detail_user = document.getElementById('Box_detail_user');
+    id_change_detail_user = document.getElementById('Box_change_detail_user'); 
+    id_change_mdp_user = document.getElementById('Box_change_mdp_user');       
+    id_detail_user.className = 'off';
+    id_change_detail_user.className = 'off';
+    id_change_mdp_user.className = 'on';
+    
+    for(key in user_change_mdp){
+        var strContent_detail_key = 'membre_change_' + key ;
+        var id_detail_key = document.getElementById(strContent_detail_key);
+        if(id_detail_key != null){
+            strContent = new String();
+            strContent = user_change_mdp[key];
+            id_detail_key.value = strContent ;
+        }
+    }
+}
+
+//changer le mdp du membre
+function user_mdp_change_value(){
+      for(key in user_change_mdp){
+              var strContent_info_key = 'membre_change_' + key ;
+              var id_info_key = document.getElementById(strContent_info_key);
+              if(id_info_key != null){
+                      user_change_mdp[key] = id_info_key.value ;
+              }
+      }   
+}
+
+// valider le changement du mdp du user
+function user_mdp_change_valid()
+{
+    if(user_change_mdp['new_password'] == user_change_mdp['password_confirmation']){
+      var param1 = array2object(user_change_mdp);
+      $.ajax({
+          url: "/accueil/change_mdp",
+          type: 'POST',
+          dataType: 'text',
+          data: $.toJSON(param1),
+          contentType: 'application/json; charset=utf-8',
+          success: function(json) {
+              if(json == 'success'){
+                alert("Mot de passe modifié");
+                get_user_detail();
+              }else{
+                alert("Votre mot de passe n'a pas été modifié !");
+                affich_change_mdp_user();
+              }
+          }
+      });
+    }else{
+      alert("Vous n'avez pas taper les deux mêmes valeurs pour votre nouveau mot de passe");
+      affich_change_mdp_user();
+    }
+
+}
+
 
 
 //------------------------------------------------------------------------------------------------------

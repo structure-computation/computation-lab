@@ -1,0 +1,31 @@
+#Box_change_mdp_user.off
+  .DetailCadreModel1
+    .DetailCadreModelMarge
+    .DetailCadreModelLigne
+      .DetailCadreModelCase1
+        Mot de passe actuel
+      .DetailCadreModelCase2
+        %input#membre_change_password{ :type => "password", :onKeyup => "user_mdp_change_value()" }
+    .DetailCadreModelLigne  
+      .DetailCadreModelCase1
+        Nouveau mot de passe
+      .DetailCadreModelCase2
+        %input#membre_change_new_password{ :type => "password", :onKeyup => "user_mdp_change_value()" }
+    .DetailCadreModelLigne  
+      .DetailCadreModelCase1
+        Répéter mot de passe
+      .DetailCadreModelCase2
+        %input#membre_change_password_confirmation{ :type => "password", :onKeyup => "user_mdp_change_value()" }
+
+    .DetailCadreModelMarge
+    .DetailCadreModelMarge
+    
+    .DetailCadreLink
+      %a{ :onclick => "affich_detail_user()", :style => "cursor: pointer;" } 
+        Annuler
+    .DetailCadreLink
+      %a{ :onclick => "user_mdp_change_valid()", :style => "cursor: pointer;" } 
+        Valider
+
+    .DetailCadreModelMarge
+    .DetailCadreModelMarge

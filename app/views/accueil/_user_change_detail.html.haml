@@ -1,57 +1,47 @@
-.DetailCadreModel1
-  .DetailCadreModelMarge
-  .DetailCadreModelLigne
-    .DetailCadreModelCase1
-      email
-    .DetailCadreModelCase2
-      %input#membre_change_email{ :type => "text", :onKeyup => "user_detail_change_value()" }
-  .DetailCadreModelLigne
-    .DetailCadreModelCase1
-      Nom
-    .DetailCadreModelCase2
-      %input#membre_change_lastname{ :type => "text", :onKeyup => "user_detail_change_value()" }
-  .DetailCadreModelLigne
-    .DetailCadreModelCase1
-      Prenom
-    .DetailCadreModelCase2
-      %input#membre_change_firstname{ :type => "text", :onKeyup => "user_detail_change_value()" }
-  .DetailCadreModelLigne
-    .DetailCadreModelCase1
-      Droits
-    .DetailCadreModelCase2
-      ingénieur
+#Box_change_detail_user.off
+  .DetailCadreModel1
+    .DetailCadreModelMarge
+    .DetailCadreModelLigne
+      .DetailCadreModelCase1
+        email
+      .DetailCadreModelCase2#membre_detail_change_email
+    .DetailCadreModelLigne
+      .DetailCadreModelCase1
+        Nom
+      .DetailCadreModelCase2
+        %input#membre_change_lastname{ :type => "text", :onKeyup => "user_detail_change_value()" }
+    .DetailCadreModelLigne
+      .DetailCadreModelCase1
+        Prenom
+      .DetailCadreModelCase2
+        %input#membre_change_firstname{ :type => "text", :onKeyup => "user_detail_change_value()" }
+    .DetailCadreModelLigne
+      .DetailCadreModelCase1
+        Droits
+      .DetailCadreModelCase2#membre_detail_change_role
 
-  .DetailCadreModelMarge
-  .DetailCadreModelLigne
-    .DetailCadreModelCase1
-      Statut
-    .DetailCadreModelCase2
-      actif
-  .DetailCadreModelLigne  
-    .DetailCadreModelCase1
-      date d'arrivée
-    .DetailCadreModelCase2
-      01\/03\/2009
-      
-  .DetailCadreModelMarge
-  .DetailCadreModelLigne
-    .DetailCadreModelCase1
-      Ancien mot de passe 
-    .DetailCadreModelCase2
-      %input#membre_change_old_password{ :type => "text", :onKeyup => "user_detail_change_value()" }
-  .DetailCadreModelLigne  
-    .DetailCadreModelCase1
-      Nouveau mot de passe
-    .DetailCadreModelCase2
-      %input#membre_change_new_password{ :type => "text", :onKeyup => "user_detail_change_value()" }
-  .DetailCadreModelLigne  
-    .DetailCadreModelCase1
-      Répéter mot de passe
-    .DetailCadreModelCase2
-      %input#membre_change_bis_nex_password{ :type => "text", :onKeyup => "user_detail_change_value()" }
-      
-  .DetailCadreModelMarge
-  .DetailCadreModelMarge  
+    .DetailCadreModelMarge
+    .DetailCadreModelLigne
+      .DetailCadreModelCase1
+        Statut
+      .DetailCadreModelCase2#membre_detail_change_state
+    .DetailCadreModelLigne  
+      .DetailCadreModelCase1
+        date d'arrivée
+      .DetailCadreModelCase2#membre_detail_change_created_at
+        01\/03\/2009
+        
+    .DetailCadreModelMarge
+    .DetailCadreModelMarge  
 
-      
-      
+    .DetailCadreLink
+      %a{ :onclick => "affich_detail_user()", :style => "cursor: pointer;" } 
+        Annuler
+    .DetailCadreLink
+      %a{ :onclick => "user_detail_change_valid()", :style => "cursor: pointer;" } 
+        Valider
+
+    .DetailCadreModelMarge
+    .DetailCadreModelMarge
+        
+        

@@ -1,6 +1,6 @@
 #New_wiz_layer.off
   #New_wiz_layer_top
-    Ajout d'un nouveau membre
+    Ajouter un nouveau membre
   #New_wiz_layer_milieu
     #NM_wiz_menu
       %a{ :onclick => "()" } 
@@ -49,8 +49,9 @@
       .NM_text_1{ :style => "width:500px;" }
         /%input#new_membre_role{ :type => "text", :onKeyup => "new_membre_change_value()" }
         %select#new_membre_role{ :onChange => "new_membre_change_value()"}
-          %option{:value => "ingenieur"} ingénieur
-          %option{:value => "gestionnaire"} gestionnaire
+          %option{:value => "ingenieur"} Ingénieur
+          %option{:value => "gestionnaire"} Gestionnaire
+          %option{:value => "tous"} Tous les droits 
 
 
 
