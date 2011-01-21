@@ -48,7 +48,7 @@ class User < ActiveRecord::Base
   validates_uniqueness_of   :email
   validates_format_of       :email,    :with => Authentication.email_regex, :message => Authentication.bad_email_message
 
-  
+  # validates_format_of       :password, :with => /^(?=.\d)(?=.([a-z]|[A-Z]))([\x20-\x7E]){6,40}$/, :if => :require_password?, :message => "must include one number, one letter and be between 6 and 40 characters"  
 
   # HACK HACK HACK -- how to do attr_accessible from here?
   # prevents a user from submitting a crafted form that bypasses activation
@@ -89,9 +89,8 @@ class User < ActiveRecord::Base
   end
   
   def change_mdp(params)
-    self.password = params[:new_password]
-    self.password_confirmation = params[:password_confirmation]
-    self.save
+    user = @current_user.authenticated?(params[:password]) && !params[:new_password].blank? && params[:new_password] == params[:password_confirmation]
+    return true
   end
   
   # Le mot de passe n'est necessaire que si l'utilisateur est "actif".
