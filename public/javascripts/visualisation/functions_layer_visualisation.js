@@ -597,6 +597,20 @@ function go_page_new_forfait(num){
 }
 
 
+//------------------------------------------------------------------------------------------------------
+// initialisation du serveur d'image en relation aves ImgServer.js
+//------------------------------------------------------------------------------------------------------
+
+function init_all() {
+    var s = new ImgServer( "my_canvas", "00" );
+    s.load_vtu( "/var/www/Visu/data/manchon.vtu" );
+    //     alert(s);
+    // s.load_vtu( "/home/leclerc/code/Visu/data/croix.vtu" );
+    // s.color_by_field( "epsilon", 1 );
+    // s.shrink( 0.01 );
+    s.fit();
+    s.render();
+}
 
 
 -->
