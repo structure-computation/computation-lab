@@ -168,6 +168,20 @@ ImgServer = (function() {
     evt.returnValue = false;
     return false;
   };
+  ImgServer.prototype.getLeft = function(l) {
+    if (l.offsetParent != null) {
+      return l.offsetLeft + this.getLeft(l.offsetParent);
+    } else {
+      return l.offsetLeft;
+    }
+  };
+  ImgServer.prototype.getTop = function(l) {
+    if (l.offsetParent != null) {
+      return l.offsetTop + this.getTop(l.offsetParent);
+    } else {
+      return l.offsetTop;
+    }
+  };
   ImgServer.prototype.img_mouse_wheel = function(evt) {
     var O, P, X, Y, canvas, coeff, d, delta, mwh, x, y;
     if (!(evt != null)) {
@@ -185,8 +199,8 @@ ImgServer = (function() {
     }
     coeff = Math.pow(1.2, delta);
     mwh = Math.min(this.canvas.width, this.canvas.height);
-    x = (evt.clientX - this.canvas.offsetLeft - this.canvas.width / 2) * this.IP.d / mwh;
-    y = (this.canvas.height / 2 - evt.clientY - this.canvas.offsetTop) * this.IP.d / mwh;
+    x = (evt.clientX - this.getLeft(this.canvas) - this.canvas.width / 2) * this.IP.d / mwh;
+    y = (this.canvas.height - evt.clientY - this.getTop(this.canvas)) * this.IP.d / mwh;
     O = this.IP.O;
     X = this.IP.X;
     Y = this.IP.Y;
