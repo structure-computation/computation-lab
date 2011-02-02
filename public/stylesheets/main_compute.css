@@ -832,8 +832,9 @@ body
 .NC_filter_i
 {
   width:248px ; 
-  height:25px ;
-  line-height: 23px;
+  margin-top: 5px ;
+/*   height:25px ; */
+  line-height: 18px;
   font-weight: 100;
   font-size: 0.75em;
   color: #ffffff;
@@ -864,6 +865,7 @@ body
 {
   width:248px ; 
   height:20px ;
+  margin-top: 5px ;
   line-height: 19px;
   color: #2a3556;
   font-weight: 100;
@@ -921,6 +923,28 @@ body
 {
   color: black;
 }
+
+#load_brouillon_name
+{
+  position: relative;
+}
+
+.load_brouillon_fichier
+{
+  position: absolute;
+  margin: 5px 0px 0px 34px;
+  z-index: 1;
+  width:180px ; 
+  height:22px ;
+  text-align:right;
+  overflow:hidden;
+}
+.load_brouillon_fichier input {
+  opacity:0;
+}
+
+
+
 /*
  * ccs pour les titre de conditions limite
  *

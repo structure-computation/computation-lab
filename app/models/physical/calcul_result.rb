@@ -70,12 +70,55 @@ class CalculResult < ActiveRecord::Base
     return results
   end
   
+  def load_brouillon_from_ext_file(params,current_user) # verification et enregistrement du brouillon envoyé par l'utilisateur
+    file = params[:file]
+    path_to_mesh = "#{SC_MODEL_ROOT}/model_#{self.sc_model.id}/MESH/mesh.txt"
+    mesh = File.read(path_to_mesh)
+    jsonmesh = JSON.parse(mesh)
+    jsonmesh = jsonmesh[0]
+    jsonbrouillon = JSON.parse(file.read)
+    
+    results = false
+    #verification
+    if (jsonbrouillon['mesh']['nb_sst'] == jsonmesh['mesh']['nb_sst'] && jsonbrouillon['mesh']['nb_inter'] == jsonmesh['mesh']['nb_inter'] && jsonbrouillon['mesh']['nb_groups_elem'] == jsonmesh['mesh']['nb_groups_elem'] && jsonbrouillon['mesh']['nb_groups_inter'] == jsonmesh['mesh']['nb_groups_inter'])
+      results = true
+    end
+    
+    #enregistrement
+    if results
+      file_save = JSON.pretty_generate(jsonbrouillon)
+      self.save 
+      self.user = current_user
+      self.name = "brouillon_#{self.id}"
+      self.save
+      
+      # on enregistre le fichier sur le disque et on change les droit pour que le serveur de calcul y ait acces
+      path_to_model = "#{SC_MODEL_ROOT}/model_#{self.sc_model.id}"
+      path_to_calcul = "#{SC_MODEL_ROOT}/model_#{self.sc_model.id}/calcul_#{self.id}"
+  
+      Dir.mkdir(path_to_model, 0777) unless File.exists?(path_to_model)
+      Dir.mkdir(path_to_calcul, 0777) unless File.exists?(path_to_calcul)
+      File.chmod 0777, path_to_calcul
+      
+      path_to_file = path_to_calcul + "/brouillon.txt"
+      
+      File.open(path_to_file, 'w+') do |f|
+          f.write(file_save)
+      end
+      File.chmod 0777, path_to_file
+    end
+
+    return results
+  end
+  
   def get_brouillon(params,current_user) # lecture du fichier brouillon sur le disque
     path_to_file = "#{SC_MODEL_ROOT}/model_#{self.sc_model.id}/calcul_#{self.id}/brouillon.txt"
     results = File.read(path_to_file)
     jsonobject = JSON.parse(results)
     
     if(self.state == 'temp') 	#si on prend le brouillon d'un calcul non effectué
+      self.description = params[:description]
+      self.save
       send_data  = {:calcul => self, :brouillon => jsonobject}
     else			#si on prend le brouillon d'un calcul effectué
       @new_calcul = self.sc_model.calcul_results.create(:name => params[:name], :description => params[:description], :state => 'temp', :ctype =>params[:ctype], :D2type => params[:D2type], :log_type => 'compute')

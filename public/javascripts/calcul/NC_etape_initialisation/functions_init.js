@@ -44,6 +44,46 @@ function affich_box_init(){
 // fonctions utiles pour la colone de gauche, bibliothèque des calcul 
 // -------------------------------------------------------------------------------------------------------------------------------------------
 
+// afficher la page de chargement d'un brouillon a partir d'un fichier exterieur
+function affich_load_brouillon_from_ext_file(){
+        //alert('affich_load_brouillon_from_ext_file');
+        var id_calcul_filter = document.getElementById('NC_filter_calcul');
+        var id_load_calcul = document.getElementById('NC_load_brouillon_from_ext_calcul');
+        id_calcul_filter.className = "off";
+        id_load_calcul.className = "on";
+}
+
+// annuler la page de chargement d'un brouillon a partir d'un fichier exterieur
+function cache_load_brouillon_from_ext_file(){
+        var id_calcul_filter = document.getElementById('NC_filter_calcul');
+        var id_load_calcul = document.getElementById('NC_load_brouillon_from_ext_calcul');
+        id_calcul_filter.className = "on";
+        id_load_calcul.className = "off";
+}
+
+// initialisation du formulaire ajax
+function  ajax_form_load_brouillon_from_ext_file(){ 
+    $('#load_brouillon_form').ajaxForm({dataType: 'script'});
+    //alert("Thank you for your comment!"); 
+}
+// telecharger le brouillon a partir d'un fichier exterieur
+function load_brouillon_from_ext_file()
+{
+    var queryString = $('#load_brouillon_form').formSerialize();
+    $('#load_brouillon_form').ajaxSubmit(function(json) {
+        alert("ce brouillon ne sera pris en compte que s'il est compatible avec le modèle");
+        var url_php = "/calcul/index?id_model=" + model_id ;
+        $(location).attr('href',url_php); 
+//         if (json==true){
+//           alert("le broullion a bien été ajouté");
+//           get_Tableau_calcul();
+//         }else{
+//           alert("le broullion n'est pas compatible avec ce modèle");
+//         }  
+    });
+}
+
+
 // afficher les filtres calcul
 function affich_calcul_filter(){
 	var id_calcul_filter = document.getElementById('NC_filter_calcul');

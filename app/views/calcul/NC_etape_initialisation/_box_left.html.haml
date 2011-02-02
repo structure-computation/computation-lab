@@ -3,7 +3,31 @@
     Bibliothèque des calcul
   #page_calcul_12.NC_box
     .NC_filter{ :style => "width:248px; height:120px" }
-    /  <?php include("./contenu/NC_etape_initialisation/NC_filter_calcul.php");  ?>
+      #NC_filter_calcul.on
+        .NC_filter_i
+          Paramétrer un nouveau calcul à partir de zero, à partir d un calcul déjà réalisé, ou charger un fichier de brouillon au format json compatible avec ce modèle.
+        .NC_filter_valid
+          %a{:onclick => "affich_load_brouillon_from_ext_file()", :style => "cursor: pointer;" }
+            .NC_filter_button{ :style => "margin-right:40px;" }
+              Charger un brouillon
+      #NC_load_brouillon_from_ext_calcul.off
+        %form#load_brouillon_form{:action => "/calcul/load_brouillon_from_ext_file", :enctype => "multipart/form-data", :method => "post"}
+          .NC_filter_i
+            %input#format{:type => "hidden", :value => "js"}
+            %input#id_model{:type => "hidden", :name => "id_model", :value => "#{@id_model}" }
+            %input#load_brouillon_name{:type => "text", :name=> "load_brouillon_name", :onfocus => "this.blur();"} 
+          .load_brouillon_fichier
+            %input{:name => "file", :type => "file", :onchange => "document.getElementById('load_brouillon_name').value=this.value;"}
+          .NC_filter_valid
+            %a{:onclick => "load_brouillon_from_ext_file()", :style => "cursor: pointer;" }
+              .NC_filter_button{ :style => "margin-right:40px;" }
+                Ajouter ce brouillon
+        .NC_filter_i
+        .NC_filter_i
+          %a{:onclick => "cache_load_brouillon_from_ext_file()", :style => "cursor: pointer;" }
+            %img{ :src => "/images/NC_picto_annuler_filtre.png", :style => "vertical-align:middle;" }
+            Annuler
+       
     - (0...20).each do |i|
       .tableNC_impair{ :id => "calcul_pair_#{i}" }
         .tableNC_box_0{ :id => "calcul_1_#{i}" }

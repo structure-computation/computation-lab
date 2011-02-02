@@ -86,6 +86,17 @@ class CalculController < ApplicationController
     render :json => send_data.to_json
   end
 
+  def load_brouillon_from_ext_file
+    @current_model = @current_user.sc_models.find(params[:id_model])
+    @current_calcul = @current_model.calcul_results.new( :state => 'temp', :ctype =>params[:ctype], :log_type => 'compute')
+    results = @current_calcul.load_brouillon_from_ext_file(params,@current_user)
+    if !results
+      @current_calcul.delete
+    end
+    # envoie de la reponse au client
+    render :text => results
+  end
+  
   def send_brouillon
     @current_model = @current_user.sc_models.find(params[:id_model])
     @current_calcul = @current_model.calcul_results.find(params[:id_calcul])
