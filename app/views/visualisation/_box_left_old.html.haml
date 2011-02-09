@@ -43,16 +43,34 @@
           .tableNC_box_radio_select#piece_lign_erreur_radio
           .tableNC_box_2#piece_lign_erreur_2
             Carte d erreur
+          
+    %div{ :style => "width:248px; height:5px; float:left;" }
+    .NC_CL_titre
+      Interfaces : Champs visualisables
+    .tableNC_impair
+      .tableNC_box_lign#Interface_lign_deplacements
+        %a{ :onclick => "", :style => "cursor: pointer;" }
+          .tableNC_box_radio_select#Interface_lign_deplacements_radio
+          .tableNC_box_2#Interface_lign_deplacements_2
+            Déplacements
     .tableNC_pair
-      .tableNC_box_lign#piece_lign_num_piece
-        %a{ :onclick => "image_3d.color_by_field( 'num_group', 0 );image_3d.fit();image_3d.render();", :style => "cursor: pointer;" }
-          .tableNC_box_radio_select#piece_lign_erreur_radio
-          .tableNC_box_2#piece_lign_erreur_2
-            Numéro de pièce    
-
-
-
-
+      .tableNC_box_lign#Interface_lign_efforts
+        %a{ :onclick => "", :style => "cursor: pointer;" }
+          .tableNC_box_radio_select#Interface_lign_efforts_radio
+          .tableNC_box_2#Interface_lign_efforts_2
+            Efforts
+    .tableNC_impair
+      .tableNC_box_lign#Interface_lign_E_deformation
+        %a{ :onclick => "", :style => "cursor: pointer;" }
+          .tableNC_box_radio_select#Interface_lign_E_deformation_radio
+          .tableNC_box_2#Interface_lign_E_deformation_2
+            Energie de déformation
+    .tableNC_pair
+      .tableNC_box_lign#Interface_lign_erreur
+        %a{ :onclick => "", :style => "cursor: pointer;" }
+          .tableNC_box_radio_select#Interface_lign_erreur_radio
+          .tableNC_box_2#Interface_lign_erreur_2
+            Carte d'erreur
 
     %div{ :style => "width:248px; height:5px; float:left;" }
     .NC_CL_titre

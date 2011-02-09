@@ -12,12 +12,13 @@
       %li#MenuModelUtilisateurs
         %a{ :onclick => "affich_Utilisateurs()", :style => "cursor: pointer;" }
           Utilisateurs
+      %li#MenuModelFile
+        %a{ :onclick => "affich_File()", :style => "cursor: pointer;" }
+          Fichiers
       %li#MenuModelForum
         %a{ :onclick => "affich_Forum()", :style => "cursor: pointer;" }
           Forum
-      %li#MenuModelDescription
-        %a{ :onclick => "affich_Description()", :style => "cursor: pointer;" }
-          Description
+      
 
   .CompteContent
     .CompteContentHeightMin
@@ -25,7 +26,7 @@
     = render :partial => "detail_model/resultats/cadre_resultats"
     = render :partial => "detail_model/utilisateurs/cadre_utilisateurs"
     = render :partial => "detail_model/forum/cadre_forum"
-    = render :partial => "detail_model/description/cadre_description"
+    = render :partial => "detail_model/file/cadre_file"
     /= render :partial => "company/calcul/decompte_calcul"
   
   

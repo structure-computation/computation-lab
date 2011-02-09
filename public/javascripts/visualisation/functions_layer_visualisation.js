@@ -41,6 +41,7 @@ for(i=0; i<content_tableau_page.length ; i++){
     }
 }
 
+var image_3d;
 
 //------------------------------------------------------------------------------------------------------
 // fonctions génériques
@@ -437,6 +438,42 @@ function go_page_piece(num){
 	affiche_Tableau_piece();
 }
 
+// selectionner (activer) un une piece
+function active_piece_select(id){
+        var num_select = -1; 
+        var id_select = -1; 
+        for(i=0;i<Tableau_pieces.length;i++){
+                if(Tableau_pieces[i]['id'] == id) {
+                      num_select = i;
+                      id_select = id;
+                      break;
+                }
+        }
+        if(num_select != -1){
+                num_page = Math.floor(num_select/taille_tableau_content_page['piece']);
+                num_in_page = num_select - num_page * taille_tableau_content_page['piece'];
+                go_page_piece(num_page);
+                select_pieces(num_in_page)
+        }
+}
+
+// afficher la piece actif dans la twin box left
+function select_pieces(num_in_page){ 
+        for(i=0;i<taille_tableau_content_page['piece'];i++){
+                strContent_1 = new String();
+                strContent_1 = 'piece_lign_' + i;
+                var id_active = document.getElementById(strContent_1);
+                if(id_active.className != "tableNC_box_lign off"){
+                        if(i==num_in_page){
+                                id_active.className = "tableNC_box_lign_active on";
+                        }else{
+                                id_active.className = "tableNC_box_lign on";
+                        }
+                }
+        }
+}
+
+
 //------------------------------------------------------------------------------------------------------
 // fonctions utiles pour l'affichage des interfaces
 //------------------------------------------------------------------------------------------------------
@@ -602,15 +639,24 @@ function go_page_new_forfait(num){
 //------------------------------------------------------------------------------------------------------
 
 function init_all() {
-    var s = new ImgServer( "my_canvas", "00" );
-    s.load_vtu( "/var/www/Visu/data/manchon.vtu" );
+    image_3d = new ImgServer( "my_canvas", "00" );
+    strgeom = new String();
+    strgeom = '/share/sc2/Developpement/MODEL/model_' + model_id + '/MESH/geometrie_all_0_0.vtu';
+    //strgeom = '/share/sc2/Developpement/MODEL/model_' + model_id + '/MESH/geom_inter_0_0.vtu';
+    
+    //image_3d.load_vtu( strgeom );
+    image_3d.load_vtu( "/var/www/Visu/data/geometry_all_0_0.vtu" );
+    //image_3d.load_vtu( "/var/www/Visu/data/manchon.vtu" );
     //     alert(s);
-    // s.load_vtu( "/home/leclerc/code/Visu/data/croix.vtu" );
-    // s.color_by_field( "epsilon", 1 );
-    // s.shrink( 0.01 );
-    s.fit();
-    s.render();
+    //image_3d.load_vtu( "/home/jbellec/Dropbox/SC/Inbox/fibres_mat/calcul_97/resultat_0_0.vtu" );
+    //image_3d.load_vtu("/var/www/Visu/data/croix.vtu" );
+    //image_3d.color_by_field( "epsilon", 1 );
+    //image_3d.shrink( 0.05 );
+    image_3d.fit();
+    image_3d.render();
 }
+
+
 
 
 -->

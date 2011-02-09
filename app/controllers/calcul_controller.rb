@@ -88,7 +88,7 @@ class CalculController < ApplicationController
 
   def load_brouillon_from_ext_file
     @current_model = @current_user.sc_models.find(params[:id_model])
-    @current_calcul = @current_model.calcul_results.new( :state => 'temp', :ctype =>params[:ctype], :log_type => 'compute')
+    @current_calcul = @current_model.calcul_results.new( :state => 'temp', :ctype =>'statique', :log_type => 'compute', :D2type => 'DP')
     results = @current_calcul.load_brouillon_from_ext_file(params,@current_user)
     if !results
       @current_calcul.delete

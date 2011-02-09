@@ -16,7 +16,7 @@ ImgServer = (function() {
   ImgServer.prototype.old_button = "";
   ImgServer.prototype.img_rgba = new Image();
   ImgServer.prototype.img_zzzz = new Image();
-  ImgServer.prototype.img_nnnn = new Image();
+  ImgServer.prototype.img_ngrp = new Image();
   ImgServer.prototype.hidden_src_canvas = [];
   ImgServer.prototype.z_min = 0;
   ImgServer.prototype.z_max = 0;
@@ -37,8 +37,8 @@ ImgServer = (function() {
     this.img_zzzz.onload = __bind(function() {
       return this.img_zzzz.data = void 0;
     }, this);
-    this.img_nnnn.onload = __bind(function() {
-      return this.img_nnnn.data = void 0;
+    this.img_ngrp.onload = __bind(function() {
+      return this.img_ngrp.data = void 0;
     }, this);
     this.canvas.onmousedown = __bind(function(evt) {
       return this.img_mouse_down(evt);
@@ -52,7 +52,7 @@ ImgServer = (function() {
     this.canvas.onmouseout = function(evt) {
       return this.onmousemove = null;
     };
-    if (typeof (_base = this.canvas).addEventListener === "function") {
+    if (typeof (_base = this.canvas).addEventListener == "function") {
       _base.addEventListener("DOMMouseScroll", this.canvas.onmousewheel, false);
     }
     for (i = 0; i <= 2; i++) {
@@ -78,6 +78,10 @@ ImgServer = (function() {
   };
   ImgServer.prototype.fit = function() {
     return this.queue_img_server_cmd('fit\n');
+  };
+  ImgServer.prototype.set_XY = function(X, Y) {
+    this.queue_img_server_cmd('set_X ' + X[0] + ' ' + X[1] + ' ' + X[2] + '\n');
+    return this.queue_img_server_cmd('set_Y ' + Y[0] + ' ' + Y[1] + ' ' + Y[2] + '\n');
   };
   ImgServer.prototype.shrink = function(s) {
     return this.queue_img_server_cmd('shrink ' + s + '\n');
@@ -150,6 +154,14 @@ ImgServer = (function() {
     this.IP.Y = this.rot_3(this.IP.Y, R);
     return this.IP.O = this.add_3(this.C, this.rot_3(this.sub_3(this.IP.O, this.C), R));
   };
+  ImgServer.prototype.get_num_group = function(x, y) {
+    var ngrp_data, o;
+    x -= this.getLeft(this.canvas);
+    y -= this.getTop(this.canvas);
+    o = 4 * (y * this.canvas.width + x);
+    ngrp_data = this.get_img_data(this.img_ngrp, this.hidden_src_canvas[2]);
+    return ngrp_data[o + 0] + 256 * ngrp_data[o + 1] + 256 * 256 * ngrp_data[o + 2];
+  };
   ImgServer.prototype.img_mouse_down = function(evt) {
     var canvas;
     if (!(evt != null)) {
@@ -162,7 +174,12 @@ ImgServer = (function() {
     }, this);
     this.old_x = evt.clientX - this.canvas.offsetLeft;
     this.old_y = evt.clientY - this.canvas.offsetTop;
-    if (typeof evt.preventDefault === "function") {
+    if (evt.ctrlKey) {
+      //alert(this.get_num_group(evt.clientX, evt.clientY));
+      select_pieces(this.get_num_group(evt.clientX, evt.clientY));
+      //document.getElementById("com").firstChild.data = this.get_num_group(evt.clientX, evt.clientY);
+    }
+    if (typeof evt.preventDefault == "function") {
       evt.preventDefault();
     }
     evt.returnValue = false;
@@ -200,7 +217,7 @@ ImgServer = (function() {
     coeff = Math.pow(1.2, delta);
     mwh = Math.min(this.canvas.width, this.canvas.height);
     x = (evt.clientX - this.getLeft(this.canvas) - this.canvas.width / 2) * this.IP.d / mwh;
-    y = (this.canvas.height - evt.clientY - this.getTop(this.canvas)) * this.IP.d / mwh;
+    y = (this.canvas.height / 2 - evt.clientY + this.getTop(this.canvas)) * this.IP.d / mwh;
     O = this.IP.O;
     X = this.IP.X;
     Y = this.IP.Y;
@@ -210,7 +227,7 @@ ImgServer = (function() {
       this.IP.O[d] = P[d] + (O[d] - P[d]) / coeff;
     }
     this.draw_img_on_canvas();
-    if (typeof evt.preventDefault === "function") {
+    if (typeof evt.preventDefault == "function") {
       evt.preventDefault();
     }
     evt.returnValue = false;
@@ -250,8 +267,20 @@ ImgServer = (function() {
     this.old_x = new_x;
     return this.old_y = new_y;
   };
+  ImgServer.prototype.get_img_data = function(img, hc) {
+    var ctx, src_pix;
+    if (!(img.data != null)) {
+      hc.width = img.width;
+      hc.height = img.height;
+      ctx = hc.getContext('2d');
+      ctx.drawImage(img, 0, 0);
+      src_pix = ctx.getImageData(0, 0, img.width, img.height);
+      img.data = src_pix.data;
+    }
+    return img.data;
+  };
   ImgServer.prototype.draw_img_on_canvas = function() {
-    var P_mas, P_mis, b, b_mm, ctx, d_mar, d_mir, div_m, e_mm, g, get_img_data, h, i, inv_z, lineargradient, mwh, new_D, new_P, new_eye, nnnn_data, o, old_buf, oz_dir, p1i0, r, rgba_data, s_mm, t0, t1, w, x, x_mas, x_md, x_mis, x_s, y, y_mas, y_md, y_mis, y_s, z, z_md_0, z_md_1, zu, zzzz_data, _ref, _ref2;
+    var P_mas, P_mis, b, b_mm, ctx, d_mar, d_mir, div_m, e_mm, g, h, i, inv_z, lineargradient, mwh, new_D, new_P, new_eye, ngrp_data, o, old_buf, oz_dir, p1i0, r, rgba_data, s_mm, t0, t1, w, x, x_mas, x_md, x_mis, x_s, y, y_mas, y_md, y_mis, y_s, z, z_md_0, z_md_1, zu, zzzz_data, _ref, _ref2;
     w = this.canvas.width;
     h = this.canvas.height;
     mwh = Math.min(w, h);
@@ -265,21 +294,9 @@ ImgServer = (function() {
     if (this.equal_obj(this.IP, this.RP)) {
       return ctx.drawImage(this.img_rgba, 0, 0, w, h);
     } else {
-      get_img_data = function(img, hc) {
-        var src_pix;
-        if (!(img.data != null)) {
-          hc.width = img.width;
-          hc.height = img.height;
-          ctx = hc.getContext('2d');
-          ctx.drawImage(img, 0, 0);
-          src_pix = ctx.getImageData(0, 0, img.width, img.height);
-          img.data = src_pix.data;
-        }
-        return img.data;
-      };
-      rgba_data = get_img_data(this.img_rgba, this.hidden_src_canvas[0]);
-      zzzz_data = get_img_data(this.img_zzzz, this.hidden_src_canvas[1]);
-      nnnn_data = get_img_data(this.img_zzzz, this.hidden_src_canvas[2]);
+      rgba_data = this.get_img_data(this.img_rgba, this.hidden_src_canvas[0]);
+      zzzz_data = this.get_img_data(this.img_zzzz, this.hidden_src_canvas[1]);
+      ngrp_data = this.get_img_data(this.img_ngrp, this.hidden_src_canvas[2]);
       old_buf = new TransBuf(this.RP, w, h);
       new_eye = new TransEye(this.IP, w, h);
       inv_z = this.dot_3(old_buf.Z, new_eye.Z) < 0;

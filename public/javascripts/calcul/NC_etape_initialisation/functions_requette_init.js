@@ -141,6 +141,7 @@ function load_brouillon(brouillon_temp)
 	}
 	Tableau_model = brouillon_temp['brouillon'] ;
 	Tableau_init_select = brouillon_temp['calcul']['calcul_result'];
+        //alert(array2json(Tableau_init_select));
 	affiche_Tableau_init_select();
 	
 	var taille_Tableau=Tableau_model.length;

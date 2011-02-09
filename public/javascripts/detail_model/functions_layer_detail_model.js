@@ -20,11 +20,12 @@ var content_tableau_connect         =  new Array();              // connectivit�
 var content_tableau_current_page    =  new Array();              // numéro de la page du tableau (sert pour la définition de la connectivité)    
 var content_tableau_curseur_page    =  new Array();              // nombre de page du tableau (sert pour l'affichage des page en bas des tableaux)
 var content_tableau_liste_page      =  new Array();              // liste des pages du tableau (sert pour l'affichage des page en bas des tableaux)
-var content_tableau_page            =  new Array('resultat','utilisateur','new_utilisateur','select_utilisateur');    // initialisation des pages avec tableau dynamique
+var content_tableau_page            =  new Array('resultat','utilisateur','file','new_utilisateur','select_utilisateur');    // initialisation des pages avec tableau dynamique
 
 var taille_tableau_content_page     =  new Array()               // taille du tableau dans la content box
 taille_tableau_content_page['resultat'] = 20;
 taille_tableau_content_page['utilisateur'] = 20;
+taille_tableau_content_page['file'] = 20;
 taille_tableau_content_page['new_utilisateur'] = 8;
 taille_tableau_content_page['select_utilisateur'] = 8;
 
@@ -49,8 +50,8 @@ var num_delete_resultat = -1;
 //---------------------------------------------------------------------------------------------------------
 
 function cadres_off(){
-  list_str_id = new Array('CadreOutils', 'CadreResultats', 'CadreUtilisateurs', 'CadreForum', 'CadreDescription');
-  list_str_menu_id = new Array('MenuModelOutils', 'MenuModelResultats', 'MenuModelUtilisateurs', 'MenuModelForum', 'MenuModelDescription');
+  list_str_id = new Array('CadreOutils', 'CadreResultats', 'CadreUtilisateurs', 'CadreForum', 'CadreFile');
+  list_str_menu_id = new Array('MenuModelOutils', 'MenuModelResultats', 'MenuModelUtilisateurs', 'MenuModelForum', 'MenuModelFile');
   for(i=0; i<list_str_id.length; i++){
     strtemp = list_str_id[i];
     id_off = document.getElementById(strtemp);
@@ -116,6 +117,16 @@ function affich_Description(){
   id_selected.className = 'selected';
 }
 
+function affich_File(){
+  get_Tableau_file(Current_model['id']);
+  cadres_off();
+  id_on = document.getElementById('CadreFile');  
+  id_on.className = 'on';
+  
+  id_selected = document.getElementById('MenuModelFile');        
+  id_selected.className = 'selected';
+}
+
 
 //-------------------------------------------------------------------------------------------------
 // fonctions utiles pour l'onglet outil
@@ -130,6 +141,18 @@ function send_model_mesh()
 	$(location).attr('href',url_php);   
     });
 }
+
+// telecharger un fichier
+function send_model_file()
+{
+    // pour l'envoie du tableau model_new
+    var queryString = $('#send_file_form').formSerialize();
+    $('#send_file_form').ajaxSubmit(function(json) {
+        var url_php = "/detail_model/index?id_model=" + Current_model['id'] ;
+        $(location).attr('href',url_php);   
+    });
+}
+
 
 function refresh_page()
 {
@@ -229,7 +252,7 @@ function download_resultat(num){
     var num_select = content_tableau_connect['resultat'][num];
     var id_resultat = Tableau_resultat_filter[num_select]['calcul_result']['id'];
     if(Tableau_resultat_filter[num_select]['calcul_result']['state']=='finish'){
-        var url_php = "/detail_model/download?id_model=" + model_id + "&id_resultat=" + id_resultat ;
+        var url_php = "/detail_model/download_resultat?id_model=" + model_id + "&id_resultat=" + id_resultat ;
         $(location).attr('href',url_php);  
     }else{
         alert('aucun résultat à télécharger');

@@ -108,6 +108,15 @@
   border: none;
   float: left;
 }
+.ResumeCompte7
+{
+  background: transparent;
+  width: 310px;
+  height: 83px;
+  margin: 0px 0px 0 0px;
+  border: none;
+  float: left;
+}
 .ResumeCompte3GreenBar
 {
   background: transparent url('../images/greybar.png') no-repeat top left;

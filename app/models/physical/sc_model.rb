@@ -76,6 +76,32 @@ class ScModel < ActiveRecord::Base
   end
   
   
+  def send_file(params,current_user)
+    # on enregistre les fichier sur le disque et on change les droit pour que le serveur de calcul y ai acces
+    file = params[:file] 
+    name = file.original_filename
+    
+    path_to_model = "#{SC_MODEL_ROOT}/model_#{self.id}"
+    path_to_dir_file = "#{SC_MODEL_ROOT}/model_#{self.id}/FILE"
+    Dir.mkdir(path_to_model, 0777) unless File.exists?(path_to_model)
+    Dir.mkdir(path_to_dir_file, 0777) unless File.exists?(path_to_dir_file)
+    path_to_file = path_to_dir_file + '/' + name
+    File.chmod 0777, path_to_model
+    File.chmod 0777, path_to_dir_file
+    
+    File.open(path_to_file, 'w+') do |f|
+        f.write(file.read)
+    end
+    
+    self.files_sc_models.create(:name => name, :user_id => current_user.id, :state =>'uploaded', :size => File.stat(path_to_file).size)
+    self.save
+    
+    # on retourne le resultats
+    return results
+    
+  end
+  
+  
   #def mesh_valid(id_user,calcul_time,json)
   def mesh_valid(params)
     id_user=params[:id_user]

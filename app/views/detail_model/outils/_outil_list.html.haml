@@ -13,10 +13,23 @@
       .ResumeCompteText1
       .ResumeCompteText1
         Visualisation
-      
+
 .largeBoxResumeCompte
-  .ResumeCompte1
+  %a{ :style => "cursor: pointer;", :onclick => "affich_send_file()" }  
+    .ResumeCompte1
   .ResumeCompte2
     .ResumeCompteText1
     .ResumeCompteText1
       Partager un fichier
+  #send_file_block.on
+    .ResumeCompte7
+      .ResumeCompteText1
+      %form#send_file_form{:action => "/detail_model/send_new_file", :enctype => "multipart/form-data", :method => "post"}
+        %input#send_file_id_model{:type => "hidden", :name => "id_model", :value => "#{@id_model}" }
+        .ResumeCompteText1{ :style => "width:320px;" }
+          %input#send_file_file{:name => "file", :type => "file"}/
+    .ResumeCompte6{ :style => "width:150px;" }
+      .ResumeCompteText1
+      %a{ :onclick => "send_model_file()", :style => "cursor: pointer;" }
+        .ResumeCompteBouton1
+          valider
