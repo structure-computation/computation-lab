@@ -211,7 +211,7 @@ function affich_detail_calcul_account(){
 
 
 function modif_compte_calcul(){
-    alert("Pour toute modification, \n veuillez contacter nos conseillés");
+    alert("Pour toute modification merci de contacter nos conseillers");
 }
 
 

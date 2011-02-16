@@ -110,6 +110,6 @@ function affich_detail_memory_account(){
 
 
 function modif_compte_abonnement(){
-    alert("Pour toute modification, \n veuillez contacter nos conseillés");
+    alert("Pour toute modification merci de contacter nos conseillers");
 }
 -->
