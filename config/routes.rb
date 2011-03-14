@@ -1,4 +1,29 @@
 SCInterface::Application.routes.draw do
+  
+  # Routes nommees pour restful authentication.
+  map.logout    '/logout',    :controller => 'sessions' , :action => 'destroy'
+  map.login     '/login',     :controller => 'sessions' , :action => 'new'
+  map.register  '/register',  :controller => 'users'    , :action => 'create'
+  map.signup    '/signup',    :controller => 'users'    , :action => 'new'
+  
+  # Ressources User et session (auth)
+  map.resource  :session
+  map.resources :users
+
+  # map.resource  :modele
+
+  # Route d'activation des utilisateurs.
+  map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate', :activation_code => nil
+  
+  # map.root :controller => "accueil"
+  root :to => "accueil#index"
+  
+  # La route par défaut héritée de l'application Rails 2, à conserver avant passage au REST.
+  # This is a legacy wild controller route that's not recommended for RESTful applications.
+  # Note: This route will make all actions in every controller accessible via GET requests.
+  match ':controller(/:action(/:id(.:format)))'
+  
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -52,7 +77,5 @@ SCInterface::Application.routes.draw do
 
   # See how all your routes lay out with "rake routes"
 
-  # This is a legacy wild controller route that's not recommended for RESTful applications.
-  # Note: This route will make all actions in every controller accessible via GET requests.
-  # match ':controller(/:action(/:id(.:format)))'
+
 end
