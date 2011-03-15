@@ -12,6 +12,7 @@ gem 'prawn'       , '0.8.4'
 gem 'jquery-rails', '0.2.5'
 gem 'json'                    # Inutile si ruby 1.9
 gem 'aasm'
+gem 'devise'      , '1.1.8'
 
 # Use unicorn as the web server
 # gem 'unicorn'
