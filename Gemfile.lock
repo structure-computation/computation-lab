@@ -129,3 +129,4 @@ DEPENDENCIES
   prawn (= 0.8.4)
   rails (= 3.0.5)
   ruby-debug19
+  warden
