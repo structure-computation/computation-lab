@@ -1,19 +1,22 @@
 SCInterface::Application.routes.draw do
   
+  
+
   # Routes nommees pour restful authentication.
-  match  '/logout'    => 'sessions#destroy'   , :as => :logout   
-  match  '/login'     => 'sessions#new'       , :as => :login    
-  match  '/register'  => 'users#create'       , :as => :register 
-  match  '/signup'    => 'users#new'          , :as => :signup   
+  # match  '/logout'    => 'sessions#destroy'   , :as => :logout   
+  # match  '/login'     => 'sessions#new'       , :as => :login    
+  # match  '/register'  => 'users#create'       , :as => :register 
+  # match  '/signup'    => 'users#new'          , :as => :signup   
   
   # Ressources User et session (auth)
-  resource  :session
-  resources :users
+  # resource    :session
+  # resources   :users
+  devise_for  :users
 
   # map.resource  :modele
 
   # Route d'activation des utilisateurs.
-  match '/activate/:activation_code' => 'users#activate', :activation_code => nil, :as => :activate
+  # match '/activate/:activation_code' => 'users#activate', :activation_code => nil, :as => :activate
   
   # map.root :controller => "accueil"
   root :to => "accueil#index"
