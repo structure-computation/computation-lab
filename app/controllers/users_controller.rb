@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
 
-  before_filter :login_required,  :except => :activate
+  # before_filter :login_required,  :except => :activate
   # Protect these actions behind an admin login
   # before_filter :admin_required, :only => [:suspend, :unsuspend, :destroy, :purge]
   before_filter :find_user, :only => [:suspend, :unsuspend, :destroy, :purge]

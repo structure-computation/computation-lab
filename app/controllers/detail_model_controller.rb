@@ -1,6 +1,6 @@
 class DetailModelController < ApplicationController
   require 'json'
-  before_filter :login_required,  :except => :mesh_valid
+  # before_filter :login_required,  :except => :mesh_valid
 
   def index
     @page = 'SCcompute'

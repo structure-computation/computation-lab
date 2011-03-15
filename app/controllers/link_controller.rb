@@ -1,6 +1,6 @@
 class LinkController < ApplicationController
   #session :cookie_only => false, :only => :upload
-  before_filter :login_required
+  # before_filter :login_required
   
   def index 
     @page = 'SCcompute'

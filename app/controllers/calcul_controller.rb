@@ -2,7 +2,7 @@ class CalculController < ApplicationController
   require 'json'
   require 'socket'
   include Socket::Constants
-  before_filter :login_required , :except => :calcul_valid
+  # before_filter :login_required , :except => :calcul_valid
   
   def index
     @page = 'SCcompute'
