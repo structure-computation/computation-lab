@@ -35,7 +35,7 @@ gem 'devise'
 # and rake tasks are available in development mode:
 group :development, :test do
   # gem 'webrat'
-  gem 'ruby-debug19'          , :require => 'ruby-debug'
+  # gem 'ruby-debug19'          , :require => 'ruby-debug'
   
   # gem 'factory_girl_rails'  , '1.0'
   # gem 'rspec-rails'         , '2.2.1'
