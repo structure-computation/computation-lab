@@ -65,6 +65,7 @@ class User < ActiveRecord::Base
 
   # validates_format_of       :password, :with => /^(?=.\d)(?=.([a-z]|[A-Z]))([\x20-\x7E]){6,40}$/, :if => :require_password?, :message => "must include one number, one letter and be between 6 and 40 characters"  
 
+  # TODO: Ajouter des validation d'association avec une entreprise.
 
 
 

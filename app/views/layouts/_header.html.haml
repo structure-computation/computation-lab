@@ -7,15 +7,16 @@
     #header_top_user
       #{session[:current_user_name]}
       %br
-      = link_to "déconnexion", destroy_user_session_path,  :id => "disconnect_link"
+      - if user_signed_in?
+        = link_to "déconnexion", destroy_user_session_path,  :id => "disconnect_link"
         
     #header_top_temp
     #header_top_societe
       #{session[:current_company_name]}
       / TODO: Supprimer la ligne suivante dans une version ultérieure. C'est une mauvaise façon de se connecter.
-      - if(current_user && current_user.company.id == 240607020)
+      - if(current_user && current_user.company && current_user.company.id == 240607020)
         %br
-        %a{:href => "/sc_admin_company", :style => "font-size: 0.75em; color : #b8b9c3; text-decoration: underline ;" }
+        %a{:href => "/sc_admin_company", :id=>"administration_link" }
           administration
     
     
