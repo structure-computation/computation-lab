@@ -48,5 +48,8 @@ group :development, :test do
 
   # gem 'autotest-rails'      , '4.1.0'
   # gem 'autotest'            , '4.4.1'
-
+  
+  # Utilisation des générateurs haml de devise.
+  gem 'hpricot'
+  gem 'ruby_parser'
 end
