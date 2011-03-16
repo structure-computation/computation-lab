@@ -69,7 +69,9 @@ class User < ActiveRecord::Base
 
 
 
-
+  def full_name
+    self.firstname + " " + self.lastname
+  end
 
   def email=(value)
     write_attribute :email, (value ? value.downcase : nil)

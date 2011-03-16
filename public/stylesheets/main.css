@@ -230,7 +230,15 @@ body
   font-size: 0.80em;
   font-weight: normal;
   float: right;
+
 }
+
+#disconnect_link, #administration_link {
+  font-size:        0.75em;
+  color:            #b8b9c3;
+  text-decoration:  underline;
+}
+
 #header_top_cadena
 {
   width: 43px;
