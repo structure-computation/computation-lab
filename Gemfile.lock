@@ -120,7 +120,7 @@ DEPENDENCIES
   aasm
   barista (= 1.0.0)
   delayed_job
-  devise (= 1.1.8)
+  devise
   haml (= 3.0.25)
   haml_scaffold (= 1.1.0)
   jquery-rails (= 0.2.5)

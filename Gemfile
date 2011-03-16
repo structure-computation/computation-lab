@@ -13,7 +13,7 @@ gem 'jquery-rails', '0.2.5'
 gem 'json'                    # Inutile si ruby 1.9
 gem 'aasm'
 gem 'warden'
-gem 'devise'      , '1.1.8'
+gem 'devise'      
 
 # Use unicorn as the web server
 # gem 'unicorn'
