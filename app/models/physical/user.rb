@@ -54,7 +54,7 @@ class User < ActiveRecord::Base
   
   # TODO: La validation de format n'est plus disponible (suppr du module Authentication)
   validates_presence_of     :lastname
-  validates_format_of       :lastname,     :with => Authentication.name_regex,  :message => Authentication.bad_name_message, :allow_nil => true
+  # validates_format_of       :lastname,     :with => Authentication.name_regex,  :message => Authentication.bad_name_message, :allow_nil => true
   validates_length_of       :lastname,     :maximum => 100
 
   # Normalement pris en compte par Devise
