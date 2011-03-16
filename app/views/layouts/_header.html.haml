@@ -22,61 +22,22 @@
     
     /#bl_2.black.off
     #menu
-      - if @page == 'Accueil' 
-        %ul
-          %a{ :href => "/accueil" }
-            %li#mAccueil.selected 
-              Accueil
-          %a{ :href => "/company" }
-            %li#mSCmanage
-              Ma société
-          /%a{ :href => "/project" }
-          /  %li#mSCproject
-          /    SC project
-          %a{ :href => "/modele" }
-            %li#mSCcompute
-              Mes modèles
-      - if @page == 'SCmanage' 
-        %ul
-          %a{ :href => "/accueil" }
-            %li#mAccueil 
-              Accueil
-          %a{ :href => "/company" }
-            %li#mSCmanage.selected
-              Ma société
-          /%li#mSCproject
-          /  %a{ :href => "/project" }
-          /    SC project
-          %a{ :href => "/modele" }
-            %li#mSCcompute
-              Mes modèles
-      - if @page == 'SC project' 
-        %ul
-          %a{ :href => "/accueil" }
-            %li#mAccueil
-              Accueil
-          %a{ :href => "/company" }
-            %li#mSCmanage
-              Ma société
-          /%a{ :href => "/project" }
-          /  %li#mSCproject.selected
-          /    SC project
-          %a{ :href => "/modele" }
-            %li#mSCcompute
-              Mes modèles
-      - if @page == 'SCcompute' 
-        %ul
-          %li#mAccueil
-            %a{ :href => "/accueil" }
-              Accueil
-          %li#mSCmanage
-            %a{ :href => "/company" }
-              Ma société
-          /%a{ :href => "/project" }
-          /  %li#mSCproject
-          /    SC project
-          %a{ :href => "/modele" }
-            %li#mSCcompute.selected
-              Mes modèles
+      %ul
+        %a{ :href => "/accueil" }
+          %li{:id => "mAccueil" , :class => ( @page == 'Accueil'  ? "selected" : "")}
+            Accueil
+            
+        %a{ :href => "/company" }
+          %li{:id => "mSCmanage", :class => ( @page == 'SCmanage' ? "selected" : "")}
+            Ma société
+            
+        /%a{ :href => "/project" }
+        /  %li{:id => "mSCproject", :class => ( @page == 'SC project' ? "selected" : "")}
+        /    SC project
+        
+        %a{ :href => "/modele" }
+          %li{:id => "mSCcompute", :class => ( @page == 'SCcompute' ? "selected" : "")}
+            Mes modèles
+            
 
 / fin partie header
