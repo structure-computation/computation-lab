@@ -2,23 +2,10 @@ SCInterface::Application.routes.draw do
   
   
 
-  # Routes nommees pour restful authentication.
-  # match  '/logout'    => 'sessions#destroy'   , :as => :logout   
-  # match  '/login'     => 'sessions#new'       , :as => :login    
-  # match  '/register'  => 'users#create'       , :as => :register 
-  # match  '/signup'    => 'users#new'          , :as => :signup   
-  
-  # Ressources User et session (auth)
-  # resource    :session
-  # resources   :users
   devise_for  :users
 
   # map.resource  :modele
 
-  # Route d'activation des utilisateurs.
-  # match '/activate/:activation_code' => 'users#activate', :activation_code => nil, :as => :activate
-  
-  # map.root :controller => "accueil"
   root :to => "accueil#index"
   
   # La route par défaut héritée de l'application Rails 2, à conserver avant passage au REST.
@@ -26,6 +13,14 @@ SCInterface::Application.routes.draw do
   # Note: This route will make all actions in every controller accessible via GET requests.
   match ':controller(/:action(/:id(.:format)))'
   
+  
+  
+  
+  
+  
+  # -----------------------------------------------------------------------------------------
+  # --------------------------------- Commentaires standards --------------------------------
+  # -----------------------------------------------------------------------------------------
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
