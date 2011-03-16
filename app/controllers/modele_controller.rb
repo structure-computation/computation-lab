@@ -7,7 +7,7 @@ class ModeleController < ApplicationController
   
   def index
     @page = 'SCcompute'
-    list_model = @current_user.sc_models
+    list_model = current_user.sc_models
     @model_list = []
     list_model.each{ |model_i|
       model = Hash.new
@@ -30,14 +30,14 @@ class ModeleController < ApplicationController
   end
 
   def new
-    model = @current_user.sc_models.create(:name => params[:name], :dimension => params[:dimension], :description => params[:description], :company => @current_user.company, :state => 'void')
+    model = current_user.sc_models.create(:name => params[:name], :dimension => params[:dimension], :description => params[:description], :company => current_user.company, :state => 'void')
     #model.save
     render :text => { :result => 'success' }
   end
  
   def delete
     @id_model = params[:id_model]
-    @current_model = @current_user.sc_models.find(@id_model)
+    @current_model = current_user.sc_models.find(@id_model)
     if(@current_model.test_delete?)
       @current_model.delete_model()
       render :text => "true"

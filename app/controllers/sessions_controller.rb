@@ -17,9 +17,9 @@ class SessionsController < ApplicationController
       # button. Uncomment if you understand the tradeoffs.
       # reset_session
       self.current_user = user
-      # current_company = user.Company.find(@current_user.company_id)
+      # current_company = user.Company.find(current_user.company_id)
       current_company = user.company
-      session[:current_user_name] = @current_user.firstname + " " + @current_user.lastname
+      session[:current_user_name] = current_user.firstname + " " + current_user.lastname
       session[:current_company_name] = current_company.name
       session[:current_company_id] = current_company.id
       new_cookie_flag = (params[:remember_me] == "1")

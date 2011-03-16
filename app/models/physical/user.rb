@@ -90,7 +90,7 @@ class User < ActiveRecord::Base
   end
   
   def change_mdp(params)
-    user = @current_user.authenticated?(params[:password]) && !params[:new_password].blank? && params[:new_password] == params[:password_confirmation]
+    user = current_user.authenticated?(params[:password]) && !params[:new_password].blank? && params[:new_password] == params[:password_confirmation]
     return true
   end
   
