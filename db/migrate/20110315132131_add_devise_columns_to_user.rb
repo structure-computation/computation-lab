@@ -1,6 +1,6 @@
 
 class AddDeviseColumnsToUser < ActiveRecord::Migration
-  def self.up
+    def self.up
     change_table :users do |t|
       
       # Suppression des colonnes de restful auth
@@ -13,17 +13,25 @@ class AddDeviseColumnsToUser < ActiveRecord::Migration
       # On conserve "state" et "deleted_at" pour le moment.
       
       # if you already have a email column, you have to comment the below line and add the :encrypted_password column manually (see devise/schema.rb).
-      # t.database_authenticatable
+      # # t.database_authenticatable
       t.string   "encrypted_password",   :default => "", :null => false
       t.string   "password_salt",        :default => "", :null => false
-      
+            
       t.confirmable
       t.recoverable
       t.rememberable
       t.trackable
+      t.lockable
+      
       
       add_index :users, :reset_password_token, :unique => true
       add_index :users, :confirmation_token,   :unique => true
+      
+      # On place tous les mots de passe à 'monkey'
+      User.all.each do |user|
+        user.password = 'monkey'
+        user.save
+      end
       
     end
   end
@@ -34,7 +42,7 @@ class AddDeviseColumnsToUser < ActiveRecord::Migration
     change_table :users do |t|
       t.remove :encrypted_password
       t.remove :password_salt
-      t.remove :authentication_token
+      # t.remove :authentication_token
       t.remove :confirmation_token
       t.remove :confirmed_at
       t.remove :confirmation_sent_at
@@ -56,6 +64,11 @@ class AddDeviseColumnsToUser < ActiveRecord::Migration
       t.datetime "remember_token_expires_at"
       t.string   "activation_code",           :limit => 40
       t.datetime "activated_at"
+      
+      # Ne fonctionne pas.
+      # remove_index :users, :reset_password_token
+      # remove_index :users, :confirmation_token
+      
     end
   end
 end
