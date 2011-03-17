@@ -835,6 +835,14 @@ body
   line-height: 32px;
   color:#2a3557;
 }
+
+/* Bouton de login, décalé de 5px à gauche pour ne pas "grignoter" la bordure de la fenetre*/
+#New_wiz_layer #login_button{
+  border: none; 
+  margin-right: 5px;  
+}
+
+
 .wiz_pic_ok
 {
   width: 70px;

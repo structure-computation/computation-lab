@@ -66,7 +66,11 @@
                 .New_create_bouton_jaune
                   Annuler
               //%a{ :href => "/sessions/create", :onclick => "" }
-              = submit_tag 'Log in', :class => "New_footer_bouton_suivant New_footer_top_bouton", :style => "border: none; margin-right: 5px"
+              %a{ :href => "#", :onclick => '$("#user_new").submit();'}
+                #login_button.New_footer_bouton_suivant.New_footer_top_bouton
+                  Se connecter
+              
+              - #= submit_tag 'Log in', :class => "New_footer_bouton_suivant New_footer_top_bouton", :style => "border: none; margin-right: 5px"
               -#  Log in
 
       / partie haute du footer, bas de la boite projet plus bouton
