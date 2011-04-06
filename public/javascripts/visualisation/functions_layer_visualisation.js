@@ -640,12 +640,14 @@ function go_page_new_forfait(num){
 
 function init_all() {
     image_3d = new ImgServer( "my_canvas", "00" );
+    model_id_test = 18;
     strgeom = new String();
-    strgeom = '/share/sc2/Developpement/MODEL/model_' + model_id + '/MESH/geometrie_all_0_0.vtu';
+    strgeom = '/share/sc2/Developpement/MODEL/model_' + model_id_test + '/MESH/visu_geometry.h5';
+    alert(strgeom);
     //strgeom = '/share/sc2/Developpement/MODEL/model_' + model_id + '/MESH/geom_inter_0_0.vtu';
     
-    //image_3d.load_vtu( strgeom );
-    image_3d.load_vtu( "/var/www/Visu/data/geometry_all_0_0.vtu" );
+    image_3d.load_hdf( strgeom, "Level_0/Geometry/" );
+    //image_3d.load_vtu( "/var/www/Visu/data/geometry_all_0_0.vtu" );
     //image_3d.load_vtu( "/var/www/Visu/data/manchon.vtu" );
     //     alert(s);
     //image_3d.load_vtu( "/home/jbellec/Dropbox/SC/Inbox/fibres_mat/calcul_97/resultat_0_0.vtu" );
