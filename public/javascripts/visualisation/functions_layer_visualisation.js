@@ -642,23 +642,35 @@ function init_all() {
     image_3d = new ImgServer( "my_canvas", "00" );
     model_id_test = 18;
     strgeom = new String();
-    strgeom = '/share/sc2/Developpement/MODEL/model_' + model_id_test + '/MESH/visu_geometry.h5';
-    alert(strgeom);
-    //strgeom = '/share/sc2/Developpement/MODEL/model_' + model_id + '/MESH/geom_inter_0_0.vtu';
+    //strgeom = '/share/sc2/Developpement/MODEL/model_' + model_id + '/MESH/geometrie_all_0_0.vtu';
+    strgeom = '/share/sc2/Developpement/MODEL/model_14/MESH/visu_geometry.h5';
+    namegeom = new String();
+    namegeom = 'Level_0/Geometry';
     
-    image_3d.load_hdf( strgeom, "Level_0/Geometry/" );
+    image_3d.load_hdf( strgeom, namegeom );
     //image_3d.load_vtu( "/var/www/Visu/data/geometry_all_0_0.vtu" );
     //image_3d.load_vtu( "/var/www/Visu/data/manchon.vtu" );
     //     alert(s);
     //image_3d.load_vtu( "/home/jbellec/Dropbox/SC/Inbox/fibres_mat/calcul_97/resultat_0_0.vtu" );
     //image_3d.load_vtu("/var/www/Visu/data/croix.vtu" );
+    
     //image_3d.color_by_field( "epsilon", 1 );
     //image_3d.shrink( 0.05 );
     image_3d.fit();
     image_3d.render();
 }
 
+function fit_img( c ) {
+    var s = document.getElementById(c).img_server;
+    s.fit();
+    s.render();
+}
 
+function sx( c, x, y ) { 
+    var s = document.getElementById(c).img_server; 
+    s.set_XY(x,y); 
+    s.render(); 
+}
 
 
 -->

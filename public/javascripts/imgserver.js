@@ -8,8 +8,8 @@ ImgServer = (function() {
   ImgServer.prototype.port = "00";
   ImgServer.prototype.cmd_list = "";
   ImgServer.prototype.mesh_list = [];
-  ImgServer.prototype.want_fps = 15;
-  ImgServer.prototype.size_disp_rect = 10;
+  ImgServer.prototype.want_fps = 50;
+  ImgServer.prototype.size_disp_rect = 5;
   ImgServer.prototype.delay_send = 100;
   ImgServer.prototype.old_x = 0;
   ImgServer.prototype.old_y = 0;
@@ -17,6 +17,7 @@ ImgServer = (function() {
   ImgServer.prototype.img_rgba = new Image();
   ImgServer.prototype.img_zzzz = new Image();
   ImgServer.prototype.img_ngrp = new Image();
+  ImgServer.prototype.img_altc = new Image();
   ImgServer.prototype.hidden_src_canvas = [];
   ImgServer.prototype.z_min = 0;
   ImgServer.prototype.z_max = 0;
@@ -32,14 +33,21 @@ ImgServer = (function() {
     this.queue_img_server_cmd('set_wh ' + this.canvas.width + ' ' + this.canvas.height + '\n');
     this.img_rgba.onload = __bind(function() {
       this.img_rgba.data = void 0;
+      this.get_img_data(this.img_rgba, this.hidden_src_canvas[0]);
       return this.draw_img_on_canvas();
     }, this);
     this.img_zzzz.onload = __bind(function() {
-      return this.img_zzzz.data = void 0;
+      this.img_zzzz.data = void 0;
+      return this.get_img_data(this.img_zzzz, this.hidden_src_canvas[1]);
     }, this);
     this.img_ngrp.onload = __bind(function() {
-      return this.img_ngrp.data = void 0;
+      this.img_ngrp.data = void 0;
+      return this.get_img_data(this.img_ngrp, this.hidden_src_canvas[2]);
     }, this);
+    this.img_altc.onload = __bind(function() {
+      return this.img_altc.data = void 0;
+    }, this);
+    this.alpha_altc = 0.5;
     this.canvas.onmousedown = __bind(function(evt) {
       return this.img_mouse_down(evt);
     }, this);
@@ -52,15 +60,17 @@ ImgServer = (function() {
     this.canvas.onmouseout = function(evt) {
       return this.onmousemove = null;
     };
-    if (typeof (_base = this.canvas).addEventListener == "function") {
+    if (typeof (_base = this.canvas).addEventListener === "function") {
       _base.addEventListener("DOMMouseScroll", this.canvas.onmousewheel, false);
     }
-    for (i = 0; i <= 2; i++) {
+    for (i = 0; i <= 3; i++) {
       hc = document.createElement("canvas");
       hc.style.display = "none";
       document.body.appendChild(hc);
       this.hidden_src_canvas.push(hc);
     }
+    this.hc_tmp = this.hidden_src_canvas[3];
+    this.hc_tmp.width = 0;
   }
   ImgServer.prototype.render = function() {
     this.queue_img_server_cmd('render\n');
@@ -73,8 +83,14 @@ ImgServer = (function() {
     this.queue_img_server_cmd('set_num_comp ' + num_comp + "\n");
     return this.queue_img_server_cmd("color_by " + name + "\n");
   };
+  ImgServer.prototype.get_num_group_info = function(name) {
+    return this.queue_img_server_cmd('get_num_group_info ' + name + '\n');
+  };
   ImgServer.prototype.load_vtu = function(m) {
     return this.queue_img_server_cmd('load_vtu ' + m + '\n');
+  };
+  ImgServer.prototype.load_hdf = function(file, mesh) {
+    return this.queue_img_server_cmd('load_hdf ' + file + ' ' + mesh + '\n');
   };
   ImgServer.prototype.fit = function() {
     return this.queue_img_server_cmd('fit\n');
@@ -89,6 +105,12 @@ ImgServer = (function() {
   ImgServer.prototype.rot_img = function(x, y, z) {
     this.rotate_cam(x, y, z);
     return this.update_img_src();
+  };
+  ImgServer.prototype.set_elem_filter = function(filter) {
+    return this.queue_img_server_cmd('set_elem_filter ' + filter + '\n');
+  };
+  ImgServer.prototype.num_context_next_cmd = function(num) {
+    return this.queue_img_server_cmd('num_context_next_cmd ' + num + '\n');
   };
   TransEye = (function() {
     TransEye.prototype.X = [];
@@ -175,11 +197,9 @@ ImgServer = (function() {
     this.old_x = evt.clientX - this.canvas.offsetLeft;
     this.old_y = evt.clientY - this.canvas.offsetTop;
     if (evt.ctrlKey) {
-      //alert(this.get_num_group(evt.clientX, evt.clientY));
-      select_pieces(this.get_num_group(evt.clientX, evt.clientY));
-      //document.getElementById("com").firstChild.data = this.get_num_group(evt.clientX, evt.clientY);
+      alert(this.get_num_group(evt.clientX, evt.clientY));
     }
-    if (typeof evt.preventDefault == "function") {
+    if (typeof evt.preventDefault === "function") {
       evt.preventDefault();
     }
     evt.returnValue = false;
@@ -227,7 +247,7 @@ ImgServer = (function() {
       this.IP.O[d] = P[d] + (O[d] - P[d]) / coeff;
     }
     this.draw_img_on_canvas();
-    if (typeof evt.preventDefault == "function") {
+    if (typeof evt.preventDefault === "function") {
       evt.preventDefault();
     }
     evt.returnValue = false;
@@ -280,7 +300,7 @@ ImgServer = (function() {
     return img.data;
   };
   ImgServer.prototype.draw_img_on_canvas = function() {
-    var P_mas, P_mis, b, b_mm, ctx, d_mar, d_mir, div_m, e_mm, g, h, i, inv_z, lineargradient, mwh, new_D, new_P, new_eye, ngrp_data, o, old_buf, oz_dir, p1i0, r, rgba_data, s_mm, t0, t1, w, x, x_mas, x_md, x_mis, x_s, y, y_mas, y_md, y_mis, y_s, z, z_md_0, z_md_1, zu, zzzz_data, _ref, _ref2;
+    var P_mas, P_mis, b, b_mm, ctx, d_mar, d_mir, div_m, e_mm, h, i, inv_z, lineargradient, mwh, new_D, new_P, new_eye, o, off_loc_image_data, old_buf, oz_dir, p1i0, rgba_data, rh, rw, rx, ry, s_mm, t0, t1, w, x_mas, x_md, x_mis, x_s, y_mas, y_md, y_mis, y_s, z, z_md_0, z_md_1, zu, zzzz_data, _ref, _ref2, _ref3;
     w = this.canvas.width;
     h = this.canvas.height;
     mwh = Math.min(w, h);
@@ -292,23 +312,42 @@ ImgServer = (function() {
     ctx.fillStyle = lineargradient;
     ctx.fillRect(0, 0, w, h);
     if (this.equal_obj(this.IP, this.RP)) {
-      return ctx.drawImage(this.img_rgba, 0, 0, w, h);
+      ctx.drawImage(this.img_rgba, 0, 0, w, h);
+      if (this.nb_alt_contexts) {
+        ctx.globalAlpha = this.alpha_altc;
+        ctx.drawImage(this.img_altc, 0, 0, w, h);
+        return ctx.globalAlpha = 1.0;
+      }
     } else {
       rgba_data = this.get_img_data(this.img_rgba, this.hidden_src_canvas[0]);
       zzzz_data = this.get_img_data(this.img_zzzz, this.hidden_src_canvas[1]);
-      ngrp_data = this.get_img_data(this.img_ngrp, this.hidden_src_canvas[2]);
+      t0 = new Date().getTime();
       old_buf = new TransBuf(this.RP, w, h);
       new_eye = new TransEye(this.IP, w, h);
       inv_z = this.dot_3(old_buf.Z, new_eye.Z) < 0;
-      t0 = new Date().getTime();
+      rw = w / this.size_disp_rect;
+      rh = h / this.size_disp_rect;
+      if (this.hc_tmp.width !== rw || this.hc_tmp.height !== rh) {
+        this.hc_tmp.width = rw;
+        this.hc_tmp.height = rh;
+        this.ctx_tmp = this.hc_tmp.getContext('2d');
+        this.loc_img = this.ctx_tmp.createImageData(rw, rh);
+        this.loc_img_dat = this.loc_img.data;
+      } else {
+        for (i = 0, _ref = rw * rh; (0 <= _ref ? i <= _ref : i >= _ref); (0 <= _ref ? i += 1 : i -= 1)) {
+          this.loc_img_dat[4 * i + 3] = 0;
+        }
+      }
       oz_dir = this.nor_3(old_buf.Z);
       p1i0 = function(x) {
         return x + (x === 0);
       };
-      for (y = 0, _ref = h - 1; (0 <= _ref ? y <= _ref : y >= _ref); y += this.size_disp_rect) {
-        y_s = y + this.size_disp_rect / 2.0;
-        for (x = 0, _ref2 = w - 1; (0 <= _ref2 ? x <= _ref2 : x >= _ref2); x += this.size_disp_rect) {
-          x_s = x + this.size_disp_rect / 2.0;
+      off_loc_image_data = -4;
+      for (ry = 0, _ref2 = rh - 1; (0 <= _ref2 ? ry <= _ref2 : ry >= _ref2); (0 <= _ref2 ? ry += 1 : ry -= 1)) {
+        y_s = this.size_disp_rect * (ry + 0.5);
+        for (rx = 0, _ref3 = rw - 1; (0 <= _ref3 ? rx <= _ref3 : rx >= _ref3); (0 <= _ref3 ? rx += 1 : rx -= 1)) {
+          x_s = this.size_disp_rect * (rx + 0.5);
+          off_loc_image_data += 4;
           new_P = new_eye.pos(x_s, y_s);
           new_D = new_eye.dir(x_s, y_s);
           div_m = 1 / p1i0(this.dot_3(new_D, oz_dir));
@@ -377,11 +416,10 @@ ImgServer = (function() {
               z_md_0 = this.z_min + (i - 2 * s_mm) * (this.z_max - this.z_min);
               z_md_1 = this.z_min + (i + 3 * s_mm) * (this.z_max - this.z_min);
               if (z <= z_md_1 && z >= z_md_0) {
-                r = rgba_data[o + 0];
-                g = rgba_data[o + 1];
-                b = rgba_data[o + 2];
-                ctx.fillStyle = "rgb( " + r + ", " + g + ", " + b + " )";
-                ctx.fillRect(x, y, this.size_disp_rect, this.size_disp_rect);
+                this.loc_img_dat[off_loc_image_data + 0] = rgba_data[o + 0];
+                this.loc_img_dat[off_loc_image_data + 1] = rgba_data[o + 1];
+                this.loc_img_dat[off_loc_image_data + 2] = rgba_data[o + 2];
+                this.loc_img_dat[off_loc_image_data + 3] = rgba_data[o + 3];
                 break;
               }
             }
@@ -389,8 +427,9 @@ ImgServer = (function() {
           }
         }
       }
+      this.ctx_tmp.putImageData(this.loc_img, 0, 0);
+      ctx.drawImage(this.hc_tmp, 0, 0, w, h);
       t1 = new Date().getTime() - t0;
-      this.size_disp_rect = Math.ceil(this.size_disp_rect * Math.pow(this.want_fps * t1 / 1000.0, 0.5));
       return this.restart_timer_for_src_update();
     }
   };
