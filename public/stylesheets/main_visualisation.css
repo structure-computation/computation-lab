@@ -565,6 +565,14 @@ body
   border: none;
   float:right;
 }
+.tableNC_box_visu_active
+{
+  width: 24px;
+  height: 20px;
+  background: transparent url('../images/LM_visu.png') no-repeat center center;
+  border: none;
+  float:right;
+}
 .tableNC_box_info
 {
   width: 24px;

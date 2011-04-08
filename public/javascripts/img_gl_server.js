@@ -128,8 +128,8 @@ DisplayCanvas = (function() {
         return this.ctx.globalAlpha = 1.0;
       }
     } else {
-      rgba_data = this.get_img_data(disp.img_rgba);
-      zzzz_data = this.get_img_data(disp.img_zzzz);
+      rgba_data = disp.get_img_data(disp.img_rgba);
+      zzzz_data = disp.get_img_data(disp.img_zzzz);
       t0 = new Date().getTime();
       old_buf = disp.new_TransBuf(disp.RP, w, h);
       new_eye = disp.new_TransEye(disp.IP, w, h);
@@ -231,23 +231,6 @@ DisplayCanvas = (function() {
       return t1 = new Date().getTime() - t0;
     }
   };
-  DisplayCanvas.prototype.get_img_data = function(img) {
-    var ctx, src_pix;
-    if (!(img.data != null)) {
-      if (!(img.hc != null)) {
-        img.hc = document.createElement("canvas");
-        img.hc.style.display = "none";
-        document.body.appendChild(img.hc);
-      }
-      img.hc.width = img.width;
-      img.hc.height = img.height;
-      ctx = img.hc.getContext('2d');
-      ctx.drawImage(img, 0, 0);
-      src_pix = ctx.getImageData(0, 0, img.width, img.height);
-      img.data = src_pix.data;
-    }
-    return img.data;
-  };
   return DisplayCanvas;
 })();
 ImgServer = (function() {
@@ -301,7 +284,7 @@ ImgServer = (function() {
     this.canvas.onmouseout = function(evt) {
       return this.onmousemove = null;
     };
-    if (typeof (_base = this.canvas).addEventListener == "function") {
+    if (typeof (_base = this.canvas).addEventListener === "function") {
       _base.addEventListener("DOMMouseScroll", this.canvas.onmousewheel, false);
     }
   }
@@ -330,6 +313,26 @@ ImgServer = (function() {
   };
   ImgServer.prototype.set_elem_filter = function(filter) {
     return this.queue_img_server_cmd('set_elem_filter ' + filter + '\n');
+  };
+  ImgServer.prototype.num_context_next_cmd = function(num) {
+    return this.queue_img_server_cmd('num_context_next_cmd ' + num + '\n');
+  };
+  ImgServer.prototype.get_img_data = function(img) {
+    var ctx, src_pix;
+    if (!(img.data != null)) {
+      if (!(img.hc != null)) {
+        img.hc = document.createElement("canvas");
+        img.hc.style.display = "none";
+        document.body.appendChild(img.hc);
+      }
+      img.hc.width = img.width;
+      img.hc.height = img.height;
+      ctx = img.hc.getContext('2d');
+      ctx.drawImage(img, 0, 0);
+      src_pix = ctx.getImageData(0, 0, img.width, img.height);
+      img.data = src_pix.data;
+    }
+    return img.data;
   };
   ImgServer.prototype.my_xml_http_request = function() {
     if (window.XMLHttpRequest) {
@@ -439,8 +442,16 @@ ImgServer = (function() {
     this.IP.Y = this.rot_3(this.IP.Y, R);
     return this.IP.O = this.add_3(this.C, this.rot_3(this.sub_3(this.IP.O, this.C), R));
   };
+  ImgServer.prototype.get_num_group = function(x, y) {
+    var ngrp_data, o;
+    x -= this.getLeft(this.canvas);
+    y -= this.getTop(this.canvas);
+    o = 4 * (y * this.canvas.width + x);
+    ngrp_data = this.get_img_data(this.img_ngrp, this.hidden_src_canvas[2]);
+    return ngrp_data[o + 0] + 256 * ngrp_data[o + 1] + 256 * 256 * ngrp_data[o + 2];
+  };
   ImgServer.prototype.img_mouse_down = function(evt) {
-    var canvas;
+    var canvas, num_list;
     if (!(evt != null)) {
       evt = window.event;
     }
@@ -452,9 +463,10 @@ ImgServer = (function() {
     this.old_x = evt.clientX - this.canvas.offsetLeft;
     this.old_y = evt.clientY - this.canvas.offsetTop;
     if (evt.ctrlKey) {
-      document.getElementById("com").firstChild.data = this.get_num_group(evt.clientX, evt.clientY);
+      num_list = this.get_num_group(evt.clientX, evt.clientY);
+      select_on_table(num_list);
     }
-    if (typeof evt.preventDefault == "function") {
+    if (typeof evt.preventDefault === "function") {
       evt.preventDefault();
     }
     evt.returnValue = false;
@@ -473,6 +485,14 @@ ImgServer = (function() {
     } else {
       return l.offsetTop;
     }
+  };
+  ImgServer.prototype.get_num_group = function(x, y) {
+    var ngrp_data, o;
+    x -= this.getLeft(this.canvas);
+    y -= this.getTop(this.canvas);
+    o = 4 * (y * this.canvas.width + x);
+    ngrp_data = this.get_img_data(this.img_ngrp);
+    return ngrp_data[o + 0] + 256 * ngrp_data[o + 1] + 256 * 256 * ngrp_data[o + 2];
   };
   ImgServer.prototype.img_mouse_wheel = function(evt) {
     var O, P, X, Y, canvas, coeff, d, delta, mwh, x, y;
@@ -502,7 +522,7 @@ ImgServer = (function() {
       this.IP.O[d] = P[d] + (O[d] - P[d]) / coeff;
     }
     this.draw_img_on_canvas();
-    if (typeof evt.preventDefault == "function") {
+    if (typeof evt.preventDefault === "function") {
       evt.preventDefault();
     }
     evt.returnValue = false;
