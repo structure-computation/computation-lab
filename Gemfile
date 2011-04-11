@@ -11,7 +11,7 @@ gem 'prawn'       , '0.8.4'
 
 gem 'jquery-rails', '0.2.5'
 gem 'json'                    # Inutile si ruby 1.9
-gem 'aasm'
+gem 'transitions'
 gem 'warden'
 gem 'devise'      
 
