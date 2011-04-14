@@ -19,7 +19,7 @@
 class User < ActiveRecord::Base
   
   # Configuration de devise
-  devise :database_authenticatable, :registerable,
+  devise :database_authenticatable  , :registerable,
          :recoverable, :rememberable, :trackable, :validatable #, :confirmable
 
 

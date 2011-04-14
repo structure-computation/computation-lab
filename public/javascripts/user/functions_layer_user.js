@@ -36,10 +36,7 @@ var num_delete_membre = -1;
 
 // initialisation du tableau des info sur le nouveau membree
 var Tableau_new_membre  =  new Array();
-Tableau_new_membre['email'] = 'bellec@lmt.ens-cachan.fr';
-Tableau_new_membre['firstname'] = 'bellec';
-Tableau_new_membre['lastname'] = 'jeremie';
-Tableau_new_membre['role'] = 'ingénieur';
+
 
 
 
@@ -442,12 +439,12 @@ function send_new_membre()
 //     alert(array2json(Tableau_new_membre));
     var param1 = array2object(Tableau_new_membre);
     var Tableau_new_membre_post         =  new Object(); 
-    Tableau_new_membre_post['user'] =  new Object(); 
-    Tableau_new_membre_post['user'] = param1;
+    Tableau_new_membre_post['user']     =  new Object(); 
+    Tableau_new_membre_post['user']     =  param1;
     //alert(array2json(Tableau_new_membre_post));
     $.ajax({
 	//url: "/company/create_user",
-	url: "/users/create",
+	url: "/member/create",
 	type: 'POST',
 	dataType: 'text',
 	data: $.toJSON(param1),
