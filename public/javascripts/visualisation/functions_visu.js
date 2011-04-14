@@ -129,7 +129,7 @@ function filter_pieces(c) {
 function select_on_table(num_list){
     alert(num_list);
     if(num_group_info[ num_list ]){
-        alert(num_group_info[ num_list ].id);
+        alert(num_group_info[ num_list ].type);
         // alert(array2json(num_group_info));
         // alert(array2json(Tableau_interfaces));
         if(num_group_info[ num_list ].type == 0){
