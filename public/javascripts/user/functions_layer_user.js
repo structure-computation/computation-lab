@@ -39,7 +39,6 @@ var Tableau_new_membre  =  new Array();
 
 
 
-
 //-------------------------------------------------------------------------------------------------
 // fonctions utiles pour l'obtention de la liste des membres (tableau)
 //-------------------------------------------------------------------------------------------------
@@ -436,12 +435,12 @@ function affich_new_membre_resume(){
 // telecharger le nom et la description du membre
 function send_new_membre()
 {
-//     alert(array2json(Tableau_new_membre));
+    alert(array2json(Tableau_new_membre));
     var param1 = array2object(Tableau_new_membre);
     var Tableau_new_membre_post         =  new Object(); 
     Tableau_new_membre_post['user']     =  new Object(); 
     Tableau_new_membre_post['user']     =  param1;
-    //alert(array2json(Tableau_new_membre_post));
+    alert(array2json(Tableau_new_membre_post));
     $.ajax({
 	//url: "/company/create_user",
 	url: "/member/create",
