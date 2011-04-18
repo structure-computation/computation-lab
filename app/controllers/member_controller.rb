@@ -6,8 +6,10 @@ class MemberController < ApplicationController
   
 
     before_filter :authenticate_user! #,  :except => :activate
+    
     # Protect these actions behind an admin login
     # before_filter :admin_required, :only => [:suspend, :unsuspend, :destroy, :purge]
+    
     before_filter :find_user, :only => [:suspend, :unsuspend, :destroy, :purge]
 
     def index
@@ -20,7 +22,8 @@ class MemberController < ApplicationController
     end
 
     def create
-      @user         = User.new(params) 
+      debugger
+      @user         = User.new(params["member"]) 
       @user.company = current_user.company
       # @user.register! if @user && @user.valid?
       success = @user && @user.valid?

@@ -36,6 +36,10 @@ var num_delete_membre = -1;
 
 // initialisation du tableau des info sur le nouveau membree
 var Tableau_new_membre  =  new Array();
+Tableau_new_membre['email']     = 'bellec@lmt.ens-cachan.fr';
+Tableau_new_membre['firstname'] = 'bellec';
+Tableau_new_membre['lastname']  = 'jeremie';
+Tableau_new_membre['role']      = 'ingénieur';
 
 
 
@@ -436,23 +440,28 @@ function affich_new_membre_resume(){
 // telecharger le nom et la description du membre
 function send_new_membre()
 {
-//     alert(array2json(Tableau_new_membre));
-    var param1 = array2object(Tableau_new_membre);
-    var Tableau_new_membre_post         =  new Object(); 
-    Tableau_new_membre_post['user']     =  new Object(); 
-    Tableau_new_membre_post['user']     =  param1;
-    //alert(array2json(Tableau_new_membre_post));
+    var param1                  = array2object(Tableau_new_membre);
+
     $.ajax({
-	//url: "/company/create_user",
-	url: "/member/create",
-	type: 'POST',
-	dataType: 'text',
-	data: $.toJSON(param1),
-	contentType: 'application/json; charset=utf-8',
-	success: function(json) {
-	    //alert(json);
-	    get_Tableau_membre();
-	}
+    	url         : "/member/create",
+    	type        : 'POST',
+      dataTypes    : 'text',
+      // dataType: 'json',
+        
+    	data        : {
+                      // member                : $.toJSON(param1),
+    	                "authenticity_token"  : authToken(),
+    	                "member[email]"       : 'bellec@lmt.ens-cachan.fr',
+                      "member[firstname]"   : 'bellec',
+                      "member[lastname]"    : 'jeremie',
+                      "member[role]"        : 'ingénieur'
+                      
+    	              },
+      // contentType : 'application/json; charset=utf-8',
+    	success     : function(json) {
+    	    //alert(json);
+    	    get_Tableau_membre();
+    	}
     });
 
 }

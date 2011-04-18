@@ -32,6 +32,9 @@
     
     %script{ :src => "/javascripts/functions_layer.js" ,   :type => "text/javascript" }
     
+    %script{ :type => "text/javascript"}
+      = "function authToken(){ return '#{ form_authenticity_token if protect_against_forgery? }'; }" 
+    
     - # php include("./php/functions_layer_LM.php");
 
   %body
