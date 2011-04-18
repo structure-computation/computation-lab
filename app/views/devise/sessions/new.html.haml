@@ -37,6 +37,7 @@
             Accédez à votre espace calcul
           - form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
             #New_wiz_layer_milieu
+              = render :partial => "/layouts/flashs_and_notices"
               %div{ :style => "width: 400px; height:300px; margin: 100px 0px 0 213px;" }
                 #login_format
                   %p= f.label :email
