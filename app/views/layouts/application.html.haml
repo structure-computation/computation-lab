@@ -32,11 +32,15 @@
     
     %script{ :src => "/javascripts/functions_layer.js" ,   :type => "text/javascript" }
     
+    %script{ :type => "text/javascript"}
+      = "function authToken(){ return '#{ form_authenticity_token if protect_against_forgery? }'; }" 
+    
     - # php include("./php/functions_layer_LM.php");
 
   %body
     #conteneur
       = render :partial => "layouts/header"
+      = render :partial => "layouts/flashs_and_notices"
       /= render :partial => "layouts/pathbar"
       /partie contenu
       /#content
@@ -46,7 +50,6 @@
       / Fin du code d'affichage de la vue
 
       / Fin content
-      / = render :partial => "layouts/a_CORRIGER_footer_top"
       = render :partial => "layouts/footer"
     /
       Fin conteneur

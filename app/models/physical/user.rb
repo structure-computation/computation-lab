@@ -67,6 +67,10 @@ class User < ActiveRecord::Base
 
   # TODO: Ajouter des validation d'association avec une entreprise.
 
+  # Voir documentation devise : https://github.com/plataformatec/devise/wiki/How-To%3a-Allow-users-to-edit-their-account-without-providing-a-password
+  def password_required?
+    new_record?
+  end
 
 
   def full_name
