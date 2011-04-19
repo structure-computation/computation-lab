@@ -22,6 +22,7 @@ var id_calcul_select = -1;				    // id de l'element graphique pour le calcul s�
 var Tableau_calcul_filter = new Array();  	// tableau des calcul filtrés (à partir de Tableau_calcul) à afficher
 var calcul_filter = new Array('','');  		    	// filtres pour les calcul
 var current_state_active_box_init = 'on';    		// affichage de la boite active initialisation
+
 var Tableau_init_time_step_temp = new Array();		// tableau des step calcul définis à l'initialisation et repris dans le CLs
 Tableau_init_time_step_temp['name'] = 'step_0';
 Tableau_init_time_step_temp['Ti'] = 0;
@@ -29,10 +30,17 @@ Tableau_init_time_step_temp['PdT'] = 1;
 Tableau_init_time_step_temp['nb_PdT'] = 1;
 Tableau_init_time_step_temp['Tf'] = 1;
 
+var Tableau_init_param_multiresolutions_temp = new Array();   // tableau de definition des paramètres variables
+Tableau_init_time_step_temp['name_auto'] = 'V_0';
+Tableau_init_time_step_temp['name_user'] = '';
+Tableau_init_time_step_temp['fct_cycle'] = '';
+
 var new_Tableau_init_select =  new Array();		// tableu new calcul select
     new_Tableau_init_select['name'] = 'Nouveau calcul';
     new_Tableau_init_select['description'] = 'Description';
-    new_Tableau_init_select['ctype'] = 'statique';
+    new_Tableau_init_select['ctype'] = 'statique';              // calcul statique, quasistatique, ou dynamique
+    new_Tableau_init_select['Multiresolution_on'] = 0;          // multiresolution ?
+    new_Tableau_init_select['Multiresolution_nb_cyle'] = 1;     // nb de cycle pour une etude en multiresolution
     new_Tableau_init_select['D2type'] = 'DP';
     new_Tableau_init_select['id'] = -1;
 
@@ -143,12 +151,14 @@ Tableau_option_test['LATIN_multiechelle']=0;
 Tableau_option_test['PREC_nb_niveaux']=1;
 Tableau_option_test['PREC_erreur']=30;
 Tableau_option_test['PREC_boite'] = new Array();   	// type (prec_max ou prec_min); boite
-Tableau_option_test['PREC_nb_decoupe'] = 2 ;  	// découpage des elements 
-Tableau_option_test['Crack'] = new Array();   	// taille, direction (normale), point d'encrage
+Tableau_option_test['PREC_nb_decoupe'] = 2 ;  	        // découpage des elements 
+Tableau_option_test['Crack'] = new Array();   	        // taille, direction (normale), point d'encrage
 Tableau_option_test['Dissipation'] = 'off';		// taille, direction (normale), point d'encrage
-// Tableau_option_test['architecture'] = 'cpu';     // résolution sur cpu ou gpu
+Tableau_option_test['Multiresolution_on'] = 0;          // calcul avec multiresolution ?
+Tableau_option_test['Multiresolution_nb_cyle'] = 1;     // nb de cycle pour une etude en multiresolution
+// Tableau_option_test['architecture'] = 'cpu';         // résolution sur cpu ou gpu
 
-var Tableau_option_normal = new Array();	    	// options mode test
+var Tableau_option_normal = new Array();	    	// options mode normal
 Tableau_option_normal['mode']='normal';
 Tableau_option_normal['nb_option']=2;
 Tableau_option_normal['LATIN_conv']=0.0001;
@@ -160,9 +170,11 @@ Tableau_option_normal['PREC_boite'] = new Array();   	// type (prec_max ou prec_
 Tableau_option_normal['PREC_nb_decoupe'] = 2 ;  	// découpage des elements 
 Tableau_option_normal['Crack'] = new Array();   	// taille, direction (normale), point d'encrage
 Tableau_option_normal['Dissipation'] = 'off';		// taille, direction (normale), point d'encrage
+Tableau_option_normal['Multiresolution_on'] = 0;          // calcul avec multiresolution ?
+Tableau_option_normal['Multiresolution_nb_cyle'] = 1;   // nb de cycle pour une etude en multiresolution
 // Tableau_option_normal['architecture'] = 'cpu';     // résolution sur cpu ou gpu
 
-var Tableau_option_expert = new Array();	    	// options mode test
+var Tableau_option_expert = new Array();	    	// options mode expert
 Tableau_option_expert['mode']='expert';
 Tableau_option_expert['nb_option']=5;
 Tableau_option_expert['LATIN_conv']=0.0001;
@@ -174,6 +186,8 @@ Tableau_option_expert['PREC_boite'] = new Array();   	// type (prec_max ou prec_
 Tableau_option_expert['PREC_nb_decoupe'] = 2 ;  	// découpage des elements 
 Tableau_option_expert['Crack'] = new Array();   	// taille, direction (normale), point d'encrage
 Tableau_option_expert['Dissipation'] = 'off';		// taille, direction (normale), point d'encrage
+Tableau_option_expert['Multiresolution_on'] = 0;          // calcul avec multiresolution ?
+Tableau_option_expert['Multiresolution_nb_cyle'] = 1;   // nb de cycle pour une etude en multiresolution
 // Tableau_option_expert['architecture'] = 'cpu';     // résolution sur cpu ou gpu
 
 
@@ -252,6 +266,7 @@ for(i=0; i<twin_right_tableau_page.length ; i++){
 var Tableau_id_model = new Array();			// tableau des caractéristiques du model
 var Tableau_init_select = new Array();			// tableau des caractéristiques du calcul pour l'initialisation
 var Tableau_init_time_step = new Array();		// tableau des step calcul définis à l'initialisation et repirs dans le CLs
+var Tableau_init_param_multiresolution = new Array();   // tableau des paramètres de multiresolution
 
 var Tableau_mat_select = new Array();			// tableau des matériaux selectionnés
 var Tableau_pieces = new Array();			// liste des pieces du modèle, a initialiser à partir du xml. on le complete dans l'interface web
