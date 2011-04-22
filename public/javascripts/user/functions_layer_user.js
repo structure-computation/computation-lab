@@ -445,7 +445,7 @@ function send_new_membre()
     $.ajax({
     	url         : "/member/create",
     	type        : 'POST',
-      dataTypes    : 'text',
+      dataTypes   : 'text',
       // dataType: 'json',
         
     	data        : {

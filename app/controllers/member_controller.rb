@@ -23,11 +23,16 @@ class MemberController < ApplicationController
 
     def create
       debugger
-      @user         = User.new(params["member"]) 
-      @user.company = current_user.company
+      pwd            = generate_password
+      @user          = User.new  params["member"]
+      @user.password = pwd
+      @user.company  = current_user.company
       # @user.register! if @user && @user.valid?
-      success = @user && @user.valid?
-      if success && @user.errors.empty? 
+      success        = @user.save
+      if @user.errors
+        logger.debug "New user errors : " + @user.errors.full_messages.join("\n")
+      end
+      if success
         render :text => "validation du nouvel utilisateur"
   #       redirect_back_or_default('/')
   #       flash[:notice] = "Thanks for signing up!  We're sending you an email with your activation code."
@@ -95,6 +100,11 @@ class MemberController < ApplicationController
   protected
     def find_user
       @user = User.find(params[:id])
+    end
+    
+    # TODO: Trouver un emplacement plus pertinent.
+    def generate_password
+      pwd = `pwgen 12 1`
     end
   
 end

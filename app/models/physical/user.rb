@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   
   # Configuration de devise
   devise :database_authenticatable  , :registerable,
-         :recoverable, :rememberable, :trackable, :validatable #, :confirmable
+         :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
 
   attr_accessible   :email,     :password, :password_confirmation, :remember_me,
