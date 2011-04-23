@@ -6,7 +6,7 @@ gem 'delayed_job'
 
 # gem 'resque'  
 gem 'haml'        , '3.0.25'
-gem 'barista'     , '1.0.0'
+gem 'barista'     , '1.0.0'  # Attention, haml doit être chargé AVANT barrista.
 gem 'prawn'       , '0.8.4'
 
 gem 'jquery-rails', '0.2.5'
