@@ -46,7 +46,6 @@ Tableau_new_membre['role']      = 'ingénieur';
 
 
 
-
 //-------------------------------------------------------------------------------------------------
 // fonctions utiles pour l'obtention de la liste des membres (tableau)
 //-------------------------------------------------------------------------------------------------
@@ -448,12 +447,13 @@ function send_new_membre()
     	url         : "/member/create",
     	type        : 'POST',
       dataTypes   : 'text',
+
       // dataType: 'json',
         
     	data        : {
                       // member                : $.toJSON(param1),
-    	                "authenticity_token"  : authToken(),
-    	                "member[email]"       : 'bellec@lmt.ens-cachan.fr',
+    	              "authenticity_token"  : authToken(),
+    	              "member[email]"       : 'bellec@lmt.ens-cachan.fr',
                       "member[firstname]"   : 'bellec',
                       "member[lastname]"    : 'jeremie',
                       "member[role]"        : 'ingénieur'

@@ -302,27 +302,43 @@ function lance_calcul(){
 	
 	// Tableau Time_step
 	var Time_step = new Array();
-    for(i in Tableau_init_time_step ){
-        Time_step[i] = new Array();
-        table_param = ["id","PdT","name","nb_PdT","Tf","Ti"];
-        for(j in table_param){
-            if(table_param[j]=="name"){
-                Time_step[i][table_param[j]] = Tableau_init_time_step[i][table_param[j]].toString();
-            }else if(table_param[j]=="id"){
-                Time_step[i][table_param[j]] = parseFloat(i);
-            }else if(table_param[j]=="nb_PdT"){
-                Time_step[i][table_param[j]] = Tableau_init_time_step[i][table_param[j]].toString();
-            }else if(table_param[j]=="PdT"){
-                Time_step[i][table_param[j]] = Tableau_init_time_step[i][table_param[j]].toString();
-            }else{
-                Time_step[i][table_param[j]] = parseFloat(Tableau_init_time_step[i][table_param[j]]);
+        for(i in Tableau_init_time_step ){
+            Time_step[i] = new Array();
+            table_param = ["id","PdT","name","nb_PdT","Tf","Ti"];
+            for(j in table_param){
+                if(table_param[j]=="name"){
+                    Time_step[i][table_param[j]] = Tableau_init_time_step[i][table_param[j]].toString();
+                }else if(table_param[j]=="id"){
+                    Time_step[i][table_param[j]] = parseFloat(i);
+                }else if(table_param[j]=="nb_PdT"){
+                    Time_step[i][table_param[j]] = Tableau_init_time_step[i][table_param[j]].toString();
+                }else if(table_param[j]=="PdT"){
+                    Time_step[i][table_param[j]] = Tableau_init_time_step[i][table_param[j]].toString();
+                }else{
+                    Time_step[i][table_param[j]] = parseFloat(Tableau_init_time_step[i][table_param[j]]);
+                }
             }
         }
-    }
+        
+        // Tableau Multiresolution
+        var Param_multiresolution = new Array();
+        for(i in Tableau_init_param_multiresolution ){
+            Param_multiresolution[i] = new Array();
+            table_param = ["name_auto","name_user","fct_cycle"];
+            for(j in table_param){
+                if(table_param[j]=="name_auto"){
+                    Param_multiresolution[i][table_param[j]] = Tableau_init_param_multiresolution[i][table_param[j]].toString();
+                }else if(table_param[j]=="name_user"){
+                    Param_multiresolution[i][table_param[j]] = Tableau_init_param_multiresolution[i][table_param[j]].toString();
+                }else if(table_param[j]=="fct_cycle"){
+                    Param_multiresolution[i][table_param[j]] = Tableau_init_param_multiresolution[i][table_param[j]].toString();
+                }
+            }
+        }
 	
 	// Tableau Option
 	var Options = new Array();
-	table_param = ["mode","nb_option","LATIN_conv","LATIN_nb_iter","PREC_nb_niveaux","PREC_erreur","PREC_boite","Crack","Dissipation","Temp_statique","2D_resolution", "LATIN_multiechelle", "architecture"];
+	table_param = ["mode","nb_option","LATIN_conv","LATIN_nb_iter","PREC_nb_niveaux","PREC_erreur","PREC_boite","Crack","Dissipation","Temp_statique","2D_resolution", "LATIN_multiechelle", "architecture","Multiresolution_on","Multiresolution_nb_cyle"];
 	for(j in table_param){
 		if(table_param[j]=="LATIN_conv"){
 			Options[table_param[j]] = Tableau_option_select[table_param[j]].toString();
@@ -335,12 +351,16 @@ function lance_calcul(){
 		}else if(table_param[j]=="Dissipation"){
 			Options[table_param[j]] = Tableau_option_select[table_param[j]].toString();
 		}else if(table_param[j]=="LATIN_multiechelle"){
-            Options[table_param[j]] = Tableau_option_select[table_param[j]].toString() ;
-        }else if(table_param[j]=="2D_resolution"){
+                    Options[table_param[j]] = Tableau_option_select[table_param[j]].toString() ;
+                }else if(table_param[j]=="2D_resolution"){
 			Options["2D_resolution"] = Tableau_init_select['D2type'].toString() ;
 		}else if(table_param[j]=="Temp_statique"){
 			Options["Temp_statique"] = Tableau_init_select['ctype'].toString() ;
-		}else{
+		}else if(table_param[j]=="Multiresolution_on"){
+                        Options["Multiresolution_on"] = parseFloat(Tableau_init_select['Multiresolution_on']) ;
+                }else if(table_param[j]=="Multiresolution_nb_cyle"){
+                        Options["Multiresolution_nb_cyle"] = parseFloat(Tableau_init_select['Multiresolution_nb_cyle']) ;
+                }else{
 			Options[table_param[j]] = Tableau_option_select[table_param[j]];
 		}
 	}
@@ -396,7 +416,7 @@ function go_detail_model(num){
 
 
 function complete_brouillon(interupteur, prevision){
-	// tableau représentatn l'etat courant de l'interface
+	// tableau représentant l'etat courant de l'interface
 	var Tableau_current_stape_interface = new Array();
 	Tableau_current_stape_interface['NC_current_step'] = NC_current_step;
 	Tableau_current_stape_interface['compteur_mat_select'] = compteur_mat_select;
@@ -422,17 +442,18 @@ function complete_brouillon(interupteur, prevision){
 	Tableau_calcul_complet['CL'] = Tableau_CL_select;
 	Tableau_calcul_complet['CL_volume'] = Tableau_CL_select_volume;
 	Tableau_calcul_complet['time_step'] = Tableau_init_time_step;
-    //alert(array2json(Tableau_init_time_step));
+        Tableau_calcul_complet['multiresolution'] = Tableau_init_param_multiresolution;
+        //alert(array2json(Tableau_init_time_step));
     
-    //traitement du tableau des options
+        // tableau des options
+        Tableau_option_select['Multiresolution_on'] = Tableau_init_select['Multiresolution_on'];
+        Tableau_option_select['Multiresolution_nb_cyle'] = Tableau_init_select['Multiresolution_nb_cyle'];
 	Tableau_calcul_complet['options'] = Tableau_option_select;
 	
 	// pour l'affichage dans l'interface
 	Tableau_calcul_complet['groupe_pieces'] = groupe_pieces;
 	Tableau_calcul_complet['groupe_interfaces'] = groupe_interfaces;
 	Tableau_calcul_complet['groupe_bords'] = groupe_bords;
-	// options du calcul
-	Tableau_calcul_complet['options'] = Tableau_option_select;
 	
 	// json
 	fichier_calcul = array2json(Tableau_calcul_complet);
