@@ -3,12 +3,20 @@
   %head
     %title
       Structure Computation
-    = render :partial => "layouts/html_header_content"
+    
+    / Inclusions des CSS, javascripts... dans un partial.
+    = render      :partial      => "layouts/html_header_content"
 
+    / CSS et javascript additionnels
+    = yield :additionnal_stylesheets
+    = yield :additionnal_javascript
+    
+    
   %body
     #conteneur
       = render :partial => "layouts/header"
       = render :partial => "layouts/flashs_and_notices"
+      
       /= render :partial => "layouts/pathbar"
       /partie contenu
       /#content
@@ -19,5 +27,5 @@
 
       / Fin content
       = render :partial => "layouts/footer"
-    /
-      Fin conteneur
+      
+    / Fin conteneur
