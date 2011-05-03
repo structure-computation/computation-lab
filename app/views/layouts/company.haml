@@ -1,10 +1,11 @@
 / Layout dédié aux pages "entreprise"
 
 -content_for :additionnal_stylesheets do 
-  %link{ :href => "/stylesheets/main_user.css"                              , :rel => "stylesheet", :media => "screen" }
-  %link{ :href => "/stylesheets/main_sc_admin_company.css"                  , :rel => "stylesheet", :media => "screen" }
+  %link{ :href => "/stylesheets/main_user.css"    , :rel => "stylesheet", :media => "screen" }
+  %link{ :href => "/stylesheets/main_company.css" , :rel => "stylesheet", :media => "screen" }
+  
 
--content_for :additionnal_javascript  do 
+-# MIS DANS LES VUES pour des raisons de conflits entre les JS. content_for :additionnal_javascript  do 
   / Javascript dédié à la gestion des utilisateurs.
   -# ATTENTION : les 2 js suivant en commentaires NE SONT PAS COMPATIBLES ! ajoutés ensembles ils font planter les pages.
   -# %script{ :src => "/javascripts/user/functions_layer_user.js"              ,   :type => "text/javascript" }
