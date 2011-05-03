@@ -3,7 +3,10 @@
 
 class MemberController < ApplicationController
   
-  
+    # Creer un layout spécifique pour les fonctions du menu "scté".
+    # layout "inventory"
+    
+    respond_to    :html, :json
 
     before_filter :authenticate_user! #,  :except => :activate
     
@@ -14,6 +17,8 @@ class MemberController < ApplicationController
 
     def index
       @page = 'SCmanage' 
+      @users = current_user.company.users
+      respond_with(@users)
     end
 
     # render new.rhtml
