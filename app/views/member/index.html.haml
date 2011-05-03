@@ -1,15 +1,15 @@
-/ Vue Index desuser.
-/ Liens vers les CSS
-%link{ :href => "/stylesheets/main_user.css", :rel => "stylesheet", :media => "screen" }
 
-/ Javascript particulier a la page modele
-%script{ :src => "/javascripts/user/functions_layer_user.js" ,   :type => "text/javascript" }
+-# Ajouter ici car il existe des conflits entre les JS.
+%script{ :src => "/javascripts/user/functions_layer_user.js"              ,   :type => "text/javascript" }
+
+
+
+
 
 -content_for :wizzard_content do
   = render :partial => "membre_nouveau"
   / wizard de suppression d'un membre
   = render :partial => "membre_delete"
-
 
 
 
