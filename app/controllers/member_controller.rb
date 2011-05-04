@@ -23,7 +23,7 @@ class MemberController < ApplicationController
 
     # render new.rhtml
     def new
-      @user = User.new
+      @member = User.new
     end
 
     def create
