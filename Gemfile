@@ -1,19 +1,20 @@
 source :rubygems
 
-gem 'rails'       , '3.0.5'
-gem 'mysql'       , '2.8.1'
-gem 'delayed_job' 
+gem 'rails'       , '~>3.0.5'
+gem 'mysql'       , '~>2.8.1'
+gem 'delayed_job' , '~>2.1.4'
 
 # gem 'resque'  
-gem 'haml'        , '3.0.25'
-gem 'barista'     , '1.0.0'  # Attention, haml doit être chargé AVANT barrista.
-gem 'prawn'       , '0.8.4'
+gem 'haml'        , '~>3.0.25'
+gem 'barista'     , '~>1.0.0'  # Attention, haml doit être chargé AVANT barrista.
+gem 'prawn'       , '~>0.8.4'
 
-gem 'jquery-rails', '0.2.5'
+gem 'jquery-rails', '~>0.2.5'
 gem 'json'                    # Inutile si ruby 1.9
-gem 'transitions'
-gem 'warden'
-gem 'devise'      
+gem 'transitions' , '~>0.0.9'
+gem 'warden'      , '~>1.0.3'
+gem 'devise'      , '~>1.1.8'
+gem 'formtastic'  , '~>1.2.3'
 
 # Use unicorn as the web server
 # gem 'unicorn'
@@ -37,19 +38,19 @@ group :development, :test do
   # gem 'webrat'
   gem 'ruby-debug'          , :require => 'ruby-debug'
   
-  # gem 'factory_girl_rails'  , '1.0'
-  # gem 'rspec-rails'         , '2.2.1'
-  # gem 'cucumber'            , '0.9.4'
-  # gem 'cucumber-rails'      , '0.3.2'
-  gem 'haml_scaffold'         , '1.1.0'
-  # gem 'shoulda'             , '2.11.3'
-  # gem 'email_spec'          , '1.0.0'
-  # gem 'rcov'                , '0.9.9'
+  # gem 'factory_girl_rails'  , '~>1.0'
+  # gem 'rspec-rails'         , '~>2.2.1'
+  # gem 'cucumber'            , '~>0.9.4'
+  # gem 'cucumber-rails'      , '~>0.3.2'
+  gem 'haml_scaffold'         , '~>1.1.0'
+  # gem 'shoulda'             , '~>2.11.3'
+  # gem 'email_spec'          , '~>1.0.0'
+  # gem 'rcov'                , '~>0.9.9'
 
-  # gem 'autotest-rails'      , '4.1.0'
-  # gem 'autotest'            , '4.4.1'
+  # gem 'autotest-rails'      , '~>4.1.0'
+  # gem 'autotest'            , '~>4.4.1'
   
   # Utilisation des générateurs haml de devise.
-  gem 'hpricot'
-  gem 'ruby_parser'
+  gem 'hpricot'               , '~>0.8.4'
+  gem 'ruby_parser'           , '~>2.0.6'
 end
