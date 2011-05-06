@@ -439,7 +439,7 @@ function go_page_piece(num){
 }
 
 // selectionner (activer) un une piece
-function active_piece_select(id){
+function active_piece(id){
         var num_select = -1; 
         var id_select = -1; 
         for(i=0;i<Tableau_pieces.length;i++){
@@ -459,6 +459,7 @@ function active_piece_select(id){
 
 // afficher la piece actif dans la twin box left
 function select_pieces(num_in_page){ 
+        //alert(num_in_page);
         for(i=0;i<taille_tableau_content_page['piece'];i++){
                 strContent_1 = new String();
                 strContent_1 = 'piece_lign_' + i;
@@ -471,6 +472,28 @@ function select_pieces(num_in_page){
                         }
                 }
         }
+}
+
+// afficher la piece sur le canvas
+function view_pieces(num_in_page){ 
+        for(i=0;i<taille_tableau_content_page['piece'];i++){
+                strContent_1 = new String();
+                strContent_lign = 'piece_lign_' + i;
+                var id_lign_active = document.getElementById(strContent_lign);
+                strContent_visu = 'piece_visu_' + i;
+                var id_visu_active = document.getElementById(strContent_visu);
+                if(id_lign_active.className != "tableNC_box_lign off"){
+                        if(i==num_in_page){
+                                id_visu_active.className = "tableNC_box_visu_active on";
+                        }else{
+                                id_visu_active.className = "tableNC_box_visu on";
+                        }
+                }
+        } 
+        //alert(array2json(content_tableau_connect['piece']));
+        num_select = content_tableau_connect['piece'][num_in_page];
+        id_piece = Tableau_pieces_filter[num_select].id;
+        filter_piece_id('my_canvas',id_piece);
 }
 
 
@@ -506,6 +529,64 @@ function go_page_interface(num){
 	affiche_Tableau_piece();
 }
 
+
+// selectionner (activer) une interface
+function active_interface(id){
+        var num_select = -1; 
+        var id_select = -1; 
+        for(i=0;i<Tableau_interfaces.length;i++){
+                if(Tableau_interfaces[i]['id'] == id) {
+                      num_select = i;
+                      id_select = id;
+                      break;
+                }
+        }
+        if(num_select != -1){
+                num_page = Math.floor(num_select/taille_tableau_content_page['interface']);
+                num_in_page = num_select - num_page * taille_tableau_content_page['interface'];
+                go_page_interface(num_page);
+                select_interface(num_in_page)
+        }
+}
+
+// afficher l'interface actif dans la twin box left
+function select_interface(num_in_page){ 
+        alert(num_in_page);
+        for(i=0;i<taille_tableau_content_page['interface'];i++){
+                strContent_1 = new String();
+                strContent_1 = 'piece_lign_' + i;
+                var id_active = document.getElementById(strContent_1);
+                if(id_active.className != "tableNC_box_lign off"){
+                        if(i==num_in_page){
+                                id_active.className = "tableNC_box_lign_active on";
+                        }else{
+                                id_active.className = "tableNC_box_lign on";
+                        }
+                }
+        }
+}
+
+// afficher l'interface dans le canvas
+function view_interfaces(num_in_page){ 
+        for(i=0;i<taille_tableau_content_page['interface'];i++){
+                strContent_1 = new String();
+                strContent_lign = 'interface_lign_' + i;
+                var id_lign_active = document.getElementById(strContent_lign);
+                strContent_visu = 'interface_visu_' + i;
+                var id_visu_active = document.getElementById(strContent_visu);
+                if(id_lign_active.className != "tableNC_box_lign off"){
+                        if(i==num_in_page){
+                                id_visu_active.className = "tableNC_box_visu_active on";
+                        }else{
+                                id_visu_active.className = "tableNC_box_visu on";
+                        }
+                }
+        } 
+        //alert(array2json(content_tableau_connect['piece']));
+        num_select = content_tableau_connect['interface'][num_in_page];
+        id_interface = Tableau_interfaces_filter[num_select].id;
+        filter_interface_id('my_canvas',id_interface);
+}
 
 //------------------------------------------------------------------------------------------------------
 // fonctions utiles pour l'affichage des bords
@@ -641,22 +722,35 @@ function go_page_new_forfait(num){
 function init_all() {
     image_3d = new ImgServer( "my_canvas", "00" );
     strgeom = new String();
-    strgeom = '/share/sc2/Developpement/MODEL/model_' + model_id + '/MESH/geometrie_all_0_0.vtu';
-    //strgeom = '/share/sc2/Developpement/MODEL/model_' + model_id + '/MESH/geom_inter_0_0.vtu';
+    //strgeom = '/share/sc2/Developpement/MODEL/model_' + model_id + '/MESH/geometrie_all_0_0.vtu';
+    strgeom = '/share/sc2/Developpement/MODEL/model_14/MESH/visu_geometry.h5';
+    namegeom = new String();
+    namegeom = 'Level_0/Geometry';
     
-    //image_3d.load_vtu( strgeom );
-    image_3d.load_vtu( "/var/www/Visu/data/geometry_all_0_0.vtu" );
+    image_3d.load_hdf( strgeom, namegeom );
+    //image_3d.load_vtu( "/var/www/Visu/data/geometry_all_0_0.vtu" );
     //image_3d.load_vtu( "/var/www/Visu/data/manchon.vtu" );
     //     alert(s);
     //image_3d.load_vtu( "/home/jbellec/Dropbox/SC/Inbox/fibres_mat/calcul_97/resultat_0_0.vtu" );
     //image_3d.load_vtu("/var/www/Visu/data/croix.vtu" );
+    
     //image_3d.color_by_field( "epsilon", 1 );
     //image_3d.shrink( 0.05 );
     image_3d.fit();
     image_3d.render();
 }
 
+function fit_img( c ) {
+    var s = document.getElementById(c).img_server;
+    s.fit();
+    s.render();
+}
 
+function sx( c, x, y ) { 
+    var s = document.getElementById(c).img_server; 
+    s.set_XY(x,y); 
+    s.render(); 
+}
 
 
 -->

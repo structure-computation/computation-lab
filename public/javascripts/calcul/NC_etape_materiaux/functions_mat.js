@@ -278,6 +278,28 @@ function go_page_piece(num){
 	affiche_Tableau_piece();
 }
 
+
+// afficher la piece sur le canvas
+function view_pieces(num_in_page){ 
+        //alert(taille_tableau_right);
+        for(i=0;i<taille_tableau_right;i++){
+                strContent_1 = new String();
+                strContent_visu = 'piece_visu_' + i;
+                var id_visu_active = document.getElementById(strContent_visu);
+                
+                if(i==num_in_page){
+                        id_visu_active.className = "tableNC_box_visu_active on";
+                }else{
+                        id_visu_active.className = "tableNC_box_visu on";
+                }
+                
+        } 
+        //alert(array2json(content_tableau_connect['piece']));
+        num_select = right_tableau_connect['piece'][num_in_page];
+        id_piece = Tableau_pieces_filter[num_select].id;
+        filter_piece_id('my_canvas',id_piece);
+}
+
 // -------------------------------------------------------------------------------------------------------------------------------------------
 // fonctions utiles pour la colone twin_left de la page active, liste des matériaux selectionnés 
 // -------------------------------------------------------------------------------------------------------------------------------------------

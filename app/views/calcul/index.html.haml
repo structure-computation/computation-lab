@@ -31,7 +31,9 @@
     %script{ :src => "/javascripts/calcul/NC_etape_options/functions_options.js", :type => "text/javascript" }
     %script{ :src => "/javascripts/calcul/NC_etape_previsions/functions_previsions.js", :type => "text/javascript" }
     %script{ :src => "/javascripts/calcul/NC_prop/functions_prop.js", :type => "text/javascript" }
-    %script{ :src => "/javascripts/imgserver.js", :type => "text/javascript" }
+    %script{ :src => "/javascripts/visualisation/functions_visu.js", :type => "text/javascript" }
+    /%script{ :src => "/javascripts/imgserver.js", :type => "text/javascript" }
+    %script{ :src => "/javascripts/img_gl_server.js", :type => "text/javascript" }
 
   %body
     #conteneur
@@ -144,6 +146,6 @@
   $(document).ready(get_Tableau_CL);
   $(document).ready(select_new_calcul);
   affiche_NC_page_initialisation();
-  $(document).ready( function() { img_init( document.getElementById("mainimg") ); } );
+  $(document).ready( function() { init_visualisation(); } );
   displayBlack("on");
   / alert("ok");
