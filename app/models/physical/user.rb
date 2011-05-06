@@ -80,6 +80,19 @@ class User < ActiveRecord::Base
   def email=(value)
     write_attribute :email, (value ? value.downcase : nil)
   end
+  
+  
+  # def serializable_hash(options = nil)
+  #   options ||= {}
+  #   options[:only] ||= []
+  #   options[:only] += PUBLIC_FIELDS
+  #   options[:only].uniq!
+  #   super(options)
+  # end
+  
+  def as_json(options = {})
+    super( :only => [ :id, :firstname, :lastname, :telephone, :email, :role  ] )
+  end
 
   # TODO: Valider les procédure suivantes qui me semble non adaptées aux noms ou prénoms composés.
   # def firstname=(value)
