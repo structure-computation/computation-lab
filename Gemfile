@@ -15,7 +15,7 @@ gem 'transitions' , '~>0.0.9'
 gem 'warden'      , '~>1.0.3'
 gem 'devise'      , '~>1.1.8'
 gem 'formtastic'  , '~>1.2.3'
-
+gem 'acts_as_api' , '~>0.3.5'
 # Use unicorn as the web server
 # gem 'unicorn'
 

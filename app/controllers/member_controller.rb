@@ -18,7 +18,15 @@ class MemberController < ApplicationController
     def index
       @page   = 'SCmanage' 
       @users  = current_user.company.users
-      respond_with(@users)  
+      respond_with(@users) 
+      
+      # TODO: Mis de côté en attendant de travailler avec le bon format résultat.
+      # respond_with(@users) do |format|
+      #   format.html
+      #   # format.json { render_for_api :std, :json => @users, :root => :users }
+      #   format.json { render_for_api :std, :json => @users }
+      # end
+         
     end
 
     # render new.rhtml
