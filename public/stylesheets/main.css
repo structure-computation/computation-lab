@@ -230,7 +230,15 @@ body
   font-size: 0.80em;
   font-weight: normal;
   float: right;
+
 }
+
+#disconnect_link, #administration_link {
+  font-size:        0.75em;
+  color:            #b8b9c3;
+  text-decoration:  underline;
+}
+
 #header_top_cadena
 {
   width: 43px;
@@ -827,6 +835,14 @@ body
   line-height: 32px;
   color:#2a3557;
 }
+
+/* Bouton de login, décalé de 5px à gauche pour ne pas "grignoter" la bordure de la fenetre*/
+#New_wiz_layer #login_button{
+  border: none; 
+  margin-right: 5px;  
+}
+
+
 .wiz_pic_ok
 {
   width: 70px;

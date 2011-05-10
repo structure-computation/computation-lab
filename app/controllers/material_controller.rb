@@ -1,10 +1,10 @@
 class MaterialController < ApplicationController
   #session :cookie_only => false, :only => :upload
-  before_filter :login_required
+  before_filter :authenticate_user!
   
   def index 
     @page = 'SCcompute'
-    @current_company = @current_user.company
+    @current_company = current_user.company
     @standard_materials = Material.find(:all,:conditions => {:company_id => -1}) # matériaux standards
     @materials = @current_company.materials.find(:all)
     respond_to do |format|
@@ -23,7 +23,7 @@ class MaterialController < ApplicationController
   
   def get_company_material
     @page = 'SCcompute'
-    @current_company = @current_user.company
+    @current_company = current_user.company
     @materials = @current_company.materials.find(:all)
     respond_to do |format|
       format.js   {render :json => @materials.to_json}
@@ -31,7 +31,7 @@ class MaterialController < ApplicationController
   end
   
   def create
-    @current_company = @current_user.company
+    @current_company = current_user.company
     @new_material = @current_company.materials.build(params[:material])
     @new_material.save
 #     num_model = 1

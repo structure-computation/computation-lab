@@ -1,10 +1,10 @@
 class CompanyController < ApplicationController
   
-  before_filter :login_required
+  before_filter :authenticate_user!
   
   def index
     @page = 'SCmanage' 
-    @current_company = @current_user.company
+    @current_company = current_user.company
     @id_company = @current_company.id
     respond_to do |format|
       format.html {render :layout => true }
@@ -13,13 +13,13 @@ class CompanyController < ApplicationController
   end
 
   def list_membre
-    @users = @current_user.company.users
+    @users = current_user.company.users
     render :json => @users.to_json
   end
   
   def get_gestionnaire
     #recherche des gestionnaires dans la bdd
-    gestionnaire = @current_user.company.users.find(:all, :conditions => {:role => "gestionnaire"})
+    gestionnaire = current_user.company.users.find(:all, :conditions => {:role => "gestionnaire"})
 
     # creation du tableau des gestionnaires réduit a envoyer
     @users = []
@@ -35,7 +35,7 @@ class CompanyController < ApplicationController
   
   def get_solde
     # Creation d'une liste fictive d'opération.
-    @soldes = @current_user.company.solde_calcul_accounts.find(:all)
+    @soldes = current_user.company.solde_calcul_accounts.find(:all)
     render :json => @soldes.to_json
   end
   
@@ -58,13 +58,13 @@ class CompanyController < ApplicationController
   end
   
   def delete_user
-    @current_company = @current_user.company
+    @current_company = current_user.company
     @user = @current_company.users.find(params[:id_membre])
-    if(@user && @user.id == @current_user.id)
-      render :text => "false " + @user.id.to_s() + "  " + @current_user.id.to_s()
+    if(@user && @user.id == current_user.id)
+      render :text => "false " + @user.id.to_s() + "  " + current_user.id.to_s()
     else
       @user.delete!
-      render :text => "true" + @user.id.to_s() + "  " + @current_user.id.to_s()
+      render :text => "true" + @user.id.to_s() + "  " + current_user.id.to_s()
     end
   end
   

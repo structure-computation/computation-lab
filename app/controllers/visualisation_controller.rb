@@ -2,12 +2,12 @@ class VisualisationController < ApplicationController
   require 'json'
   require 'socket'
   include Socket::Constants
-  before_filter :login_required , :except => :calcul_valid
+  before_filter :authenticate_user! , :except => :calcul_valid
   
   def index
     @page = 'SCcompute'
     @id_model = params[:id_model]
-    current_model = @current_user.sc_models.find(@id_model)
+    current_model = current_user.sc_models.find(@id_model)
     @dim_model = current_model.dimension
     respond_to do |format|
       format.html {render :layout => false }

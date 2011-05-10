@@ -1,11 +1,11 @@
 class DetailModelController < ApplicationController
   require 'json'
-  before_filter :login_required,  :except => :mesh_valid
+  before_filter :authenticate_user!,  :except => :mesh_valid
 
   def index
     @page = 'SCcompute'
     @id_model = params[:id_model]
-    @current_model = @current_user.sc_models.find(@id_model)
+    @current_model = current_user.sc_models.find(@id_model)
     respond_to do |format|
       format.html {render :layout => true }
       format.js   {render :json => @current_model.to_json}
@@ -14,7 +14,7 @@ class DetailModelController < ApplicationController
   
   def get_list_resultat
     @id_model = params[:id_model]
-    current_model = @current_user.sc_models.find(@id_model)
+    current_model = current_user.sc_models.find(@id_model)
     # list_resultats = current_model.calcul_results.find(:all, :conditions => {:log_type => "compute", :state => "finish"})
     list_resultats = current_model.calcul_results.find(:all, :conditions => {:log_type => "compute"})
     respond_to do |format|
@@ -24,7 +24,7 @@ class DetailModelController < ApplicationController
   
   def get_list_file
     @id_model = params[:id_model]
-    current_model = @current_user.sc_models.find(@id_model)
+    current_model = current_user.sc_models.find(@id_model)
     # list_file = current_model.calcul_results.find(:all, :conditions => {:log_type => "compute", :state => "finish"})
     list_files = current_model.files_sc_models.find(:all)
     respond_to do |format|
@@ -34,7 +34,7 @@ class DetailModelController < ApplicationController
   
   def get_list_utilisateur
     @id_model = params[:id_model]
-    current_model = @current_user.sc_models.find(@id_model)
+    current_model = current_user.sc_models.find(@id_model)
     list_role_utilisateurs = current_model.user_sc_models
     @users = []
     list_role_utilisateurs.each{ |utilisateur_i| 
@@ -50,7 +50,7 @@ class DetailModelController < ApplicationController
   end
   
   def get_list_utilisateur_new
-    @current_company = @current_user.company
+    @current_company = current_user.company
     list_utilisateur_new = @current_company.users
     @users = []
     list_utilisateur_new.each{ |utilisateur_i| 
@@ -67,7 +67,7 @@ class DetailModelController < ApplicationController
   
   def valid_new_utilisateur
     @id_model = params[:id_model]
-    @current_model = @current_user.sc_models.find(@id_model)
+    @current_model = current_user.sc_models.find(@id_model)
     @current_company = @current_model.company
     jsonobject = JSON.parse(params[:file])
     num_user = 0
@@ -84,15 +84,15 @@ class DetailModelController < ApplicationController
   end
   
   def send_mesh
-    current_model = @current_user.sc_models.find(params[:id_model])
-    results = current_model.send_mesh(params,@current_user)
+    current_model = current_user.sc_models.find(params[:id_model])
+    results = current_model.send_mesh(params,current_user)
     # envoie de la reponse au client
     render :text => results
   end
   
   def send_new_file
-    current_model = @current_user.sc_models.find(params[:id_model])
-    results = current_model.send_file(params,@current_user)
+    current_model = current_user.sc_models.find(params[:id_model])
+    results = current_model.send_file(params,current_user)
     # envoie de la reponse au client
     render :text => results
   end
@@ -132,7 +132,7 @@ class DetailModelController < ApplicationController
   def delete_resultat
     @id_model = params[:id_model]
     @id_resultat = params[:id_resultat]
-    @current_model = @current_user.sc_models.find(@id_model)
+    @current_model = current_user.sc_models.find(@id_model)
     @current_calcul = @current_model.calcul_results.find(@id_resultat)
     if(@current_calcul.test_delete?)
       @current_calcul.delete_calcul()
