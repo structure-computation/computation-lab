@@ -115,7 +115,9 @@ function lance_calcul(){
 					materials[i]["comp"] += "plastique ";
 				}if (Tableau_mat_select[i]["comp"].match('en')){
 					materials[i]["comp"] += "endommageable ";
-				}
+				}if (Tableau_mat_select[i]["comp"].match('vi')){
+                                        materials[i]["comp"] += "visqueux ";
+                                }
 			}
 			
 			else if(table_param[j]=="elastic_modulus"){
