@@ -118,7 +118,7 @@ class CalculAccount < ActiveRecord::Base
     current_log_calcul.calcul_time = current_calcul_result.calcul_time
     current_log_calcul.gpu_cards_number = current_calcul_result.gpu_allocated
     current_log_calcul.log_type = 'calcul'
-    current_log_calcul.debit_jeton = ((current_calcul_result.calcul_time * current_calcul_result.gpu_allocated)/15).ceil+1
+    current_log_calcul.debit_jeton = ((current_calcul_result.estimated_calcul_time * current_calcul_result.gpu_allocated)/15).ceil+1
 
     #mise à jour du solde_calcul_accounts
     current_solde = self.solde_calcul_accounts.build()

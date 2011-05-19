@@ -359,9 +359,9 @@ function lance_calcul(){
 		}else if(table_param[j]=="Temp_statique"){
 			Options["Temp_statique"] = Tableau_init_select['ctype'].toString() ;
 		}else if(table_param[j]=="Multiresolution_on"){
-                        Options["Multiresolution_on"] = parseFloat(Tableau_init_select['Multiresolution_on']) ;
+                        Options["Multiresolution_on"] = parseFloat(Tableau_option_select['Multiresolution_on']) ;
                 }else if(table_param[j]=="Multiresolution_nb_cyle"){
-                        Options["Multiresolution_nb_cyle"] = parseFloat(Tableau_init_select['Multiresolution_nb_cyle']) ;
+                        Options["Multiresolution_nb_cyle"] = parseFloat(Tableau_option_select['Multiresolution_nb_cyle']) ;
                 }else{
 			Options[table_param[j]] = Tableau_option_select[table_param[j]];
 		}
@@ -448,8 +448,8 @@ function complete_brouillon(interupteur, prevision){
         //alert(array2json(Tableau_init_time_step));
     
         // tableau des options
-        Tableau_option_select['Multiresolution_on'] = Tableau_init_select['Multiresolution_on'];
-        Tableau_option_select['Multiresolution_nb_cyle'] = Tableau_init_select['Multiresolution_nb_cyle'];
+//         Tableau_option_select['Multiresolution_on'] = Tableau_init_select['Multiresolution_on'];
+//         Tableau_option_select['Multiresolution_nb_cyle'] = Tableau_init_select['Multiresolution_nb_cyle'];
 	Tableau_calcul_complet['options'] = Tableau_option_select;
 	
 	// pour l'affichage dans l'interface
