@@ -158,17 +158,12 @@ class CalculResult < ActiveRecord::Base
     @solde_jeton = self.sc_model.company.calcul_account.solde_jeton
     @solde_jeton_tempon = self.sc_model.company.calcul_account.solde_jeton_tempon
     self.launch_autorisation = false
-    if(@solde_jeton == 0) 			#si il n'y a plus de jetons
+    if(@debit_jeton > @solde_jeton) 		#si le debit depasse le nb de jetons restants
       self.launch_autorisation = false
-    elsif(@debit_jeton > @solde_jeton)
-      temp_rest_jeton = @debit_jeton - @solde_jeton
-      if(temp_rest_jeton > @solde_jeton_tempon) #si il n'y a plus assez de jetons tempons
-        self.launch_autorisation = false
-      else					#si il y a assez de jetons tempons
-        self.launch_autorisation = true
-      end
-    else					#si il y a assez de jetons
+    elsif()                                     #si il y a assez de jetons , les jetons sont placé sur la reserve				
       self.launch_autorisation = true
+      self.sc_model.company.calcul_account.solde_jeton = self.sc_model.company.calcul_account.solde_jeton - @debit_jeton
+      self.sc_model.company.calcul_account.solde_jeton_tempon = self.sc_model.company.calcul_account.solde_jeton_tempon + @debit_jeton
     end
     #TEMP
     #self.launch_autorisation = true
@@ -192,18 +187,14 @@ class CalculResult < ActiveRecord::Base
     
     if(calcul_state == 0) #si le calcul est arrivé au bout
       self.change_state('finish')
+      self.get_used_memory()
     else
       self.change_state('echec')
     end
     #debugger
     
-    self.get_used_memory()
-    #self.save
-    
     #mise à jour du compte de calcul
-    if(calcul_state == 0)
-      self.sc_model.company.calcul_account.log_calcul(self.id)
-    end
+    self.sc_model.company.calcul_account.log_calcul(self.id, calcul_state)
   end
   
   def get_used_memory()

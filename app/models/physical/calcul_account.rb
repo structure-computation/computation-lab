@@ -108,7 +108,7 @@ class CalculAccount < ActiveRecord::Base
   end
   
   # nouveaucalcul fini sur ce compte
-  def log_calcul(id_calcul_result)
+  def log_calcul(id_calcul_result, calcul_state)
     #reprise du calcul_result
     current_calcul_result = CalculResult.find(id_calcul_result)
     
@@ -127,25 +127,20 @@ class CalculAccount < ActiveRecord::Base
     current_solde.credit_jeton = 0
     current_solde.credit_jeton_tempon = 0
     
-    if(current_log_calcul.debit_jeton > self.solde_jeton)
-      current_solde.debit_jeton = self.solde_jeton
-      temp_rest_jeton = current_log_calcul.debit_jeton - self.solde_jeton
-      if(temp_rest_jeton > self.solde_jeton_tempon)
-        current_solde.debit_jeton_tempon = self.solde_jeton_tempon
-      else
-        current_solde.debit_jeton_tempon = temp_rest_jeton
-      end
+    if(calcul_state == 0)
+      current_solde.debit_jeton = 0 
+      current_solde.debit_jeton_tempon = current_log_calcul.debit_jeton
     else
-      current_solde.debit_jeton = current_log_calcul.debit_jeton
-      current_solde.debit_jeton_tempon = 0
+      current_solde.debit_jeton = - current_log_calcul.debit_jeton
+      current_solde.debit_jeton_tempon = current_log_calcul.debit_jeton
     end
     
     current_solde.solde_jeton = self.solde_jeton - current_solde.debit_jeton
     current_solde.solde_jeton_tempon = self.solde_jeton_tempon - current_solde.debit_jeton_tempon
     
     #mise a jour des info du compte et sauvegarde
-    self.used_jeton += current_solde.debit_jeton
-    self.used_jeton_tempon += current_solde.debit_jeton_tempon
+    self.used_jeton += current_solde.debit_jeton + current_solde.debit_jeton_tempon
+    self.used_jeton_tempon += 0
     self.solde_jeton = current_solde.solde_jeton
     self.solde_jeton_tempon = current_solde.solde_jeton_tempon
     current_solde.save
