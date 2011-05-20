@@ -140,34 +140,38 @@ class CalculResult < ActiveRecord::Base
     jsonobject = JSON.parse(results)
     
     #calcul des prévisions
-    @estimated_calcul_points = self.sc_model.dimension * self.sc_model.dimension * self.sc_model.sst_number * jsonobject['options']['LATIN_nb_iter'] * jsonobject['time_step'].length 
-    self.gpu_allocated = (self.sc_model.dimension * self.sc_model.dimension * self.sc_model.sst_number * 0.00001).ceil
-    self.estimated_calcul_time = @estimated_calcul_points * 0.00001 * 0.07
-    @estimated_debit_jeton = ((self.estimated_calcul_time * self.gpu_allocated)/15).ceil+1
+    logger.debug jsonobject['options']['LATIN_nb_iter']
+    logger.debug jsonobject['time_step'].length 
+    logger.debug self.sc_model.dimension
+    logger.debug jsonobject['mesh']['nb_groups_elem']
+    
+    sst_number = jsonobject['mesh']['nb_groups_elem']
+    
+    @estimated_calcul_points = self.sc_model.dimension * self.sc_model.dimension * sst_number * jsonobject['options']['LATIN_nb_iter'] * jsonobject['time_step'].length 
+    self.gpu_allocated = (self.sc_model.dimension * self.sc_model.dimension * sst_number * 0.001).ceil
+    
+    # TODO changer  estimated_calcul_time en debit_jetons
+    self.estimated_calcul_time = @estimated_calcul_points * 0.0007
+    @debit_jeton = ((self.estimated_calcul_time * self.gpu_allocated)/15).ceil+1
         
     #autorisation de calcul
     @solde_jeton = self.sc_model.company.calcul_account.solde_jeton
     @solde_jeton_tempon = self.sc_model.company.calcul_account.solde_jeton_tempon
     self.launch_autorisation = false
-    if(@solde_jeton == 0) 			#si il n'y a plus de jetons
+    if(@debit_jeton > @solde_jeton) 		#si le debit depasse le nb de jetons restants
       self.launch_autorisation = false
-    elsif(@estimated_debit_jeton > @solde_jeton)
-      temp_rest_jeton = @estimated_debit_jeton - @solde_jeton
-      if(temp_rest_jeton > @solde_jeton_tempon) #si il n'y a plus assez de jetons tempons
-        self.launch_autorisation = false
-      else					#si il y a assez de jetons tempons
-        self.launch_autorisation = true
-      end
-    else					#si il y a assez de jetons
+    elsif()                                     #si il y a assez de jetons , les jetons sont placé sur la reserve				
       self.launch_autorisation = true
+      self.sc_model.company.calcul_account.solde_jeton = self.sc_model.company.calcul_account.solde_jeton - @debit_jeton
+      self.sc_model.company.calcul_account.solde_jeton_tempon = self.sc_model.company.calcul_account.solde_jeton_tempon + @debit_jeton
     end
     #TEMP
-    self.launch_autorisation = true
+    #self.launch_autorisation = true
     self.save
     
     
     
-    send_data  = {:launch_autorisation => self.launch_autorisation, :gpu_allocated => self.gpu_allocated, :estimated_calcul_time => self.estimated_calcul_time, :estimated_debit_jeton => @estimated_debit_jeton}
+    send_data  = {:launch_autorisation => self.launch_autorisation, :gpu_allocated => self.gpu_allocated, :estimated_calcul_time => self.estimated_calcul_time, :estimated_debit_jeton => @debit_jeton}
     
     return send_data 
   end
@@ -183,18 +187,14 @@ class CalculResult < ActiveRecord::Base
     
     if(calcul_state == 0) #si le calcul est arrivé au bout
       self.change_state('finish')
+      self.get_used_memory()
     else
       self.change_state('echec')
     end
     #debugger
     
-    self.get_used_memory()
-    #self.save
-    
     #mise à jour du compte de calcul
-    if(calcul_state == 0)
-      self.sc_model.company.calcul_account.log_calcul(self.id)
-    end
+    self.sc_model.company.calcul_account.log_calcul(self.id, calcul_state)
   end
   
   def get_used_memory()
