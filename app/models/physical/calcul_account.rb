@@ -123,15 +123,15 @@ class CalculAccount < ActiveRecord::Base
     #mise à jour du solde_calcul_accounts
     current_solde = self.solde_calcul_accounts.build()
     current_solde.log_calcul = current_log_calcul
-    current_solde.solde_type = 'calcul'
+    current_solde.solde_type = 'calcul_' +  current_calcul_result.id.to_s()
     current_solde.credit_jeton = 0
     current_solde.credit_jeton_tempon = 0
     
     if(calcul_state == 0)
-      current_solde.debit_jeton = 0 
+      current_solde.debit_jeton = current_log_calcul.debit_jeton 
       current_solde.debit_jeton_tempon = current_log_calcul.debit_jeton
     else
-      current_solde.debit_jeton = - current_log_calcul.debit_jeton
+      current_solde.debit_jeton = 0
       current_solde.debit_jeton_tempon = current_log_calcul.debit_jeton
     end
     

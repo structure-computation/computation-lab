@@ -121,6 +121,7 @@ function select_liaison(num){
 	Tableau_liaison_select[taille_Tableau_liaison_select]=new Array();
 	Tableau_liaison_select[taille_Tableau_liaison_select]=clone(Tableau_liaison_filter[num_select]);
 	Tableau_liaison_select[taille_Tableau_liaison_select]['id_select'] = compteur_liaison_select;
+	Tableau_liaison_select[taille_Tableau_liaison_select]['name_select'] = "liaison_select_" + compteur_liaison_select;
 	compteur_liaison_select = compteur_liaison_select + 1;
 	Tableau_liaison_select[taille_Tableau_liaison_select]['interfaces']=new Array();
 	twin_left_tableau_current_page['liaison_twin'] = twin_left_tableau_liste_page['liaison_twin'].length-1;
@@ -303,7 +304,7 @@ function go_page_interface(num){
 function affiche_Tableau_liaison_select(){
 	var current_tableau = Tableau_liaison_select;
 	var strname = 'liaison_twin';
-	var stridentificateur = 'name';
+	var stridentificateur = 'name_select';
 	affiche_Tableau_twin_left(current_tableau,strname,stridentificateur);
 	affich_active_liaison_select();
 }

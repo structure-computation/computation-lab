@@ -121,6 +121,7 @@ function select_mat(num){
 	Tableau_mat_select[taille_Tableau_mat_select]=new Array();
 	Tableau_mat_select[taille_Tableau_mat_select]=clone(Tableau_mat_filter[num_select]);
 	Tableau_mat_select[taille_Tableau_mat_select]['id_select'] = compteur_mat_select;
+	Tableau_mat_select[taille_Tableau_mat_select]['name_select'] = "mat_select_" + compteur_mat_select;
 	compteur_mat_select = compteur_mat_select + 1;
 	//alert(compteur_mat_select);
 	Tableau_mat_select[taille_Tableau_mat_select]['pieces']=new Array();
@@ -308,7 +309,7 @@ function view_pieces(num_in_page){
 function affiche_Tableau_mat_select(){
 	var current_tableau = Tableau_mat_select;
 	var strname = 'mat_twin';
-	var stridentificateur = 'name';
+	var stridentificateur = 'name_select';
 	affiche_Tableau_twin_left(current_tableau,strname,stridentificateur);
 	affich_active_mat_select();
 }

@@ -34,14 +34,14 @@ class CalculController < ApplicationController
   end
   
   def materiaux
-    @materiaux = Material.find(:all)
+    @materiaux = Material.find(:all, :conditions => {:reference => 1})
     respond_to do |format|
       format.js   {render :json => @materiaux.to_json}
     end
   end
   
   def liaisons
-    @liaisons = Link.find(:all)
+    @liaisons = Link.find(:all, :conditions => {:reference => 1})
     respond_to do |format|
       format.js   {render :json => @liaisons.to_json}
     end

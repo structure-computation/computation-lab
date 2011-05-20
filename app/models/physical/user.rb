@@ -32,7 +32,8 @@ class User < ActiveRecord::Base
   
   
   has_many    :user_sc_models 
-  has_many    :sc_models    ,  :through => :user_sc_models
+  has_many    :sc_models    ,  :through => :user_sc_models, :readonly => false
+
 
   has_many    :user_projects,  :dependent => :destroy # Pour les gestionnaires, reattribuer ce projet.
   has_many    :projects,       :through => :user_projects

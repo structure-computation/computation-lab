@@ -54,10 +54,13 @@ class CalculResult < ActiveRecord::Base
     # on enregistre le fichier sur le disque et on change les droit pour que le serveur de calcul y ait acces
     path_to_model = "#{SC_MODEL_ROOT}/model_#{self.sc_model.id}"
     path_to_calcul = "#{SC_MODEL_ROOT}/model_#{self.sc_model.id}/calcul_#{self.id}"
+    path_to_result = "#{SC_MODEL_ROOT}/model_#{self.sc_model.id}/calcul_#{self.id}/results"
  
     Dir.mkdir(path_to_model, 0777) unless File.exists?(path_to_model)
     Dir.mkdir(path_to_calcul, 0777) unless File.exists?(path_to_calcul)
+    Dir.mkdir(path_to_result, 0777) unless File.exists?(path_to_result)
     File.chmod 0777, path_to_calcul
+    File.chmod 0777, path_to_result
     
     path_to_file = path_to_calcul + "/brouillon.txt"
     
@@ -158,12 +161,12 @@ class CalculResult < ActiveRecord::Base
     @solde_jeton = self.sc_model.company.calcul_account.solde_jeton
     @solde_jeton_tempon = self.sc_model.company.calcul_account.solde_jeton_tempon
     self.launch_autorisation = false
-    if(@debit_jeton > @solde_jeton) 		#si le debit depasse le nb de jetons restants
+    if(@debit_jeton > (@solde_jeton - @solde_jeton_tempon)) 		#si le debit depasse le nb de jetons restants
       self.launch_autorisation = false
-    elsif()                                     #si il y a assez de jetons , les jetons sont placé sur la reserve				
+    else                                       #si il y a assez de jetons , les jetons sont placé sur la reserve				
       self.launch_autorisation = true
-      self.sc_model.company.calcul_account.solde_jeton = self.sc_model.company.calcul_account.solde_jeton - @debit_jeton
       self.sc_model.company.calcul_account.solde_jeton_tempon = self.sc_model.company.calcul_account.solde_jeton_tempon + @debit_jeton
+      self.sc_model.company.calcul_account.save
     end
     #TEMP
     #self.launch_autorisation = true
