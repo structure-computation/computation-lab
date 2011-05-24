@@ -103,7 +103,7 @@ fr:
     format:
       default: "%d/%m/%Y %H:%M"
       date_only: "%d/%m/%Y"
-      json:""
+      json: ""
       
     distance_in_words:
       half_a_minute: "une demi-minute"
