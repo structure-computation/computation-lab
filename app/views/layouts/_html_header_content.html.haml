@@ -41,6 +41,7 @@
 
 - #---------------------------------------------------------------------------------------------------------------------------#
 / Initialisation du token de protection XSS
+= csrf_meta_tag
 %script{ :type => "text/javascript"}
   = "function authToken(){ return '#{ form_authenticity_token if protect_against_forgery? }'; }" 
 
