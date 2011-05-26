@@ -3,3 +3,8 @@ db/*.sqlite3
 log/*.log
 tmp/
 Gemfile.lock
+
+public/stylesheets/ie.css
+public/stylesheets/print.css
+public/stylesheets/screen.css
+

@@ -5,7 +5,7 @@ gem 'mysql'       , '~>2.8.1'
 gem 'delayed_job' , '~>2.1.4'
 
 # gem 'resque'  
-gem 'haml'        , '~>3.0.25'
+gem 'haml'        , '~>3.1.0'
 gem 'barista'     , '~>1.0.0'  # Attention, haml doit être chargé AVANT barrista.
 gem 'prawn'       , '~>0.8.4'
 
@@ -16,6 +16,7 @@ gem 'warden'      , '~>1.0.3'
 gem 'devise'      , '~>1.1.8'
 gem 'formtastic'  , '~>1.2.3'
 gem 'acts_as_api' , '~>0.3.5'
+gem 'compass'     , '>= 0.11.1'
 # Use unicorn as the web server
 # gem 'unicorn'
 
