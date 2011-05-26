@@ -1,5 +1,8 @@
 
+.contentheightmin
+#bl_5.black.off
     
+
 #largeBox
   %h2
     Création d'un nouvel utilisateur.
@@ -19,12 +22,11 @@
     = form.input :lastname  , :label => "", :hint => "", :required => true
     = form.input :role      , :label => "", :as   => :select, :collection => {"Ingénieur" => "ingenieur", "Gestionnaire" => "gestionnaire", "Tous les droits" => "tous"}        
     = form.buttons :commit
+
+
   
-  /
-    email :
-    Nom :
-    Prénom :
-    Droits :
 
 
+/ Fin contenu de la vue.
+  
 

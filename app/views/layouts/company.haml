@@ -36,7 +36,7 @@
 
 
 
-  = render :partial => "footer_top"
+  = content_for?(:footer_top) ? yield(:footer_top)  : render(:partial => "footer_top")
 
 -# Ce template est rendu au sein du layout général de l'application.
 = render :file => 'layouts/application' 
