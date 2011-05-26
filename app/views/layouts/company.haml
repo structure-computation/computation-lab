@@ -1,5 +1,6 @@
 / Layout dédié aux pages "entreprise"
 
+-# Css et Javascript additionnels.
 -content_for :additionnal_stylesheets do 
   %link{ :href => "/stylesheets/main_user.css"    , :rel => "stylesheet", :media => "screen" }
   %link{ :href => "/stylesheets/main_company.css" , :rel => "stylesheet", :media => "screen" }
@@ -12,11 +13,12 @@
   -# %script{ :src => "/javascripts/admin/functions_layer_sc_admin_company.js" ,   :type => "text/javascript" }
   
 
+-# Layout du contenu.
 -content_for :content do
   / wizard création de projet en premier plan
   #content
     #bl_5.black.off
-    = yield(:wizzard_content)
+    = yield(:wizzard_content)  # Conservé pour pouvoir ajouter le HTML des Wizzards. 
 
     / partie gauche du contenu, raccourci
     #contentleft
@@ -25,10 +27,13 @@
       = render :partial => "context_leftbox"
     / fin partie gauche du contenu
   
+  
+  
     / partie droite du contenu, tableaux, informations importantes
     #contentright
       - # Seul cette partie est donnée par les vues.
       = content_for?(:company_content) ? yield(:company_content) : yield
+
 
 
   = render :partial => "footer_top"
