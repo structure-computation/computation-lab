@@ -4,6 +4,8 @@
 @import partials/base
 // Import all the default blueprint modules so that we can access their mixins.
 @import blueprint
+// On importe aussi la version "liquide" (redimentionnable)
+//@import "blueprint/liquid"
 // Import the non-default scaffolding module.
 @import blueprint/scaffolding
 
@@ -26,12 +28,42 @@ form.bp
   // You'll probably want to remove the scaffolding once you start styling your site.
   +blueprint-scaffolding
 
+$header-logo-cols:7
+$header-company-name-cols:5
 // Page layout can be done using mixins applied to your semantic classes and IDs:
-body.two-col
+body
   #container
     +container
+    +showgrid
+    // width: 90%
+    margin:auto
   #header, #footer
+    // +column($blueprint-liquid-grid-columns)
     +column($blueprint-grid-columns)
+    
+    #header_logo
+      +column(7)
+      background: transparent url('../images/Logo_StructureComputation_gris.png') no-repeat top left
+      height: image-height('Logo_StructureComputation_gris.png')
+    #header_company_name
+      +prepend(7)
+      +column(5)
+      a#administration_link 
+    
+    #user_information
+      // +prepend(7+7+5)
+      +column(5, true)
+      #user_name
+      a#disconnect_link
+      #logo_session_lock  
+      // #header_top_cadena        
+    #main_menu
+      +column($blueprint-grid-columns)
+      
+    
+    
+    
+    
   #sidebar
     // One third of the grid columns, rounding down. With 24 cols, this is 8.
     $sidebar-columns: floor($blueprint-grid-columns / 3)
