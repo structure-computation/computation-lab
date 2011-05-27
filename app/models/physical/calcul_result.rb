@@ -148,13 +148,17 @@ class CalculResult < ActiveRecord::Base
     logger.debug self.sc_model.dimension
     logger.debug jsonobject['mesh']['nb_groups_elem']
     
-    sst_number = jsonobject['mesh']['nb_groups_elem']
+    sst_number = jsonobject['mesh']['nb_sst']
     
     @estimated_calcul_points = self.sc_model.dimension * self.sc_model.dimension * sst_number * jsonobject['options']['LATIN_nb_iter'] * jsonobject['time_step'].length 
-    self.gpu_allocated = (self.sc_model.dimension * self.sc_model.dimension * sst_number * 0.001).ceil
+    #self.gpu_allocated = (self.sc_model.dimension * self.sc_model.dimension * sst_number * 0.001).ceil
+    self.gpu_allocated = 1
+    if(jsonobject['mesh']['nb_groups_elem'] > 8)
+      self.gpu_allocated = 1
+    end
     
     # TODO changer  estimated_calcul_time en debit_jetons
-    self.estimated_calcul_time = @estimated_calcul_points * 0.0007
+    self.estimated_calcul_time = (@estimated_calcul_points * 0.000001 / self.gpu_allocated)
     @debit_jeton = ((self.estimated_calcul_time * self.gpu_allocated)/15).ceil+1
         
     #autorisation de calcul
@@ -210,7 +214,7 @@ class CalculResult < ActiveRecord::Base
     Find.find(path_to_calcul) do |f| 
       dirsize += File.stat(f).size 
     end 
-    self.used_memory = dirsize
+    self.used_memory = dirsize/100
     self.save
     self.sc_model.get_used_memory()
   end
@@ -234,7 +238,7 @@ class CalculResult < ActiveRecord::Base
     #mise à jour dde l'état du calcul_result
     #state = ['temp', 'in_process', 'finish','downloaded','failed','uploaded']
     self.state = state
-    #self.save
+    self.save
   end
   
 end
