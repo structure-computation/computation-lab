@@ -31,6 +31,7 @@ form.bp
 
 $header-logo-cols:7
 $header-company-name-cols:5
+$submenu-col-number: 4
 // Page layout can be done using mixins applied to your semantic classes and IDs:
 body
   #container
@@ -65,8 +66,11 @@ body
         +border-top-radius(10px)
         border:     1px solid #bbb
         text-align:      center
+        // +pull
         .main_submenu
           display: none
+          .submenu_separator
+            +colruler($submenu-col-number)
     
     
     
