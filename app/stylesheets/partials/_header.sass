@@ -1,17 +1,20 @@
 
+@import "compass/typography/links/unstyled-link"
+
 $header-logo-cols:7
 $header-company-name-cols:5
 $submenu-col-number: 4
 
 @mixin main-menu-tab
-  height: 25px
   width:  125px // Ne fonctionne pas comme on le souhaite avec +column(3)
+  height: 25px
   float:  left
   // Image de fond et bordure
   background: transparent url(http://localhost:3000/images/header_menu.png) no-repeat 0% 0%
   marging-bottom: 5px
   text-align:     center 
   list-style-type: none
+
   
   // border:     1px solid #bbb // Double effet avec l'image de fond.
   // +border-top-radius(10px)   // Double effet avec l'image de fond.
@@ -46,10 +49,15 @@ body #header
   #main_menu
     +column($blueprint-grid-columns)
     padding-left: 0 // Suppression du padding pour aligner les tabs à gauche.
+    margin-top: 4px
     #home_tab, #company_tab, #lab_tab
       +main-menu-tab
-      .selected
-        background: transparent url(http://localhost:3000/images/header_menu_selected.png) no-repeat 0% 0%
+      a
+        +unstyled-link
+        // link-colors($normal, $hover, $active, $visited, $focus)
+        color: #551A8B
+        font-weight: bold
+          
       .main_submenu
         display: none
         .submenu_separator
@@ -58,3 +66,6 @@ body #header
     // append-selector("#home_tab, #company_tab, #lab_tab", ".selected") Ne marche pas...
     #home_tab.selected, #company_tab.selected, #lab_tab.selected
       background: transparent url(http://localhost:3000/images/header_menu_selected.png) no-repeat 0% 0%
+      a
+        color: #E5E5E5
+      
