@@ -18,7 +18,7 @@
     - if user_signed_in?
       #user_name
         = current_user.full_name
-      %br
+      
       = link_to "déconnexion", destroy_user_session_path,  :id => "disconnect_link"
       #logo_session_lock  
       - #header_top_cadena        

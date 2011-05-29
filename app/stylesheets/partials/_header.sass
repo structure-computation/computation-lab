@@ -15,7 +15,6 @@ $submenu-col-number: 4
   marging-bottom:   5px
   text-align:       center 
   list-style-type:  none
-  font-family:      Verdana, Arial, Helvetica, sans-serif
   font-size:        16px
   
   // border:     1px solid #bbb // Double effet avec l'image de fond.
@@ -30,6 +29,10 @@ body #header
   height:     90px  // Finalement fixé par le contenu. Environs 90px
   margin-top: 10px
   background: transparent url('/images/header_bg.png') repeat-x left top
+  font-family:  Verdana, Arial, Helvetica, sans-serif
+  font-size:    13px
+  font-weight:  normal
+  color:        #E5E5E5
   
   #header_logo
     +column(7)
@@ -40,10 +43,17 @@ body #header
   #header_company_name
     +prepend(7)
     +column (5)
+    font-family:  Verdana, Arial, Helvetica, sans-serif
+    font-size:    13px
+    font-weight:  normal
+    padding-top:  10px
+    color:        #E5E5E5
     a#administration_link 
   
   #user_information
     +column (5, true)
+    padding-top:  10px
+    
     #user_name
     a#disconnect_link
     #logo_session_lock  
