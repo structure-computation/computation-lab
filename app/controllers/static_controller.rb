@@ -2,7 +2,7 @@
 class StaticController < ApplicationController
   layout "application2"
   def index
-    
+    @page = :home # Pour afficher le menu en selected.
   end
   
   

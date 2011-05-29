@@ -1,0 +1,60 @@
+
+$header-logo-cols:7
+$header-company-name-cols:5
+$submenu-col-number: 4
+
+@mixin main-menu-tab
+  height: 25px
+  width:  125px // Ne fonctionne pas comme on le souhaite avec +column(3)
+  float:  left
+  // Image de fond et bordure
+  background: transparent url(http://localhost:3000/images/header_menu.png) no-repeat 0% 0%
+  marging-bottom: 5px
+  text-align:     center 
+  list-style-type: none
+  
+  // border:     1px solid #bbb // Double effet avec l'image de fond.
+  // +border-top-radius(10px)   // Double effet avec l'image de fond.
+
+  
+
+// Header général de l'application. Appelle le partial du main menu
+body #header
+  // +column($blueprint-liquid-grid-columns)
+  +column($blueprint-grid-columns)
+  height:     90px  // Finalement fixé par le contenu. Environs 90px
+  margin-top: 10px
+  background: transparent url('/images/header_bg.png') repeat-x left top
+  
+  #header_logo
+    +column(7)
+    background: transparent url('/images/Logo_StructureComputation_gris.png') no-repeat top left
+    height:     image-height('Logo_StructureComputation_gris.png')
+    margin: 7px 0px 0px 11px
+    padding: 10px 0px 0px
+  #header_company_name
+    +prepend(7)
+    +column (5)
+    a#administration_link 
+  
+  #user_information
+    +column (5, true)
+    #user_name
+    a#disconnect_link
+    #logo_session_lock  
+    // #header_top_cadena        
+  #main_menu
+    +column($blueprint-grid-columns)
+    padding-left: 0 // Suppression du padding pour aligner les tabs à gauche.
+    #home_tab, #company_tab, #lab_tab
+      +main-menu-tab
+      .selected
+        background: transparent url(http://localhost:3000/images/header_menu_selected.png) no-repeat 0% 0%
+      .main_submenu
+        display: none
+        .submenu_separator
+          +colruler($submenu-col-number)
+
+    // append-selector("#home_tab, #company_tab, #lab_tab", ".selected") Ne marche pas...
+    #home_tab.selected, #company_tab.selected, #lab_tab.selected
+      background: transparent url(http://localhost:3000/images/header_menu_selected.png) no-repeat 0% 0%
