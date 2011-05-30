@@ -15,12 +15,13 @@
       Nom entreprise
   #vertical_separator
   #user_information
-    - if user_signed_in?
+    - if user_signed_in?  # Le cadenas est placé en premier car on aligne de droite à gauche dans cette zone. 
+      #logo_session_lock  
       #user_name
         = current_user.full_name
+        %br
+        = link_to "déconnexion", destroy_user_session_path,  :id => "disconnect_link"
       
-      = link_to "déconnexion", destroy_user_session_path,  :id => "disconnect_link"
-      #logo_session_lock  
       - #header_top_cadena        
   
   = render :partial => "layouts/main_menu" 

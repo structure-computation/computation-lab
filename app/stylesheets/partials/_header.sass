@@ -59,11 +59,20 @@ body #header
   #user_information
     +column (5, true)
     padding-top:  10px
-    text-align: right
+    text-align:   right
     
     #user_name
-    a#disconnect_link
+      float:    right
+      //display:  block
+      a#disconnect_link
     #logo_session_lock  
+      $lock-image:    'header_cadena.png'
+      float:          right
+      background:     transparent url('/images/' + $lock-image) no-repeat top left
+      height:         image-height($lock-image)
+      width :         image-width($lock-image)
+      margin-top:     -4px // La marge de 10Px est déjà comprise dans l'image. la valeur est empirique pour aligner la ligne basse et la base de l'image.
+      
     // #header_top_cadena        
   #main_menu
     +column($blueprint-grid-columns)
