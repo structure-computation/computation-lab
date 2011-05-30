@@ -2,9 +2,12 @@
 @import "compass/typography/links/unstyled-link"
 @import "compass/typography/links/hover-link"
 
-$header-logo-cols:7
-$header-company-name-cols:5
-$submenu-col-number: 4
+$header-logo-cols:          7
+$header-company-name-cols:  5
+$submenu-col-number:        4
+$user-information-columns:  6 // Taille de la zone comportant les informations utilisateur nom, prénom et icone cadenas.
+$lock-image:                'header_cadena.png'
+
 
 @mixin main-menu-tab
   width:  125px // Ne fonctionne pas comme on le souhaite avec +column(3)
@@ -41,7 +44,7 @@ body #header
     margin: 7px 0px 0px 11px
     padding: 10px 0px 0px
   #header_company_name
-    +prepend(6)
+    +prepend(12 - $user-information-columns)
     +column (5)
     padding-top:  10px
     text-align: right
@@ -57,16 +60,20 @@ body #header
     margin-right:     - ceil($separator-width / 2)
     
   #user_information
-    +column (6, true)
+    +column ( $user-information-columns , true)
+    
+    
     padding-top:  10px
     text-align:   right
     
     #user_name
       float:    right
+      $user-name-width: floor(span($user-information-columns) - image-width($lock-image) - 15) // -10 n'était pas assez après essais. On passe à 15 pour garder une sécurité.
+
+      width: $user-name-width
       //display:  block
       a#disconnect_link
     #logo_session_lock  
-      $lock-image:    'header_cadena.png'
       float:          right
       background:     transparent url('/images/' + $lock-image) no-repeat top left
       height:         image-height($lock-image)
