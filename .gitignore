@@ -3,6 +3,7 @@ db/*.sqlite3
 log/*.log
 tmp/
 Gemfile.lock
+.DS_Store
 
 public/stylesheets/ie.css
 public/stylesheets/print.css
