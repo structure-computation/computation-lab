@@ -43,16 +43,23 @@ body #header
   #header_company_name
     +prepend(7)
     +column (5)
-    font-family:  Verdana, Arial, Helvetica, sans-serif
-    font-size:    13px
-    font-weight:  normal
     padding-top:  10px
-    color:        #E5E5E5
+    text-align: right
+    
     a#administration_link 
-  
+  #vertical_separator // Le séparateur vertical, ne dois pas impacter la grille... 
+    $separator-width: 10px
+    background:       transparent url('/images/header_bg_separateur.png') no-repeat top left
+    height:           53px
+    width:            $separator-width
+    float:            left
+    margin-left:      - ceil($separator-width / 2)
+    margin-right:     - ceil($separator-width / 2)
+    
   #user_information
     +column (5, true)
     padding-top:  10px
+    text-align: right
     
     #user_name
     a#disconnect_link
