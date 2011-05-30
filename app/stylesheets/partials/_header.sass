@@ -8,20 +8,24 @@ $submenu-col-number:        4
 $user-information-columns:  6 // Taille de la zone comportant les informations utilisateur nom, prénom et icone cadenas.
 $lock-image:                'header_cadena.png'
 
+@import "compass/css3/images"
+
 
 @mixin main-menu-tab
   width:  125px // Ne fonctionne pas comme on le souhaite avec +column(3)
   height: 25px
   float:  left
   // Image de fond et bordure
-  background:       transparent url(http://localhost:3000/images/header_menu.png) no-repeat 0% 0%
+  // background:       transparent url(http://localhost:3000/images/header_menu.png) no-repeat 0% 0%
   marging-bottom:   5px
+  margin-right : 2px
   text-align:       center 
   list-style-type:  none
   font-size:        16px
   
+  +background-image(linear-gradient(#535781, #515783))
   // border:     1px solid #bbb // Double effet avec l'image de fond.
-  // +border-top-radius(10px)   // Double effet avec l'image de fond.
+  +border-top-radius(12px)   // Double effet avec l'image de fond.
 
   
 
@@ -83,10 +87,12 @@ body #header
     // #header_top_cadena        
   #main_menu
     +column($blueprint-grid-columns)
-    padding-left: 0 // Suppression du padding pour aligner les tabs à gauche.
-    margin-top: 4px
+    padding-left:   0 // Suppression du padding pour aligner les tabs à gauche.
+    margin-top:     4px
     #home_tab, #company_tab, #lab_tab
       +main-menu-tab
+      margin-right : 2px
+      
       a
         // +unstyled-link
         +hover-link
@@ -101,7 +107,8 @@ body #header
 
     // append-selector("#home_tab, #company_tab, #lab_tab", ".selected") Ne marche pas...
     #home_tab.selected, #company_tab.selected, #lab_tab.selected
-      background: transparent url(http://localhost:3000/images/header_menu_selected.png) no-repeat 0% 0%
+      // background: transparent url(http://localhost:3000/images/header_menu_selected.png) no-repeat 0% 0%
+      +background-image(linear-gradient(#FDDE35, #FEA82A))
       a
         color: #E5E5E5
         font-weight: bold
