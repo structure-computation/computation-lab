@@ -53,8 +53,8 @@ class CalculController < ApplicationController
     @CLs[1] = BoundaryCondition.new(:ref=>'v1', :type_picto=>'acceleration', :bctype=>'volume', :name=>'effort d\'accélération')
     @CLs[2] = BoundaryCondition.new(:ref=>'v2', :type_picto=>'centrifuge',   :bctype=>'volume', :name=>'effort centrifuge')
 	
-	@CLs[3] = BoundaryCondition.new(:ref=>'e0', :type_picto=>'effort',   :bctype=>'effort', :name=>'force')
-	@CLs[4] = BoundaryCondition.new(:ref=>'e1', :type_picto=>'effort',   :bctype=>'effort_normal', :name=>'force normale')
+	@CLs[3] = BoundaryCondition.new(:ref=>'e0', :type_picto=>'effort',   :bctype=>'effort', :name=>"densité d'effort")
+	@CLs[4] = BoundaryCondition.new(:ref=>'e1', :type_picto=>'effort',   :bctype=>'effort_normal', :name=>"densité d'effort normal")
 	@CLs[5] = BoundaryCondition.new(:ref=>'e2', :type_picto=>'effort',   :bctype=>'pression', :name=>'pression')
 	
 	@CLs[6] = BoundaryCondition.new(:ref=>'d0', :type_picto=>'depl',   :bctype=>'depl_nul', :name=>'déplacement nul')

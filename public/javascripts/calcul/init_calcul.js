@@ -85,8 +85,10 @@ var actif_interface_select = -1;             		// interface sélectionné actif 
 var id_actif_interface_select = -1;			// id de l'element graphique interface sélectionné actif
 
 // pour la page CLs------------
-var Tableau_CL = new Array();  				// tableau des CLs 
-var Tableau_CL_step = new Array();  		// tableau des motif pour chaque step d'une CL
+var Tableau_CLe = new Array();  			// tableau des CLs effort
+var Tableau_CLd = new Array();                          // tableau des CLs deplacement
+var Tableau_CL_step = new Array();              // tableau des motif pour chaque step d'une CL
+
 Tableau_CL_step['fct_spatiale_x'] = "0";
 Tableau_CL_step['fct_spatiale_y'] = "0";
 Tableau_CL_step['fct_spatiale_z'] = "0";
@@ -197,7 +199,7 @@ var left_tableau_connect = new Array();			// connectivité entre l'id de l'eleme
 var left_tableau_current_page = new Array();		// numéro de la page du tableau (sert pour la définition de la connectivité)	
 var left_tableau_curseur_page = new Array();		// nombre de page du tableau (sert pour l'affichage des page en bas des tableaux)
 var left_tableau_liste_page = new Array();		// liste des page du tableau (sert pour l'affichage des page en bas des tableaux)
-var left_tableau_page = new Array('calcul', 'mat', 'liaison', 'CL', 'CLv');		// initialisation de toute les page avec tableau dynamique à gauche
+var left_tableau_page = new Array('calcul', 'mat', 'liaison', 'CLe', 'CLd', 'CLv');		// initialisation de toute les page avec tableau dynamique à gauche
 for(i=0; i<left_tableau_page.length ; i++){
 	left_tableau_connect[left_tableau_page[i]] = new Array(taille_tableau_left);
 	left_tableau_current_page[left_tableau_page[i]] = 0;
