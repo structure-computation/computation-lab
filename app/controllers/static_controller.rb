@@ -5,5 +5,4 @@ class StaticController < ApplicationController
     @page = :home # Pour afficher le menu en selected.
   end
   
-  
 end
