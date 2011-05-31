@@ -283,18 +283,25 @@ function go_page_piece(num){
 // afficher la piece sur le canvas
 function view_pieces(num_in_page){ 
         //alert(taille_tableau_right);
-        for(i=0;i<taille_tableau_right;i++){
-                strContent_1 = new String();
-                strContent_visu = 'piece_visu_' + i;
-                var id_visu_active = document.getElementById(strContent_visu);
-                
-                if(i==num_in_page){
-                        id_visu_active.className = "tableNC_box_visu_active on";
-                }else{
-                        id_visu_active.className = "tableNC_box_visu on";
-                }
-                
-        } 
+        
+        close_eyes_view_piece();
+	strContent_1 = new String();
+	strContent_visu = 'piece_visu_' + num_in_page;
+	var id_visu_active = document.getElementById(strContent_visu);
+	id_visu_active.className = "tableNC_box_visu_active on";
+	
+//         for(i=0;i<taille_tableau_right;i++){
+//                 strContent_1 = new String();
+//                 strContent_visu = 'piece_visu_' + i;
+//                 var id_visu_active = document.getElementById(strContent_visu);
+//                 
+//                 if(i==num_in_page){
+//                         id_visu_active.className = "tableNC_box_visu_active on";
+//                 }else{
+//                         id_visu_active.className = "tableNC_box_visu on";
+//                 }
+//                 
+//         } 
         //alert(array2json(content_tableau_connect['piece']));
         num_select = right_tableau_connect['piece'][num_in_page];
         id_piece = Tableau_pieces_filter[num_select].id;
@@ -448,7 +455,7 @@ function affich_active_piece_select(){
 
 // enlever la piece active de la selection pour le matériaux actif_mat_select
 function suppr_piece_select(num){
-	active_piece_select(num)
+	active_piece_select(num);
 	if(Tableau_pieces_assigned_i[actif_piece_select]['group']=='true'){
 		var taille_groupe = 1;
 		for(i=0; i<Tableau_mat_select[actif_mat_select]['pieces'].length ;i++){
@@ -478,4 +485,50 @@ function suppr_piece_select(num){
 	affiche_Tableau_piece();	
 }
 
+// afficher la piece sur le canvas
+function view_piece_select(num_in_page){ 
+        //alert(taille_tableau_right);
+        
+        close_eyes_view_piece();
+	strContent_1 = new String();
+	strContent_visu = 'piece_twin_visu_' + num_in_page;
+	var id_visu_active = document.getElementById(strContent_visu);
+	id_visu_active.className = "tableNC_box_visu_active on";
+	
+//         for(i=0;i<taille_tableau_twin_right;i++){
+//                 strContent_1 = new String();
+//                 strContent_visu = 'piece_twin_visu_' + i;
+//                 var id_visu_active = document.getElementById(strContent_visu);
+//                 
+// 		close_eyes_view_piece();
+//                 if(i==num_in_page){
+//                         id_visu_active.className = "tableNC_box_visu_active on";
+//                 }else{
+//                         id_visu_active.className = "tableNC_box_visu on";
+//                 }
+//                 
+//         } 
+        //alert(array2json(content_tableau_connect['piece']));
+        //num_select = right_tableau_connect['piece'][num_in_page];
+	active_piece_select(num_in_page);
+        id_piece = Tableau_pieces_assigned_i[actif_piece_select].id;
+        filter_piece_id('my_canvas',id_piece);
+}
 
+function close_eyes_view_piece(){ 
+        //alert(taille_tableau_right);
+        
+        for(i=0;i<taille_tableau_twin_right;i++){
+                strContent_1 = new String();
+                strContent_visu = 'piece_twin_visu_' + i;
+                var id_visu_active = document.getElementById(strContent_visu);
+                id_visu_active.className = "tableNC_box_visu on";       
+        }
+        for(i=0;i<taille_tableau_right;i++){
+                strContent_1 = new String();
+                strContent_visu = 'piece_visu_' + i;
+                var id_visu_active = document.getElementById(strContent_visu);
+                id_visu_active.className = "tableNC_box_visu on";  
+        } 
+        
+}

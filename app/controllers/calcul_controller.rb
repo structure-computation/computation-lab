@@ -27,16 +27,20 @@ class CalculController < ApplicationController
   def calculs
     @id_model = params[:id_model]
     current_model = current_user.sc_models.find(@id_model)
-    @calculs = current_model.calcul_results.find(:all, :conditions => {:log_type => "compute"})
+    @calculs = current_model.calcul_results.find(:all, :conditions => ["log_type = ? AND state != ?", "compute", "deleted"])
+    #:all, :conditions => ["log_type = ? AND state != ?", "compute", "deleted"])
     respond_to do |format|
       format.js   {render :json => @calculs.to_json}
     end
   end
   
   def materiaux
-    @materiaux = Material.find(:all, :conditions => {:reference => 1})
+    @current_company = current_user.company
+    all_materials = Material.find(:all, :conditions => {:reference => 1, :company_id => -1})
+    company_materials = @current_company.materials.find(:all)
+    @materials = all_materials.concat( company_materials )
     respond_to do |format|
-      format.js   {render :json => @materiaux.to_json}
+      format.js   {render :json => @materials.to_json}
     end
   end
   

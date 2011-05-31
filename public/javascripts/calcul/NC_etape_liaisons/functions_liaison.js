@@ -142,23 +142,7 @@ function go_page_liaison(num){
 }
 
 
-// afficher l'interface dans le canvas
-function view_interfaces(num_in_page){ 
-        for(i=0;i<taille_tableau_right;i++){
-                strContent_1 = new String();
-                strContent_visu = 'interface_visu_' + i;
-                var id_visu_active = document.getElementById(strContent_visu);
-                if(i==num_in_page){
-                        id_visu_active.className = "tableNC_box_visu_active on";
-                }else{
-                        id_visu_active.className = "tableNC_box_visu on";
-                }
-        } 
-        //alert(array2json(content_tableau_connect['piece']));
-        num_select = right_tableau_connect['interface'][num_in_page];
-        id_interface = Tableau_interfaces_filter[num_select].id;
-        filter_interface_id('my_canvas',id_interface);
-}
+
 
 // -------------------------------------------------------------------------------------------------------------------------------------------
 // fonctions utiles pour la colone de droite, liste des interfaces 
@@ -295,6 +279,33 @@ function go_page_interface(num){
 	}
 	affiche_Tableau_interface();
 }
+
+
+// afficher l'interface dans le canvas
+function view_interfaces(num_in_page){ 
+  
+	close_eyes_view_interface();
+	strContent_1 = new String();
+	strContent_visu = 'interface_visu_' + num_in_page;
+	var id_visu_active = document.getElementById(strContent_visu);
+	id_visu_active.className = "tableNC_box_visu_active on";
+  
+//         for(i=0;i<taille_tableau_right;i++){
+//                 strContent_1 = new String();
+//                 strContent_visu = 'interface_visu_' + i;
+//                 var id_visu_active = document.getElementById(strContent_visu);
+//                 if(i==num_in_page){
+//                         id_visu_active.className = "tableNC_box_visu_active on";
+//                 }else{
+//                         id_visu_active.className = "tableNC_box_visu on";
+//                 }
+//         } 
+        //alert(array2json(content_tableau_connect['piece']));
+        num_select = right_tableau_connect['interface'][num_in_page];
+        id_interface = Tableau_interfaces_filter[num_select].id;
+        filter_interface_id('my_canvas',id_interface);
+}
+
 
 // -------------------------------------------------------------------------------------------------------------------------------------------
 // fonctions utiles pour la colone twin_left de la page active, liste des liaisons selectionnés 
@@ -444,7 +455,7 @@ function affich_active_interface_select(){
 
 // enlever la interface active de la selection pour le liaisons actif_liaison_select
 function suppr_interface_select(num){
-	active_interface_select(num)
+	active_interface_select(num);
 	if(Tableau_interfaces_assigned_i[actif_interface_select]['group']=='true'){
 		var taille_groupe = 1;
 		for(i=0; i<Tableau_liaison_select[actif_liaison_select]['interfaces'].length ;i++){
@@ -474,4 +485,48 @@ function suppr_interface_select(num){
 	affiche_Tableau_interface();
 }
 
+
+// afficher l'interface dans le canvas
+function view_interfaces_select(num_in_page){ 
+  
+	close_eyes_view_interface();
+	strContent_1 = new String();
+	strContent_visu = 'interface_twin_visu_' + num_in_page;
+	var id_visu_active = document.getElementById(strContent_visu);
+	id_visu_active.className = "tableNC_box_visu_active on";
+	
+//         for(i=0;i<taille_tableau_right;i++){
+//                 strContent_1 = new String();
+//                 strContent_visu = 'interface_visu_' + i;
+//                 var id_visu_active = document.getElementById(strContent_visu);
+//                 if(i==num_in_page){
+//                         id_visu_active.className = "tableNC_box_visu_active on";
+//                 }else{
+//                         id_visu_active.className = "tableNC_box_visu on";
+//                 }
+//         } 
+        //alert(array2json(content_tableau_connect['piece']));
+	active_interface_select(num_in_page);
+	id_interface = Tableau_interfaces_assigned_i[actif_interface_select].id;
+        filter_interface_id('my_canvas',id_interface);
+}
+
+
+function close_eyes_view_interface(){ 
+        //alert(taille_tableau_right);
+        
+        for(i=0;i<taille_tableau_twin_right;i++){
+                strContent_1 = new String();
+                strContent_visu = 'interface_twin_visu_' + i;
+                var id_visu_active = document.getElementById(strContent_visu);
+                id_visu_active.className = "tableNC_box_visu on";       
+        }
+        for(i=0;i<taille_tableau_right;i++){
+                strContent_1 = new String();
+                strContent_visu = 'interface_visu_' + i;
+                var id_visu_active = document.getElementById(strContent_visu);
+                id_visu_active.className = "tableNC_box_visu on";  
+        } 
+        
+}
 

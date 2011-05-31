@@ -16,7 +16,7 @@ function init_Tableau_CL()
 	Tableau_CL_select_volume[0]=new Array();
 // 	Tableau_CL_select_volume[0]=clone(Tableau_CL_temp[0]['boundary_condition']);
         
-        Tableau_CL_select_volume[0]['ref'] = "v0";
+        Tableau_CL_select_volume[0]['ref'] = 0;
         Tableau_CL_select_volume[0]['type_picto'] = "poids";
         Tableau_CL_select_volume[0]['bctype'] = "volume";
         Tableau_CL_select_volume[0]['name'] = "effort volumique 0";
@@ -38,7 +38,7 @@ function init_Tableau_CL()
 	Tableau_CL_select_volume[1]=new Array();
 // 	Tableau_CL_select_volume[1]=clone(Tableau_CL_temp[1]['boundary_condition']);
         
-        Tableau_CL_select_volume[1]['ref'] = "v1";
+        Tableau_CL_select_volume[1]['ref'] = 1;
         Tableau_CL_select_volume[1]['type_picto'] = "poids";
         Tableau_CL_select_volume[1]['bctype'] = "volume";
         Tableau_CL_select_volume[1]['name'] = "effort volumique 1";
@@ -60,7 +60,7 @@ function init_Tableau_CL()
 	Tableau_CL_select_volume[2]=new Array();
 // 	Tableau_CL_select_volume[2]=clone(Tableau_CL_temp[2]['boundary_condition']);
         
-        Tableau_CL_select_volume[2]['ref'] = "v2";
+        Tableau_CL_select_volume[2]['ref'] = 2;
         Tableau_CL_select_volume[2]['type_picto'] = "poids";
         Tableau_CL_select_volume[2]['bctype'] = "volume";
         Tableau_CL_select_volume[2]['name'] = "effort volumique 2";

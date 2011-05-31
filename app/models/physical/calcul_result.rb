@@ -2,6 +2,9 @@ class CalculResult < ActiveRecord::Base
   require 'find'
   require 'json'
   require 'socket'
+  require 'fileutils'
+  
+
   
   include Socket::Constants
   
@@ -230,7 +233,9 @@ class CalculResult < ActiveRecord::Base
   def delete_calcul()
     self.change_state('deleted')
     self.updated_at = Time.now
-    #self.used_memory = 0
+    path_to_calcul = "#{SC_MODEL_ROOT}/model_#{self.sc_model.id}/calcul_#{self.id}"
+    FileUtils.rm_rf path_to_calcul
+    self.used_memory = 0
     self.save
   end
   
