@@ -10,6 +10,7 @@
 @import blueprint/scaffolding
 
 @import compass/css3
+@import compass/css3/images
 // To generate css equivalent to the blueprint css but with your
 // configuration applied, uncomment:
 // @include blueprint
@@ -31,7 +32,9 @@ form.bp
 
 
 
-@import partials/header 
+@import partials/header
+@import partials/footer
+ 
 
 // Page layout can be done using mixins applied to your semantic classes and IDs:
 body
@@ -58,5 +61,5 @@ body
     // true means it's the last column in the row
     +column($content-columns, true)
   
-  #footer
+  
 

@@ -13,9 +13,10 @@
     
     
   %body.bp
-    
+    = render :partial => "layouts/header_sass"    # Header prend toute la largeur et contient son sontainer.
+
     #container
-      = render :partial => "layouts/header_sass"
+      
       = render :partial => "layouts/breadcrumb"
       = render :partial => "layouts/flashs_and_notices"
       
@@ -26,6 +27,6 @@
         / Fin du code d'affichage de la vue
 
       / Fin content
-      = render :partial => "layouts/footer"
+    = render :partial => "layouts/footer_sass"         # Footer prend toute la largeur et contient son sontainer.
       
     / Fin conteneur
