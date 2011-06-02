@@ -1,10 +1,10 @@
 class FacturesController < ApplicationController
   
-  before_filter :login_required
+  before_filter :authenticate_user!
   
   def index
     @page = 'SCmanage' 
-    @current_company = @current_user.company
+    @current_company = current_user.company
     @id_company = @current_company.id
     @current_gestionnaire = @current_company.users.find(:first, :conditions => {:role => "gestionnaire"})
     respond_to do |format|
@@ -13,7 +13,7 @@ class FacturesController < ApplicationController
   end
   
   def get_facture
-    @current_company = @current_user.company
+    @current_company = current_user.company
     @factures = @current_company.factures.find(:all)
     @current_gestionnaire = @current_company.users.find(:first, :conditions => {:role => "gestionnaire"})
     @factures_forfaits = []
@@ -36,7 +36,7 @@ class FacturesController < ApplicationController
   end
   
   def download_facture
-    @current_company = @current_user.company
+    @current_company = current_user.company
     @current_facture = @current_company.factures.find(params[:id_facture])
     name_file = "#{SC_FACTURE_ROOT}/facture_" + params[:id_facture] + ".pdf"
     name_facture = 'Facture_' + @current_facture.ref.to_s() + '.pdf'
@@ -44,7 +44,7 @@ class FacturesController < ApplicationController
   end
   
   def generate_pdf_facture
-    @current_company = @current_user.company
+    @current_company = current_user.company
     @current_facture = @current_company.factures.find(params[:id_facture])
     @current_gestionnaire = @current_company.users.find(:first, :conditions => {:role => "gestionnaire"})
     prawnto :inline => false

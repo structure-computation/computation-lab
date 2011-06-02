@@ -1360,7 +1360,7 @@ body
 {
   width: 60px;
   height: 30px;
-  background: transparent url('../images/NC_pic_pdf.png') no-repeat center center;
+  //background: transparent url('../images/NC_pic_pdf.png') no-repeat center center;
   float: left;
 }
 .NC_gen_resume

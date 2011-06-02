@@ -87,11 +87,15 @@ function filter_interfaces(c) {
             //alert(array2json(num_group_info[ x ]));
         }
     }
+
     
     //s.set_XY( [1,0,0], [0,1,0] );
     if ( filter.length ) {
         var s = document.getElementById(c).img_server;
         s.set_elem_filter( filter );
+// 	s.num_context_next_cmd(1);
+// 	s.set_elem_filter( filter_piece );
+// 	s.alpha_altc = 0.3;
         //s.fit();
         s.render();
 //         alert(filter);

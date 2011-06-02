@@ -5,76 +5,40 @@
     #header_top_logo
     #header_top_cadena
     #header_top_user
-      #{session[:current_user_name]}
-      %br
-      %a{:href => "/sessions/destroy", :style => "font-size: 0.75em; color : #b8b9c3; text-decoration: underline ;" }
-        déconnexion
+      - if user_signed_in?
+        = current_user.full_name
+        %br
+        = link_to "déconnexion", destroy_user_session_path,  :id => "disconnect_link"
+        
     #header_top_temp
     #header_top_societe
-      #{session[:current_company_name]}
-      - if(@current_user.company.id == 240607020)
-        %br
-        %a{:href => "/sc_admin_company", :style => "font-size: 0.75em; color : #b8b9c3; text-decoration: underline ;" }
-          administration
+      - if user_signed_in? && current_user.company
+        = current_user.company.name
+        / TODO: Supprimer la ligne suivante dans une version ultérieure. C'est une mauvaise façon de se connecter.
+        - if(current_user.company.id == 240607020)
+          %br
+          %a{:href => "/sc_admin_company", :id=>"administration_link" }
+            administration
     
     
     /#bl_2.black.off
     #menu
-      - if @page == 'Accueil' 
-        %ul
-          %a{ :href => "/accueil" }
-            %li#mAccueil.selected 
-              Accueil
-          %a{ :href => "/company" }
-            %li#mSCmanage
-              Ma société
-          /%a{ :href => "/project" }
-          /  %li#mSCproject
-          /    SC project
-          %a{ :href => "/modele" }
-            %li#mSCcompute
-              Mes modèles
-      - if @page == 'SCmanage' 
-        %ul
-          %a{ :href => "/accueil" }
-            %li#mAccueil 
-              Accueil
-          %a{ :href => "/company" }
-            %li#mSCmanage.selected
-              Ma société
-          /%li#mSCproject
-          /  %a{ :href => "/project" }
-          /    SC project
-          %a{ :href => "/modele" }
-            %li#mSCcompute
-              Mes modèles
-      - if @page == 'SC project' 
-        %ul
-          %a{ :href => "/accueil" }
-            %li#mAccueil
-              Accueil
-          %a{ :href => "/company" }
-            %li#mSCmanage
-              Ma société
-          /%a{ :href => "/project" }
-          /  %li#mSCproject.selected
-          /    SC project
-          %a{ :href => "/modele" }
-            %li#mSCcompute
-              Mes modèles
-      - if @page == 'SCcompute' 
-        %ul
-          %li#mAccueil
-            %a{ :href => "/accueil" }
-              Accueil
-          %li#mSCmanage
-            %a{ :href => "/company" }
-              Ma société
-          /%a{ :href => "/project" }
-          /  %li#mSCproject
-          /    SC project
-          %a{ :href => "/modele" }
-            %li#mSCcompute.selected
-              Mes modèles
+      %ul
+        %a{ :href => "/accueil" }
+          %li{:id => "mAccueil" , :class => ( @page == 'Accueil'  ? "selected" : "")}
+            Accueil
+            
+        %a{ :href => "/company" }
+          %li{:id => "mSCmanage", :class => ( @page == 'SCmanage' ? "selected" : "")}
+            Ma société
+            
+        /%a{ :href => "/project" }
+        /  %li{:id => "mSCproject", :class => ( @page == 'SC project' ? "selected" : "")}
+        /    SC project
+        
+        %a{ :href => "/modele" }
+          %li{:id => "mSCcompute", :class => ( @page == 'SCcompute' ? "selected" : "")}
+            Mes modèles
+            
 
 / fin partie header

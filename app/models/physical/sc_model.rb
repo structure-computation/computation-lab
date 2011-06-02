@@ -173,6 +173,7 @@ class ScModel < ActiveRecord::Base
          value_to_return = false
       end
     }
+    value_to_return = true  # TODO
     return value_to_return
   end
   

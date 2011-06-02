@@ -2,6 +2,9 @@ class CalculResult < ActiveRecord::Base
   require 'find'
   require 'json'
   require 'socket'
+  require 'fileutils'
+  
+
   
   include Socket::Constants
   
@@ -54,10 +57,13 @@ class CalculResult < ActiveRecord::Base
     # on enregistre le fichier sur le disque et on change les droit pour que le serveur de calcul y ait acces
     path_to_model = "#{SC_MODEL_ROOT}/model_#{self.sc_model.id}"
     path_to_calcul = "#{SC_MODEL_ROOT}/model_#{self.sc_model.id}/calcul_#{self.id}"
+    path_to_result = "#{SC_MODEL_ROOT}/model_#{self.sc_model.id}/calcul_#{self.id}/results"
  
     Dir.mkdir(path_to_model, 0777) unless File.exists?(path_to_model)
     Dir.mkdir(path_to_calcul, 0777) unless File.exists?(path_to_calcul)
+    Dir.mkdir(path_to_result, 0777) unless File.exists?(path_to_result)
     File.chmod 0777, path_to_calcul
+    File.chmod 0777, path_to_result
     
     path_to_file = path_to_calcul + "/brouillon.txt"
     
@@ -140,34 +146,43 @@ class CalculResult < ActiveRecord::Base
     jsonobject = JSON.parse(results)
     
     #calcul des prévisions
-    @estimated_calcul_points = self.sc_model.dimension * self.sc_model.dimension * self.sc_model.sst_number * jsonobject['options']['LATIN_nb_iter'] * jsonobject['time_step'].length 
-    self.gpu_allocated = (self.sc_model.dimension * self.sc_model.dimension * self.sc_model.sst_number * 0.001).ceil
-    self.estimated_calcul_time = @estimated_calcul_points * 0.001 * 0.07
-    @estimated_debit_jeton = ((self.estimated_calcul_time * self.gpu_allocated)/15).ceil+1
+
+    logger.debug jsonobject['options']['LATIN_nb_iter']
+    logger.debug jsonobject['time_step'].length 
+    logger.debug self.sc_model.dimension
+    logger.debug jsonobject['mesh']['nb_groups_elem']
+    
+    sst_number = jsonobject['mesh']['nb_sst']
+    
+    @estimated_calcul_points = self.sc_model.dimension * self.sc_model.dimension * sst_number * jsonobject['options']['LATIN_nb_iter'] * jsonobject['time_step'].length 
+    #self.gpu_allocated = (self.sc_model.dimension * self.sc_model.dimension * sst_number * 0.001).ceil
+    self.gpu_allocated = 1
+    if(jsonobject['mesh']['nb_groups_elem'] > 8)
+      self.gpu_allocated = 1
+    end
+    
+    # TODO changer  estimated_calcul_time en debit_jetons
+    self.estimated_calcul_time = (@estimated_calcul_points * 0.000001 / self.gpu_allocated)
+    @debit_jeton = ((self.estimated_calcul_time * self.gpu_allocated)/15).ceil+1
         
     #autorisation de calcul
     @solde_jeton = self.sc_model.company.calcul_account.solde_jeton
     @solde_jeton_tempon = self.sc_model.company.calcul_account.solde_jeton_tempon
     self.launch_autorisation = false
-    if(@solde_jeton == 0) 			#si il n'y a plus de jetons
+    if(@debit_jeton > (@solde_jeton - @solde_jeton_tempon)) 		#si le debit depasse le nb de jetons restants
       self.launch_autorisation = false
-    elsif(@estimated_debit_jeton > @solde_jeton)
-      temp_rest_jeton = @estimated_debit_jeton - @solde_jeton
-      if(temp_rest_jeton > @solde_jeton_tempon) #si il n'y a plus assez de jetons tempons
-        self.launch_autorisation = false
-      else					#si il y a assez de jetons tempons
-        self.launch_autorisation = true
-      end
-    else					#si il y a assez de jetons
+    else                                       #si il y a assez de jetons , les jetons sont placé sur la reserve				
       self.launch_autorisation = true
+      self.sc_model.company.calcul_account.solde_jeton_tempon = self.sc_model.company.calcul_account.solde_jeton_tempon + @debit_jeton
+      self.sc_model.company.calcul_account.save
     end
     #TEMP
-    self.launch_autorisation = true
+    #self.launch_autorisation = true
     self.save
     
     
     
-    send_data  = {:launch_autorisation => self.launch_autorisation, :gpu_allocated => self.gpu_allocated, :estimated_calcul_time => self.estimated_calcul_time, :estimated_debit_jeton => @estimated_debit_jeton}
+    send_data  = {:launch_autorisation => self.launch_autorisation, :gpu_allocated => self.gpu_allocated, :estimated_calcul_time => self.estimated_calcul_time, :estimated_debit_jeton => @debit_jeton}
     
     return send_data 
   end
@@ -183,18 +198,14 @@ class CalculResult < ActiveRecord::Base
     
     if(calcul_state == 0) #si le calcul est arrivé au bout
       self.change_state('finish')
+      self.get_used_memory()
     else
       self.change_state('echec')
     end
     #debugger
     
-    self.get_used_memory()
-    #self.save
-    
     #mise à jour du compte de calcul
-    if(calcul_state == 0)
-      self.sc_model.company.calcul_account.log_calcul(self.id)
-    end
+    self.sc_model.company.calcul_account.log_calcul(self.id, calcul_state)
   end
   
   def get_used_memory()
@@ -207,7 +218,7 @@ class CalculResult < ActiveRecord::Base
     Find.find(path_to_calcul) do |f| 
       dirsize += File.stat(f).size 
     end 
-    self.used_memory = dirsize
+    self.used_memory = dirsize/100
     self.save
     self.sc_model.get_used_memory()
   end
@@ -223,7 +234,9 @@ class CalculResult < ActiveRecord::Base
   def delete_calcul()
     self.change_state('deleted')
     self.updated_at = Time.now
-    #self.used_memory = 0
+    path_to_calcul = "#{SC_MODEL_ROOT}/model_#{self.sc_model.id}/calcul_#{self.id}"
+    FileUtils.rm_rf path_to_calcul
+    self.used_memory = 0
     self.save
   end
   
@@ -231,7 +244,7 @@ class CalculResult < ActiveRecord::Base
     #mise à jour dde l'état du calcul_result
     #state = ['temp', 'in_process', 'finish','downloaded','failed','uploaded']
     self.state = state
-    #self.save
+    self.save
   end
   
 end

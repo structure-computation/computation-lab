@@ -1,0 +1,30 @@
+
+    
+#largeBox
+  %h2
+    Création d'un nouvel utilisateur.
+
+#largeBoxcontent1
+
+  Merci de renseigner les champs suivants :
+  
+  - # semantic_form_for @member, :url => member_path do |form|
+  - semantic_form_for @member, :url => "/member/new" do |form|
+
+    = form.semantic_errors 
+    -# form.inputs  :name => "Basic" do 
+      -# form.input :slug, :label => "URL Title", :hint => "Created automatically if left blank", :required => false
+    = form.input :email     , :label => "", :hint => "", :required => true
+    = form.input :firstname , :label => "", :hint => "", :required => true
+    = form.input :lastname  , :label => "", :hint => "", :required => true
+    = form.input :role      , :label => "", :as   => :select, :collection => {"Ingénieur" => "ingenieur", "Gestionnaire" => "gestionnaire", "Tous les droits" => "tous"}        
+    = form.buttons :commit
+  
+  /
+    email :
+    Nom :
+    Prénom :
+    Droits :
+
+
+

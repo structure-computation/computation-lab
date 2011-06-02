@@ -38,12 +38,32 @@ function refresh_NC_page_CLs(){
 
 // affichage du tableau des CLs effort et depl
 function affiche_Tableau_CL(){
-	taille_tableau_left = 7;
-	var current_tableau = Tableau_CL;
-	var strname = 'CL';
-	var stridentificateur = 'name';
-	affiche_Tableau_left(current_tableau,strname,stridentificateur);
+// 	taille_tableau_left = 7;
+// 	var current_tableau = Tableau_CL;
+// 	var strname = 'CL';
+// 	var stridentificateur = 'name';
+// 	affiche_Tableau_left(current_tableau,strname,stridentificateur);
+        affiche_Tableau_CLe();
+        affiche_Tableau_CLd();
 	affiche_Tableau_CL_volume();
+}
+
+// affichage du tableau des CLs effort et depl
+function affiche_Tableau_CLe(){
+        taille_tableau_left = 3;
+        var current_tableau = Tableau_CLe;
+        var strname = 'CLe';
+        var stridentificateur = 'name';
+        affiche_Tableau_left(current_tableau,strname,stridentificateur);
+}
+
+// affichage du tableau des CLs effort et depl
+function affiche_Tableau_CLd(){
+        taille_tableau_left = 4;
+        var current_tableau = Tableau_CLd;
+        var strname = 'CLd';
+        var stridentificateur = 'name';
+        affiche_Tableau_left(current_tableau,strname,stridentificateur);
 }
 
 // affichage du tableau des CLs volume
@@ -62,25 +82,6 @@ function affiche_Tableau_CL_volume(){
 			id_check.checked=true;
 		}
 	}
-	
-//	for(i=0; i<3 ;i++){
-//		strid_v1 = 'CLv_11_' + i;
-//		id_v1 = document.getElementById(strid_v1);
-//		id_v1.className = "tableNC_box_1 CL_" + Tableau_CL_select_volume[i]['type_picto']	;
-//		strid_v2 = 'CLv_12_' + i;
-//		id_v2 = document.getElementById(strid_v2);
-//		strtemp = new String();
-//		strtemp = Tableau_CL_select_volume[i]['name'];
-//		remplacerTexte(id_v2, strtemp);
-//		
-//		strid_v3 = 'CLv_13_' + i;
-//		id_check = document.getElementById(strid_v3);
-//		if(!Tableau_CL_select_volume[i]['select']){
-//			id_check.checked=false;	
-//		}else{
-//			id_check.checked=true;
-//		}
-//	}
 }
 
 // ajout d'un effort volumique
@@ -93,23 +94,63 @@ function select_CL_vol(num){
 	affiche_Tableau_CL_volume();
 }
 
-// ajout d'une CL sur les bors
-function select_CL(num){
-	var taille_Tableau_CL_select = Tableau_CL_select.length;
-	var num_select = left_tableau_connect['CL'][num];
-	Tableau_CL_select[taille_Tableau_CL_select]=new Array();
-	Tableau_CL_select[taille_Tableau_CL_select]=clone(Tableau_CL[num_select]);
-	Tableau_CL_select[taille_Tableau_CL_select]['id_select'] = compteur_CL_select;
-	compteur_CL_select = compteur_CL_select + 1;
-	Tableau_CL_select[taille_Tableau_CL_select]['bords']=new Array();
-	Tableau_CL_select[taille_Tableau_CL_select]['step']=new Array();
-	for(i=0;i<Tableau_init_time_step.length;i++){
-		Tableau_CL_select[taille_Tableau_CL_select]['step'][i]=new Array();	
-		Tableau_CL_select[taille_Tableau_CL_select]['step'][i]=clone(Tableau_CL_step);
-	}
-	twin_left_tableau_current_page['CL_twin'] = twin_left_tableau_liste_page['CL_twin'].length-1;
-	affiche_Tableau_CL_select();
+
+// ajout d'une CL effort sur les bors
+function select_CLe(num){
+        var taille_Tableau_CL_select = Tableau_CL_select.length;
+        var num_select = left_tableau_connect['CLe'][num];
+        Tableau_CL_select[taille_Tableau_CL_select]=new Array();
+        Tableau_CL_select[taille_Tableau_CL_select]=clone(Tableau_CLe[num_select]);
+        Tableau_CL_select[taille_Tableau_CL_select]['id_select'] = compteur_CL_select;
+        Tableau_CL_select[taille_Tableau_CL_select]['name_select'] = Tableau_CLe[num_select]['name'] + " " +  compteur_CL_select;
+        compteur_CL_select = compteur_CL_select + 1;
+        Tableau_CL_select[taille_Tableau_CL_select]['bords']=new Array();
+        Tableau_CL_select[taille_Tableau_CL_select]['step']=new Array();
+        for(i=0;i<Tableau_init_time_step.length;i++){
+                Tableau_CL_select[taille_Tableau_CL_select]['step'][i]=new Array();     
+                Tableau_CL_select[taille_Tableau_CL_select]['step'][i]=clone(Tableau_CL_step);
+        }
+        twin_left_tableau_current_page['CL_twin'] = twin_left_tableau_liste_page['CL_twin'].length-1;
+        affiche_Tableau_CL_select();
 }
+
+
+// ajout d'une CL deplacement sur les bors
+function select_CLd(num){
+        var taille_Tableau_CL_select = Tableau_CL_select.length;
+        var num_select = left_tableau_connect['CLd'][num];
+        Tableau_CL_select[taille_Tableau_CL_select]=new Array();
+        Tableau_CL_select[taille_Tableau_CL_select]=clone(Tableau_CLd[num_select]);
+        Tableau_CL_select[taille_Tableau_CL_select]['id_select'] = compteur_CL_select;
+        Tableau_CL_select[taille_Tableau_CL_select]['name_select'] = Tableau_CLd[num_select]['name'] + " " +  compteur_CL_select;
+        compteur_CL_select = compteur_CL_select + 1;
+        Tableau_CL_select[taille_Tableau_CL_select]['bords']=new Array();
+        Tableau_CL_select[taille_Tableau_CL_select]['step']=new Array();
+        for(i=0;i<Tableau_init_time_step.length;i++){
+                Tableau_CL_select[taille_Tableau_CL_select]['step'][i]=new Array();     
+                Tableau_CL_select[taille_Tableau_CL_select]['step'][i]=clone(Tableau_CL_step);
+        }
+        twin_left_tableau_current_page['CL_twin'] = twin_left_tableau_liste_page['CL_twin'].length-1;
+        affiche_Tableau_CL_select();
+}
+
+// ajout d'une CL sur les bors
+// function select_CL(num){
+// 	var taille_Tableau_CL_select = Tableau_CL_select.length;
+// 	var num_select = left_tableau_connect['CL'][num];
+// 	Tableau_CL_select[taille_Tableau_CL_select]=new Array();
+// 	Tableau_CL_select[taille_Tableau_CL_select]=clone(Tableau_CL[num_select]);
+// 	Tableau_CL_select[taille_Tableau_CL_select]['id_select'] = compteur_CL_select;
+// 	compteur_CL_select = compteur_CL_select + 1;
+// 	Tableau_CL_select[taille_Tableau_CL_select]['bords']=new Array();
+// 	Tableau_CL_select[taille_Tableau_CL_select]['step']=new Array();
+// 	for(i=0;i<Tableau_init_time_step.length;i++){
+// 		Tableau_CL_select[taille_Tableau_CL_select]['step'][i]=new Array();	
+// 		Tableau_CL_select[taille_Tableau_CL_select]['step'][i]=clone(Tableau_CL_step);
+// 	}
+// 	twin_left_tableau_current_page['CL_twin'] = twin_left_tableau_liste_page['CL_twin'].length-1;
+// 	affiche_Tableau_CL_select();
+// }
 
 // -------------------------------------------------------------------------------------------------------------------------------------------
 // fonctions utiles pour la colone de droite, liste des bords 
@@ -271,7 +312,7 @@ function go_page_bord(num){
 function affiche_Tableau_CL_select(){
 	var current_tableau = Tableau_CL_select;
 	var strname = 'CL_twin';
-	var stridentificateur = 'name';
+	var stridentificateur = 'name_select';
 	affiche_Tableau_twin_left(current_tableau,strname,stridentificateur);
 	affich_active_CL_select();
 }

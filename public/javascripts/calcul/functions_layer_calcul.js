@@ -330,7 +330,7 @@ function affiche_Tableau_left(current_tableau,strname,stridentificateur){
 				    id_pair.className = "tableNC_impair";
 				}
 			}
-			if(strname=='CL' || strname=='CLv'){	
+			if(strname=='CLe' || strname=='CLd' || strname=='CLv'){	
 				id_11.className = "tableNC_box_1 CL_" + current_tableau[i]['type_picto'];
 			}else{
 				id_11.className = "tableNC_box_1 "+strname;
@@ -342,7 +342,7 @@ function affiche_Tableau_left(current_tableau,strname,stridentificateur){
 		}
 	}
 	// pour l'affichage des page en bas de la boite
-	if(strname=='CL' || strname=='CLv'){
+	if(strname=='CLe' || strname=='CLd' || strname=='CLv'){
 	}else{
 		var nb_page = Math.floor(taille_Tableau/taille_tableau_left)+1;
 		if(nb_page < 5){

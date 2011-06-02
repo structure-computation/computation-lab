@@ -1,15 +1,8 @@
-# Filters added to this controller apply to all controllers in the application.
-# Likewise, all the methods added will be available for all controllers.
-
 class ApplicationController < ActionController::Base
-  helper :all # include all helpers, all the time
-  # protect_from_forgery # See ActionController::RequestForgeryProtection for details
-
-  include AuthenticatedSystem
-  
+#   protect_from_forgery
   def valid_admin_user
     admin_company = ScAdmin.find(:first)
-    admin_user = admin_company.user_sc_admins.find(:first, :conditions => {:user_id => @current_user.id})
+    admin_user = admin_company.user_sc_admins.find(:first, :conditions => {:user_id => current_user.id})
     if admin_user
       
     else
@@ -17,6 +10,5 @@ class ApplicationController < ActionController::Base
     end
   end
   
-  # Scrub sensitive parameters from your log
-  # filter_parameter_logging :password
+  
 end
