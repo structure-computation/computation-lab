@@ -28,6 +28,8 @@ class ScModel < ActiveRecord::Base
       extension = ".bdf"
     elsif name.match(/.avs/)
       extension = ".avs"
+    elsif name.match(/.unv/)
+      extension = ".unv"
     else
       results = "type de fichier de maillage non reconnu"
       return results

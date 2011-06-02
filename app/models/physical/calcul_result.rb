@@ -141,8 +141,8 @@ class CalculResult < ActiveRecord::Base
     
     #calcul des prévisions
     @estimated_calcul_points = self.sc_model.dimension * self.sc_model.dimension * self.sc_model.sst_number * jsonobject['options']['LATIN_nb_iter'] * jsonobject['time_step'].length 
-    self.gpu_allocated = (self.sc_model.dimension * self.sc_model.dimension * self.sc_model.sst_number * 0.00001).ceil
-    self.estimated_calcul_time = @estimated_calcul_points * 0.00001 * 0.07
+    self.gpu_allocated = (self.sc_model.dimension * self.sc_model.dimension * self.sc_model.sst_number * 0.001).ceil
+    self.estimated_calcul_time = @estimated_calcul_points * 0.001 * 0.07
     @estimated_debit_jeton = ((self.estimated_calcul_time * self.gpu_allocated)/15).ceil+1
         
     #autorisation de calcul
