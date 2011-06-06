@@ -5,7 +5,7 @@ gem 'mysql'       , '~>2.8.1'
 gem 'delayed_job' , '~>2.1.4'
 
 # gem 'resque'  
-gem 'haml'        , '~>3.0.25'
+gem 'haml'        , '~>3.1.1'
 gem 'barista'     , '~>1.0.0'  # Attention, haml doit être chargé AVANT barrista.
 gem 'prawn'       , '~>0.8.4'
 
