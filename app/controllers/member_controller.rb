@@ -18,6 +18,7 @@ class MemberController < ApplicationController
     def index
       @page   = 'SCmanage' 
       @users  = current_user.company.users
+      @member = User.new
       respond_with(@users) 
       
       # TODO: Mis de côté en attendant de travailler avec le bon format résultat.

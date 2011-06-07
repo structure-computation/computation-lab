@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable  , :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
-  acts_as_api
+#   acts_as_api
 
   attr_accessible   :email,     :password, :password_confirmation, :remember_me,
                     :firstname, :lastname, :role
@@ -84,15 +84,15 @@ class User < ActiveRecord::Base
   end
   
   # Definition des champs accessibles dans les retours JSON et/ou xml
-  api_accessible :std do |template|
-    template.add :id
-    template.add :last_name
-    template.add :firstname 
-    template.add :lastname 
-    template.add :telephone 
-    template.add :email 
-    template.add :role
-  end
+#   api_accessible :std do |template|
+#     template.add :id
+#     template.add :last_name
+#     template.add :firstname 
+#     template.add :lastname 
+#     template.add :telephone 
+#     template.add :email 
+#     template.add :role
+#   end
 
   # Pour éviter toute erreur...
   def as_json(options = {})

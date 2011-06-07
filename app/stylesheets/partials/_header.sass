@@ -28,6 +28,9 @@ body #header
   +background-image(linear-gradient(#4551AA, #2B3657))
   width:      100%
   height:     90px
+  position: fixed
+  top:    0
+  left:   0
 
 // Header général de l'application. Appelle le partial du main menu
 
@@ -45,10 +48,9 @@ body #header #container
     margin: 7px 0px 0px 11px
     padding: 10px 0px 0px
   #header_company_name
-    +prepend(12 - $user-information-columns)
-    +column (5)
     padding-top:  10px
     text-align: right
+    float:      right
     
     a#administration_link 
   #vertical_separator // Le séparateur vertical, ne dois pas impacter la grille... 
@@ -56,9 +58,9 @@ body #header #container
     background:       transparent url('/images/header_bg_separateur.png') no-repeat top left
     height:           53px
     width:            $separator-width
-    float:            left
-    margin-left:      - ceil($separator-width / 2)
-    margin-right:     - ceil($separator-width / 2)
+    float:            right
+    margin-left:      10px
+    margin-right:     10px
     
   #user_information
     +column ( $user-information-columns , true)
@@ -66,6 +68,7 @@ body #header #container
     
     padding-top:  10px
     text-align:   right
+    float:      right
     
     #user_name
       float:    right

@@ -102,7 +102,7 @@ function download_file(num){
 //---------------------------------------------------------------------------------------------------------
 
 // affichage du cache noir et du wizard suppression
-function displayDeleteResultat(interupteur) {
+function displayDeleteFile(interupteur) {
     displayBlack(interupteur);
     document.getElementById('Delete_wiz_layer_file').className = "Delete_wiz_layer " + interupteur;
     
@@ -121,7 +121,7 @@ function delete_file(num){
     var num_select = content_tableau_connect['file'][num];
     num_delete_file = num_select;
     var id_file = Tableau_file_filter[num_select]['files_sc_model']['id'];
-    displayDeleteResultat('on');
+    displayDeleteFile('on');
     var table_detail = Tableau_file_filter[num_select]['files_sc_model'];
     for(key in table_detail){
         var strContent_detail_key = 'file_delete_' + key ;
