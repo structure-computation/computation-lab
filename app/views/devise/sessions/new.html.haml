@@ -19,15 +19,18 @@
     %script{ :src => "/javascripts/user/functions_layer_session.js" ,   :type => "text/javascript" }
 
   %body
-    #conteneur
-      #header
-        #bl_1.black.off
-        #header_top_logo
-        #header_top_cadena
+    #headerLarge 
+      #conteneur
+        .contentTransparent
+          #header
+            #bl_1.black.off
+            #header_top_logo
+            #header_top_cadena
 
         
       / Debut affichage du code de la vue
       / wizard en premier plan
+    #conteneur
       .content
         .contentheightmin
         #bl_5.black.off
@@ -74,15 +77,11 @@
               - #= submit_tag 'Log in', :class => "New_footer_bouton_suivant New_footer_top_bouton", :style => "border: none; margin-right: 5px"
               -#  Log in
 
-      / partie haute du footer, bas de la boite projet plus bouton
-      #footer_top_void
-        #black_footer_top.black.off
-      / fin partie haute du footer
-      
-      / Fin du code d'affichage de la vue
-
-      / Fin content
-      = render :partial => "/layouts/footer"
+    #footerLarge
+      #conteneur
+        .contentTransparent
+          .black.on
+          #footerLargeCarre
       
       
     :javascript
