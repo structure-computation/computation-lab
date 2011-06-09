@@ -121,6 +121,7 @@ function select_liaison(num){
 	Tableau_liaison_select[taille_Tableau_liaison_select]=new Array();
 	Tableau_liaison_select[taille_Tableau_liaison_select]=clone(Tableau_liaison_filter[num_select]);
 	Tableau_liaison_select[taille_Tableau_liaison_select]['id_select'] = compteur_liaison_select;
+	Tableau_liaison_select[taille_Tableau_liaison_select]['name_select'] = "liaison_select_" + compteur_liaison_select;
 	compteur_liaison_select = compteur_liaison_select + 1;
 	Tableau_liaison_select[taille_Tableau_liaison_select]['interfaces']=new Array();
 	twin_left_tableau_current_page['liaison_twin'] = twin_left_tableau_liste_page['liaison_twin'].length-1;
@@ -141,23 +142,7 @@ function go_page_liaison(num){
 }
 
 
-// afficher l'interface dans le canvas
-function view_interfaces(num_in_page){ 
-        for(i=0;i<taille_tableau_right;i++){
-                strContent_1 = new String();
-                strContent_visu = 'interface_visu_' + i;
-                var id_visu_active = document.getElementById(strContent_visu);
-                if(i==num_in_page){
-                        id_visu_active.className = "tableNC_box_visu_active on";
-                }else{
-                        id_visu_active.className = "tableNC_box_visu on";
-                }
-        } 
-        //alert(array2json(content_tableau_connect['piece']));
-        num_select = right_tableau_connect['interface'][num_in_page];
-        id_interface = Tableau_interfaces_filter[num_select].id;
-        filter_interface_id('my_canvas',id_interface);
-}
+
 
 // -------------------------------------------------------------------------------------------------------------------------------------------
 // fonctions utiles pour la colone de droite, liste des interfaces 
@@ -295,6 +280,33 @@ function go_page_interface(num){
 	affiche_Tableau_interface();
 }
 
+
+// afficher l'interface dans le canvas
+function view_interfaces(num_in_page){ 
+  
+	close_eyes_view_interface();
+	strContent_1 = new String();
+	strContent_visu = 'interface_visu_' + num_in_page;
+	var id_visu_active = document.getElementById(strContent_visu);
+	id_visu_active.className = "tableNC_box_visu_active on";
+  
+//         for(i=0;i<taille_tableau_right;i++){
+//                 strContent_1 = new String();
+//                 strContent_visu = 'interface_visu_' + i;
+//                 var id_visu_active = document.getElementById(strContent_visu);
+//                 if(i==num_in_page){
+//                         id_visu_active.className = "tableNC_box_visu_active on";
+//                 }else{
+//                         id_visu_active.className = "tableNC_box_visu on";
+//                 }
+//         } 
+        //alert(array2json(content_tableau_connect['piece']));
+        num_select = right_tableau_connect['interface'][num_in_page];
+        id_interface = Tableau_interfaces_filter[num_select].id;
+        filter_interface_id('my_canvas',id_interface);
+}
+
+
 // -------------------------------------------------------------------------------------------------------------------------------------------
 // fonctions utiles pour la colone twin_left de la page active, liste des liaisons selectionnés 
 // -------------------------------------------------------------------------------------------------------------------------------------------
@@ -303,7 +315,7 @@ function go_page_interface(num){
 function affiche_Tableau_liaison_select(){
 	var current_tableau = Tableau_liaison_select;
 	var strname = 'liaison_twin';
-	var stridentificateur = 'name';
+	var stridentificateur = 'name_select';
 	affiche_Tableau_twin_left(current_tableau,strname,stridentificateur);
 	affich_active_liaison_select();
 }
@@ -443,7 +455,7 @@ function affich_active_interface_select(){
 
 // enlever la interface active de la selection pour le liaisons actif_liaison_select
 function suppr_interface_select(num){
-	active_interface_select(num)
+	active_interface_select(num);
 	if(Tableau_interfaces_assigned_i[actif_interface_select]['group']=='true'){
 		var taille_groupe = 1;
 		for(i=0; i<Tableau_liaison_select[actif_liaison_select]['interfaces'].length ;i++){
@@ -473,4 +485,48 @@ function suppr_interface_select(num){
 	affiche_Tableau_interface();
 }
 
+
+// afficher l'interface dans le canvas
+function view_interfaces_select(num_in_page){ 
+  
+	close_eyes_view_interface();
+	strContent_1 = new String();
+	strContent_visu = 'interface_twin_visu_' + num_in_page;
+	var id_visu_active = document.getElementById(strContent_visu);
+	id_visu_active.className = "tableNC_box_visu_active on";
+	
+//         for(i=0;i<taille_tableau_right;i++){
+//                 strContent_1 = new String();
+//                 strContent_visu = 'interface_visu_' + i;
+//                 var id_visu_active = document.getElementById(strContent_visu);
+//                 if(i==num_in_page){
+//                         id_visu_active.className = "tableNC_box_visu_active on";
+//                 }else{
+//                         id_visu_active.className = "tableNC_box_visu on";
+//                 }
+//         } 
+        //alert(array2json(content_tableau_connect['piece']));
+	active_interface_select(num_in_page);
+	id_interface = Tableau_interfaces_assigned_i[actif_interface_select].id;
+        filter_interface_id('my_canvas',id_interface);
+}
+
+
+function close_eyes_view_interface(){ 
+        //alert(taille_tableau_right);
+        
+        for(i=0;i<taille_tableau_twin_right;i++){
+                strContent_1 = new String();
+                strContent_visu = 'interface_twin_visu_' + i;
+                var id_visu_active = document.getElementById(strContent_visu);
+                id_visu_active.className = "tableNC_box_visu on";       
+        }
+        for(i=0;i<taille_tableau_right;i++){
+                strContent_1 = new String();
+                strContent_visu = 'interface_visu_' + i;
+                var id_visu_active = document.getElementById(strContent_visu);
+                id_visu_active.className = "tableNC_box_visu on";  
+        } 
+        
+}
 

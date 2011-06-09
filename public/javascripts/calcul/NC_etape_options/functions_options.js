@@ -105,6 +105,7 @@ function select_option(str){
 		
 	}else if(str=='normal'){
 		Tableau_option_select = Tableau_option_normal;
+                //alert(array2json(Tableau_option_select));
 		for(key in Tableau_option_select){
 			if(key == 'mode' || key == 'nb_option'){
 			}else if(key == 'LATIN_multiechelle'){

@@ -259,6 +259,18 @@ function download_resultat(num){
     }
 }
 
+// affiche la page num pour la liste des resultats
+function go_page_resultat(num){
+    if(num=='first'){
+        content_tableau_current_page['resultat'] = 0;
+    }else if(num=='end'){
+        content_tableau_current_page['resultat'] = content_tableau_liste_page['resultat'].length-1;
+    }else{
+        var num_page = num + content_tableau_curseur_page['resultat'];
+        content_tableau_current_page['resultat'] = content_tableau_liste_page['resultat'][num_page]-1;    
+    }
+    affiche_Tableau_resultat();
+}
 
 //---------------------------------------------------------------------------------------------------------
 // wizard de suppression du resultat ou calcul
@@ -447,19 +459,6 @@ function affiche_Tableau_content(current_tableau, strname, strnamebdd, stridenti
 }
 
 
-
-// affiche la page num pour la liste des resultats
-function go_page_resultat(num){
-    if(num=='first'){
-        content_tableau_current_page['calcul_result'] = 0;
-    }else if(num=='end'){
-        content_tableau_current_page['calcul_result'] = content_tableau_liste_page['calcul_result'].length-1;
-    }else{
-        var num_page = num + content_tableau_curseur_page['calcul_result'];
-        content_tableau_current_page['calcul_result'] = content_tableau_liste_page['calcul_result'][num_page]-1;    
-    }
-    affiche_Tableau_resultat();
-}
 
 
 //---------------------------------------------------------------------------------------------------------

@@ -66,7 +66,7 @@ function info_select(strinfo,num){
 	if(strinfo=='liaison' || strinfo=='liaison_twin' || strinfo=='interface_twin'){
 		refresh_NC_page_liaisons();
 	}
-	if(strinfo=='CL' || strinfo.match('CLv') || strinfo=='CL_twin' || strinfo=='bord' || strinfo=='bord_twin'){
+	if(strinfo=='CLe' || strinfo=='CLd' || strinfo.match('CLv') || strinfo=='CL_twin' || strinfo=='bord' || strinfo=='bord_twin'){
 		refresh_NC_page_CLs();
 	}
 	selected_for_info = [strinfo,num];
@@ -102,24 +102,32 @@ function info_select(strinfo,num){
 		prop_liaison_for_info = Tableau_liaison_select[num_select];
 		prop_liaison_affich_info();
 	}
-	if(strinfo=='CL'){
+	if(strinfo=='CLe'){
 		document.getElementById('NC_top_box_prop').className = 'NC_top_box_center';
 		var num_select = left_tableau_connect[strinfo][num];
-		prop_CL_for_info = Tableau_CL[num_select];
+		prop_CL_for_info = Tableau_CLe[num_select];
 		prop_CL_affich_info();
 	}
+	if(strinfo=='CLd'){
+                document.getElementById('NC_top_box_prop').className = 'NC_top_box_center';
+                var num_select = left_tableau_connect[strinfo][num];
+                prop_CL_for_info = Tableau_CLd[num_select];
+                prop_CL_affich_info();
+        }
 	if(strinfo=='CLv'){
 		document.getElementById('NC_top_box_prop').className = 'NC_top_active_box';
 		var num_select = num;
 		prop_CL_for_info = Tableau_CL_select_volume[num_select];
 		
-		if(num_select == 0){  //le poids
-			prop_CLv_affich_info('poids');
-		}else if(num_select == 1){ //l'accéleration
-			prop_CLv_affich_info('acceleration');
-		}else if(num_select == 2){ //les efforts centrifuges
-			prop_CLv_affich_info('centrifuge');
-		}
+                prop_CLv_affich_info('acceleration');
+                
+// 		if(num_select == 0){  //le poids
+// 			prop_CLv_affich_info('poids');
+// 		}else if(num_select == 1){ //l'accéleration
+// 			prop_CLv_affich_info('acceleration');
+// 		}else if(num_select == 2){ //les efforts centrifuges
+// 			prop_CLv_affich_info('centrifuge');
+// 		}
 	}
 	if(strinfo=='CL_twin'){
 		active_CL_select(num);
@@ -580,8 +588,10 @@ function prop_CLv_affich_info(strinfo){
 					var strContent_prop_key = 'prop_CLv_' + strinfo + '_' + key_step + '_' + i_step;
 					//alert(strContent_prop_key);
 					var id_prop_key = document.getElementById(strContent_prop_key);
-					id_prop_key.value =  prop_CL_for_info[key][i_step][key_step] ;
-					id_prop_key.disabled = false;
+                                        if(id_prop_key != null){
+                                            id_prop_key.value =  prop_CL_for_info[key][i_step][key_step] ;
+                                            id_prop_key.disabled = false;
+                                        }
 				}
 			}
 		}

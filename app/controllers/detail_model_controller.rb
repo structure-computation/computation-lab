@@ -110,8 +110,8 @@ class DetailModelController < ApplicationController
     @id_resultat = params[:id_resultat]
     @current_model = ScModel.find(@id_model)
     @current_resultat = @current_model.calcul_results.find(@id_resultat)
-    name_file = "#{SC_MODEL_ROOT}/model_" + @id_model + "/calcul_" + @id_resultat + "/resultat_0_0.vtu"
-    name_resultats = 'result_' + @id_resultat + '.vtu'
+    name_file = "#{SC_MODEL_ROOT}/model_" + @id_model + "/calcul_" + @id_resultat + "/results.zip"
+    name_resultats = 'result_' + @id_resultat + '.zip'
     send_file name_file, :filename => name_resultats, :x_sendfile=>true
     
     @current_resultat.change_state('downloaded') 

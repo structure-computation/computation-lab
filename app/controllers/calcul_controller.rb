@@ -27,21 +27,25 @@ class CalculController < ApplicationController
   def calculs
     @id_model = params[:id_model]
     current_model = current_user.sc_models.find(@id_model)
-    @calculs = current_model.calcul_results.find(:all, :conditions => {:log_type => "compute"})
+    @calculs = current_model.calcul_results.find(:all, :conditions => ["log_type = ? AND state != ?", "compute", "deleted"])
+    #:all, :conditions => ["log_type = ? AND state != ?", "compute", "deleted"])
     respond_to do |format|
       format.js   {render :json => @calculs.to_json}
     end
   end
   
   def materiaux
-    @materiaux = Material.find(:all)
+    @current_company = current_user.company
+    all_materials = Material.find(:all, :conditions => {:reference => 1, :company_id => -1})
+    company_materials = @current_company.materials.find(:all)
+    @materials = all_materials.concat( company_materials )
     respond_to do |format|
-      format.js   {render :json => @materiaux.to_json}
+      format.js   {render :json => @materials.to_json}
     end
   end
   
   def liaisons
-    @liaisons = Link.find(:all)
+    @liaisons = Link.find(:all, :conditions => {:reference => 1})
     respond_to do |format|
       format.js   {render :json => @liaisons.to_json}
     end
@@ -53,8 +57,8 @@ class CalculController < ApplicationController
     @CLs[1] = BoundaryCondition.new(:ref=>'v1', :type_picto=>'acceleration', :bctype=>'volume', :name=>'effort d\'accélération')
     @CLs[2] = BoundaryCondition.new(:ref=>'v2', :type_picto=>'centrifuge',   :bctype=>'volume', :name=>'effort centrifuge')
 	
-	@CLs[3] = BoundaryCondition.new(:ref=>'e0', :type_picto=>'effort',   :bctype=>'effort', :name=>'force')
-	@CLs[4] = BoundaryCondition.new(:ref=>'e1', :type_picto=>'effort',   :bctype=>'effort_normal', :name=>'force normale')
+	@CLs[3] = BoundaryCondition.new(:ref=>'e0', :type_picto=>'effort',   :bctype=>'effort', :name=>"densité d'effort")
+	@CLs[4] = BoundaryCondition.new(:ref=>'e1', :type_picto=>'effort',   :bctype=>'effort_normal', :name=>"densité d'effort normal")
 	@CLs[5] = BoundaryCondition.new(:ref=>'e2', :type_picto=>'effort',   :bctype=>'pression', :name=>'pression')
 	
 	@CLs[6] = BoundaryCondition.new(:ref=>'d0', :type_picto=>'depl',   :bctype=>'depl_nul', :name=>'déplacement nul')

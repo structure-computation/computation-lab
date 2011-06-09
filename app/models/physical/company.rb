@@ -1,15 +1,15 @@
 class Company < ActiveRecord::Base
   has_many  :users
   
-  has_one   :calcul_account
-  has_one   :memory_account
+  has_one   :calcul_account	, :readonly => false
+  has_one   :memory_account	, :readonly => false
   
-  has_many  :projects
-  has_many  :sc_models
-  has_many  :materials
-  has_many  :links
-  has_many  :solde_calcul_accounts,  :through => :calcul_account
-  has_many  :factures
+  has_many  :projects		, :readonly => false
+  has_many  :sc_models		, :readonly => false
+  has_many  :materials		, :readonly => false
+  has_many  :links		, :readonly => false
+  has_many  :solde_calcul_accounts,  :through => :calcul_account		, :readonly => false
+  has_many  :factures		, :readonly => false
   
   belongs_to  :user_sc_admin
   

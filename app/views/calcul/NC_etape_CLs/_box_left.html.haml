@@ -37,25 +37,25 @@
     .NC_CL_titre
       Conditions Limites en effort
     - (0...3).each do |i|
-      .tableNC_impair{ :id => "CL_pair_#{i}" }
-        .tableNC_box_0{ :id => "CL_1_#{i}" }
-          %a{ :onclick => "select_CL(#{i})", :style => "cursor: pointer;" }
-            .tableNC_box_1{ :id => "CL_11_#{i}" }
-            .tableNC_box_2{ :id => "CL_12_#{i}" }
-          %a{ :onclick => "info_select('CL',#{i})", :style => "cursor: pointer;" }
-            .tableNC_box_4{ :id => "CL_14_#{i}" }
+      .tableNC_impair{ :id => "CLe_pair_#{i}" }
+        .tableNC_box_0{ :id => "CLe_1_#{i}" }
+          %a{ :onclick => "select_CLe(#{i})", :style => "cursor: pointer;" }
+            .tableNC_box_1{ :id => "CLe_11_#{i}" }
+            .tableNC_box_2{ :id => "CLe_12_#{i}" }
+          %a{ :onclick => "info_select('CLe',#{i})", :style => "cursor: pointer;" }
+            .tableNC_box_4{ :id => "CLe_14_#{i}" }
 
     %div{ :style => "width:248px; height:22px; float:left;" }
     .NC_CL_titre
       Conditions Limites en déplacement
-    - (3...7).each do |i|
-      .tableNC_impair{ :id => "CL_pair_#{i}" }
-        .tableNC_box_0{ :id => "CL_1_#{i}" }
-          %a{ :onclick => "select_CL(#{i})", :style => "cursor: pointer;" }
-            .tableNC_box_1{ :id => "CL_11_#{i}" }
-            .tableNC_box_2{ :id => "CL_12_#{i}" }
-          %a{ :onclick => "info_select('CL',#{i})", :style => "cursor: pointer;" }
-            .tableNC_box_4{ :id => "CL_14_#{i}" }
+    - (0...4).each do |i|
+      .tableNC_impair{ :id => "CLd_pair_#{i}" }
+        .tableNC_box_0{ :id => "CLd_1_#{i}" }
+          %a{ :onclick => "select_CLd(#{i})", :style => "cursor: pointer;" }
+            .tableNC_box_1{ :id => "CLd_11_#{i}" }
+            .tableNC_box_2{ :id => "CLd_12_#{i}" }
+          %a{ :onclick => "info_select('CLd',#{i})", :style => "cursor: pointer;" }
+            .tableNC_box_4{ :id => "CLd_14_#{i}" }
               
     %div{ :style => "width:248px; height:23px; float:left;" }
     .NC_filter{ :style => "width:248px; height:20px" }
