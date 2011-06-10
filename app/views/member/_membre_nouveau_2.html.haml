@@ -1,0 +1,42 @@
+#New_wiz_layer.off
+  - # semantic_form_for @member, :url => member_path do |form|
+    - semantic_form_for @member, :url => "/member/new" do |form|
+    #New_wiz_layer_top
+      Ajouter un nouveau membre
+    #New_wiz_layer_milieu
+      / page fichier et description
+      #NM_page_fichier.on
+        %div{ :style => "width:700px; height:70px; float:left;" }
+        
+
+          = form.semantic_errors 
+          
+
+          .NM_text_1{ :style => "width:200px;" }
+            email :
+          .NM_text_1{ :style => "width:500px;" }
+            = form.input :email     , :label => "", :hint => "", :required => true
+          .NM_text_1{ :style => "width:200px;" }
+            Nom :
+          .NM_text_1{ :style => "width:500px;" }
+            = form.input :lastname  , :label => "", :hint => "", :required => true
+          .NM_text_1{ :style => "width:200px;" }
+            Prénom :
+          .NM_text_1{ :style => "width:500px;" }
+            = form.input :firstname , :label => "", :hint => "", :required => true
+          .NM_text_1{ :style => "width:200px;" }
+            Droits :
+          .NM_text_1{ :style => "width:500px;" }
+            /%input#new_membre_role{ :type => "text", :onKeyup => "new_membre_change_value()" }
+            = form.input :role      , :label => "", :as   => :select, :collection => {"Ingénieur" => "ingenieur", "Gestionnaire" => "gestionnaire", "Tous les droits" => "tous"}   
+
+
+    #New_wiz_layer_bas
+      #wiz_annul.on{:style => "float: left;" }
+        %a{ :style => "cursor: pointer;", :onclick => "displayNewMembre('off')" } 
+          .New_create_bouton_jaune
+            Annuler
+
+      #wiz_fin.on{:style => "float: right;" }
+        .New_create_bouton_jaune{ :style => "margin-right:5px;" }
+          = form.buttons :commit

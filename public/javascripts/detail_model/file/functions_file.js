@@ -102,26 +102,27 @@ function download_file(num){
 //---------------------------------------------------------------------------------------------------------
 
 // affichage du cache noir et du wizard suppression
-// function displayDeleteResultat(interupteur) {
-//     displayBlack(interupteur);
-//     document.getElementById('Delete_wiz_layer_file').className = "Delete_wiz_layer " + interupteur;
-//     
-//     document.getElementById('Delete_model_pic').className    =  'on' ;
-//     document.getElementById('Delete_model_pic_wait').className    =  'off' ;
-//     document.getElementById('Delete_model_pic_ok').className    =  'off' ;
-//     document.getElementById('Delete_model_pic_failed').className    =  'off' ;
-//     
-//     document.getElementById('Delete_wiz_annul').className    =  'left on' ;
-//     document.getElementById('Delete_wiz_delete').className    =  'right on' ;
-//     document.getElementById('Delete_wiz_close').className    =  'right off' ;
-// }
+
+function displayDeleteFile(interupteur) {
+    displayBlack(interupteur);
+    document.getElementById('Delete_wiz_layer_file').className = "Delete_wiz_layer " + interupteur;
+    
+    document.getElementById('Delete_model_pic').className    =  'on' ;
+    document.getElementById('Delete_model_pic_wait').className    =  'off' ;
+    document.getElementById('Delete_model_pic_ok').className    =  'off' ;
+    document.getElementById('Delete_model_pic_failed').className    =  'off' ;
+    
+    document.getElementById('Delete_wiz_annul').className    =  'left on' ;
+    document.getElementById('Delete_wiz_delete').className    =  'right on' ;
+    document.getElementById('Delete_wiz_close').className    =  'right off' ;
+}
 
 // fonction appellé à partir du tableau des modèles
 function delete_file(num){
     var num_select = content_tableau_connect['file'][num];
     num_delete_file = num_select;
     var id_file = Tableau_file_filter[num_select]['files_sc_model']['id'];
-    displayDeleteResultat('on');
+    displayDeleteFile('on');
     var table_detail = Tableau_file_filter[num_select]['files_sc_model'];
     for(key in table_detail){
         var strContent_detail_key = 'file_delete_' + key ;

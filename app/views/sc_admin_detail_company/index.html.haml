@@ -7,7 +7,7 @@
 %script{ :src => "/javascripts/admin/forfait/functions_forfait.js" ,   :type => "text/javascript" }
 %script{ :src => "/javascripts/admin/abonnement/functions_abonnement.js" ,   :type => "text/javascript" }
 / wizard création de projet en premier plan
-#content
+.content
   #bl_5.black.off
   / wizard d'ajout d'un nouveau forfait
   = render :partial => "sc_admin_detail_company/forfait/forfait_nouveau"
@@ -44,4 +44,4 @@
   $(document).ready(function() {get_Tableau_abonnement_list()});
   
     
-= render :partial => "footer_top"
+/= render :partial => "footer_top"

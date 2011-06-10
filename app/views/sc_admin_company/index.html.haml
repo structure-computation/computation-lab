@@ -6,7 +6,7 @@
 %script{ :src => "/javascripts/admin/functions_layer_sc_admin_company.js" ,   :type => "text/javascript" }
 
 / wizard création de projet en premier plan
-#content
+.content
   #bl_5.black.off
   / wizard de creation d'un nouveau sc_admin_company
   = render :partial => "company_nouveau"
@@ -40,4 +40,4 @@
 %script{ :type => "text/javascript" }
   $(document).ready(get_Tableau_company);
   
-= render :partial => "footer_top"
+/= render :partial => "footer_top"

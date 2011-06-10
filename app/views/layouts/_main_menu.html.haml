@@ -1,0 +1,40 @@
+/ Menu principal de l'application.
+
+%ul#main_menu
+  %li#home_tab{   :class => ( @page == :home      ? "selected" : "")}
+    %a{ :href => "/accueil" }  Accueil
+  
+  %li#company_tab{:class => ( @page == :manage    ? "selected" : "")}
+    %a{ :href => "/company" }  Ma société
+    %ul.main_submenu
+      %li
+        %a{:href => member_index_path} Liste des membres
+      %li
+        %a{:href => ""} Liste des factures
+      %li.submenu_separator
+      %li
+        %a{:href => ""} Abonnement
+      %li
+        %a{:href => ""} Forfait calcul
+        
+  %li#lab_tab{    :class => ( @page == :lab       ? "selected" : "")}
+    %a{ :href => "/modele" }   Mes modèles
+    %ul#main_submenu_solution.main_submenu
+      %li
+        %a{:href => "#"} Liste des modèles
+      %li
+        %a{:href => "#"} Bibliothèque matériaux
+      %li
+        %a{:href => "#"} Bibliothèque liaisons
+      %li.submenu_separator
+      %li
+        %a{:href => "#"} Déposer un modèle
+      
+
+-# TODO: Utiliser un helper pour le style "selected"
+-#   %li{:id => "menu_accueil"     , :class => "main_menu_item " + menu_item_selected_class( @page, :accueil   ) }
+
+
+
+
+    

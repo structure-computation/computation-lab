@@ -156,3 +156,11 @@
   %a{:style => "cursor: pointer;", :onclick => "ferme_detail_facture()" }
     .DetailTextFermeture
       Fermer le détail
+
+
+#model_bouton_jaune{ :style => "margin:5px 0px 0px 170px" }
+  %ul
+    %li
+      %a{ :href => "#", :onclick => "download_facture()" }
+        %img{ :src => "/images/NC_pic_pdf.png" }
+        télécharger la facture
