@@ -12,10 +12,7 @@ class CompanyController < ApplicationController
     end
   end
 
-  def list_membre
-    @users = current_user.company.users
-    render :json => @users.to_json
-  end
+
   
   def get_gestionnaire
     #recherche des gestionnaires dans la bdd

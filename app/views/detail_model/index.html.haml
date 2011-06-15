@@ -8,7 +8,7 @@
 %script{ :src => "/javascripts/detail_model/file/functions_file.js" ,   :type => "text/javascript" }
 
 / wizard création de projet en premier plan
-#content
+.content
   #bl_5.black.off
   / wizard d'ajout d'un nouveau forfait
   = render :partial => "detail_model/utilisateurs/utilisateur_nouveau"
@@ -41,4 +41,4 @@
   $(document).ready(function() {get_Current_model( #{@id_model} )});
   $(document).ready(function() {get_Tableau_utilisateur_new_list()});
     
-= render :partial => "footer_top"
+/= render :partial => "footer_top"

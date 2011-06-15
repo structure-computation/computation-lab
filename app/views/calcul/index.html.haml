@@ -36,19 +36,20 @@
     %script{ :src => "/javascripts/img_gl_server.js", :type => "text/javascript" }
 
   %body
+    = render :partial => "layouts/header"
     #conteneur
-      = render :partial => "layouts/header"
       / partie content_top
-      #NC_content_top
+      /#NC_content_top
       / fin partie content_top
       
       / partie contenu
-      #NC_content
+      /#NC_content
+      .content{:style => "padding-bottom:2px;"}
         / bar de progression
         = render :partial => "progressbar"
         / fin bar de prograssion
         
-      #NC_content
+      .content{:style => "padding-bottom:3px;"}
         / marge
         #NC_contentmarge
         / fin marge
@@ -107,33 +108,39 @@
       / fin NC_content
       
       / partie haute du footer, bas de la boite projet plus bouton
-      #NC_footer_top
-        %a{ :href => "/modele" }
-          #NC_footer_bouton_annuler.NC_footer_top_bouton
-            Annuler
-        %a{ :onclick => "complete_brouillon(true,false)", :style => "cursor: pointer;" }
-          #NC_footer_bouton_sauver.NC_footer_top_bouton
-            sauvegarde le brouillon
+    #footerLarge
+      #conteneur
+        .contentTransparent
+          #footerLargeCarre
+            %a{ :href => "/modele" }
+              #NC_footer_bouton_annuler.NC_footer_top_bouton
+                Annuler
+            %a{ :onclick => "complete_brouillon(true,false)", :style => "cursor: pointer;" }
+              #NC_footer_bouton_sauver.NC_footer_top_bouton
+                sauvegarde le brouillon
+            
+            #NC_footer_top_init.off
+              %a{ :onclick => "next_stape()", :style => "cursor: pointer;" }
+                #NC_footer_bouton_suivant.NC_footer_top_bouton
+                  Suivant
+            #NC_footer_top_suiv.off
+              %a{ :onclick => "previous_stape()", :style => "cursor: pointer;" }
+                #NC_footer_bouton_precedent.NC_footer_top_bouton
+                  Précédent
+              %a{ :onclick => "next_stape()", :style => "cursor: pointer;" }
+                #NC_footer_bouton_suivant.NC_footer_top_bouton
+                  Suivant
+            #NC_footer_top_valid.on
+              %a{ :onclick => "complete_calcul()", :style => "cursor: pointer;" }
+                #NC_footer_bouton_lancer.NC_footer_top_bouton
+                  valider et envoyer
+
+      /#NC_footer_top
         
-        #NC_footer_top_init.off
-          %a{ :onclick => "next_stape()", :style => "cursor: pointer;" }
-            #NC_footer_bouton_suivant.NC_footer_top_bouton
-              Suivant
-        #NC_footer_top_suiv.off
-          %a{ :onclick => "previous_stape()", :style => "cursor: pointer;" }
-            #NC_footer_bouton_precedent.NC_footer_top_bouton
-              Précédent
-          %a{ :onclick => "next_stape()", :style => "cursor: pointer;" }
-            #NC_footer_bouton_suivant.NC_footer_top_bouton
-              Suivant
-        #NC_footer_top_valid.on
-          %a{ :onclick => "complete_calcul()", :style => "cursor: pointer;" }
-            #NC_footer_bouton_lancer.NC_footer_top_bouton
-              valider et envoyer
       / fin partie haute du footer
       
       / partie basse du footer, mentions legale...
-      #NC_footer
+      /#NC_footer
       / fin partie basse du footer
 %script{ :type => "text/javascript" }
   model_id = #{@id_model};

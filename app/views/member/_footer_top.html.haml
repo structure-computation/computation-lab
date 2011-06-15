@@ -1,22 +1,6 @@
-/ partie haute du footer, bas de la boite projet plus bouton
+
 #footer_top
   #black_footer_top.black.off
   #footer_top_1
-  #footer_top_2
-    %a.page_select{ :onclick => "go_page_membre('first')", :style => "cursor: pointer;" }
-      %img{:src=>"/images/page_moins.png", :style=>"vertical-align:middle;"}
-    page
-    - (0...5).each do |i|
-      %a{ :id => "membre_page_#{i}", :onclick => "go_page_membre(#{i})", :style => "cursor: pointer;" }
-        #{i}
-    %a.page_select{ :onclick => "go_page_membre('end')", :style => "cursor: pointer;" }
-      %img{:src=>"/images/page_plus.png", :style=>"vertical-align:middle;"}
-      
-  #footer_top_3
-    #model_bouton_jaune{ :style => "margin:5px 0px 0px 170px" }
-      %ul
-        %li
-          %a{ :href => "#", :onclick => "CPcurrent_stage=displayNewMembre('on')" }
-            %img{ :src => "/images/manage_pic_nouveau_membre.png" }
-            Nouveau membre
-/ fin partie haute du footer
+-  #footer_top_2    
+-  #footer_top_3

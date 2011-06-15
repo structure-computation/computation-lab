@@ -13,19 +13,23 @@
     
     
   %body
+    
+    
+    = render :partial => "layouts/header"
     #conteneur
-      = render :partial => "layouts/header"
-      = render :partial => "layouts/flashs_and_notices"
-      
+      .content
+        = render :partial => "layouts/flashs_and_notices"
+
+    #conteneur 
       /= render :partial => "layouts/pathbar"
       /partie contenu
-      /#content
+      /.content
         
       / Début d'affichage du code de la vue.
       = content_for?(:content) ? yield(:content) : yield # on utilise ici la technique des layout imbriqués décrite dans le guide rails.
       / Fin du code d'affichage de la vue
 
-      / Fin content
-      = render :partial => "layouts/footer"
-      
+    / Fin content 
+    = render :partial => "layouts/footer"
+    #bl_0.blackTotal.on 
     / Fin conteneur
