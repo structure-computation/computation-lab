@@ -224,7 +224,8 @@ class CalculResult < ActiveRecord::Base
   
   def test_delete?
     value_to_return = true
-    if(self.state == 'finish' || self.state == 'in_process')
+    #if(self.state == 'finish' || self.state == 'in_process')
+    if(self.state == 'finish') # || self.state == 'in_process')
         value_to_return = false
     end
     return value_to_return

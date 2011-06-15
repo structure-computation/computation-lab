@@ -7,7 +7,7 @@
   background: transparent url('../images/manage_compte_bg.png') repeat-x left top;
   width: 726px;
   height: 83px;
-  margin: 15px 0px 0 7px;
+  margin: 15px 0px 0 3px;
   //border: thin solid #696969;
   float: left;
 }
@@ -16,7 +16,7 @@
   background: transparent url('../images/manage_compte1_bg.png') repeat left top;
   width: 726px;
   //height: 500px;
-  margin: 0px 0px 0 7px;
+  margin: 0px 0px 0 3px;
   //border: thin solid #696969;
   border-top: thin solid #696969;
   float: left;

@@ -6,7 +6,7 @@
 %script{ :src => "/javascripts/factures/functions_layer_factures.js" ,   :type => "text/javascript" }
 
 / wizard création de projet en premier plan
-#content
+.content
   #bl_5.black.off
   / wizard de creation d'un nouveau modele
   / = render :partial => "membre_nouveau"
@@ -41,4 +41,4 @@
 %script{ :type => "text/javascript" }
   $(document).ready(get_Tableau_facture);
 
-= render :partial => "footer_top"
+/= render :partial => "footer_top"
