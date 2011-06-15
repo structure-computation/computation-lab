@@ -1,275 +1,119 @@
-body, div, h1, h2, h3, p, ul, li {
-  margin: 0;
-  padding: 0;
-  position: relative; }
+/*
+Syntax error: Invalid CSS after "": expected selector, was "!contener_width..."
+        on line 6 of /home/jbellec/code_dev/SC_Interface/public/stylesheets/sass/_variables.sass
+        from line 3 of /home/jbellec/code_dev/SC_Interface/public/stylesheets/sass/styles.sass
 
-div.clearline {
-  clear: both; }
+1: // Ce fichier sert à generer la feuille de style finale.
+2: 
+3: @import variables.sass
+4: @import base.sass
+5: @import header.sass
+6: @import footer.sass
+7: @import general_content.sass
+8: @import leftbox.sass
 
-body {
-  background-color: #f8f8f8;
-  font-family: Verdana, Arial, Helvetica, sans-serif;
-  font-size: 100%;
-  color: black;
-  line-height: 1;
-  text-align: center;
-  margin-top: 10px; }
-
-#conteneur {
-  background: transparent;
-  width: 946px;
-  margin: 0 auto; }
-
-#header_top {
-  background: transparent url("../images/header_top.png") no-repeat left top;
-  width: 945px;
-  height: 46px;
-  text-align: left;
-  float: left; }
-  #header_top #header_top_logo {
-    width: 280px;
-    height: 46px;
-    text-align: left;
-    float: left; }
-  #header_top #header_top_societe {
-    width: 480px;
-    height: 46px;
-    text-align: right;
-    padding: 10px 0px 0 0px;
-    color: #e5e5e5;
-    font-size: 0.8em;
-    font-weight: normal;
-    float: left; }
-    #header_top #header_top_societe #administration_link {
-      font-size: 0.75em;
-      color: #b8b9c3;
-      text-decoration: underline; }
-  #header_top #header_top_temp {
-    width: 10px;
-    height: 46px;
-    float: left; }
-  #header_top #header_top_user {
-    width: 125px;
-    height: 46px;
-    text-align: right;
-    padding: 10px 0px 0 0px;
-    color: #e5e5e5;
-    font-size: 0.8em;
-    font-weight: normal;
-    float: left; }
-    #header_top #header_top_user #disconnect_link {
-      font-size: 0.75em;
-      color: #b8b9c3;
-      text-decoration: underline; }
-
-#header_menu {
-  background: transparent url("../images/header_menu.png") no-repeat left top;
-  width: 945px;
-  height: 35px;
-  text-align: left;
-  float: left; }
-  #header_menu #header_profil_1 {
-    width: 315px;
-    height: 35px;
-    text-align: right;
-    padding: 0px 0px 0px 0px;
-    color: #b8b9c3;
-    font-size: 0.7em;
-    font-weight: 100;
-    float: left; }
-  #header_menu #header_profil_2 {
-    width: 65px;
-    height: 35px;
-    text-align: right;
-    padding: 18px 0px 0px 0px;
-    color: #b8b9c3;
-    font-size: 0.7em;
-    font-weight: 100;
-    float: left; }
-  #header_menu #menu {
-    width: 550px;
-    height: 35px;
-    background: transparent;
-    float: left;
-    margin: 0px 0px 0 1px; }
-    #header_menu #menu li {
-      list-style-type: none;
-      float: left;
-      width: 125px;
-      height: 35px;
-      background: transparent;
-      line-height: 35px;
-      margin: 0px 0px 0 0px;
-      padding: 5px 0px 0 0px;
-      text-align: center; }
-  #header_menu #mAccueil.selected, #header_menu #mSCmanage.selected, #header_menu #mSCproject.selected, #header_menu #mSCcompute.selected {
-    background: transparent url("../images/header_menu_selected.png") no-repeat left top; }
-  #header_menu #menu li a {
-    font-size: 0.8em;
-    font-weight: normal;
-    color: #e5e5e5;
-    text-decoration: none;
-    display: block; }
-  #header_menu #menu li.selected a {
-    color: #2a3556; }
-  #header_menu #menu li a:hover {
-    color: #ffdb00; }
-  #header_menu #menu li.selected a:hover {
-    color: #2a3556; }
-
-#header_barre_bas {
-  background: transparent url("../images/header_barre_bas.png") no-repeat left top;
-  width: 945px;
-  height: 2px;
-  text-align: left;
-  float: left; }
-
-#path_bar {
-  background: transparent url("../images/path_bar.png") no-repeat left top;
-  width: 945px;
-  height: 27px;
-  float: left; }
-
-#path_bar_1 {
-  width: 42px;
-  height: 27px;
-  float: left; }
-
-#path_bar_2 {
-  width: 900px;
-  height: 27px;
-  line-height: 29px;
-  text-align: left;
-  font-size: 0.5em;
-  vertical-align: middle;
-  float: left; }
-
-#footer_top {
-  width: 945px;
-  height: 49px;
-  text-align: left;
-  background: transparent url("../images/footer_top.png") no-repeat left top;
-  float: left; }
-
-#black_footer_top.black {
-  position: absolute;
-  z-index: 10;
-  width: 945px;
-  height: 49px;
-  background: transparent url("../images/black_footer_top.png") no-repeat top left;
-  filter: Alpha(opacity=50);
-  -moz-opacity: 0.5;
-  -khtml-opacity: 0.5;
-  opacity: 0.5; }
-
-#footer {
-  position: relative;
-  background: transparent url("../images/footer.png") no-repeat top left;
-  height: 31px;
-  width: 945px;
-  float: left; }
-
-#black_footer.black {
-  position: absolute;
-  z-index: 10;
-  width: 945px;
-  height: 31px;
-  background: transparent url("../images/black_footer.png") no-repeat top left;
-  filter: Alpha(opacity=50);
-  -moz-opacity: 0.5;
-  -khtml-opacity: 0.5;
-  opacity: 0.5; }
-
-#footer p {
-  color: #c8c8c8;
-  text-decoration: none;
-  line-height: 20px;
-  text-align: left;
-  font-size: 0.6em;
-  margin-left: 12px;
-  float: left; }
-#footer a {
-  color: #c8c8c8;
-  text-decoration: none;
-  line-height: 20px;
-  text-align: left;
-  font-size: 0.6em;
-  margin-left: 12px;
-  float: left;
-  position: absolute;
-  right: 18px;
-  text-decoration: underline; }
-  #footer a:hover {
-    text-decoration: none; }
-
-#content {
-  width: 945px;
-  text-align: left;
-  background: transparent url("../images/conteneur_milieu.png") repeat-y left top;
-  float: left; }
-
-.black {
-  position: absolute;
-  z-index: 10;
-  width: 940px;
-  height: 100%;
-  background-color: black;
-  filter: Alpha(opacity=50);
-  -moz-opacity: 0.5;
-  -khtml-opacity: 0.5;
-  opacity: 0.5; }
-
-#contentleft {
-  width: 197px;
-  text-align: left;
-  background: transparent;
-  float: left; }
-
-#contentright {
-  width: 745px;
-  text-align: left;
-  background: transparent;
-  float: left; }
-
-.contentheightmin {
-  height: 497px;
-  background: transparent;
-  float: left; }
-
-#leftBox {
-  background: transparent url("../images/left_box_header_Bg.png") no-repeat top left;
-  width: 197px;
-  margin: 0px 0px 0 0;
-  float: left; }
-  #leftBox h2 {
-    width: 197px;
-    height: 19px;
-    font-weight: normal;
-    font-size: 0.8em;
-    color: black;
-    padding: 10px 0 0 0px;
-    text-align: center; }
-
-#leftBoxcontent {
-  background: transparent url("../images/left_box_side_Bg.png") repeat-y left top;
-  width: 197px;
-  float: left; }
-
-#tableleftBox {
-  width: 177px;
-  margin: 3px 0px 0px 15px;
-  font-weight: 100;
-  font-size: 0.75em;
-  color: #696969;
-  border: none;
-  border-collapse: collapse; }
-  #tableleftBox tr {
-    height: 20px; }
-    #tableleftBox tr a {
-      text-decoration: underline; }
-
-#leftBoxfoot {
-  background: transparent url("../images/left_box_bottom_Bg.png") no-repeat top left;
-  width: 197px;
-  height: 15px;
-  float: left; }
+Backtrace:
+/home/jbellec/code_dev/SC_Interface/public/stylesheets/sass/_variables.sass:6
+/home/jbellec/code_dev/SC_Interface/public/stylesheets/sass/styles.sass:3
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/haml-3.1.1/vendor/sass/lib/sass/../sass/scss/parser.rb:900:in `expected'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/haml-3.1.1/vendor/sass/lib/sass/../sass/scss/parser.rb:843:in `expected'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/haml-3.1.1/vendor/sass/lib/sass/../sass/scss/parser.rb:825:in `expr!'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/haml-3.1.1/vendor/sass/lib/sass/../sass/scss/static_parser.rb:18:in `parse_selector'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/haml-3.1.1/vendor/sass/lib/sass/../sass/tree/visitors/perform.rb:229:in `visit_rule'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/haml-3.1.1/vendor/sass/lib/sass/../sass/tree/visitors/base.rb:37:in `send'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/haml-3.1.1/vendor/sass/lib/sass/../sass/tree/visitors/base.rb:37:in `visit'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/haml-3.1.1/vendor/sass/lib/sass/../sass/tree/visitors/perform.rb:18:in `visit'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/haml-3.1.1/vendor/sass/lib/sass/../sass/tree/visitors/perform.rb:145:in `visit_import'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/haml-3.1.1/vendor/sass/lib/sass/../sass/tree/visitors/perform.rb:145:in `map'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/haml-3.1.1/vendor/sass/lib/sass/../sass/tree/visitors/perform.rb:145:in `visit_import'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/haml-3.1.1/vendor/sass/lib/sass/../sass/tree/visitors/base.rb:37:in `send'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/haml-3.1.1/vendor/sass/lib/sass/../sass/tree/visitors/base.rb:37:in `visit'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/haml-3.1.1/vendor/sass/lib/sass/../sass/tree/visitors/perform.rb:18:in `visit'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/haml-3.1.1/vendor/sass/lib/sass/../sass/tree/visitors/base.rb:53:in `visit_children'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/haml-3.1.1/vendor/sass/lib/sass/../sass/tree/visitors/base.rb:53:in `map'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/haml-3.1.1/vendor/sass/lib/sass/../sass/tree/visitors/base.rb:53:in `visit_children'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/haml-3.1.1/vendor/sass/lib/sass/../sass/tree/visitors/perform.rb:27:in `visit_children'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/haml-3.1.1/vendor/sass/lib/sass/../sass/tree/visitors/perform.rb:39:in `with_environment'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/haml-3.1.1/vendor/sass/lib/sass/../sass/tree/visitors/perform.rb:26:in `visit_children'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/haml-3.1.1/vendor/sass/lib/sass/../sass/tree/visitors/base.rb:37:in `visit'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/haml-3.1.1/vendor/sass/lib/sass/../sass/tree/visitors/perform.rb:47:in `visit_root'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/haml-3.1.1/vendor/sass/lib/sass/../sass/tree/visitors/base.rb:37:in `send'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/haml-3.1.1/vendor/sass/lib/sass/../sass/tree/visitors/base.rb:37:in `visit'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/haml-3.1.1/vendor/sass/lib/sass/../sass/tree/visitors/perform.rb:18:in `visit'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/haml-3.1.1/vendor/sass/lib/sass/../sass/tree/visitors/perform.rb:7:in `send'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/haml-3.1.1/vendor/sass/lib/sass/../sass/tree/visitors/perform.rb:7:in `visit'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/haml-3.1.1/vendor/sass/lib/sass/../sass/tree/root_node.rb:20:in `render'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/haml-3.1.1/vendor/sass/lib/sass/../sass/engine.rb:291:in `_render'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/haml-3.1.1/vendor/sass/lib/sass/../sass/engine.rb:239:in `render'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/haml-3.1.1/vendor/sass/lib/sass/../sass/util.rb:298:in `silence_sass_warnings'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/haml-3.1.1/vendor/sass/lib/sass/../sass/engine.rb:239:in `render'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/haml-3.1.1/vendor/sass/lib/sass/../sass/plugin/compiler.rb:319:in `update_stylesheet'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/haml-3.1.1/vendor/sass/lib/sass/../sass/plugin/compiler.rb:181:in `update_stylesheets'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/haml-3.1.1/vendor/sass/lib/sass/../sass/plugin/compiler.rb:175:in `each'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/haml-3.1.1/vendor/sass/lib/sass/../sass/plugin/compiler.rb:175:in `update_stylesheets'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/haml-3.1.1/vendor/sass/lib/sass/../sass/plugin/compiler.rb:173:in `each'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/haml-3.1.1/vendor/sass/lib/sass/../sass/plugin/compiler.rb:173:in `update_stylesheets'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/haml-3.1.1/vendor/sass/lib/sass/../sass/plugin.rb:81:in `update_stylesheets'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/haml-3.1.1/vendor/sass/lib/sass/../sass/plugin.rb:54:in `check_for_updates'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/haml-3.1.1/vendor/sass/lib/sass/../sass/plugin/rack.rb:51:in `call'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/warden-1.0.3/lib/warden/manager.rb:35:in `call'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/warden-1.0.3/lib/warden/manager.rb:34:in `catch'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/warden-1.0.3/lib/warden/manager.rb:34:in `call'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/actionpack-3.0.5/lib/action_dispatch/middleware/best_standards_support.rb:17:in `call'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/actionpack-3.0.5/lib/action_dispatch/middleware/head.rb:14:in `call'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/rack-1.2.2/lib/rack/methodoverride.rb:24:in `call'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/actionpack-3.0.5/lib/action_dispatch/middleware/params_parser.rb:21:in `call'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/actionpack-3.0.5/lib/action_dispatch/middleware/flash.rb:182:in `call'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/actionpack-3.0.5/lib/action_dispatch/middleware/session/abstract_store.rb:149:in `call'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/actionpack-3.0.5/lib/action_dispatch/middleware/cookies.rb:302:in `call'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/activerecord-3.0.5/lib/active_record/query_cache.rb:32:in `call'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/activerecord-3.0.5/lib/active_record/connection_adapters/abstract/query_cache.rb:28:in `cache'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/activerecord-3.0.5/lib/active_record/query_cache.rb:12:in `cache'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/activerecord-3.0.5/lib/active_record/query_cache.rb:31:in `call'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/activerecord-3.0.5/lib/active_record/connection_adapters/abstract/connection_pool.rb:354:in `call'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/actionpack-3.0.5/lib/action_dispatch/middleware/callbacks.rb:46:in `call'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/activesupport-3.0.5/lib/active_support/callbacks.rb:415:in `_run_call_callbacks'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/actionpack-3.0.5/lib/action_dispatch/middleware/callbacks.rb:44:in `call'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/rack-1.2.2/lib/rack/sendfile.rb:107:in `call'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/actionpack-3.0.5/lib/action_dispatch/middleware/remote_ip.rb:48:in `call'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/actionpack-3.0.5/lib/action_dispatch/middleware/show_exceptions.rb:47:in `call'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/railties-3.0.5/lib/rails/rack/logger.rb:13:in `call'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/rack-1.2.2/lib/rack/runtime.rb:17:in `call'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/activesupport-3.0.5/lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/rack-1.2.2/lib/rack/lock.rb:11:in `call'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/rack-1.2.2/lib/rack/lock.rb:11:in `synchronize'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/rack-1.2.2/lib/rack/lock.rb:11:in `call'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/actionpack-3.0.5/lib/action_dispatch/middleware/static.rb:30:in `call'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/railties-3.0.5/lib/rails/application.rb:168:in `call'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/railties-3.0.5/lib/rails/application.rb:77:in `send'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/railties-3.0.5/lib/rails/application.rb:77:in `method_missing'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/passenger-3.0.7/lib/phusion_passenger/rack/request_handler.rb:96:in `process_request'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/passenger-3.0.7/lib/phusion_passenger/abstract_request_handler.rb:513:in `accept_and_process_next_request'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/passenger-3.0.7/lib/phusion_passenger/abstract_request_handler.rb:274:in `main_loop'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/passenger-3.0.7/lib/phusion_passenger/rack/application_spawner.rb:205:in `start_request_handler'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/passenger-3.0.7/lib/phusion_passenger/rack/application_spawner.rb:170:in `send'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/passenger-3.0.7/lib/phusion_passenger/rack/application_spawner.rb:170:in `handle_spawn_application'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/passenger-3.0.7/lib/phusion_passenger/utils.rb:479:in `safe_fork'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/passenger-3.0.7/lib/phusion_passenger/rack/application_spawner.rb:165:in `handle_spawn_application'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/passenger-3.0.7/lib/phusion_passenger/abstract_server.rb:357:in `__send__'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/passenger-3.0.7/lib/phusion_passenger/abstract_server.rb:357:in `server_main_loop'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/passenger-3.0.7/lib/phusion_passenger/abstract_server.rb:206:in `start_synchronously'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/passenger-3.0.7/lib/phusion_passenger/abstract_server.rb:180:in `start'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/passenger-3.0.7/lib/phusion_passenger/rack/application_spawner.rb:128:in `start'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/passenger-3.0.7/lib/phusion_passenger/spawn_manager.rb:253:in `spawn_rack_application'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/passenger-3.0.7/lib/phusion_passenger/abstract_server_collection.rb:132:in `lookup_or_add'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/passenger-3.0.7/lib/phusion_passenger/spawn_manager.rb:246:in `spawn_rack_application'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/passenger-3.0.7/lib/phusion_passenger/abstract_server_collection.rb:82:in `synchronize'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/passenger-3.0.7/lib/phusion_passenger/abstract_server_collection.rb:79:in `synchronize'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/passenger-3.0.7/lib/phusion_passenger/spawn_manager.rb:244:in `spawn_rack_application'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/passenger-3.0.7/lib/phusion_passenger/spawn_manager.rb:137:in `spawn_application'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/passenger-3.0.7/lib/phusion_passenger/spawn_manager.rb:275:in `handle_spawn_application'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/passenger-3.0.7/lib/phusion_passenger/abstract_server.rb:357:in `__send__'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/passenger-3.0.7/lib/phusion_passenger/abstract_server.rb:357:in `server_main_loop'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/passenger-3.0.7/lib/phusion_passenger/abstract_server.rb:206:in `start_synchronously'
+/home/jbellec/.rvm/gems/ruby-1.8.7-p334/gems/passenger-3.0.7/helper-scripts/passenger-spawn-server:99
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Syntax error: Invalid CSS after \"\": expected selector, was \"!contener_width...\"\A         on line 6 of /home/jbellec/code_dev/SC_Interface/public/stylesheets/sass/_variables.sass\A         from line 3 of /home/jbellec/code_dev/SC_Interface/public/stylesheets/sass/styles.sass\A \A 1: // Ce fichier sert à generer la feuille de style finale.\A 2: \A 3: @import variables.sass\A 4: @import base.sass\A 5: @import header.sass\A 6: @import footer.sass\A 7: @import general_content.sass\A 8: @import leftbox.sass"; }
