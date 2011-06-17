@@ -44,6 +44,8 @@ for(i=0; i<content_tableau_page.length ; i++){
 // numero du calcul(resultat) selectionné pour la suppression
 var num_delete_resultat = -1;
 
+// pour le browser de navigation dans le model
+//s_browser = new ScBrowser( "exploreModel" );
 
 //---------------------------------------------------------------------------------------------------------
 // pour l'affichage des différent onglet du modele
@@ -118,7 +120,8 @@ function affich_Description(){
 }
 
 function affich_File(){
-  get_Tableau_file(Current_model['id']);
+  s_browser.launch( function( rep ) { alert( rep ); } );
+//   get_Tableau_file(Current_model['id']);
   cadres_off();
   id_on = document.getElementById('CadreFile');  
   id_on.className = 'on';
