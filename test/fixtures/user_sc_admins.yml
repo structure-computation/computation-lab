@@ -4,6 +4,11 @@
 one:
   user_id:          440946503   #jbellec
   sc_admin_id:      980190962   #sc_admin
+
+two:
+  user_id:          700953621   #dvioleau
+  sc_admin_id:      980190962   #sc_admin
+
 # one:
 #   column: value
 #
