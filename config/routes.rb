@@ -5,7 +5,7 @@ SCInterface::Application.routes.draw do
   devise_for  :users,   :controllers => { :sessions => "users/sessions", :registrations => "users/registrations" }
 
   # map.resource  :modele
-
+  resources :member
   root :to => "accueil#index"
   
   # La route par défaut héritée de l'application Rails 2, à conserver avant passage au REST.

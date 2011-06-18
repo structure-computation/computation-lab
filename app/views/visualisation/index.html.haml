@@ -24,15 +24,18 @@
 
 
   %body
+    = render :partial => "layouts/header"
     #conteneur
-      = render :partial => "layouts/header"
       / partie content_top
-      #NC_content_top
+    
+      /#NC_content_top
+      
       / fin partie content_top
       
       / partie contenu
         
-      #NC_content
+      /#NC_content
+      .content{:style => "padding-top:5px;"}
         / marge
         #NC_contentmarge
         / fin marge
@@ -77,15 +80,23 @@
       / fin NC_content
       
       / partie haute du footer, bas de la boite projet plus bouton
-      #NC_footer_top
-        %a{ :href => "/modele" }
-          #NC_footer_bouton_sauver.NC_footer_top_bouton{ :style => "margin-left: 5px" }
-            Retour liste des modèles 
+    #footerLarge
+      #conteneur
+        .contentTransparent
+          #footerLargeCarre
+            %a{ :href => "/modele" }
+              #NC_footer_bouton_sauver.NC_footer_top_bouton{ :style => "margin-left: 5px" }
+                Retour liste des modèles 
+
+      /#NC_footer_top
+      /  %a{ :href => "/modele" }
+      /    #NC_footer_bouton_sauver.NC_footer_top_bouton{ :style => "margin-left: 5px" }
+      /      Retour liste des modèles 
         
       / fin partie haute du footer
       
       / partie basse du footer, mentions legale...
-      #NC_footer
+      /#NC_footer
       / fin partie basse du footer
 %script{ :type => "text/javascript" }
   model_id = #{@id_model};

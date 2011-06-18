@@ -1,22 +1,5 @@
 / partie haute du footer, bas de la boite projet plus bouton
 #footer_top
   #black_footer_top.black.off
-  #footer_top_1
-  #footer_top_2
-    %a.page_select{ :onclick => "go_page_facture('first')", :style => "cursor: pointer;" }
-      %img{:src=>"/images/page_moins.png", :style=>"vertical-align:middle;"}
-    page
-    - (0...5).each do |i|
-      %a{ :id => "facture_page_#{i}", :onclick => "go_page_facture(#{i})", :style => "cursor: pointer;" }
-        #{i}
-    %a.page_select{ :onclick => "go_page_facture('end')", :style => "cursor: pointer;" }
-      %img{:src=>"/images/page_plus.png", :style=>"vertical-align:middle;"}
-      
-  #footer_top_3.off
-    #model_bouton_jaune{ :style => "margin:5px 0px 0px 170px" }
-      %ul
-        %li
-          %a{ :href => "#", :onclick => "download_facture()" }
-            %img{ :src => "/images/NC_pic_pdf.png" }
-            télécharger la facture
+  
 / fin partie haute du footer
