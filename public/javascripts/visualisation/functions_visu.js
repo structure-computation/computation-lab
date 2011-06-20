@@ -1,47 +1,52 @@
 <!--
 
+var image_3d;
+
 //------------------------------------------------------------------------------------------------------
 // initialisation du serveur d'image en relation aves ImgServer.js
 //------------------------------------------------------------------------------------------------------
 
 var num_group_info;
 
+// function init_visualisation() {
+//     image_3d = new ImgServer( "my_canvas", "00" );
+//     strgeom = new String();
+//     strgeom = '/share/sc2/Developpement/MODEL/model_' + model_id + '/MESH/visu_geometry.h5';
+//     //strgeom = '/share/sc2/Developpement/MODEL/model_14/MESH/visu_geometry.h5';
+//     namegeom = new String();
+//     namegeom = 'Level_0/Geometry';
+//     
+//     image_3d.load_hdf( strgeom, namegeom );
+//     //image_3d.load_vtu( "/var/www/Visu/data/geometry_all_0_0.vtu" );
+//     //image_3d.load_vtu( "/var/www/Visu/data/manchon.vtu" );
+//     //     alert(s);
+//     //image_3d.load_vtu( "/home/jbellec/Dropbox/SC/Inbox/fibres_mat/calcul_97/resultat_0_0.vtu" );
+//     //image_3d.load_vtu("/var/www/Visu/data/croix.vtu" );
+//     
+//     //image_3d.color_by_field( "epsilon", 1 );
+//     //image_3d.shrink( 0.05 );
+//     image_3d.fit();
+//     image_3d.get_num_group_info( "num_group_info" );
+//     image_3d.render();
+// }
+
 function init_visualisation() {
-    image_3d = new ImgServer( "my_canvas", "00" );
+    image_3d = new ScDisp( "my_canvas");
     strgeom = new String();
     strgeom = '/share/sc2/Developpement/MODEL/model_' + model_id + '/MESH/visu_geometry.h5';
-    //strgeom = '/share/sc2/Developpement/MODEL/model_14/MESH/visu_geometry.h5';
     namegeom = new String();
     namegeom = 'Level_0/Geometry';
-    
-    image_3d.load_hdf( strgeom, namegeom );
-    //image_3d.load_vtu( "/var/www/Visu/data/geometry_all_0_0.vtu" );
-    //image_3d.load_vtu( "/var/www/Visu/data/manchon.vtu" );
-    //     alert(s);
-    //image_3d.load_vtu( "/home/jbellec/Dropbox/SC/Inbox/fibres_mat/calcul_97/resultat_0_0.vtu" );
-    //image_3d.load_vtu("/var/www/Visu/data/croix.vtu" );
-    
-    //image_3d.color_by_field( "epsilon", 1 );
-    //image_3d.shrink( 0.05 );
-    image_3d.fit();
-    image_3d.get_num_group_info( "num_group_info" );
-    image_3d.render();
-}
+    image_3d.add_item(new ScItem_GradiendBackground([[0.0, "rgb( 0, 0,   0 )"], [0.5, "rgb( 0, 0,  40 )"], [1.0, "rgb( 0, 0, 200 )"]]));
+    m = new ScItem_Model();
+    item_id = m.item_id;
 
-function dec_alpha( c, v, d ) {
-    var s = document.getElementById(c).img_server;
-    if ( s.alpha_altc <= v ) return;
-    s.alpha_altc -= d;
-    s.draw_img_on_canvas();
-    setTimeout( function() { dec_alpha( c, v, d ) }, 15 );
-}
+    m.load_hdf( strgeom, namegeom );
 
-function inc_alpha( c, v, d ) {
-    var s = document.getElementById(c).img_server;
-    if ( s.alpha_altc >= v ) return;
-    s.alpha_altc += d;
-    s.draw_img_on_canvas();
-    setTimeout( function() { inc_alpha( c, v, d ) }, 15 );
+    m.get_info();
+    m.fit();
+    image_3d.add_item(m);
+    image_3d.add_item(new ScItem_Axes("lb"));
+//     image_3d.fit();
 }
 
 //------------------------------------------------------------------------------------------------------
@@ -49,9 +54,10 @@ function inc_alpha( c, v, d ) {
 //------------------------------------------------------------------------------------------------------
 
 function fit_img( c ) {
-    var s = document.getElementById(c).img_server;
+    var s = document.getElementById(c).sc_disp;
     s.fit();
-    s.render();
+//     s.render();
+//     image_3d.fit();
 }
 
 function sx( c, x, y ) { 
