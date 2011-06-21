@@ -2,10 +2,16 @@
 / Liens vers les CSS
 %link{ :href => "/stylesheets/main_detail_model.css", :rel => "stylesheet", :media => "screen" }
 
-/ Javascript particulier a la page resultat
+/ Javascript particulier au serveur de visu SC
+%script{ :src => "/javascripts/SCVisu/scene/ScBase.js" ,   :type => "text/javascript" }
+%script{ :src => "/javascripts/SCVisu/scene/ScClient.js" ,   :type => "text/javascript" }
+%script{ :src => "/javascripts/SCVisu/scene/ScBrowser.js" ,   :type => "text/javascript" }
+
 %script{ :src => "/javascripts/detail_model/functions_layer_detail_model.js" ,   :type => "text/javascript" }
 %script{ :src => "/javascripts/detail_model/utilisateur/functions_utilisateur.js" ,   :type => "text/javascript" }
 %script{ :src => "/javascripts/detail_model/file/functions_file.js" ,   :type => "text/javascript" }
+
+
 
 / wizard création de projet en premier plan
 .content
@@ -40,5 +46,4 @@
   model_id = #{@id_model};
   $(document).ready(function() {get_Current_model( #{@id_model} )});
   $(document).ready(function() {get_Tableau_utilisateur_new_list()});
-    
-/= render :partial => "footer_top"
+  $(document).ready(function() {s_browser = new ScBrowser( "exploreModel" )});

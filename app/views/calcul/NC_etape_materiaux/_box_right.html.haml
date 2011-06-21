@@ -11,7 +11,7 @@
             .tableNC_box_retrait_10{ :id => "piece_1r_#{i}" }
             .tableNC_box_1{ :id => "piece_11_#{i}" }
             .tableNC_box_2{ :id => "piece_12_#{i}" }
-          %a{ :onclick => "view_pieces(#{i})", :style => "cursor: pointer;" }
+          %a{ :onclick => "view_pieces(#{i})", :ondblclick => "view_only_piece(#{i})", :style => "cursor: pointer;" }
             .tableNC_box_visu{ :id => "piece_visu_#{i}" }
 
     .NC_filter{ :style => "width:248px; height:20px" }
