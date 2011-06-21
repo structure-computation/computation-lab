@@ -5,7 +5,7 @@
   - (0...20).each do |i|
     .tableNC_impair{ :id => "interface_pair_#{i}" }
       .tableNC_box_lign{ :id => "interface_lign_#{i}" }
-        %a{:onclick => "select_interface(#{i})", :style => "cursor: pointer;" }
+        %a{ :style => "cursor: pointer;" }
           .tableNC_box_picto{ :id => "interface_picto_#{i}" }
           .tableNC_box_2{ :id => "interface_0_#{i}" }
         %a{ :onclick => "view_interfaces(#{i})", :ondblclick => "view_only_interface(#{i})", :style => "cursor: pointer;" }

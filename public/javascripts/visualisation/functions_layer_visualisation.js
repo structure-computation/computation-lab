@@ -451,12 +451,12 @@ function active_piece(id){
                 num_page = Math.floor(num_select/taille_tableau_content_page['piece']);
                 num_in_page = num_select - num_page * taille_tableau_content_page['piece'];
                 go_page_piece(num_page);
-                select_pieces(num_in_page)
+                affich_active_piece(num_in_page)
         }
 }
 
 // afficher la piece actif dans la twin box left
-function select_pieces(num_in_page){ 
+function affich_active_piece(num_in_page){ 
         //alert(num_in_page);
         for(i=0;i<taille_tableau_content_page['piece'];i++){
                 strContent_1 = new String();
