@@ -243,6 +243,43 @@ function affiche_Tableau_piece(){
 	affiche_Tableau_right(current_tableau,strname,stridentificateur);
 }
 
+// selectionner (activer) un une piece
+function active_piece(id){
+        var num_select_local = -1; 
+        var id_select_local = -1; 
+        for(i=0;i<Tableau_pieces_filter.length;i++){
+                if(Tableau_pieces_filter[i]['id'] == id) {
+                      num_select_local = i;
+                      id_select_local = id;
+                      break;
+                }
+        }
+        if(num_select_local != -1){
+                num_page = Math.floor(num_select_local/taille_tableau_right);
+                num_in_page = num_select_local - num_page * taille_tableau_right;
+                go_page_piece(num_page);
+                affich_active_pieces(num_in_page)
+        }
+}
+
+// afficher la piece actif dans la twin box left
+function affich_active_pieces(num_in_page){ 
+        //alert(num_in_page);
+        for(i=0;i<taille_tableau_right;i++){
+                strContent_1 = new String();
+                strContent_1 = 'piece_1_' + i;
+                var id_active = document.getElementById(strContent_1);
+                if(id_active.className != "tableNC_box_0 off"){
+                        if(i==num_in_page){
+                                id_active.className = "tableNC_box_0_active on";
+                        }else{
+                                id_active.className = "tableNC_box_0 on";
+                        }
+                }
+        }
+}
+
+
 // ajout d'une piece au matériaux selectionné actif
 function select_pieces_mat(num){
 	if(id_actif_mat_select != -1){
@@ -282,30 +319,18 @@ function go_page_piece(num){
 
 // afficher la piece sur le canvas
 function view_pieces(num_in_page){ 
-        //alert(taille_tableau_right);
-        
-        close_eyes_view_piece();
-	strContent_1 = new String();
-	strContent_visu = 'piece_visu_' + num_in_page;
-	var id_visu_active = document.getElementById(strContent_visu);
-	id_visu_active.className = "tableNC_box_visu_active on";
-	
-//         for(i=0;i<taille_tableau_right;i++){
-//                 strContent_1 = new String();
-//                 strContent_visu = 'piece_visu_' + i;
-//                 var id_visu_active = document.getElementById(strContent_visu);
-//                 
-//                 if(i==num_in_page){
-//                         id_visu_active.className = "tableNC_box_visu_active on";
-//                 }else{
-//                         id_visu_active.className = "tableNC_box_visu on";
-//                 }
-//                 
-//         } 
-        //alert(array2json(content_tableau_connect['piece']));
         num_select = right_tableau_connect['piece'][num_in_page];
         id_piece = Tableau_pieces_filter[num_select].id;
-        filter_piece_id('my_canvas',id_piece);
+        filter_piece_id(id_piece);    
+        change_eyes_view_piece();       
+}
+
+// afficher la piece sur le canvas
+function view_only_piece(num_in_page){  
+        num_select = right_tableau_connect['piece'][num_in_page];
+        id_piece = Tableau_pieces_filter[num_select].id;
+        filter_piece_only_id(id_piece); 
+        change_eyes_view_piece();
 }
 
 // -------------------------------------------------------------------------------------------------------------------------------------------
@@ -487,48 +512,49 @@ function suppr_piece_select(num){
 
 // afficher la piece sur le canvas
 function view_piece_select(num_in_page){ 
-        //alert(taille_tableau_right);
-        
-        close_eyes_view_piece();
-	strContent_1 = new String();
-	strContent_visu = 'piece_twin_visu_' + num_in_page;
-	var id_visu_active = document.getElementById(strContent_visu);
-	id_visu_active.className = "tableNC_box_visu_active on";
-	
-//         for(i=0;i<taille_tableau_twin_right;i++){
-//                 strContent_1 = new String();
-//                 strContent_visu = 'piece_twin_visu_' + i;
-//                 var id_visu_active = document.getElementById(strContent_visu);
-//                 
-// 		close_eyes_view_piece();
-//                 if(i==num_in_page){
-//                         id_visu_active.className = "tableNC_box_visu_active on";
-//                 }else{
-//                         id_visu_active.className = "tableNC_box_visu on";
-//                 }
-//                 
-//         } 
-        //alert(array2json(content_tableau_connect['piece']));
-        //num_select = right_tableau_connect['piece'][num_in_page];
 	active_piece_select(num_in_page);
         id_piece = Tableau_pieces_assigned_i[actif_piece_select].id;
-        filter_piece_id('my_canvas',id_piece);
+        filter_piece_id(id_piece);      
+        change_eyes_view_piece();
 }
 
-function close_eyes_view_piece(){ 
-        //alert(taille_tableau_right);
+// afficher la piece sur le canvas
+function view_only_piece_select(num_in_page){  
+        active_piece_select(num_in_page);
+        id_piece = Tableau_pieces_assigned_i[actif_piece_select].id;
+        filter_piece_only_id(id_piece); 
+        change_eyes_view_piece();
+}
+
+
+function change_eyes_view_piece(){ 
         
-        for(i=0;i<taille_tableau_twin_right;i++){
-                strContent_1 = new String();
-                strContent_visu = 'piece_twin_visu_' + i;
-                var id_visu_active = document.getElementById(strContent_visu);
-                id_visu_active.className = "tableNC_box_visu on";       
+        for(i=0;i<taille_tableau_twin_right;i++){           
+            strContent_visu = 'piece_twin_visu_' + i;
+            id_visu_active = document.getElementById(strContent_visu);
+            num_i = twin_right_tableau_connect['piece_twin'][i];
+            if(Tableau_pieces_assigned_i[num_i]){
+                id_piece_i = Tableau_pieces_assigned_i[num_i].id;
+                if(find_id_in_id_piece_select_for_visu(id_piece_i)){
+                    id_visu_active.className = "tableNC_box_visu_active on";
+                }else{
+                    id_visu_active.className = "tableNC_box_visu on";
+                }
+            }
         }
-        for(i=0;i<taille_tableau_right;i++){
-                strContent_1 = new String();
-                strContent_visu = 'piece_visu_' + i;
-                var id_visu_active = document.getElementById(strContent_visu);
-                id_visu_active.className = "tableNC_box_visu on";  
+        for(i=0;i<taille_tableau_right;i++){              
+            strContent_visu = 'piece_visu_' + i;
+            var id_visu_active = document.getElementById(strContent_visu);
+
+            num_i = right_tableau_connect['piece'][i];
+            if(Tableau_pieces_filter[num_i]){
+                id_piece_i = Tableau_pieces_filter[num_i].id;
+                if(find_id_in_id_piece_select_for_visu(id_piece_i)){
+                    id_visu_active.className = "tableNC_box_visu_active on";
+                }else{
+                    id_visu_active.className = "tableNC_box_visu on";
+                }
+            }
         } 
         
 }
