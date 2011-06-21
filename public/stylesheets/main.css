@@ -1414,6 +1414,14 @@ body
   background-color: #ff9d9d ;
   float:left;
 }
+.contentBoxTable_lign_pending
+{
+  width: 720px;
+  height: 25px;
+  background-color: #9297a8 ;
+  color: #ffffff;
+  float:left;
+}
 .contentBoxTable_lign_pair:hover, .contentBoxTable_lign_impair:hover
 {
   background-color: #9297a8 ;

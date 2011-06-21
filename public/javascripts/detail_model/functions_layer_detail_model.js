@@ -237,6 +237,10 @@ function complete_affiche_Tableau_resultat(current_tableau, strname, strnamebdd)
                 id_pair.className = "contentBoxTable_lign_echec";
                 strtemp = 'echec' ;
                 remplacerTexte(idContent, strtemp);
+            }else if(current_tableau[i_page][strnamebdd]['state']=='uploaded'){
+                id_pair.className = "contentBoxTable_lign_pending";
+                strtemp = 'pending' ;
+                remplacerTexte(idContent, strtemp);
             }else{
                 strtemp = '' ;
                 remplacerTexte(idContent, strtemp);
@@ -251,7 +255,8 @@ function complete_affiche_Tableau_resultat(current_tableau, strname, strnamebdd)
 function download_resultat(num){
     var num_select = content_tableau_connect['resultat'][num];
     var id_resultat = Tableau_resultat_filter[num_select]['calcul_result']['id'];
-    if(Tableau_resultat_filter[num_select]['calcul_result']['state']=='finish'){
+    state = Tableau_resultat_filter[num_select]['calcul_result']['state'];
+    if(state=='finish' || state=='downloaded' ){
         var url_php = "/detail_model/download_resultat?id_model=" + model_id + "&id_resultat=" + id_resultat ;
         $(location).attr('href',url_php);  
     }else{
