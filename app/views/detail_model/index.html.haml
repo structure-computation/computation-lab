@@ -46,4 +46,4 @@
   model_id = #{@id_model};
   $(document).ready(function() {get_Current_model( #{@id_model} )});
   $(document).ready(function() {get_Tableau_utilisateur_new_list()});
-  $(document).ready(function() {s_browser = new ScBrowser( "exploreModel" )});
+  $(document).ready(function() {s_browser = new ScBrowser( "exploreModel", model_id )});
