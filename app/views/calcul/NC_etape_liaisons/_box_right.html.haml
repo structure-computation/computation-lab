@@ -11,7 +11,7 @@
             .tableNC_box_retrait_10{ :id => "interface_1r_#{i}" }
             .tableNC_box_1{ :id => "interface_11_#{i}" }
             .tableNC_box_2{ :id => "interface_12_#{i}" }
-          %a{ :onclick => "view_interfaces(#{i})", :style => "cursor: pointer;" }
+          %a{ :onclick => "view_interfaces(#{i})", :ondblclick => "view_only_interface(#{i})", :style => "cursor: pointer;" }
             .tableNC_box_visu{ :id => "interface_visu_#{i}" }
 
     .NC_filter{ :style => "width:248px; height:20px" }
