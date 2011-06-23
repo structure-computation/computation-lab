@@ -11,6 +11,18 @@ var id_interface_select_for_visu = new Array();
 // initialisation du serveur d'image en relation aves ImgServer.js
 //------------------------------------------------------------------------------------------------------
 
+function refresh_page(){
+    var url_php = "visualisation/index?id_model=" + model_id ;
+    $(location).attr('href',url_php);   
+}
+
+function launch_visu_server(){
+    var url_php = "/visualisation/launch_visu_server";
+    $.getJSON(url_php,function() {
+            alert("serveur launch");
+        });
+    timer = setTimeout(refresh_page(),2000);    //Toute les 40 ms
+}
 
 
 // function init_visualisation() {
