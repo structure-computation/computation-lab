@@ -1706,3 +1706,8 @@ body
 #login_page input{
     width: 250px
 }
+
+#login_page #user_remember_me{
+  width: 20px;
+  margin-top:20px;
+}
