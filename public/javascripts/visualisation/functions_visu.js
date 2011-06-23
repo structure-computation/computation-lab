@@ -19,7 +19,7 @@ function refresh_page(){
 function launch_visu_server(){
     var url_php = "/visualisation/launch_visu_server";
     $.getJSON(url_php);
-    timer = setTimeout(refresh_page(),1000);    //Toute les 40 ms
+    timer = setTimeout(refresh_page(),2000);    //Toute les 40 ms
 }
 
 
