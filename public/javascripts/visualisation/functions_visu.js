@@ -12,16 +12,14 @@ var id_interface_select_for_visu = new Array();
 //------------------------------------------------------------------------------------------------------
 
 function refresh_page(){
-    var url_php = "visualisation/index?id_model=" + model_id ;
+    var url_php = "/visualisation/index?id_model=" + model_id ;
     $(location).attr('href',url_php);   
 }
 
 function launch_visu_server(){
     var url_php = "/visualisation/launch_visu_server";
-    $.getJSON(url_php,function() {
-            alert("serveur launch");
-        });
-    timer = setTimeout(refresh_page(),2000);    //Toute les 40 ms
+    $.getJSON(url_php);
+    timer = setTimeout(refresh_page(),1000);    //Toute les 40 ms
 }
 
 
