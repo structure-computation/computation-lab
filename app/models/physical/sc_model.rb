@@ -20,6 +20,13 @@ class ScModel < ActiveRecord::Base
     return (rand(1) > 0.5)
   end
   
+  def add_repository()
+    # on crée le repertoir du modele
+    path_to_model = "#{SC_MODEL_ROOT}/model_#{self.id}"
+    Dir.mkdir(path_to_model, 0777) unless File.exists?(path_to_model)
+    File.chmod 0777, path_to_model
+  end
+  
   def send_mesh(params,current_user)
     # on enregistre les fichier sur le disque et on change les droit pour que le serveur de calcul y ai acces
     file = params[:fichier] 

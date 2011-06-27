@@ -1706,3 +1706,16 @@ body
   border-bottom : thin solid #2a3557;
   //color: #e5e5e5;
 }
+
+// Fenetre de login.
+#login_page label{
+    width: 250px
+}
+#login_page input{
+    width: 250px
+}
+
+#login_page #user_remember_me{
+  width: 20px;
+  margin-top:20px;
+}
