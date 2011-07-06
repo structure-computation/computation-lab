@@ -198,6 +198,15 @@ function make_select_num_group_info_piece(){
                     }
                 }
             }
+            // ajout temporaire tant que les interface ne marchent pas
+//             for(var id_piece in num_group_info[ x ].id_edge_of){
+//                 if( num_group_info[ x ].id_edge_of[id_piece] == id_piece_ && num_group_info[ x ].type!= 2) { 
+//                     if(id_piece_select_for_visu[ i_piece ]){
+//                       select_num_group_info[ x ] = true;
+//                       break;
+//                     }
+//                 }
+//             }
         }
     }
 }
@@ -265,6 +274,7 @@ function add_remove_only_id_interface_select_for_visu(id) {
 }
 
 function make_select_num_group_info_interface(){
+//     make_select_num_group_info_interface_2();
     for( var x = 0; x < num_group_info.length; ++x ) {
         select_num_group_info[ x ] = false;
         for( var i_inter = 0; i_inter < Tableau_interfaces.length; ++i_inter ) {
@@ -279,7 +289,30 @@ function make_select_num_group_info_interface(){
     }
 }
 
+//ajout temporaire tant que les interface ne marchent pas
+function make_select_num_group_info_interface_2(){
+    for( var x = 0; x < num_group_info.length; ++x ) {
+        select_num_group_info[ x ] = false;
+        for( var i_inter = 0; i_inter < Tableau_interfaces.length; ++i_inter ) {
+            id_interface_ = Tableau_interfaces[ i_inter ].id;
+            adj_num_group = Tableau_interfaces[ i_inter ].adj_num_group.split(" ");
+            if(id_interface_select_for_visu[ i_inter ]){
+                for( var ng = 0; ng < adj_num_group.length; ++ng ){
+                    id_piece_ = adj_num_group[ng];
+                    for(var id_piece in num_group_info[ x ].id_edge_of){
+                        if( num_group_info[ x ].id_edge_of[id_piece] == id_piece_ && num_group_info[ x ].type!= 2) { 
+                              select_num_group_info[ x ] = true;
+                        }
+                    }
+                }   
+            }         
+        }
+    }
+}
+
 function filter_interfaces() {
+//     adj_num_group = Tableau_interfaces[ 0 ].adj_num_group.split(" ");
+//     alert(adj_num_group[0]);
     all_interface_select_for_visu();
     make_filter();
     change_eyes_view_interface();  
@@ -291,6 +324,7 @@ function filter_interface_id(id) {
 }
 
 function filter_interface_only_id(id) {
+    //alert("only");
     add_remove_only_id_interface_select_for_visu(id);
     make_filter();
 }
