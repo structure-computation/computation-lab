@@ -5,8 +5,3 @@ tmp/
 Gemfile.lock
 .DS_Store
 
-public/stylesheets/ie.css
-public/stylesheets/print.css
-public/stylesheets/screen.css
-public/stylesheets/styles.css
-public/stylesheets/ie6.css

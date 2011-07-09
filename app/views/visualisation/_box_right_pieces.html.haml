@@ -5,10 +5,10 @@
   - (0...20).each do |i|
     .tableNC_impair{ :id => "piece_pair_#{i}" }
       .tableNC_box_lign{ :id => "piece_lign_#{i}" }
-        %a{:onclick => "select_pieces(#{i})", :style => "cursor: pointer;" }
+        %a{ :style => "cursor: pointer;" }
           .tableNC_box_picto{ :id => "piece_picto_#{i}" }
           .tableNC_box_2{ :id => "piece_0_#{i}" }
-        %a{ :onclick => "view_pieces(#{i})", :style => "cursor: pointer;" }
+        %a{ :onclick => "view_pieces(#{i})", :ondblclick => "view_only_piece(#{i})", :style => "cursor: pointer;" }
           .tableNC_box_visu{ :id => "piece_visu_#{i}" }
 
   .NC_filter{ :style => "width:248px; height:20px" }

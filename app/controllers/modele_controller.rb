@@ -31,7 +31,7 @@ class ModeleController < ApplicationController
 
   def new
     model = current_user.sc_models.create(:name => params[:name], :dimension => params[:dimension], :description => params[:description], :company => current_user.company, :state => 'void')
-    #model.save
+    model.add_repository()
     render :text => { :result => 'success' }
   end
  

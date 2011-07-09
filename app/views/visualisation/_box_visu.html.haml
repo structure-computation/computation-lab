@@ -9,12 +9,12 @@
       %canvas#my_canvas{ :height => "509px", :width => "670px" }
         canvas
     #NC_box_visu_bouton.NC_espace_bouton_visu
-      #NC_box_visu_bouton_01.NC_bouton_visu_01
+      #NC_box_visu_bouton_01.NC_bouton_visu_01{ :onmousedown => "launch_visu_server( )" }
       #NC_box_visu_bouton_02.NC_bouton_visu_02{ :onmousedown => "fit_img( 'my_canvas' )" }
       #NC_box_visu_bouton_03.NC_bouton_visu_03{ :onmousedown => "sx( 'my_canvas', [1,0,0], [0,1,0] )" }
       #NC_box_visu_bouton_04.NC_bouton_visu_04{ :onmousedown => "sx( 'my_canvas', [0,0,1], [0,1,0] )" }
       #NC_box_visu_bouton_05.NC_bouton_visu_05{ :onmousedown => "sx( 'my_canvas', [1,0,0], [0,0,1] )" }
-      #NC_box_visu_bouton_06.NC_bouton_visu_06{ :onmousedown => "dec_alpha( 'my_canvas', 0.5, 0.02 )" }
-      #NC_box_visu_bouton_07.NC_bouton_visu_07{ :onmousedown => "filter_pieces( 'my_canvas' )" }
-      #NC_box_visu_bouton_08.NC_bouton_visu_08{ :onmousedown => "filter_interfaces( 'my_canvas' )" }
-      #NC_box_visu_bouton_09.NC_bouton_visu_09
+      #NC_box_visu_bouton_06.NC_bouton_visu_06{ :onmousedown => "shrink( 'my_canvas' )" }
+      #NC_box_visu_bouton_07.NC_bouton_visu_07{ :onmousedown => "filter_pieces( )" }
+      #NC_box_visu_bouton_08.NC_bouton_visu_08{ :onmousedown => "filter_interfaces( )" }
+      /#NC_box_visu_bouton_09.NC_bouton_visu_09

@@ -2,7 +2,7 @@
 / Liens vers les CSS
 %link{ :href => "/stylesheets/main_detail_model.css", :rel => "stylesheet", :media => "screen" }
 
-/ Javascript particulier a la page resultat
+/ Javascript particulier au serveur de visu SC
 %script{ :src => "/javascripts/SCVisu/scene/ScBase.js" ,   :type => "text/javascript" }
 %script{ :src => "/javascripts/SCVisu/scene/ScClient.js" ,   :type => "text/javascript" }
 %script{ :src => "/javascripts/SCVisu/scene/ScBrowser.js" ,   :type => "text/javascript" }
@@ -31,7 +31,7 @@
   #contentright
     #largeBox
       %h2
-        détail du model
+        détail du modèle
     #largeBoxcontent
       / taille minimum du contenu du contenu
       .contentheightmin
@@ -46,4 +46,4 @@
   model_id = #{@id_model};
   $(document).ready(function() {get_Current_model( #{@id_model} )});
   $(document).ready(function() {get_Tableau_utilisateur_new_list()});
-  $(document).ready(function() {s_browser = new ScBrowser( "exploreModel" )});
+  $(document).ready(function() {s_browser = new ScBrowser( "exploreModel", model_id )});
