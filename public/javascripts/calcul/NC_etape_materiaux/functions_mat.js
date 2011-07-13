@@ -234,19 +234,42 @@ function filtre_Tableau_pieces(){
 	}
 	// filtre par nom
 	else if(piece_filter[0]=='between_2_ids'){  
-	    group_piece_id_st = piece_filter[1].split(";");
-	    //alert(group_piece_id_st.length);
-	    for(ng=0; ng<group_piece_id_st.length; ng++){
-		piece_id_st = group_piece_id_st[ng].split(",");
+	    group_modulo_id_st = piece_filter[1].split("--");
+	    if(group_modulo_id_st.length==2){
+		piece_id_st = group_modulo_id_st[0].split(",");
+		modulo_id = parseInt(group_modulo_id_st[1]);
+		modulo = 0;
+		out = true;
+		while(out){
+		    piece_id = new Array();
+		    piece_id[0] = parseFloat(piece_id_st[0]) + modulo;
+		    piece_id[1] = parseFloat(piece_id_st[1]) + modulo;
+		    for(i=0; i<Tableau_pieces_not_assigned.length ;i++){
+			    if(Tableau_pieces_not_assigned[i].id >= piece_id[0] && Tableau_pieces_not_assigned[i].id <= piece_id[1]){
+				    groupe_pieces_temp[groupe_pieces_temp.length] = Tableau_pieces_not_assigned[i];
+			    }
+		    }
+		    modulo += modulo_id;
+		    if((parseFloat(piece_id_st[0]) + modulo) > Tableau_pieces_not_assigned.length){
+			out = false;
+			break;
+		    }
+		}
+	    }else if(group_modulo_id_st.length==1){
+		group_piece_id_st = group_modulo_id_st[0].split(";");
+		//alert(group_piece_id_st.length);
+		for(ng=0; ng<group_piece_id_st.length; ng++){
+		    piece_id_st = group_piece_id_st[ng].split(",");
 
-		piece_id = new Array();
-		piece_id[0] = parseFloat(piece_id_st[0]);
-		piece_id[1] = parseFloat(piece_id_st[1]);
+		    piece_id = new Array();
+		    piece_id[0] = parseFloat(piece_id_st[0]);
+		    piece_id[1] = parseFloat(piece_id_st[1]);
 
-		for(i=0; i<Tableau_pieces_not_assigned.length ;i++){
-			if(Tableau_pieces_not_assigned[i].id >= piece_id[0] && Tableau_pieces_not_assigned[i].id <= piece_id[1]){
-				groupe_pieces_temp[groupe_pieces_temp.length] = Tableau_pieces_not_assigned[i];
-			}
+		    for(i=0; i<Tableau_pieces_not_assigned.length ;i++){
+			    if(Tableau_pieces_not_assigned[i].id >= piece_id[0] && Tableau_pieces_not_assigned[i].id <= piece_id[1]){
+				    groupe_pieces_temp[groupe_pieces_temp.length] = Tableau_pieces_not_assigned[i];
+			    }
+		    }
 		}
 	    }
 	    if(groupe_pieces_temp.length > 1){
