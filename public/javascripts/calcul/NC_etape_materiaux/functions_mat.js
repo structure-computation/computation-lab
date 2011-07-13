@@ -176,7 +176,7 @@ function change_piece_filter(){
 	var id_piece_filter_value = document.getElementById('piece_filter_value');
 	piece_filter[0] = id_piece_filter_type.value;
 	piece_filter[1] = id_piece_filter_value.value;
-	affiche_Tableau_piece();
+	//affiche_Tableau_piece();
 }
 
 // filtrage du tableau des piece (par références)
@@ -231,7 +231,40 @@ function filtre_Tableau_pieces(){
 		}else{
 			Tableau_pieces_filter=groupe_pieces_temp;
 		}
-	}	
+	}
+	// filtre par nom
+	else if(piece_filter[0]=='between_2_ids'){  
+	    group_piece_id_st = piece_filter[1].split(";");
+	    for(ng=0; ng<group_piece_id_st.length; ng++){
+		piece_id_st = group_piece_id_st[ng].split(",");
+		piece_id = new Array();
+		piece_id[0] = parseFloat(piece_id_st[0]);
+		piece_id[1] = parseFloat(piece_id_st[1]);
+		for(i=0; i<Tableau_pieces_not_assigned.length ;i++){
+			if(Tableau_pieces_not_assigned[i].id >= piece_id[0] && Tableau_pieces_not_assigned[i].id <= piece_id[1]){
+				groupe_pieces_temp[groupe_pieces_temp.length] = Tableau_pieces_not_assigned[i];
+			}
+		}
+	    }
+	    if(groupe_pieces_temp.length > 1){
+		    Tableau_pieces_filter[0]=new Array();
+		    Tableau_pieces_filter[0]['id']=groupe_pieces.length;
+		    Tableau_pieces_filter[0]['name']='group_' + groupe_pieces.length;
+		    Tableau_pieces_filter[0]['group'] = 'true';
+		    Tableau_pieces_filter[0]['assigned'] = '-1';
+		    Tableau_pieces_filter[0]['type']= piece_filter[0];
+		    Tableau_pieces_filter[0]['value']= piece_filter[1];
+		    Tableau_pieces_filter[0]['nb_pieces']= groupe_pieces_temp.length ;
+		    for(i=0; i<groupe_pieces_temp.length ;i++){
+			    groupe_pieces_temp[i]['group']=Tableau_pieces_filter[0]['id'];
+			    Tableau_pieces_filter[i+1]=groupe_pieces_temp[i];
+		    }
+	    }else{
+		    Tableau_pieces_filter=groupe_pieces_temp;
+	    }    
+	}
+	
+	
 }
 
 // affichage du tableau des pièces
