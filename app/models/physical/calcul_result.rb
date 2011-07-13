@@ -157,6 +157,10 @@ class CalculResult < ActiveRecord::Base
     #self.gpu_allocated = (self.sc_model.dimension * self.sc_model.dimension * sst_number * 0.001).ceil
     self.gpu_allocated = 1
     if(jsonobject['mesh']['nb_groups_elem'] > 8)
+      self.gpu_allocated = 3
+    end
+    
+    if(jsonobject['options']['mode'] == "test")
       self.gpu_allocated = 1
     end
     
