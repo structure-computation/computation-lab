@@ -250,7 +250,7 @@ function filtre_Tableau_pieces(){
 			    }
 		    }
 		    modulo += modulo_id;
-		    if((parseFloat(piece_id_st[0]) + modulo) > Tableau_pieces_not_assigned.length){
+		    if((parseFloat(piece_id_st[0]) + modulo) > Tableau_pieces.length){
 			out = false;
 			break;
 		    }
