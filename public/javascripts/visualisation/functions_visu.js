@@ -2,7 +2,7 @@
 
 var image_3d;
 var image_3d_shrink_on = false;
-var num_group_info;
+var num_group_info = new Array();
 var select_num_group_info = new Array();
 var id_piece_select_for_visu = new Array();
 var id_interface_select_for_visu = new Array();
@@ -60,7 +60,7 @@ function init_visualisation() {
     m.get_info();
     m.get_num_group_info( "num_group_info" ); 
     m.fit();
-    image_3d.add_item(m);
+    image_3d.add_item(m); 
     image_3d.add_item(new ScItem_Axes("lb"));
     image_3d.click_fun.push( function( disp, evt ) {
         num_list = disp.get_num_group( evt.clientX, evt.clientY );

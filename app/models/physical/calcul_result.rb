@@ -146,6 +146,7 @@ class CalculResult < ActiveRecord::Base
     jsonobject = JSON.parse(results)
     
     #calcul des prévisions
+
     logger.debug jsonobject['options']['LATIN_nb_iter']
     logger.debug jsonobject['time_step'].length 
     logger.debug self.sc_model.dimension

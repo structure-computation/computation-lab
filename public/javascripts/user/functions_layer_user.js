@@ -39,10 +39,10 @@ var num_delete_membre = -1;
 
 // initialisation du tableau des info sur le nouveau membree
 var Tableau_new_membre          =  [];
-Tableau_new_membre['email']     = 'bellec@lmt.ens-cachan.fr';
-Tableau_new_membre['firstname'] = 'bellec';
-Tableau_new_membre['lastname']  = 'jeremie';
-Tableau_new_membre['role']      = 'ingénieur';
+Tableau_new_membre['email']     = '-';
+Tableau_new_membre['firstname'] = '-';
+Tableau_new_membre['lastname']  = '-';
+Tableau_new_membre['role']      = '-';
 
 
 
@@ -441,31 +441,37 @@ function affich_new_membre_resume(){
 // telecharger le nom et la description du membre
 function send_new_membre()
 {
-    var param1                  = array2object(Tableau_new_membre);
 
     $.ajax({
     	url         : "/member/create",
     	type        : 'POST',
-      dataTypes   : 'text',
+        dataTypes   : 'text',
 
       // dataType: 'json',
         
     	data        : {
-                      // member                : $.toJSON(param1),
+//                       "member"              : $.toJSON(param1),
     	              "authenticity_token"  : authToken(),
-    	              "member[email]"       : 'bellec@lmt.ens-cachan.fr',
-                      "member[firstname]"   : 'bellec',
-                      "member[lastname]"    : 'jeremie',
-                      "member[role]"        : 'ingénieur'
-                      
+    	              "member[email]"       : Tableau_new_membre["email"],
+                      "member[firstname]"   : Tableau_new_membre["firstname"],
+                      "member[lastname]"    : Tableau_new_membre["lastname"],
+		      "member[password]"    : "gtsl1535Z",
+                      "member[role]"        : Tableau_new_membre["role"]               
     	              },
       // contentType : 'application/json; charset=utf-8',
     	success     : function(json) {
     	    //alert(json);
-    	    get_members();
+    	    go_members();
     	}
     });
 
+}
+
+// lancer un calcul sur le model
+function go_members(){
+    //alert("in go_members")
+    var url_php = "/member" ;
+    $(location).attr('href',url_php);
 }
 
 -->
