@@ -25,7 +25,7 @@ class VisualisationController < ApplicationController
   end
   
   def launch_visu_server
-    result = system("cd /home/jbellec/code_dev/Visu; make;")
+    result = system("cd /home/scproduction/code_dev/Visu; make;")
     #stdin, stdout, stderr = Open3.popen3("cd /home/jbellec/code_dev/Visu; make;") 
     render :text => result
   end

@@ -3,7 +3,22 @@
     Liste des interfaces
   #page_liaison_22.NC_box
     .NC_filter{ :style => "width:248px; height:120px" }
-    /  <?php include("./contenu/NC_etape_liaisons/NC_filter_interfaces.php");  ?>
+      .NC_active_box_init_text_1{ :style => "width:90%;" }
+        %select#interface_filter_type{ :onChange => "change_interface_filter()", :name=> "interface_filter_type" }
+          %option{ :value => "" }
+            pas de filtre
+          %option{ :value => "name" }
+            name
+          %option{ :value => "id_side_mat" }
+            id side material
+      .NC_active_box_init_text_1{ :style => "width:90%;" }
+        %input#interface_filter_value{:type => "text", :name=> "interface_filter_value", :onChange => "change_interface_filter()"} 
+      .NC_active_box_init_text_1{ :style => "width:90%;" }
+        %a{:onclick => "affiche_Tableau_interface()", :style => "cursor: pointer;" }
+          .NC_filter_button{ :style => "margin-right:40px; text-align: center;" }
+            valider
+      
+    /= render :partial => "calcul/NC_etape_liaisons/NC_filter_interfaces"
     - (0...20).each do |i|
       .tableNC_impair{ :id => "interface_pair_#{i}" }
         .tableNC_box_0{ :id => "interface_1_#{i}" }
@@ -11,7 +26,7 @@
             .tableNC_box_retrait_10{ :id => "interface_1r_#{i}" }
             .tableNC_box_1{ :id => "interface_11_#{i}" }
             .tableNC_box_2{ :id => "interface_12_#{i}" }
-          %a{ :onclick => "view_interfaces(#{i})", :ondblclick => "view_only_interface(#{i})", :style => "cursor: pointer;" }
+          %a{ :ondblclick => "view_only_interface(#{i})", :onclick => "view_interfaces(#{i})", :style => "cursor: pointer;" }
             .tableNC_box_visu{ :id => "interface_visu_#{i}" }
 
     .NC_filter{ :style => "width:248px; height:20px" }

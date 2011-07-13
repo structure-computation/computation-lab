@@ -68,40 +68,39 @@ function change_liaison_filter(){
 	affiche_Tableau_liaison();
 }
 
-
 // filtrage du tableau des liaisons
 function filtre_Tableau_liaison(){
-	Tableau_liaison_filter = new Array();
-	// aucun filtre
-	if(liaison_filter[0]=='' || liaison_filter[1]==''){
-		Tableau_liaison_filter = Tableau_liaison;
-	}
-	// filtre par nom
-	else if(liaison_filter[0]=='name'){
-		if(liaison_filter[1].match('[\*]')){
-			liaison_filter[1]= liaison_filter[1].substring(0, liaison_filter[1].length-1);
-			for(i=0; i<Tableau_liaison.length ;i++){
-				if(Tableau_liaison[i]['name'].match(liaison_filter[1])){
-					Tableau_liaison_filter[Tableau_liaison_filter.length] = Tableau_liaison[i];
-				}
-			}
-		}else{
-			for(i=0; i<Tableau_liaison.length ;i++){
-				if(Tableau_liaison[i]['name']==liaison_filter[1]){
-					Tableau_liaison_filter[Tableau_liaison_filter.length] = Tableau_liaison[i];
-				}
-			}
-		}
-		
-	}	
-	// filtre par référence
-	else if(liaison_filter[0]=='id'){
-		for(i=0; i<Tableau_liaison.length ;i++){
-			if(Tableau_liaison[i]['id']==liaison_filter[1]){
-				Tableau_liaison_filter[Tableau_liaison_filter.length] = Tableau_liaison[i];
-			}
-		}
-	}	
+    Tableau_liaison_filter = new Array();
+    // aucun filtre
+    if(liaison_filter[0]=='' || liaison_filter[1]==''){
+      Tableau_liaison_filter = Tableau_liaison;
+    }
+    // filtre par nom
+    else if(liaison_filter[0]=='name'){
+      if(liaison_filter[1].match('[\*]')){
+        liaison_filter[1]= liaison_filter[1].substring(0, liaison_filter[1].length-1);
+        for(i=0; i<Tableau_liaison.length ;i++){
+          if(Tableau_liaison[i]['name'].match(liaison_filter[1])){
+            Tableau_liaison_filter[Tableau_liaison_filter.length] = Tableau_liaison[i];
+          }
+        }
+      }else{
+        for(i=0; i<Tableau_liaison.length ;i++){
+          if(Tableau_liaison[i]['name']==liaison_filter[1]){
+            Tableau_liaison_filter[Tableau_liaison_filter.length] = Tableau_liaison[i];
+          }
+        }
+      }
+      
+    }	
+    // filtre par référence
+    else if(liaison_filter[0]=='id'){
+      for(i=0; i<Tableau_liaison.length ;i++){
+        if(Tableau_liaison[i]['id']==liaison_filter[1]){
+          Tableau_liaison_filter[Tableau_liaison_filter.length] = Tableau_liaison[i];
+        }
+      }
+    } 
 }
 
 // affichage du tableau des liaisons
@@ -177,71 +176,129 @@ function change_interface_filter(){
 	var id_interface_filter_value = document.getElementById('interface_filter_value');
 	interface_filter[0] = id_interface_filter_type.value;
 	interface_filter[1] = id_interface_filter_value.value;
-	affiche_Tableau_interface();
+  //alert(array2json(interface_filter));
+  //alert(array2json(Tableau_interfaces[0]));
+	//affiche_Tableau_interface();
 }
 
 // filtrage du tableau des interface (par références)
 function filtre_Tableau_interfaces(){
-	groupe_interfaces_temp = new Array();
-	Tableau_interfaces_filter = new Array();
-	Tableau_interfaces_assigned = new Array();
-	Tableau_interfaces_not_assigned = new Array(); 
-	for(i=0; i<Tableau_interfaces.length ;i++){
-		if(Tableau_interfaces[i]['assigned']=='-1'){
-			Tableau_interfaces[i]['group']='-1';
-			Tableau_interfaces_not_assigned[Tableau_interfaces_not_assigned.length]=Tableau_interfaces[i];
-		}else{
-			Tableau_interfaces_assigned[Tableau_interfaces_assigned.length]=Tableau_interfaces[i];
-		}
-	}
-	// aucun filtre
-	if(interface_filter[0]=='' || interface_filter[1]==''){
-		for(i=0; i<Tableau_interfaces_not_assigned.length ;i++){
-			Tableau_interfaces_filter[Tableau_interfaces_filter.length] = Tableau_interfaces_not_assigned[i];
-		}
-	}
-	// filtre par nom
-	else if(interface_filter[0]=='name'){
-		if(interface_filter[1].match('[\*]')){
-			interface_filter[1]= interface_filter[1].substring(0, interface_filter[1].length-1);
-			for(i=0; i<Tableau_interfaces_not_assigned.length ;i++){
-				if(Tableau_interfaces_not_assigned[i]['name'].match(interface_filter[1])){
-					groupe_interfaces_temp[groupe_interfaces_temp.length] = Tableau_interfaces_not_assigned[i];
-				}
-			}
-		}else{
-			for(i=0; i<Tableau_interfaces_not_assigned.length ;i++){
-				if(Tableau_interfaces_not_assigned[i]['name']==interface_filter[1]){
-					groupe_interfaces_temp[groupe_interfaces_temp.length] = Tableau_interfaces_not_assigned[i];
-				}
-			}
-		}
-		if(groupe_interfaces_temp.length > 1){
-			Tableau_interfaces_filter[0]=new Array();
-			Tableau_interfaces_filter[0]['id']=groupe_interfaces.length;
-			Tableau_interfaces_filter[0]['name']='group_' + groupe_interfaces.length;
-			Tableau_interfaces_filter[0]['group'] = 'true';
-			Tableau_interfaces_filter[0]['assigned'] = '-1';
-			Tableau_interfaces_filter[0]['type']= interface_filter[0];
-			Tableau_interfaces_filter[0]['value']= interface_filter[1];
-			Tableau_interfaces_filter[0]['nb_interfaces']= groupe_interfaces_temp.length ;
-			for(i=0; i<groupe_interfaces_temp.length ;i++){
-				groupe_interfaces_temp[i]['group']=Tableau_interfaces_filter[0]['id'];
-				Tableau_interfaces_filter[i+1]=groupe_interfaces_temp[i];
-			}
-		}else{
-			Tableau_interfaces_filter=groupe_interfaces_temp;
-		}
-	}	
+    groupe_interfaces_temp = new Array();
+    Tableau_interfaces_filter = new Array();
+    Tableau_interfaces_assigned = new Array();
+    Tableau_interfaces_not_assigned = new Array(); 
+    for(i=0; i<Tableau_interfaces.length ;i++){
+        if(Tableau_interfaces[i]['assigned']=='-1'){
+            Tableau_interfaces[i]['group']='-1';
+            Tableau_interfaces_not_assigned[Tableau_interfaces_not_assigned.length]=Tableau_interfaces[i];
+        }else{
+            Tableau_interfaces_assigned[Tableau_interfaces_assigned.length]=Tableau_interfaces[i];
+        }
+    }
+    // aucun filtre
+    if(interface_filter[0]=='' || interface_filter[1]==''){
+        for(i=0; i<Tableau_interfaces_not_assigned.length ;i++){
+            Tableau_interfaces_filter[Tableau_interfaces_filter.length] = Tableau_interfaces_not_assigned[i];
+        }
+    }
+    // filtre par nom
+    else if(interface_filter[0]=='name'){
+        if(interface_filter[1].match('[\*]')){
+            interface_filter[1]= interface_filter[1].substring(0, interface_filter[1].length-1);
+            for(i=0; i<Tableau_interfaces_not_assigned.length ;i++){
+                if(Tableau_interfaces_not_assigned[i]['name'].match(interface_filter[1])){
+                    groupe_interfaces_temp[groupe_interfaces_temp.length] = Tableau_interfaces_not_assigned[i];
+                }
+            }
+        }else{
+            for(i=0; i<Tableau_interfaces_not_assigned.length ;i++){
+                if(Tableau_interfaces_not_assigned[i]['name']==interface_filter[1]){
+                    groupe_interfaces_temp[groupe_interfaces_temp.length] = Tableau_interfaces_not_assigned[i];
+                }
+            }
+        }
+        if(groupe_interfaces_temp.length > 1){
+            Tableau_interfaces_filter[0]=new Array();
+            Tableau_interfaces_filter[0]['id']=groupe_interfaces.length;
+            Tableau_interfaces_filter[0]['name']='group_' + groupe_interfaces.length;
+            Tableau_interfaces_filter[0]['group'] = 'true';
+            Tableau_interfaces_filter[0]['assigned'] = '-1';
+            Tableau_interfaces_filter[0]['type']= interface_filter[0];
+            Tableau_interfaces_filter[0]['value']= interface_filter[1];
+            Tableau_interfaces_filter[0]['nb_interfaces']= groupe_interfaces_temp.length ;
+            for(i=0; i<groupe_interfaces_temp.length ;i++){
+                groupe_interfaces_temp[i]['group']=Tableau_interfaces_filter[0]['id'];
+                Tableau_interfaces_filter[i+1]=groupe_interfaces_temp[i];
+            }
+        }else{
+            Tableau_interfaces_filter=groupe_interfaces_temp;
+        }
+    }
+    // filtre par matériaux adjacents
+    else if(interface_filter[0]=='id_side_mat'){
+//         alert("filtre : id_side_mat");
+        mat_id_st = interface_filter[1].split(" ");
+        mat_id = new Array();
+        mat_id[0] = parseFloat(mat_id_st[1]);
+        mat_id[1] = parseFloat(mat_id_st[0]);
+        for(i=0; i<Tableau_interfaces_not_assigned.length ;i++){
+            piece_id_st = Tableau_interfaces_not_assigned[i]['adj_num_group'].split(" ");
+            piece_id = new Array();
+            piece_id[0] = parseFloat(piece_id_st[1]);
+            piece_id[1] = parseFloat(piece_id_st[0]);
+            mat_piece_id = new Array();
+            assigned = 0;
+            for(i_p=0; i_p<Tableau_pieces.length ;i_p++){
+                if(Tableau_pieces[i_p].id == piece_id[0]){
+                  mat_piece_id[0] = Tableau_pieces[i_p].assigned;
+                  break;
+                }
+            }
+            for(i_p=0; i_p<Tableau_pieces.length ;i_p++){
+                if(Tableau_pieces[i_p].id == piece_id[1]){
+                  mat_piece_id[1] = Tableau_pieces[i_p].assigned;
+                  break;
+                }
+            }
+            
+//             if(i<3){
+//               alert(mat_piece_id);
+//               alert(mat_id);
+//             }
+            
+            if(mat_piece_id[0]==mat_id[0] && mat_piece_id[1]==mat_id[1]){
+                groupe_interfaces_temp[groupe_interfaces_temp.length] = Tableau_interfaces_not_assigned[i];
+            }else if(mat_piece_id[0]==mat_id[1] && mat_piece_id[1]==mat_id[0]){
+                groupe_interfaces_temp[groupe_interfaces_temp.length] = Tableau_interfaces_not_assigned[i];
+            }
+        }
+        
+        if(groupe_interfaces_temp.length > 1){
+            Tableau_interfaces_filter[0]=new Array();
+            Tableau_interfaces_filter[0]['id']=groupe_interfaces.length;
+            Tableau_interfaces_filter[0]['name']='group_' + groupe_interfaces.length;
+            Tableau_interfaces_filter[0]['group'] = 'true';
+            Tableau_interfaces_filter[0]['assigned'] = '-1';
+            Tableau_interfaces_filter[0]['type']= interface_filter[0];
+            Tableau_interfaces_filter[0]['value']= interface_filter[1];
+            Tableau_interfaces_filter[0]['nb_interfaces']= groupe_interfaces_temp.length ;
+            for(i=0; i<groupe_interfaces_temp.length ;i++){
+                groupe_interfaces_temp[i]['group']=Tableau_interfaces_filter[0]['id'];
+                Tableau_interfaces_filter[i+1]=groupe_interfaces_temp[i];
+            }
+        }else{
+            Tableau_interfaces_filter=groupe_interfaces_temp;
+        }
+    }
 }
 
 // affichage du tableau des interfaces
 function affiche_Tableau_interface(){
-	filtre_Tableau_interfaces();
-	var current_tableau = Tableau_interfaces_filter;
-	var strname = 'interface';
-	var stridentificateur = 'name';
-	affiche_Tableau_right(current_tableau,strname,stridentificateur);
+    filtre_Tableau_interfaces();
+    var current_tableau = Tableau_interfaces_filter;
+    var strname = 'interface';
+    var stridentificateur = 'name';
+    affiche_Tableau_right(current_tableau,strname,stridentificateur);
 }
 
 // activer une interface
@@ -284,38 +341,38 @@ function affich_active_interface(num_in_page){
 
 // ajout d'une interface aux liaisons selectionné actif
 function select_interfaces_liaison(num){
-	if(id_actif_liaison_select != -1){
-		var num_select = right_tableau_connect['interface'][num];
-		if(Tableau_interfaces_filter[num_select]['group']=='true'){ 	// si on assigne un groupe entier (num_select = 0)
-			var taille_tableau = Tableau_liaison_select[actif_liaison_select]['interfaces'].length;
-			for(i=0; i<Tableau_interfaces_filter.length ;i++){
-				Tableau_interfaces_filter[i]['assigned']=Tableau_liaison_select[actif_liaison_select]['id_select'];
-				var i_temp = i + taille_tableau;
-				Tableau_liaison_select[actif_liaison_select]['interfaces'][i_temp] = clone(Tableau_interfaces_filter[i]);
-			}
-			groupe_interfaces[groupe_interfaces.length] = clone(Tableau_interfaces_filter[num_select]);
-		}else{														// si on assigne une seule interface
-			Tableau_interfaces_filter[num_select]['assigned']=Tableau_liaison_select[actif_liaison_select]['id_select'];
-			var i_temp = Tableau_liaison_select[actif_liaison_select]['interfaces'].length;
-			Tableau_liaison_select[actif_liaison_select]['interfaces'][i_temp]= clone(Tableau_interfaces_filter[num_select]);
-		}
-		twin_right_tableau_current_page['interface_twin'] = twin_right_tableau_liste_page['interface_twin'].length-1;
-		affiche_Tableau_interface_select();
-		affiche_Tableau_interface();
-	}
+    if(id_actif_liaison_select != -1){
+        var num_select = right_tableau_connect['interface'][num];
+        if(Tableau_interfaces_filter[num_select]['group']=='true'){     // si on assigne un groupe entier (num_select = 0)
+            var taille_tableau = Tableau_liaison_select[actif_liaison_select]['interfaces'].length;
+            for(i=0; i<Tableau_interfaces_filter.length ;i++){
+                Tableau_interfaces_filter[i]['assigned']=Tableau_liaison_select[actif_liaison_select]['id_select'];
+                var i_temp = i + taille_tableau;
+                Tableau_liaison_select[actif_liaison_select]['interfaces'][i_temp] = clone(Tableau_interfaces_filter[i]);
+            }
+            groupe_interfaces[groupe_interfaces.length] = clone(Tableau_interfaces_filter[num_select]);
+        }else{                                                        // si on assigne une seule interface
+            Tableau_interfaces_filter[num_select]['assigned']=Tableau_liaison_select[actif_liaison_select]['id_select'];
+            var i_temp = Tableau_liaison_select[actif_liaison_select]['interfaces'].length;
+            Tableau_liaison_select[actif_liaison_select]['interfaces'][i_temp]= clone(Tableau_interfaces_filter[num_select]);
+        }
+        twin_right_tableau_current_page['interface_twin'] = twin_right_tableau_liste_page['interface_twin'].length-1;
+        affiche_Tableau_interface_select();
+        affiche_Tableau_interface();
+    }
 }
 
 // affiche la page num pour la liste des interfaces
 function go_page_interface(num){
-	if(num=='first'){
-		right_tableau_current_page['interface'] = 0;
-	}else if(num=='end'){
-		right_tableau_current_page['interface'] = right_tableau_liste_page['interface'].length;
-	}else{
-		var num_page = num + right_tableau_curseur_page['interface'];
-		right_tableau_current_page['interface']=right_tableau_liste_page['interface'][num_page]-1;	
-	}
-	affiche_Tableau_interface();
+    if(num=='first'){
+        right_tableau_current_page['interface'] = 0;
+    }else if(num=='end'){
+        right_tableau_current_page['interface'] = right_tableau_liste_page['interface'].length;
+    }else{
+        var num_page = num + right_tableau_curseur_page['interface'];
+        right_tableau_current_page['interface']=right_tableau_liste_page['interface'][num_page]-1;    
+    }
+    affiche_Tableau_interface();
 }
 
 
@@ -329,7 +386,7 @@ function view_interfaces(num_in_page){
 
 // afficher l'interface selectionnée uniquement dans le canvas
 function view_only_interface(num_in_page){ 
-        num_select = content_tableau_connect['interface'][num_in_page];
+        num_select = right_tableau_connect['interface'][num_in_page];
         id_interface = Tableau_interfaces_filter[num_select].id;
         filter_interface_only_id(id_interface);
         change_eyes_view_interface();  
@@ -341,54 +398,54 @@ function view_only_interface(num_in_page){
 
 // affichage du tableau des liaisons selectionnés
 function affiche_Tableau_liaison_select(){
-	var current_tableau = Tableau_liaison_select;
-	var strname = 'liaison_twin';
-	var stridentificateur = 'name_select';
-	affiche_Tableau_twin_left(current_tableau,strname,stridentificateur);
-	affich_active_liaison_select();
+    var current_tableau = Tableau_liaison_select;
+    var strname = 'liaison_twin';
+    var stridentificateur = 'name_select';
+    affiche_Tableau_twin_left(current_tableau,strname,stridentificateur);
+    affich_active_liaison_select();
 }
 
 // selectionner (activer) un liaisons de la selection pour lui ajouter des attribut ou le supprimer
 function active_liaison_select(num){
-	var num_select = twin_left_tableau_connect['liaison_twin'][num];
-	actif_liaison_select = num_select ;
-	id_actif_liaison_select = num ;
-	twin_right_tableau_current_page['liaison_twin']=0;
-	affich_active_liaison_select();
-	affiche_Tableau_interface_select();
+    var num_select = twin_left_tableau_connect['liaison_twin'][num];
+    actif_liaison_select = num_select ;
+    id_actif_liaison_select = num ;
+    twin_right_tableau_current_page['liaison_twin']=0;
+    affich_active_liaison_select();
+    affiche_Tableau_interface_select();
 }
 
 // afficher le liaisons actif dans la twin box left
 function affich_active_liaison_select(){
-	if(id_actif_liaison_select != -1){
-		var taille_Tableau_liaison_select = Tableau_liaison_select.length;
-		for(i=0;i<taille_tableau_twin_left;i++){
-			strContent_1 = new String();
-			strContent_1 = 'liaison_twin_1_' + i;
-			var id_active = document.getElementById(strContent_1);
-			if(id_active.className != "tableNC_twin_box_0 off"){
-				if(i==id_actif_liaison_select){
-					id_active.className = "tableNC_twin_box_0_active on";
-				}else{
-					id_active.className = "tableNC_twin_box_0 on";
-				}
-			}
-		}
-	}
+    if(id_actif_liaison_select != -1){
+        var taille_Tableau_liaison_select = Tableau_liaison_select.length;
+        for(i=0;i<taille_tableau_twin_left;i++){
+            strContent_1 = new String();
+            strContent_1 = 'liaison_twin_1_' + i;
+            var id_active = document.getElementById(strContent_1);
+            if(id_active.className != "tableNC_twin_box_0 off"){
+                if(i==id_actif_liaison_select){
+                    id_active.className = "tableNC_twin_box_0_active on";
+                }else{
+                    id_active.className = "tableNC_twin_box_0 on";
+                }
+            }
+        }
+    }
 }
 
 // affiche la page num pour les liaisons selectionnés et selectione le premier element
 function go_page_liaison_select(num){
-	if(num=='first'){
-		twin_left_tableau_current_page['liaison_twin'] = 0;
-	}else if(num=='end'){
-		twin_left_tableau_current_page['liaison_twin'] = twin_left_tableau_liste_page['liaison_twin'].length-1;
-	}else{
-		var num_page = num + twin_left_tableau_curseur_page['liaison_twin'];
-		twin_left_tableau_current_page['liaison_twin']=twin_left_tableau_liste_page['liaison_twin'][num_page]-1;	
-	}
-	affiche_Tableau_liaison_select();
-	active_liaison_select(0);
+    if(num=='first'){
+        twin_left_tableau_current_page['liaison_twin'] = 0;
+    }else if(num=='end'){
+        twin_left_tableau_current_page['liaison_twin'] = twin_left_tableau_liste_page['liaison_twin'].length-1;
+    }else{
+        var num_page = num + twin_left_tableau_curseur_page['liaison_twin'];
+        twin_left_tableau_current_page['liaison_twin']=twin_left_tableau_liste_page['liaison_twin'][num_page]-1;    
+    }
+    affiche_Tableau_liaison_select();
+    active_liaison_select(0);
 }
 
 // supprimer le liaisons actif
