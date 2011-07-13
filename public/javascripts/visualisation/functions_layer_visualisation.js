@@ -536,7 +536,7 @@ function go_page_interface(num){
 		var num_page = num + content_tableau_curseur_page['interface'];
 		content_tableau_current_page['interface']=content_tableau_liste_page['interface'][num_page]-1;
 	}
-	affiche_Tableau_piece();
+	affiche_Tableau_interface();
 }
 
 

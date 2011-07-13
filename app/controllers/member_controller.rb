@@ -33,13 +33,15 @@ class MemberController < ApplicationController
     # render new.rhtml
     def new
       @member = User.new
+      render :layout => false 
     end
 
     def create
-      debugger
       pwd            = generate_password
+      #params["member"]["password"] = pwd
+      #pwd            = "monkey"
       @user          = User.new  params["member"]
-      @user.password = pwd
+      #@user.password = pwd
       @user.company  = current_user.company
       # @user.register! if @user && @user.valid?
       success        = @user.save
@@ -119,6 +121,7 @@ class MemberController < ApplicationController
     # TODO: Trouver un emplacement plus pertinent.
     def generate_password
       pwd = `pwgen 12 1`
+      return pwd
     end
   
 end

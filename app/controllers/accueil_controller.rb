@@ -24,13 +24,8 @@ class AccueilController < ApplicationController
   end
   
   def change_mdp
-    user = current_user.authenticated?(params[:password]) 
-    if user
-      current_user.update_attributes(:password => params[:new_password], :password_confirmation => params[:password_confirmation])
-      render :text => 'success'
-    else
-      render :text => 'failed'
-    end
+    current_user.update_attributes(:password => params[:new_password], :password_confirmation => params[:password_confirmation])
+    render :text => 'success'
   end
   
 end
