@@ -12,15 +12,15 @@
     = yield :additionnal_javascript
     
     
-  %body.bp
-    = render :partial => "layouts/header_sass"    # Header prend toute la largeur et contient son sontainer.
+  %body.bp#container
+    = render :partial => "layouts/header_sass"    # Header prend toute la largeur et contient son container.
 
-    #container
+    #content
       
       = render :partial => "layouts/breadcrumb"
       = render :partial => "layouts/flashs_and_notices"
       
-    #container
+    #content
       #content  
         / Début d'affichage du code de la vue.
         = content_for?(:content) ? yield(:content) : yield # on utilise ici la technique des layout imbriqués décrite dans le guide rails.

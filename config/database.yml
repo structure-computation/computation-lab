@@ -2,8 +2,8 @@ defaults_development: &defaults_development
   adapter:  mysql
   encoding: utf8
   host:     localhost
-  username: structcomp
-  # password: u7N5TeqPXt4pxtjX
+  username: root
+  password: 
 
 development:
   database: structcompDev
