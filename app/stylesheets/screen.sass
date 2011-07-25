@@ -20,7 +20,7 @@
 
 #container
   +container
-  +susy-grid-background
+  //+susy-grid-background
   margin-left: 0
   margin-right: 0
   width: 100%
@@ -83,8 +83,17 @@
         .submenu_separator
  
     #home_tab.selected, #company_tab.selected, #lab_tab.selected
-      +background-image(linear-gradient(#FDDE35, #FEA82A))
+      +background-image(linear-gradient(#FFF600, #FFB500))
       a
         color: #551A8B
         font-weight: bold
-      
+ 
+#footer
+  +linear-gradient(color-stops(#4551a8, #003))
+  width:      100%
+  height:     30px
+  margin-top: 0px
+  position: fixed
+  bottom:   0
+  left:     0
+  text-align: center     
