@@ -1,9 +1,9 @@
 / partie header commune à toute les pages, CSproject.selected
 
 #header
-  #container
-    #header_logo
-    #header_company_name
+  #header_logo
+  #header_user_connected
+    %p#header_company_name
       - if user_signed_in? && current_user.company
         = current_user.company.name
         / 
@@ -14,18 +14,17 @@
               administration
       - else
         Nom entreprise
-    #vertical_separator
     #user_information
       - if user_signed_in?  # Le cadenas est placé en premier car on aligne de droite à gauche dans cette zone. 
-        #logo_session_lock  
-        #user_name
+        -#logo_session_lock  
+        %p#user_name
           = current_user.full_name
-          %br
+          -#%br
           = link_to "déconnexion", destroy_user_session_path,  :id => "disconnect_link"
       
         - #header_top_cadena        
-  
-    = render :partial => "layouts/main_menu" 
+
+  = render :partial => "layouts/main_menu" 
             
 
 / fin partie header
