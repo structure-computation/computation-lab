@@ -9,6 +9,11 @@ SCInterface::Application.routes.draw do
 
   root :to => "home#index"
   
+  # TODO: La partie calcul est à séparer en plusieurs ressources.
+  match 'calcul/:action(/:id(.:format))' => :controller => "calcul"
+  
+  
+  
   # La route par défaut héritée de l'application Rails 2, à conserver avant passage au REST.
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
