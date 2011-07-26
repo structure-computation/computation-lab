@@ -5,7 +5,7 @@
     %a{ :href => "/accueil" }  Accueil
   
   %li#company_tab{:class => ( @page == :manage    ? "selected" : "")}
-    %a{ :href => "/company" }  Ma société
+    = link_to companies_path,  Ma société
     %ul.main_submenu
       %li
         %a{:href => member_index_path} Liste des membres

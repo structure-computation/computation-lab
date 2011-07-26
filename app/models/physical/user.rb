@@ -22,10 +22,12 @@ class User < ActiveRecord::Base
   devise :database_authenticatable  , :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
-#   acts_as_api
+  # acts_as_api
 
   attr_accessible   :email,     :password, :password_confirmation, :remember_me,
                     :firstname, :lastname, :role
+  
+  scope       :managers     ,   where(:role => "gestionnaire")
   
   
   # Relations
@@ -37,7 +39,7 @@ class User < ActiveRecord::Base
 
 
   has_many    :user_projects,  :dependent => :destroy # Pour les gestionnaires, reattribuer ce projet.
-  has_many    :projects,       :through => :user_projects
+  has_many    :projects     ,  :through => :user_projects
   has_many    :owned_projects, :through => :user_projects, :source => :task , :conditions => { "user_projects.is_admin"     => true }
   
   # Gestion des tâches. 2 types de tâches + toutes les tâches : 3 relations + la relation de jointure.

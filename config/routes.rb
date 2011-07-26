@@ -5,12 +5,12 @@ SCInterface::Application.routes.draw do
   devise_for  :users,   :controllers => { :sessions => "users/sessions", :registrations => "users/registrations" }
 
   resources :member  
-
+  resources :companies
 
   root :to => "home#index"
   
   # TODO: La partie calcul est à séparer en plusieurs ressources.
-  match 'calcul/:action(/:id(.:format))' => :controller => "calcul"
+  match 'calcul/:action(/:id(.:format))' => "calcul"
   
   
   
