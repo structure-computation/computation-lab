@@ -1,5 +1,5 @@
 %tr{:class => (member_counter % 2 == 0 ? "light_grey" : "grey") }
-  %td= link_to "Détails", {:action => "show", :id => member} #, :remote => true, :update => "member_details"
+  %td= link_to "Détails", {:action => "show", :id => member} , :remote => true
   %td= member.email
   %td= member.firstname
   %td= member.role

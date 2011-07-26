@@ -17,10 +17,6 @@ class MemberController < ApplicationController
 
     def show
       @member = User.find(params[:id])
-      respond_to do |format|
-        format.html
-        format.js
-      end
     end
     
     def index

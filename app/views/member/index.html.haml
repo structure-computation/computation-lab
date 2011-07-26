@@ -25,11 +25,11 @@
     / Liste des membres
     %table#member_list
       %thead
-        %th
-          %td{ :colspan => 2 } Mail
-          %td                  Nom
-          %td                  Role
-          %td{ :colspan => 2 } Status
+        %tr
+          %th{ :colspan => 2 } Mail
+          %th                  Nom
+          %th                  Role
+          %th{ :colspan => 2 } Status
       %tbody
         = render :partial => "member", :collection => @members
 

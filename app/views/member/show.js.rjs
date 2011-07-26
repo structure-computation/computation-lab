@@ -1,1 +1,0 @@
-page.replace_html('member_details', "render(:partial => 'member_detail', :object => @member)")
