@@ -1,8 +1,9 @@
 source :rubygems
 
-gem 'rails'       , '~>3.0.5'
+gem 'rails'       , '~>3.0.9'
 gem 'mysql'       , '~>2.8.1'
 gem 'delayed_job' , '~>2.1.4'
+gem 'mongrel'     , '~>1.1.5'
 
 # gem 'resque'  
 
@@ -11,7 +12,7 @@ gem 'haml'        , '~>3.1.1'
 gem 'barista'     , '~>1.0.0'  # Attention, haml doit être chargé AVANT barrista.
 gem 'prawn'       , '~>0.8.4'
 
-gem 'jquery-rails', '~>0.2.5'
+gem 'jquery-rails', '~>1.0.12'
 gem 'json'                    # Inutile si ruby 1.9
 gem 'transitions' , '~>0.0.9'
 gem 'warden'      , '~>1.0.3'

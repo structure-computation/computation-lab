@@ -3,14 +3,17 @@
 %script{ :src => "/javascripts/user/functions_layer_user.js"              ,   :type => "text/javascript" }
 
 
+- content_for :additionnal_stylesheets do
+  = stylesheet_link_tag "member"
 
+- content_for :additionnal_javascript do
+  = javascript_include_tag "rails"
 
 
 -content_for :wizzard_content do
   = render :partial => "membre_nouveau_2"
   / wizard de suppression d'un membre
   = render :partial => "membre_delete"
-
 
 
 
@@ -22,18 +25,21 @@
   .contentheightmin
   / taille minimum du contenu du contenu
   
-  #MembreDetail.off
-    = render :partial => "membre_detail"
   #MembreListe.on
     = render :partial => "filtre_des_membres"
-    / liste des membres
-    = render :partial => "membre_list"
-    / fin largeBoxcontent de la liste des membres
+    / Liste des membres
+    %table#member_list
+      %thead
+        %tr#member_list_first_line
+          %td{ :colspan => 2 } Mail
+          %td                  Nom
+          %td                  Role
+          %td{ :colspan => 2 } Status
+      %tbody
+        = render :partial => "member", :collection => @members
 
-
-      
-      
-/ fin de #contentright, partie droite du contenu
-%script{ :type => "text/javascript" }
-  $(document).ready(get_Tableau_membre);
-
+    %span#new_member= link_to "Nouveau membre", new_member_path
+    
+    #member_detail
+      - #render :partial => "membre_detail"
+    

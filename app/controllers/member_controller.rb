@@ -15,10 +15,15 @@ class MemberController < ApplicationController
     
     before_filter :find_user, :only => [:suspend, :unsuspend, :destroy, :purge]
 
+    def show
+      @member = User.find(params[:id])
+    end
+    
     def index
-      @page   = 'SCmanage' 
-      @users  = current_user.company.users
-      @member = User.new
+      @page    = 'SCmanage' 
+      @users   = current_user.company.users
+      @member  = User.new
+      @members = User.all
       respond_with(@users) 
       
       # TODO: Mis de côté en attendant de travailler avec le bon format résultat.
