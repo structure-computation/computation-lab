@@ -1,0 +1,69 @@
+$light_grey : #CACBD5
+$grey       : #B8B9C3
+$dark_grey  : #9297A8
+table#member_list
+  width: 100%
+  font-size   : 0.75em
+  border-collapse: collapse
+  tr#member_list_first_line
+    font-style  : bold
+    color       : white
+    background  : transparent url('../images/tableau_header_Bg.png') repeat-x left top
+  
+  tr
+    line-height : 30px
+    
+  thead
+    td
+      padding-left  : 0.5em
+  tbody
+    td
+      border-left   : solid 1px white
+      padding-left  : 0.5em
+    td:first-child
+      border-left   : none
+    
+  .grey
+    background-color: $light_grey
+  .light_grey
+    background-color: $grey
+
+#new_member
+  background      : transparent url('../images/button_jaune.png') no-repeat left top
+  font-size       : 0.75em
+  padding-top     : 0.5em
+  padding-bottom  : 0.5em
+  margin          : 1em
+  display         : block
+  text-align      : center
+  width           : 226px
+  height          : 40px
+  a
+    padding-left    : 2em
+    background      : transparent url('../images/manage_pic_nouveau_membre.png') no-repeat left top    
+
+
+h4
+  text-align  : center
+
+dl
+  margin    : auto
+  width     : 80%
+  font-size : 0.8em
+  font-style  : bold
+  dt
+    color             : white
+    width             : 30%
+    line-height       : 22px
+    background-color  : $dark_grey
+    float             : left
+    margin            : 0
+    margin-right      : 1em
+    margin-bottom     : 1px
+    clear             : both
+    padding-left      : 0.5em
+  dd
+    line-height       : 22px
+    background-color  : $grey
+    margin            : 0
+    margin-bottom     : 1px

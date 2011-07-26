@@ -6,7 +6,7 @@ class MemberController < ApplicationController
     # Creer un layout spécifique pour les fonctions du menu "scté".
     layout "company"
     
-    respond_to    :html, :json
+    respond_to    :html, :json, :js
 
     before_filter :authenticate_user! #,  :except => :activate
     
@@ -17,6 +17,10 @@ class MemberController < ApplicationController
 
     def show
       @member = User.find(params[:id])
+      respond_to do |format|
+        format.html
+        format.js
+      end
     end
     
     def index

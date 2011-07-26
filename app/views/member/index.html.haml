@@ -1,14 +1,9 @@
-
 -# Ajouter ici car il existe des conflits entre les JS.
-%script{ :src => "/javascripts/user/functions_layer_user.js"              ,   :type => "text/javascript" }
+%script{ :src => "/javascripts/user/functions_layer_user.js",   :type => "text/javascript" }
 
 
 - content_for :additionnal_stylesheets do
   = stylesheet_link_tag "member"
-
-- content_for :additionnal_javascript do
-  = javascript_include_tag "rails"
-
 
 -content_for :wizzard_content do
   = render :partial => "membre_nouveau_2"
@@ -40,6 +35,6 @@
 
     %span#new_member= link_to "Nouveau membre", new_member_path
     
-    #member_detail
+    #member_details
       - #render :partial => "membre_detail"
     
