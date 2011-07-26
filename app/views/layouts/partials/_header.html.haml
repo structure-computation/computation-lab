@@ -1,30 +1,33 @@
 / partie header commune à toute les pages, CSproject.selected
 
-#header
-  #header_logo
-  #header_user_connected
-    %p#header_company_name
-      - if user_signed_in? && current_user.company
-        = current_user.company.name
-        / 
-          TODO: Supprimer la ligne suivante dans une version ultérieure. C'est une mauvaise façon de se connecter.
-          - if(current_user.company.id == 240607020)
-            %br
-            %a{:href => "/sc_admin_company", :id=>"administration_link" }
-              administration
-      - else
-        Nom entreprise
-    #user_information
-      - if user_signed_in?  # Le cadenas est placé en premier car on aligne de droite à gauche dans cette zone. 
-        -#logo_session_lock  
-        %p#user_name
-          = current_user.full_name
-          -#%br
-          = link_to "déconnexion", destroy_user_session_path,  :id => "disconnect_link"
-      
-        - #header_top_cadena        
-
-  = render :partial => "layouts/main_menu" 
+%header
+  .container
+    #header_top
+      #header_logo
+      #header_user_connected
+        
+        #user_information
+          - if user_signed_in?  # Le cadenas est placé en premier car on aligne de droite à gauche dans cette zone. 
+            -#logo_session_lock  
+            %p#user_name
+              = current_user.full_name
+              %br
+              = link_to "déconnexion", destroy_user_session_path,  :id => "disconnect_link"
+          
+            -#header_top_cadena
+        %p#header_company_name
+          - if user_signed_in? && current_user.company
+            = current_user.company.name
+            / 
+              TODO: Supprimer la ligne suivante dans une version ultérieure. C'est une mauvaise façon de se connecter.
+              - if(current_user.company.id == 240607020)
+                %br
+                %a{:href => "/sc_admin_company", :id=>"administration_link" }
+                  administration
+          - else
+            Nom entreprise      
+    #header_bottom
+      = render :partial => "layouts/main_menu" 
             
 
 / fin partie header

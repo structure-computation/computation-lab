@@ -1,99 +1,28 @@
-// Imports -------------------------------------------------------------------
+/* Imports --------------------------------------------------------------- */
 
 @import base
 @import compass/css3/gradient
 @import compass/css3/border-radius
+@import compass/typography/links/unstyled-link
+@import compass/typography/links/hover-link
 
-/* Layout ------------------------------------------------------------------ */
+/* Variables ------------------------------------------------------------- */
 
-@mixin main-menu-tab
-  width:            9em // Ne fonctionne pas comme on le souhaite avec +column(3)
-  line-height:           1.5em
-  float:            left  
-  margin-right :    2px
-  text-align:       center 
-  list-style-type:  none
-  font-size:        16px
+$largeur-min : 950px
+$largeur-max : 90%
+
+/* Mixins ---------------------------------------------------------------- */
+
+/* Global ---------------------------------------------------------------- */
+
+body
+  margin: 0
   
-  +background-image(linear-gradient(#535781, #515783))
-  +border-top-radius(0.4em)   // Double effet avec l'image de fond.
-
-#container
+.container
   +container
-  //+susy-grid-background
-  margin-left: 0
-  margin-right: 0
-  width: 100%
+  +susy-grid-background
+  min-width: $largeur-min
+  max-width: $largeur-max
 
-#header
-  +linear-gradient(color-stops(#4551a8, #003))
-  +full
-  overflow: auto
-  min-width: 950px
-  
-  #header_logo 
-    padding-top: 1%  
-    background: transparent url('/images/Logo_StructureComputation_gris.png') no-repeat bottom left
-    height:     image-height('Logo_StructureComputation_gris.png')
-    +columns(7)
-    +prefix(1)
+@import partials/header
 
-  #header_user_connected
-    +columns(12)
-    text-align: right
-    +omega
-       
-    #header_company_name
-      display: inline-block
-      vertical-align: top
-      margin: 0
-      background:       transparent url('/images/header_bg_separateur.png') no-repeat top right
-      padding-right: 15px
-      line-height: 40px
-    
-    #user_information  
-      display: inline-block
-      vertical-align: top
-      #user_name
-        display: inline-block
-        vertical-align: top
-        margin: 0
-        line-height: 40px
-        padding-right: 35px
-        background: transparent url('/images/header_cadena.png') no-repeat center right
-
-      a
-        display: inline
-        color: white  
-        
-  #main_menu
-    +columns(20)
-    margin-bottom: 0
-
-    #home_tab, #company_tab, #lab_tab
-      +main-menu-tab
-      
-      a
-        color: #E5E5E5
-      a:hover
-        color: #FFDB00
-        
-      .main_submenu
-        display: none
-        .submenu_separator
- 
-    #home_tab.selected, #company_tab.selected, #lab_tab.selected
-      +background-image(linear-gradient(#FFF600, #FFB500))
-      a
-        color: #551A8B
-        font-weight: bold
- 
-#footer
-  +linear-gradient(color-stops(#4551a8, #003))
-  width:      100%
-  height:     30px
-  margin-top: 0px
-  position: fixed
-  bottom:   0
-  left:     0
-  text-align: center     
