@@ -8,9 +8,10 @@
     = link_to companies_path,  Ma société
     %ul.main_submenu
       %li
-        %a{:href => member_index_path} Liste des membres
+        = link_to 'Liste des membres', members_path
       %li
-        = link_to 'Liste des factures', companies_bills_path
+        = link_to 'Liste des factures'
+        -#, company_bills_path
       %li.submenu_separator
       %li
         %a{:href => ""} Abonnement
