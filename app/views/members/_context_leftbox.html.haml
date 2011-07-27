@@ -8,5 +8,4 @@
         %img{ :src => "/images/manage_pic_nouveau_membre.png" }
       %td
         /%a{ :style => "cursor: pointer;", :onclick => "displayNewMembre('on')" } 
-        %a{ :href => new_member_path }
-          Ajouter un membre
+        = link_to "Ajouter un membre", new_member_path

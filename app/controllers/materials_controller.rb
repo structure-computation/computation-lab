@@ -20,15 +20,6 @@ class MaterialsController < ApplicationController
     end
   end
   
-  def get_company_material
-    @page = 'SCcompute'
-    @current_company = current_user.company
-    @materials = @current_company.materials.find(:all)
-    respond_to do |format|
-      format.js   {render :json => @materials.to_json}
-    end
-  end
-  
   def create
     @current_company = current_user.company
     @new_material = @current_company.materials.build(params[:material])

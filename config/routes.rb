@@ -6,18 +6,15 @@ SCInterface::Application.routes.draw do
 
 
 
+  resources :members
   resources :materials
 
   match 'companies/get_gestionnaire'   => "companies#get_gestionnaire"  
-  resources :companies
-
-
-
-  resources :member
-  resources :bills do
-    get 'download_bill', :on => :member
+  resources :companies do
+    resources :bills do
+      get 'download_bill', :on => :member
+    end
   end
-  
   root :to => "home#index"
   
   # TODO: La partie calcul est à séparer en plusieurs ressources.
