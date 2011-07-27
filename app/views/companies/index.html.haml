@@ -10,19 +10,19 @@
     Tableau de bord
 #largeBoxcontent1
   /compte d'abonnement annuel
-  = render :partial => "company/abonnement/resume_abonnement"
-  = render :partial => "company/abonnement/contenu_abonnement"
+  = render :partial => "companies/abonnement/resume_abonnement"
+  = render :partial => "companies/abonnement/contenu_abonnement"
   /compte de calcul
-  = render :partial => "company/calcul/resume_calcul"
-  = render :partial => "company/calcul/contenu_calcul"
+  = render :partial => "companies/calcul/resume_calcul"
+  = render :partial => "companies/calcul/contenu_calcul"
 
 #largeBox
   %h2
     Profil
 #largeBoxcontent
   /profil company
-  = render :partial => "company/profil_company/resume_company"
-  = render :partial => "company/profil_company/contenu_company"  
+  = render :partial => "companies/profil_company/resume_company"
+  = render :partial => "companies/profil_company/contenu_company"  
   
 %script{ :type => "text/javascript" }
   $(document).ready(function() {get_current_calcul_account( #{@id_company} )});

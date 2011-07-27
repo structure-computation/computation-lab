@@ -3,20 +3,22 @@ class CompaniesController < InheritedResources::Base
   before_filter :authenticate_user!
   before_filter :set_page_name 
   
+  layout 'company'
+  
   def set_page_name
     @page = 'SCmanage'
   end
   
   
-  # def index
-  #   @page = 'SCmanage' 
-  #   @current_company = current_user.company
-  #   @id_company = @current_company.id
-  #   respond_to do |format|
-  #     format.html {render :layout => true }
-  #     format.js   {render :json => @current_company.to_json}
-  #   end
-  # end
+  def index
+    @page = 'SCmanage' 
+    @current_company = current_user.company
+    @id_company = @current_company.id
+    respond_to do |format|
+      format.html {render :layout => true }
+      format.js   {render :json => @current_company.to_json}
+    end
+  end
 
 
   # TODO: Passer en ressource incluse.

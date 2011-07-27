@@ -45,7 +45,7 @@ function init_current_memory_account(Current_memory_account_temp)
 // requette pour l'obtention du tableau des resultats
 function get_current_memory_account(id_company)
 { 
-    var url_php = "/company/get_memory_account";
+    var url_php = "/companies/get_memory_account";
     $.getJSON(url_php,{"id_company": id_company},init_current_memory_account);
 }
 
