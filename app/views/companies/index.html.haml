@@ -24,9 +24,13 @@
   = render :partial => "companies/profil_company/resume_company"
   = render :partial => "companies/profil_company/contenu_company"  
   
-%script{ :type => "text/javascript" }
-  $(document).ready(function() {get_current_calcul_account( #{@id_company} )});
-  $(document).ready(function() {get_current_memory_account( #{@id_company} )});
-  
-=javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery?
+:javascript
+  var init_account_sliders = function (){ 
+    // Initialise les reglettes indiquant les consommations.
+    var calcul_account = #{@current_company.calcul_account.to_json};
+    var memory_account = #{@current_company.memory_account.to_json};
+    init_current_calcul_account(calcul_account);
+    init_current_memory_account(memory_account);    
+  };
+  $(document).ready( init_account_sliders );
   

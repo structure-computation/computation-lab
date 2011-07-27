@@ -11,6 +11,7 @@ class CompaniesController < InheritedResources::Base
   
   
   def index
+    # redirect_to current_user.company
     @page = 'SCmanage' 
     @current_company = current_user.company
     @id_company = @current_company.id
