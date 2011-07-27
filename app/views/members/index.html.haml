@@ -6,10 +6,12 @@
   = stylesheet_link_tag "member"
   = stylesheet_link_tag "table"
 
--content_for :wizzard_content do
-  = render :partial => "member_new"
+-content_for :wizzard_content do 
+  -#   Les wizzard ne sont plus ajoutés dans cette page, nous les supprimerons à terme pour ne plus passer en Ajax sur des fonctions de nature synchrones et
+  -#   pour éviter des erreurs rails (besoin d'une variable @member dans index ou elle ne doit pas être instanciée.)
+  -# = render :partial => "member_new"
   / wizard de suppression d'un membre
-  = render :partial => "membre_delete"
+  -# = render :partial => "membre_delete"
 
 
 

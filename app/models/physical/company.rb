@@ -21,12 +21,16 @@ class Company < ActiveRecord::Base
   # ET pour faire fonctionner inherited ressource qui fait un current_user.companies.find(...)
   scope :accessible_by_user, lambda { |user| 
           joins(:users).where("users.id = ?", user.id)
-      }
+  }
   
   # TODO: pour faire foncitonner la chaine d'association Inherited ressource. 
   # Trouver une meilleure solution à terme.
   scope :companies
   
+  
+  def members
+    users
+  end
   def managers
     users.where(:role => "gestionnaire")
   end
