@@ -23,7 +23,6 @@ gem 'compass'     , '>= 0.11.5'
 gem 'compass-susy-plugin'
 gem 'inherited_resources'
 
-
 # Use unicorn as the web server
 # gem 'unicorn'
 

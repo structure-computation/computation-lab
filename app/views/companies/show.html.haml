@@ -27,8 +27,8 @@
 :javascript
   var init_account_sliders = function (){ 
     // Initialise les reglettes indiquant les consommations.
-    var calcul_account = #{@current_company.calcul_account.to_json};
-    var memory_account = #{@current_company.memory_account.to_json};
+    var calcul_account = #{@company.calcul_account.to_json};
+    var memory_account = #{@company.memory_account.to_json};
     var solde_calculs  = #{@solde_calculs.to_json};
     init_current_calcul_account(calcul_account);
     init_current_memory_account(memory_account);    

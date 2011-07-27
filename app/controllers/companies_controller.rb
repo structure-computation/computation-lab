@@ -1,8 +1,12 @@
 class CompaniesController < InheritedResources::Base
-  
   before_filter :authenticate_user!
   before_filter :set_page_name 
   before_filter :get_solde, :only =>[:index, :show]
+  
+  # Actions inherited ressource. 
+  actions :all, :except => [ :index, :edit, :update, :destroy ]
+  
+  
   layout 'company'
   
   def set_page_name
@@ -17,14 +21,13 @@ class CompaniesController < InheritedResources::Base
   
   
   def index
-    # redirect_to current_user.company
-    @page = 'SCmanage' 
-    @current_company = current_user.company
-    @id_company = @current_company.id
-    respond_to do |format|
-      format.html {render :layout => true }
-      format.js   {render :json => @current_company.to_json}
-    end
+    redirect_to current_user.company
+    # @page = 'SCmanage' 
+    # @company = current_user.company
+    # respond_to do |format|
+    #   format.html {render :layout => true }
+    #   format.js   {render :json => @current_company.to_json}
+    # end
   end
 
 
@@ -43,20 +46,11 @@ class CompaniesController < InheritedResources::Base
     } 
     render :json => @users.to_json
   end
-  
-  
 
   
-  # TODO: Ressource incluse "member"
-  def delete_user
-    @current_company = current_user.company
-    @user = @current_company.users.find(params[:id_membre])
-    if(@user && @user.id == current_user.id)
-      render :text => "false " + @user.id.to_s() + "  " + current_user.id.to_s()
-    else
-      @user.delete!
-      render :text => "true" + @user.id.to_s() + "  " + current_user.id.to_s()
+  protected
+    def begin_of_association_chain
+      Company.accessible_by_user(@current_user)
     end
-  end
   
 end
