@@ -1,6 +1,6 @@
 / Menu principal de l'application.
 
-%ul#main_menu
+%ul#main_menuazd
   %li#home_tab{   :class => ( @page == :home      ? "selected" : "")}
     %a{ :href => "/accueil" }  Accueil
   
@@ -23,7 +23,7 @@
       %li
         %a{:href => "#"} Liste des modèles
       %li
-        %a{:href => "#"} Bibliothèque matériaux
+        = link_to "Bibliothèque matériaux", materials_path
       %li
         %a{:href => "#"} Bibliothèque liaisons
       %li.submenu_separator

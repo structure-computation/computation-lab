@@ -1,0 +1,8 @@
+%tr{ :class => (material_counter % 2 == 0 ? "light_grey" : "grey") }
+  %td 
+    %a{ :onclick => "affich_detail_material(0)", :href => "#"} >
+  %td= material.name
+  %td= material.family
+  %td= material.mtype
+  %td= material.comp
+  %td X

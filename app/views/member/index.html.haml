@@ -4,6 +4,7 @@
 
 - content_for :additionnal_stylesheets do
   = stylesheet_link_tag "member"
+  = stylesheet_link_tag "table"
 
 -content_for :wizzard_content do
   = render :partial => "membre_nouveau_2"
@@ -26,22 +27,15 @@
     %table#member_list
       %thead
         %tr
-          %th{ :colspan => 2 } Mail
+          %th
+          %th                  Mail
           %th                  Nom
           %th                  Role
           %th{ :colspan => 2 } Status
       %tbody
         = render :partial => "member", :collection => @members
 
-    %span#new_member= link_to "Nouveau membre", new_member_path
+    %span#new_member.button_style= link_to "Nouveau membre", new_member_path
     
     #member_details
       - #render :partial => "membre_detail"
-
-:javascript
-  jQuery(function($) {
-    $(".member_details_link")
-      .bind("ajax:success", function(event, data, status, xhr) {
-        alert("BIIIIIIITE")
-      });
-  });

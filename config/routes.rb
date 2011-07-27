@@ -5,6 +5,9 @@ SCInterface::Application.routes.draw do
   devise_for  :users,   :controllers => { :sessions => "users/sessions", :registrations => "users/registrations" }
 
 
+
+  resources :materials
+
   match 'companies/get_gestionnaire'   => "companies#get_gestionnaire"  
   resources :companies
 
