@@ -274,7 +274,7 @@ function init_Tableau_gestionnaire(Tableau_gestionnaire_temp)
 // requette pour l'obtention du tableau des materials
 function get_Tableau_gestionnaire()
 { 
-    var url_php = "/company/get_gestionnaire";
+    var url_php = "/companies/get_gestionnaire";
     $.getJSON(url_php,[],init_Tableau_gestionnaire);
 }
 

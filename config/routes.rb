@@ -4,21 +4,32 @@ SCInterface::Application.routes.draw do
 
   devise_for  :users,   :controllers => { :sessions => "users/sessions", :registrations => "users/registrations" }
 
-  resources :member  
+
 
   resources :materials
+
+  match 'companies/get_gestionnaire'   => "companies#get_gestionnaire"  
+  resources :companies
+
+
+
+  resources :member
+  resources :bills do
+    get 'download_bill', :on => :member
+  end
   
   root :to => "home#index"
   
   # TODO: La partie calcul est à séparer en plusieurs ressources.
-  match 'calcul/:action(/:id(.:format))', :controller => "calcul"
+  match 'calcul/:action(/:id(.:format))' => "calcul"
   
   
   
+  match ':controller(/:action(/:id(.:format)))'
+
   # La route par défaut héritée de l'application Rails 2, à conserver avant passage au REST.
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
-  match ':controller(/:action(/:id(.:format)))'
   
   
   

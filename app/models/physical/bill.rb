@@ -1,4 +1,4 @@
-class Facture < ActiveRecord::Base
+class Bill < ActiveRecord::Base
   belongs_to :company
   belongs_to :credit
   belongs_to :log_abonnement
@@ -264,7 +264,4 @@ class Facture < ActiveRecord::Base
     pdf.render_file "#{SC_FACTURE_ROOT}/facture_" + self.id.to_s() + ".pdf"
     
   end
-  
-  
-  
 end

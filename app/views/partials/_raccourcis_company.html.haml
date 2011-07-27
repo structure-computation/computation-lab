@@ -7,8 +7,8 @@
       %td{ :style => "width:22px ;" }
         %img{ :src => "/images/manage_pic_liste_compte.png" }
       %td
-        %a{ :href => "/company" }
-          Tableau de bord
+        = link_to "Tableau de bord", companies_path
+          
     %tr
       %td{ :style => "width:22px ;" }
         %img{ :src => "/images/manage_pic_liste_membre.png" }
@@ -19,5 +19,4 @@
       %td{ :style => "width:22px ;" }
         %img{ :src => "/images/manage_pic_liste_factures.png" }
       %td
-        %a{ :href => "/factures" }
-          Liste des factures
+        = link_to 'Liste des factures', bills_path

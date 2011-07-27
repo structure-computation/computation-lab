@@ -55,7 +55,7 @@ function init_Tableau_facture(Tableau_facture_temp)
 // requette pour l'obtention du tableau des materials
 function get_Tableau_facture()
 { 
-    var url_php = "/factures/get_facture";
+    var url_php = "/bills";
     $.getJSON(url_php,[],init_Tableau_facture);
 }
 
@@ -289,7 +289,7 @@ function ferme_detail_facture(){
 function download_facture(){
     //alert(current_facture_num);
     var id_facture = Tableau_facture_filter[current_facture_num]['facture']['id'];
-    var url_php = "/factures/download_facture?id_facture=" + id_facture ;
+    var url_php = "/bills/" + id_facture + "/download_facture"  ;
     $(location).attr('href',url_php);  
 }
 

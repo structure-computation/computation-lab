@@ -5,12 +5,12 @@
     %a{ :href => "/accueil" }  Accueil
   
   %li#company_tab{:class => ( @page == :manage    ? "selected" : "")}
-    %a{ :href => "/company" }  Ma société
+    = link_to companies_path,  Ma société
     %ul.main_submenu
       %li
         %a{:href => member_index_path} Liste des membres
       %li
-        %a{:href => ""} Liste des factures
+        = link_to 'Liste des factures', bills_path
       %li.submenu_separator
       %li
         %a{:href => ""} Abonnement
