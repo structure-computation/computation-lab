@@ -1,8 +1,23 @@
-class CompanyController < ApplicationController
+class CompaniesController < InheritedResources::Base
   
   before_filter :authenticate_user!
+  before_filter :set_page_name 
+  before_filter :get_solde, :only =>[:index, :show]
+  layout 'company'
+  
+  def set_page_name
+    @page = 'SCmanage'
+  end
+  
+  # Suppr
+  def get_solde
+    # Creation d'une liste fictive d'opération.
+    @solde_calculs = current_user.company.solde_calcul_accounts.find(:all)
+  end
+  
   
   def index
+    # redirect_to current_user.company
     @page = 'SCmanage' 
     @current_company = current_user.company
     @id_company = @current_company.id
@@ -13,7 +28,7 @@ class CompanyController < ApplicationController
   end
 
 
-  
+  # TODO: Passer en ressource incluse.
   def get_gestionnaire
     #recherche des gestionnaires dans la bdd
     gestionnaire = current_user.company.users.find(:all, :conditions => {:role => "gestionnaire"})
@@ -30,30 +45,9 @@ class CompanyController < ApplicationController
   end
   
   
-  def get_solde
-    # Creation d'une liste fictive d'opération.
-    @soldes = current_user.company.solde_calcul_accounts.find(:all)
-    render :json => @soldes.to_json
-  end
+
   
-  def get_calcul_account
-    @id_company = params[:id_company]
-    @current_company = Company.find(@id_company)
-    @calcul_account = @current_company.calcul_account
-    respond_to do |format|
-      format.js   {render :json => @calcul_account.to_json}
-    end 
-  end
-  
-  def get_memory_account
-    @id_company = params[:id_company]
-    @current_company = Company.find(@id_company)
-    @memory_account = @current_company.memory_account
-    respond_to do |format|
-      format.js   {render :json => @memory_account.to_json}
-    end 
-  end
-  
+  # TODO: Ressource incluse "member"
   def delete_user
     @current_company = current_user.company
     @user = @current_company.users.find(params[:id_membre])

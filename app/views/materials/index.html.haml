@@ -1,3 +1,6 @@
+- content_for :additionnal_stylesheets do
+  = stylesheet_link_tag "table"
+
 / Vue Index des materials.
 / Liens vers les CSS
 %link{ :href => "/stylesheets/main_material.css", :rel => "stylesheet", :media => "screen" }
@@ -32,10 +35,21 @@
       #MaterialDetail.off
         = render :partial => "material_detail"
       #MaterialListe.on
-        = render :partial => "filtre_des_material"
+        = render :partial => "materials_filter"
         / liste des projet
-        = render :partial => "material_list"
-        / fin largeBoxcontent de la liste des projet
+        %table
+          %thead
+            %tr
+              %th 
+              %th Nom
+              %th Famille
+              %th Type
+              %th{ :colspan => 2 } Comportement
+          %tbody
+            = render @standard_materials
+        %a.button_style{ :href => "#", :onclick => "CPcurrent_stage=displayNewMaterial('on')" }
+          %img{ :src => "/images/LM_pic_new_mat.png" }
+          Nouveau materiaux
       
 / fin de #contentright, partie droite du contenu
 %script{ :type => "text/javascript" }

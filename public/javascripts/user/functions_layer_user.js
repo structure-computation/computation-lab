@@ -272,7 +272,7 @@ function valid_delete_membre(){
     document.getElementById('Delete_wiz_delete').className    =  'right off' ;
     document.getElementById('Delete_wiz_close').className    =  'right on' ;
     
-    var url_php = "/company/delete_user";
+    var url_php = "/companies/delete_user";
 //     var url_php = "/users/destroy";
     $.get(url_php,{"id_membre": id_membre},resultat_delete);
 }
