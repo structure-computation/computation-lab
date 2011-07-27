@@ -1,6 +1,7 @@
 class BillsController < ApplicationController
   before_filter :authenticate_user!
   
+  #TODO remplacer chargement JSON par chargement normal (sans requète ajax)
   def index
     @page = 'SCmanage' 
     @current_company = current_user.company
@@ -48,7 +49,7 @@ class BillsController < ApplicationController
     end
   end
   
-  def download_facture
+  def download_bill
     @current_company = current_user.company
     @current_bill = @current_company.bills.find(params[:id])
     name_file = "#{SC_FACTURE_ROOT}/facture_" + params[:id] + ".pdf"
@@ -56,7 +57,7 @@ class BillsController < ApplicationController
     send_file name_file, :filename => name_bill
   end
   
-#
+#TODO a supprimer, je pense qu'elle n'est jamais utilisée
 #  def generate_pdf_facture
 #     @current_company = current_user.company
 #     @current_bill = @current_company.bills.find(params[:id_facture])

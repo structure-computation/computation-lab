@@ -8,7 +8,7 @@ SCInterface::Application.routes.draw do
 
   resources :member
   resources :bills do
-    get 'download_facture', :on => :member
+    get 'download_bill', :on => :member
   end
   
   root :to => "home#index"
