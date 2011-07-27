@@ -1,13 +1,10 @@
 - content_for :additionnal_stylesheets do
   = stylesheet_link_tag "table"
+  = stylesheet_link_tag "main_material"
 
-/ Vue Index des materials.
-/ Liens vers les CSS
-%link{ :href => "/stylesheets/main_material.css", :rel => "stylesheet", :media => "screen" }
-
-/ Javascript particulier a la page material
-%script{ :src => "/javascripts/material/functions_layer_material.js" ,   :type => "text/javascript" }
-%script{ :src => "/javascripts/material/init_new_material.js" ,   :type => "text/javascript" }
+- content_for :additionnal_javascript do
+  = javascript_include_tag "material/functions_layer_material"
+  = javascript_include_tag "material/init_new_material"
 
 / wizard création de projet en premier plan
 .content
@@ -31,9 +28,7 @@
       / taille minimum du contenu du contenu
       .contentheightmin
       / taille minimum du contenu du contenu
-      
-      #MaterialDetail.off
-        = render :partial => "material_detail"
+ 
       #MaterialListe.on
         = render :partial => "materials_filter"
         / liste des projet
@@ -51,8 +46,9 @@
           %img{ :src => "/images/LM_pic_new_mat.png" }
           Nouveau materiaux
       
+
 / fin de #contentright, partie droite du contenu
 %script{ :type => "text/javascript" }
   $(document).ready(filtre_material_change_owner);
-  
+
 /= render :partial => "footer_top"

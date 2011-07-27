@@ -1,0 +1,62 @@
+%h3 Plasticité
+- if material.mtype == "orthotrope"
+  %table
+    %thead
+      %tr.light_grey
+        %th
+        %th Selon V1
+        %th Selon V2 
+        %th Selon V3
+    %tbody
+      %tr.grey
+        %th Limite de plasticité
+        %td 
+          %label Sp1 = 
+          %input.me1{:disabled => true, :value => "#{material.sigma_p_1}"}
+        %td 
+          %label Sp2 = 
+          %input{:disabled => true, :value => "#{material.sigma_p_2}"}
+        %td 
+          %label Sp3 = 
+          %input{:disabled => true, :value => "#{material.sigma_p_3}"}
+      %tr.light_grey
+        %th Taux de plastification
+        %td
+          %label dp1 = 
+          %input{:disabled => true, :value => "#{material.nu_12}"}
+        %td 
+          %label dp2 = 
+          %input{:disabled => true, :value => "#{material.nu_23}"}
+        %td 
+          %label dp3 = 
+          %input{:disabled => true, :value => "#{material.nu_13}"}
+      %tr.grey
+        %th Déformation plastique
+        %td 
+          %label p1 = 
+          %input{:disabled => true, :value => "#{material.p_1}"}
+        %td 
+          %label p2 = 
+          %input{:disabled => true, :value => "#{material.p_2}"}
+        %td 
+          %label p3 = 
+          %input{:disabled => true, :value => "#{material.p_3}"}
+
+- elsif material.mtype == "isotrope"
+  %table
+    %tbody
+      %tr.light_grey
+        %th Limite de plasticité
+        %td 
+          %label Sp1 = 
+          %input.me1{:disabled => true, :value => "#{material.sigma_p_1}"}
+      %tr.grey
+        %th Taux de plastification
+        %td 
+          %label dp1 = 
+          %input{:disabled => true, :value => "#{material.nu_12}"}
+      %tr.light_grey
+        %th Déformation plastique
+        %td 
+          %label p1 = 
+          %input{:disabled => true, :value => "#{material.p_1}"}

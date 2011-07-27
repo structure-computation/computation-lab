@@ -1,0 +1,63 @@
+%h3 Elasticité
+
+- if material.mtype == "orthotrope"
+  %table
+    %thead
+      %tr.light_grey
+        %th
+        %th Selon V1
+        %th Selon V2 
+        %th Selon V3
+    %tbody
+      %tr.grey
+        %th Module d'Young
+        %td 
+          %label E1 = 
+          %input.me1{:disabled => true, :value => "#{material.E_1}"}
+        %td 
+          %label E2 = 
+          %input{:disabled => true, :value => "#{material.E_2}"}
+        %td 
+          %label E3 = 
+          %input{:disabled => true, :value => "#{material.E_3}"}
+      %tr.light_grey
+        %th Coefficient de Poisson
+        %td 
+          %label mu12 = 
+          %input{:disabled => true, :value => "#{material.nu_12}"}
+        %td 
+          %label mu23 = 
+          %input{:disabled => true, :value => "#{material.nu_23}"}
+        %td 
+          %label mu13 = 
+          %input{:disabled => true, :value => "#{material.nu_13}"}
+      %tr.grey
+        %th Limite de rupture
+        %td 
+          %label Sr1 = 
+          %input{:disabled => true, :value => "#{material.sigma_r_1}"}
+        %td 
+          %label Sr2 = 
+          %input{:disabled => true, :value => "#{material.sigma_r_2}"}
+        %td 
+          %label Sr3 = 
+          %input{:disabled => true, :value => "#{material.sigma_r_3}"}
+
+- elsif material.mtype == "isotrope"
+  %table
+    %tbody
+      %tr.light_grey
+        %th Module d'Young
+        %td
+          %label E1 = 
+          %input.me1{:disabled => true, :value => "#{material.E_1}"}
+      %tr.grey
+        %th Coefficient de poisson
+        %td 
+          %label mu12 = 
+          %input{:disabled => true, :value => "#{material.nu_12}"}
+      %tr.light_grey
+        %th Limite de rupture
+        %td 
+          %label Sr1 = 
+          %input{:disabled => true, :value => "#{material.sigma_r_1}"}

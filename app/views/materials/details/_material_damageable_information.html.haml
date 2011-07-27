@@ -1,0 +1,47 @@
+%h3 Endomagement
+
+- if material.mtype == "orthotrope"
+  %table
+    %thead
+      %tr.light_grey
+        %th
+        %th Selon V1
+        %th Selon V2 
+        %th Selon V3
+    %tbody
+      %tr.grey
+        %th Limite d'endomagement 
+        %td 
+          %label Se1 = 
+          %input.me1{:disabled => true, :value => "#{material.sigma_p_1}"}
+        %td 
+          %label Se2 = 
+          %input{:disabled => true, :value => "#{material.sigma_p_2}"}
+        %td 
+          %label Se3 = 
+          %input{:disabled => true, :value => "#{material.sigma_p_3}"}
+      %tr.light_grey
+        %th Endomagement
+        %td 
+          %label e1 = 
+          %input{:disabled => true, :value => "#{material.nu_12}"}
+        %td 
+          %label e2 = 
+          %input{:disabled => true, :value => "#{material.nu_23}"}
+        %td 
+          %label e3 = 
+          %input{:disabled => true, :value => "#{material.nu_13}"}
+          
+- elsif material.mtype == "isotrope"
+  %table
+    %tbody
+      %tr.grey
+        %th Limite de plasticité
+        %td 
+          %label Se1 = 
+          %input.me1{:disabled => true, :value => "#{material.sigma_p_1}"}
+      %tr.grey
+        %th Taux de plastification
+        %td 
+          %label e1 = 
+          %input{:disabled => true, :value => "#{material.nu_12}"}

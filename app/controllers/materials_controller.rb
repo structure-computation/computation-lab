@@ -1,4 +1,4 @@
-class MaterialsController < ApplicationController
+class MaterialsController < InheritedResources::Base
   #session :cookie_only => false, :only => :upload
   before_filter :authenticate_user!
   
@@ -31,13 +31,6 @@ class MaterialsController < ApplicationController
     render :json => { :result => 'success' }
   end
 
-  def show
-    @material = Material.find(params[:id])
-		# TODO redirect according withe the type of comments
-		respond_to do |format|
-			format.html { redirect_to(:controller => 'users', :action => 'profile', :id => @comment.user_id) }
-			format.xml { render :xml => @comment }
-		end
-  end
   
+
 end
