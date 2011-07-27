@@ -17,14 +17,13 @@ class CompaniesController < InheritedResources::Base
   
   
   def index
-    # redirect_to current_user.company
-    @page = 'SCmanage' 
-    @current_company = current_user.company
-    @id_company = @current_company.id
-    respond_to do |format|
-      format.html {render :layout => true }
-      format.js   {render :json => @current_company.to_json}
-    end
+    redirect_to current_user.company
+    # @page = 'SCmanage' 
+    # @company = current_user.company
+    # respond_to do |format|
+    #   format.html {render :layout => true }
+    #   format.js   {render :json => @current_company.to_json}
+    # end
   end
 
 
