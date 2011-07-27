@@ -6,10 +6,14 @@ class MaterialsController < ApplicationController
     @page = 'SCcompute'
     @current_company = current_user.company
     @materials = @current_company.materials.find(:all)
+    @standard_materials = Material.standard
+    if params[:type] == "standard"
+      @standard_materials = @materials
+    end
     respond_to do |format|
-      format.html {render :layout => true }
+      format.html #{render :layout => true }
       if params[:type] == "standard"
-        format.js   {render :json => Material.standard.to_json}  # matériaux standards
+        format.js   {render :json => @standard_materials.to_json}  # matériaux standards
       else
         format.js   {render :json => @materials.to_json}
       end

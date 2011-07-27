@@ -35,17 +35,18 @@
       #MaterialDetail.off
         = render :partial => "material_detail"
       #MaterialListe.on
-        = render :partial => "filtre_des_material"
+        = render :partial => "materials_filter"
         / liste des projet
         %table
           %thead
             %tr
-              %th{ :colspan => 2 } Nom
+              %th 
+              %th Nom
               %th Famille
               %th Type
               %th{ :colspan => 2 } Comportement
           %tbody
-            = render @materials
+            = render @standard_materials
         %a.button_style{ :href => "#", :onclick => "CPcurrent_stage=displayNewMaterial('on')" }
           %img{ :src => "/images/LM_pic_new_mat.png" }
           Nouveau materiaux
