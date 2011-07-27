@@ -1,23 +1,18 @@
-class MaterialController < ApplicationController
+class MaterialsController < ApplicationController
   #session :cookie_only => false, :only => :upload
   before_filter :authenticate_user!
   
   def index 
     @page = 'SCcompute'
     @current_company = current_user.company
-    @standard_materials = Material.find(:all,:conditions => {:company_id => -1}) # matériaux standards
     @materials = @current_company.materials.find(:all)
     respond_to do |format|
       format.html {render :layout => true }
-      format.js   {render :json => @materials.to_json}
-    end
-  end
-  
-  def get_standard_material
-    @page = 'SCcompute'
-    @standard_materials = Material.find(:all,:conditions => {:company_id => -1}) # matériaux standards
-    respond_to do |format|
-      format.js   {render :json => @standard_materials.to_json}
+      if params[:type] == "standard"
+        format.js   {render :json => Material.standard.to_json}  # matériaux standards
+      else
+        format.js   {render :json => @materials.to_json}
+      end
     end
   end
   
@@ -39,6 +34,15 @@ class MaterialController < ApplicationController
 #         f.write(params.to_json)
 #     end
     render :json => { :result => 'success' }
+  end
+
+  def show
+    @material = Material.find(params[:id])
+		# TODO redirect according withe the type of comments
+		respond_to do |format|
+			format.html { redirect_to(:controller => 'users', :action => 'profile', :id => @comment.user_id) }
+			format.xml { render :xml => @comment }
+		end
   end
   
 end

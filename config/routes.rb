@@ -6,11 +6,12 @@ SCInterface::Application.routes.draw do
 
   resources :member  
 
-
+  resources :materials
+  
   root :to => "home#index"
   
   # TODO: La partie calcul est à séparer en plusieurs ressources.
-  match 'calcul/:action(/:id(.:format))' => :controller => "calcul"
+  match 'calcul/:action(/:id(.:format))', :controller => "calcul"
   
   
   

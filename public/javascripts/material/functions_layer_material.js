@@ -57,13 +57,13 @@ function init_Tableau_material(Tableau_material_temp)
 // requette pour l'obtention du tableau des materials
 function get_Tableau_material_standard()
 { 
-    var url_php = "/material/get_standard_material";
+    var url_php = "/materials?type=standard"; //get_standard_material";
     $.getJSON(url_php,[],init_Tableau_material);
 }
 
 function get_Tableau_material_company()
 { 
-    var url_php = "/material/get_company_material";
+    var url_php = "/materials";
     $.getJSON(url_php,[],init_Tableau_material);
 }
 
@@ -682,7 +682,7 @@ function send_new_material()
     Tableau_new_material_post['material'] =  new Object(); 
     Tableau_new_material_post['material'] = param1;
     $.ajax({
-	url: "/material/create",
+	url: "/materials/create",
 	type: 'POST',
 	dataType: 'json',
 	data: $.toJSON(Tableau_new_material_post),

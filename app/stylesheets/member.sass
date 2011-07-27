@@ -1,42 +1,10 @@
-$light_grey : #CACBD5
-$grey       : #B8B9C3
-$dark_grey  : #9297A8
-table#member_list
-  width: 100%
-  font-size   : 0.75em
-  border-collapse: collapse
-  thead
-    tr
-      font-style  : bold
-      color       : white
-      background  : transparent url('../images/tableau_header_Bg.png') repeat-x left top  
-      th
-        padding-left  : 0.5em
-  tr
-    line-height : 30px
+@import "colors"
 
-  tbody
-    td
-      border-left   : solid 1px white
-      padding-left  : 0.5em
-    td:first-child
-      border-left   : none
-    
-  .grey
-    background-color: $light_grey
-  .light_grey
-    background-color: $grey
+table#member_list
+  overflow :auto
 
 #new_member
   background      : transparent url('../images/button_jaune.png') no-repeat left top
-  font-size       : 0.75em
-  padding-top     : 0.5em
-  padding-bottom  : 0.5em
-  margin          : 1em
-  display         : block
-  text-align      : center
-  width           : 226px
-  height          : 40px
   a
     padding-left    : 2em
     background      : transparent url('../images/manage_pic_nouveau_membre.png') no-repeat left top    
