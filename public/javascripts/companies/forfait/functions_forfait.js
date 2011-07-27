@@ -6,7 +6,6 @@ var bool_affiche_compte_calcul = false;
 
 function affich_contenu_compte_calcul() {
     if (!bool_affiche_compte_calcul) {
-        // get_Tableau_solde_calcul();
         // switch du contenu
         $('#CompteCalculContent').slideDown("slow");
         // bouton afficher

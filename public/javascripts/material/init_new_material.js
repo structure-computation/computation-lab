@@ -156,7 +156,7 @@ var Tableau_material_new_list              =  new Array();              // table
 // initialisation d'un matériaux elastique isotrope numero 1
 Tableau_material_new_list[0]               =  new Array();
 Tableau_material_new_list[0]["name"]='Nouveau matériaux';
-Tableau_material_new_list[0]["familly"]='métaux';
+Tableau_material_new_list[0]["family"]='métaux';
 //Tableau_material_new_list_list[1]["user_id"]='Nouveau matériaux';
 Tableau_material_new_list[0]["company_id"]=-1;
 Tableau_material_new_list[0]["reference"]=-1;
@@ -211,7 +211,7 @@ Tableau_material_new_list[0]["ed_3"]=200;
 // initialisation d'un matériaux elastique orthotrope numero 2
 Tableau_material_new_list[1]               =  new Array();
 Tableau_material_new_list[1]["name"]='Nouveau matériaux';
-Tableau_material_new_list[1]["familly"]='Composite';
+Tableau_material_new_list[1]["family"]='Composite';
 //Tableau_material_new_list[1]["user_id"]='Nouveau matériaux';
 Tableau_material_new_list[1]["company_id"]=-1;
 Tableau_material_new_list[1]["reference"]=-1;
@@ -265,7 +265,7 @@ Tableau_material_new_list[1]["ed_3"]=200;
 // initialisation d'un matériaux elastique orthotrope numero 2
 Tableau_material_new_list[2]               =  new Array();
 Tableau_material_new_list[2]["name"]='Nouveau matériaux';
-Tableau_material_new_list[2]["familly"]='Composite';
+Tableau_material_new_list[2]["family"]='Composite';
 //Tableau_material_new_list[1]["user_id"]='Nouveau matériaux';
 Tableau_material_new_list[2]["company_id"]=-1;
 Tableau_material_new_list[2]["reference"]=-1;
