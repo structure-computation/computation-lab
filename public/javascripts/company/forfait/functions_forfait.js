@@ -6,7 +6,7 @@ var bool_affiche_compte_calcul = false;
 
 function affich_contenu_compte_calcul() {
     if (!bool_affiche_compte_calcul) {
-        get_Tableau_solde_calcul();
+        // get_Tableau_solde_calcul();
         // switch du contenu
         $('#CompteCalculContent').slideDown("slow");
         // bouton afficher
@@ -86,12 +86,14 @@ function init_Tableau_solde_calcul(Tableau_solde_calcul_temp)
     }
     affiche_Tableau_solde_calcul();
 }
+
+// TODO: Supprimer
 // requette pour l'obtention du tableau des materials
-function get_Tableau_solde_calcul()
- {
-    var url_php = "/companies/get_solde";
-    $.getJSON(url_php, [], init_Tableau_solde_calcul);
-}
+// function get_Tableau_solde_calcul()
+//  {
+//     var url_php = "/companies/get_solde";
+//     $.getJSON(url_php, [], init_Tableau_solde_calcul);
+// }
 
 function filtre_Tableau_solde_calcul() {
     Tableau_solde_calcul_filter = Tableau_solde_calcul;
@@ -139,15 +141,7 @@ function init_current_calcul_account(Current_calcul_account_temp)
 }
 
 
-// requette pour l'obtention du tableau des resultats
-function get_current_calcul_account(id_company)
- {
-    var url_php = "/companies/get_calcul_account";
-    $.getJSON(url_php, {
-        "id_company": id_company
-    },
-    init_current_calcul_account);
-}
+
 
 
 

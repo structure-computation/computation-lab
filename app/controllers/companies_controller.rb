@@ -2,11 +2,17 @@ class CompaniesController < InheritedResources::Base
   
   before_filter :authenticate_user!
   before_filter :set_page_name 
-  
+  before_filter :get_solde, :only =>[:index, :show]
   layout 'company'
   
   def set_page_name
     @page = 'SCmanage'
+  end
+  
+  # Suppr
+  def get_solde
+    # Creation d'une liste fictive d'opération.
+    @solde_calculs = current_user.company.solde_calcul_accounts.find(:all)
   end
   
   
@@ -38,33 +44,8 @@ class CompaniesController < InheritedResources::Base
     render :json => @users.to_json
   end
   
-  # Suppr
-  def get_solde
-    # Creation d'une liste fictive d'opération.
-    @soldes = current_user.company.solde_calcul_accounts.find(:all)
-    render :json => @soldes.to_json
-  end
   
-  # Supprimer
-  def get_calcul_account
-    @id_company = params[:id_company]
-    @current_company = Company.find(@id_company)
-    @calcul_account = @current_company.calcul_account
-    respond_to do |format|
-      format.js   {render :json => @calcul_account.to_json}
-    end 
-  end
-  
-  
-  # Supprimer.
-  def get_memory_account
-    @id_company = params[:id_company]
-    @current_company = Company.find(@id_company)
-    @memory_account = @current_company.memory_account
-    respond_to do |format|
-      format.js   {render :json => @memory_account.to_json}
-    end 
-  end
+
   
   # TODO: Ressource incluse "member"
   def delete_user

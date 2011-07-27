@@ -7,9 +7,6 @@ SCInterface::Application.routes.draw do
   resources :member  
 
   match 'companies/get_gestionnaire'   => "companies#get_gestionnaire"  
-  match 'companies/get_solde'          => "companies#get_solde" 
-  match 'companies/get_calcul_account' => "companies#get_calcul_account" 
-  match 'companies/get_memory_account' => "companies#get_memory_account"
   resources :companies
 
 

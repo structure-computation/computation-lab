@@ -29,8 +29,10 @@
     // Initialise les reglettes indiquant les consommations.
     var calcul_account = #{@current_company.calcul_account.to_json};
     var memory_account = #{@current_company.memory_account.to_json};
+    var solde_calculs  = #{@solde_calculs.to_json};
     init_current_calcul_account(calcul_account);
     init_current_memory_account(memory_account);    
+    init_Tableau_solde_calcul(solde_calculs);
   };
   $(document).ready( init_account_sliders );
   
