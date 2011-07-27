@@ -1,7 +1,7 @@
 # Controlleur permettant de gerer les utilisateurs (user) au sein d'une équipe.
 # Ulterieurement pourra être une ressource incluse dans une ressource company
 
-class MemberController < ApplicationController
+class MembersController < InheritedResources::Base
   
     # Creer un layout spécifique pour les fonctions du menu "scté".
     layout "company"
@@ -14,13 +14,10 @@ class MemberController < ApplicationController
     # before_filter :admin_required, :only => [:suspend, :unsuspend, :destroy, :purge]
     
     before_filter :find_user, :only => [:suspend, :unsuspend, :destroy, :purge]
-
+    
     def show
       @member = User.find(params[:id])
-      respond_to do |format|
-        format.html
-        format.js 
-      end
+      show!
     end
     
     def index
@@ -28,6 +25,7 @@ class MemberController < ApplicationController
       @users   = current_user.company.users
       @member  = User.new
       @members = User.all
+      
       respond_with(@users) 
       
       # TODO: Mis de côté en attendant de travailler avec le bon format résultat.

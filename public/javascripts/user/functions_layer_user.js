@@ -2,7 +2,7 @@
 //---------------------------------------------------------------------------------------------------------
 // initialisation
 //---------------------------------------------------------------------------------------------------------
-var members_url = "/member/";
+var members_url = "/members/";
 
 
 var new_member_step                 =  0;                        // étape pour le wizzard nouveau membre
@@ -443,7 +443,7 @@ function send_new_membre()
 {
 
     $.ajax({
-    	url         : "/member/create",
+    	url         : "/members/create",
     	type        : 'POST',
         dataTypes   : 'text',
 
@@ -470,7 +470,7 @@ function send_new_membre()
 // lancer un calcul sur le model
 function go_members(){
     //alert("in go_members")
-    var url_php = "/member" ;
+    var url_php = "/members" ;
     $(location).attr('href',url_php);
 }
 

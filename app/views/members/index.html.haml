@@ -37,11 +37,3 @@
     
     #member_details
       - #render :partial => "membre_detail"
-
-:javascript
-  jQuery(function($) {
-    $(".member_details_link")
-      .bind("ajax:success", function(event, data, status, xhr) {
-        alert("BIIIIIIITE")
-      });
-  });

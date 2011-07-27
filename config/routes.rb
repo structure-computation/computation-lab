@@ -6,7 +6,7 @@ SCInterface::Application.routes.draw do
 
 
 
-  resources :member
+  resources :members
   resources :bills do
     get 'download_bill', :on => :member
   end
