@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110315132131) do
+ActiveRecord::Schema.define(:version => 20110727075030) do
 
   create_table "abonnements", :force => true do |t|
     t.string   "name"
@@ -21,6 +21,27 @@ ActiveRecord::Schema.define(:version => 20110315132131) do
     t.string   "state"
     t.date     "start_date"
     t.date     "end_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "bills", :force => true do |t|
+    t.integer  "company_id"
+    t.integer  "credit_id"
+    t.integer  "log_abonnement_id"
+    t.string   "facture_type"
+    t.float    "price_calcul_HT"
+    t.float    "price_calcul_TVA"
+    t.float    "price_calcul_TTC"
+    t.float    "price_memory_HT"
+    t.float    "price_memory_TVA"
+    t.float    "price_memory_TTC"
+    t.float    "total_price_HT"
+    t.float    "total_price_TVA"
+    t.float    "total_price_TTC"
+    t.string   "ref"
+    t.string   "statut"
+    t.date     "paid_date"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -114,27 +135,6 @@ ActiveRecord::Schema.define(:version => 20110315132131) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
-
-  create_table "factures", :force => true do |t|
-    t.integer  "company_id"
-    t.integer  "credit_id"
-    t.integer  "log_abonnement_id"
-    t.string   "facture_type"
-    t.float    "price_calcul_HT"
-    t.float    "price_calcul_TVA"
-    t.float    "price_calcul_TTC"
-    t.float    "price_memory_HT"
-    t.float    "price_memory_TVA"
-    t.float    "price_memory_TTC"
-    t.float    "total_price_HT"
-    t.float    "total_price_TVA"
-    t.float    "total_price_TTC"
-    t.string   "ref"
-    t.string   "statut"
-    t.date     "paid_date"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "files_sc_models", :force => true do |t|
     t.integer  "sc_model_id"

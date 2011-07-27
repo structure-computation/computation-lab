@@ -12,7 +12,8 @@ class Company < ActiveRecord::Base
   has_many  :factures		    , :readonly => false
   
   has_many  :solde_calcul_accounts,  :through => :calcul_account		, :readonly => false
-  
+
+  has_many  :bills		, :readonly => false
   
   belongs_to  :user_sc_admin
   
