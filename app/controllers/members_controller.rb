@@ -4,7 +4,11 @@
 class MembersController < InheritedResources::Base
   
     # Creer un layout spécifique pour les fonctions du menu "scté".
-    layout "company"
+    layout        "company"
+    
+    defaults      :resource_class => User, :collection_name => 'members', :instance_name => 'member'
+    belongs_to    :company
+    
     
     respond_to    :html, :json, :js
 
@@ -99,13 +103,13 @@ class MembersController < InheritedResources::Base
 
     # TODO: écrire un traitement cohérent et compatible avec devise et la volonté de conserver toutes les données utilisateurs.
   #   def destroy
-  # #     @current_company = @current_user.company
+  # #     @current_company = current_user.company
   # #     @user = @current_company.users.find(params[:id_membre])
-  #     if(@user && @user.id == @current_user.id)
-  #       render :text => "false " + @user.id.to_s() + "  " + @current_user.id.to_s()
+  #     if(@user && @user.id == current_user.id)
+  #       render :text => "false " + @user.id.to_s() + "  " + current_user.id.to_s()
   #     else
   #       @user.delete!
-  #       render :text => "true" + @user.id.to_s() + "  " + @current_user.id.to_s()
+  #       render :text => "true" + @user.id.to_s() + "  " + current_user.id.to_s()
   #     end
   # #     @user.delete!
   # #     redirect_to users_path

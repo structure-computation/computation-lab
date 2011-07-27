@@ -6,7 +6,6 @@ SCInterface::Application.routes.draw do
 
 
 
-  resources :members
   resources :materials
 
   match 'companies/get_gestionnaire'   => "companies#get_gestionnaire"  
@@ -14,6 +13,7 @@ SCInterface::Application.routes.draw do
     resources :bills do
       get 'download_bill', :on => :member
     end
+    resources :members
   end
   root :to => "home#index"
   

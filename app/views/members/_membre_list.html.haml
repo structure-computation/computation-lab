@@ -42,6 +42,6 @@
     %ul
       %li
         /-# %a{ :href => "#", :onclick => "CPcurrent_stage=displayNewMembre('on')" }
-        %a{ :href => new_member_path  }
+        %a{ :href => new_company_member_path(current_user.company)  }
           %img{ :src => "/images/manage_pic_nouveau_membre.png" }
           Nouveau membre

@@ -35,7 +35,7 @@
       %tbody
         = render :partial => "member", :collection => @members
 
-    %span#new_member.button_style= link_to "Nouveau membre", new_member_path
+    %span#new_member.button_style= link_to "Nouveau membre", new_company_member_path(current_user.company)
     
     #member_details
       - #render :partial => "membre_detail"
