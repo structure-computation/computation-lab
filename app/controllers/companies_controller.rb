@@ -45,21 +45,7 @@ class CompaniesController < InheritedResources::Base
     } 
     render :json => @users.to_json
   end
-  
-  
 
-  
-  # TODO: Ressource incluse "member"
-  def delete_user
-    @current_company = current_user.company
-    @user = @current_company.users.find(params[:id_membre])
-    if(@user && @user.id == current_user.id)
-      render :text => "false " + @user.id.to_s() + "  " + current_user.id.to_s()
-    else
-      @user.delete!
-      render :text => "true" + @user.id.to_s() + "  " + current_user.id.to_s()
-    end
-  end
   
   protected
     def begin_of_association_chain
