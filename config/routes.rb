@@ -9,7 +9,8 @@ SCInterface::Application.routes.draw do
   resources :members
   resources :materials
 
-  match 'companies/get_gestionnaire'   => "companies#get_gestionnaire"  
+  match 'companies/get_gestionnaire'   => "companies#get_gestionnaire"
+    
   resources :companies do
     resources :bills do
       get 'download_bill', :on => :member

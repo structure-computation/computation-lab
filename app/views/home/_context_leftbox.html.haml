@@ -1,17 +1,10 @@
-#leftBox
+#profil_submenu
   %h2
     Profil
-#leftBoxcontent
-  %table#tableleftBox
-    %tr
-      %td{ :style => "width:22px ;" }
-        %img{ :src => "/images/picto_profil.png" }
-      %td
-        %a{ :style => "cursor: pointer;", :onclick => "affich_contenu_profil_user()" }
-          Mon profil
-    %tr
-      %td{ :style => "width:22px ;" }
-        %img{ :src => "/images/manage_pic_liste_membre.png" }
-      %td
-        %a{ :style => "cursor: pointer;", :onclick => "affich_contenu_profil_company()" }
-          Mes gestionnaires
+  %ul
+    %li.picto_profil
+      %a{ :style => "cursor: pointer;", :onclick => "affich_contenu_profil_user()" }
+        Mon profil
+    %li.manage_pic_liste_membre
+      %a{ :style => "cursor: pointer;", :onclick => "affich_contenu_profil_company()" }
+        Mes gestionnaires

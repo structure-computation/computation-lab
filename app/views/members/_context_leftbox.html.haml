@@ -1,11 +1,6 @@
-#leftBox
+#members_submenu
   %h2
     Comptes
-#leftBoxcontent
-  %table#tableleftBox
-    %tr
-      %td{ :style => "width:22px ;" }
-        %img{ :src => "/images/manage_pic_nouveau_membre.png" }
-      %td
-        /%a{ :style => "cursor: pointer;", :onclick => "displayNewMembre('on')" } 
-        = link_to "Ajouter un membre", new_member_path
+  %ul
+    %li.manage_pic_nouveau_membre.png
+      = link_to "Ajouter un membre", new_member_path

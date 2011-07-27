@@ -1,11 +1,11 @@
 / Menu principal de l'application.
 
-%ul#main_menuazd
-  %li#home_tab{   :class => ( @page == :home      ? "selected" : "")}
-    %a{ :href => "/accueil" }  Accueil
+%ul#main_menu
+  %li#home_tab{:class => ( @page == :home ? "selected" : "")}
+    =link_to 'Accueil', :controller => 'home'
   
-  %li#company_tab{:class => ( @page == :manage    ? "selected" : "")}
-    = link_to companies_path,  Ma société
+  %li#company_tab{:class => ( @page == :manage ? "selected" : "")}
+    = link_to 'Ma société', companies_path
     %ul.main_submenu
       %li
         = link_to 'Liste des membres', members_path
@@ -18,7 +18,7 @@
       %li
         %a{:href => ""} Forfait calcul
         
-  %li#lab_tab{    :class => ( @page == :lab       ? "selected" : "")}
+  %li#lab_tab{:class => ( @page == :lab ? "selected" : "")}
     %a{ :href => "/modele" }   Mes modèles
     %ul#main_submenu_solution.main_submenu
       %li

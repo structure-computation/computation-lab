@@ -13,10 +13,10 @@
   = render :partial => "modele_delete"
 
   / partie gauche du contenu, raccourci
-  #contentleft
-    .contentheightmin
-    = render :partial => "partials/raccourcis_modele"
-    = render :partial => "ajouts_modele"
+  - content_for :left_submenu do
+    #contentleft      
+      = render :partial => "partials/raccourcis_modele"
+      = render :partial => "ajouts_modele"
   / fin partie gauche du contenu
   
   / partie droite du contenu, tableaux, informations importantes

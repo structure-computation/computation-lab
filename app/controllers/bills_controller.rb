@@ -1,7 +1,7 @@
 class BillsController < ApplicationController
   before_filter :authenticate_user!
   
-  #TODO remplacer chargement JSON par chargement normal (sans requète ajax)
+  #TODO remplacer chargement JSON par chargement normal (sans requête ajax)
   def index
     @page = 'SCmanage' 
     @current_company = current_user.company
