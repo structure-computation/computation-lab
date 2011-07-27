@@ -1,8 +1,12 @@
 class CompaniesController < InheritedResources::Base
-  
   before_filter :authenticate_user!
   before_filter :set_page_name 
   before_filter :get_solde, :only =>[:index, :show]
+  
+  # Actions inherited ressource. 
+  actions :all, :except => [ :index, :edit, :update, :destroy ]
+  
+  
   layout 'company'
   
   def set_page_name
@@ -57,5 +61,10 @@ class CompaniesController < InheritedResources::Base
       render :text => "true" + @user.id.to_s() + "  " + current_user.id.to_s()
     end
   end
+  
+  protected
+    def begin_of_association_chain
+      Company.accessible_by_user(@current_user)
+    end
   
 end

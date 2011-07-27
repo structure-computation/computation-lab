@@ -17,6 +17,15 @@ class Company < ActiveRecord::Base
   
   belongs_to  :user_sc_admin
   
+  # TODO: Placé en prévision du moment ou un utilisateur pourra acceder à plusieurs entreprise 
+  # ET pour faire fonctionner inherited ressource qui fait un current_user.companies.find(...)
+  scope :accessible_by_user, lambda { |user| 
+          joins(:users).where("users.id = ?", user.id)
+      }
+  
+  # TODO: pour faire foncitonner la chaine d'association Inherited ressource. 
+  # Trouver une meilleure solution à terme.
+  scope :companies
   
   def managers
     users.where(:role => "gestionnaire")
