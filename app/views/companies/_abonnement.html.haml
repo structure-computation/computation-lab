@@ -5,11 +5,9 @@
     Mémoire
     %br
     Visualisation
-  %p.abonnement
-    Abonnement annuel
-  %p.utilisation
-    utilisation de la mémoire :
-    -# TODO: mettre un slider représentant l'utilisation de la mémoire
+  %p.abonnement Abonnement annuel
+  %p.utilisation utilisation de la mémoire :
+  -# TODO: mettre un slider représentant l'utilisation de la mémoire
   %p.modification
     %a{ :style => "cursor: pointer;", :onclick => "modif_compte_abonnement()" } 
       Modifier
@@ -20,22 +18,14 @@
         %a{ :onclick => "affich_contenu_compte_abonnement()", :style => "cursor: pointer;" }
           Description
   .compte_content 
-    %p
-      Cet abonnement annuel donne accès à un espace mémoire sur les serveurs de Structure Computation. Il vous permet de stocker les modèles, les résultats de calculs et l'ensemble des informations relatives aux modèles.
-    %p
-      Votre abonnement actuel est  le suivant : 
+    %p Cet abonnement annuel donne accès à un espace mémoire sur les serveurs de Structure Computation. Il vous permet de stocker les modèles, les résultats de calculs et l'ensemble des informations relatives aux modèles.
+    %p Votre abonnement actuel est  le suivant : 
     %table
       %tr
-        %td
-          Mémoire disponible
-        %td
-          Date d'échéance
-        %td
-          utilisation actuelle
+        %td Mémoire disponible
+        %td Date d'échéance
+        %td Utilisation actuelle
       %tr
-        %td
-          500 
-        %td
-          10-12-2010
-        %td
-          100
+        %td 500 
+        %td 10-12-2010
+        %td 100
