@@ -7,9 +7,6 @@
   = stylesheet_link_tag "table"
 
 
-
-
-
 #largeBox
   %h2
     Liste des membres
@@ -19,7 +16,7 @@
   / taille minimum du contenu du contenu
   
   #MembreListe.on
-    = render :partial => "filtre_des_membres"
+    = render :partial => "member_filter"
     / Liste des membres
     %table#member_list
       %thead
@@ -33,6 +30,4 @@
         = render :partial => "member", :collection => @members
 
     %span#new_member.button_style= link_to "Nouveau membre", new_company_member_path(current_user.company)
-    
-    #member_details
-      - #render :partial => "membre_detail"
+  
