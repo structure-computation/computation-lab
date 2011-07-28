@@ -19,6 +19,16 @@ class MaterialsController < InheritedResources::Base
     create! { company_materials_path }
   end
   
+  def edit
+    @material = Material.find(params[:id])
+    if @material.company_id == -1
+      flash[:notice] = "Vous n'avez pas le droit d'éditer cette pièce !"
+      redirect_to company_materials_path
+    else
+      edit!
+    end
+  end
+  
   # Essayer de faire une ressources accessibles par /material
   def show
     @material = Material.find(params[:id])
