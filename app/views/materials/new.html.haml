@@ -8,15 +8,10 @@
 
 / wizard création de projet en premier plan
 .content
-  #bl_5.black.off
-  / wizard de creation d'un nouveau material
-  = render :partial => "material_nouveau"
-
   / partie gauche du contenu, raccourci
   #contentleft
     .contentheightmin
     = render :partial => "partials/raccourcis_modele"
-    = render :partial => "add_material"
   / fin partie gauche du contenu
   
   / partie droite du contenu, tableaux, informations importantes
@@ -32,8 +27,8 @@
   
         %p
           - @behaviors.each do |behavior|
-            = label_tag(behavior)
-            = check_box_tag(behavior, true)
+            = label_tag behavior
+            = check_box_tag behavior
         %p
           = submit_tag "Suivant"
     - else
