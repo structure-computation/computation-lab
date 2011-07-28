@@ -1,12 +1,3 @@
-- content_for :additionnal_stylesheets do
-  = stylesheet_link_tag "table"
-  = stylesheet_link_tag "main_material"
-
-- content_for :additionnal_javascript do
-  = javascript_include_tag "material/functions_layer_material"
-  = javascript_include_tag "material/init_new_material"
-
-/ wizard création de projet en premier plan
 .content
   / partie gauche du contenu, raccourci
   #contentleft
@@ -27,7 +18,7 @@
       #MaterialListe.on
         = render :partial => "search_filter"
         - if !@materials.empty?
-          %table
+          %table.grey
             %thead
               %tr
                 %th 

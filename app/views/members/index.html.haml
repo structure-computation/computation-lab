@@ -24,7 +24,7 @@
   #MembreListe.on
     = render :partial => "member_filter"
     / Liste des membres
-    %table#member_list
+    %table#member_list.grey
       %thead
         %tr
           %th
@@ -35,6 +35,6 @@
       %tbody
         = render :partial => "member", :collection => @members
 
-    %span#new_member.button_style= link_to "Nouveau membre", new_company_member_path(current_user.company)
+    = link_to "Nouveau membre", new_company_member_path(current_user.company), :class => 'yellow_button'
   
 

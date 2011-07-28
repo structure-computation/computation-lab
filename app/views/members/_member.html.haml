@@ -1,4 +1,4 @@
-%tr{:class => (member_counter % 2 == 0 ? "light_grey" : "grey") }
+%tr
   %td= link_to "Détails", company_member_path( current_user.company, member), :class => "member_details_link"
   %td= member.email
   %td= member.firstname

@@ -3,7 +3,7 @@
   Calcul
 %div
   Jetons de calcul
-  %a{ :style => "cursor: pointer;", :onclick => "modif_compte_calcul()" } 
+  %a.yellow_button{ :style => "cursor: pointer;", :onclick => "modif_compte_calcul()" } 
     Nouveau
   %div
     utilisation du forfait : 
@@ -30,7 +30,7 @@
       %label Référence projet :
       %input{ :name => "username", :type => "text" }
     %p
-      %a Appliquer les Filtres
+      %a.yellow_button Appliquer les Filtres
     %p
       %label Début, du :
       %input{ :name => "username", :type => "text" }
@@ -38,7 +38,7 @@
       %label au :
       %input{ :name => "username", :type => "text" }
     %p 
-      %a Annuler les filtres
+      %a.yellow_button Annuler les filtres
   %table.grey
     %thead
       %tr
