@@ -1,0 +1,48 @@
+// TODO Adapter les champs à la BDD
+%h3 Endomagement
+
+- if material.mtype == "orthotrope"
+  %table
+    %thead
+      %tr.light_grey
+        %th
+        %th Selon V1
+        %th Selon V2 
+        %th Selon V3
+    %tbody
+      %tr.grey
+        %th Limite d'endomagement 
+        %td 
+          %label Se1 = 
+          = text_field :material, :sigma_p_1, :value => "TODO", :disabled => disabled
+        %td 
+          %label Se2 = 
+          = text_field :material, :sigma_p_2, :value => "TODO", :disabled => disabled
+        %td 
+          %label Se3 = 
+          = text_field :material, :sigma_p_3, :value => "TODO", :disabled => disabled
+      %tr.light_grey
+        %th Endomagement
+        %td 
+          %label e1 = 
+          = text_field :material, :sigma_p_3, :value => "TODO", :disabled => disabled
+        %td 
+          %label e2 = 
+          = text_field :material, :sigma_p_3, :value => "TODO", :disabled => disabled
+        %td 
+          %label e3 = 
+          = text_field :material, :sigma_p_3, :value => "TODO", :disabled => disabled
+          
+- elsif material.mtype == "isotrope"
+  %table
+    %tbody
+      %tr.grey
+        %th Limite de plasticité
+        %td 
+          %label Se1 = 
+          = text_field :material, :sigma_p_3, :value => "TODO", :disabled => disabled
+      %tr.grey
+        %th Taux de plastification
+        %td 
+          %label e1 = 
+          = text_field :material, :sigma_p_3, :value => "TODO", :disabled => disabled

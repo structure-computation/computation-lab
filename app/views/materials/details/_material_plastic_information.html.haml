@@ -1,0 +1,63 @@
+/ TODO !!!!!!!!!!! CHANGER LES VALEURS DES CHAMPS. Elles ne sont pas adapté à celle présente en BDD
+%h3 Plasticité
+- if material.mtype == "orthotrope"
+  %table
+    %thead
+      %tr.light_grey
+        %th
+        %th Selon V1
+        %th Selon V2 
+        %th Selon V3
+    %tbody
+      %tr.grey
+        %th Limite de plasticité
+        %td 
+          %label Sp1 = 
+          = text_field :material, :sigma_p_1, :value => material.sigma_p_1, :disabled => disabled
+        %td 
+          %label Sp2 = 
+          = text_field :material, :sigma_p_2, :value => material.sigma_p_2, :disabled => disabled
+        %td 
+          %label Sp3 = 
+          = text_field :material, :sigma_p_3, :value => material.sigma_p_3, :disabled => disabled
+      %tr.light_grey
+        %th Taux de plastification
+        %td
+          %label dp1 = 
+          = text_field :material, :dp_1, :value => "TODO", :disabled => disabled
+        %td 
+          %label dp2 = 
+          = text_field :material, :dp_2, :value => "TODO", :disabled => disabled
+        %td 
+          %label dp3 = 
+          = text_field :material, :dp_3, :value => "TODO", :disabled => disabled
+      %tr.grey
+        %th Déformation plastique
+        %td 
+          %label p1 = 
+          = text_field :material, :p_1, :value => material.p_1, :disabled => disabled
+        %td 
+          %label p2 = 
+          = text_field :material, :p_2, :value => material.p_2, :disabled => disabled
+        %td 
+          %label p3 = 
+          = text_field :material, :p_3, :value => material.p_3, :disabled => disabled
+
+- elsif material.mtype == "isotrope"
+  %table
+    %tbody
+      %tr.light_grey
+        %th Limite de plasticité
+        %td 
+          %label Sp1 = 
+          = text_field :material, :sigma_p_1, :value => material.sigma_p_1, :disabled => disabled
+      %tr.grey
+        %th Taux de plastification
+        %td 
+          %label dp1 = 
+          = text_field :material, :dp_1, :value => material.dp_1, :disabled => disabled
+      %tr.light_grey
+        %th Déformation plastique
+        %td 
+          %label p1 = 
+          = text_field :material, :p_1, :value => material.p_1, :disabled => disabled

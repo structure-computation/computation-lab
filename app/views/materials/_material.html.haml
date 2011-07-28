@@ -1,8 +1,9 @@
 %tr{ :class => (material_counter % 2 == 0 ? "light_grey" : "grey") }
-  %td 
-    %a{ :onclick => "affich_detail_material(0)", :href => "#"} >
+  %td= link_to "Détails", [@company, material]
   %td= material.name
   %td= material.family
   %td= material.mtype
   %td= material.comp
-  %td X
+  - if params[:type] != "standard"
+    %td= link_to "Editer"   , edit_company_material_path(@company, material)
+    %td= link_to "Supprimer", {:action=>"destroy", :controller=>"materials", :id => material.id}, :method => :delete

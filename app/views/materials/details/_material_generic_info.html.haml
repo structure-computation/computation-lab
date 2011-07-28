@@ -1,0 +1,26 @@
+%p
+  Masse volumique :
+  %label m1 = 
+  %input{:disabled => disabled, :value => "#{@material.rho}"}
+%table
+  %thead
+    %tr.light_grey
+      %th
+      %th Selon V1
+      - if material.mtype == "orthotrope"
+        %th Selon V2
+        %th Selon V3
+  %tbody
+    %tr.grey
+      %th Dilatation thermique
+      %td
+        %label a1 = 
+        = text_field :material, :alpha_1, :value => material.alpha_1, :disabled => disabled
+      - if material.mtype == "orthotrope"
+        %td
+          %label a2 = 
+          = text_field :material, :alpha_2, :value => material.alpha_2, :disabled => disabled
+        %td
+          %label a3 = 
+          = text_field :material, :alpha_3, :value => material.alpha_3, :disabled => disabled
+

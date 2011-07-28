@@ -1,0 +1,65 @@
+- content_for :additionnal_stylesheets do
+  = stylesheet_link_tag "table"
+  = stylesheet_link_tag "main_material"
+
+- content_for :additionnal_javascript do
+  = javascript_include_tag "material/functions_layer_material"
+  = javascript_include_tag "material/init_new_material"
+
+/ wizard création de projet en premier plan
+.content
+  #bl_5.black.off
+  / wizard de creation d'un nouveau material
+  = render :partial => "material_nouveau"
+
+  / partie gauche du contenu, raccourci
+  #contentleft
+    .contentheightmin
+    = render :partial => "partials/raccourcis_modele"
+    = render :partial => "add_material"
+  / fin partie gauche du contenu
+  
+  / partie droite du contenu, tableaux, informations importantes
+  #contentright
+    #largeBox
+      %h2
+        Matériaux : 
+        = @material.name
+      %ul.main_infos
+        %li
+          Référence :
+          = @material.reference
+        %li
+          Famille :
+          = @material.family
+        %li
+          Type :
+          = @material.mtype
+        %li
+          Comportement :
+          - if @material.comp.include? "el"
+            %span.material_behavior Elastique
+          - if @material.comp.include? "pl"
+            %span.material_behavior Plastique
+          - if @material.comp.include? "en"
+            %span.material_behavior Endommageable
+          - if @material.comp.include? "vi"
+            %span.material_behavior Visqueux
+      
+      
+      #material_information
+        = render :partial => "materials/details/material_main_information", :locals => { :material => @material, :disabled => true }
+
+      #material_generic_information
+        = render :partial => "materials/details/material_generic_info", :locals => { :material => @material, :disabled => true }
+        
+      - if @material.comp.include? "el"
+        = render :partial => "materials/details/material_elastic_information", :locals => { :material => @material, :disabled => true }
+      - if @material.comp.include? "pl"
+        = render :partial => "materials/details/material_plastic_information", :locals => { :material => @material, :disabled => true }
+      - if @material.comp.include? "en"
+        = render :partial => "materials/details/material_damageable_information", :locals => { :material => @material, :disabled => true }
+      - if @material.comp.include? "vi"
+        = render :partial => "materials/details/material_viscous_information", :locals => { :material => @material, :disabled => true }
+
+    = link_to "Retourner à la liste", company_materials_path

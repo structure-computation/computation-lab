@@ -1,0 +1,63 @@
+%h3 Elasticité
+
+- if material.mtype == "orthotrope"
+  %table
+    %thead
+      %tr.light_grey
+        %th
+        %th Selon V1
+        %th Selon V2 
+        %th Selon V3
+    %tbody
+      %tr.grey
+        %th Module d'Young
+        %td 
+          %label E1 = 
+          = text_field :material, :E_1, :value => material.E_1, :disabled => disabled
+        %td 
+          %label E2 = 
+          = text_field :material, :E_2, :value => material.E_2, :disabled => disabled
+        %td 
+          %label E3 = 
+          = text_field :material, :E_3, :value => material.E_3, :disabled => disabled
+      %tr.light_grey
+        %th Coefficient de Poisson
+        %td 
+          %label mu12 = 
+          = text_field :material, :nu_12, :value => material.nu_12, :disabled => disabled
+        %td 
+          %label mu23 = 
+          = text_field :material, :nu_23, :value => material.nu_23, :disabled => disabled
+        %td 
+          %label mu13 = 
+          = text_field :material, :nu_13, :value => material.nu_13, :disabled => disabled
+      %tr.grey
+        %th Limite de rupture
+        %td 
+          %label Sr1 = 
+          = text_field :material, :sigma_r_1, :value => material.sigma_r_1, :disabled => disabled
+        %td 
+          %label Sr2 = 
+          = text_field :material, :sigma_r_2, :value => material.sigma_r_2, :disabled => disabled
+        %td 
+          %label Sr3 = 
+          = text_field :material, :sigma_r_3, :value => material.sigma_r_3, :disabled => disabled
+
+- elsif material.mtype == "isotrope"
+  %table
+    %tbody
+      %tr.light_grey
+        %th Module d'Young
+        %td
+          %label E1 =
+          = text_field :material, :E_1, :value => material.E_1, :disabled => disabled
+      %tr.grey
+        %th Coefficient de poisson
+        %td 
+          %label mu12 = 
+          = text_field :material, :nu_12, :value => material.nu_12, :disabled => disabled
+      %tr.light_grey
+        %th Limite de rupture
+        %td 
+          %label Sr1 = 
+          = text_field :material, :sigma_r_1, :value => material.sigma_r_1, :disabled => disabled
