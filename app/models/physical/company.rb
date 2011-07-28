@@ -31,6 +31,7 @@ class Company < ActiveRecord::Base
   def members
     users
   end
+  
   def managers
     users.where(:role => "gestionnaire")
   end

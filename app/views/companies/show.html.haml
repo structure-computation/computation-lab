@@ -1,10 +1,8 @@
--# Css et Javascript additionnels.
 -content_for :additionnal_stylesheets do 
   %link{ :href => "/stylesheets/main_user.css"    , :rel => "stylesheet", :media => "screen" }
   %link{ :href => "/stylesheets/main_company.css" , :rel => "stylesheet", :media => "screen" }
   
 -content_for :additionnal_javascript  do 
-  / Javascript particulier a la page societe
   %script{ :src => "/javascripts/companies/functions_layer_company.js"          ,   :type => "text/javascript" }
   %script{ :src => "/javascripts/companies/forfait/functions_forfait.js"        ,   :type => "text/javascript" }
   %script{ :src => "/javascripts/companies/abonnement/functions_abonnement.js"  ,   :type => "text/javascript" }
@@ -12,36 +10,19 @@
 -content_for :left_submenu do
   #contentleft
     = render :partial => "partials/raccourcis_company"
-    = render :partial => "context_leftbox"
+    = render :partial => "left_submenu"
   
--content_for :content do
-  #largeBox
+-content_for :content_company do
+  .resume_table
     %h2
       Tableau de bord
-    #largeBoxcontent1
-      /compte d'abonnement annuel
-      = render :partial => "companies/abonnement/resume_abonnement"
-      = render :partial => "companies/abonnement/contenu_abonnement"
-      /compte de calcul
-      = render :partial => "companies/calcul/resume_calcul"
-      = render :partial => "companies/calcul/contenu_calcul"
+    .content_resume_table
+      = render :partial => "abonnement"
+      = render :partial => "calcul"
   
-  #largeBox
+  .resume_table
     %h2
       Profil
-    #largeBoxcontent
-      /profil company
-      = render :partial => "companies/profil_company/resume_company"
-      = render :partial => "companies/profil_company/contenu_company"  
-    
-  :javascript
-    var init_account_sliders = function (){ 
-      // Initialise les reglettes indiquant les consommations.
-      var calcul_account = #{@company.calcul_account.to_json};
-      var memory_account = #{@company.memory_account.to_json};
-      var solde_calculs  = #{@solde_calculs.to_json};
-      init_current_calcul_account(calcul_account);
-      init_current_memory_account(memory_account);    
-      init_Tableau_solde_calcul(solde_calculs);
-    };
-    $(document).ready( init_account_sliders );
+    .content_resume_table
+      = render :partial => "company", :object => @company
+

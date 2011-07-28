@@ -1,0 +1,63 @@
+-#.ligne_resume_table
+%p
+  coordonées
+%p
+  liste des gestionnaires
+%p
+  Profil de votre société
+%p
+  N gestionnaires
+%ul
+  %li
+    %a{ :onclick => "affich_gestionnaire()", :style => "cursor: pointer;" }
+      Gestionaires
+  %li
+    %a{ :onclick => "affich_detail_company()", :style => "cursor: pointer;" }
+      Détail
+%table.grey_table
+  %thead
+    %tr
+      %th
+        Nom                   
+      %th
+        email
+  %tbody
+    - company.users.managers.each do |manager|
+      %tr
+        %td
+          = manager.lastname + " " + manager.firstname
+        %td
+          = manager.email
+%dl
+  %dt
+    nom
+  %dd
+    = company.name
+  %dt
+    Division
+  %dd
+    = company.division
+  %dt
+    Adresse
+  %dd
+    = company.address
+  %dt
+    Ville
+  %dd
+    = company.city
+  %dt
+    Code Postal
+  %dd
+    = company.zipcode
+  %dt
+    Pays
+  %dd
+    = company.country
+  %dt
+    TVA intracommunautaire
+  %dd
+    = company.TVA
+  %dt
+    SIREN
+  %dd
+    = company.siren
