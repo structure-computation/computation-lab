@@ -1,0 +1,11 @@
+one:
+  user_id: 
+  company_id: 
+  role: MyString
+  status: MyString
+
+two:
+  user_id: 
+  company_id: 
+  role: MyString
+  status: MyString
