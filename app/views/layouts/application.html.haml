@@ -5,7 +5,7 @@
       Structure Computation
     
     / Inclusions des CSS, javascripts... dans un partial.
-    = render      :partial      => "layouts/html_header_content"
+    = render      :partial      => "layouts/partials/html_header_content"
 
     / CSS et javascript additionnels
     = yield :additionnal_stylesheets
@@ -13,23 +13,13 @@
     
     
   %body
-    
-    
-    = render :partial => "layouts/header"
-    #conteneur
-      .content
-        = render :partial => "layouts/partials/flashs_and_notices"
+    = render :partial => "layouts/partials/header"      
+    .container
+      = render :partial => "layouts/partials/breadcrumb"
+      = render :partial => "layouts/partials/flashs_and_notices"
+      = yield :left_submenu
+      
+      #content
+        = content_for?(:content) ? yield(:content) : yield
 
-    #conteneur 
-      /= render :partial => "layouts/pathbar"
-      /partie contenu
-      /.content
-        
-      / Début d'affichage du code de la vue.
-      = content_for?(:content) ? yield(:content) : yield # on utilise ici la technique des layout imbriqués décrite dans le guide rails.
-      / Fin du code d'affichage de la vue
-
-    / Fin content 
-    = render :partial => "layouts/footer"
-    /#bl_0.blackTotal.on 
-    / Fin conteneur
+    = render :partial => "layouts/partials/footer"

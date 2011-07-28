@@ -7,6 +7,12 @@
   = stylesheet_link_tag "table"
 
 
+-content_for :left_submenu do
+  #contentleft
+    = render :partial => "partials/raccourcis_modele"
+    = render :partial => "context_leftbox"
+
+
 #largeBox
   %h2
     Liste des membres
@@ -31,3 +37,4 @@
 
     %span#new_member.button_style= link_to "Nouveau membre", new_company_member_path(current_user.company)
   
+

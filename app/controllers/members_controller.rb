@@ -4,7 +4,7 @@
 class MembersController < InheritedResources::Base
   
     # Creer un layout spécifique pour les fonctions du menu "scté".
-    layout        "company"
+    # TODO: replacer :layout        "company"
     
     # Configuration de inherited ressource.
     defaults      :resource_class => User, :collection_name => 'members', :instance_name => 'member'

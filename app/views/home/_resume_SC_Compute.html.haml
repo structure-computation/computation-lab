@@ -1,26 +1,6 @@
-/ résumé
-#SCComputeResume.largeBoxResumeCompte1
-  %a{ :href => "/modele" } 
-    #SCComputeFleche.ResumeCompte1
-  .ResumeCompte2
-    .ResumeCompteText1{ :style => "width: 90%; margin-top:10px;" }
-      Utilisation en ligne de nos logiciels
-  .ResumeCompte3{ :style => "border: none;" }
-    .ResumeCompteText1{ :style => "width: 90%;" }
-    .ResumeCompteText4
-      Mes modèles
-  .ResumeCompte6.off
-    .ResumeCompteText3{ :style => "width: 90%;" }
-      %span#SCComputeNBModel.textred
-        N
-      Modèles
-    .ResumeCompteText3{ :style => "width: 90%;" }
-      %span#SCComputeNBCalcul.textred
-        N
-      Calcul en cours
-    .ResumeCompteText3{ :style => "width: 90%;" }
-      %span#SCComputeNBResultat.textred
-        N
-      Nouveau résultats
-    
-/ fin du résumé
+.ligne
+  =link_to '>',  :controller => "modele" 
+  %p.description
+    Utilisation en ligne de nos logiciels
+  %h3
+    Mes modèles

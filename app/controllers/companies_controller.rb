@@ -5,10 +5,7 @@ class CompaniesController < InheritedResources::Base
   
   # Actions inherited ressource. 
   actions :all, :except => [ :index, :edit, :update, :destroy ]
-  
-  
-  layout 'company'
-  
+    
   def set_page_name
     @page = 'SCmanage'
   end
@@ -23,7 +20,6 @@ class CompaniesController < InheritedResources::Base
   def index
     redirect_to current_user.company
     # @page = 'SCmanage' 
-    # @company = current_user.company
     # respond_to do |format|
     #   format.html {render :layout => true }
     #   format.js   {render :json => @current_company.to_json}

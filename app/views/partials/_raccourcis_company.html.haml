@@ -1,22 +1,11 @@
-#leftBox
+.left_submenu
   %h2
     Menu
-#leftBoxcontent
-  %table#tableleftBox
-    %tr
-      %td{ :style => "width:22px ;" }
-        %img{ :src => "/images/manage_pic_liste_compte.png" }
-      %td
-        = link_to "Tableau de bord", companies_path
-          
-    %tr
-      %td{ :style => "width:22px ;" }
-        %img{ :src => "/images/manage_pic_liste_membre.png" }
-      %td
-        = link_to 'Liste des membres', company_members_path(current_user.company)
-    %tr
-      %td{ :style => "width:22px ;" }
-        %img{ :src => "/images/manage_pic_liste_factures.png" }
-      %td
-        = link_to 'Liste des factures'
-        -#bills_path
+  %ul
+    %li.manage_pic_liste_compte
+      = link_to "Tableau de bord", company_path(current_user.company)
+    %li.manage_pic_liste_membre
+      = link_to 'Liste des membres', company_members_path(current_user.company)
+    %li.manage_pic_liste_factures
+      = link_to 'Liste des factures', company_bills_path(current_user.company)
+

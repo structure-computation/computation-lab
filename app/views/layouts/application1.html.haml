@@ -1,0 +1,37 @@
+!!!
+%html{ "xml:lang" => "fr", :lang => "fr", :xmlns => "http://www.w3.org/1999/xhtml" }
+  %head
+    %title
+      Structure Computation
+    
+    / Inclusions des CSS, javascripts... dans un partial.
+    = render      :partial      => "layouts/html_header_content"
+    = stylesheet_link_tag 'screen.css'
+
+    / CSS et javascript additionnels
+    = yield :additionnal_stylesheets
+    = yield :additionnal_javascript
+    
+    
+  %body
+    
+    
+    = render :partial => "layouts/header"
+    #conteneur
+      .content
+        = render :partial => "layouts/partials/flashs_and_notices"
+
+    #conteneur 
+      /= render :partial => "layouts/pathbar"
+      /partie contenu
+      /.content
+        
+      / Début d'affichage du code de la vue.
+      = yield :left_submenu
+      = content_for?(:content) ? yield(:content) : yield # on utilise ici la technique des layout imbriqués décrite dans le guide rails.
+      / Fin du code d'affichage de la vue
+
+    / Fin content 
+    = render :partial => "layouts/footer"
+    /#bl_0.blackTotal.on 
+    / Fin conteneur
