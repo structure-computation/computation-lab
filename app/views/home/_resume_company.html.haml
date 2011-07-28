@@ -1,21 +1,7 @@
-/ résumé
-#ProfilCompanyResume.largeBoxResumeCompte1
-  %a{ :style => "cursor: pointer;", :onclick => "affich_contenu_profil_company()" } 
-    #ProfilCompanyFleche.ResumeCompte1
-  .ResumeCompte2
-    .ResumeCompteText1{ :style => "width: 90px; margin-top: 20px;" }
-      contactez vos gestionnaires
-  .ResumeCompte3{ :style => "border: none;" }
-    .ResumeCompteText1{ :style => "width: 90%;" }
-    .ResumeCompteText4
-      Liste de vos gestionnaires
-  .ResumeCompte6.off
-    .ResumeCompteText1{ :style => "width: 90%;" }
-    .ResumeCompteText1{ :style => "width: 90%;" }
-      %span#ProfilCompanyNBGestionnaire.textred
-        N
-      gestionnaires
-       
-  
-    
-/ fin du résumé
+.ligne
+  %a{ :style => "cursor: pointer;", :onclick => "affich_contenu_profil_company()" }
+    >
+  %p.description
+    Contactez vos gestionnaires
+  %h3
+    Liste de vos gestionnaires

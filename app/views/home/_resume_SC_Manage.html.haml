@@ -1,23 +1,6 @@
-/ résumé
-#SCManageResume.largeBoxResumeCompte1
-  %a{ :href => companies_path} 
-    #SCManageFleche.ResumeCompte1
-  .ResumeCompte2
-    .ResumeCompteText1{ :style => "width: 95%; margin-top:10px;" }
-      Gestion des comptes et des droits d'accès
-  .ResumeCompte3{ :style => "border: none;" }
-    .ResumeCompteText1{ :style => "width: 90%;" }
-    .ResumeCompteText4
-      Ma société
-  .ResumeCompte6.off
-    .ResumeCompteText3{ :style => "width: 90%; margin-top:20px;" }
-      %span#CManageNBFactures.textred
-        N
-      Factures
-    .ResumeCompteText3{ :style => "width: 90%;" }
-      %span#CManageNBUsers.textred
-        N
-      utilisateurs
-  
-    
-/ fin du résumé
+.ligne
+  =link_to '>', companies_path
+  %p.description
+    Gestion des comptes et des droits d'accès
+  %h3
+    Ma société

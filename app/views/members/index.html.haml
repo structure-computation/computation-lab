@@ -11,31 +11,36 @@
   / wizard de suppression d'un membre
   = render :partial => "membre_delete"
 
+-content_for :left_submenu do
+  #contentleft
+    = render :partial => "partials/raccourcis_modele"
+    = render :partial => "context_leftbox"
 
-
-#largeBox
-  %h2
-    Liste des membres
-#largeBoxcontent
-  / taille minimum du contenu du contenu
-  .contentheightmin
-  / taille minimum du contenu du contenu
+-content_for :content do
   
-  #MembreListe.on
-    = render :partial => "filtre_des_membres"
-    / Liste des membres
-    %table#member_list
-      %thead
-        %tr
-          %th
-          %th                  Mail
-          %th                  Nom
-          %th                  Role
-          %th{ :colspan => 2 } Status
-      %tbody
-        = render :partial => "member", :collection => @members
-
-    %span#new_member.button_style= link_to "Nouveau membre", new_member_path
+  #largeBox
+    %h2
+      Liste des membres
+  #largeBoxcontent
+    / taille minimum du contenu du contenu
+    .contentheightmin
+    / taille minimum du contenu du contenu
     
-    #member_details
-      - #render :partial => "membre_detail"
+    #MembreListe.on
+      = render :partial => "filtre_des_membres"
+      / Liste des membres
+      %table#member_list
+        %thead
+          %tr
+            %th
+            %th                  Mail
+            %th                  Nom
+            %th                  Role
+            %th{ :colspan => 2 } Status
+        %tbody
+          = render :partial => "member", :collection => @members
+  
+      %span#new_member.button_style= link_to "Nouveau membre", new_member_path
+      
+      #member_details
+        - #render :partial => "membre_detail"

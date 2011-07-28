@@ -5,10 +5,7 @@ class CompaniesController < InheritedResources::Base
   
   # Actions inherited ressource. 
   actions :all, :except => [ :index, :edit, :update, :destroy ]
-  
-  
-  layout 'company'
-  
+    
   def set_page_name
     @page = 'SCmanage'
   end

@@ -2,10 +2,7 @@
 # Ulterieurement pourra être une ressource incluse dans une ressource company
 
 class MembersController < InheritedResources::Base
-  
-    # Creer un layout spécifique pour les fonctions du menu "scté".
-    layout "company"
-    
+      
     respond_to    :html, :json, :js
 
     before_filter :authenticate_user! #,  :except => :activate

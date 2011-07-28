@@ -1,5 +1,5 @@
 # This controller handles the login/logout function of the site.  
-class ModeleController < ApplicationController
+class ModelesController < InheritedResources::Base
   #session :cookie_only => false, :only => :upload
   require 'socket'
   include Socket::Constants
