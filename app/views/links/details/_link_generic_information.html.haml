@@ -1,0 +1,37 @@
+%h3
+  Information générique
+%table
+  %tbody
+    %tr
+      %td Description :
+      %td= text_area :link, :description, :value => @link.description, :disabled => disabled
+    %tr
+      %td Epaisseur :
+      %td 
+        = label :link, :Ep, "Ep = "
+        = text_field :link, :Ep, :value => @link.Ep, :disabled => disabled
+        m
+    %tr
+      %td Jeu :
+      %td
+        = label :link, :jeu, "j = "
+        = text_field :link, :jeu, :value => @link.jeu, :disabled => disabled
+        m
+
+    - if @link.comp_generique.downcase.include? "el"
+      %tr
+        %td Raideur :
+        %td
+          = label :link, :R, "R = "
+          = text_field :link, :R, :value => @link.R, :disabled => disabled
+          N/m
+
+
+    - if @link.comp_generique.downcase.include? "co"
+      %tr
+        %td Coefficient de frottement :
+        %td
+          = label :link, :f, "f = "
+          = text_field :link, :f, :value => @link.f, :disabled => disabled
+
+

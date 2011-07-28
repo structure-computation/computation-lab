@@ -1,10 +1,10 @@
 - content_for :additionnal_stylesheets do
   = stylesheet_link_tag "table"
-  = stylesheet_link_tag "main_material"
+  = stylesheet_link_tag "main_link"
 
 - content_for :additionnal_javascript do
   = javascript_include_tag "material/functions_layer_material"
-  = javascript_include_tag "material/init_new_material"
+  = javascript_include_tag "material/init_new_link"
 
 / wizard création de projet en premier plan
 .content
@@ -12,6 +12,7 @@
   #contentleft
     .contentheightmin
     = render :partial => "partials/raccourcis_modele"
+    - render :partial => "ajouts_link"
   / fin partie gauche du contenu
   
   / partie droite du contenu, tableaux, informations importantes
@@ -23,23 +24,21 @@
       / taille minimum du contenu du contenu
       .contentheightmin
       / taille minimum du contenu du contenu
- 
-      #MaterialListe.on
+      
+      #LinkListe
         = render :partial => "search_filter"
-        - if !@materials.empty?
+        - if !@links.empty?
           %table
             %thead
               %tr
                 %th 
                 %th Nom
                 %th Famille
-                %th Type
-                %th Comportement
-                / Pour afficher les colonnes Editer et Supprimer
+                %th Générique
+                %th Complexe
                 - if params[:type] != "standard" 
                   %th
                   %th
             %tbody
-              = render @materials
-        = link_to "Nouveau materiaux", new_company_material_path
-          
+              = render @links
+        = link_to "Nouvelle liaison", new_company_link_path
