@@ -28,7 +28,7 @@
         %p
           - @behaviors.each do |behavior|
             = label_tag behavior
-            = check_box_tag behavior
+            = check_box_tag behavior, true
         %p
           = submit_tag "Suivant"
     - else
