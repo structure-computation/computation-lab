@@ -12,35 +12,35 @@
       %tr.grey
         %th Limite de plasticité
         %td 
-          %label Sp1 = 
+          = label :material, :sigma_p_1, "Sp1"
           = text_field :material, :sigma_p_1, :value => material.sigma_p_1, :disabled => disabled
         %td 
-          %label Sp2 = 
+          = label :material, :sigma_p_2, "Sp2"
           = text_field :material, :sigma_p_2, :value => material.sigma_p_2, :disabled => disabled
         %td 
-          %label Sp3 = 
+          = label :material, :sigma_p_2, "Sp3"
           = text_field :material, :sigma_p_3, :value => material.sigma_p_3, :disabled => disabled
       %tr.light_grey
         %th Taux de plastification
         %td
-          %label dp1 = 
+          = label :material, :dp_1, "dp1"
           = text_field :material, :dp_1, :value => "TODO", :disabled => disabled
         %td 
-          %label dp2 = 
+          = label :material, :dp_2, "dp2"
           = text_field :material, :dp_2, :value => "TODO", :disabled => disabled
         %td 
-          %label dp3 = 
+          = label :material, :dp_3, "dp3"
           = text_field :material, :dp_3, :value => "TODO", :disabled => disabled
       %tr.grey
         %th Déformation plastique
         %td 
-          %label p1 = 
+          = label :material, :p_1, "p1"
           = text_field :material, :p_1, :value => material.p_1, :disabled => disabled
         %td 
-          %label p2 = 
+          = label :material, :p_2, "p1"
           = text_field :material, :p_2, :value => material.p_2, :disabled => disabled
         %td 
-          %label p3 = 
+          = label :material, :p_3, "p3"
           = text_field :material, :p_3, :value => material.p_3, :disabled => disabled
 
 - elsif material.mtype == "isotrope"
@@ -49,15 +49,15 @@
       %tr.light_grey
         %th Limite de plasticité
         %td 
-          %label Sp1 = 
+          = label :material, :sigma_p_1, "Sp1"
           = text_field :material, :sigma_p_1, :value => material.sigma_p_1, :disabled => disabled
       %tr.grey
         %th Taux de plastification
         %td 
-          %label dp1 = 
+          = label :material, :dp_1, "dp1"
           = text_field :material, :dp_1, :value => material.dp_1, :disabled => disabled
       %tr.light_grey
         %th Déformation plastique
         %td 
-          %label p1 = 
+          = label :material, :p_1, "p1"
           = text_field :material, :p_1, :value => material.p_1, :disabled => disabled

@@ -25,20 +25,21 @@
       / taille minimum du contenu du contenu
  
       #MaterialListe.on
-        = render :partial => "materials_filter"
-        / liste des projet
-        %table
-          %thead
-            %tr
-              %th 
-              %th Nom
-              %th Famille
-              %th Type
-              %th Comportement
-              - if params[:type] != "standard"
-                %th
-                %th
-          %tbody
-            = render @materials
+        = render :partial => "search_filter"
+        - if !@materials.empty?
+          %table
+            %thead
+              %tr
+                %th 
+                %th Nom
+                %th Famille
+                %th Type
+                %th Comportement
+                / Pour afficher les colonnes Editer et Supprimer
+                - if params[:type] != "standard" 
+                  %th
+                  %th
+            %tbody
+              = render @materials
         = link_to "Nouveau materiaux", new_company_material_path
           

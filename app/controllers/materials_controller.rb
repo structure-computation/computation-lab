@@ -18,6 +18,19 @@ class MaterialsController < InheritedResources::Base
   def create
     create! { company_materials_path }
   end
+  
+  # Essayer de faire une ressources accessibles par /material
+  def show
+    @material = Material.find(params[:id])
+    if @material.company_id == -1
+      render :action => "show"
+    elsif @material.company_id == current_user.company.id
+      render :action => "show"
+    else
+      flash[:notice] = "Vous n'avez pas accès à cette pièce !"
+      redirect_to company_materials_path
+    end
+  end
 
   def new
     if params[:type]
