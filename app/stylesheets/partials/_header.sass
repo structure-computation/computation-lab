@@ -1,11 +1,3 @@
-/* Imports --------------------------------------------------------------- */
-
-@import base
-@import compass/css3/gradient
-@import compass/css3/border-radius
-@import compass/typography/links/unstyled-link
-@import compass/typography/links/hover-link
-
 /* Variables ------------------------------------------------------------- */
 
 $header-logo-cols           : 8  // Largeur de la zone du logo en colonne 
@@ -47,9 +39,7 @@ $separator-image            : 'header_bg_separateur.png' // Nom de l'image sépa
   width           : $width-tab
   line-height     : $height-tab
   margin-right    : $gap-between-tabs
-  float           : left  
   text-align      : center 
-  list-style-type : none
   font-size       : $font-size-tab
   +background-image(linear-gradient($color-tab-start, $color-tab-end))
   +border-top-radius($radius-tab)
@@ -111,8 +101,12 @@ header
       #main_menu
         padding-left : 0 // Suppression du padding pour aligner les tabs à gauche.
         #home_tab, #company_tab, #lab_tab
-          +main-menu-tab
+          float : left
+          list-style-type : none
+          background-color: transparent
           a
+            display: block
+            +main-menu-tab
             +unstyled-link
             +hover-link
             color   : $color-font-tab
@@ -120,12 +114,12 @@ header
           a:hover
             +unstyled-link
             color   : $color-font-hover-tab
-            
+            +background-image(linear-gradient(lighten($color-tab-start, 5%), lighten($color-tab-end, 5%)))
           .main_submenu
             display : none
 
         #home_tab.selected, #company_tab.selected, #lab_tab.selected
-          +background-image(linear-gradient($color-tab-selected-start, $color-tab-selected-end))
           a
+            +background-image(linear-gradient($color-tab-selected-start, $color-tab-selected-end))
             color       : $color-font-selected-tab
             font-weight : bold

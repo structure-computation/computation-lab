@@ -4,7 +4,7 @@ class HomeController < ApplicationController
   before_filter :set_page_name 
   
   def set_page_name
-    @page = 'Accueil'
+    @page = :accueil
   end
   
   def index  
