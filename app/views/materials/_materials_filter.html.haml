@@ -1,5 +1,5 @@
 = form_tag materials_path, :method => :get do
 
-  = select_tag "type", options_for_select([["Bibliothèque standard", "standard"],["Ma bibliothèque", "owner"]])
+  = select_tag "type", options_for_select([["Bibliothèque standard", "standard"],["Ma bibliothèque", "owner"]], (params[:type] == "standard" ? "standard" : "owner"))
 
   = submit_tag "Filtrer"

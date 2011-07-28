@@ -48,27 +48,18 @@
       
       
       #material_information
-        %p
-          Description
-          %textarea{:disabled => true}
-            = @material.description
-        - if @material.mtype == "orthotrope"
-          = render :partial => "materials/details/material_main_direction", :locals => { :material => @material }
+        = render :partial => "materials/details/material_main_information", :locals => { :material => @material, :disabled => true }
 
       #material_generic_information
-        %p
-          Masse volumique :
-          %label m1 = 
-          %input{:disabled => true, :value => "#{@material.rho}"}
-        = render :partial => "materials/details/material_thermal_dilatation", :locals => { :material => @material }
+        = render :partial => "materials/details/material_generic_info", :locals => { :material => @material, :disabled => true }
         
       - if @material.comp.include? "el"
-        = render :partial => "materials/details/material_elastic_information", :locals => { :material => @material }
+        = render :partial => "materials/details/material_elastic_information", :locals => { :material => @material, :disabled => true }
       - if @material.comp.include? "pl"
-        = render :partial => "materials/details/material_plastic_information", :locals => { :material => @material }
+        = render :partial => "materials/details/material_plastic_information", :locals => { :material => @material, :disabled => true }
       - if @material.comp.include? "en"
-        = render :partial => "materials/details/material_damageable_information", :locals => { :material => @material }
+        = render :partial => "materials/details/material_damageable_information", :locals => { :material => @material, :disabled => true }
       - if @material.comp.include? "vi"
-        = render :partial => "material_viscous_information", :locals => { :material => @material }
+        = render :partial => "materials/details/material_viscous_information", :locals => { :material => @material, :disabled => true }
 
     = link_to "Retourner à la liste", materials_path

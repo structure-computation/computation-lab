@@ -4,4 +4,5 @@
   %td= material.family
   %td= material.mtype
   %td= material.comp
-  %td X
+  - if params[:type] != "standard"
+    %td= link_to "Editer", edit_material_path(material)

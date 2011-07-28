@@ -1,0 +1,40 @@
+- content_for :additionnal_stylesheets do
+  = stylesheet_link_tag "table"
+  = stylesheet_link_tag "main_material"
+
+- content_for :additionnal_javascript do
+  = javascript_include_tag "material/functions_layer_material"
+  = javascript_include_tag "material/init_new_material"
+
+/ wizard création de projet en premier plan
+.content
+  #bl_5.black.off
+  / wizard de creation d'un nouveau material
+  = render :partial => "material_nouveau"
+
+  / partie gauche du contenu, raccourci
+  #contentleft
+    .contentheightmin
+    = render :partial => "partials/raccourcis_modele"
+    = render :partial => "add_material"
+  / fin partie gauche du contenu
+  
+  / partie droite du contenu, tableaux, informations importantes
+  #contentright
+    - if @material.mtype.nil?
+      - @behaviors = ["Elastique", "Plastique", "Endomageable", "Visqueux"]
+      - @types      = ["Isotrope", "Orthotrope"]
+
+      = form_for new_material_path do 
+        %p
+          = label_tag("Type")
+          = select "", :type, @types
+  
+        %p
+          - @behaviors.each do |behavior|
+            = label_tag(behavior)
+            = check_box_tag(behavior, true)
+        %p
+          = submit_tag "Suivant"
+    - else
+      = render "form"

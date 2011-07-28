@@ -39,16 +39,11 @@
               %th Nom
               %th Famille
               %th Type
-              %th{ :colspan => 2 } Comportement
+              %th Comportement
+              - if params[:type] != "standard"
+                %th
           %tbody
-            = render @standard_materials
+            = render @materials
         %a.button_style{ :href => "#", :onclick => "CPcurrent_stage=displayNewMaterial('on')" }
           %img{ :src => "/images/LM_pic_new_mat.png" }
           Nouveau materiaux
-      
-
-/ fin de #contentright, partie droite du contenu
-%script{ :type => "text/javascript" }
-  $(document).ready(filtre_material_change_owner);
-
-/= render :partial => "footer_top"

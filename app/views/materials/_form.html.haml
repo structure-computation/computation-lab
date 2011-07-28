@@ -1,0 +1,41 @@
+Type :
+= @material.mtype
+- if @material.mtype.include? "el"
+  Elastique
+- if @material.mtype.include? "pl"
+  Plastique
+- if @material.mtype.include? "en"
+  Endo
+- if @material.mtype.include? "vi"
+  Visqueux
+
+= form_for @material do |f|
+  
+  %h3 Info
+
+  = f.hidden_field :comp
+  = f.hidden_field :mtype
+
+  %p
+    = label_tag("Nom")
+    = text_field(:material, :name)
+  %p
+    = label_tag("Famille")
+    = text_field(:material, :family)  
+
+  #material_information
+    = render :partial => "materials/details/material_main_information", :locals => { :material => @material, :disabled => false }
+
+  #material_generic_information
+    = render :partial => "materials/details/material_generic_info", :locals => { :material => @material, :disabled => false }
+
+  - if @material.comp.include? "el"
+    = render :partial => "materials/details/material_elastic_information", :locals => { :material => @material, :disabled => false }
+  - if @material.comp.include? "pl"
+    = render :partial => "materials/details/material_plastic_information", :locals => { :material => @material, :disabled => false }
+  - if @material.comp.include? "en"
+    = render :partial => "materials/details/material_damageable_information", :locals => { :material => @material, :disabled => false }
+  - if @material.comp.include? "vi"
+    = render :partial => "materials/details/material_viscous_information", :locals => { :material => @material, :disabled => false }
+  
+  = submit_tag "Créer"
