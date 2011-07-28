@@ -4,4 +4,4 @@
   %td= member.firstname
   %td= member.role
   %td= member.state
-  %td= link_to "X", {:controller => "company", :action => "delete_user", :id_membre => member.id}, :confirm => "Êtes vous sûr ?", :method => :delete
+  %td= link_to "X", {:controller => "companies", :action => company_member_path( current_user.company, member), :id_membre => member.id}, :confirm => "Êtes vous sûr ?", :method => :delete
