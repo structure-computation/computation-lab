@@ -47,18 +47,10 @@ class MaterialsController < InheritedResources::Base
       @material = Material.new
       @material.mtype = params[:type].downcase
       @material.comp = ""
-      if params[:Elastique]
-        @material.comp += "el "
-      end
-      if params[:Plastique]
-        @material.comp += "pl "
-      end
-      if params[:Endomageable]
-        @material.comp += "en "
-      end
-      if params[:Visqueux]
-        @material.comp += "vi "
-      end
+      @material.comp += "el " if params[:Elastique]
+      @material.comp += "pl " if params[:Plastique]
+      @material.comp += "en " if params[:Endomageable]
+      @material.comp += "vi " if params[:Visqueux]
     end
     new!
   end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110727080628) do
+ActiveRecord::Schema.define(:version => 20110728132147) do
 
   create_table "abonnements", :force => true do |t|
     t.string   "name"
@@ -164,7 +164,7 @@ ActiveRecord::Schema.define(:version => 20110727080628) do
 
   create_table "links", :force => true do |t|
     t.string   "name"
-    t.string   "familly"
+    t.string   "family"
     t.integer  "company_id"
     t.integer  "reference"
     t.integer  "id_select"
@@ -174,7 +174,7 @@ ActiveRecord::Schema.define(:version => 20110727080628) do
     t.string   "comp_complexe"
     t.integer  "type_num"
     t.float    "Ep"
-    t.float    "jeux"
+    t.float    "jeu"
     t.float    "R"
     t.float    "f"
     t.float    "Lp"

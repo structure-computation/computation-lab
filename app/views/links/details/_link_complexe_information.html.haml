@@ -1,0 +1,38 @@
+- if @link.comp_complexe.downcase.include? "pl"
+  #material_plastic_information
+    %h3
+      Plastique
+    %table
+      %tbody
+        %tr
+          %td Limite de plasticité :
+          %td
+            = label :link, :Lp, "Lp = "
+            = text_field :link, :Lp, :value => @link.Lp, :disabled => disabled
+        %tr
+          %td Taux de plastification :
+          %td 
+            = label :link, :Dp, "Dp = "
+            = text_field :link, :Dp, :value => @link.Dp, :disabled => disabled
+        %tr
+          %td Déformation plastique :
+          %td
+            = label :link, :p, "p = "
+            = text_field :link, :p, :value => @link.p, :disabled => disabled
+    
+- if @link.comp_complexe.downcase.include? "ca"
+  #material_breakable_information
+    %h3
+      Plastique
+    %table
+      %tbody
+        %tr
+          %td Limite de rupture :
+          %td
+            = label :link, :Lr, "Lr ="
+            = text_field :link, :Lr, :value => @link.Lr, :disabled => disabled
+        %tr
+          %td Coefficient de frottement :
+          %td 
+            = label :link, :f, "f = "
+            = text_field :link, :f, :value => @link.f, :disabled => disabled

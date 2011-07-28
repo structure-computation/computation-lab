@@ -1,0 +1,41 @@
+%p
+  Comportement générique :
+  - if @link.comp_generique.downcase.include? "pa"
+    %span Parfait
+  - if @link.comp_generique.downcase.include? "el"
+    %span Elastique
+  - if @link.comp_generique.downcase.include? "co"
+    %span Contact
+%p
+  Comportement complexe :
+  - if @link.comp_complexe.downcase.include? "pl"
+    %span Plastique
+  - if @link.comp_complexe.downcase.include? "ca"
+    %span Cassable
+
+= form_for [@company, @link] do |f|
+
+  = f.hidden_field :comp_generique
+  = f.hidden_field :comp_complexe
+  %p
+    = f.label :name
+    = f.text_field :name
+  %p
+    = f.label :reference
+    = f.text_field :reference
+  %o
+    = f.label :family
+    = f.text_field :family
+
+
+  #material_generic_information
+    = render :partial => "links/details/link_generic_information", :locals => { :disabled => false }
+    
+  = render :partial => "links/details/link_complexe_information", :locals => { :disabled => false }
+
+  - if action_name == "edit"
+    = submit_tag "Editer"
+  - else 
+    = submit_tag "Créer"
+
+= link_to "Retourner à la liste", company_materials_path
