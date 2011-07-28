@@ -7,7 +7,7 @@ class CompaniesController < InheritedResources::Base
   actions :all, :except => [ :index, :edit, :update, :destroy ]
     
   def set_page_name
-    @page = 'SCmanage'
+    @page = :manage
   end
   
   # Suppr

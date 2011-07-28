@@ -6,7 +6,7 @@ class ModelesController < InheritedResources::Base
   before_filter :authenticate_user!
   
   def index
-    @page = 'SCcompute'
+    @page = :lab
     list_model = current_user.sc_models
     @model_list = []
     list_model.each{ |model_i|
