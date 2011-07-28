@@ -62,4 +62,4 @@
       - if @material.comp.include? "vi"
         = render :partial => "materials/details/material_viscous_information", :locals => { :material => @material, :disabled => true }
 
-    = link_to "Retourner à la liste", materials_path
+    = link_to "Retourner à la liste", company_materials_path

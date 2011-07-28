@@ -9,7 +9,7 @@ Type :
 - if @material.mtype.include? "vi"
   Visqueux
 
-= form_for @material do |f|
+= form_for [@company, @material] do |f|
   
   %h3 Info
 

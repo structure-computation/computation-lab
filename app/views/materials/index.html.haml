@@ -42,8 +42,8 @@
               %th Comportement
               - if params[:type] != "standard"
                 %th
+                %th
           %tbody
             = render @materials
-        %a.button_style{ :href => "#", :onclick => "CPcurrent_stage=displayNewMaterial('on')" }
-          %img{ :src => "/images/LM_pic_new_mat.png" }
-          Nouveau materiaux
+        = link_to "Nouveau materiaux", new_company_material_path
+          
