@@ -8,7 +8,7 @@
     = link_to companies_path,  Ma société
     %ul.main_submenu
       %li
-        = link_to 'Liste des membres', members_path
+        = link_to 'Liste des membres', company_members_path(current_user.company)
       %li
         = link_to 'Liste des factures'
         -#, company_bills_path

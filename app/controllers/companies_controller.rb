@@ -1,7 +1,7 @@
 class CompaniesController < InheritedResources::Base
   before_filter :authenticate_user!
   before_filter :set_page_name 
-  before_filter :get_solde, :only =>[:index, :show]
+  before_filter :create_solde, :only =>[:index, :show]
   
   # Actions inherited ressource. 
   actions :all, :except => [ :index, :edit, :update, :destroy ]
@@ -14,7 +14,7 @@ class CompaniesController < InheritedResources::Base
   end
   
   # Suppr
-  def get_solde
+  def create_solde
     # Creation d'une liste fictive d'opération.
     @solde_calculs = current_user.company.solde_calcul_accounts.find(:all)
   end
@@ -50,7 +50,7 @@ class CompaniesController < InheritedResources::Base
   
   protected
     def begin_of_association_chain
-      Company.accessible_by_user(@current_user)
+      Company.accessible_by_user(current_user)
     end
   
 end

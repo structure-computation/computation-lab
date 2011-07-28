@@ -13,7 +13,7 @@
       %td{ :style => "width:22px ;" }
         %img{ :src => "/images/manage_pic_liste_membre.png" }
       %td
-        = link_to 'Liste des membres', members_path
+        = link_to 'Liste des membres', company_members_path(current_user.company)
     %tr
       %td{ :style => "width:22px ;" }
         %img{ :src => "/images/manage_pic_liste_factures.png" }

@@ -4,38 +4,27 @@
 class MembersController < InheritedResources::Base
   
     # Creer un layout spécifique pour les fonctions du menu "scté".
-    layout "company"
+    layout        "company"
+    
+    # Configuration de inherited ressource.
+    defaults      :resource_class => User, :collection_name => 'members', :instance_name => 'member'
+    belongs_to    :company
     
     respond_to    :html, :json, :js
 
     before_filter :authenticate_user! #,  :except => :activate
     
+    
     # Protect these actions behind an admin login
     # before_filter :admin_required, :only => [:suspend, :unsuspend, :destroy, :purge]
     
-    before_filter :find_user, :only => [:suspend, :unsuspend, :destroy, :purge]
+    # TODO: Supprimer à terme : InheritedRessource fait la recherche sur member seul.
+    # before_filter :find_user, :only => [:suspend, :unsuspend, :destroy, :purge]
     
-    def show
-      @member = User.find(params[:id])
-      show!
-    end
+    before_filter {@page    = 'SCmanage' }
     
-    def index
-      @page    = 'SCmanage' 
-      @users   = current_user.company.users
-      @member  = User.new
-      @members = User.all
-      
-      respond_with(@users) 
-      
-      # TODO: Mis de côté en attendant de travailler avec le bon format résultat.
-      # respond_with(@users) do |format|
-      #   format.html
-      #   # format.json { render_for_api :std, :json => @users, :root => :users }
-      #   format.json { render_for_api :std, :json => @users }
-      # end
-         
-    end
+    
+
 
     # render new.rhtml
     def new
@@ -99,13 +88,13 @@ class MembersController < InheritedResources::Base
 
     # TODO: écrire un traitement cohérent et compatible avec devise et la volonté de conserver toutes les données utilisateurs.
   #   def destroy
-  # #     @current_company = @current_user.company
+  # #     @current_company = current_user.company
   # #     @user = @current_company.users.find(params[:id_membre])
-  #     if(@user && @user.id == @current_user.id)
-  #       render :text => "false " + @user.id.to_s() + "  " + @current_user.id.to_s()
+  #     if(@user && @user.id == current_user.id)
+  #       render :text => "false " + @user.id.to_s() + "  " + current_user.id.to_s()
   #     else
   #       @user.delete!
-  #       render :text => "true" + @user.id.to_s() + "  " + @current_user.id.to_s()
+  #       render :text => "true" + @user.id.to_s() + "  " + current_user.id.to_s()
   #     end
   # #     @user.delete!
   # #     redirect_to users_path
@@ -121,8 +110,14 @@ class MembersController < InheritedResources::Base
     # supply their old password along with a new one to update it, etc.
     
   protected
+    # Configuration de InheritedRessource
+    def begin_of_association_chain
+      Company.accessible_by_user(current_user)
+    end
+  
+    # TODO: Supprimer à terme
     def find_user
-      @user = User.find(params[:id])
+      @user = @member #User.find(params[:id])
     end
     
     # TODO: Trouver un emplacement plus pertinent.
