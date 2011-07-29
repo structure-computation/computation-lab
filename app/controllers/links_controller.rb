@@ -3,6 +3,7 @@ class LinksController < InheritedResources::Base
   #session :cookie_only => false, :only => :upload
   before_filter :authenticate_user!
   belongs_to    :company
+  layout 'company'
   
   def index 
     @page     = 'SCcompute'

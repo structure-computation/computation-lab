@@ -3,6 +3,7 @@ class MaterialsController < InheritedResources::Base
   before_filter :authenticate_user!
   belongs_to    :company
   #respond_to    :json
+  layout 'company'
 
   def index 
     @page = 'SCcompute'

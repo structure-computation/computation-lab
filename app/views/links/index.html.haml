@@ -1,33 +1,25 @@
-#contentleft
-  .contentheightmin
-  = render :partial => "partials/raccourcis_modele"
-  - render :partial => "ajouts_link"
-/ fin partie gauche du contenu
+-content_for :left_submenu do
+  #contentleft
+    = render :partial => "partials/raccourcis_modele"
+    = render :partial => "left_submenu"
 
-/ partie droite du contenu, tableaux, informations importantes
-#contentright
-  #largeBox
-    %h2
-      Liste des matériaux
-  #largeBoxcontent
-    / taille minimum du contenu du contenu
-    .contentheightmin
-    / taille minimum du contenu du contenu
-    
-    #LinkListe
-      = render :partial => "search_filter"
-      - if !@links.empty?
-        %table.grey
-          %thead
-            %tr
-              %th 
-              %th Nom
-              %th Famille
-              %th Générique
-              %th Complexe
-              - if params[:type] != "standard" 
-                %th
-                %th
-          %tbody
-            = render @links
-      = link_to "Nouvelle liaison", new_company_link_path
+-content_for :content_company do
+  %h2
+    Liste des matériaux
+  #LinkListe
+    = render :partial => "search_filter"
+    - if !@links.empty?
+      %table.grey
+        %thead
+          %tr
+            %th 
+            %th Nom
+            %th Famille
+            %th Générique
+            %th Complexe
+            - if params[:type] != "standard" 
+              %th
+              %th
+        %tbody
+          = render @links
+    = link_to "Nouvelle liaison", new_company_link_path

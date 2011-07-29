@@ -1,15 +1,15 @@
 %h3 Elasticité
 
 - if material.mtype == "orthotrope"
-  %table
+  %table.grey
     %thead
-      %tr.light_grey
+      %tr
         %th
         %th Selon V1
         %th Selon V2 
         %th Selon V3
     %tbody
-      %tr.grey
+      %tr
         %th Module d'Young
         %td 
           = label :material, :E_1, "E1 = "
@@ -20,7 +20,7 @@
         %td 
           = label :material, :E_3, "E3 = "
           = text_field :material, :E_3, :value => material.E_3, :disabled => disabled
-      %tr.light_grey
+      %tr
         %th Coefficient de Poisson
         %td 
           = label :material, :nu_12, "mu12 = "
@@ -31,7 +31,7 @@
         %td 
           = label :material, :nu_13, "mu13 = "
           = text_field :material, :nu_13, :value => material.nu_13, :disabled => disabled
-      %tr.grey
+      %tr
         %th Limite de rupture
         %td 
           = label :material, :sigma_r_1, "Sr1 = "
@@ -44,19 +44,19 @@
           = text_field :material, :sigma_r_3, :value => material.sigma_r_3, :disabled => disabled
 
 - elsif material.mtype == "isotrope"
-  %table
+  %table.grey
     %tbody
-      %tr.light_grey
+      %tr
         %th Module d'Young
         %td
           = label :material, :E_1, "E1 = "
           = text_field :material, :E_1, :value => material.E_1, :disabled => disabled
-      %tr.grey
+      %tr
         %th Coefficient de poisson
         %td 
           = label :material, :nu_12, "mu12 = "
           = text_field :material, :nu_12, :value => material.nu_12, :disabled => disabled
-      %tr.light_grey
+      %tr
         %th Limite de rupture
         %td 
           = label :material, :sigma_r_1, "Sr1 = "

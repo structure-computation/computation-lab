@@ -2,15 +2,15 @@
 %h3 Endomagement
 
 - if material.mtype == "orthotrope"
-  %table
+  %table.grey
     %thead
-      %tr.light_grey
+      %tr
         %th
         %th Selon V1
         %th Selon V2 
         %th Selon V3
     %tbody
-      %tr.grey
+      %tr
         %th Limite d'endomagement 
         %td 
           = label :material, :sigma_p_1, "Se1 = "
@@ -21,7 +21,7 @@
         %td 
           = label :material, :sigma_p_1, "Se3 = "
           = text_field :material, :sigma_p_3, :value => "TODO", :disabled => disabled
-      %tr.light_grey
+      %tr
         %th Endomagement
         %td 
           = label :material, :sigma_p_1, "e1 = "
@@ -34,14 +34,14 @@
           = text_field :material, :sigma_p_3, :value => "TODO", :disabled => disabled
           
 - elsif material.mtype == "isotrope"
-  %table
+  %table.grey
     %tbody
-      %tr.grey
+      %tr
         %th Limite d'endomagement 
         %td 
           = label :material, :sigma_p_1, "Se1 = "
           = text_field :material, :sigma_p_1, :value => "TODO", :disabled => disabled
-      %tr.grey
+      %tr
         %th Endomagement
         %td 
           = label :material, :sigma_p_1, "e1 = "
