@@ -1,16 +1,16 @@
-Type :
-= @material.mtype
-- if @material.mtype.include? "el"
-  Elastique
-- if @material.mtype.include? "pl"
-  Plastique
-- if @material.mtype.include? "en"
-  Endo
-- if @material.mtype.include? "vi"
-  Visqueux
+%p
+  Type :
+  = @material.mtype
+  - if @material.mtype.include? "el"
+    Elastique
+  - if @material.mtype.include? "pl"
+    Plastique
+  - if @material.mtype.include? "en"
+    Endo
+  - if @material.mtype.include? "vi"
+    Visqueux
 
 = form_for [@company, @material] do |f|
-  
   %h3 Info
 
   = f.hidden_field :comp

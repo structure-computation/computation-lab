@@ -3,8 +3,7 @@
 
 class MembersController < InheritedResources::Base
   
-    # Creer un layout spécifique pour les fonctions du menu "scté".
-    # TODO: replacer :layout        "company"
+    layout 'company'
     
     # Configuration de inherited ressource.
     defaults      :resource_class => User, :collection_name => 'members', :instance_name => 'member'
@@ -22,14 +21,12 @@ class MembersController < InheritedResources::Base
     # before_filter :find_user, :only => [:destroy]
     
     before_filter {@page    = 'SCmanage' }
-    
-    
-
 
     # render new.rhtml
     def new
       @member = User.new
-      render :layout => false 
+      new!
+      #render :layout => false 
     end
 
     def create

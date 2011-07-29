@@ -3,11 +3,8 @@
     Menu
   %ul
     %li.LM_pic_model
-      %a{ :href => "/modele" }
-        Liste des modèles
+      = link_to 'Liste des modèles' #, company_modeles_path(current_user.company)
     %li.LM_pic_materiau
-      %a{ :href => "/material" }
-        Bibliothèque matériaux
+      = link_to 'Bibliothèque matériaux', company_materials_path(current_user.company)
     %li.LM_pic_liaison
-      %a{ :href => "/link" }
-        Bibliothèque liaisons
+      = link_to 'Bibliothèque liaisons', company_links_path(current_user.company)

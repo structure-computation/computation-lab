@@ -1,15 +1,15 @@
 / TODO !!!!!!!!!!! CHANGER LES VALEURS DES CHAMPS. Elles ne sont pas adapté à celle présente en BDD
 %h3 Plasticité
 - if material.mtype == "orthotrope"
-  %table
+  %table.grey
     %thead
-      %tr.light_grey
+      %tr
         %th
         %th Selon V1
         %th Selon V2 
         %th Selon V3
     %tbody
-      %tr.grey
+      %tr
         %th Limite de plasticité
         %td 
           = label :material, :sigma_p_1, "Sp1 = "
@@ -20,7 +20,7 @@
         %td 
           = label :material, :sigma_p_2, "Sp3 = "
           = text_field :material, :sigma_p_3, :value => material.sigma_p_3, :disabled => disabled
-      %tr.light_grey
+      %tr
         %th Taux de plastification
         %td
           = label :material, :dp_1, "dp1 = "
@@ -31,7 +31,7 @@
         %td 
           = label :material, :dp_3, "dp3 = "
           = text_field :material, :dp_3, :value => "TODO", :disabled => disabled
-      %tr.grey
+      %tr
         %th Déformation plastique
         %td 
           = label :material, :p_1, "p1 = "
@@ -44,19 +44,19 @@
           = text_field :material, :p_3, :value => material.p_3, :disabled => disabled
 
 - elsif material.mtype == "isotrope"
-  %table
+  %table.grey
     %tbody
-      %tr.light_grey
+      %tr
         %th Limite de plasticité
         %td 
           = label :material, :sigma_p_1, "Sp1 = "
           = text_field :material, :sigma_p_1, :value => material.sigma_p_1, :disabled => disabled
-      %tr.grey
+      %tr
         %th Taux de plastification
         %td 
           = label :material, :dp_1, "dp1 = "
           = text_field :material, :dp_1, :value => material.dp_1, :disabled => disabled
-      %tr.light_grey
+      %tr
         %th Déformation plastique
         %td 
           = label :material, :p_1, "p1 = "

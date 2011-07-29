@@ -4,6 +4,7 @@ class ModelesController < InheritedResources::Base
   require 'socket'
   include Socket::Constants
   before_filter :authenticate_user!
+  layout 'company'
   
   def index
     @page = :lab

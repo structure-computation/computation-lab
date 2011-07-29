@@ -1,20 +1,5 @@
-- content_for :additionnal_stylesheets do
-  = stylesheet_link_tag "table"
-  = stylesheet_link_tag "main_material"
-
-- content_for :additionnal_javascript do
-  = javascript_include_tag "material/functions_layer_material"
-  = javascript_include_tag "material/init_new_material"
-
-/ wizard création de projet en premier plan
-.content
-
-  / partie gauche du contenu, raccourci
+-content_for :left_submenu do
   #contentleft
-    .contentheightmin
     = render :partial => "partials/raccourcis_modele"
-  / fin partie gauche du contenu
-  
-  / partie droite du contenu, tableaux, informations importantes
-  #contentright
-    = render "form"
+-content_for :content_company do  
+  = render "form"
