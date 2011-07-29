@@ -1,0 +1,56 @@
+.DetailCadre{ :style => "height: 420px;" }
+  .DetailCadreModelTitre
+    Modèle
+    %span#sc_model_detail_name
+      nom
+  .DetailCadreModel1
+    .DetailCadreModelMarge
+    .DetailCadreModelLigne
+      .DetailCadreModelCase1
+        Dimention
+      .DetailCadreModelCase2#sc_model_detail_dimension
+        2D
+    .DetailCadreModelLigne
+      .DetailCadreModelCase1
+        Nombre de DDL
+      .DetailCadreModelCase2#sc_model_detail_ddl_number
+        20 000
+    .DetailCadreModelLigne
+      .DetailCadreModelCase1
+        Nombre de pièces
+      .DetailCadreModelCase2#sc_model_detail_parts
+        3
+    .DetailCadreModelLigne
+      .DetailCadreModelCase1
+        Nombre de liaisons
+      .DetailCadreModelCase2#sc_model_detail_interfaces
+        2
+
+    .DetailCadreModelMarge
+    .DetailCadreModelLigne
+      .DetailCadreModelCase1
+        Nombre de résultats
+      .DetailCadreModelCase2#sc_model_detail_results
+        10
+    .DetailCadreModelLigne  
+      .DetailCadreModelCase1
+        Temps de calcul
+      .DetailCadreModelCase2#sc_model_detail_compute_time
+        1500h
+    .DetailCadreModelLigne
+      .DetailCadreModelCase1
+        Espace mémoire
+      .DetailCadreModelCase2#sc_model_detail_space
+        5 Go
+
+    .DetailCadreModelMarge
+    .DetailCadreModelDescriptionTop
+      Description
+    .DetailCadreModelDescription#sc_model_detail_description
+    
+  .DetailCadreModel2
+  
+.DetailFermeture
+  %a{:style => "cursor: pointer;", :onclick => "ferme_detail_modele()" }
+    .DetailTextFermeture
+      Fermer le détail

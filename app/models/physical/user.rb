@@ -29,14 +29,10 @@ class User < ActiveRecord::Base
   
   scope       :managers     ,   where(:role => "gestionnaire")
   
-  
   # Relations
   belongs_to  :company
-  
-  
-  has_many    :user_sc_models 
-  has_many    :sc_models    ,  :through => :user_sc_models, :readonly => false
 
+  has_and_belongs_to_many :models
 
   has_many    :user_projects,  :dependent => :destroy # Pour les gestionnaires, reattribuer ce projet.
   has_many    :projects     ,  :through => :user_projects

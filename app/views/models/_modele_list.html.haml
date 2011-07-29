@@ -1,0 +1,56 @@
+
+.largeBoxTable
+  .largeBoxTable_first
+    .largeBoxTable_0{ :style => "width: 25px;" }
+    .largeBoxTable_0{ :style => "width: 246px;" }
+      %p
+        Nom                   
+    .largeBoxTable_0{ :style => "width: 190px;" }
+      %p
+        Projet 
+    .largeBoxTable_0{ :style => "width: 85px;" }
+      %p
+        Résultats
+    .largeBoxTable_0{ :style => "width: 60px;" }
+      %p
+        Visu
+    .largeBoxTable_0{ :style => "width: 60px;" }
+      %p
+        Calcul
+    
+  - (0...20).each do |i|
+    .largeBoxTable_lign.off{ :id => "sc_model_lign_#{i}" }
+      .largeBoxTable_lign_pair{ :id => "sc_model_pair_#{i}" }
+        %a{ :style => "cursor: pointer;", :onclick => "go_detail_model(#{i})" }
+          .largeBoxTable_fleche
+        .largeBoxTable_2{ :id => "sc_model_0_#{i}", :style => "width: 246px;" }
+        .largeBoxTable_2{ :id => "sc_model_1_#{i}", :style => "width: 190px;" }
+        .largeBoxTable_2{ :id => "sc_model_2_#{i}", :style => "width: 85px;" }
+        %a{ :style => "cursor: pointer;", :onclick => "go_visu(#{i})" }
+          .largeBoxTable_visu{ :style => "width: 60px;" }
+        %a{ :style => "cursor: pointer;", :onclick => "go_calcul(#{i})" }
+          .largeBoxTable_compute{ :style => "width: 60px;" }
+        %a{ :style => "cursor: pointer;", :onclick => "delete_model(#{i})" }
+          .largeBoxTable_suppr
+  / Fin du tableau de présentation des modèles.
+
+/ partie haute du footer, bas de la boite projet plus bouton
+
+#footer_top_2
+  %a.page_select{ :onclick => "go_page_model('first')", :style => "cursor: pointer;" }
+    %img{:src=>"/images/page_moins.png", :style=>"vertical-align:middle;"}
+  page
+  - (0...5).each do |i|
+    %a{ :id => "sc_model_page_#{i}", :onclick => "go_page_model(#{i})", :style => "cursor: pointer;" }
+      #{i}
+  %a.page_select{ :onclick => "go_page_model('end')", :style => "cursor: pointer;" }
+    %img{:src=>"/images/page_plus.png", :style=>"vertical-align:middle;"}
+    
+#footer_top_3
+  #model_bouton_jaune{ :style => "margin:5px 0px 0px 170px" }
+    %ul
+      %li
+        %a{ :href => "#", :onclick => "CPcurrent_stage=displayNewModel('on')" }
+          %img{ :src => "/images/LM_pic_new_model.png" }
+          Déposer un modèle
+/ fin partie haute du footer
