@@ -1,8 +1,8 @@
 -content_for :left_submenu do
   #contentleft
     %ul.tab_submenu
-      %li.selected 
-        %a#tab_1{:href => "#"} Info
+      %li
+        %a#tab_1.selected{:href => "#"} Info
       %li 
         %a#tab_2{:href => "#"} Générique
       %li 
@@ -64,6 +64,8 @@
     nav_links.each(function () {
       $(this).click(function() {
         $('.content_to_hide').css('display','none');
+        nav_links.removeClass('selected');
+        $(this).addClass('selected');
         $('#'+$(this).attr('id') + '_content').css('display','block');
       });
     });
