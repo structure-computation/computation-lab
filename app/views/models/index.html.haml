@@ -25,5 +25,14 @@
         %th                  Visu
         %th{ :colspan => 2 } Calcul
     %tbody
-      = render @models
+      - @models.each do |model|
+        %tr
+          %td
+            = link_to 'Détails', company_model_path(@company, model)
+          %td= model.name
+          %td= model.project
+          %td= model.results
+          %td v
+          %td c
+          %td X
   = link_to "Nouveau modèle", new_company_model_path
