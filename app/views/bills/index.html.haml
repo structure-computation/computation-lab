@@ -7,38 +7,19 @@
 
 / wizard création de projet en premier plan
 .content
-  #bl_5.black.off
-  / wizard de creation d'un nouveau modele
-  / = render :partial => "membre_nouveau"
-
-  / partie gauche du contenu, raccourci
-  #contentleft
-    .contentheightmin
-    = render :partial => "partials/raccourcis_company"
-    /= render :partial => "context_leftbox"
-  / fin partie gauche du contenu
-  
-  / partie droite du contenu, tableaux, informations importantes
   #contentright
     #largeBox
       %h2
         Liste des factures
-    #largeBoxcontent
-      / taille minimum du contenu du contenu
-      .contentheightmin
-      / taille minimum du contenu du contenu
-      
-      #FactureDetail.off
-        = render :partial => "facture_detail"
-      #FactureListe.on
-        = render :partial => "filtre_des_factures"
-        / liste des membres
-        = render :partial => "factures_list"
-        / fin largeBoxcontent de la liste des membres
 
-      
-/ fin de #contentright, partie droite du contenu
-%script{ :type => "text/javascript" }
-  $(document).ready(get_Tableau_facture);
-
-/= render :partial => "footer_top"
+      %table
+        %thead
+          %tr
+            %td Référence
+            %td Type
+            %td Prix HT(Euros)
+            %td Prix TTC(Euros)
+            %td Status
+            %td
+        %body
+          = render @bills
