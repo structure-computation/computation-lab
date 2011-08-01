@@ -20,7 +20,7 @@
       Matériaux : 
       = @material.name
     .wrapper
-      #tab_1_content.content_to_hide
+      #tab_1_content.show
         %ul
           %li
             Référence :
@@ -45,31 +45,32 @@
           Description
         %p
           = @material.description
-      #tab_2_content.content_to_hide
+      #tab_2_content.hide
         = render :partial => "materials/details/material_main_information", :locals => { :material => @material, :disabled => true }
         = render :partial => "materials/details/material_generic_info", :locals => { :material => @material, :disabled => true }
           
       - if @material.comp.include? "el"
-        #tab_3_content.content_to_hide
+        #tab_3_content.hide
           = render :partial => "materials/details/material_elastic_information", :locals => { :material => @material, :disabled => true }
       - if @material.comp.include? "pl"
-        #tab_4_content.content_to_hide
+        #tab_4_content.hide
           = render :partial => "materials/details/material_plastic_information", :locals => { :material => @material, :disabled => true }
       - if @material.comp.include? "en"
-        #tab_5_content.content_to_hide
+        #tab_5_content.hide
           = render :partial => "materials/details/material_damageable_information", :locals => { :material => @material, :disabled => true }
       - if @material.comp.include? "vi"
-        #tab_6_content.content_to_hide
+        #tab_6_content.hide
           = render :partial => "materials/details/material_viscous_information", :locals => { :material => @material, :disabled => true }
 
-  :javascript   
+  :javascript
     var nav_links = $('#contentleft a')
     nav_links.each(function () {
       $(this).click(function() {
-        $('.content_to_hide').css('display','none');
         nav_links.removeClass('selected');
         $(this).addClass('selected');
-        $('#'+$(this).attr('id') + '_content').css('display','block');
+        $('.tab_content .show').addClass('hide');
+        $('.tab_content .show').removeClass('show');
+        $('#'+$(this).attr('id') + '_content').addClass('show');
       });
     });
     
