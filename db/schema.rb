@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110729090103) do
+ActiveRecord::Schema.define(:version => 20110801090113) do
 
   create_table "abonnements", :force => true do |t|
     t.string   "name"
@@ -294,11 +294,6 @@ ActiveRecord::Schema.define(:version => 20110729090103) do
     t.datetime "updated_at"
   end
 
-  create_table "models_users", :id => false, :force => true do |t|
-    t.integer "user_id"
-    t.integer "model_id"
-  end
-
   create_table "projects", :force => true do |t|
     t.string   "name"
     t.text     "description"
@@ -344,6 +339,16 @@ ActiveRecord::Schema.define(:version => 20110729090103) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "user_model_informations", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "model_id"
+    t.string   "rights"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_model_informations", ["user_id", "model_id"], :name => "index_user_model_informations_on_user_id_and_model_id"
 
   create_table "user_projects", :force => true do |t|
     t.integer  "user_id"

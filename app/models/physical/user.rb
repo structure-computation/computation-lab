@@ -32,8 +32,9 @@ class User < ActiveRecord::Base
   # Relations
   belongs_to  :company
 
-  has_and_belongs_to_many :models
-
+  has_many :user_model_informations
+  has_many :models,                 :through => :user_model_informations
+  
   has_many    :user_projects,  :dependent => :destroy # Pour les gestionnaires, reattribuer ce projet.
   has_many    :projects     ,  :through => :user_projects
   has_many    :owned_projects, :through => :user_projects, :source => :task , :conditions => { "user_projects.is_admin"     => true }

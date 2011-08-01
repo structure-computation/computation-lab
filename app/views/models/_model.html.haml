@@ -6,4 +6,8 @@
   %td= model.results
   %td v
   %td c
-  %td X
+  %td
+    = link_to "Editer", edit_company_model_path(@company, model)
+    \-
+    = link_to "Supprimer", company_model_path(@company, model), :method => :delete
+    = #link_to "Supprimer", :controller => "models", :action => "destroy"

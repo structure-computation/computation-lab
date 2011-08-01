@@ -6,12 +6,14 @@ SCInterface::Application.routes.draw do
   resources :companies do
     resources :materials
     resources :links
-
+    resources :models do 
+      post 'load_mesh', :on => :member
+    end
+    
     resources :bills do
       get 'download_bill', :on => :member
     end
     resources :members
-    resources :models
   end
   root :to => "home#index"
   

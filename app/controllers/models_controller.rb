@@ -5,8 +5,8 @@ class ModelsController < InheritedResources::Base
   include Socket::Constants
   before_filter :authenticate_user!
   belongs_to :company
-#  belongs_to :member
-  
+
+
   def index
     # @page = :lab
     # 
@@ -24,16 +24,35 @@ class ModelsController < InheritedResources::Base
     #     f.write(params[:json])
     # end
     @model = Model.new(params[:model])
-    @model.users   << current_user
-    @model.company = current_user.company
-    create!
+    @user_model_information = UserModelInformation.create(:model => @model , :user => current_user, :rights => "all") 
+    respond_to do |format|
+      if @model.save
+    	  format.html { redirect_to( :action => :index , :notice => 'Le modèle à bien été créé') }
+      else
+   	    format.html { render :action => "new" }
+      end
+    end
   end
 
+  # TODO: Uncomment for production
   def new
     @model = Model.new
 #    @model.add_repository()
     new!
   end
+
+  def show
+    show!
+  end
   
-  
+  def load_mesh
+    @model = Model.find(params[:id])
+    if params[:model].nil?
+      flash[:error] = "Vous n'avez pas séléctionné de fichier !"
+    else
+      @model.send_mesh(params[:model][:file], current_user) unless params[:model][:file].nil?
+    end
+    redirect_to company_model_path(@model)
+  end
+
 end

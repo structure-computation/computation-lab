@@ -8,8 +8,10 @@ class Model < ActiveRecord::Base
   belongs_to  :project
   
   has_many    :files_sc_models 
-  has_and_belongs_to_many    :users
-  
+
+  has_many :user_model_informations
+  has_many :users,                  :through => :user_model_informations
+
   has_many    :calcul_results
   has_many    :forum_sc_models
   
@@ -26,9 +28,8 @@ class Model < ActiveRecord::Base
     File.chmod 0777, path_to_model
   end
   
-  def send_mesh(params,current_user)
+  def send_mesh(file,current_user)
     # on enregistre les fichier sur le disque et on change les droit pour que le serveur de calcul y ai acces
-    file = params[:fichier] 
     name = file.original_filename
     if name.match(/.bdf/)
       extension = ".bdf"
