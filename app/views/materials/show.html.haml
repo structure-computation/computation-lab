@@ -4,12 +4,16 @@
       %li
         %a#tab_1.selected{:href => "#"} Info
       %li 
-        %a#tab_2{:href => "#"} Générique
+        %a#tab_2{:href => "#"} Directions principales
       %li 
-        %a#tab_3{:href => "#"} Elasticité
+        %a#tab_3{:href => "#"} Générique
       %li 
-        %a#tab_4{:href => "#"} Plasticité
-          
+        %a#tab_4{:href => "#"} Elasticité
+      %li 
+        %a#tab_5{:href => "#"} Plasticité
+      - if @material.comp.include? "vi"
+        %li    
+          %a#tab_6{:href => "#"} Viscosité
 -content_for :content_company do
   .tab_content
     %h2
@@ -37,27 +41,26 @@
               %span.material_behavior Endommageable
             - if @material.comp.include? "vi"
               %span.material_behavior Visqueux
-      
-          #material_information
-            = render :partial => "materials/details/material_main_information", :locals => { :material => @material, :disabled => true }
-    
-          #material_generic_information
-            = render :partial => "materials/details/material_generic_info", :locals => { :material => @material, :disabled => true }
-        
+        %p
+          Description
+        %p
+          = @material.description
+      #tab_2_content.content_to_hide
+        = render :partial => "materials/details/material_main_information", :locals => { :material => @material, :disabled => true }
+        = render :partial => "materials/details/material_generic_info", :locals => { :material => @material, :disabled => true }
+          
       - if @material.comp.include? "el"
-        #tab_2_content.content_to_hide
+        #tab_3_content.content_to_hide
           = render :partial => "materials/details/material_elastic_information", :locals => { :material => @material, :disabled => true }
       - if @material.comp.include? "pl"
-        #tab_3_content.content_to_hide
+        #tab_4_content.content_to_hide
           = render :partial => "materials/details/material_plastic_information", :locals => { :material => @material, :disabled => true }
       - if @material.comp.include? "en"
-        #tab_4_content.content_to_hide
+        #tab_5_content.content_to_hide
           = render :partial => "materials/details/material_damageable_information", :locals => { :material => @material, :disabled => true }
       - if @material.comp.include? "vi"
-        #tab_5_content.content_to_hide
+        #tab_6_content.content_to_hide
           = render :partial => "materials/details/material_viscous_information", :locals => { :material => @material, :disabled => true }
-    
-      = link_to "Retourner à la liste", company_materials_path
 
   :javascript   
     var nav_links = $('#contentleft a')
