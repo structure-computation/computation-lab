@@ -136,6 +136,27 @@ ActiveRecord::Schema.define(:version => 20110728132147) do
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
+  create_table "factures", :force => true do |t|
+    t.integer  "company_id"
+    t.integer  "credit_id"
+    t.integer  "log_abonnement_id"
+    t.string   "facture_type"
+    t.float    "price_calcul_HT"
+    t.float    "price_calcul_TVA"
+    t.float    "price_calcul_TTC"
+    t.float    "price_memory_HT"
+    t.float    "price_memory_TVA"
+    t.float    "price_memory_TTC"
+    t.float    "total_price_HT"
+    t.float    "total_price_TVA"
+    t.float    "total_price_TTC"
+    t.string   "ref"
+    t.string   "statut"
+    t.date     "paid_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "files_sc_models", :force => true do |t|
     t.integer  "sc_model_id"
     t.integer  "user_id"
