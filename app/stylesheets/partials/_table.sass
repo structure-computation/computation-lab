@@ -1,55 +1,38 @@
+/* Variables ------------------------------------------------------------- */
+                            
+$color-thead-start     : #B4B6C6 // Couleur du début du gradient du fond du table header
+$color-thead-end       : #818799 // Couleur de fin du gradient du fond du table header
+                       
+$line-height-thead     : 2.5em
+$font-size-thead       : 0.75em
+                       
+$line-height-cell      : 1.5em
+$color-border-cell     : white
+$padding-left-cell     : 0.5em
+$background-color-cell : #d0d1d7
+
 table.grey
-  width: 100%
-  border-collapse: collapse
+  width           : 100%
+  border-collapse : collapse
   thead
-    line-height: 2.5em
-    font-size: 0.75em
-    font-weight: normal
-    color: white
-    font-family: Verdana, Arial, Helvetica, sans-serif
-    text-align: left
-    +background-image(linear-gradient(#c5c7d7, #818799))
+    line-height : $line-height-thead
+    font-size   : $font-size-thead
+    font-weight : normal
+    color       : white
+    font-family : Verdana, Arial, Helvetica, sans-serif
+    text-align  : left
+    +background-image(linear-gradient($color-thead-start, $color-thead-end))
+    tr
+      th
+        padding-left: $padding-left-cell
   tbody
     tr
       background-color: #c4c5cd
       td
-        padding-left: 0.5em
-        line-height: 1.5em
-        border-right: 1px solid white
+        padding-left  : $padding-left-cell
+        line-height   : $line-height-cell
+        border-right  : 1px solid $color-border-cell
       td:last-child
-        border-right: none
+        border-right  : none
     tr:nth-child(odd)
-      background-color: #d0d1d7
-        
-.resume_table
-  +full(20)
-  h2
-    text-align: center
-    +border-top-radius(0.8em)
-    +background-image(linear-gradient(#e5e7f3, #afafb3))
-    line-height: 1.7em
-    border: 1px solid dimGray
-    margin-bottom: 0
-  .content_resume_table
-    +full(20)
-    
-    .ligne_resume_table
-      background-color: #B8B9C3
-      height: 5em
-      p
-        margin-top: 0
-      p.description
-        +columns(4,20)
-      p.abonnement
-        +columns(4,20)
-      p.utilisation
-        +columns(8,20)
-      p.modification
-        +columns(4,20)
-        +omega(20)
-    
-    .ligne_content_table
-      +full(20)
-      +omega(20)
-      .compte_content
-      .compte_menu
+      background-color: $background-color-cell
