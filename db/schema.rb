@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110728132147) do
+ActiveRecord::Schema.define(:version => 20110729090103) do
 
   create_table "abonnements", :force => true do |t|
     t.string   "name"
@@ -77,7 +77,7 @@ ActiveRecord::Schema.define(:version => 20110728132147) do
   end
 
   create_table "calcul_results", :force => true do |t|
-    t.integer  "sc_model_id"
+    t.integer  "model_id"
     t.integer  "user_id"
     t.datetime "result_date"
     t.datetime "launch_date"
@@ -297,6 +297,29 @@ ActiveRecord::Schema.define(:version => 20110728132147) do
     t.datetime "updated_at"
   end
 
+  create_table "models", :force => true do |t|
+    t.string   "name"
+    t.integer  "company_id"
+    t.integer  "project_id"
+    t.string   "model_file_path"
+    t.string   "image_path"
+    t.text     "description"
+    t.integer  "dimension"
+    t.integer  "sst_number"
+    t.integer  "parts"
+    t.integer  "interfaces"
+    t.integer  "used_memory"
+    t.string   "state"
+    t.datetime "deleted_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "models_users", :id => false, :force => true do |t|
+    t.integer "user_id"
+    t.integer "model_id"
+  end
+
   create_table "projects", :force => true do |t|
     t.string   "name"
     t.text     "description"
@@ -311,24 +334,6 @@ ActiveRecord::Schema.define(:version => 20110728132147) do
 
   create_table "sc_admins", :force => true do |t|
     t.integer  "company_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "sc_models", :force => true do |t|
-    t.string   "name"
-    t.integer  "company_id"
-    t.integer  "project_id"
-    t.string   "model_file_path"
-    t.string   "image_path"
-    t.text     "description"
-    t.integer  "dimension"
-    t.integer  "sst_number"
-    t.integer  "parts"
-    t.integer  "interfaces"
-    t.integer  "used_memory"
-    t.string   "state"
-    t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -372,14 +377,6 @@ ActiveRecord::Schema.define(:version => 20110728132147) do
   create_table "user_sc_admins", :force => true do |t|
     t.integer  "user_id"
     t.integer  "sc_admin_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "user_sc_models", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "sc_model_id"
-    t.integer  "role"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

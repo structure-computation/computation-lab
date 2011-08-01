@@ -1,43 +1,44 @@
-/ Vue Index des company.
-/ Liens vers les CSS
--#%link{ :href => "/stylesheets/main_accueil.css", :rel => "stylesheet", :media => "screen" }
-/ Javascript particulier a la page societe
--content_for :additionnal_javascript do
-  %script{ :src => "/javascripts/accueil/functions_layer_accueil.js" ,   :type => "text/javascript" }
-
-
-/ partie gauche du contenu, raccourci
 -content_for :left_submenu do
   #contentleft
     = render :partial => "partials/raccourcis_accueil"
-    = render :partial => "context_leftbox"
+    = render :partial => "left_submenu"
 
-/ partie droite du contenu, tableaux, informations importantes
--content_for :content do  
+-content_for :content_company do  
   .large_ligne
     %h2
       Mes outils
     %div
-      /outil de calcul
-      = render :partial => "resume_SC_Compute"
-      /outil de gestion de projet
-      /= render :partial => "resume_SC_Project"
-      /outil de gestion des compte
-      = render :partial => "resume_SC_Manage"
+      .ligne
+        =link_to '>',  :controller => "modele" 
+        %p.description
+          Utilisation en ligne de nos logiciels
+        %h3
+          Mes modèles 
+      .ligne
+        =link_to '>', companies_path
+        %p.description
+          Gestion des comptes et des droits d'accès
+        %h3
+          Ma société
       
   .large_ligne
     %h2
       Mon profil
     %div      
       /compte d'abonnement annuel
-      = render :partial => "resume_mon_profil"
+      .ligne
+        %a{ :style => "cursor: pointer;", :onclick => "affich_contenu_profil_user()" }
+          >
+        %p.description
+          Modification de vos données personnelles
+        %h3
+          Mes profil  
       = render :partial => "contenu_mon_profil"
-      /profil company
-      = render :partial => "resume_company"
-      = render :partial => "contenu_company"  
-      
-      
-  / fin de #contentright, partie droite du contenu
-  =javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery?
-  
-/= render :partial => "footer_top"
+      .ligne
+        %a{ :style => "cursor: pointer;", :onclick => "affich_contenu_profil_company()" }
+          >
+        %p.description
+          Contactez vos gestionnaires
+        %h3
+          Liste de vos gestionnaires
+      = render :partial => "contenu_company"

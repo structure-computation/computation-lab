@@ -1,4 +1,4 @@
-class ScModel < ActiveRecord::Base
+class Model < ActiveRecord::Base
   require 'json'
   require 'find'
   require 'socket'
@@ -7,9 +7,8 @@ class ScModel < ActiveRecord::Base
   belongs_to  :company
   belongs_to  :project
   
-  has_many    :user_sc_models 
   has_many    :files_sc_models 
-  has_many    :users    ,  :through => :user_sc_models
+  has_and_belongs_to_many    :users
   
   has_many    :calcul_results
   has_many    :forum_sc_models

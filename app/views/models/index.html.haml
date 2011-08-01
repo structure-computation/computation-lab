@@ -12,7 +12,7 @@
 -content_for :left_submenu do
   #contentleft      
     = render :partial => "partials/raccourcis_modele"
-    = render :partial => "left_submenu"
+    = render :partial => "ajouts_modele"
   
 -content_for :content_company do
   %table.grey
@@ -25,4 +25,5 @@
         %th                  Visu
         %th{ :colspan => 2 } Calcul
     %tbody
-      = render :partial => "modele", :collection => @model_list
+      = render @models
+  = link_to "Nouveau modèle", new_company_model_path

@@ -1,43 +1,15 @@
-/ Vue Index des companys.
-/ Liens vers les CSS
-%link{ :href => "/stylesheets/main_sc_admin_company.css", :rel => "stylesheet", :media => "screen" }
-
-/ Javascript particulier a la page sc_admin_company
-%script{ :src => "/javascripts/admin/functions_layer_sc_admin_company.js" ,   :type => "text/javascript" }
-
-/ wizard création de projet en premier plan
-.content
-  #bl_5.black.off
-  / wizard de creation d'un nouveau sc_admin_company
-  = render :partial => "company_nouveau"
-
-  / partie gauche du contenu, raccourci
+- content_for :left_submenu do 
   #contentleft
-    .contentheightmin
     = render :partial => "partials/raccourcis_admin"
     = render :partial => "context_leftbox"
-  / fin partie gauche du contenu
-  
-  / partie droite du contenu, tableaux, informations importantes
-  #contentright
-    #largeBox
-      %h2
-        Liste des société clientes
-    #largeBoxcontent
-      / taille minimum du contenu du contenu
-      .contentheightmin
-      / taille minimum du contenu du contenu
-      
-      #SCAdminCompanyDetail.off
-        = render :partial => "company_detail"
-      #SCAdminCompanyListe.on
-        = render :partial => "filtre_des_company"
-        / liste des projet
-        = render :partial => "company_list"
-        / fin largeBoxcontent de la liste des projet
-      
-/ fin de #contentright, partie droite du contenu
-%script{ :type => "text/javascript" }
-  $(document).ready(get_Tableau_company);
-  
-/= render :partial => "footer_top"
+
+- content_for :content_company do 
+  #largeBox
+    %h2
+      Liste des société clientes
+  #largeBoxcontent
+    #SCAdminCompanyDetail.off
+      = render :partial => "company_detail"
+    #SCAdminCompanyListe.on
+      = render :partial => "filtre_des_company"
+      = render :partial => "company_list"

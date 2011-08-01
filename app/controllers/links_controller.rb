@@ -2,11 +2,15 @@ class LinksController < InheritedResources::Base
   
   #session :cookie_only => false, :only => :upload
   before_filter :authenticate_user!
+  before_filter :set_page_name
   belongs_to    :company
   layout 'company'
   
+  def set_page_name
+    @page = :links
+  end
+  
   def index 
-    @page     = 'SCcompute'
     @company  = current_user.company
     if params[:type] == "standard"
       @links = Link.standard
