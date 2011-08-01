@@ -2,6 +2,8 @@ class ScAdminCompanyController < ApplicationController
   before_filter :authenticate_user!
   before_filter :valid_admin_user
   
+  layout 'company'
+  
   def index 
     @page = 'SCadmin'
     @companys = Company.all

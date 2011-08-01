@@ -22,27 +22,5 @@
         %td= manager.created_at.to_date
         %td= manager.lastname + " " + manager.firstname
         %td= manager.email
-%dl
-  %dt Nom
-  %dd= company.name
-    
-  %dt Division
-  %dd= company.division
-  
-  %dt Adresse
-  %dd= company.address
-  
-  %dt Ville
-  %dd= company.city
-  
-  %dt Code Postal
-  %dd= company.zipcode
-  
-  %dt Pays
-  %dd= company.country
-  
-  %dt TVA intracommunautaire
-  %dd= company.TVA
-  
-  %dt SIREN
-  %dd= company.siren
+        
+= render 'form'

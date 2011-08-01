@@ -21,5 +21,15 @@
               %th
               %th
         %tbody
-          = render @links
+          - @links.each do |link|
+            %tr
+              %td= link_to "Détails", [@company, link]
+              %td= link.name
+              %td= link.family
+              %td= link.comp_generique
+              %td= link.comp_complexe
+              - if link.company and link.company.id == current_user.company.id
+                %td= link_to "Editer"   , edit_company_link_path(@company, link)
+                %td= link_to "Supprimer", {:action=>"destroy", :controller=>"link", :id => link.id}, :method => :delete
+
     = link_to "Nouvelle liaison", new_company_link_path

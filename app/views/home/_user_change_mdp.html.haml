@@ -1,31 +1,18 @@
-#Box_change_mdp_user.off
-  .DetailCadreModel1
-    .DetailCadreModelMarge
-    .DetailCadreModelLigne
-      .DetailCadreModelCase1
-        Mot de passe actuel
-      .DetailCadreModelCase2
-        %input#membre_change_password{ :type => "password", :onKeyup => "user_mdp_change_value()" }
-    .DetailCadreModelLigne  
-      .DetailCadreModelCase1
-        Nouveau mot de passe
-      .DetailCadreModelCase2
-        %input#membre_change_new_password{ :type => "password", :onKeyup => "user_mdp_change_value()" }
-    .DetailCadreModelLigne  
-      .DetailCadreModelCase1
-        Répéter mot de passe
-      .DetailCadreModelCase2
-        %input#membre_change_password_confirmation{ :type => "password", :onKeyup => "user_mdp_change_value()" }
+%p
+  %label
+    Mot de passe actuel
+  %input#membre_change_password{ :type => "password", :onKeyup => "user_mdp_change_value()" }
+%p
+  %label
+    Nouveau mot de passe
+  %input#membre_change_new_password{ :type => "password", :onKeyup => "user_mdp_change_value()" }
+%p
+  %label
+    Répéter mot de passe
+  %input#membre_change_password_confirmation{ :type => "password", :onKeyup => "user_mdp_change_value()" }
 
-    .DetailCadreModelMarge
-    .DetailCadreModelMarge
-    
-    .DetailCadreLink
-      %a{ :onclick => "affich_detail_user()", :style => "cursor: pointer;" } 
-        Annuler
-    .DetailCadreLink
-      %a{ :onclick => "user_mdp_change_valid()", :style => "cursor: pointer;" } 
-        Valider
+%a.yellow_button{ :onclick => "affich_detail_user()", :style => "cursor: pointer;" } 
+  Annuler
 
-    .DetailCadreModelMarge
-    .DetailCadreModelMarge
+%a.yellow_button{ :onclick => "user_mdp_change_valid()", :style => "cursor: pointer;" } 
+  Valider
