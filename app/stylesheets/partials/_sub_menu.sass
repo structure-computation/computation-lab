@@ -70,3 +70,36 @@
     li.picto_profil
       a
         background: url('/images/picto_profil.png') no-repeat left center
+        
+ul.tab_submenu
+  list-style: none
+  margin-top: 2em
+  padding-left: 0
+  li
+    font-family: Verdana, Arial, Helvetica, sans-serif
+    font-size: 0.9em
+    background-color: $color-tab-start
+    padding: 0.2em 1em 0.2em 1em
+    line-height: 2em
+    margin-bottom: 0.2em
+    +border-left-radius(0.4em)
+    color: $color-font-header
+  li.selected
+    +background-image(linear-gradient($color-tab-selected-start, $color-tab-selected-end))
+    color       : $color-font-selected-tab
+    font-weight : bold
+
+    
+div.tab_content
+  border: 2px $color-tab-selected-end solid
+  +border-radius(0.4em)
+  margin-left: -1.4%
+  background-color: #F0F0F0
+  h2
+    margin-top: 0
+    padding: 0.2em
+    +border-top-radius(0.2em)
+    +background-image(linear-gradient($color-tab-selected-start, $color-tab-selected-end))
+    text-align: center  
+  .wrapper
+    padding: 1%

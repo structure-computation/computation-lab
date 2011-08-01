@@ -16,7 +16,7 @@ $color-font-header          : #E5E5E5 // Couleur de la police du header
 $font-size-header           : 13px    // Taille de la police de l'ensemble des textes du header ormis le menu
                             
 $gap-between-tabs           : 2px     // Ecart entre les onglets du menu
-$width-tab                  : 12em     // Largeur des onglets, définie en 'em' pour s'agrandir avec la taille de la police
+$width-tab                  : 10em     // Largeur des onglets, définie en 'em' pour s'agrandir avec la taille de la police
 $height-tab                 : 25px    // Hauteur des onglets
 $radius-tab                 : 10px    // taille de l'arrondi des onglets
 $font-size-tab              : 16px    // Taille de la police des onglets
@@ -100,7 +100,7 @@ header
       +full   
       #main_menu
         padding-left : 0 // Suppression du padding pour aligner les tabs à gauche.
-        #home_tab, #company_tab, #lab_tab
+        li
           float : left
           list-style-type : none
           background-color: transparent
@@ -118,7 +118,7 @@ header
           .main_submenu
             display : none
 
-        #home_tab.selected, #company_tab.selected, #lab_tab.selected
+        li.selected
           a
             +background-image(linear-gradient($color-tab-selected-start, $color-tab-selected-end))
             color       : $color-font-selected-tab
