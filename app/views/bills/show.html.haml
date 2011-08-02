@@ -29,11 +29,6 @@
       %td € TVA
       %td € TTC
   %body
-    %tr
-      %td
-      %td= @bill.total_price_HT
-      %td= @bill.total_price_TVA
-      %td= @bill.total_price_TTC
 
     %tr
       %td 
@@ -43,9 +38,9 @@
         - elsif @bill.facture_type == "calcul"
           Forfait de calcul :
           = @bill.credit.forfait.name
-      %td -
-      %td -
-      %td -
+      %td= @bill.total_price_HT
+      %td= @bill.total_price_TVA
+      %td= @bill.total_price_TTC
     %tr
       %td 
         - if @bill.facture_type == "memoire"

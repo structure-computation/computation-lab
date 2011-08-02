@@ -2,6 +2,8 @@ class BillsController < InheritedResources::Base
   before_filter :authenticate_user!
   respond_to :html, :json
   belongs_to :company
+  actions :index, :show, :new, :create
+  
   #TODO remplacer chargement JSON par chargement normal (sans requête ajax)
   # def index
   #   @id_company = @current_company.id

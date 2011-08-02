@@ -8,7 +8,7 @@
     = link_to 'Ma société', companies_path
         
   %li{:class => ( @page == :lab ? "selected" : "")}
-    = link_to 'Mes modèles', company_models_path(current_user.company)
+    = link_to 'Mes modèles', company_sc_models_path(current_user.company)
 
   %li{:class => ( @page == :materials ? "selected" : "")}
     = link_to 'Matériaux', company_materials_path(current_user.company)

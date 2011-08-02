@@ -1,5 +1,5 @@
 # This controller handles the login/logout function of the site.  
-class ModelsController < InheritedResources::Base
+class ScModelsController < InheritedResources::Base
   #session :cookie_only => false, :only => :upload
   require 'socket'
   include Socket::Constants
@@ -17,10 +17,10 @@ class ModelsController < InheritedResources::Base
   def index
     # @page = :lab
     # 
-    @models = current_user.models
-    @models.each{ |model|
-      model[:results]  = model.calcul_results.find(:all, :conditions => {:log_type => "compute", :state => "finish"}).size
-    #   model[:project] = "hors projet"
+    @sc_models = current_user.sc_models
+    @sc_models.each{ |sc_model|
+      sc_model[:results]  = sc_model.calcul_results.find(:all, :conditions => {:log_type => "compute", :state => "finish"}).size
+    #   sc_model[:project] = "hors projet"
     }
     index!
   end
@@ -30,11 +30,11 @@ class ModelsController < InheritedResources::Base
     # File.open("#{RAILS_ROOT}/public/test/test_post_create_#{num_model}", 'w+') do |f|
     #     f.write(params[:json])
     # end
-    @model = Model.new(params[:model])
-    @user_model_information = UserModelInformation.create(:model => @model , :user => current_user, :rights => "all") 
+    @sc_model = ScModel.new(params[:sc_model])
+    @user_model_ownership = UserModelOwnership.create(:sc_model => @sc_model , :user => current_user, :rights => "all") 
     respond_to do |format|
-      if @model.save
-    	  format.html { redirect_to( :action => :index , :notice => 'Le modèle à bien été créé') }
+      if @sc_model.save
+    	  format.html { redirect_to(:action => :index) }
       else
    	    format.html { render :action => "new" }
       end
@@ -43,8 +43,8 @@ class ModelsController < InheritedResources::Base
 
   # TODO: Uncomment for production
   def new
-    @model = Model.new
-#    @model.add_repository()
+    @sc_model = ScModel.new
+#    @sc_model.add_repository()
     new!
   end
 
@@ -53,13 +53,13 @@ class ModelsController < InheritedResources::Base
   end
   
   def load_mesh
-    @model = Model.find(params[:id])
+    @sc_model = ScModel.find(params[:id])
     if params[:model].nil?
       flash[:error] = "Vous n'avez pas séléctionné de fichier !"
     else
-      @model.send_mesh(params[:model][:file], current_user) unless params[:model][:file].nil?
+      @sc_model.send_mesh(params[:model][:file], current_user) unless params[:model][:file].nil?
     end
-    redirect_to company_model_path(@model)
+    redirect_to company_model_path(@sc_model)
   end
 
 end

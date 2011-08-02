@@ -6,7 +6,7 @@ SCInterface::Application.routes.draw do
   resources :companies do
     resources :materials
     resources :links
-    resources :models do 
+    resources :sc_models do 
       post 'load_mesh', :on => :member
     end
     
