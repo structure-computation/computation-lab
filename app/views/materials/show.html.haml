@@ -5,7 +5,7 @@
     %ul
       %li.LM_pic_materiau
         =link_to 'Retour à la liste des matériaux', company_materials_path(@company)
-
+        
 -content_for :right_top do          
   %h2.grey
     Description
@@ -71,15 +71,4 @@
         #tab_5_content.hide
           = render :partial => "materials/details/material_viscous_information", :locals => { :material => @material, :disabled => true }
 
-  :javascript
-    var nav_links = $('ul.tab_submenu a')
-    nav_links.each(function () {
-      $(this).click(function() {
-        nav_links.removeClass('selected');
-        $(this).addClass('selected');
-        $('.tab_content .show').addClass('hide');
-        $('.tab_content .show').removeClass('show');
-        $('#'+$(this).attr('id') + '_content').addClass('show');
-      });
-    });
-    
+  = render "shared/tab_javascript"

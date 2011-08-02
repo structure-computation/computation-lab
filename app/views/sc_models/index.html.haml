@@ -1,8 +1,18 @@
--content_for :left_submenu do
-  #contentleft      
-    = render :partial => "partials/raccourcis_modele"
+-content_for :left_top do
+  .left_submenu
+    %h2.grey
+      Menu
+    %ul
+      %li.LM_pic_new_model
+        = link_to "Nouveau modèle", new_company_sc_model_path  
+
+-content_for :right_top do
+  %h2.grey
+    Liste des modèles 
+  %div
+    = render :partial => "search_filter"
   
--content_for :content_company do
+-content_for :right_content do
   %table.grey
     %thead
       %tr
@@ -23,4 +33,4 @@
           %td v
           %td c
           %td X
-  = link_to "Nouveau modèle", new_company_sc_model_path
+
