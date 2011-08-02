@@ -1,19 +1,20 @@
 /* Variables ------------------------------------------------------------- */
                             
-$color-thead-start     : #B4B6C6 // Couleur du début du gradient du fond du table header
+$color-thead-start     : #A3A5B5 // Couleur du début du gradient du fond du table header
 $color-thead-end       : #818799 // Couleur de fin du gradient du fond du table header
                        
 $line-height-thead     : 2.5em
 $font-size-thead       : 0.75em
                        
 $line-height-cell      : 1.5em
-$color-border-cell     : white
+$color-border-cell     : #555
 $padding-left-cell     : 0.5em
 $background-color-cell : #d0d1d7
 
 table.grey
   width           : 100%
   border-collapse : collapse
+  border: 1px solid #555
   thead
     line-height : $line-height-thead
     font-size   : $font-size-thead
@@ -22,12 +23,21 @@ table.grey
     font-family : Verdana, Arial, Helvetica, sans-serif
     text-align  : left
     +background-image(linear-gradient($color-thead-start, $color-thead-end))
+    border-bottom: 1px solid #555
     tr
       th
         padding-left: $padding-left-cell
   tbody
     tr
-      background-color: #c4c5cd
+      background-color: $color-thead-start
+      th
+        padding-right  : $padding-left-cell
+        background-color: #818799
+        text-align: right
+        border-right: 1px solid $color-border-cell
+        font-weight : normal
+        color       : white
+        font-family : Verdana, Arial, Helvetica, sans-serif
       td
         padding-left  : $padding-left-cell
         line-height   : $line-height-cell
@@ -36,3 +46,9 @@ table.grey
         border-right  : none
     tr:nth-child(odd)
       background-color: $background-color-cell
+      
+.search_filter
+  height: 3em
+  background-color: #F0F0F0
+  border  : 1px solid #B2B2B2
+  text-align: center

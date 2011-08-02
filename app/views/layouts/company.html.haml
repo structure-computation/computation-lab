@@ -1,6 +1,13 @@
 -content_for :content do
-  = yield :left_submenu
+  #header_company
+    #left_top
+      = yield :left_top
+    #right_top
+      = yield :right_top
   #content_company
-    = yield :content_company
+    #left_content
+      = yield :left_content
+    #right_content
+      = yield :right_content
 
 =render :file => 'layouts/application'

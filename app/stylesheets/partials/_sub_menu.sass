@@ -1,24 +1,10 @@
-#contentleft
-  +columns(4)
-
-.left_submenu
-  margin-top: 0.5em
+#left_top
   margin-bottom: 0.5em
-  h2
-    font-size: 110%
-    text-align: center
-    font-weight: 100
-    +border-top-radius(0.8em)
-    +background-image(linear-gradient(#e5e7f3, #afafb3))
-    line-height: 1.7em
-    border: 1px solid dimGray
-    border-bottom: none
-    margin-bottom: 0
   ul 
     list-style-type: none
     padding-top: 0.5em
     padding-bottom: 0.5em
-    border: 1px solid dimGray
+    border: 1px solid #B2B2B2
     padding-left: 1em
     margin-top: 0
     background-color: white
@@ -27,7 +13,8 @@
         color: dimGray
         font-size: 100%
         padding-left: 20px
-        line-height: 1.8em
+        padding-top: 0.7em
+        padding-bottom: 0.7em
         display: block
         margin: auto
         text-decoration: underline
@@ -61,45 +48,17 @@
     li.LM_pic_materiau
       a
         background: url('/images/LM_pic_materiau.png') no-repeat left center 
+    li.LM_pic_new_mat
+      a
+        background: url('/images/LM_pic_new_mat.png') no-repeat left center 
     li.LM_pic_liaison
       a
         background: url('/images/LM_pic_liaison.png') no-repeat left center
     li.LM_pic_new_liaison
       a
-        background: url('/images/LM_pic_liaison.png') no-repeat left center        
+        background: url('/images/LM_pic_new_liaison.png') no-repeat left center        
     li.picto_profil
       a
         background: url('/images/picto_profil.png') no-repeat left center
-        
-ul.tab_submenu
-  list-style: none
-  margin-top: 2em
-  padding-left: 0
-  li
-    font-family: Verdana, Arial, Helvetica, sans-serif
-    font-size: 0.9em
-    background-color: $color-tab-start
-    padding: 0.2em 1em 0.2em 1em
-    line-height: 2em
-    margin-bottom: 0.2em
-    +border-left-radius(0.4em)
-    color: $color-font-header
-  li.selected
-    +background-image(linear-gradient($color-tab-selected-start, $color-tab-selected-end))
-    color       : $color-font-selected-tab
-    font-weight : bold
 
-    
-div.tab_content
-  border: 2px $color-tab-selected-end solid
-  +border-radius(0.4em)
-  margin-left: -1.4%
-  background-color: #F0F0F0
-  h2
-    margin-top: 0
-    padding: 0.2em
-    +border-top-radius(0.2em)
-    +background-image(linear-gradient($color-tab-selected-start, $color-tab-selected-end))
-    text-align: center  
-  .wrapper
-    padding: 1%
+  

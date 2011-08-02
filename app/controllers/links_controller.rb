@@ -7,7 +7,7 @@ class LinksController < InheritedResources::Base
   layout 'company'
   
   def set_page_name
-    @page = :links
+    @page = :bibliotheque
   end
   
   def index 

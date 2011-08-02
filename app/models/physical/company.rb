@@ -6,7 +6,7 @@ class Company < ActiveRecord::Base
   has_one   :memory_account	, :readonly => false
   
   has_many  :projects		    , :readonly => false
-  has_many  :models		      , :readonly => false
+  has_many  :sc_models      , :readonly => false
   has_many  :materials		  , :readonly => false
   has_many  :links		      , :readonly => false
   has_many  :factures		    , :readonly => false
