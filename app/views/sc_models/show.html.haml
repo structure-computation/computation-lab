@@ -25,7 +25,8 @@
         %td= @sc_model.interfaces
 
   %h3
-    Outils
+    Outils    
+  / SI LE MAILLAGE N'EST PAS CHARGé
   %p
     Pour accéder aux outils, vous devez d abord charger un maillage pour ce modéle
   %p
@@ -34,12 +35,32 @@
     = f.inputs do
       = f.input :file, :as => :file
     = f.buttons
-    
+
+  / SINON
+  %ul
+    %li= link_to "Calcul des structures", :controller => "calculs", :action => "index", :model_id => @sc_model.id
+    %li= link_to "Visualisation"        , :controller => "visualisations", :action => "index", :model_id => @sc_model.id
+    %li= link_to "Partager un fichier"
+
   %h3
     Résultats
   %p
-    Pour accéder aux outils, vous devez d abord charger un maillage pour ce modéle
-
+    %table
+      %thead
+        %tr
+          %th Date
+          %th Nom
+          %th
+          %th
+          %th
+      %tbody
+        = @sc_model.calcul_results.each do |result|
+          %tr
+            %td= result.result_date
+            %td= result.name
+            %td= link_to "Voir"
+            %td= link_to "Télécharger"
+            %td= button_to "Supprimer", :controller => "calcul_results", :action => "destroy"
   %h3
     Utilisateurs
   %p
