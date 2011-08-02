@@ -32,8 +32,8 @@ class User < ActiveRecord::Base
   # Relations
   belongs_to  :company
 
-  has_many :user_model_informations
-  has_many :models,                 :through => :user_model_informations
+  has_many    :user_model_ownerships
+  has_many    :sc_models,                 :through => :user_model_ownerships
   
   has_many    :user_projects,  :dependent => :destroy # Pour les gestionnaires, reattribuer ce projet.
   has_many    :projects     ,  :through => :user_projects

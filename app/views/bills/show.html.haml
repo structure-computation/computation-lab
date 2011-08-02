@@ -1,0 +1,82 @@
+%p
+  Référence :
+  = @bill.ref
+  Date :
+  /TODO: Quelle date ?
+  = @bill.created_at
+  Status :
+  = @bill.statut
+
+%h4
+  Gestionaire :
+%p
+  = @manager.firstname
+  = @manager.lastname
+%p
+  = @company.name
+  = @company.division
+%p 
+  = @company.address
+  = @company.zipcode
+  = @company.city
+  = @company.country
+
+%table
+  %thead
+    %tr
+      %td
+      %td € HT
+      %td € TVA
+      %td € TTC
+  %body
+
+    %tr
+      %td 
+        - if @bill.facture_type == "memoire"
+          Abonnement espace mémoire :
+          = @bill.log_abonnement.abonnement.name
+        - elsif @bill.facture_type == "calcul"
+          Forfait de calcul :
+          = @bill.credit.forfait.name
+      %td= @bill.total_price_HT
+      %td= @bill.total_price_TVA
+      %td= @bill.total_price_TTC
+    %tr
+      %td 
+        - if @bill.facture_type == "memoire"
+          Mémoire assigné
+          = @bill.log_abonnement.abonnement.assigned_memory
+        - elsif @bill.facture_type == "calcul"
+          Nombre de jetons standard
+          = @bill.credit.forfait.nb_jetons
+      %td -
+      %td -
+      %td -
+    %tr
+      %td 
+        - if @bill.facture_type == "memoire"
+          Niveau de sécurité
+          = @bill.log_abonnement.abonnement.security_level
+        - elsif @bill.facture_type == "calcul"
+          Nombre de jetons tampons :
+          = @bill.credit.forfait.nb_jetons_tempon
+      %td -
+      %td -
+      %td -
+    %tr
+      %td 
+        - if @bill.facture_type == "memoire"
+          Nombre d'utilisateur maximum
+          = @bill.log_abonnement.abonnement.nb_max_user
+        - elsif @bill.facture_type == "calcul"
+          Durée de validité (mois) : 
+          = @bill.credit.forfait.validity
+      %td -
+      %td -
+      %td -
+
+    %tr
+      %td Total
+      %td= @bill.total_price_HT
+      %td= @bill.total_price_TVA
+      %td= @bill.total_price_TTC

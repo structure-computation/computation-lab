@@ -1,0 +1,58 @@
+-content_for :additionnal_javascripts do
+  %script{ :src => "/javascripts/modele/functions_file.js" ,   :type => "text/javascript" }
+
+-content_for :content_company do
+  / TODO Vérifier les données affichés
+  %h3
+    Détail du modèle : 
+    = @sc_model.name
+  
+  %table
+    %tbody
+      %tr
+        %td Dimension
+        %td= @sc_model.dimension
+      %tr
+        %td Nombre d'élèments
+        %td= @sc_model.parts
+  %table
+    %tbody
+      %tr
+        %td Nombre de pièces
+        %td= @sc_model.parts
+      %tr
+        %td Nombre de liaisons
+        %td= @sc_model.interfaces
+
+  %h3
+    Outils
+  %p
+    Pour accéder aux outils, vous devez d abord charger un maillage pour ce modéle
+  %p
+    Charger votre maillage
+  - semantic_form_for [@company, @sc_model], :url => {:controller => "sc_models", :action => "load_mesh"}, :html => {:multipart => true, :method => :post} do |f|
+    = f.inputs do
+      = f.input :file, :as => :file
+    = f.buttons
+    
+  %h3
+    Résultats
+  %p
+    Pour accéder aux outils, vous devez d abord charger un maillage pour ce modéle
+
+  %h3
+    Utilisateurs
+  %p
+    Liste des utilisateurs ayant accès à ce modéle
+  %table
+    %thead
+      %tr
+        %td E-mail
+        %td Nom
+        %td Role
+    %tbody
+      - @sc_model.user_model_ownerships.each do |info|
+        %tr
+          = info.user.email
+          = info.user.firstname
+          = info.rights

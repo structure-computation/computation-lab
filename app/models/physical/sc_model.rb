@@ -1,4 +1,4 @@
-class Model < ActiveRecord::Base
+class ScModel < ActiveRecord::Base
   require 'json'
   require 'find'
   require 'socket'
@@ -9,8 +9,8 @@ class Model < ActiveRecord::Base
   
   has_many    :files_sc_models 
 
-  has_many :user_model_informations
-  has_many :users,                  :through => :user_model_informations
+  has_many :user_model_ownerships
+  has_many :users,                  :through => :user_model_ownerships
 
   has_many    :calcul_results
   has_many    :forum_sc_models
@@ -23,9 +23,9 @@ class Model < ActiveRecord::Base
   
   def add_repository()
     # on crée le repertoir du modele
-    path_to_model = "#{SC_MODEL_ROOT}/model_#{self.id}"
-    Dir.mkdir(path_to_model, 0777) unless File.exists?(path_to_model)
-    File.chmod 0777, path_to_model
+    path_to_sc_model = "#{SC_MODEL_ROOT}/model_#{self.id}"
+    Dir.mkdir(path_to_sc_model, 0777) unless File.exists?(path_to_sc_model)
+    File.chmod 0777, path_to_sc_model
   end
   
   def send_mesh(file,current_user)
@@ -42,12 +42,12 @@ class Model < ActiveRecord::Base
       return results
     end
     
-    path_to_model = "#{SC_MODEL_ROOT}/model_#{self.id}"
+    path_to_sc_model = "#{SC_MODEL_ROOT}/model_#{self.id}"
     path_to_mesh = "#{SC_MODEL_ROOT}/model_#{self.id}/MESH"
-    Dir.mkdir(path_to_model, 0777) unless File.exists?(path_to_model)
+    Dir.mkdir(path_to_sc_model, 0777) unless File.exists?(path_to_sc_model)
     Dir.mkdir(path_to_mesh, 0777) unless File.exists?(path_to_mesh)
     path_to_file = path_to_mesh + "/mesh" + extension
-    File.chmod 0777, path_to_model
+    File.chmod 0777, path_to_sc_model
     File.chmod 0777, path_to_mesh
     
     File.open(path_to_file, 'w+') do |f|
@@ -90,12 +90,12 @@ class Model < ActiveRecord::Base
     file = params[:file] 
     name = file.original_filename
     
-    path_to_model = "#{SC_MODEL_ROOT}/model_#{self.id}"
+    path_to_sc_model = "#{SC_MODEL_ROOT}/model_#{self.id}"
     path_to_dir_file = "#{SC_MODEL_ROOT}/model_#{self.id}/FILE"
-    Dir.mkdir(path_to_model, 0777) unless File.exists?(path_to_model)
+    Dir.mkdir(path_to_sc_model, 0777) unless File.exists?(path_to_sc_model)
     Dir.mkdir(path_to_dir_file, 0777) unless File.exists?(path_to_dir_file)
     path_to_file = path_to_dir_file + '/' + name
-    File.chmod 0777, path_to_model
+    File.chmod 0777, path_to_sc_model
     File.chmod 0777, path_to_dir_file
     
     File.open(path_to_file, 'w+') do |f|
@@ -148,8 +148,8 @@ class Model < ActiveRecord::Base
   
   def get_used_memory()
     dirsize =0
-    path_to_model = "#{SC_MODEL_ROOT}/model_#{self.id}"
-    Find.find(path_to_model) do |f| 
+    path_to_sc_model = "#{SC_MODEL_ROOT}/model_#{self.id}"
+    Find.find(path_to_sc_model) do |f| 
       dirsize += File.stat(f).size 
     end 
     self.used_memory = dirsize

@@ -1,0 +1,26 @@
+-content_for :left_submenu do
+  #contentleft      
+    = render :partial => "partials/raccourcis_modele"
+  
+-content_for :content_company do
+  %table.grey
+    %thead
+      %tr
+        %th
+        %th                  Nom
+        %th                  Projet
+        %th                  Résultat
+        %th                  Visu
+        %th{ :colspan => 2 } Calcul
+    %tbody
+      - @sc_models.each do |sc_model|
+        %tr
+          %td
+            = link_to 'Détails', company_sc_model_path(@company, sc_model)
+          %td= sc_model.name
+          %td= sc_model.project
+          %td= sc_model.results
+          %td v
+          %td c
+          %td X
+  = link_to "Nouveau modèle", new_company_sc_model_path
