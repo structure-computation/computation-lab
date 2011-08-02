@@ -22,5 +22,5 @@
           %td= sc_model.results
           %td v
           %td c
-          %td X
+          %td= button_to 'Supprimer', company_sc_model_path(@company, sc_model), :method => :delete
   = link_to "Nouveau modèle", new_company_sc_model_path
