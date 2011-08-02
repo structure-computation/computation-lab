@@ -7,21 +7,32 @@
   %script{ :src => "/javascripts/companies/forfait/functions_forfait.js"        ,   :type => "text/javascript" }
   %script{ :src => "/javascripts/companies/abonnement/functions_abonnement.js"  ,   :type => "text/javascript" }
   
--content_for :left_submenu do
-  #contentleft
-    = render :partial => "partials/raccourcis_company"
-    = render :partial => "left_submenu"
+-content_for :left_top do
+  .left_top
+    %h2.grey
+      Comptes
+    %ul
+      %li.manage_pic_compte_memoire
+        %a{ :style => "cursor: pointer;", :onclick => "affich_contenu_compte_abonnement()" }
+          Abonnement
+      %li.manage_pic_compte_abonnement
+        %a{ :style => "cursor: pointer;", :onclick => "affich_contenu_compte_calcul()" }
+          Forfait calcul
+      %li.manage_pic_liste_membre
+        = link_to 'Liste des membres', company_members_path(current_user.company)
+      %li.manage_pic_liste_factures
+        = link_to 'Liste des factures', company_bills_path(current_user.company)
   
--content_for :content_company do
+-content_for :right_content do
   .resume_table
-    %h2
+    %h2.grey
       Tableau de bord
     .content_resume_table
       = render :partial => "abonnement"
       = render :partial => "calcul", :object => @company
   
   .resume_table
-    %h2
+    %h2.grey
       Profil
     .content_resume_table
       = render :partial => "company", :object => @company

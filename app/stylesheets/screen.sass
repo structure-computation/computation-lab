@@ -5,7 +5,7 @@
 @import compass/css3/border-radius
 @import compass/typography/links/unstyled-link
 @import compass/typography/links/hover-link
-
+@import compass/css3/box-shadow
 /* Variables ------------------------------------------------------------- */
 
 $largeur-min : 950px
@@ -28,15 +28,16 @@ $largeur-max : 90%
   line-height: 2em
   padding: 0.3em 2em 0.3em 2em
   +border-radius(0.4em)
-  border: 1px solid #555
+  border: 1px solid white
   color: #333
   text-decoration: none
+  +single-box-shadow(rgba(0,0,0,0.4), 1px, 1px, 4px)
 
 .yellow_button:hover
   +background-image(linear-gradient(#FEA82A, #FDDE35))
 
 html
-  font-family: Verdana, Arial, Helvetica, sans-serif
+  font-family: Helvetica, Arial, sans-serif
   font-size: 90%
   
 body

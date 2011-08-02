@@ -5,7 +5,7 @@
     =link_to 'Accueil', root_path
   
   %li{:class => ( @page == :manage ? "selected" : "")}
-    = link_to 'Ma société', companies_path
+    = link_to 'Gestion', companies_path
           
   %li{:class => ( @page == :bibliotheque ? "selected" : "")}
     %a
@@ -15,7 +15,6 @@
         = link_to 'Modèles', company_sc_models_path(current_user.company)
       %li
         = link_to 'Matériaux', company_materials_path(current_user.company)
-    
       %li
         = link_to 'Liaisons', company_links_path(current_user.company)
 
