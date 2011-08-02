@@ -11,7 +11,7 @@ class ModelsController < InheritedResources::Base
 #  belongs_to :member
   
   def set_page_name
-    @page = :lab
+    @page = :bibliotheque
   end
 
   def index

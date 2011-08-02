@@ -1,0 +1,50 @@
+.large_ligne
+  h2
+    font-size: 100%
+    text-align: center
+    font-weight: 100
+    +border-top-radius(0.8em)
+    +background-image(linear-gradient(#e5e7f3, #afafb3))
+    line-height: 1.7em
+    border: 1px solid dimGray
+    border-bottom: none
+    margin-bottom: 0
+  .ligne
+    +background-image(linear-gradient(#f6f8f4, #e5e7f3))
+    height: 6em
+    width: 100%
+    a
+      +columns(2, 20)
+      text-align: center
+      border-left: 1px solid dimGray 
+      font-size: 1em 
+      color: transparent 
+      padding-top: 2.5em
+      padding-bottom: 2.4em
+      background: url('/images/manage_fleche_compte_cote.png') no-repeat center center
+    p.description
+      +columns(6, 20)
+      border-left: 1px solid dimGray
+      border-right: 1px solid dimGray
+      text-align: center
+      margin: 0
+      line-height: 100%
+      padding-top: 2.9em
+      padding-bottom: 2.9em
+      font-size: 0.9em
+      font-family: Verdana, Arial, Helvetica, sans-serif
+    h3
+      +prefix(1, 20)
+      +columns(11, 20)
+      +omega(20)
+      color: #2A3556
+      font-size: 1.1em
+      padding-top: 2.2em
+      padding-bottom: 2.1em
+      margin: 0
+      font-weight: bold
+      font-family: Verdana, Arial, Helvetica, sans-serif
+      text-align: left 
+      border-right: 1px solid dimGray 
+  .ligne:last-child
+    border-bottom: 1px solid dimGray

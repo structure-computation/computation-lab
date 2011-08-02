@@ -1,36 +1,33 @@
--content_for :left_submenu do
-  #contentleft
-    = render :partial => "partials/raccourcis_modele"
-
--content_for :content_company do
-  %h2
+-content_for :left_top do
+  = render :partial => "partials/raccourcis_modele"
+-content_for :right_top do
+  %h2.grey
     Liste des matériaux 
   %div
     = render :partial => "search_filter"
-    - if !@materials.empty?
-      %table.grey
-        %thead
-          %tr
-            %th 
-            %th Nom
-            %th Famille
-            %th Type
-            %th Comportement
-            / Pour afficher les colonnes Editer et Supprimer
-            - if params[:type] != "standard" 
-              %th
-              %th
-        %tbody
-          - @materials.each do |material|
-            %tr
-              %td= link_to "Détails", [@company, material]
-              %td= material.name
-              %td= material.family
-              %td= material.mtype
-              %td= material.comp
-              - if material.company and material.company.id == current_user.company.id
-                %td= link_to "Editer"   , edit_company_material_path(@company, material)
-                %td= link_to "Supprimer", {:action=>"destroy", :controller=>"materials", :id => material.id}, :method => :delete
 
-    = link_to "Nouveau materiaux", new_company_material_path
-      
+-content_for :right_content do
+  - if !@materials.empty?
+    %table.grey
+      %thead
+        %tr
+          %th 
+          %th Nom
+          %th Famille
+          %th Type
+          %th Comportement
+          / Pour afficher les colonnes Editer et Supprimer
+          - if params[:type] != "standard" 
+            %th
+            %th
+      %tbody
+        - @materials.each do |material|
+          %tr
+            %td= link_to "Détails", [@company, material]
+            %td= material.name
+            %td= material.family
+            %td= material.mtype
+            %td= material.comp
+            - if material.company and material.company.id == current_user.company.id
+              %td= link_to "Editer"   , edit_company_material_path(@company, material)
+              %td= link_to "Supprimer", {:action=>"destroy", :controller=>"materials", :id => material.id}, :method => :delete    

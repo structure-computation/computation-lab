@@ -117,9 +117,23 @@ header
             +background-image(linear-gradient(lighten($color-tab-start, 5%), lighten($color-tab-end, 5%)))
           .main_submenu
             display : none
-
+        li:hover
+          ul
+            display: block
         li.selected
-          a
+          > a
             +background-image(linear-gradient($color-tab-selected-start, $color-tab-selected-end))
             color       : $color-font-selected-tab
             font-weight : bold
+      #drop_down_menu
+        display      : none
+        position     : absolute
+        z-index      : 100
+        padding-left : 0
+        li
+          float: none
+          a
+            +border-top-radius(0)
+        li:last-child
+          a
+            +border-bottom-radius($radius-tab)          

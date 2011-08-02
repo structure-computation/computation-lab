@@ -1,0 +1,41 @@
+ul.tab_submenu
+  list-style: none
+  margin-top: 2em
+  padding-left: 0
+  margin-right: -7%
+  li
+    font-family: Verdana, Arial, Helvetica, sans-serif
+    font-size: 0.9em
+    margin-bottom: 0.2em
+    a
+      text-decoration: none
+      line-height: 2em
+      display: block
+      background-color: $color-tab-start
+      padding: 0.2em 1em 0.2em 1em
+      +border-left-radius(0.4em)
+      color: $color-font-header
+      text-align: right
+  li
+    a.selected
+      +background-image(linear-gradient($color-tab-selected-start, $color-tab-selected-end))
+      color       : $color-font-selected-tab
+      font-weight : bold
+
+
+    
+div.tab_content
+  //border: 3px #2A3556 solid
+  //+border-radius(0.4em)
+  background-color: #F0F0F0
+  border: 1px solid #B2B2B2
+  +border-top-radius(0.4em)
+  h2
+    margin-top: 0
+    border: none
+  .wrapper
+    padding: 1%
+  .hide
+    display: none
+  .show
+    display: block
