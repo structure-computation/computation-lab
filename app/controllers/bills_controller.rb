@@ -48,7 +48,11 @@ class BillsController < InheritedResources::Base
   def show
     @company = Company.find(params[:company_id])
     @manager = @company.users.find(:first, :conditions => {:role => "gestionnaire"})
-    show!
+    if @manager
+      show!
+    else
+      redirect_to company_bills_path
+    end
   end
 
   def download_bill
