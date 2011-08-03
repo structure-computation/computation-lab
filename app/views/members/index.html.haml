@@ -1,25 +1,27 @@
--content_for :left_submenu do
-  #contentleft
-    = render :partial => "partials/raccourcis_modele"
-    = render :partial => "context_leftbox"
+-content_for :left_top do
+  .left_submenu
+    %h2.grey
+      Comptes
+    %ul
+      %li.manage_pic_nouveau_membre
+        = link_to "Ajouter un membre", new_company_member_path (current_user.company)
 
--content_for :content_company do
-  #largeBox
-    %h2
-      Liste des membres    
-    %div
-      = render :partial => "member_filter"
-      %table#member_list.grey
-        %thead
-          %tr
-            %th
-            %th                  Mail
-            %th                  Nom
-            %th                  Role
-            %th{ :colspan => 2 } Status
-        %tbody
-          = render :partial => "member", :collection => @members
-  
-      = link_to "Nouveau membre", new_company_member_path(current_user.company), :class => 'yellow_button'
-  
+
+-content_for :right_top do
+  %h2.grey
+    Liste des membres
+  = render :partial => "search_filter"
+
+-content_for :company_content do
+  %table.grey
+    %thead
+      %tr
+        %th
+        %th                  Mail
+        %th                  Nom
+        %th                  Role
+        %th{ :colspan => 2 } Status
+    %tbody
+      = render :partial => "member", :collection => @members
+
 
