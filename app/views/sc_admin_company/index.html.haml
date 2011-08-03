@@ -1,15 +1,10 @@
-- content_for :left_submenu do 
-  #contentleft
-    = render :partial => "partials/raccourcis_admin"
-    = render :partial => "context_leftbox"
+- content_for :left_top do 
+  = render :partial => "partials/raccourcis_admin"
+  = render :partial => "context_leftbox"
 
-- content_for :content_company do 
-  #largeBox
-    %h2
-      Liste des société clientes
-  #largeBoxcontent
-    #SCAdminCompanyDetail.off
-      = render :partial => "company_detail"
-    #SCAdminCompanyListe.on
-      = render :partial => "filtre_des_company"
-      = render :partial => "company_list"
+- content_for :company_content do 
+  %h2.grey
+    Liste des société clientes
+  = render :partial => "company_detail"
+  = render :partial => "filtre_des_company"
+  = render :partial => "company_list"

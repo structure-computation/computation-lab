@@ -15,21 +15,4 @@
     = render "search_filter"
 
 -content_for :company_content do
-  %table.grey
-    %thead
-      %tr
-        %td Référence
-        %td Type
-        %td Prix HT(Euros)
-        %td Prix TTC(Euros)
-        %td Status
-        %td
-    %body
-      - @bills.each do |bill|
-        %tr
-          %td= bill.ref
-          %td= bill.facture_type
-          %td= bill.total_price_HT
-          %td= bill.total_price_TTC
-          %td= bill.statut
-          %td= link_to "Détails", [@company, bill]
+  =render :partial => 'factures_list', :object => @company.bills

@@ -39,6 +39,6 @@
     = render :partial => "materials/details/material_viscous_information", :locals => { :material => @material, :disabled => false }
   
   - if action_name == "edit"
-    = submit_tag "Editer"
+    = submit_tag "Editer", :class => 'yellow_button'
   - else 
-    = submit_tag "Créer"
+    = submit_tag "Créer", :class => 'yellow_button'

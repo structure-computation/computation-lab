@@ -13,15 +13,5 @@
   = render :partial => "search_filter"
 
 -content_for :company_content do
-  %table.grey
-    %thead
-      %tr
-        %th
-        %th                  Mail
-        %th                  Nom
-        %th                  Role
-        %th{ :colspan => 2 } Status
-    %tbody
-      = render :partial => "member", :collection => @members
-
+  = render :partial => "members_list", :object => @members
 
