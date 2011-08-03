@@ -32,18 +32,18 @@
   %h2.grey
     Modèle : 
     = @sc_model.name
-  #left_content
-    %ul.tab_submenu
-      %li 
-        %a#tab_1.selected{:href => "#"} Outils
-      %li 
-        %a#tab_2{:href => "#"} Résultats
-      %li 
-        %a#tab_3{:href => "#"} Utilisateurs
-                     
-  #right_content
-    .tab_content
-      .wrapper
+  .wrapper
+    #left_content
+      %ul.tab_submenu
+        %li 
+          %a#tab_1.selected{:href => "#"} Outils
+        %li 
+          %a#tab_2{:href => "#"} Résultats
+        %li 
+          %a#tab_3{:href => "#"} Utilisateurs
+                       
+    #right_content
+      .tab_content
         #tab_1_content.show
           %p
             Pour accéder aux outils, vous devez d abord charger un maillage pour ce modéle

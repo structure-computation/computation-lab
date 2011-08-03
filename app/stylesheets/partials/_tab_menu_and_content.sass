@@ -1,3 +1,5 @@
+
+
 ul.tab_submenu
   list-style: none
   margin-top: 2em
@@ -40,8 +42,7 @@ ul.tab_submenu
 div.tab_content
   border-left: 1px #B2B2B2 solid
   background-color: #F0F0F0
-  .wrapper
-    padding: 1%
+  padding: 1%
   .hide
     display: none
   .show
@@ -49,8 +50,10 @@ div.tab_content
     
 #content_company
   overflow: auto
-  border: 1px #B2B2B2 solid
-  +border-top-radius(0.4em)
   h2
-    border: none
+    //border: none
     margin-top: 0
+    +border-top-radius(0.4em)
+  .wrapper
+    border: 1px #B2B2B2 solid  
+    overflow: auto    
