@@ -6,31 +6,37 @@
     %thead
       %tr
         %th
-        %th Selon V1
-        %th Selon V2 
-        %th Selon V3
+        %th{:colspan => 2} Selon V1
+        %th{:colspan => 2} Selon V2 
+        %th{:colspan => 2} Selon V3
     %tbody
       %tr
         %th Limite d'endomagement 
-        %td 
+        %td.label_table
           = label :material, :sigma_p_1, "Se1 = "
+        %td 
           = text_field :material, :sigma_p_1, :value => "TODO", :disabled => disabled
-        %td 
+        %td.label_table 
           = label :material, :sigma_p_1, "Se2 = "
-          = text_field :material, :sigma_p_2, :value => "TODO", :disabled => disabled
         %td 
+          = text_field :material, :sigma_p_2, :value => "TODO", :disabled => disabled
+        %td.label_table
           = label :material, :sigma_p_1, "Se3 = "
+        %td 
           = text_field :material, :sigma_p_3, :value => "TODO", :disabled => disabled
       %tr
         %th Endomagement
-        %td 
+        %td.label_table
           = label :material, :sigma_p_1, "e1 = "
-          = text_field :material, :sigma_p_3, :value => "TODO", :disabled => disabled
         %td 
+          = text_field :material, :sigma_p_3, :value => "TODO", :disabled => disabled
+        %td.label_table
           = label :material, :sigma_p_1, "e2 = "
-          = text_field :material, :sigma_p_3, :value => "TODO", :disabled => disabled
         %td 
+          = text_field :material, :sigma_p_3, :value => "TODO", :disabled => disabled
+        %td.label_table
           = label :material, :sigma_p_1, "e3 = "
+        %td 
           = text_field :material, :sigma_p_3, :value => "TODO", :disabled => disabled
           
 - elsif material.mtype == "isotrope"
@@ -38,11 +44,13 @@
     %tbody
       %tr
         %th Limite d'endomagement 
-        %td 
+        %td.label_table
           = label :material, :sigma_p_1, "Se1 = "
+        %td 
           = text_field :material, :sigma_p_1, :value => "TODO", :disabled => disabled
       %tr
         %th Endomagement
-        %td 
+        %td.label_table
           = label :material, :sigma_p_1, "e1 = "
+        %td 
           = text_field :material, :sigma_p_3, :value => "TODO", :disabled => disabled

@@ -41,12 +41,15 @@
     %ul.tab_submenu
       %li 
         %a#tab_1.selected{:href => "#"} Génériques
-      %li 
-        %a#tab_2{:href => "#"} Elasticité
-      %li 
-        %a#tab_3{:href => "#"} Plasticité
-      %li 
-        %a#tab_4{:href => "#"} Endommagement
+      - if @material.comp.include? "el"
+        %li
+          %a#tab_2{:href => "#"} Elasticité
+      - if @material.comp.include? "pl"
+        %li 
+          %a#tab_3{:href => "#"} Plasticité
+      - if @material.comp.include? "en"
+        %li 
+          %a#tab_4{:href => "#"} Endommagement
       - if @material.comp.include? "vi"
         %li    
           %a#tab_5{:href => "#"} Viscosité

@@ -6,7 +6,8 @@ class ScModelsController < InheritedResources::Base
   before_filter :authenticate_user!
   before_filter :set_page_name
   belongs_to :company
-
+  respond_to :html, :json
+  
   layout 'company'
 #  belongs_to :member
   

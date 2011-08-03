@@ -5,42 +5,51 @@
     %thead
       %tr
         %th
-        %th Selon V1
-        %th Selon V2 
-        %th Selon V3
+        %th{:colspan => 2} Selon V1
+        %th{:colspan => 2} Selon V2 
+        %th{:colspan => 2} Selon V3
     %tbody
       %tr
         %th Module d'Young
-        %td 
+        %td.label_table
           = label :material, :E_1, "E1 = "
+        %td 
           = text_field :material, :E_1, :value => material.E_1, :disabled => disabled
-        %td 
+        %td.label_table
           = label :material, :E_2, "E2 = "
-          = text_field :material, :E_2, :value => material.E_2, :disabled => disabled
         %td 
+          = text_field :material, :E_2, :value => material.E_2, :disabled => disabled
+        %td.label_table
           = label :material, :E_3, "E3 = "
+        %td 
           = text_field :material, :E_3, :value => material.E_3, :disabled => disabled
       %tr
         %th Coefficient de Poisson
-        %td 
+        %td.label_table
           = label :material, :nu_12, "mu12 = "
+        %td 
           = text_field :material, :nu_12, :value => material.nu_12, :disabled => disabled
-        %td 
+        %td.label_table
           = label :material, :nu_23, "mu23 = "
-          = text_field :material, :nu_23, :value => material.nu_23, :disabled => disabled
         %td 
+          = text_field :material, :nu_23, :value => material.nu_23, :disabled => disabled
+        %td.label_table
           = label :material, :nu_13, "mu13 = "
+        %td 
           = text_field :material, :nu_13, :value => material.nu_13, :disabled => disabled
       %tr
         %th Limite de rupture
-        %td 
+        %td.label_table
           = label :material, :sigma_r_1, "Sr1 = "
+        %td 
           = text_field :material, :sigma_r_1, :value => material.sigma_r_1, :disabled => disabled
-        %td 
+        %td.label_table
           = label :material, :sigma_r_2, "Sr2 = "
-          = text_field :material, :sigma_r_2, :value => material.sigma_r_2, :disabled => disabled
         %td 
+          = text_field :material, :sigma_r_2, :value => material.sigma_r_2, :disabled => disabled
+        %td.label_table
           = label :material, :sigma_r_3, "Sr3 = "
+        %td 
           = text_field :material, :sigma_r_3, :value => material.sigma_r_3, :disabled => disabled
 
 - elsif material.mtype == "isotrope"
@@ -48,16 +57,19 @@
     %tbody
       %tr
         %th Module d'Young
-        %td
+        %td.label_table
           = label :material, :E_1, "E1 = "
+        %td 
           = text_field :material, :E_1, :value => material.E_1, :disabled => disabled
       %tr
         %th Coefficient de poisson
-        %td 
+        %td.label_table
           = label :material, :nu_12, "mu12 = "
+        %td 
           = text_field :material, :nu_12, :value => material.nu_12, :disabled => disabled
       %tr
         %th Limite de rupture
-        %td 
+        %td.label_table
           = label :material, :sigma_r_1, "Sr1 = "
+        %td 
           = text_field :material, :sigma_r_1, :value => material.sigma_r_1, :disabled => disabled

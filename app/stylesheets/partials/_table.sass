@@ -1,8 +1,10 @@
 /* Variables ------------------------------------------------------------- */
                             
-$color-thead-start     : #A3A5B5 // Couleur du début du gradient du fond du table header
-$color-thead-end       : #818799 // Couleur de fin du gradient du fond du table header
-                       
+// Couleur du début du gradient du fond du table header
+$color-thead-start     : #A3A5B5 
+// Couleur de fin du gradient du fond du table header
+$color-thead-end       : #818799 
+
 $line-height-thead     : 2.5em
 $font-size-thead       : 0.75em
                        
@@ -44,6 +46,9 @@ table.grey
         border-right  : 1px solid $color-border-cell
       td:last-child
         border-right  : none
+      td.label_table
+        text-align  : right
+        border-right: none
     tr:nth-child(odd)
       background-color: $background-color-cell
       
