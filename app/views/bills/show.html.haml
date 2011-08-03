@@ -5,7 +5,8 @@
     %ul
       %li.manage_pic_liste_factures
         = link_to "Retour à la liste des factures", company_bills_path(@company) 
-
+      %li.manage_pic_liste_factures
+        = link_to "Télécharger la facture", company_bills_path(@company) 
 -content_for :right_top do
   %h2.grey
     Référence Facture : 

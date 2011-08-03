@@ -11,7 +11,7 @@ class ScModelsController < InheritedResources::Base
 #  belongs_to :member
   
   def set_page_name
-    @page = :bibliotheque
+    @page = :lab
   end
 
   def index
