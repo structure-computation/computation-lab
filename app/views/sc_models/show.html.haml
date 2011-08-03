@@ -1,29 +1,44 @@
--content_for :additionnal_javascripts do
-  %script{ :src => "/javascripts/modele/functions_file.js" ,   :type => "text/javascript" }
+-content_for :left_top do
+  .left_submenu
+    %h2.grey
+      Menu
+    %ul
+      %li.LM_pic_model
+        = link_to "Retour à la liste de modèles", company_sc_models_path(@company) 
 
--content_for :content_company do
-  / TODO Vérifier les données affichés
-  %h3
+-content_for :right_top do
+  %h2.grey
     Détail du modèle : 
     = @sc_model.name
-  
-  %table
-    %tbody
-      %tr
-        %td Dimension
-        %td= @sc_model.dimension
-      %tr
-        %td Nombre d'élèments
-        %td= @sc_model.parts
-  %table
-    %tbody
-      %tr
-        %td Nombre de pièces
-        %td= @sc_model.parts
-      %tr
-        %td Nombre de liaisons
-        %td= @sc_model.interfaces
+  .grey  
+    %table
+      %tbody
+        %tr
+          %td Dimension
+          %td= @sc_model.dimension
+        %tr
+          %td Nombre d'élèments
+          %td= @sc_model.parts
+    %table
+      %tbody
+        %tr
+          %td Nombre de pièces
+          %td= @sc_model.parts
+        %tr
+          %td Nombre de liaisons
+          %td= @sc_model.interfaces
 
+-content_for :left_content do
+
+  %ul.tab_submenu
+    %li 
+      %a#tab_1.selected{:href => "#"} Outils
+    %li 
+      %a#tab_2{:href => "#"} Résultats
+    %li 
+      %a#tab_3{:href => "#"} Utilisateurs
+                   
+-content_for :right_content do
   %h3
     Outils    
   / SI LE MAILLAGE N'EST PAS CHARGé
@@ -61,19 +76,38 @@
             %td= link_to "Voir"
             %td= link_to "Télécharger"
             %td= button_to "Supprimer", :controller => "calcul_results", :action => "destroy"
-  %h3
-    Utilisateurs
-  %p
-    Liste des utilisateurs ayant accès à ce modéle
-  %table
-    %thead
-      %tr
-        %td E-mail
-        %td Nom
-        %td Role
-    %tbody
-      - @sc_model.user_model_ownerships.each do |info|
-        %tr
-          = info.user.email
-          = info.user.firstname
-          = info.rights
+
+  / TODO Vérifier les données affichés
+  .tab_content
+    %h2.grey
+      Modèle : 
+      = @sc_model.name
+    .wrapper
+      #tab_1_content.show
+        %p
+          Pour accéder aux outils, vous devez d abord charger un maillage pour ce modéle
+        %p
+          Charger votre maillage
+        - semantic_form_for [@company, @sc_model], :url => {:controller => "sc_models", :action => "load_mesh"}, :html => {:multipart => true, :method => :post} do |f|
+          = f.inputs do
+            = f.input :file, :as => :file
+          = f.buttons
+      #tab_2_content.hide
+        %h3 TODO RESULTATS
+
+      #tab_3_content.hide
+        %p Liste des utilisateurs ayant accès à ce modéle
+        %table.grey
+          %thead
+            %tr
+              %td E-mail
+              %td Nom
+              %td Role
+          %tbody
+            - @sc_model.user_model_ownerships.each do |info|
+              %tr
+                = info.user.email
+                = info.user.firstname
+                = info.rights
+      = render "shared/tab_javascript"
+>>>>>>> 8cd65bc993ed518df5652647096d82e20c13de9a

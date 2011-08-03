@@ -7,7 +7,7 @@ class MaterialsController < InheritedResources::Base
   layout 'company'
 
   def set_page_name
-    @page = :materials
+    @page = :bibliotheque
   end
 
   def index 

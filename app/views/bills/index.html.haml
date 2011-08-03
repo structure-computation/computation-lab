@@ -1,25 +1,25 @@
-/ Vue Index desuser.
-/ Liens vers les CSS
-%link{ :href => "/stylesheets/main_factures.css", :rel => "stylesheet", :media => "screen" }
+-content_for :right_top do
+  %h2.grey
+    Liste des factures
+  %div
+    = render "search_filter"
 
-/ Javascript particulier a la page modele
-%script{ :src => "/javascripts/factures/functions_layer_factures.js" ,   :type => "text/javascript" }
-
-/ wizard création de projet en premier plan
-.content
-  #contentright
-    #largeBox
-      %h2
-        Liste des factures
-
-      %table
-        %thead
-          %tr
-            %td Référence
-            %td Type
-            %td Prix HT(Euros)
-            %td Prix TTC(Euros)
-            %td Status
-            %td
-        %body
-          = render @bills
+-content_for :right_content do
+  %table.grey
+    %thead
+      %tr
+        %td Référence
+        %td Type
+        %td Prix HT(Euros)
+        %td Prix TTC(Euros)
+        %td Status
+        %td
+    %body
+      - @bills.each do |bill|
+        %tr
+          %td= bill.ref
+          %td= bill.facture_type
+          %td= bill.total_price_HT
+          %td= bill.total_price_TTC
+          %td= bill.statut
+          %td= link_to "Détails", [@company, bill]

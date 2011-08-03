@@ -1,6 +1,10 @@
--content_for :left_submenu do
-  #contentleft
-    = render :partial => "partials/raccourcis_modele"
+-content_for :left_top do
+  .left_submenu
+    %h2.grey
+      Menu
+    %ul
+      %li.LM_pic_liaison
+        =link_to 'Retour à la liste des liaisons', company_links_path(@company)
 
--content_for :content_company do
+-content_for :right_content do
   = render "form"

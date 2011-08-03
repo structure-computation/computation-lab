@@ -3,6 +3,7 @@ class BillsController < InheritedResources::Base
   respond_to :html, :json
   belongs_to :company
   actions :index, :show, :new, :create
+  layout 'company'
   
   #TODO remplacer chargement JSON par chargement normal (sans requête ajax)
   # def index

@@ -1,5 +1,5 @@
-.left_submenu
-  %h2
+.left_top
+  %h2.grey
     Comptes
   %ul
     %li.manage_pic_compte_memoire
@@ -8,3 +8,7 @@
     %li.manage_pic_compte_abonnement
       %a{ :style => "cursor: pointer;", :onclick => "affich_contenu_compte_calcul()" }
         Forfait calcul
+    %li.manage_pic_liste_membre
+      = link_to 'Liste des membres', company_members_path(current_user.company)
+    %li.manage_pic_liste_factures
+      = link_to 'Liste des factures', company_bills_path(current_user.company)

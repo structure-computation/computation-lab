@@ -1,8 +1,18 @@
--content_for :left_submenu do
-  #contentleft      
-    = render :partial => "partials/raccourcis_modele"
+-content_for :left_top do
+  .left_submenu
+    %h2.grey
+      Menu
+    %ul
+      %li.LM_pic_new_model
+        = link_to "Nouveau modèle", new_company_sc_model_path  
+
+-content_for :right_top do
+  %h2.grey
+    Liste des modèles 
+  %div
+    = render :partial => "search_filter"
   
--content_for :content_company do
+-content_for :right_content do
   %table.grey
     %thead
       %tr
@@ -22,5 +32,4 @@
           %td= sc_model.results
           %td v
           %td c
-          %td= button_to 'Supprimer', company_sc_model_path(@company, sc_model), :method => :delete
-  = link_to "Nouveau modèle", new_company_sc_model_path
+          %td= button_to 'X', company_sc_model_path(@company, sc_model), :method => :delete
