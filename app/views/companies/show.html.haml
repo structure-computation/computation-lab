@@ -9,21 +9,101 @@
       %li.manage_pic_compte_abonnement
         %a{ :style => "cursor: pointer;", :onclick => "affich_contenu_compte_calcul()" }
           Forfait calcul
-      %li.manage_pic_liste_membre
-        = link_to 'Liste des membres', company_members_path(current_user.company)
-      %li.manage_pic_liste_factures
-        = link_to 'Liste des factures', company_bills_path(current_user.company)
-  
+
+-content_for :right_top do
+  %h2.grey
+    = @company.name
+  .grey
+    %p Abonnement
+    %p Forfait
+    
 -content_for :company_content do
-  .resume_table
-    %h2.grey
-      Tableau de bord
-    .content_resume_table
-      = render :partial => "abonnement"
-      = render :partial => "calcul", :object => @company
-  
-  .resume_table
-    %h2.grey
-      Profil
-    .content_resume_table
-      = render :partial => "company", :object => @company
+  %h2.grey
+    Détails de la société
+  .wrapper
+    #left_content
+      %ul.tab_submenu  
+        %li 
+          %a#tab_1.selected{:href => "#"} Factures
+        %li 
+          %a#tab_2{:href => "#"} Abonnement
+        %li 
+          %a#tab_3{:href => "#"} Forfait
+        %li 
+          %a#tab_4{:href => "#"} Gestionnaires  
+        %li 
+          %a#tab_5{:href => "#"} Description
+            
+    #right_content
+      .tab_content
+        #tab_1_content.show
+          %p Liste des factures de la socitété :
+          = render :partial => 'bills/factures_list', :object => @company.bills
+        #tab_2_content.hide
+          %p Cet abonnement annuel donne accès à un espace mémoire sur les serveurs de Structure Computation. Il vous permet de stocker les modèles, les résultats de calculs et l'ensemble des informations relatives aux modèles.
+          %p Votre abonnement actuel est le suivant :
+          %table.grey
+            -#TODO afficher les bonnes valeurs
+            %thead
+              %tr
+                %th Mémoire diponnible
+                %th Date d'échéance
+            %tbody
+              %tr
+                %td= @company.calcul_account.solde_jeton
+                %td= @company.calcul_account.used_jeton
+        #tab_3_content.hide
+          %p Les forfaits de calcul vous permettent d'utiliser à la demande les outils et la puissance de calcul de Structure Computation (maillage de vos modèles, calcul de structures...). Vous pouvez cumuler plusieurs forfaits.
+          %p Dernier relevé :
+          %table.grey
+            %thead
+              %tr
+                %th Report de jetons
+                %th Jetons standards
+                %th Jetons tampons
+                %th Date d'échéance
+            %tbody
+              %tr
+                %td= @company.calcul_account.report_jeton
+                %td= @company.calcul_account.base_jeton
+                %td= @company.calcul_account.base_jeton_tempon
+                %td= @company.calcul_account.end_date
+          %p Votre utilisation actuelle :
+          %table.grey
+            %thead
+              %tr
+                %th Solde de jetons standards
+                %th Jetons utilisé
+            %tbody
+              %tr
+                %td= @company.calcul_account.solde_jeton
+                %td= @company.calcul_account.used_jeton
+                
+        #tab_4_content.hide
+          = render :partial => "members/members_list", :object => @company.members
+        #tab_5_content.hide
+          %table.grey
+            %tr
+              %th Division
+              %td= @company.division
+            %tr
+              %th Adresse
+              %td= @company.address
+            %tr
+              %th Ville
+              %td= @company.city   
+            %tr
+              %th Code Postal
+              %td= @company.zipcode
+            %tr
+              %th Pays
+              %td= @company.country
+            %tr
+              %th TVA intracommunautaire
+              %td= @company.TVA
+            %tr
+              %th SIREN
+              %td= @company.siren
+
+              
+      = render "shared/tab_javascript"
