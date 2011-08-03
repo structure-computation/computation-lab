@@ -3,7 +3,7 @@ class MaterialsController < InheritedResources::Base
   before_filter :authenticate_user!
   before_filter :set_page_name
   belongs_to    :company
-  #respond_to    :json
+  respond_to    :json
   layout 'company'
 
   def set_page_name

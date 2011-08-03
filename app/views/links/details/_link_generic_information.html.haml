@@ -4,25 +4,28 @@
   %tbody
     %tr
       %td Description :
-      %td= text_area :link, :description, :value => @link.description, :disabled => disabled
+      %td{:colspan => 2}= text_area :link, :description, :value => @link.description, :disabled => disabled
     %tr
       %td Epaisseur :
-      %td 
+      %td.label_table
         = label :link, :Ep, "Ep = "
+      %td 
         = text_field :link, :Ep, :value => @link.Ep, :disabled => disabled
         m
     %tr
       %td Jeu :
-      %td
+      %td.label_table
         = label :link, :jeu, "j = "
+      %td 
         = text_field :link, :jeu, :value => @link.jeu, :disabled => disabled
         m
 
     - if @link.comp_generique.downcase.include? "el"
       %tr
         %td Raideur :
-        %td
+        %td.label_table
           = label :link, :R, "R = "
+        %td 
           = text_field :link, :R, :value => @link.R, :disabled => disabled
           N/m
 
@@ -30,8 +33,9 @@
     - if @link.comp_generique.downcase.include? "co"
       %tr
         %td Coefficient de frottement :
-        %td
+        %td.label_table
           = label :link, :f, "f = "
+        %td 
           = text_field :link, :f, :value => @link.f, :disabled => disabled
 
 
