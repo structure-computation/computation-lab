@@ -14,7 +14,7 @@
 
 -content_for :company_content do
   - if !@links.empty?
-    %table.grey
+    %table.grey#links_table
       %thead
         %tr
           %th 
@@ -36,3 +36,6 @@
             - if link.company and link.company.id == current_user.company.id
               %td= link_to "Editer"   , edit_company_link_path(@company, link)
               %td= link_to "Supprimer", {:action=>"destroy", :controller=>"link", :id => link.id}, :method => :delete
+
+  :coffeescript
+    $('#links_table').tablesorter()

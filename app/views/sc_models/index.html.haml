@@ -13,7 +13,7 @@
     = render :partial => "search_filter"
   
 -content_for :company_content do
-  %table.grey
+  %table.grey#models_table
     %thead
       %tr
         %th
@@ -33,3 +33,6 @@
           %td v
           %td c
           %td= button_to 'X', company_sc_model_path(@company, sc_model), :method => :delete
+
+  :coffeescript
+    $('#models_table').tablesorter()
