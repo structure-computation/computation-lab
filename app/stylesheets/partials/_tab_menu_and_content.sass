@@ -7,7 +7,6 @@ ul.tab_submenu
   margin-right: -7%
   margin-bottom: 0
   li
-    font-family: Helvetica, Arial, sans-serif
     font-size: 0.9em
     margin-bottom: 0.2em
     a
@@ -40,14 +39,14 @@ ul.tab_submenu
       text-align: right
                 
 div.tab_content
+  min-height: 20em
   border-left: 1px #B2B2B2 solid
   background-color: #F0F0F0
-  padding: 1%
+  padding: 1%   
   .hide
     display: none
   .show
     display: block
-    
 #content_company
   overflow: auto
   h2
@@ -55,5 +54,10 @@ div.tab_content
     margin-top: 0
     +border-top-radius(0.4em)
   .wrapper
+    background-color: #F5F5F5
     border: 1px #B2B2B2 solid  
-    overflow: auto    
+    overflow: auto  
+    min-height: 20em
+    #left_content  
+      min-height: 20em
+    #right_content

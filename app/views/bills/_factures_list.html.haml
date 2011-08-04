@@ -1,12 +1,14 @@
+=render :partial => 'bills/search_filter'
+
 %table.grey
   %thead
     %tr
-      %td Référence
-      %td Type
-      %td Prix HT(Euros)
-      %td Prix TTC(Euros)
-      %td Status
-      %td
+      %th Référence
+      %th Type
+      %th Prix HT(Euros)
+      %th Prix TTC(Euros)
+      %th Status
+      %th
   %body
     - factures_list.each do |bill|
       %tr
