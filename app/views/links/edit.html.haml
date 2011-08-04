@@ -6,5 +6,6 @@
       %li.LM_pic_liaison
         =link_to 'Retour à la liste des liaisons', company_links_path(@company)
 
--content_for :right_content do
-  = render "form"
+-content_for :company_content do 
+  .grey
+    = render "form"

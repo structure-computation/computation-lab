@@ -1,4 +1,4 @@
-class CalculController < ApplicationController
+class CalculsController < ApplicationController
   require 'json'
   require 'socket'
   include Socket::Constants
@@ -6,8 +6,8 @@ class CalculController < ApplicationController
   
   def index
     @page = 'SCcompute'
-    @id_model = params[:id_model]
-    current_model = current_user.sc_models.find(@id_model)
+    @model_id = params[:model_id]
+    current_model = current_user.sc_models.find(@model_id)
     @dim_model = current_model.dimension
     respond_to do |format|
       format.html {render :layout => false }

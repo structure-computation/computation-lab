@@ -3,6 +3,7 @@ class BillsController < InheritedResources::Base
   respond_to :html, :json
   belongs_to :company
   actions :index, :show, :new, :create
+  layout 'company'
   
   #TODO remplacer chargement JSON par chargement normal (sans requête ajax)
   # def index
@@ -48,7 +49,11 @@ class BillsController < InheritedResources::Base
   def show
     @company = Company.find(params[:company_id])
     @manager = @company.users.find(:first, :conditions => {:role => "gestionnaire"})
-    show!
+    if @manager
+      show!
+    else
+      redirect_to company_bills_path
+    end
   end
 
   def download_bill

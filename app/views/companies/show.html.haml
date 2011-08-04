@@ -1,27 +1,109 @@
--content_for :additionnal_stylesheets do 
-  %link{ :href => "/stylesheets/main_user.css"    , :rel => "stylesheet", :media => "screen" }
-  %link{ :href => "/stylesheets/main_company.css" , :rel => "stylesheet", :media => "screen" }
-  
--content_for :additionnal_javascript  do 
-  %script{ :src => "/javascripts/companies/functions_layer_company.js"          ,   :type => "text/javascript" }
-  %script{ :src => "/javascripts/companies/forfait/functions_forfait.js"        ,   :type => "text/javascript" }
-  %script{ :src => "/javascripts/companies/abonnement/functions_abonnement.js"  ,   :type => "text/javascript" }
-  
--content_for :left_submenu do
-  #contentleft
-    = render :partial => "partials/raccourcis_company"
-    = render :partial => "left_submenu"
-  
--content_for :content_company do
-  .resume_table
-    %h2
-      Tableau de bord
-    .content_resume_table
-      = render :partial => "abonnement"
-      = render :partial => "calcul", :object => @company
-  
-  .resume_table
-    %h2
-      Profil
-    .content_resume_table
-      = render :partial => "company", :object => @company
+-content_for :left_top do
+  .left_top
+    %h2.grey
+      Comptes
+    %ul
+      %li.manage_pic_compte_memoire
+        %a
+          Nouvel abonnement
+      %li.manage_pic_compte_abonnement
+        %a
+          Nouveau forfait
+
+-content_for :right_top do
+  %h2.grey
+    = @company.name
+  .grey
+    %p Abonnement
+    %p Forfait
+    
+-content_for :company_content do
+  %h2.grey
+    Détails de la société
+  .wrapper
+    #left_content
+      %ul.tab_submenu  
+        %li 
+          %a#tab_1{:href => "#", :class => tab_selected('Factures', params[:tab], true)} Factures
+        %li 
+          %a#tab_2{:href => "#", :class => tab_selected('Abonnement', params[:tab])} Abonnement
+        %li 
+          %a#tab_3{:href => "#", :class => tab_selected('Forfait', params[:tab])} Forfait
+        %li 
+          %a#tab_4{:href => "#", :class => tab_selected('Membres', params[:tab])} Membres
+        %li 
+          %a#tab_5{:href => "#", :class => tab_selected('Description', params[:tab])} Description
+            
+    #right_content
+      .tab_content
+        #tab_1_content{:class => tab_content_selected('Factures', params[:tab], true)}
+          %p Liste des factures de la société :
+          = render :partial => 'bills/factures_list', :object => @company.bills
+        #tab_2_content{:class => tab_content_selected('Abonnement', params[:tab])}
+          %p Cet abonnement annuel donne accès à un espace mémoire sur les serveurs de Structure Computation. Il vous permet de stocker les modèles, les résultats de calculs et l'ensemble des informations relatives aux modèles.
+          %p Votre abonnement actuel est le suivant :
+          %table.grey
+            -#TODO afficher les bonnes valeurs
+            %thead
+              %tr
+                %th Mémoire disponnible
+                %th Date d'échéance
+            %tbody
+              %tr
+                %td= @company.calcul_account.solde_jeton
+                %td= @company.calcul_account.used_jeton
+        #tab_3_content{:class => tab_content_selected('Forfait', params[:tab])}
+          %p Les forfaits de calcul vous permettent d'utiliser à la demande les outils et la puissance de calcul de Structure Computation (maillage de vos modèles, calcul de structures...). Vous pouvez cumuler plusieurs forfaits.
+          %p Dernier relevé :
+          %table.grey
+            %thead
+              %tr
+                %th Report de jetons
+                %th Jetons standards
+                %th Jetons tampons
+                %th Date d'échéance
+            %tbody
+              %tr
+                %td= @company.calcul_account.report_jeton
+                %td= @company.calcul_account.base_jeton
+                %td= @company.calcul_account.base_jeton_tempon
+                %td= @company.calcul_account.end_date
+          %p Votre utilisation actuelle :
+          %table.grey
+            %thead
+              %tr
+                %th Solde de jetons standards
+                %th Jetons utilisé
+            %tbody
+              %tr
+                %td= @company.calcul_account.solde_jeton
+                %td= @company.calcul_account.used_jeton
+                
+        #tab_4_content{:class => tab_content_selected('Membres', params[:tab])}
+          = render :partial => "members/members_list", :object => @company.members
+        #tab_5_content{:class => tab_content_selected('Description', params[:tab])}
+          %table.grey#company_information_table
+            %tr
+              %th Division
+              %td= @company.division
+            %tr
+              %th Adresse
+              %td= @company.address
+            %tr
+              %th Ville
+              %td= @company.city   
+            %tr
+              %th Code Postal
+              %td= @company.zipcode
+            %tr
+              %th Pays
+              %td= @company.country
+            %tr
+              %th TVA intracommunautaire
+              %td= @company.TVA
+            %tr
+              %th SIREN
+              %td= @company.siren
+
+              
+      = render "shared/tab_javascript"

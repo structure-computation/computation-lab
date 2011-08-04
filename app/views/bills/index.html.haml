@@ -1,25 +1,18 @@
-/ Vue Index desuser.
-/ Liens vers les CSS
-%link{ :href => "/stylesheets/main_factures.css", :rel => "stylesheet", :media => "screen" }
+-content_for :left_top do
+  .left_submenu
+    %h2.grey
+      Menu
+    %ul
+      %li.manage_pic_compte_memoire
+        = link_to "Nouvel abonnement", company_sc_models_path(@company) 
+      %li.manage_pic_compte_abonnement
+        = link_to "Nouveau forfait", company_sc_models_path(@company)
+                 
+-content_for :right_top do
+  %h2.grey
+    Liste des factures
+  %div
+    = render "search_filter"
 
-/ Javascript particulier a la page modele
-%script{ :src => "/javascripts/factures/functions_layer_factures.js" ,   :type => "text/javascript" }
-
-/ wizard création de projet en premier plan
-.content
-  #contentright
-    #largeBox
-      %h2
-        Liste des factures
-
-      %table
-        %thead
-          %tr
-            %td Référence
-            %td Type
-            %td Prix HT(Euros)
-            %td Prix TTC(Euros)
-            %td Status
-            %td
-        %body
-          = render @bills
+-content_for :company_content do
+  =render :partial => 'factures_list', :object => @company.bills

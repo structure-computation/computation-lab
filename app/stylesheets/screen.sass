@@ -1,19 +1,17 @@
-/* Imports --------------------------------------------------------------- */
+/* Imports de base ------------------------------------------------------- */
 
 @import base
 @import compass/css3/gradient
 @import compass/css3/border-radius
 @import compass/typography/links/unstyled-link
 @import compass/typography/links/hover-link
-
-/* Variables ------------------------------------------------------------- */
-
-$largeur-min : 950px
-$largeur-max : 90%
+@import compass/typography
+@import compass/css3/box-shadow
 
 /* Mixins ---------------------------------------------------------------- */
 
-/* Global ---------------------------------------------------------------- */
+
+/* Imports des autres fichiers sass -------------------------------------- */
 
 @import partials/header
 @import partials/sub_menu
@@ -22,21 +20,82 @@ $largeur-max : 90%
 @import partials/layout_company
 @import partials/large_ligne
 @import partials/tab_menu_and_content
+@import partials/companies_show
+/* Notifications : Error - Notice ---------------------------------------- */
+
+#flash_notice, #flash_error
+  +columns(16,24)
+  line-height: 2em
+  +prefix(1,24)
+  
+#flash_notice
+  border: 1px solid #C6D880
+  color: #264409
+  background-color: #E6EFC2
+  
+#flash_error
+  color: #8A1F11
+  border: 1px solid #FBC2C4
+  background-color: #FBE3E4
+
+/* Boutons --------------------------------------------------------------- */
+
+/* -- Variables pour la partie boutons -- */
+
+$color-button-start       : #FDDE35 // Couleur du début du gradient du fond des boutons qui ont la class .yellow_button
+$color-button-end         : #FEA82A // Couleur de fin du gradient du fond des boutons qui ont la class .yellow_button
+$color-button-start-hover : $color-button-end // Couleur du début du gradient du fond des boutons qui ont la class .yellow_button au survol de la souris
+$color-button-end-hover   : $color-button-start // Couleur de fin du gradient du fond des boutons qui ont la class .yellow_button au survol de la souris
+
+$font-color-button        : #333
+$radius-button            : 0.4em
+
+$border-width-button      : 1px
+$border-color-button      : white
+$padding-bottom-button    : 0.3em
+$padding-top-button       : $padding-bottom-button
+$padding-left-button      : 1em
+$padding-right-button     : $padding-left-button
+
+/* -- Fin variables pour la partie boutons -- */
 
 .yellow_button
-  +background-image(linear-gradient(#FDDE35, #FEA82A))
-  line-height: 2em
-  padding: 0.3em 2em 0.3em 2em
-  +border-radius(0.4em)
-  border: 1px solid #555
-  color: #333
+  +background-image(linear-gradient($color-button-start, $color-button-end))
+  padding: $padding-top-button $padding-right-button $padding-bottom-button $padding-left-button 
+  +border-radius($radius-button)
+  border: $border-width-button solid $border-color-button
+  color: $font-color-button
   text-decoration: none
+  +single-box-shadow(rgba(0,0,0,0.4), 1px, 1px, 4px)
+  cursor: pointer
+  display: inline-block
 
 .yellow_button:hover
-  +background-image(linear-gradient(#FEA82A, #FDDE35))
+  +background-image(linear-gradient($color-button-start-hover, $color-button-end-hover))
+
+/* Global ---------------------------------------------------------------- */
+
+/* -- Variables pour la partie global -- */
+
+$largeur-min : 950px
+$largeur-max : 90%
+
+$background-color-content       : #F0F0F0
+$border-color-content-and-title : #B2B2B2
+$border-width-content-and-title : 1px
+$radius-title                   : 0.3em
+$font-size-title                : 1.3em
+$padding-h2                     : 0.2em
+$margin-bottom-title            : 0
+$padding-left-and-right-content : 1%
+
+$color-title-start              : #E6E6E6 // Couleur du début du gradient du fond du titre h2 qui a la class .grey
+$color-title-end                : #B2B2B2 // Couleur de fin du gradient du fond du titre h2 qui a la class .grey
+
+/* -- Fin variables pour la partie global -- */
 
 html
-  font-family: Verdana, Arial, Helvetica, sans-serif
+  font-family: Helvetica, Arial, sans-serif
   font-size: 90%
   
 body
@@ -53,42 +112,16 @@ body
   +full
 
 h2.grey
-  +border-top-radius(0.3em)
-  +background-image(linear-gradient(#E6E6E6, #B2B2B2))
-  font-size: 1.3em
-  text-align: center
-  border: 1px solid #B2B2B2
-  padding: 0.2em
-  margin-bottom: 0
+  +border-top-radius($radius-title)
+  +background-image(linear-gradient($color-title-start, $color-title-end))
+  font-size     : $font-size-title
+  text-align    : center
+  border        : $border-width-content-and-title solid $border-color-content-and-title
+  padding       : $padding-h2
+  margin-bottom : $margin-bottom-title
   
 div.grey
-  border: 1px solid #B2B2B2
-  background-color: #F0F0F0
-  padding-left: 1em
-  padding-right: 1em
-  
-      
-#flash_notice, #flash_error
-  +columns(16,24)
-  line-height: 2em
-  +prefix(1,24)
-  
-#flash_notice
-  border: 1px solid #C6D880
-  color: #264409
-  background-color: #E6EFC2
-  
-#flash_error
-  color: #8A1F11
-  border: 1px solid #FBC2C4
-  background-color: #FBE3E4
-  
-.description_form
-  +columns(20)
-  ol
-    +columns(6,20)
-    list-style-type: none
-  label
-    +columns(2,6)
-    text-align: right
-  input
+  border           : $border-width-content-and-title solid $border-color-content-and-title
+  background-color : $background-color-content
+  padding-left     : $padding-left-and-right-content
+  padding-right    : $padding-left-and-right-content

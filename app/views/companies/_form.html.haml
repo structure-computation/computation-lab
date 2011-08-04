@@ -1,11 +1,10 @@
-.description_form
-  = semantic_form_for @company do |form|
-    = form.inputs do
-      = form.input :name, :input_html => { :disabled => true }
-      = form.input :division, :input_html => { :disabled => true }
-      = form.input :address, :input_html => { :disabled => true }
-      = form.input :city, :input_html => { :disabled => true }
-      = form.input :zipcode, :input_html => { :disabled => true }
-      = form.input :country, :as => :string, :input_html => { :disabled => true }
-      = form.input :TVA, :input_html => { :disabled => true }
-      = form.input :siren, :input_html => { :disabled => true }
+= semantic_form_for @company do |form|
+  = form.inputs do
+    = form.input :name, :input_html => { :disabled => true }
+    = form.input :division, :input_html => { :disabled => true }
+    = form.input :address, :input_html => { :disabled => true }
+    = form.input :city, :input_html => { :disabled => true }
+    = form.input :zipcode, :input_html => { :disabled => true }
+    = form.input :country, :as => :string, :input_html => { :disabled => true }
+    = form.input :TVA, :input_html => { :disabled => true }
+    = form.input :siren, :input_html => { :disabled => true }

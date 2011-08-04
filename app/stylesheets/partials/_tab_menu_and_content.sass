@@ -1,10 +1,12 @@
+
+
 ul.tab_submenu
   list-style: none
   margin-top: 2em
   padding-left: 0
   margin-right: -7%
+  margin-bottom: 0
   li
-    font-family: Verdana, Arial, Helvetica, sans-serif
     font-size: 0.9em
     margin-bottom: 0.2em
     a
@@ -12,30 +14,50 @@ ul.tab_submenu
       line-height: 2em
       display: block
       background-color: $color-tab-start
-      padding: 0.2em 1em 0.2em 1em
-      +border-left-radius(0.4em)
+      //background-color: #999
+      padding: 0.2em 0.5em 0.2em 1em
+      +border-radius(0.4em)
       color: $color-font-header
       text-align: right
+      text-align: left
+      margin-right: 1.5em
+      margin-left: 1.5em
   li
     a.selected
+      //background: darken( $color-tab-selected-start, 5%)
       +background-image(linear-gradient($color-tab-selected-start, $color-tab-selected-end))
+      //background: $color-tab-selected-start
       color       : $color-font-selected-tab
+      border: 1px #B2B2B2 solid
+      border-right: none
+        //color: white
       font-weight : bold
-
-
-    
+      +border-right-radius(0)
+      +border-left-radius(0.4em)
+      padding: 0.2em 2em 0.2em 1em
+      margin-right: 0
+      text-align: right
+                
 div.tab_content
-  //border: 3px #2A3556 solid
-  //+border-radius(0.4em)
+  min-height: 20em
+  border-left: 1px #B2B2B2 solid
   background-color: #F0F0F0
-  border: 1px solid #B2B2B2
-  +border-top-radius(0.4em)
-  h2
-    margin-top: 0
-    border: none
-  .wrapper
-    padding: 1%
+  padding: 1%   
   .hide
     display: none
   .show
     display: block
+#content_company
+  overflow: auto
+  h2
+    //border: none
+    margin-top: 0
+    +border-top-radius(0.4em)
+  .wrapper
+    background-color: #F5F5F5
+    border: 1px #B2B2B2 solid  
+    overflow: auto  
+    min-height: 20em
+    #left_content  
+      min-height: 20em
+    #right_content

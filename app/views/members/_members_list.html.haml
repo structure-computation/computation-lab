@@ -1,0 +1,19 @@
+%table.grey
+  %thead
+    %tr
+      %th
+      %th                  Mail
+      %th                  Nom
+      %th                  Role
+      %th{ :colspan => 2 } Status
+  %tbody
+    - members_list.each do |member|
+      %tr
+        %td= link_to "Détails", company_member_path( current_user.company, member), :class => "member_details_link"
+        %td= member.email
+        %td= member.firstname
+        %td= member.role
+        %td= member.state
+        %td= link_to "X", {:controller => "companies", :action => company_member_path( current_user.company, member), :id_membre => member.id}, :confirm => "Êtes vous sûr ?", :method => :delete
+
+= link_to 'Ajouter un membre', new_company_member_path(@company), :class => 'yellow_button'

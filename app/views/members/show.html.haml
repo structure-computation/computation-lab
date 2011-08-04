@@ -1,25 +1,33 @@
-- content_for :additionnal_stylesheets do
-  = stylesheet_link_tag "member"
+-content_for :left_top do
+  .left_submenu
+    %h2.grey
+      Menu
+    %ul
+      %li.LM_pic_materiau
+        =link_to 'Retour à la liste des membres', company_path(@company, :tab => 'Membres')
 
-%h4
-  Détail du membre
-
-%dl
-  %dt Mail
-  %dd= @member.email
-
-  %dt Nom
-  %dd= @member.lastname
-
-  %dt Prénom
-  %dd= @member.firstname
-
-  %dt Role
-  %dd= @member.role
-  %br/
-
-  %dt Status
-  %dd= @member.state
-
-  %dt Date de création
-  %dd= @member.created_at
+-content_for :right_top do
+  %h2.grey
+    Détail du membre
+  %table.grey
+    %thead
+      %tr
+        %th Mail
+        %th Prénom
+        %th Nom
+        %th Rôle
+        %th Status
+        %th Date d'inscription
+    %tbody
+      %tr
+        %td= @member.email
+        %td= @member.firstname
+        %td= @member.lastname
+        %td= @member.role
+        %td= @member.state
+        %td= @member.created_at.to_date
+  
+  = link_to 'Editer', edit_company_member_path(@company, @member), :class => 'yellow_button'
+  = link_to 'Désactiver', edit_company_member_path(@company, @member), :class => 'yellow_button'
+  -# TODO Créer un fonction pour désactiver un user 
+  = link_to 'Editer', edit_company_member_path(@company, @member), :class => 'yellow_button'

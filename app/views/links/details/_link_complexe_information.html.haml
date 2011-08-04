@@ -6,18 +6,21 @@
       %tbody
         %tr
           %td Limite de plasticité :
-          %td
+          %td.label_table
             = label :link, :Lp, "Lp = "
+          %td
             = text_field :link, :Lp, :value => @link.Lp, :disabled => disabled
         %tr
           %td Taux de plastification :
-          %td 
+          %td.label_table
             = label :link, :Dp, "Dp = "
+          %td
             = text_field :link, :Dp, :value => @link.Dp, :disabled => disabled
         %tr
           %td Déformation plastique :
-          %td
+          %td.label_table
             = label :link, :p, "p = "
+          %td
             = text_field :link, :p, :value => @link.p, :disabled => disabled
     
 - if @link.comp_complexe.downcase.include? "ca"
@@ -28,11 +31,13 @@
       %tbody
         %tr
           %td Limite de rupture :
-          %td
+          %td.label_table
             = label :link, :Lr, "Lr ="
+          %td
             = text_field :link, :Lr, :value => @link.Lr, :disabled => disabled
         %tr
           %td Coefficient de frottement :
-          %td 
+          %td.label_table
             = label :link, :f, "f = "
+          %td
             = text_field :link, :f, :value => @link.f, :disabled => disabled

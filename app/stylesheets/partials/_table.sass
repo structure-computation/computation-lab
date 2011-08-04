@@ -1,54 +1,67 @@
 /* Variables ------------------------------------------------------------- */
-                            
-$color-thead-start     : #A3A5B5 // Couleur du début du gradient du fond du table header
-$color-thead-end       : #818799 // Couleur de fin du gradient du fond du table header
-                       
-$line-height-thead     : 2.5em
-$font-size-thead       : 0.75em
-                       
-$line-height-cell      : 1.5em
-$color-border-cell     : #555
-$padding-left-cell     : 0.5em
-$background-color-cell : #d0d1d7
+                               
+$color-thead-start           : #A3A5B5 // Couleur du début du gradient du fond du table header
+$color-thead-end             : #818799 // Couleur de fin du gradient du fond du table header
+
+$color-background-row-header : $color-thead-end
+                           
+$line-height-thead           : 2em
+$font-size-thead             : 1em
+$font-color-table-header     : white
+                             
+$border-table-width          : 1px
+$border-between-cell-width   : 1px
+                             
+$line-height-cell            : 1.5em
+$color-border-cell           : #555
+$padding-left-cell           : 0.5em
+$background-color-cell       : #d0d1d7
 
 table.grey
   width           : 100%
   border-collapse : collapse
-  border: 1px solid #555
+  border          : $border-table-width solid $color-border-cell
   thead
-    line-height : $line-height-thead
-    font-size   : $font-size-thead
-    font-weight : normal
-    color       : white
-    font-family : Verdana, Arial, Helvetica, sans-serif
-    text-align  : left
+    border-bottom : 1px solid $color-border-cell
     +background-image(linear-gradient($color-thead-start, $color-thead-end))
-    border-bottom: 1px solid #555
     tr
       th
         padding-left: $padding-left-cell
+        line-height : $line-height-thead
+        font-size   : $font-size-thead
+        color       : $font-color-table-header
+        text-align  : left
+        font-weight : normal
   tbody
     tr
-      background-color: $color-thead-start
-      th
-        padding-right  : $padding-left-cell
-        background-color: #818799
-        text-align: right
-        border-right: 1px solid $color-border-cell
-        font-weight : normal
-        color       : white
-        font-family : Verdana, Arial, Helvetica, sans-serif
-      td
-        padding-left  : $padding-left-cell
-        line-height   : $line-height-cell
-        border-right  : 1px solid $color-border-cell
-      td:last-child
-        border-right  : none
-    tr:nth-child(odd)
-      background-color: $background-color-cell
+      background-color: lighten($background-color-cell, 8%)
       
+      th
+        padding-right    : $padding-left-cell
+        text-align       : right
+        border-right     : 1px solid $color-border-cell
+        font-weight      : normal
+        color            : $font-color-table-header
+        background-color : $color-background-row-header
+        
+      td                 
+        padding-left     : $padding-left-cell
+        line-height      : $line-height-cell
+        border-right     : $border-between-cell-width solid $color-border-cell
+        
+      td:last-child      
+        border-right     : none
+        
+      td.label_table     
+        text-align       : right
+        border-right     : none
+        
+    tr:nth-child(odd)    
+      background-color   : $background-color-cell
+
+
 .search_filter
-  height: 3em
-  background-color: #F0F0F0
-  border  : 1px solid #B2B2B2
-  text-align: center
+  height           : 3em
+  background-color : #F0F0F0
+  border           : 1px solid #B2B2B2
+  text-align       : center

@@ -33,42 +33,44 @@
         - if @material.comp.include? "vi"
           %span.material_behavior Visqueux
           
--content_for :left_content do
-  %ul.tab_submenu
-    %li 
-      %a#tab_1.selected{:href => "#"} Génériques
-    %li 
-      %a#tab_2{:href => "#"} Elasticité
-    %li 
-      %a#tab_3{:href => "#"} Plasticité
-    %li 
-      %a#tab_4{:href => "#"} Endommagement
-    - if @material.comp.include? "vi"
-      %li    
-        %a#tab_5{:href => "#"} Viscosité
-
-    
--content_for :right_content do
-  .tab_content
-    %h2.grey
-      Matériaux : 
-      = @material.name
-    .wrapper
-      #tab_1_content.show
-        = render :partial => "materials/details/material_main_information", :locals => { :material => @material, :disabled => true }
-        = render :partial => "materials/details/material_generic_info", :locals => { :material => @material, :disabled => true }
-          
-      - if @material.comp.include? "el"
-        #tab_2_content.hide
-          = render :partial => "materials/details/material_elastic_information", :locals => { :material => @material, :disabled => true }
-      - if @material.comp.include? "pl"
-        #tab_3_content.hide
-          = render :partial => "materials/details/material_plastic_information", :locals => { :material => @material, :disabled => true }
-      - if @material.comp.include? "en"
-        #tab_4_content.hide
-          = render :partial => "materials/details/material_damageable_information", :locals => { :material => @material, :disabled => true }
-      - if @material.comp.include? "vi"
-        #tab_5_content.hide
-          = render :partial => "materials/details/material_viscous_information", :locals => { :material => @material, :disabled => true }
-
-  = render "shared/tab_javascript"
+-content_for :company_content do
+  %h2.grey
+    Matériaux : 
+    = @material.name
+  .wrapper
+    #left_content
+      %ul.tab_submenu
+        %li 
+          %a#tab_1.selected{:href => "#"} Génériques
+        - if @material.comp.include? "el"
+          %li
+            %a#tab_2{:href => "#"} Elasticité
+        - if @material.comp.include? "pl"
+          %li 
+            %a#tab_3{:href => "#"} Plasticité
+        - if @material.comp.include? "en"
+          %li 
+            %a#tab_4{:href => "#"} Endommagement
+        - if @material.comp.include? "vi"
+          %li    
+            %a#tab_5{:href => "#"} Viscosité
+    #right_content
+      .tab_content
+        #tab_1_content.show
+          = render :partial => "materials/details/material_main_information", :locals => { :material => @material, :disabled => true }
+          = render :partial => "materials/details/material_generic_info", :locals => { :material => @material, :disabled => true }
+            
+        - if @material.comp.include? "el"
+          #tab_2_content.hide
+            = render :partial => "materials/details/material_elastic_information", :locals => { :material => @material, :disabled => true }
+        - if @material.comp.include? "pl"
+          #tab_3_content.hide
+            = render :partial => "materials/details/material_plastic_information", :locals => { :material => @material, :disabled => true }
+        - if @material.comp.include? "en"
+          #tab_4_content.hide
+            = render :partial => "materials/details/material_damageable_information", :locals => { :material => @material, :disabled => true }
+        - if @material.comp.include? "vi"
+          #tab_5_content.hide
+            = render :partial => "materials/details/material_viscous_information", :locals => { :material => @material, :disabled => true }
+  
+      = render "shared/tab_javascript"

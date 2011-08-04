@@ -41,7 +41,7 @@
     /%script{ :src => "/javascripts/img_gl_server.js", :type => "text/javascript" }
 
   %body
-    = render :partial => "layouts/header"
+    = #render :partial => "layouts/header"
     #conteneur
       / partie content_top
       /#NC_content_top
@@ -63,13 +63,13 @@
         #NC_contentleft
           / hauteur minimum du contenu
           .contentheightmin
-          = render :partial => "calcul/NC_etape_initialisation/box_left"
-          = render :partial => "calcul/NC_etape_temporelle/box_left"
-          = render :partial => "calcul/NC_etape_materiaux/box_left"
-          = render :partial => "calcul/NC_etape_liaisons/box_left"
-          = render :partial => "calcul/NC_etape_CLs/box_left"
-          = render :partial => "calcul/NC_etape_options/box_left"
-          = render :partial => "calcul/NC_etape_previsions/box_left"
+          = render :partial => "calculs/NC_etape_initialisation/box_left"
+          = render :partial => "calculs/NC_etape_temporelle/box_left"
+          = render :partial => "calculs/NC_etape_materiaux/box_left"
+          = render :partial => "calculs/NC_etape_liaisons/box_left"
+          = render :partial => "calculs/NC_etape_CLs/box_left"
+          = render :partial => "calculs/NC_etape_options/box_left"
+          = render :partial => "calculs/NC_etape_previsions/box_left"
         / fin partie gauche du contenu
         
         / partie centre fake du contenu, sert pour pousser vers le bas le footer, doit avoir la même taille que NC_contentcenter
@@ -81,24 +81,24 @@
           / hauteur minimum du contenu
           .contentheightmin_1
           / #textetest{ :style => "float:left; width:650px; height:300px; border:thin solid #646464;" } 
-          = render :partial => "calcul/nc_box_visu"	
-          = render :partial => "calcul/nc_box_propriete"
-          = render :partial => "calcul/NC_etape_initialisation/box_active"
-          = render :partial => "calcul/NC_etape_temporelle/box_active"
-          = render :partial => "calcul/NC_etape_materiaux/box_active"
-          = render :partial => "calcul/NC_etape_liaisons/box_active"
-          = render :partial => "calcul/NC_etape_CLs/box_active"
-          = render :partial => "calcul/NC_etape_options/box_active"
-          = render :partial => "calcul/NC_etape_previsions/box_active"
+          = render :partial => "calculs/nc_box_visu"	
+          = render :partial => "calculs/nc_box_propriete"
+          = render :partial => "calculs/NC_etape_initialisation/box_active"
+          = render :partial => "calculs/NC_etape_temporelle/box_active"
+          = render :partial => "calculs/NC_etape_materiaux/box_active"
+          = render :partial => "calculs/NC_etape_liaisons/box_active"
+          = render :partial => "calculs/NC_etape_CLs/box_active"
+          = render :partial => "calculs/NC_etape_options/box_active"
+          = render :partial => "calculs/NC_etape_previsions/box_active"
         / fin partie centre du contenu
         
         / partie droite du contenu, tableau des pieces, interface, bord...
         #NC_contentright.on
           / hauteur minimum du contenu
           .contentheightmin
-          = render :partial => "calcul/NC_etape_materiaux/box_right"
-          = render :partial => "calcul/NC_etape_liaisons/box_right"
-          = render :partial => "calcul/NC_etape_CLs/box_right"
+          = render :partial => "calculs/NC_etape_materiaux/box_right"
+          = render :partial => "calculs/NC_etape_liaisons/box_right"
+          = render :partial => "calculs/NC_etape_CLs/box_right"
         / fin partie droite du contenu
         
         / scrollbar du contenu, raccourci
