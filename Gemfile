@@ -9,7 +9,7 @@ gem 'mongrel'     , '~>1.1.5'
 
 gem 'haml'        , '~>3.1.1'
 
-gem 'barista'     , '~>1.0.0'  # Attention, haml doit être chargé AVANT barrista.
+gem 'barista'     , '~>1.2.1'  # Attention, haml doit être chargé AVANT barrista.
 gem 'prawn'       , '~>0.8.4'
 
 gem 'jquery-rails', '~>1.0.12'

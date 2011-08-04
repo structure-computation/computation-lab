@@ -27,22 +27,20 @@
   = stylesheet_link_tag 'ie.css', :media => 'screen, projection'
 
 
-
-
 - #---------------------------------------------------------------------------------------------------------------------------#
 / Javascripts
-%script{ :src => "/javascripts/sources_ext/jquery-1.3.2.js"           ,   :type => "text/javascript" }
-%script{ :src => "/javascripts/sources_ext/jquery.form.js"            ,   :type => "text/javascript" }
-%script{ :src => "/javascripts/texteutils.js"                         ,   :type => "text/javascript" }
-%script{ :src => "/javascripts/jquery.tablesorter.js"                 ,   :type => "text/javascript" }
-%script{ :src => "/javascripts/jquery.tablesorter.pager.js"           ,   :type => "text/javascript" }
-%script{ :src => "/javascripts/sources_ext/swfupload.js"              ,   :type => "text/javascript" }
-%script{ :src => "/javascripts/sources_ext/jquery-asyncUpload-0.1.js" ,   :type => "text/javascript" }
+= javascript_include_tag "jquery.jquery"
+= javascript_include_tag "jquery.tablesorter"
+= javascript_include_tag "jquery.tablesorter.pager"
+= javascript_include_tag "texteutils"
+= javascript_include_tag "sources_ext/jquery.form"
+= javascript_include_tag "sources_ext/swfupload"
+= javascript_include_tag "sources_ext/jquery-asyncUpload-0.1"
 
 -# %script{ :src => "/javascripts/sources_ext/jquery_uploadify/swfobject.js"    ,   :type => "text/javascript" }
 -# %script{ :src => "/javascripts/sources_ext/jquery_uploadify/jquery.uploadify.v2.1.0.js",:type => "text/javascript" }
 
-%script{ :src => "/javascripts/functions_layer.js"                    ,   :type => "text/javascript" }
+= javascript_include_tag "functions_layer"
 
 
 - #---------------------------------------------------------------------------------------------------------------------------#
