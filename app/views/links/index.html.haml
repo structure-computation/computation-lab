@@ -11,6 +11,8 @@
     Liste des matériaux
   %div
     = render :partial => "search_filter"
+    %label{:for => "search_filter"} Recherche
+    %input#search_filter{:type => "text"}
 
 -content_for :company_content do
   - if !@links.empty?
@@ -36,6 +38,8 @@
             - if link.company and link.company.id == current_user.company.id
               %td= link_to "Editer"   , edit_company_link_path(@company, link)
               %td= link_to "Supprimer", {:action=>"destroy", :controller=>"link", :id => link.id}, :method => :delete
+
+  = coffeescript_include_tag "search"
 
   :coffeescript
     $('#links_table').tablesorter()
