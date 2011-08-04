@@ -2,7 +2,7 @@
   %p this is a test
 
 -content_for :right_content do
-  = semantic_form_for [@company, @member] do |form|
+  = form_for [@company, @member] do |form|
     = form.inputs do
       = form.input :email
       = form.input :name

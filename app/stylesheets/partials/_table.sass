@@ -21,6 +21,10 @@ table.grey
   width           : 100%
   border-collapse : collapse
   border          : $border-table-width solid $color-border-cell
+  a
+    //color: #333
+  a:hover
+    //color: lighten(#333, 15%)
   thead
     border-bottom : 1px solid $color-border-cell
     +background-image(linear-gradient($color-thead-start, $color-thead-end))
@@ -55,13 +59,42 @@ table.grey
       td.label_table     
         text-align       : right
         border-right     : none
+      td.action_on_table
+        background  : transparent url('/images/arrow_down.png') no-repeat 95% 50%
+        ul
+          //min-width: 4em
+          position: relative
+          right: 0
+          margin: 0
+          display: none
+          background-color: #F0F0F0
+          border: 1px solid #B2B2B2
+          list-style: none
+          padding: 0.2em
+          +border-radius(0.2em)
+      td.action_on_table:hover
+        ul
+          display: block
         
     tr:nth-child(odd)    
       background-color   : $background-color-cell
 
 
 .search_filter
-  height           : 3em
-  background-color : #F0F0F0
-  border           : 1px solid #B2B2B2
+  color: white
+  +border-radius(0.3em)
+  +background-image(linear-gradient(lighten($color-thead-start, 5%), lighten($color-thead-end, 5%)))
+  border           : 1px solid $color-border-cell
+  //border-bottom    : none
   text-align       : center
+  margin-bottom    : 1%
+  p
+    margin: 1%
+    label, input
+      display: inline-block
+      vertical-align: middle
+      margin: 0
+    input
+      //border: 1px solid $color-border-cell
+      //+border-radius(0.2em)
+      padding: 3px     

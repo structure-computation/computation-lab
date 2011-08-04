@@ -3,12 +3,11 @@
     %h2.grey
       Comptes
     %ul
-      %li.manage_pic_compte_memoire
-        %a
-          Nouvel abonnement
       %li.manage_pic_compte_abonnement
         %a
           Nouveau forfait
+      %li.manage_pic_nouveau_membre
+        = link_to 'Ajouter un membre', new_company_member_path(@company)
 
 -content_for :right_top do
   %h2.grey
@@ -39,6 +38,7 @@
         #tab_1_content{:class => tab_content_selected('Factures', params[:tab], true)}
           %p Liste des factures de la société :
           = render :partial => 'bills/factures_list', :object => @company.bills
+          
         #tab_2_content{:class => tab_content_selected('Abonnement', params[:tab])}
           %p Cet abonnement annuel donne accès à un espace mémoire sur les serveurs de Structure Computation. Il vous permet de stocker les modèles, les résultats de calculs et l'ensemble des informations relatives aux modèles.
           %p Votre abonnement actuel est le suivant :
@@ -52,6 +52,7 @@
               %tr
                 %td= @company.calcul_account.solde_jeton
                 %td= @company.calcul_account.used_jeton
+                
         #tab_3_content{:class => tab_content_selected('Forfait', params[:tab])}
           %p Les forfaits de calcul vous permettent d'utiliser à la demande les outils et la puissance de calcul de Structure Computation (maillage de vos modèles, calcul de structures...). Vous pouvez cumuler plusieurs forfaits.
           %p Dernier relevé :
@@ -81,6 +82,7 @@
                 
         #tab_4_content{:class => tab_content_selected('Membres', params[:tab])}
           = render :partial => "members/members_list", :object => @company.members
+          
         #tab_5_content{:class => tab_content_selected('Description', params[:tab])}
           %table.grey#company_information_table
             %tr

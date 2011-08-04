@@ -14,6 +14,12 @@
         %td= member.firstname
         %td= member.role
         %td= member.state
-        %td= link_to "X", {:controller => "companies", :action => company_member_path( current_user.company, member), :id_membre => member.id}, :confirm => "Êtes vous sûr ?", :method => :delete
+        %td.action_on_table
+          Action…
+          %ul
+            %li
+              =link_to "Supprimer", {:controller => "companies", :action => company_member_path( current_user.company, member), :id_membre => member.id}, :confirm => "Êtes vous sûr ?", :method => :delete
+            %li 
+              %a Editer
 
 = link_to 'Ajouter un membre', new_company_member_path(@company), :class => 'yellow_button'

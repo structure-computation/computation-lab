@@ -1,6 +1,4 @@
 .search_filter
-  = form_tag company_links_path, :method => :get do
-  
-    = select_tag "type", options_for_select([["Bibliothèque standard", "standard"],["Ma bibliothèque", "owner"]], (params[:type] == "standard" ? "standard" : "owner"))
-  
-    = submit_tag "Filtrer", :class => 'yellow_button'
+  %p
+    %label Recherche :
+    %input
