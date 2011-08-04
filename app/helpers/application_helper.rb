@@ -3,4 +3,5 @@ module ApplicationHelper
   def page_selected(page, page_name)
     page == page_name ? "selected" : ""
   end
+  
 end

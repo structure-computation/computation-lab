@@ -4,7 +4,7 @@
       Menu
     %ul
       %li.manage_pic_liste_factures
-        = link_to "Retour à la liste des factures", company_bills_path(@company) 
+        = link_to "Retour à la liste des factures", company_path(@company, :tab => 'Factures') 
       %li.manage_pic_liste_factures
         = link_to "Télécharger la facture", download_bill_company_bill_path(@company, @bill)
         

@@ -5,7 +5,7 @@
     =link_to 'Accueil', root_path
   
   %li{:class => ( @page == :manage ? "selected" : "")}
-    = link_to 'Gestion', companies_path
+    = link_to 'Gestion', companies_path(:tab => 'Factures')
   %li{:class => ( @page == :lab ? "selected" : "")}
     %a
       Laboratoire

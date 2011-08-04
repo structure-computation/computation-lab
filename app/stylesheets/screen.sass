@@ -20,7 +20,7 @@
 @import partials/layout_company
 @import partials/large_ligne
 @import partials/tab_menu_and_content
-
+@import partials/companies_show
 /* Notifications : Error - Notice ---------------------------------------- */
 
 #flash_notice, #flash_error
@@ -52,10 +52,11 @@ $radius-button            : 0.4em
 
 $border-width-button      : 1px
 $border-color-button      : white
-$padding-bottom-button    : 0.5em
+$padding-bottom-button    : 0.3em
 $padding-top-button       : $padding-bottom-button
 $padding-left-button      : 1em
 $padding-right-button     : $padding-left-button
+
 /* -- Fin variables pour la partie boutons -- */
 
 .yellow_button
@@ -67,6 +68,7 @@ $padding-right-button     : $padding-left-button
   text-decoration: none
   +single-box-shadow(rgba(0,0,0,0.4), 1px, 1px, 4px)
   cursor: pointer
+  display: inline-block
 
 .yellow_button:hover
   +background-image(linear-gradient($color-button-start-hover, $color-button-end-hover))
