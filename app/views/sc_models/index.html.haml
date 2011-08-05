@@ -25,7 +25,7 @@
     %tbody
       - @sc_models.each do |sc_model|
         %tr
-          %td.escape_search=  link_to 'Détails', company_sc_model_path(@company, sc_model)
+          %td.escape_search.details_link= link_to 'Détails', company_sc_model_path(@company, sc_model)
           %td.name=           sc_model.name ? sc_model.name : 'Undefined'
           %td.id=             sc_model.id
           %td.project=        sc_model.project ? sc_model.project : 'Undefined'

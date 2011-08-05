@@ -23,6 +23,7 @@ table.grey
   width           : 100%
   border-collapse : collapse
   border          : $border-table-width solid $color-border-cell
+  margin-bottom: 1%
   a
     //color: #333
   a:hover
@@ -55,7 +56,6 @@ table.grey
   tbody
     tr
       background-color: lighten($background-color-cell, 8%)
-      
       th
         padding-right    : $padding-left-cell
         text-align       : right
@@ -88,12 +88,21 @@ table.grey
           list-style: none
           padding: 0.5em
           +border-radius(0.2em)
-          margin-top: 1em
-      td.action_on_table:hover
-        //background  : transparent url('/images/arrow_down_hover.png') no-repeat 50% 50%
-        ul
-          //display: block
-        
+          margin-top: 0.5em
+
+      td.details_link
+        background  : transparent url('/images/fleche.png') no-repeat 0% 50%
+        padding-left: 25px
+        width: 4em   
+        a
+          display: block
+          text-decoration: none
+          color: #555
+      td.details_link:hover
+        background  : transparent url('/images/fleche_select.png') no-repeat 0% 50%
+        a
+          color: #202c6b
+            
     tr:nth-child(odd)    
       background-color   : $background-color-cell
 

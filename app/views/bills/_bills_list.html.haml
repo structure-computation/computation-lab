@@ -15,7 +15,7 @@
   %body
     - bills_list.each do |bill|
       %tr
-        %td= link_to "Détails", [@company, bill]      
+        %td.escape_search.details_link= link_to "Détails", [@company, bill]      
         %td= bill.ref
         %td= bill.facture_type
         %td= bill.total_price_HT

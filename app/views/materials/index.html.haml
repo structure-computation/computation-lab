@@ -27,7 +27,7 @@
       %tbody
         - @materials.each do |material|
           %tr
-            %td.escape_search=  link_to "Détails", [@company, material]
+            %td.escape_search.details_link=  link_to "Détails", [@company, material]
             %td.name=           material.name
             %td.id=             material.id
             %td.reference=      material.reference            
