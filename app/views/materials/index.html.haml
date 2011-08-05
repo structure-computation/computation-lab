@@ -36,6 +36,8 @@
         %tr
           %th.no_sorter 
           %th Nom
+          %th ID
+          %th Référence
           %th Famille
           %th Type
           %th Comportement
@@ -45,6 +47,8 @@
           %tr
             %td= link_to "Détails", [@company, material]
             %td.name= material.name
+            %td.id= material.id
+            %td.reference= material.reference            
             %td.family= material.family
             %td.type= material.mtype
             %td.comp= material.comp

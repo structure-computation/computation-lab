@@ -21,6 +21,8 @@
         %tr
           %th.no_sorter
           %th Nom
+          %th ID
+          %th Référence
           %th Famille
           %th Générique
           %th Complexe
@@ -30,6 +32,8 @@
           %tr
             %td= link_to "Détails", [@company, link]
             %td= link.name
+            %td= link.id
+            %td= link.reference
             %td= link.family
             %td= link.comp_generique
             %td= link.comp_complexe
