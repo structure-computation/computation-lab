@@ -28,15 +28,15 @@
       %tbody
         - @links.each do |link|
           %tr
-            %td.details_link= link_to "Détails", [@company, link]
-            %td.name= link.name
-            %td.id= link.id
-            %td.reference= link.reference
-            %td.family= link.family
-            %td.comp_generic= link.comp_generique
-            %td.comp_complex= link.comp_complexe
+            %td.escape_search.details_link=  link_to "Détails", [@company, link]
+            %td.name=           link.name
+            %td.id=             link.id
+            %td.reference=      link.reference
+            %td.family=         link.family
+            %td.comp_generic=   link.comp_generique
+            %td.comp_complex=   link.comp_complexe
             - if link.company and link.company.id == current_user.company.id
-              %td.action_on_table
+              %td.action_on_table.escape_search
                 %ul
                   %li
                     = link_to "Editer"   , edit_company_link_path(@company, link)

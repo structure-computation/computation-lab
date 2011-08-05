@@ -7,7 +7,7 @@
 
   %label{:for => "search_filter"} Recherche
   %input#search_filter{:type => "text"}
-  %button#more_details +
+  %button#more_details.close +
   #advanced_search
     %br/
     %label{:for => "name_search_filter"} Nom
@@ -35,8 +35,13 @@
 
     $("#advanced_search").toggle()  
     $('#more_details').click( () ->
-      $("#advanced_search").toggle()
-      $(this).text(if $(this).text() is '+' then '-' else '+')
+      $("#advanced_search").slideToggle()
+      if $(this).hasClass('open')
+        $(this).removeClass('open')
+        $(this).addClass('close')
+      else
+        $(this).removeClass('close')
+        $(this).addClass('open')
     )
 
     advancedSearchFilter("links_table",
