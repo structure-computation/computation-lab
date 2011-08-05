@@ -18,14 +18,15 @@ window.searchFilter = (tableId, inputFieldId) ->
     rows = $(tableId + " tbody tr")
     if searchText?
       for row in rows
-        row = $(row)
+        row = $(row).find("> :not('td.escape_search')")
+
         tableContainsOccurence = true
         for text in searchText
           tableContainsOccurence = false if row.text().toLowerCase().indexOf(text) == -1
         if tableContainsOccurence
-          row.css('display', 'table-row')
+          row.parent().css('display', 'table-row')
         else
-          row.css('display', 'none')
+          row.parent().css('display', 'none')
     else
       rows.css('display', 'table-row')
   )
