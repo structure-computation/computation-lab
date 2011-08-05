@@ -3,18 +3,18 @@
 %table.grey
   %thead
     %tr
+      %th.no_sorter
       %th Référence
       %th Type
       %th Prix HT(Euros)
       %th Prix TTC(Euros)
       %th Status
-      %th
   %body
     - factures_list.each do |bill|
       %tr
+        %td= link_to "Détails", [@company, bill]      
         %td= bill.ref
         %td= bill.facture_type
         %td= bill.total_price_HT
         %td= bill.total_price_TTC
         %td= bill.statut
-        %td= link_to "Détails", [@company, bill]

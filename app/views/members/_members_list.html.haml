@@ -1,11 +1,12 @@
 %table.grey
   %thead
     %tr
-      %th
-      %th                  Mail
-      %th                  Nom
-      %th                  Role
-      %th{ :colspan => 2 } Status
+      %th.no_sorter
+      %th Mail
+      %th Nom
+      %th Role
+      %th Status
+      %th.no_sorter Actions
   %tbody
     - members_list.each do |member|
       %tr
@@ -15,7 +16,6 @@
         %td= member.role
         %td= member.state
         %td.action_on_table
-          Action…
           %ul
             %li
               =link_to "Supprimer", {:controller => "companies", :action => company_member_path( current_user.company, member), :id_membre => member.id}, :confirm => "Êtes vous sûr ?", :method => :delete

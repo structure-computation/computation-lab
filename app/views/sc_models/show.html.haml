@@ -72,7 +72,7 @@
               %tr
                 %th Date
                 %th Nom
-                %th Actions
+                %th.no_sorter Actions
             %tbody
               - @sc_model.calcul_results.each do |result|
                 %tr
@@ -91,9 +91,9 @@
           %table.grey
             %thead
               %tr
-                %td E-mail
-                %td Nom
-                %td Role
+                %th E-mail
+                %th Nom
+                %th Role
             %tbody
               - @sc_model.user_model_ownerships.each do |info|
                 %tr
