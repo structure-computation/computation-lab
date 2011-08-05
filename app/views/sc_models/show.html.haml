@@ -11,21 +11,19 @@
     Détail du modèle : 
     = @sc_model.name
   .grey  
-    %table
+    %table.grey#modele_details
       %tbody
         %tr
-          %td Dimension
+          %th Dimension
           %td= @sc_model.dimension
         %tr
-          %td Nombre d'élèments
-          %td= @sc_model.parts
-    %table
-      %tbody
-        %tr
-          %td Nombre de pièces
+          %th Nombre d'élèments
           %td= @sc_model.parts
         %tr
-          %td Nombre de liaisons
+          %th Nombre de pièces
+          %td= @sc_model.parts
+        %tr
+          %th Nombre de liaisons
           %td= @sc_model.interfaces
 
 -content_for :left_content do
@@ -55,8 +53,8 @@
     #right_content
       .tab_content
         #tab_1_content.show
-          %p
-            Pour accéder aux outils, vous devez d abord charger un maillage pour ce modéle
+          %h3
+            Pour accéder aux outils, vous devez d'abord charger un maillage pour ce modèle
           %p
             Charger votre maillage
           - semantic_form_for [@company, @sc_model], :url => {:controller => "sc_models", :action => "load_mesh"}, :html => {:multipart => true, :method => :post} do |f|
@@ -68,24 +66,28 @@
             %li= link_to "Visualisation"        , :controller => "visualisations", :action => "index", :model_id => @sc_model.id
             %li= link_to "Partager un fichier"
         #tab_2_content.hide
+          %h3 Liste des résultats
           %table.grey
             %thead
               %tr
                 %th Date
                 %th Nom
-                %th
-                %th
-                %th
+                %th Actions
             %tbody
-              = @sc_model.calcul_results.each do |result|
+              - @sc_model.calcul_results.each do |result|
                 %tr
                   %td= result.result_date
-                  %td= result.name
-                  %td= link_to "Voir"
-                  %td= link_to "Télécharger"
-                  %td= button_to "Supprimer", :controller => "calcul_results", :action => "destroy"
+                  %td= result.name ? result.name : 'Undefined'
+                  %td.action_on_table
+                    %ul
+                      %li
+                        = link_to "Voir"
+                      %li
+                        = link_to "Télécharger"
+                      %li
+                        = link_to "Supprimer", :controller => "calcul_results", :action => "destroy"
         #tab_3_content.hide
-          %p Liste des utilisateurs ayant accès à ce modéle
+          %h3 Liste des utilisateurs ayant accès à ce modèle
           %table.grey
             %thead
               %tr
@@ -95,7 +97,10 @@
             %tbody
               - @sc_model.user_model_ownerships.each do |info|
                 %tr
-                  = info.user.email
-                  = info.user.firstname
-                  = info.rights
+                  %td
+                    = info.user.email
+                  %td
+                    = info.user.firstname
+                  %td
+                    = info.rights
         = render "shared/tab_javascript"
