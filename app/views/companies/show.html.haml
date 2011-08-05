@@ -37,7 +37,7 @@
       .tab_content
         #tab_1_content{:class => tab_content_selected('Factures', params[:tab], true)}
           %p Liste des factures de la société :
-          = render :partial => 'bills/factures_list', :object => @company.bills
+          = render :partial => 'bills/bills_list', :object => @company.bills
           
         #tab_2_content{:class => tab_content_selected('Abonnement', params[:tab])}
           %p Cet abonnement annuel donne accès à un espace mémoire sur les serveurs de Structure Computation. Il vous permet de stocker les modèles, les résultats de calculs et l'ensemble des informations relatives aux modèles.
@@ -81,6 +81,7 @@
                 %td= @company.calcul_account.used_jeton
                 
         #tab_4_content{:class => tab_content_selected('Membres', params[:tab])}
+          = render :partial => "members/search_filter"
           = render :partial => "members/members_list", :object => @company.members
           
         #tab_5_content{:class => tab_content_selected('Description', params[:tab])}

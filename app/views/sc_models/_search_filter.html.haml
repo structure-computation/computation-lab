@@ -2,13 +2,14 @@
   = form_tag company_materials_path, :method => :get do
   
     = select_tag "type", options_for_select([["Bibliothèque standard", "standard"],["Ma bibliothèque", "owner"]], (params[:type] == "standard" ? "standard" : "owner"))
-  
     = submit_tag "Filtrer"
-  %label{:for => "search_filter"} Recherche
-  %input#search_filter{:type => "text"}
-  %button#more_details.close +
-  #advanced_search
-    %br/
+
+  %p
+    %label{:for => "search_filter"} Recherche
+    %input#search_filter{:type => "text"}
+    %button#more_details.close +
+
+  %p#advanced_search
     %label{:for => "name_search_filter"} Nom
     %input#name_search_filter{:type => "text"}
     

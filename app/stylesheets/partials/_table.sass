@@ -1,7 +1,9 @@
 /* Variables ------------------------------------------------------------- */
                                
-$color-thead-start           : #A3A5B5 // Couleur du début du gradient du fond du table header
-$color-thead-end             : #818799 // Couleur de fin du gradient du fond du table header
+// Couleur du début du gradient du fond du table header
+$color-thead-start           : #A3A5B5 
+// Couleur de fin du gradient du fond du table header
+$color-thead-end             : #818799 
 
 $color-background-row-header : $color-thead-end
                            
@@ -86,10 +88,11 @@ table.grey
           list-style: none
           padding: 0.5em
           +border-radius(0.2em)
+          margin-top: 1em
       td.action_on_table:hover
-        background  : transparent url('/images/arrow_down_hover.png') no-repeat 50% 50%
+        //background  : transparent url('/images/arrow_down_hover.png') no-repeat 50% 50%
         ul
-          display: block
+          //display: block
         
     tr:nth-child(odd)    
       background-color   : $background-color-cell

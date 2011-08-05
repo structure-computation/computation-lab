@@ -5,11 +5,12 @@
   
     = submit_tag "Filtrer", :class => 'yellow_button'
 
-  %label{:for => "search_filter"} Recherche
-  %input#search_filter{:type => "text"}
-  %button#more_details.close +
-  #advanced_search
-    %br/
+  %p
+    %label{:for => "search_filter"} Recherche
+    %input#search_filter{:type => "text"}
+    %button#more_details.close +
+
+  %p#advanced_search
     %label{:for => "name_search_filter"} Nom
     %input#name_search_filter{:type => "text"}
 

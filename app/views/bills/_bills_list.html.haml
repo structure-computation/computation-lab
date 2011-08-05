@@ -1,6 +1,9 @@
-=render :partial => 'bills/search_filter'
+.search_filter
+  %p
+    %label{:for => "bills_search_filter"} Recherche
+    %input#bills_search_filter{:type => "text"}
 
-%table.grey
+%table.grey#bills_table
   %thead
     %tr
       %th.no_sorter
@@ -10,7 +13,7 @@
       %th Prix TTC(Euros)
       %th Status
   %body
-    - factures_list.each do |bill|
+    - bills_list.each do |bill|
       %tr
         %td= link_to "Détails", [@company, bill]      
         %td= bill.ref
@@ -18,3 +21,9 @@
         %td= bill.total_price_HT
         %td= bill.total_price_TTC
         %td= bill.statut
+:coffeescript
+  $( ->
+    $('#bills_table').tablesorter()
+
+    searchFilter("bills_table", "bills_search_filter")
+  )

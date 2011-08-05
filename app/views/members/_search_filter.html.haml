@@ -1,13 +1,10 @@
 .search_filter
-  = form_tag company_materials_path, :method => :get do
-  
-    = select_tag "type", options_for_select([["Bibliothèque standard", "standard"],["Ma bibliothèque", "owner"]], (params[:type] == "standard" ? "standard" : "owner"))
-  
-    = submit_tag "Filtrer", :class => 'yellow_button'
-    %br/
+  %p
     %label{:for => "search_filter"} Recherche
     %input#search_filter{:type => "text"}
   
 :coffeescript
-  $("member_table").tablesorter()
-  searchFilter("members_table", "search_filter")
+  $( ->
+    $("member_table").tablesorter()
+    searchFilter("members_table", "search_filter")
+  )

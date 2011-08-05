@@ -67,7 +67,11 @@
             %li= link_to "Partager un fichier"
         #tab_2_content.hide
           %h3 Liste des résultats
-          %table.grey
+          .search_filter
+            %p
+              %label{:for => "results_search_filter"} Recherche
+              %input#results_search_filter{:type => "text"}
+          %table.grey#results_table
             %thead
               %tr
                 %th Date
@@ -88,7 +92,11 @@
                         = link_to "Supprimer", :controller => "calcul_results", :action => "destroy"
         #tab_3_content.hide
           %h3 Liste des utilisateurs ayant accès à ce modèle
-          %table.grey
+          .search_filter
+            %p
+              %label{:for => "users_search_filter"} Recherche
+              %input#users_search_filter{:type => "text"}
+          %table.grey#users_table
             %thead
               %tr
                 %th E-mail
@@ -104,3 +112,12 @@
                   %td
                     = info.rights
         = render "shared/tab_javascript"
+
+:coffeescript
+  $( ->
+    $('#results_table').tablesorter()
+    $('#users_table').tablesorter()
+
+    searchFilter("results_table", "results_search_filter")
+    searchFilter("users_table", "users_search_filter")
+  )
