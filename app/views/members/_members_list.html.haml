@@ -1,4 +1,4 @@
-%table.grey
+%table#members_table.grey
   %thead
     %tr
       %th.no_sorter
@@ -10,12 +10,13 @@
   %tbody
     - members_list.each do |member|
       %tr
-        %td= link_to "Détails", company_member_path( current_user.company, member), :class => "member_details_link"
+        %td.escape_search
+          = link_to "Détails", company_member_path( current_user.company, member), :class => "member_details_link"
         %td= member.email
         %td= member.firstname
         %td= member.role
         %td= member.state
-        %td.action_on_table
+        %td.action_on_table.escape_search
           %ul
             %li
               =link_to "Supprimer", {:controller => "companies", :action => company_member_path( current_user.company, member), :id_membre => member.id}, :confirm => "Êtes vous sûr ?", :method => :delete
