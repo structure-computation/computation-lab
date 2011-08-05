@@ -4,3 +4,36 @@
     = select_tag "type", options_for_select([["Bibliothèque standard", "standard"],["Ma bibliothèque", "owner"]], (params[:type] == "standard" ? "standard" : "owner"))
   
     = submit_tag "Filtrer", :class => 'yellow_button'
+
+  %label{:for => "search_filter"} Recherche
+  %input#search_filter{:type => "text"}
+  %button#more_details +
+  #advanced_search
+    %br/
+    %label{:for => "name_search_filter"} Nom
+    %input#name_search_filter{:type => "text"}
+    
+    %label{:for => "family_search_filter"} Famille
+    %input#family_search_filter{:type => "text"}
+    
+    %label{:for => "type_search_filter"} Type
+    %input#type_search_filter{:type => "text"}
+    
+    %label{:for => "comp_search_filter"} Comportement
+    %input#comp_search_filter{:type => "text"}
+
+:coffeescript
+  $( ->
+    $('#materials_table').tablesorter()
+
+    $("#advanced_search").toggle()  
+    $('#more_details').click( () ->
+      $("#advanced_search").toggle()
+      $(this).text(if $(this).text() is '+' then '-' else '+')
+    )
+
+    advancedSearchFilter("materials_table",
+                         ["name_search_filter","family_search_filter","type_search_filter","comp_search_filter"],
+                         ["name"              ,"family"              ,"type"              ,"comp"])
+    searchFilter("materials_table", "search_filter")
+  )

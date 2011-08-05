@@ -11,8 +11,6 @@
     Liste des matériaux
   %div
     = render :partial => "search_filter"
-    %label{:for => "search_filter"} Recherche
-    %input#search_filter{:type => "text"}
 
 -content_for :company_content do
   - if !@links.empty?
@@ -31,15 +29,10 @@
         - @links.each do |link|
           %tr
             %td= link_to "Détails", [@company, link]
-            %td= link.name
-            %td= link.family
-            %td= link.comp_generique
-            %td= link.comp_complexe
+            %td.name= link.name
+            %td.family= link.family
+            %td.comp_generic= link.comp_generique
+            %td.comp_complex= link.comp_complexe
             - if link.company and link.company.id == current_user.company.id
               %td= link_to "Editer"   , edit_company_link_path(@company, link)
               %td= link_to "Supprimer", {:action=>"destroy", :controller=>"link", :id => link.id}, :method => :delete
-
-  = coffeescript_include_tag "search"
-
-  :coffeescript
-    $('#links_table').tablesorter()

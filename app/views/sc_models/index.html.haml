@@ -11,32 +11,26 @@
     Liste des modèles 
   %div
     = render :partial => "search_filter"
-    %label{:for => "search_filter"} Recherche
-    %input#search_filter{:type => "text"}
 
 -content_for :company_content do
   %table.grey#models_table
     %thead
       %tr
         %th
-        %th                  Nom
-        %th                  Projet
-        %th                  Résultat
-        %th                  Visu
-        %th{ :colspan => 2 } Calcul
+        %th Nom
+        %th Projet
+        %th Résultat
+        %th Visu
+        %th Calcul
+        %th
     %tbody
       - @sc_models.each do |sc_model|
         %tr
           %td
             = link_to 'Détails', company_sc_model_path(@company, sc_model)
-          %td= sc_model.name
-          %td= sc_model.project
-          %td= sc_model.results
+          %td.name= sc_model.name
+          %td.project= sc_model.project
+          %td.result= sc_model.results
           %td v
           %td c
           %td= button_to 'X', company_sc_model_path(@company, sc_model), :method => :delete
-
-  = coffeescript_include_tag "search"
-
-  :coffeescript
-    $('#models_table').tablesorter()

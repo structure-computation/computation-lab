@@ -4,3 +4,33 @@
     = select_tag "type", options_for_select([["Bibliothèque standard", "standard"],["Ma bibliothèque", "owner"]], (params[:type] == "standard" ? "standard" : "owner"))
   
     = submit_tag "Filtrer"
+  %label{:for => "search_filter"} Recherche
+  %input#search_filter{:type => "text"}
+  %button#more_details +
+  #advanced_search
+    %br/
+    %label{:for => "name_search_filter"} Nom
+    %input#name_search_filter{:type => "text"}
+    
+    %label{:for => "project_search_filter"} Projets
+    %input#project_search_filter{:type => "text"}
+    
+    %label{:for => "result_generic_search_filter"} Résultats
+    %input#result_generic_search_filter{:type => "text"}
+
+
+:coffeescript
+  $( ->
+    $('#models_table').tablesorter()
+
+    $("#advanced_search").toggle()  
+    $('#more_details').click( () ->
+      $("#advanced_search").toggle()
+      $(this).text(if $(this).text() is '+' then '-' else '+')
+    )
+
+    advancedSearchFilter("models_table",
+                         ["name_search_filter","project_search_filter","result_search_filter"],
+                         ["name"              ,"project"              ,"result"])
+    searchFilter("models_table", "search_filter")
+  )

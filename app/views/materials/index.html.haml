@@ -10,25 +10,7 @@
     Liste des matériaux 
   %div
     = render :partial => "search_filter"
-    %label{:for => "search_filter"} Recherche
-    %input#search_filter{:type => "text"}
-    %button#more_details +
-    #advanced_search
-      %br/
-      %label{:for => "name_search_filter"} Nom
-      %input#name_search_filter{:type => "text"}
 
-      %label{:for => "family_search_filter"} Famille
-      %input#family_search_filter{:type => "text"}
-
-      %label{:for => "type_search_filter"} Type
-      %input#type_search_filter{:type => "text"}
-
-      %label{:for => "comp_search_filter"} Comportement
-      %input#comp_search_filter{:type => "text"}
-      %button#more_details X
-
-    
 -content_for :company_content do
   - if !@materials.empty?
     %table.grey#materials_table
@@ -54,15 +36,3 @@
             - if material.company and material.company.id == current_user.company.id
               %td= link_to "Editer"   , edit_company_material_path(@company, material)
               %td= link_to "Supprimer", {:action=>"destroy", :controller=>"materials", :id => material.id}, :method => :delete    
-
-  = coffeescript_include_tag "search"
-  
-  :coffeescript
-    $('#materials_table').tablesorter()
-
-    $("#advanced_search").toggle()  
-    $('#more_details').click( () ->
-      $("#advanced_search").toggle()
-      $(this).text(if $(this).text() is '+' then '-' else '+')
-    )
-
