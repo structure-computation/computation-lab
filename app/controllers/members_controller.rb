@@ -30,28 +30,10 @@ class MembersController < InheritedResources::Base
     end
 
     def create
-      pwd            = generate_password
-      @user          = User.new  params["member"]
-      @user.company  = current_user.company
-      success        = @user.save
-
-      if @user.errors
-        logger.debug "New user errors : " + @user.errors.full_messages.join("\n")
-      end
-
-      if success
-        render :text => "validation du nouvel utilisateur"
-  #       redirect_back_or_default('/')
-  #       flash[:notice] = "Thanks for signing up!  We're sending you an email with your activation code."
-      else
-        render :text => "We couldn't set up that account, sorry.  Please try again, or contact an admin (link is above)."
-  #       flash[:error]  = "We couldn't set up that account, sorry.  Please try again, or contact an admin (link is above)."
-  #       render :action => 'new'
-      end
+      @user = User.new(params["user"])
+      @user.company = current_user.company
+      create!
     end
-    
-
-
 
     # There's no page here to update or destroy a user.  If you add those, be
     # smart -- make sure you check that the visitor is authorized to do so, that they
