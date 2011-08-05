@@ -16,13 +16,9 @@ class ScModelsController < InheritedResources::Base
   end
 
   def index
-    # @page = :lab
-    # 
     @sc_models = current_user.sc_models
     @sc_models.each{ |sc_model|
-      sc_model[:results]  = sc_model.calcul_results.find(:all, :conditions => {:log_type => "compute", :state => "finish"}).size
-    #   sc_model[:project] = "hors projet"
-    }
+      sc_model[:results]  = sc_model.calcul_results.find(:all, :conditions => {:log_type => "compute", :state => "finish"}).size }
     index!
   end
   

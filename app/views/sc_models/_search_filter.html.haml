@@ -12,6 +12,9 @@
     %label{:for => "name_search_filter"} Nom
     %input#name_search_filter{:type => "text"}
     
+    %label{:for => "id_search_filter"} ID
+    %input#id_search_filter{:type => "text"}    
+
     %label{:for => "project_search_filter"} Projets
     %input#project_search_filter{:type => "text"}
     
@@ -30,7 +33,7 @@
     )
 
     advancedSearchFilter("models_table",
-                         ["name_search_filter","project_search_filter","result_search_filter"],
-                         ["name"              ,"project"              ,"result"])
+                         ["name_search_filter","id_search_filter", "project_search_filter","result_search_filter"],
+                         ["name"              ,"id"              ,"project"              ,"result"])
     searchFilter("models_table", "search_filter")
   )

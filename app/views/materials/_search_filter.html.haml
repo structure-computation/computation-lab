@@ -12,6 +12,12 @@
     %br/
     %label{:for => "name_search_filter"} Nom
     %input#name_search_filter{:type => "text"}
+
+    %label{:for => "id_search_filter"} ID
+    %input#id_search_filter{:type => "text"}
+
+    %label{:for => "reference_search_filter"} Référence
+    %input#reference_search_filter{:type => "text"}
     
     %label{:for => "family_search_filter"} Famille
     %input#family_search_filter{:type => "text"}
@@ -33,7 +39,7 @@
     )
 
     advancedSearchFilter("materials_table",
-                         ["name_search_filter","family_search_filter","type_search_filter","comp_search_filter"],
-                         ["name"              ,"family"              ,"type"              ,"comp"])
+                         ["name_search_filter", "id_search_filter", "reference_search_filter", "family_search_filter","type_search_filter","comp_search_filter"],
+                         ["name"              , "id"              , "reference"              , "family"              ,"type"              ,"comp"])
     searchFilter("materials_table", "search_filter")
   )

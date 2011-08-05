@@ -36,6 +36,20 @@ table.grey
         color       : $font-color-table-header
         text-align  : left
         font-weight : normal
+        background  : transparent url('/images/bg_asc_desc.gif') no-repeat center right
+        border-right     : 1px solid $color-border-cell
+        cursor: pointer
+      th.headerSortDown       
+        background  : transparent url('/images/desc.gif') no-repeat center right
+      th.headerSortUp       
+        background  : transparent url('/images/asc.gif') no-repeat center right
+      th.no_sorter
+        background  : none
+        cursor: default 
+    tr.no_sorter
+      th
+        background  : none
+        cursor: default    
   tbody
     tr
       background-color: lighten($background-color-cell, 8%)
@@ -47,7 +61,6 @@ table.grey
         font-weight      : normal
         color            : $font-color-table-header
         background-color : $color-background-row-header
-        
       td                 
         padding-left     : $padding-left-cell
         line-height      : $line-height-cell
@@ -60,19 +73,21 @@ table.grey
         text-align       : right
         border-right     : none
       td.action_on_table
-        background  : transparent url('/images/arrow_down.png') no-repeat 95% 50%
+        background  : transparent url('/images/arrow_down.png') no-repeat 50% 50%
+        width: 6em
+        cursor: pointer
         ul
           //min-width: 4em
-          position: relative
-          right: 0
+          position: absolute
           margin: 0
           display: none
           background-color: #F0F0F0
           border: 1px solid #B2B2B2
           list-style: none
-          padding: 0.2em
+          padding: 0.5em
           +border-radius(0.2em)
       td.action_on_table:hover
+        background  : transparent url('/images/arrow_down_hover.png') no-repeat 50% 50%
         ul
           display: block
         

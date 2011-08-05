@@ -12,7 +12,13 @@
     %br/
     %label{:for => "name_search_filter"} Nom
     %input#name_search_filter{:type => "text"}
+
+    %label{:for => "id_search_filter"} ID
+    %input#id_search_filter{:type => "text"}
     
+    %label{:for => "reference_search_filter"} Réference
+    %input#reference_search_filter{:type => "text"}
+
     %label{:for => "family_search_filter"} Famille
     %input#family_search_filter{:type => "text"}
     
@@ -34,7 +40,7 @@
     )
 
     advancedSearchFilter("links_table",
-                         ["name_search_filter","family_search_filter","comp_generic_search_filter","comp_complex_search_filter"],
-                         ["name"              ,"family"              ,"comp_generic"              ,"comp_complex"])
+                         ["name_search_filter","id_search_filter","reference_search_filter","family_search_filter","comp_generic_search_filter","comp_complex_search_filter"],
+                         ["name"              ,"id"              ,"reference"              ,"family"              ,"comp_generic"              ,"comp_complex"])
     searchFilter("links_table", "search_filter")
   )

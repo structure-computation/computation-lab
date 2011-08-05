@@ -16,23 +16,28 @@
     %table.grey#materials_table
       %thead
         %tr
-          %th 
+          %th.no_sorter 
           %th Nom
+          %th ID
+          %th Référence
           %th Famille
           %th Type
           %th Comportement
-          / Pour afficher les colonnes Editer et Supprimer
-          - if params[:type] != "standard" 
-            %th
-            %th
+          %th.no_sorter Actions
       %tbody
         - @materials.each do |material|
           %tr
             %td= link_to "Détails", [@company, material]
             %td.name= material.name
+            %td.id= material.id
+            %td.reference= material.reference            
             %td.family= material.family
             %td.type= material.mtype
             %td.comp= material.comp
             - if material.company and material.company.id == current_user.company.id
-              %td= link_to "Editer"   , edit_company_material_path(@company, material)
-              %td= link_to "Supprimer", {:action=>"destroy", :controller=>"materials", :id => material.id}, :method => :delete    
+              %td.action_on_table
+                %ul
+                  %li
+                    = link_to "Editer"   , edit_company_material_path(@company, material)
+                  %li
+                    = link_to "Supprimer", {:action=>"destroy", :controller=>"materials", :id => material.id}, :method => :delete    

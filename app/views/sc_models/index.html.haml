@@ -16,21 +16,26 @@
   %table.grey#models_table
     %thead
       %tr
-        %th
+        %th.no_sorter
         %th Nom
+        %th ID
         %th Projet
         %th Résultat
-        %th Visu
-        %th Calcul
-        %th
+        %th.no_sorter Actions
     %tbody
       - @sc_models.each do |sc_model|
         %tr
           %td
             = link_to 'Détails', company_sc_model_path(@company, sc_model)
-          %td.name= sc_model.name
-          %td.project= sc_model.project
+          %td.name= sc_model.name ? sc_model.name : 'Undefined'
+          %td.id= sc_model.id
+          %td.project= sc_model.project ? sc_model.project : 'Undefined'
           %td.result= sc_model.results
-          %td v
-          %td c
-          %td= button_to 'X', company_sc_model_path(@company, sc_model), :method => :delete
+          %td.action_on_table
+            %ul
+              %li
+                %a Visualisation
+              %li
+                %a Calcul
+              %li
+                = link_to 'Supprimer', company_sc_model_path(@company, sc_model), :method => :delete
