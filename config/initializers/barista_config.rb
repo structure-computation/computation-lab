@@ -1,6 +1,5 @@
 # Configure barista.
 Barista.configure do |c|
-  
   # Change the root to use app/scripts
   # c.root = Rails.root.join("app", "scripts")
   
