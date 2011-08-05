@@ -8,26 +8,27 @@
   %p
     %label{:for => "search_filter"} Recherche
     %input#search_filter{:type => "text"}
-    %button#more_details.close +
+    %button#more_details.close.yellow_button Recherche avancée
 
-  %p#advanced_search
-    %label{:for => "name_search_filter"} Nom
-    %input#name_search_filter{:type => "text"}
-
-    %label{:for => "id_search_filter"} ID
-    %input#id_search_filter{:type => "text"}
-    
-    %label{:for => "reference_search_filter"} Réference
-    %input#reference_search_filter{:type => "text"}
-
-    %label{:for => "family_search_filter"} Famille
-    %input#family_search_filter{:type => "text"}
-    
-    %label{:for => "comp_generic_search_filter"} Générique
-    %input#comp_generic_search_filter{:type => "text"}
-    
-    %label{:for => "comp_complex_search_filter"} Complexe
-    %input#comp_complex_search_filter{:type => "text"}
+  #advanced_search
+    %p
+      %label{:for => "name_search_filter"} Nom
+      %input#name_search_filter{:type => "text"}
+    %p  
+      %label{:for => "id_search_filter"} ID
+      %input#id_search_filter{:type => "text"}
+    %p      
+      %label{:for => "reference_search_filter"} Réference
+      %input#reference_search_filter{:type => "text"}
+    %p  
+      %label{:for => "family_search_filter"} Famille
+      %input#family_search_filter{:type => "text"}
+    %p      
+      %label{:for => "comp_generic_search_filter"} Générique
+      %input#comp_generic_search_filter{:type => "text"}
+    %p      
+      %label{:for => "comp_complex_search_filter"} Complexe
+      %input#comp_complex_search_filter{:type => "text"}
 
 :coffeescript
   

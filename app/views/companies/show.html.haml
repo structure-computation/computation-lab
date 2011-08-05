@@ -36,7 +36,7 @@
     #right_content
       .tab_content
         #tab_1_content{:class => tab_content_selected('Factures', params[:tab], true)}
-          %p Liste des factures de la société :
+          %h3 Liste des factures de la société :
           = render :partial => 'bills/bills_list', :object => @company.bills
           
         #tab_2_content{:class => tab_content_selected('Abonnement', params[:tab])}

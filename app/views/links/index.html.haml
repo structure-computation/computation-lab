@@ -8,7 +8,7 @@
 
 -content_for :right_top do
   %h2.grey
-    Liste des matériaux
+    Liste des liaisons
   %div
     = render :partial => "search_filter"
 
@@ -35,8 +35,8 @@
             %td.family=         link.family
             %td.comp_generic=   link.comp_generique
             %td.comp_complex=   link.comp_complexe
-            - if link.company and link.company.id == current_user.company.id
-              %td.action_on_table.escape_search
+            %td.action_on_table.escape_search
+              - if link.company and link.company.id == current_user.company.id
                 %ul
                   %li
                     = link_to "Editer"   , edit_company_link_path(@company, link)
