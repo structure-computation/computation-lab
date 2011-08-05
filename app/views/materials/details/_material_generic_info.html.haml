@@ -1,8 +1,14 @@
-%h3
-  Masse volumique :
-%p
-  %label m1 = 
-  %input{:disabled => disabled, :value => "#{@material.rho}"}
+%h3 Masse volumique
+%table.grey
+  %tbody
+    %tr.no_sorter
+      %th Masse volumique :
+      %td 
+        %label m1 = 
+        %input{:disabled => disabled, :value => "#{@material.rho}"}
+
+%h3 Dilatation thermique
+        
 %table.grey
   %thead
     %tr.no_sorter

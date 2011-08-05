@@ -25,7 +25,7 @@
     %tbody
       - @sc_models.each do |sc_model|
         %tr
-          %td
+          %td.details_link
             = link_to 'Détails', company_sc_model_path(@company, sc_model)
           %td.name= sc_model.name ? sc_model.name : 'Undefined'
           %td.id= sc_model.id

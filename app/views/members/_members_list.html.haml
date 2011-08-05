@@ -10,7 +10,7 @@
   %tbody
     - members_list.each do |member|
       %tr
-        %td= link_to "Détails", company_member_path( current_user.company, member), :class => "member_details_link"
+        %td.details_link= link_to "Détails", company_member_path( current_user.company, member)
         %td= member.email
         %td= member.firstname
         %td= member.role
