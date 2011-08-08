@@ -36,7 +36,7 @@
     #right_content
       .tab_content
         #tab_1_content{:class => tab_content_selected('Factures', params[:tab], true)}
-          %p Liste des factures de la société :
+          %h3 Liste des factures de la société :
           = render :partial => 'bills/bills_list', :object => @company.bills
           
         #tab_2_content{:class => tab_content_selected('Abonnement', params[:tab])}
@@ -45,7 +45,7 @@
           %table.grey
             -#TODO afficher les bonnes valeurs
             %thead
-              %tr
+              %tr.no_sorter
                 %th Mémoire disponnible
                 %th Date d'échéance
             %tbody
@@ -58,7 +58,7 @@
           %p Dernier relevé :
           %table.grey
             %thead
-              %tr
+              %tr.no_sorter
                 %th Report de jetons
                 %th Jetons standards
                 %th Jetons tampons
@@ -72,7 +72,7 @@
           %p Votre utilisation actuelle :
           %table.grey
             %thead
-              %tr
+              %tr.no_sorter
                 %th Solde de jetons standards
                 %th Jetons utilisé
             %tbody
