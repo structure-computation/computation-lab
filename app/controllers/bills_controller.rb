@@ -1,10 +1,14 @@
 class BillsController < InheritedResources::Base
   before_filter :authenticate_user!
+  before_filter :set_page_name
   respond_to :html, :json
   belongs_to :company
   actions :index, :show, :new, :create
   layout 'company'
   
+  def set_page_name
+    @page = :manage
+  end
   #TODO remplacer chargement JSON par chargement normal (sans requête ajax)
   # def index
   #   @id_company = @current_company.id

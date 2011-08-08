@@ -5,6 +5,8 @@
     %ul
       %li.LM_pic_materiau
         =link_to 'Retour à la liste des matériaux', company_materials_path(@company)
+      %li.LM_pic_materiau
+        =link_to 'Editer le matériau', edit_company_material_path(@company, @material)
         
 -content_for :right_top do          
   %h2.grey

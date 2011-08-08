@@ -12,7 +12,7 @@ class MembersController < InheritedResources::Base
     respond_to    :html, :json, :js
 
     before_filter :authenticate_user! #,  :except => :activate
-    
+    before_filter :set_page_name
     
     # Protect these actions behind an admin login
     # before_filter :admin_required, :only => [ :destroy ]
@@ -20,8 +20,10 @@ class MembersController < InheritedResources::Base
     # TODO: Supprimer à terme : InheritedRessource fait la recherche sur member seul.
     # before_filter :find_user, :only => [:destroy]
     
-    before_filter {@page    = 'SCmanage' }
-
+    def set_page_name
+      @page = :manage
+    end
+    
     # render new.rhtml
     def new
       @member = User.new
@@ -33,6 +35,10 @@ class MembersController < InheritedResources::Base
       @user = User.new(params["user"])
       @user.company = current_user.company
       create!
+    end
+    
+    def destroy
+      destroy!{ company_path(:anchor => 'Membres') }
     end
 
     # There's no page here to update or destroy a user.  If you add those, be

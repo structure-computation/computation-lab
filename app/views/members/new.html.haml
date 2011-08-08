@@ -1,1 +1,10 @@
-= render "form"
+-content_for :left_top do
+  .left_submenu
+    %h2.grey
+      Menu
+    %ul
+      %li.LM_pic_materiau
+        =link_to 'Retour à la liste des membres', company_path(@company, :anchor => 'Membres')
+
+-content_for :company_content do        
+  = render "form"
