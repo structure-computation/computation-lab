@@ -9,6 +9,7 @@ class CalculResult < ActiveRecord::Base
   include Socket::Constants
   
   belongs_to  :user         # utilisateur ayant lance le calcul
+  belongs_to  :company_member, :class_name => "UserCompanyMembership", :foreign_key => "company_member_id"
   belongs_to  :sc_model
   has_one     :log_calcul
   

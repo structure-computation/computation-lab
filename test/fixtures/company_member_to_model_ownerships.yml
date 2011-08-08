@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  company_member_id: 1
+  rights: MyString
+  sc_model_id: 1
+
+two:
+  company_member_id: 1
+  rights: MyString
+  sc_model_id: 1
