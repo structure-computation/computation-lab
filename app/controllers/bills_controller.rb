@@ -52,7 +52,7 @@ class BillsController < InheritedResources::Base
     if @manager
       show!
     else
-      redirect_to company_bills_path
+      redirect_to company_path
     end
   end
 

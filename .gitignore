@@ -7,4 +7,4 @@ Gemfile.lock
 *.css
 public/javascripts/search.js
 public/javascripts/table.js
-public/javascripts/tab_javascript.js
+public/javascripts/manage_tab.js

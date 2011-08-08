@@ -30,11 +30,11 @@
 
   %ul.tab_submenu
     %li 
-      %a#tab_1.selected{:href => "#"} Outils
+      %a#tab_1.selected{:href => "#Outils"} Outils
     %li 
-      %a#tab_2{:href => "#"} Résultats
+      %a#tab_2{:href => "#Résultats"} Résultats
     %li 
-      %a#tab_3{:href => "#"} Utilisateurs
+      %a#tab_3{:href => "#Utilisateurs"} Utilisateurs
                    
 -content_for :company_content do
   %h2.grey
@@ -44,11 +44,11 @@
     #left_content
       %ul.tab_submenu
         %li 
-          %a#tab_1.selected{:href => "#"} Outils
+          %a#tab_1.selected{:href => "#Outils"} Outils
         %li 
-          %a#tab_2{:href => "#"} Résultats
+          %a#tab_2{:href => "#Résultats"} Résultats
         %li 
-          %a#tab_3{:href => "#"} Utilisateurs
+          %a#tab_3{:href => "#Utilisateurs"} Utilisateurs
                        
     #right_content
       .tab_content
@@ -111,7 +111,7 @@
                     = info.user.firstname
                   %td
                     = info.rights
-        = coffeescript_include_tag "tab_javascript"
+        = coffeescript_include_tag "manage_tab"
 
 :coffeescript
   $( ->

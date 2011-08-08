@@ -11,8 +11,6 @@
 -content_for :right_top do
   %h2.grey
     Liste des factures
-  %div
-    = render "search_filter"
 
 -content_for :company_content do
   =render :partial => 'bills_list', :object => @company.bills
