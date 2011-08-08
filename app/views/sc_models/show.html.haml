@@ -111,7 +111,7 @@
                     = info.user.firstname
                   %td
                     = info.rights
-        = render "shared/tab_javascript"
+        = coffeescript_include_tag "tab_javascript"
 
 :coffeescript
   $( ->

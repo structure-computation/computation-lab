@@ -53,4 +53,4 @@
         #tab_2_content.hide
           = render :partial => "links/details/link_complexe_information", :locals => { :link => @link, :disabled => true }
       
-        = render "shared/tab_javascript"
+        = coffeescript_include_tag "tab_javascript"
