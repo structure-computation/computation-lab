@@ -31,11 +31,6 @@ class User < ActiveRecord::Base
   # has_many    :projects      , :through   => :user_projects
   # has_many    :owned_projects, :through   => :user_projects, :source => :task , :conditions => { "user_projects.is_admin"     => true }
   
-  # Gestion des tâches. 2 types de tâches + toutes les tâches : 3 relations + la relation de jointure.
-  # has_many    :user_tasks
-  # has_many    :tasks         , :through => :user_tasks,                   :dependent => :destroy
-  # has_many    :created_tasks , :through => :user_tasks, :source => :task    , :conditions => { "user_tasks.is_creator"      => true }
-  # has_many    :assigned_tasks, :through => :user_tasks, :source => :task    , :conditions => { "user_tasks.is_assigned_to"  => true }
 
   has_many    :calcul_results  
   has_many    :log_calculs
