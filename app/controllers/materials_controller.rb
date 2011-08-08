@@ -15,7 +15,7 @@ class MaterialsController < InheritedResources::Base
     if params[:type] == "standard"
       @materials = Material.standard
     else
-      @materials = Material.find_all_by_company_id(@company.id)
+        @materials = Material.find_all_by_company_id(@company.id)
     end
     index!
   end
