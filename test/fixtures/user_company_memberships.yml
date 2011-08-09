@@ -1,11 +1,26 @@
-one:
-  user_id: 
-  company_id: 
-  role: MyString
-  status: MyString
 
-two:
-  user_id: 
-  company_id: 
-  role: MyString
-  status: MyString
+
+# Liaison des 6 utilisateurs de TF Avionics avec l'entreprise.
+<% tf_avionics_members = ["mbleriot", "fcolac"  , "mleroy"  , "jlinder"] 
+   be_civil_members    = ["htrasset", "gselec"]
+%>
+   
+# Membres de tf_avionics
+<% tf_avionics_members.each do |member_name| %>
+<%="ucm_tf_avionics_#{member_name}:"%>
+  user_id:    <%=member_name%>
+  company_id: tf_avionics   #674101581
+  role:       # TODO
+  status:     # active
+  
+<% end %>
+
+# Membres de be_civil
+<% be_civil_members.each do |member_name| %>
+<%="ucm_be_civil_#{member_name}:"%>
+  user_id:    <%=member_name%>
+  company_id: be_civil   #725745063
+  role:       # TODO
+  status:     # active
+  
+<% end %>
