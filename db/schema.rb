@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110808215608) do
+ActiveRecord::Schema.define(:version => 20110809112537) do
 
   create_table "abonnements", :force => true do |t|
     t.string   "name"
@@ -286,18 +286,6 @@ ActiveRecord::Schema.define(:version => 20110808215608) do
     t.datetime "updated_at"
   end
 
-  create_table "projects", :force => true do |t|
-    t.string   "name"
-    t.text     "description"
-    t.date     "start_date"
-    t.date     "estimated_end_date"
-    t.date     "end_date"
-    t.integer  "estimated_done"
-    t.string   "state"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "sc_admins", :force => true do |t|
     t.integer  "company_id"
     t.datetime "created_at"
@@ -355,14 +343,6 @@ ActiveRecord::Schema.define(:version => 20110808215608) do
   end
 
   add_index "user_model_ownerships", ["user_id", "sc_model_id"], :name => "index_user_model_informations_on_user_id_and_model_id"
-
-  create_table "user_projects", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "project_id"
-    t.integer  "is_admin"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "user_sc_admins", :force => true do |t|
     t.integer  "user_id"
