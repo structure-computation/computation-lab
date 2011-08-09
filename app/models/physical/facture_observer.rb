@@ -1,3 +1,4 @@
+# TODO: supprimer ce fichier ou lui donner un rôle.
 class FactureObserver < ActiveRecord::Observer
 #   def after_create(facture)  
 #     # ecripture de la facture au format pdf
