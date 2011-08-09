@@ -63,6 +63,7 @@ table.grey
         font-weight      : normal
         color            : $font-color-table-header
         background-color : $color-background-row-header
+        width: columns-width(6)
       td                 
         padding-left     : $padding-left-cell
         line-height      : $line-height-cell
@@ -98,9 +99,11 @@ table.grey
         
       td.details_link
         background  : transparent url('/images/fleche.png') no-repeat 0% 50%
-        padding-left: 25px
         width: 4em   
+        padding-left: 0
         a
+          padding-left: 20px
+          padding-right: 10px
           display: block
           text-decoration: none
           color: #555

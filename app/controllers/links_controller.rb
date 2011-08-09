@@ -36,6 +36,7 @@ class LinksController < InheritedResources::Base
 
   def show
     @link = Link.find(params[:id])
+    @company = Company.find(params[:company_id])
     if @link.company_id == -1
       render :action => "show"
     elsif @link.company_id == current_user.company.id

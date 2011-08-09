@@ -5,6 +5,8 @@
     %ul
       %li.LM_pic_liaison
         =link_to 'Retour à la liste des liaisons', company_links_path(@company)
+      %li.LM_pic_liaison
+        =link_to 'Editer la liaison', edit_company_link_path(@company, @link)        
 
 -content_for :right_top do 
   %h2.grey

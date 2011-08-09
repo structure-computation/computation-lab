@@ -37,6 +37,7 @@ class MaterialsController < InheritedResources::Base
   # Essayer de faire une ressources accessibles par /material
   def show
     @material = Material.find(params[:id])
+    @company = Company.find(params[:company_id])
     if @material.company_id == -1
       render :action => "show"
     elsif @material.company_id == current_user.company.id
