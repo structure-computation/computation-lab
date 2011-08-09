@@ -8,9 +8,9 @@
 # Membres de tf_avionics
 <% tf_avionics_members.each do |member_name| %>
 <%="ucm_tf_avionics_#{member_name}:"%>
-  user_id:    <%=member_name%>
-  company_id: tf_avionics   #674101581
-  role:       # TODO
+  user:    <%=member_name%>
+  company: tf_avionics   #674101581
+  rights:       # TODO
   status:     # active
   
 <% end %>
@@ -18,9 +18,9 @@
 # Membres de be_civil
 <% be_civil_members.each do |member_name| %>
 <%="ucm_be_civil_#{member_name}:"%>
-  user_id:    <%=member_name%>
-  company_id: be_civil   #725745063
-  role:       # TODO
+  user:    <%=member_name%>
+  company: be_civil   #725745063
+  rights:       # TODO
   status:     # active
   
 <% end %>

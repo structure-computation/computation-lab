@@ -2,7 +2,7 @@
 
 one:
   name : 'soudure parfaite'
-  familly : 'soudure'
+  family : 'soudure'
   company_id : -1
   reference : -1
   id_select : 
@@ -12,7 +12,7 @@ one:
   comp_complexe : ''
   type_num : 0
   Ep : 0
-  jeux : 0
+  jeu : 0
   R : 200000
   f : 0.3
   Lp : 200000
@@ -22,7 +22,7 @@ one:
 
 two:
   name : 'soudure elastique'
-  familly : 'soudure'
+  family : 'soudure'
   company_id : -1
   reference : -1
   id_select : 
@@ -32,7 +32,7 @@ two:
   comp_complexe : ''
   type_num : 1
   Ep : 0
-  jeux : 0
+  jeu : 0
   R : 200000
   f : 0.3
   Lp : 200000
@@ -42,7 +42,7 @@ two:
   
 three:
   name : 'contact 0,3'
-  familly : 'contact'
+  family : 'contact'
   company_id : -1
   reference : -1
   id_select : 
@@ -52,7 +52,7 @@ three:
   comp_complexe : ''
   type_num : 2
   Ep : 0
-  jeux : 0
+  jeu : 0
   R : 200000
   f : 0.3
   Lp : 200000
@@ -62,7 +62,7 @@ three:
   
 four:
   name : 'soudure parfaite cassable'
-  familly : 'soudure'
+  family : 'soudure'
   company_id : -1
   reference : -1
   id_select : 
@@ -72,7 +72,7 @@ four:
   comp_complexe : 'Ca'
   type_num : 3
   Ep : 0
-  jeux : 0
+  jeu : 0
   R : 200000
   f : 0.3
   Lp : 200000
@@ -82,7 +82,7 @@ four:
   
 five:
   name : 'soudure elastique cassable'
-  familly : 'soudure'
+  family : 'soudure'
   company_id : -1
   reference : -1
   id_select : 
@@ -92,7 +92,7 @@ five:
   comp_complexe : 'Ca'
   type_num : 4
   Ep : 0
-  jeux : 0
+  jeu : 0
   R : 200000
   f : 0.3
   Lp : 200000
@@ -102,7 +102,7 @@ five:
   
 six:
   name : 'plastique cassable'
-  familly : 'soudure'
+  family : 'soudure'
   company_id : -1
   reference : -1
   id_select : 
@@ -112,7 +112,7 @@ six:
   comp_complexe : 'Pl Ca'
   type_num : 5
   Ep : 0
-  jeux : 0
+  jeu : 0
   R : 200000
   f : 0.3
   Lp : 200000

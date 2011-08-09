@@ -2,7 +2,7 @@
 
 one:
   name : 'metal 1'
-  familly : 'métaux'
+  family : 'métaux'
   company_id : -1
   reference : -1
   id_select : 
@@ -54,7 +54,7 @@ one:
   
 two:
   name : 'metal 2'
-  familly : 'métaux'
+  family : 'métaux'
   company_id : -1
   reference : -1
   id_select : 
