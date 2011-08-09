@@ -1,12 +1,21 @@
-# Si l'url contient un Hash la bonne section est chargé
+# Selectionne le premier onglet du tableau
+selectFirst = ->
+  $($('.tab_submenu a')[0]).addClass('selected')
+  $('.tab_content div').addClass('hide')
+  $($('.tab_content div')[0]).removeClass('hide')
+  $($('.tab_content div')[0]).addClass('show')
+
+# Ancre de l'url sans le "#"
 currentAnchor = unescape(location.hash.slice(1))
 
+# Si l'url contient une ancre correcte la section correspondante sera chargé
 if currentAnchor != ""
   badHash = true
+  # Vérifie si l'ancre éxiste
   for tab in $('.tab_submenu a')
     if $(tab).text() == currentAnchor
       badHash = false
-  # Cache les sections uniquement si le hash de l'URL est correcte
+  # Cache les sections si l'ancre de l'URL est correcte
   if !badHash
     $('.tab_content div').addClass('hide')
     $('.tab_content div').removeClass('show')
@@ -15,13 +24,13 @@ if currentAnchor != ""
       if $(tab).text() == currentAnchor
         $(tab).addClass('selected')
         $('#'+$(tab).attr('id') + '_content').addClass('show')
-
+  else 
+    selectFirst()
 else
-  $($('.tab_submenu a')[0]).addClass('selected')
-  $('.tab_content div').addClass('hide')
-  $($('.tab_content div')[0]).removeClass('hide')
-  $($('.tab_content div')[0]).addClass('show')
+  selectFirst()
 
+
+# Ajout d'évènement sur les onglets du menu pour les faires aparaître comme il se doit
 nav_links = $('ul.tab_submenu a')
 nav_links.each( () ->
   $(this).click( () ->
