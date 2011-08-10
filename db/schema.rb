@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110809112537) do
+ActiveRecord::Schema.define(:version => 20110809203526) do
 
   create_table "abonnements", :force => true do |t|
     t.string   "name"
@@ -49,7 +49,6 @@ ActiveRecord::Schema.define(:version => 20110809112537) do
   create_table "boundary_conditions", :force => true do |t|
     t.string   "name"
     t.integer  "user_id"
-    t.integer  "project_id"
     t.integer  "ref"
     t.integer  "id_select"
     t.string   "name_select"
@@ -295,7 +294,6 @@ ActiveRecord::Schema.define(:version => 20110809112537) do
   create_table "sc_models", :force => true do |t|
     t.string   "name"
     t.integer  "company_id"
-    t.integer  "project_id"
     t.string   "model_file_path"
     t.string   "image_path"
     t.text     "description"
