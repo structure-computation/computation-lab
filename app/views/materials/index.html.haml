@@ -35,7 +35,7 @@
             %td.type=           material.mtype
             %td.comp=           material.comp
             %td.action_on_table.escape_search
-              - if material.company and material.company.id == current_user.company.id
+              - if material.company and material.company.id == current_company_member.company.id
                 %ul
                   %li
                     = link_to "Editer"   , edit_company_material_path(@company, material)

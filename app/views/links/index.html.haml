@@ -36,7 +36,7 @@
             %td.comp_generic=   link.comp_generique
             %td.comp_complex=   link.comp_complexe
             %td.action_on_table.escape_search
-              - if link.company and link.company.id == current_user.company.id
+              - if link.company and link.company.id == current_company_member.company.id
                 %ul
                   %li
                     = link_to "Editer"   , edit_company_link_path(@company, link)

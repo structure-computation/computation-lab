@@ -4,6 +4,6 @@
     = f.input :name
     = f.input :description
     = f.input :state,       :as => :hidden, :value => "void"
-    = f.input :company_id,  :as => :hidden, :value => current_user.company.id
+    = f.input :company_id,  :as => :hidden, :value => current_company_member.company.id
 
   = f.buttons

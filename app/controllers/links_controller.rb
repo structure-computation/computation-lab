@@ -11,7 +11,7 @@ class LinksController < InheritedResources::Base
   end
   
   def index 
-    @company  = current_user.company
+    @company  = current_company_member.company
     if params[:type] == "standard"
       @links = Link.standard
     else
@@ -39,7 +39,7 @@ class LinksController < InheritedResources::Base
     @company = Company.find(params[:company_id])
     if @link.company_id == -1
       render :action => "show"
-    elsif @link.company_id == current_user.company.id
+    elsif @link.company_id == current_company_member.company.id
       render :action => "show"
     else
       flash[:notice] = "Vous n'avez pas accès à cette liaison !"

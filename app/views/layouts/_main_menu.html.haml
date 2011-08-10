@@ -11,7 +11,7 @@
       Laboratoire
     %ul#drop_down_menu               
       %li
-        = link_to 'Mes modèles', company_sc_models_path(current_user.company)
+        = link_to 'Mes modèles', company_sc_models_path(current_company_member.company)
       %li
         %a Mes Projets
         -#= link_to 'Modèles', company_sc_models_path(current_user.company)
@@ -20,9 +20,9 @@
       Bibliothèque
     %ul#drop_down_menu      
       %li
-        = link_to 'Matériaux', company_materials_path(current_user.company)
+        = link_to 'Matériaux', company_materials_path(current_company_member.company)
       %li
-        = link_to 'Liaisons', company_links_path(current_user.company)
+        = link_to 'Liaisons', company_links_path(current_company_member.company)
 
 -# TODO: Utiliser un helper pour le style "selected"
 -#   %li{:id => "menu_accueil"     , :class => "main_menu_item " + menu_item_selected_class( @page, :accueil   ) }
