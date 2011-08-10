@@ -4,6 +4,8 @@ module ApplicationHelper
     page == page_name ? "selected" : ""
   end
   
+  # TODO: fait doublon avec la même procédure dans ApplicationController. 
+  # Trouver la "bonne methode".
   def current_company_member
     current_user.user_company_memberships.first
   end
