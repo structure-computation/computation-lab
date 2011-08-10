@@ -8,31 +8,37 @@
 
 -content_for :right_top do
   %h2.grey
-    Liste des matériaux
+    Liste des liaisons
   %div
     = render :partial => "search_filter"
 
 -content_for :company_content do
   - if !@links.empty?
-    %table.grey
+    %table.grey#links_table
       %thead
         %tr
-          %th 
+          %th.no_sorter
           %th Nom
+          %th ID
+          %th Référence
           %th Famille
           %th Générique
           %th Complexe
-          - if params[:type] != "standard" 
-            %th
-            %th
+          %th.no_sorter Actions
       %tbody
         - @links.each do |link|
           %tr
-            %td= link_to "Détails", [@company, link]
-            %td= link.name
-            %td= link.family
-            %td= link.comp_generique
-            %td= link.comp_complexe
-            - if link.company and link.company.id == current_user.company.id
-              %td= link_to "Editer"   , edit_company_link_path(@company, link)
-              %td= link_to "Supprimer", {:action=>"destroy", :controller=>"link", :id => link.id}, :method => :delete
+            %td.escape_search.details_link=  link_to "Détails", [@company, link]
+            %td.name=           link.name
+            %td.id=             link.id
+            %td.reference=      link.reference
+            %td.family=         link.family
+            %td.comp_generic=   link.comp_generique
+            %td.comp_complex=   link.comp_complexe
+            %td.action_on_table.escape_search
+              - if link.company and link.company.id == current_user.company.id
+                %ul
+                  %li
+                    = link_to "Editer"   , edit_company_link_path(@company, link)
+                  %li
+                    = link_to "Supprimer", {:action=>"destroy", :controller=>"link", :id => link.id}, :method => :delete

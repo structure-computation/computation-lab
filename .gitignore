@@ -5,3 +5,6 @@ tmp/
 Gemfile.lock
 .DS_Store
 *.css
+public/javascripts/search.js
+public/javascripts/table.js
+public/javascripts/manage_tab.js

@@ -20,7 +20,7 @@ class CompaniesController < InheritedResources::Base
   
   
   def index
-    redirect_to company_path(current_user.company, :tab => params[:tab])
+    redirect_to company_path(current_user.company)
     # @page = 'SCmanage' 
     # respond_to do |format|
     #   format.html {render :layout => true }

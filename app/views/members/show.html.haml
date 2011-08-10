@@ -4,14 +4,14 @@
       Menu
     %ul
       %li.LM_pic_materiau
-        =link_to 'Retour à la liste des membres', company_path(@company, :tab => 'Membres')
+        =link_to 'Retour à la liste des membres', company_path(@company, :anchor => 'Membres')
 
 -content_for :right_top do
   %h2.grey
     Détail du membre
   %table.grey
     %thead
-      %tr
+      %tr.no_sorter
         %th Mail
         %th Prénom
         %th Nom

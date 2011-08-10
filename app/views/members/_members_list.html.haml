@@ -1,19 +1,28 @@
-%table.grey
+%table#members_table.grey
   %thead
     %tr
-      %th
-      %th                  Mail
-      %th                  Nom
-      %th                  Role
-      %th{ :colspan => 2 } Status
+      %th.no_sorter
+      %th Mail
+      %th Nom
+      %th Role
+      %th Status
+      %th.no_sorter Actions
   %tbody
     - members_list.each do |member|
       %tr
-        %td= link_to "Détails", company_member_path( current_user.company, member), :class => "member_details_link"
+        %td.escape_search.details_link= link_to "Détails", company_member_path( current_user.company, member)
         %td= member.email
         %td= member.firstname
         %td= member.role
         %td= member.state
-        %td= link_to "X", {:controller => "companies", :action => company_member_path( current_user.company, member), :id_membre => member.id}, :confirm => "Êtes vous sûr ?", :method => :delete
+        %td.action_on_table.escape_search
+          %ul
+            %li
+              = link_to "Supprimer", company_member_path(current_user.company, member), :confirm => "Êtes vous sûr ?", :method => :delete
+            %li 
+              = link_to "Editer", edit_company_member_path(current_user.company, member)
 
 = link_to 'Ajouter un membre', new_company_member_path(@company), :class => 'yellow_button'
+
+:coffeescript
+  $('#members_table').tablesorter()

@@ -1,25 +1,30 @@
-- content_for :left_submenu do
-  #contentleft
-    = render :partial => "partials/raccourcis_modele"
+-content_for :left_top do
+  .left_submenu
+    %h2.grey
+      Menu
+    %ul
+      %li.LM_pic_liaison
+        =link_to 'Retour à la liste des liaisons', company_links_path(@company)
 
-- content_for :content_company do
-  - if @link.comp_complexe.nil?
-    - @comp_generique  = ["Parfaite", "Elastique", "Contact"]
-    - @comp_complexe = ["Plastique", "Cassable"]
-
-    = form_for new_company_material_path, :html => {:method => :get} do 
-
-      %p
-        - @comp_generique.each do |comp|
-          = label_tag  comp
-          = check_box_tag comp, true
-      %p
-        - @comp_complexe.each do |comp|
-          = label_tag  comp
-          = check_box_tag comp, true
-      %p
-        = hidden_field_tag :next, true
-      %p
-        = submit_tag "Suivant"
-  - else
-    = render "form"
+-content_for :company_content do
+  .grey
+    - if @link.comp_complexe.nil?
+      - @comp_generique  = ["Parfaite", "Elastique", "Contact"]
+      - @comp_complexe = ["Plastique", "Cassable"]
+  
+      = form_for new_company_material_path, :html => {:method => :get} do 
+  
+        %p
+          - @comp_generique.each do |comp|
+            = label_tag  comp
+            = check_box_tag comp, true
+        %p
+          - @comp_complexe.each do |comp|
+            = label_tag  comp
+            = check_box_tag comp, true
+        %p
+          = hidden_field_tag :next, true
+        %p
+          = submit_tag "Suivant"
+    - else
+      = render "form"

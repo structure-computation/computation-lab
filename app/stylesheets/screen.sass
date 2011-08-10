@@ -21,6 +21,8 @@
 @import partials/large_ligne
 @import partials/tab_menu_and_content
 @import partials/companies_show
+@import partials/modeles_show
+
 /* Notifications : Error - Notice ---------------------------------------- */
 
 #flash_notice, #flash_error
@@ -69,6 +71,8 @@ $padding-right-button     : $padding-left-button
   +single-box-shadow(rgba(0,0,0,0.4), 1px, 1px, 4px)
   cursor: pointer
   display: inline-block
+  font-size: 0.9em
+  font-family: Helvetica, Arial, sans-serif
 
 .yellow_button:hover
   +background-image(linear-gradient($color-button-start-hover, $color-button-end-hover))
@@ -125,3 +129,6 @@ div.grey
   background-color : $background-color-content
   padding-left     : $padding-left-and-right-content
   padding-right    : $padding-left-and-right-content
+  
+fieldset
+  border: none

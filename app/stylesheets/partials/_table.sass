@@ -1,7 +1,9 @@
 /* Variables ------------------------------------------------------------- */
                                
-$color-thead-start           : #A3A5B5 // Couleur du début du gradient du fond du table header
-$color-thead-end             : #818799 // Couleur de fin du gradient du fond du table header
+// Couleur du début du gradient du fond du table header
+$color-thead-start           : #A3A5B5 
+// Couleur de fin du gradient du fond du table header
+$color-thead-end             : #818799 
 
 $color-background-row-header : $color-thead-end
                            
@@ -21,6 +23,11 @@ table.grey
   width           : 100%
   border-collapse : collapse
   border          : $border-table-width solid $color-border-cell
+  margin-bottom: 1%
+  a
+    //color: #333
+  a:hover
+    //color: lighten(#333, 15%)
   thead
     border-bottom : 1px solid $color-border-cell
     +background-image(linear-gradient($color-thead-start, $color-thead-end))
@@ -32,10 +39,23 @@ table.grey
         color       : $font-color-table-header
         text-align  : left
         font-weight : normal
+        background  : transparent url('/images/bg_asc_desc.gif') no-repeat center right
+        border-right     : 1px solid $color-border-cell
+        cursor: pointer
+      th.headerSortDown       
+        background  : transparent url('/images/desc.gif') no-repeat center right
+      th.headerSortUp       
+        background  : transparent url('/images/asc.gif') no-repeat center right
+      th.no_sorter
+        background  : none
+        cursor: default 
+    tr.no_sorter
+      th
+        background  : none
+        cursor: default    
   tbody
     tr
       background-color: lighten($background-color-cell, 8%)
-      
       th
         padding-right    : $padding-left-cell
         text-align       : right
@@ -43,7 +63,7 @@ table.grey
         font-weight      : normal
         color            : $font-color-table-header
         background-color : $color-background-row-header
-        
+        width: columns-width(6)
       td                 
         padding-left     : $padding-left-cell
         line-height      : $line-height-cell
@@ -55,13 +75,81 @@ table.grey
       td.label_table     
         text-align       : right
         border-right     : none
+      td.action_on_table
+        background  : transparent url('/images/arrow_down.png') no-repeat 50% 50%
+        width: 6em
+        cursor: pointer
+        ul
+          //min-width: 4em
+          position: absolute
+          margin: 0
+          display: none
+          background-color: #F0F0F0
+          border: 1px solid #B2B2B2
+          list-style: none
+          padding: 0.5em
+          +border-radius(0.3em)
+          margin-top: 0.5em
+          li
+            a:hover
+              color: #333
+      td.action_on_table:hover
+        background  : transparent url('/images/arrow_down_hover.png') no-repeat 50% 50%
+        background-color: darken($background-color-cell, 10%)
         
+      td.details_link
+        background  : transparent url('/images/fleche.png') no-repeat 0% 50%
+        width: 4em   
+        padding-left: 0
+        a
+          padding-left: 20px
+          padding-right: 10px
+          display: block
+          text-decoration: none
+          color: #555
+      td.details_link:hover
+        background  : transparent url('/images/fleche_select.png') no-repeat 0% 50%
+        a
+          color: #202c6b
+            
     tr:nth-child(odd)    
-      background-color   : $background-color-cell
-
+      background-color : $background-color-cell
 
 .search_filter
-  height           : 3em
-  background-color : #F0F0F0
-  border           : 1px solid #B2B2B2
+  color: #333
+  +background-image(linear-gradient(lighten($color-thead-start, 5%), lighten($color-thead-end, 5%)))
+  border           : 1px solid $color-border-cell
+  //border-bottom    : none
   text-align       : center
+  margin-bottom    : 1%
+  p
+    margin: 1%
+    label, input
+      display: inline-block
+      vertical-align: middle
+      margin: 0
+    input
+      //border: 1px solid $color-border-cell
+      //+border-radius(0.2em)
+      padding: 3px
+  #more_details
+    display: inline-block
+    vertical-align: middle
+  #advanced_search
+    width: 100%
+    border-top: 1px solid #B2B2B2
+    background-color: #F0F0F0
+    +border-bottom-radius(0.2em)
+    p
+      text-align: left
+      display: inline-block
+      label
+        display: block
+      label:after
+        content: " :"
+
+#right_top
+  .search_filter
+    +border-bottom-radius(0.3em)
+    background: $background-color-cell
+    border : 1px solid #B2B2B2

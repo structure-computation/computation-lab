@@ -11,71 +11,32 @@
     Détail du modèle : 
     = @sc_model.name
   .grey  
-    %table
+    %table.grey#modele_details
       %tbody
         %tr
-          %td Dimension
+          %th Dimension
           %td= @sc_model.dimension
         %tr
-          %td Nombre d'élèments
-          %td= @sc_model.parts
-    %table
-      %tbody
-        %tr
-          %td Nombre de pièces
+          %th Nombre d'élèments
           %td= @sc_model.parts
         %tr
-          %td Nombre de liaisons
+          %th Nombre de pièces
+          %td= @sc_model.parts
+        %tr
+          %th Nombre de liaisons
           %td= @sc_model.interfaces
 
 -content_for :left_content do
 
   %ul.tab_submenu
     %li 
-      %a#tab_1.selected{:href => "#"} Outils
+      %a#tab_1.selected{:href => "#Outils"} Outils
     %li 
-      %a#tab_2{:href => "#"} Résultats
+      %a#tab_2{:href => "#Résultats"} Résultats
     %li 
-      %a#tab_3{:href => "#"} Utilisateurs
+      %a#tab_3{:href => "#Utilisateurs"} Utilisateurs
                    
 -content_for :company_content do
-  %h3
-    Outils    
-  / SI LE MAILLAGE N'EST PAS CHARGé
-  %p
-    Pour accéder aux outils, vous devez d abord charger un maillage pour ce modéle
-  %p
-    Charger votre maillage
-  - semantic_form_for [@company, @sc_model], :url => {:controller => "sc_models", :action => "load_mesh"}, :html => {:multipart => true, :method => :post} do |f|
-    = f.inputs do
-      = f.input :file, :as => :file
-    = f.buttons
-
-  / SINON
-  %ul
-    %li= link_to "Calcul des structures", :controller => "calculs", :action => "index", :model_id => @sc_model.id
-    %li= link_to "Visualisation"        , :controller => "visualisations", :action => "index", :model_id => @sc_model.id
-    %li= link_to "Partager un fichier"
-
-  %h3
-    Résultats
-  %p
-    %table
-      %thead
-        %tr
-          %th Date
-          %th Nom
-          %th
-          %th
-          %th
-      %tbody
-        = @sc_model.calcul_results.each do |result|
-          %tr
-            %td= result.result_date
-            %td= result.name
-            %td= link_to "Voir"
-            %td= link_to "Télécharger"
-            %td= button_to "Supprimer", :controller => "calcul_results", :action => "destroy"
   %h2.grey
     Modèle : 
     = @sc_model.name
@@ -83,38 +44,80 @@
     #left_content
       %ul.tab_submenu
         %li 
-          %a#tab_1.selected{:href => "#"} Outils
+          %a#tab_1.selected{:href => "#Outils"} Outils
         %li 
-          %a#tab_2{:href => "#"} Résultats
+          %a#tab_2{:href => "#Résultats"} Résultats
         %li 
-          %a#tab_3{:href => "#"} Utilisateurs
+          %a#tab_3{:href => "#Utilisateurs"} Utilisateurs
                        
     #right_content
       .tab_content
         #tab_1_content.show
-          %p
-            Pour accéder aux outils, vous devez d abord charger un maillage pour ce modéle
+          %h3
+            Pour accéder aux outils, vous devez d'abord charger un maillage pour ce modèle
           %p
             Charger votre maillage
           - semantic_form_for [@company, @sc_model], :url => {:controller => "sc_models", :action => "load_mesh"}, :html => {:multipart => true, :method => :post} do |f|
             = f.inputs do
               = f.input :file, :as => :file
             = f.buttons
+          %ul
+            %li= link_to "Calcul des structures", :controller => "calculs", :action => "index", :model_id => @sc_model.id
+            %li= link_to "Visualisation"        , :controller => "visualisations", :action => "index", :model_id => @sc_model.id
+            %li= link_to "Partager un fichier"
         #tab_2_content.hide
-          %h3 TODO RESULTATS
-  
-        #tab_3_content.hide
-          %p Liste des utilisateurs ayant accès à ce modéle
-          %table.grey
+          %h3 Liste des résultats
+          .search_filter
+            %p
+              %label{:for => "results_search_filter"} Recherche
+              %input#results_search_filter{:type => "text"}
+          %table.grey#results_table
             %thead
               %tr
-                %td E-mail
-                %td Nom
-                %td Role
+                %th Date
+                %th Nom
+                %th.no_sorter Actions
+            %tbody
+              - @sc_model.calcul_results.each do |result|
+                %tr
+                  %td= result.result_date
+                  %td= result.name ? result.name : 'Undefined'
+                  %td.action_on_table
+                    %ul
+                      %li
+                        = link_to "Voir"
+                      %li
+                        = link_to "Télécharger"
+                      %li
+                        = link_to "Supprimer", :controller => "calcul_results", :action => "destroy"
+        #tab_3_content.hide
+          %h3 Liste des utilisateurs ayant accès à ce modèle
+          .search_filter
+            %p
+              %label{:for => "users_search_filter"} Recherche
+              %input#users_search_filter{:type => "text"}
+          %table.grey#users_table
+            %thead
+              %tr
+                %th E-mail
+                %th Nom
+                %th Role
             %tbody
               - @sc_model.user_model_ownerships.each do |info|
                 %tr
-                  = info.user.email
-                  = info.user.firstname
-                  = info.rights
-        = render "shared/tab_javascript"
+                  %td
+                    = info.user.email
+                  %td
+                    = info.user.firstname
+                  %td
+                    = info.rights
+        = coffeescript_include_tag "manage_tab"
+
+:coffeescript
+  $( ->
+    $('#results_table').tablesorter()
+    $('#users_table').tablesorter()
+
+    searchFilter("results_table", "results_search_filter")
+    searchFilter("users_table", "users_search_filter")
+  )

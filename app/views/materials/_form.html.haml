@@ -1,4 +1,4 @@
-%p
+%h2
   Type :
   = @material.mtype
   - if @material.mtype.include? "el"
@@ -11,17 +11,28 @@
     Visqueux
 
 = form_for [@company, @material] do |f|
-  %h3 Info
+  %h3 Informations
 
   = f.hidden_field :comp
   = f.hidden_field :mtype
 
-  %p
-    = label_tag("Nom")
-    = text_field(:material, :name)
-  %p
-    = label_tag("Famille")
-    = text_field(:material, :family)  
+  %table.grey
+    %tbody
+      %tr
+        %th
+          = label_tag("Nom")
+        %td
+          = text_field(:material, :name)
+      %tr
+        %th
+          = label_tag("Famille")
+        %td
+          = text_field(:material, :family)  
+      %tr
+        %th
+          = label_tag("Description")
+        %td
+          = text_field(:material, :description)  
 
   #material_information
     = render :partial => "materials/details/material_main_information", :locals => { :material => @material, :disabled => false }
@@ -42,3 +53,4 @@
     = submit_tag "Editer", :class => 'yellow_button'
   - else 
     = submit_tag "Créer", :class => 'yellow_button'
+    = link_to "Annuler", company_materials_path, :class => 'yellow_button'

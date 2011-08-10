@@ -13,55 +13,31 @@
 
 -content_for :company_content do
   - if !@materials.empty?
-    %table.grey
+    %table.grey#materials_table
       %thead
         %tr
-          %th 
+          %th.no_sorter 
           %th Nom
+          %th ID
+          %th Référence
           %th Famille
           %th Type
           %th Comportement
-          / Pour afficher les colonnes Editer et Supprimer
-          - if params[:type] != "standard" 
-            %th
-            %th
+          %th.no_sorter Actions
       %tbody
         - @materials.each do |material|
           %tr
-            %td= link_to "Détails", [@company, material]
-            %td= material.name
-            %td= material.family
-            %td= material.mtype
-            %td= material.comp
-            - if material.company and material.company.id == current_user.company.id
-              %td= link_to "Editer"   , edit_company_material_path(@company, material)
-              %td= link_to "Supprimer", {:action=>"destroy", :controller=>"materials", :id => material.id}, :method => :delete    
-
-  = javascript_include_tag "jqgrid/jquery.jqGrid.min"
-
-  %table#materials_data
-
-  :javascript
-    jQuery("#materials_data").jqGrid({
-    	datatype: "local",
-    	height: 250,
-       	colNames:['Name','Famille', 'Type', 'Comportement', 'Links'],
-       	colModel:[
-       		{name:'name',index:'name', sorttype:"string", search:true, stype:'text'},
-       		{name:'family',index:'family', sorttype:"string"},
-       		{name:'type',index:'type', sorttype:"string"},
-       		{name:'comp',index:'comp', sorttype:"string"},
-       		{name:'links',index:'links',sortable:'false'}
-       	],
-       	multipleSearch:true, 
-       	multipleGroup:true,
-       	multiselect: false
-    });
-    var mydata = []
-  - @materials.each_with_index do |material, i|
-    :javascript
-      mydata [#{i}] = {name: '#{link_to material.name, [@company, material]}', family:"#{material.family}", type:"#{material.mtype}", comp: "#{material.comp}", 
-      links:'#{link_to "Editer"   , edit_company_material_path(@company, material)}'}
-  :javascript
-    for(var i = 0; i <= mydata.length; i++)
-      jQuery("#materials_data").jqGrid('addRowData',i+1,mydata[i]);
+            %td.escape_search.details_link=  link_to "Détails", [@company, material]
+            %td.name=           material.name
+            %td.id=             material.id
+            %td.reference=      material.reference            
+            %td.family=         material.family
+            %td.type=           material.mtype
+            %td.comp=           material.comp
+            %td.action_on_table.escape_search
+              - if material.company and material.company.id == current_user.company.id
+                %ul
+                  %li
+                    = link_to "Editer"   , edit_company_material_path(@company, material)
+                  %li
+                    = link_to "Supprimer", {:action=>"destroy", :controller=>"materials", :id => material.id}, :method => :delete    

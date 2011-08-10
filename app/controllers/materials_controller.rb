@@ -15,7 +15,7 @@ class MaterialsController < InheritedResources::Base
     if params[:type] == "standard"
       @materials = Material.standard
     else
-      @materials = Material.find_all_by_company_id(@company.id)
+        @materials = Material.find_all_by_company_id(@company.id)
     end
     index!
   end
@@ -37,6 +37,7 @@ class MaterialsController < InheritedResources::Base
   # Essayer de faire une ressources accessibles par /material
   def show
     @material = Material.find(params[:id])
+    @company = Company.find(params[:company_id])
     if @material.company_id == -1
       render :action => "show"
     elsif @material.company_id == current_user.company.id
