@@ -57,7 +57,7 @@ class BillsController < InheritedResources::Base
   end
 
   def download_bill
-    @current_company = current_user.company
+    @current_company = current_company_member.company
     @current_bill = @current_company.bills.find(params[:id])
     name_file = "#{SC_FACTURE_ROOT}/facture_" + params[:id] + ".pdf"
     name_bill = 'Facture_' + @current_bill.ref.to_s() + '.pdf'
@@ -65,7 +65,7 @@ class BillsController < InheritedResources::Base
   end
 
  def generate_pdf_facture
-    @current_company = current_user.company
+    @current_company = current_company_member.company
     @current_bill = @current_company.bills.find(params[:id_facture])
     @current_gestionnaire = @current_company.users.find(:first, :conditions => {:role => "gestionnaire"})
     prawnto :inline => false

@@ -1,4 +1,6 @@
 class CompaniesController < InheritedResources::Base
+  helper :application
+  
   before_filter :authenticate_user!
   before_filter :set_page_name 
   before_filter :create_solde, :only =>[:index, :show]
@@ -15,12 +17,12 @@ class CompaniesController < InheritedResources::Base
   # Suppr
   def create_solde
     # Creation d'une liste fictive d'opération.
-    @solde_calculs = current_user.company.solde_calcul_accounts.find(:all)
+    @solde_calculs = current_company_member.company.solde_calcul_accounts.find(:all)
   end
   
   
   def index
-    redirect_to company_path(current_user.company)
+    redirect_to company_path(current_company_member.company)
     # @page = 'SCmanage' 
     # respond_to do |format|
     #   format.html {render :layout => true }

@@ -11,7 +11,7 @@ class MaterialsController < InheritedResources::Base
   end
 
   def index 
-    @company = current_user.company
+    @company = current_company_member.company
     if params[:type] == "standard"
       @materials = Material.standard
     else
@@ -39,7 +39,7 @@ class MaterialsController < InheritedResources::Base
     @material = Material.find(params[:id])
     if @material.company_id == -1
       render :action => "show"
-    elsif @material.company_id == current_user.company.id
+    elsif @material.company_id == current_company_member.company.id
       render :action => "show"
     else
       flash[:notice] = "Vous n'avez pas accès à cette pièce !"

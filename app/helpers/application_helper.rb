@@ -4,4 +4,8 @@ module ApplicationHelper
     page == page_name ? "selected" : ""
   end
   
+  def current_company_member
+    current_user.user_company_memberships.first
+  end
+  
 end
