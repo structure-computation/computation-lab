@@ -29,6 +29,7 @@ class ScModelsController < InheritedResources::Base
     # end
     @sc_model = ScModel.new(params[:sc_model])
     @company_member_to_model_ownership = CompanyMemberToModelOwnership.create(:sc_model => @sc_model , :company_member => current_company_member, :rights => "all") 
+
     respond_to do |format|
       if @sc_model.save
     	  format.html { redirect_to(:action => :index) }
