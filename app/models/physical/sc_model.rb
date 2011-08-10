@@ -9,8 +9,8 @@ class ScModel < ActiveRecord::Base
   
   has_many    :files_sc_models 
 
-  has_many :user_model_ownerships
-  has_many :users,                  :through => :user_model_ownerships
+  has_many    :company_member_to_model_ownerships
+  has_many    :company_member,                  :through => :company_member_to_model_ownerships
 
   has_many    :calcul_results
   has_many    :forum_sc_models
