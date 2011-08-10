@@ -22,7 +22,10 @@
       %li
         = link_to 'Matériaux', company_materials_path(current_user.company)
       %li
-        = link_to 'Liaisons', company_links_path(current_user.company)
+        = link_to 'Liaisons', company_links_path(current_user.company)   
+    %li{:class => ( @page == :manage ? "selected" : "")}
+      = link_to 'Forum', companies_path(:tab => 'Factures')  
+      # = link_to 'Forum', forums_path(:tab => 'Forums')
 
 -# TODO: Utiliser un helper pour le style "selected"
 -#   %li{:id => "menu_accueil"     , :class => "main_menu_item " + menu_item_selected_class( @page, :accueil   ) }

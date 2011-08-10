@@ -1,0 +1,58 @@
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="first active"><%= link_to "#{t("web-app-theme.list", :default => "List")}", forum_topic_posts_path  %></li>
+      <li><%= link_to "#{t("web-app-theme.new", :default => "New")}", new_forum_topic_post_path %></li>
+    </ul>
+  </div>          
+  <div class="content">          
+    <h2 class="title"><%= t("web-app-theme.all", :default => "All")  %> Posts</h2>
+    <div class="inner">
+      <table class="table">
+        <tr>             
+          <th class="first">ID</th>
+          <th>
+            <%= t("activerecord.attributes.post.title_post", :default => t("activerecord.labels.title_post", :default => "Title_post")) %>
+          </th>
+          <th><%= t("web-app-theme.created_at", :default => "Created at")  %></th>
+          <th><%= t("web-app-theme.posted_by", :default => "Posted by")  %></th>    
+          <th><%= t("web-app-theme.posted_by", :default => "Content")  %></th>
+          
+          
+          <th class="last">&nbsp;</th>
+        </tr>
+        <% @posts.each do |post| -%>
+        <tr class="<%= cycle("odd", "even") %>">
+          <td>
+            <%= post.id %>
+          </td>
+                    <td>
+            <%= link_to post.title_post, forum_topic_post_path(@topic.forum, @topic, post) %>
+          </td>
+                    <td>
+            <%= post.created_at.to_date %>
+          </td>                   
+          <td>
+            <%= post.username %>
+          </td>  
+          <td>
+            <%= post.content.html_safe %>
+          </td>
+          <td class="last">
+            <%= link_to "#{t("web-app-theme.show", :default => "Show")}", forum_topic_post_path(@topic.forum, @topic, post) %> |  
+            <%= link_to "#{t("web-app-theme.edit", :default => "Edit")}", edit_forum_topic_post_path(@topic.forum, @topic, post) %> |
+            <%= link_to "#{t("web-app-theme.delete", :default => "Delete")}", forum_topic_post_path(@topic.forum, @topic, post), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
+          </td>
+        </tr>          
+        <% end -%>
+      </table>
+      <div class="actions-bar wat-cf">
+        <div class="actions">
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<% content_for :sidebar, render(:partial => 'sidebar') -%>

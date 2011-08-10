@@ -42,8 +42,10 @@ class Company < ActiveRecord::Base
     
     current_memory_account = self.create_memory_account
     current_memory_account.init
+  end  
+  
+  def percent_of(n)
+    self.to_f/n.to_f * 100.0
   end
-  
-  
   
 end
