@@ -2,6 +2,7 @@ class CompaniesController < InheritedResources::Base
   before_filter :authenticate_user!
   before_filter :set_page_name 
   before_filter :create_solde, :only =>[:index, :show]
+  respond_to :json
   
   # Actions inherited ressource. 
   actions :all, :except => [ :index, :edit, :update, :destroy ]

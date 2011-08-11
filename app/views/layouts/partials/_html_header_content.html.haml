@@ -46,7 +46,9 @@
 / CoffeeScripts
 = coffeescript_include_tag "search"
 = coffeescript_include_tag "table"
-
+= javascript_include_tag "underscore"
+= javascript_include_tag "backbone"
+= coffeescript_include_tag "calculs/calcul_models"
 - #---------------------------------------------------------------------------------------------------------------------------#
 / Initialisation du token de protection XSS
 = csrf_meta_tag

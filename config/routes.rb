@@ -17,11 +17,8 @@ SCInterface::Application.routes.draw do
   end
   root :to => "home#index"
   
-
   # TODO: La partie calcul est à séparer en plusieurs ressources.
   match 'calcul/:action(/:id(.:format))' => "calcul"
-  
-  
   
   match ':controller(/:action(/:id(.:format)))'
 

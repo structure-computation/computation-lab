@@ -38,10 +38,13 @@ class MaterialsController < InheritedResources::Base
   def show
     @material = Material.find(params[:id])
     @company = Company.find(params[:company_id])
-    if @material.company_id == -1
-      render :action => "show"
-    elsif @material.company_id == current_user.company.id
-      render :action => "show"
+    if @material.company_id == -1 or @material.company_id == current_user.company.id
+      respond_to do |format|
+        format.html { render :action => "show"}
+        format.json { render :json => @material.to_json }
+      end
+    # elsif @material.company_id == current_user.company.id
+    #   render :action => "show"
     else
       flash[:notice] = "Vous n'avez pas accès à cette pièce !"
       redirect_to company_materials_path

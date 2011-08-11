@@ -5,13 +5,13 @@ class CalculsController < ApplicationController
   before_filter :authenticate_user! , :except => :calcul_valid
   
   def index
-    @page = 'SCcompute'
-    @model_id = params[:model_id]
-    current_model = current_user.sc_models.find(@model_id)
-    @dim_model = current_model.dimension
-    respond_to do |format|
-      format.html {render :layout => false }
-    end 
+    # @page = 'SCcompute'
+    # @model_id = params[:model_id]
+    # current_model = current_user.sc_models.find(@model_id)
+    # @dim_model = current_model.dimension
+    # respond_to do |format|
+    #   format.html {render :layout => false }
+    # end 
   end
   
   def info_model
