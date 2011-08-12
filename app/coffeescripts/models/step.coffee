@@ -1,22 +1,37 @@
-window.Step = Backbone.Model.extend ({
-  name            : "",
-  initial_time    : 0,
-  time_step       : 1,
-  nb_time_steps   : 1,
-  final_time      : 1,
-
+window.Step = Backbone.Model.extend
+  defaults: {
+    name            : "step_",
+    initial_time    : 0,
+    time_step       : 1,
+    nb_time_steps   : 1,
+    final_time      : 1,    
+  }
+  
+  initialize: ->
+    @updateFinalTime()
+    @bind('add', @updateFinalTime)
+    @bind('change', @updateFinalTime)
   updateFinalTime: ->
-    newFinalTime = this.get('initial_time') + (this.get('nb_time_steps') * this.get('time_step'))
-    this.set({ final_time: newFinalTime})
-})
+    newFinalTime = @get('initial_time') + (@get('nb_time_steps') * @get('time_step'))
+    @set({ final_time: newFinalTime})
 
-window.Steps = Backbone.Collection.extend({
-  initialize: (step) ->
-    this.stepViews = []
-    this.stepViews.push(new StepView({model: step}))
-    this.bind('add', (step) ->
-      this.stepViews.push(new StepView({model: step}))
+
+window.StepCollection = Backbone.Collection.extend
+  model: Step
+  initialize: -> 
+    @bind('add', (step) ->
+      if !@last_step?
+        @last_step = step
+        step.set({ name: step.get('name') + (@models.length - 1)})
+      else
+        @nb_step_model += 1
+        # Incrémente le nom du step
+        step.set({ name: step.get('name') + (@models.length - 1)})
+        step.set({ initial_time: @last_step.get('final_time')})
+        @last_step = step
     )
-  ,
-  model: Step  
-})
+
+  updateModels: ->
+    for step, i in @models
+      if i > 0
+        step.set({ initial_time: @models[i - 1].get('final_time')})

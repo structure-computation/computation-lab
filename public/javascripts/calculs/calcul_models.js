@@ -72,7 +72,7 @@
         var htmlString;
         htmlString = "<td class=\"name\">\n  <input type='text' value='" + (this.model.get("name")) + "'> \n</td> \n<td class=\"initial_time\">\n  <input type='text' value='" + (this.model.get("initial_time")) + "'> \n</td> \n<td class=\"time_step\"> \n  <input type='text' value='" + (this.model.get("time_step")) + "'> \n</td> \n<td class=\"nb_time_steps\">\n  <input type='text' value='" + (this.model.get("nb_time_steps")) + "'> \n</td> \n<td class=\"final_time\">\n  <input type='text' value='" + (this.model.get("final_time")) + "' disabled> \n</td> ";
         $(this.el).html(htmlString);
-        $('#step_table tbody').append(this.el);
+        $('#steps_table tbody').append(this.el);
         return this;
       },
       updateName: function() {

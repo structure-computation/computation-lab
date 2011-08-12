@@ -1,27 +1,22 @@
-/* DO NOT MODIFY. This file was compiled Thu, 11 Aug 2011 12:31:27 GMT from
+/* DO NOT MODIFY. This file was compiled Fri, 12 Aug 2011 08:54:23 GMT from
  * /Users/Nima/Sites/Stage/StructureComputation/sc_interface/app/coffeescripts/calculs/main.coffee
  */
 
 (function() {
-  $((function() {
-    var steps;
-    steps = new Steps(new Step({
-      name: "First step",
-      initial_time: 0,
-      time_step: 1,
-      nb_time_steps: 1,
-      final_time: 1
-    }));
+  $(function() {
+    var Steps, StepsView;
+    Steps = new StepCollection;
+    StepsView = new StepListView({
+      collection: Steps
+    });
     $("#add_step").click(function() {
-      return steps.add([
-        {
-          name: "First step",
-          initial_time: 0,
-          time_step: 1,
-          nb_time_steps: 1,
-          final_time: 1
-        }
-      ]);
+      return StepsView.addStep();
+    });
+    $("#steps_table").keyup(function(event) {
+      var _ref;
+      if ((48 <= (_ref = event.keyCode) && _ref <= 57)) {
+        return StepsView.trigger('step_changed');
+      }
     });
     return window.Calcul = Backbone.Model.extend({
       initialize: function() {
@@ -32,5 +27,5 @@
         return this.steps = [];
       }
     });
-  }));
+  });
 }).call(this);
