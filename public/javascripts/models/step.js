@@ -1,4 +1,4 @@
-/* DO NOT MODIFY. This file was compiled Fri, 12 Aug 2011 08:39:38 GMT from
+/* DO NOT MODIFY. This file was compiled Fri, 12 Aug 2011 12:06:44 GMT from
  * /Users/Nima/Sites/Stage/StructureComputation/sc_interface/app/coffeescripts/models/step.coffee
  */
 
@@ -28,21 +28,7 @@
     model: Step,
     initialize: function() {
       return this.bind('add', function(step) {
-        if (!(this.last_step != null)) {
-          this.last_step = step;
-          return step.set({
-            name: step.get('name') + (this.models.length - 1)
-          });
-        } else {
-          this.nb_step_model += 1;
-          step.set({
-            name: step.get('name') + (this.models.length - 1)
-          });
-          step.set({
-            initial_time: this.last_step.get('final_time')
-          });
-          return this.last_step = step;
-        }
+        return this.updateModels();
       });
     },
     updateModels: function() {
@@ -51,6 +37,9 @@
       _results = [];
       for (i = 0, _len = _ref.length; i < _len; i++) {
         step = _ref[i];
+        step.set({
+          name: "step_" + i
+        });
         _results.push(i > 0 ? step.set({
           initial_time: this.models[i - 1].get('final_time')
         }) : void 0);

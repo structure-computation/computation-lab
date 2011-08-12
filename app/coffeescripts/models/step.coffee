@@ -20,18 +20,11 @@ window.StepCollection = Backbone.Collection.extend
   model: Step
   initialize: -> 
     @bind('add', (step) ->
-      if !@last_step?
-        @last_step = step
-        step.set({ name: step.get('name') + (@models.length - 1)})
-      else
-        @nb_step_model += 1
-        # Incrémente le nom du step
-        step.set({ name: step.get('name') + (@models.length - 1)})
-        step.set({ initial_time: @last_step.get('final_time')})
-        @last_step = step
+      @updateModels()
     )
 
   updateModels: ->
     for step, i in @models
+      step.set({ name: "step_" + i})
       if i > 0
         step.set({ initial_time: @models[i - 1].get('final_time')})
