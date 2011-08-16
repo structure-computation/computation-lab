@@ -1,41 +1,40 @@
+## MaterialListView
+window.MaterialListView = Backbone.View.extend
+  tagName: 'table'
+  className: 'grey'
+  id: 'materials_table'
+
+  initialize: (options) ->
+    @materialViews = []
+    for material in @collection
+      @materialViews.push new MaterialView model: material
+    @render()
+
+  render : ->
+    htmlString = """
+         <thead> 
+            <tr class='no_sorter'> 
+              <th>Nom</th> 
+            </tr> 
+          </thead> 
+          <tbody></tbody>
+    """
+    $(@el).html(htmlString)
+    $('#content').append(@el)
+    for materialView in @materialViews
+      materialView.render()
+
+
+
+## Material View
 window.MaterialView = Backbone.View.extend
-  tagName   : "li"
-  
-  initialize: ->
-    console.log @model
-    @model.bind('change', @render, this)
-    
+  tagName   : "tr"
   render: ->
-    $(@el).html(@model.get('name'))
-    @setContent()
-    this
-
-  setContent: ->
-      name = @model.get('name')
-      this.$('#materials_list').text(name)
-      
-      
-window.MaterialsListView = Backbone.View.extend
-  initialize: ->
-    _.bindAll this, 'addOne', 'addAll'
-
-    @collection
-      .bind('add',      @addOne)
-      .bind('refresh',  @addAll)
-
-    @list = @el.find '#materials_list'
-
-  addOne: (material, collection) ->
-
-    index    = collection.indexOf material
-    node     = new MaterialView(model: material).render().el
-    children = @list.children()
-
-    if index == children.length
-      @list.append node
-    else
-      children.eq(index).before node
-
-  addAll: ->
-    @list.children().remove()
-    @collection.each (item) => @addOne item, @collection
+    htmlString = """
+              <td class="name">
+                #{@model.get("name")}
+              </td> 
+          """
+    $(@el).html(htmlString)
+    $("#materials_table tbody").append(@el)
+    return this
