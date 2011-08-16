@@ -6,3 +6,4 @@ window.Materials = Backbone.Collection.extend
     @company_id = if options.company_id? then options.company_id else 1
     @url = "/companies/#{@company_id}/materials"
 
+
