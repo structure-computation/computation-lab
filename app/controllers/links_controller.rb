@@ -5,6 +5,7 @@ class LinksController < InheritedResources::Base
   before_filter :set_page_name
   belongs_to    :company
   layout 'company'
+  respond_to :html, :json
   
   def set_page_name
     @page = :bibliotheque
@@ -37,10 +38,8 @@ class LinksController < InheritedResources::Base
   def show
     @link = Link.find(params[:id])
     @company = Company.find(params[:company_id])
-    if @link.company_id == -1
-      render :action => "show"
-    elsif @link.company_id == current_user.company.id
-      render :action => "show"
+    if @link.company_id == current_user.company.id
+      show!
     else
       flash[:notice] = "Vous n'avez pas accès à cette liaison !"
       redirect_to company_links_path

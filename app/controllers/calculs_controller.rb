@@ -12,6 +12,7 @@ class CalculsController < ApplicationController
     # respond_to do |format|
     #   format.html {render :layout => false }
     # end 
+    @links = Link.find_by_company_id(current_user.company_id)
   end
   
   def info_model

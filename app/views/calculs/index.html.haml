@@ -1,17 +1,7 @@
+:coffeescript
+  $ ->
+    LinkCollection = new Links {company_id: #{current_user.company_id}}
+    LinkCollection.reset #{@links.to_json.html_safe}
+    LinkViews = new LinkListView {collection: LinkCollection.models}
+
 %h2 Initialisation du calcul
-
-%table#step_table.grey
-  %thead
-    %tr.no_sorter
-      %th Nom
-      %th Temps initial
-      %th Pas de temps
-      %th Nombre de pas de temps
-      %th Temps final
-  %tbody
-
-%button#add_step Ajouter un Step
-
-#mat  
-  %ul#materials_list
-    %li
