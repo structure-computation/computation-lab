@@ -13,6 +13,7 @@ class CalculsController < ApplicationController
     #   format.html {render :layout => false }
     # end 
     @links = Link.find_by_company_id(current_user.company_id)
+    @materials = Material.find_by_company_id(current_user.company_id)
   end
   
   def info_model

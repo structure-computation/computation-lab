@@ -3,5 +3,8 @@
     LinkCollection = new Links {company_id: #{current_user.company_id}}
     LinkCollection.reset #{@links.to_json.html_safe}
     LinkViews = new LinkListView {collection: LinkCollection.models}
+    MaterialCollection = new Materials {company_id: #{current_user.company_id}}
+    MaterialCollection.reset #{@materials.to_json.html_safe}
+    MaterialViews = new MaterialListView {collection: MaterialCollection.models}
 
 %h2 Initialisation du calcul
