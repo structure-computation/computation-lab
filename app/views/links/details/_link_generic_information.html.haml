@@ -3,39 +3,39 @@
 %table.grey
   %tbody
     %tr
-      %td Description :
+      %th Description
       %td{:colspan => 2}= text_area :link, :description, :value => @link.description, :disabled => disabled
     %tr
-      %td Epaisseur :
+      %th Epaisseur
       %td.label_table
         = label :link, :Ep, "Ep = "
       %td 
-        = text_field :link, :Ep, :value => @link.Ep, :disabled => disabled
+        = text_field :link, :Ep, :value => @link.Ep, :disabled => disabled, :size => '10'
         m
     %tr
-      %td Jeu :
+      %th Jeu
       %td.label_table
         = label :link, :jeu, "j = "
       %td 
-        = text_field :link, :jeu, :value => @link.jeu, :disabled => disabled
+        = text_field :link, :jeu, :value => @link.jeu, :disabled => disabled, :size => '10'
         m
 
     - if @link.comp_generique.downcase.include? "el"
       %tr
-        %td Raideur :
+        %th Raideur
         %td.label_table
           = label :link, :R, "R = "
         %td 
-          = text_field :link, :R, :value => @link.R, :disabled => disabled
+          = text_field :link, :R, :value => @link.R, :disabled => disabled, :size => '10'
           N/m
 
 
     - if @link.comp_generique.downcase.include? "co"
       %tr
-        %td Coefficient de frottement :
+        %th Coefficient de frottement
         %td.label_table
           = label :link, :f, "f = "
         %td 
-          = text_field :link, :f, :value => @link.f, :disabled => disabled
+          = text_field :link, :f, :value => @link.f, :disabled => disabled, :size => '10'
 
 

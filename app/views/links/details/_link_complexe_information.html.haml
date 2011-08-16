@@ -9,19 +9,19 @@
           %td.label_table
             = label :link, :Lp, "Lp = "
           %td
-            = text_field :link, :Lp, :value => @link.Lp, :disabled => disabled
+            = text_field :link, :Lp, :value => @link.Lp, :disabled => disabled, :size => '10'
         %tr
           %td Taux de plastification :
           %td.label_table
             = label :link, :Dp, "Dp = "
           %td
-            = text_field :link, :Dp, :value => @link.Dp, :disabled => disabled
+            = text_field :link, :Dp, :value => @link.Dp, :disabled => disabled, :size => '10'
         %tr
           %td Déformation plastique :
           %td.label_table
             = label :link, :p, "p = "
           %td
-            = text_field :link, :p, :value => @link.p, :disabled => disabled
+            = text_field :link, :p, :value => @link.p, :disabled => disabled, :size => '10'
     
 - if @link.comp_complexe.downcase.include? "ca"
   #material_breakable_information
@@ -34,10 +34,10 @@
           %td.label_table
             = label :link, :Lr, "Lr ="
           %td
-            = text_field :link, :Lr, :value => @link.Lr, :disabled => disabled
+            = text_field :link, :Lr, :value => @link.Lr, :disabled => disabled, :size => '10'
         %tr
           %td Coefficient de frottement :
           %td.label_table
             = label :link, :f, "f = "
           %td
-            = text_field :link, :f, :value => @link.f, :disabled => disabled
+            = text_field :link, :f, :value => @link.f, :disabled => disabled, :size => '10'

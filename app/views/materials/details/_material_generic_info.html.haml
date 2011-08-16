@@ -5,7 +5,7 @@
       %th Masse volumique :
       %td 
         %label m1 = 
-        %input{:disabled => disabled, :value => "#{@material.rho}"}
+        %input{:disabled => disabled, :value => "#{@material.rho}", :size => '10'}
 
 %h3 Dilatation thermique
         
@@ -23,14 +23,14 @@
       %td.label_table
         = label :material, :alpha_1, "a1 = "
       %td 
-        = text_field :material, :alpha_1, :value => material.alpha_1, :disabled => disabled
+        = text_field :material, :alpha_1, :value => material.alpha_1, :disabled => disabled, :size => '10'
       - if material.mtype == "orthotrope"
         %td.label_table
           = label :material, :alpha_2, "a2 = "
         %td 
-          = text_field :material, :alpha_2, :value => material.alpha_2, :disabled => disabled
+          = text_field :material, :alpha_2, :value => material.alpha_2, :disabled => disabled, :size => '10'
         %td.label_table
           = label :material, :alpha_3, "a3 = "
         %td 
-          = text_field :material, :alpha_3, :value => material.alpha_3, :disabled => disabled
+          = text_field :material, :alpha_3, :value => material.alpha_3, :disabled => disabled, :size => '10'
 
