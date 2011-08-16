@@ -1,5 +1,10 @@
+<<<<<<< Updated upstream
 /* DO NOT MODIFY. This file was compiled Fri, 12 Aug 2011 12:06:44 GMT from
  * /Users/Nima/Sites/Stage/StructureComputation/sc_interface/app/coffeescripts/models/step.coffee
+=======
+/* DO NOT MODIFY. This file was compiled Thu, 11 Aug 2011 14:41:20 GMT from
+ * /Users/Nico/Development/Rails/sc_interface/app/coffeescripts/models/step.coffee
+>>>>>>> Stashed changes
  */
 
 (function() {

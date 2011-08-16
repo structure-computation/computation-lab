@@ -22,7 +22,6 @@ window.StepCollection = Backbone.Collection.extend
     @bind('add', (step) ->
       @updateModels()
     )
-
   updateModels: ->
     for step, i in @models
       step.set({ name: "step_" + i})
