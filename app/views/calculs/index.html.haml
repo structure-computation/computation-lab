@@ -1,7 +1,39 @@
 :coffeescript
   $ ->
-    LinkCollection = new Links {company_id: #{current_user.company_id}}
-    LinkCollection.reset #{@links.to_json.html_safe}
-    LinkViews = new LinkListView {collection: LinkCollection.models}
+    window.LinkCollection = new Links {company_id: #{current_user.company_id}}
+    window.LinkCollection.reset #{@links.to_json.html_safe}
+    window.LinkViews = new LinkListView {collection: LinkCollection.models}
+
 
 %h2 Initialisation du calcul
+
+#steps
+  %button#add_step Ajouter un Step
+  %select#step_type
+    %option{:value => "statique"} Statique
+    %option{:value => "quasistatique"} Quasistatique
+    %option{:value => "dynamique"} Dynamique
+  %table#steps_table.grey
+    %thead
+      %tr.no_sorter
+        %th Nom
+        %th Temps initial
+        %th Pas de temps
+        %th Nombre de pas de temps
+        %th Temps final
+        %th
+    %tbody
+
+%table#links_table.grey
+  %thead
+    %tr.no_sorter
+      %th Nom
+      %th
+  %tbody
+
+%table#selected_links_table.grey
+  %thead
+    %tr.no_sorter
+      %th Nom
+      %th
+  %tbody
