@@ -87,6 +87,7 @@ window.StepListView = Backbone.View.extend
 
   selectChanged: (event) ->
     if $(event.srcElement).val() == "statique"
+      ## Delete all except first element
       for i in [0..@stepViews.length - 1]
         @stepViews[1].delete() if i > 0
       $(@el).find("button#add_step").enable(false)

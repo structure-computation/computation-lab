@@ -8,3 +8,5 @@ Gemfile.lock
 public/javascripts/search.js
 public/javascripts/table.js
 public/javascripts/manage_tab.js
+public/javascripts/calculs/main.js
+public/javascripts/views/step.js
