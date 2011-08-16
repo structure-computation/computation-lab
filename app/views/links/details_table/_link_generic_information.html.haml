@@ -1,0 +1,27 @@
+#edit_link
+  %h3
+    Information générique
+  %table.grey
+    %tbody
+      %tr
+        %td Nom :
+        %td{:colspan => "2"}
+          %input#link_name{:size => "30", :type => "text"}
+      %tr
+        %td Description :
+        %td{:colspan => "2"}
+          %textarea#link_description{:cols => "40", :rows => "5"}
+      %tr
+        %td Epaisseur :
+        %td.label_table
+          %label{:for => "link_Ep"} Ep =
+        %td
+          %input#link_Ep{:size => "30", :type => "text"}
+          m
+      %tr
+        %td Jeu :
+        %td.label_table
+          %label{:for => "link_jeu"} j =
+        %td
+          %input#link_jeu{:size => "30", :type => "text"}
+          m
