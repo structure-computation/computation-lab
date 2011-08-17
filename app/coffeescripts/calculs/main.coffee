@@ -8,3 +8,5 @@ $ ->
       this.selectedMaterials = []
       this.selectedLinks     = []
       this.steps             = [] 
+
+  Pieces = new Pieces
