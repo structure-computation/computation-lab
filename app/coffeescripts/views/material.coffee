@@ -1,6 +1,6 @@
 ## MaterialListView
 window.MaterialListView = Backbone.View.extend
-  el: 'materials_table'
+  el: '#materials_table'
 
   initialize: (options) ->
     @bind 'material_added', @add_selected_material, this
@@ -19,7 +19,7 @@ window.MaterialListView = Backbone.View.extend
     @localMaterialList.add_material material
 
 window.MaterialLocalListView = Backbone.View.extend
-  el: 'materials_selected_table'
+  el: '#materials_selected_table'
 
   initialize: (options) ->
     @bind 'material_added', @add_selected_material, this
@@ -78,7 +78,7 @@ window.MaterialView = Backbone.View.extend
 window.SelectedMaterialView = Backbone.View.extend
   initialize: (params) ->
     @parentElement = params.parentElement
- 
+    
   tagName   : "tr"
  
   events:
@@ -97,9 +97,51 @@ window.SelectedMaterialView = Backbone.View.extend
                 #{@model.get("family")}
               </td>
               <td>
+                <button class="edit">Edit</button>
+              </td>
+              <td>
                 <button class="remove">-</button>
               </td>
+
           """
     $(@el).html(htmlString)
     $("#materials_selected_table tbody").append(@el)
     return this
+
+window.EditMaterialView = Backbone.View.extend
+  el: "#edit_material"
+  initialize: (params) ->
+    @parentElement = params.parentElement
+    
+  events: 
+    'keyup': 'updateModelAttributes'
+
+  updateModel: (model) ->
+    @model = model
+    @render()
+    
+  updateModelAttributes: ->
+    @model.set name:          $(@el).find('#link_name')       .val()
+    @model.set description:   $(@el).find('#link_description').val()
+    @model.set Ep:            $(@el).find('#link_Ep')         .val()
+    @model.set jeu:           $(@el).find('#link_jeu')        .val()
+    @model.set R:             $(@el).find('#link_R')          .val()
+    @model.set Lp:            $(@el).find("#link_Lp")         .val()
+    @model.set Dp:            $(@el).find("#link_Dp")         .val()
+    @model.set p:             $(@el).find("#link_p")          .val()
+    @model.set Lr:            $(@el).find("#link_Lr")         .val()
+    @model.set f:             $(@el).find("#link_f")          .val()
+
+    @parentElement.render()
+    
+  render: ->
+    $(@el).find('#link_name')         .val(@model.get("name"))
+    $(@el).find('#link_description')  .val(@model.get("description"))
+    $(@el).find('#link_Ep')           .val(@model.get("Ep"))
+    $(@el).find('#link_jeu')          .val(@model.get("jeu"))
+    $(@el).find('#link_R')            .val(@model.get("R"))
+    $(@el).find("#link_Lp")           .val(@model.get("Lp"))
+    $(@el).find("#link_Dp")           .val(@model.get("Dp"))
+    $(@el).find("#link_p")            .val(@model.get("p"))
+    $(@el).find("#link_Lr")           .val(@model.get("Lr"))
+    $(@el).find("#link_f")            .val(@model.get("f"))

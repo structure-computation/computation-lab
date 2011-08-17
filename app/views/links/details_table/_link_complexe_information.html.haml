@@ -1,0 +1,40 @@
+#material_plastic_information
+  %h3
+    Plastique
+  %table.grey
+    %tbody
+      %tr
+        %th Limite de plasticité :
+        %td.label_table
+          %label{:for => "link_Lp"} Lp =
+        %td
+          %input#link_Lp{:size => "10", :type => "text"}
+      %tr
+        %th Taux de plastification :
+        %td.label_table
+          %label{:for => "link_Dp"} Dp =
+        %td
+          %input#link_Dp{:size => "10", :type => "text"}
+      %tr
+        %th Déformation plastique :
+        %td.label_table
+          %label{:for => "link_p"} p =
+        %td
+          %input#link_p{:size => "10", :type => "text"}
+#material_breakable_information
+  %h3
+    Cassable
+  %table.grey
+    %tbody
+      %tr
+        %th Limite de rupture :
+        %td.label_table
+          %label{:for => "link_Lr"} Lr =
+        %td
+          %input#link_Lr{:size => "10", :type => "text"}
+      %tr
+        %th Coefficient de frottement :
+        %td.label_table
+          %label{:for => "link_f"} f =
+        %td
+          %input#link_f{:size => "10", :type => "text"}
