@@ -5,50 +5,57 @@
     LinkViews = new LinkListView {collection: LinkCollection.models}
     MaterialCollection = new Materials {company_id: #{current_user.company_id}}
     MaterialCollection.reset #{@materials.to_json.html_safe}
-    MaterialViews = new MaterialListView {collection: MaterialCollection.models}
+    MaterialViews = new MaterialListView {collection: MaterialCollection}
 
 
-%h2 Initialisation du calcul
+%h2 Liste des pièces
+%ul#pieces
 
-#steps
-  %button#add_step Ajouter un Step
-  %select#step_type
-    %option{:value => "statique"} Statique
-    %option{:value => "quasistatique"} Quasistatique
-    %option{:value => "dynamique"} Dynamique
-  %table#steps_table.grey
-    %thead
-      %tr.no_sorter
-        %th Nom
-        %th Temps initial
-        %th Pas de temps
-        %th Nombre de pas de temps
-        %th Temps final
-        %th
-    %tbody
-
-%table#links_table.grey
-  %thead
-    %tr.no_sorter
-      %th Nom
-      %th
-  %tbody
-
-%table#selected_links_table.grey
-  %thead
-    %tr.no_sorter
-      %th Nom
-      %th
-      %th
-  %tbody
-
-#edit_link
-  = render :partial => "links/details/link_generic_information", :locals => { :show_all => true }
-  = render :partial => "links/details/link_complexe_information", :locals => { :show_all => true }
+%h2 Liste des Matériaux
+%ul#materials
 
 
-= render 'calculs/partials/materials'
-
+/ %h2 Initialisation du calcul
+/ 
+/ #steps
+/   %button#add_step Ajouter un Step
+/   %select#step_type
+/     %option{:value => "statique"} Statique
+/     %option{:value => "quasistatique"} Quasistatique
+/     %option{:value => "dynamique"} Dynamique
+/   %table#steps_table.grey
+/     %thead
+/       %tr.no_sorter
+/         %th Nom
+/         %th Temps initial
+/         %th Pas de temps
+/         %th Nombre de pas de temps
+/         %th Temps final
+/         %th
+/     %tbody
+/ 
+/ %table#links_table.grey
+/   %thead
+/     %tr.no_sorter
+/       %th Nom
+/       %th
+/   %tbody
+/ 
+/ %table#selected_links_table.grey
+/   %thead
+/     %tr.no_sorter
+/       %th Nom
+/       %th
+/       %th
+/   %tbody
+/ 
+/ #edit_link
+/   = render :partial => "links/details/link_generic_information", :locals => { :show_all => true }
+/   = render :partial => "links/details/link_complexe_information", :locals => { :show_all => true }
+/ 
+/ 
+/ = render 'calculs/partials/materials'
+/ 
 #edit_material
   = render :partial => "materials/details/material_main_information", :locals => { :show_all => true }
   = render :partial => "materials/details/material_generic_info", :locals => { :show_all => true }

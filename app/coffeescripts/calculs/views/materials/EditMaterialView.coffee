@@ -2,7 +2,8 @@ window.EditMaterialView = Backbone.View.extend
   el: "#edit_material"
   initialize: (params) ->
     @parentElement = params.parentElement
-    
+    @render()
+
   events: 
     'keyup': 'updateModelAttributes'
 

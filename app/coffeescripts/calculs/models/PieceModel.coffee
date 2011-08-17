@@ -9,14 +9,5 @@ window.Piece = Backbone.Model.extend
     @material_id    = piece.material_id || 0
 
 
-window.Pieces = Backbone.Collection.extend
+window.PieceCollection = Backbone.Collection.extend
   model: Piece
-  initialize: ->
-    @add new Piece {
-            "group": -1
-            "name": "piece 0"
-            "origine": "from_bulkdata"
-            "assigned": 0
-            "id": 0
-            "identificateur": 26
-          }
