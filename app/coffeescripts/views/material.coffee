@@ -22,14 +22,18 @@ window.MaterialLocalListView = Backbone.View.extend
   el: '#materials_selected_table'
 
   initialize: (options) ->
-    @bind 'material_added', @add_selected_material, this
-    @bind 'material_removed', @remove_selected_material, this
+    @bind 'materialRemoved', @remove_selected_material, this
+    @bind 'editMaterial', @edit_selected_material, this
+    @editMaterialView = new EditMaterialView parentElement: this
     @materialViews = []
 
   render : ->
     for materialView in @materialViews
       materialView.render()    
-      
+  
+  edit_selected_material: (material) ->
+    @editMaterialView.updateModel material
+    
   add_material: (material) ->
     m = material.clone()
     m.set({name: m.get('name') + ' - copy'})
@@ -82,10 +86,14 @@ window.SelectedMaterialView = Backbone.View.extend
   tagName   : "tr"
  
   events:
-    "click .remove": "remove_selected_material"
+    "click .remove" : "remove_selected_material"
+    "click .edit"   : "edit_selected_material"
   
+  edit_selected_material: ->
+    @parentElement.trigger 'editMaterial', @model
+    
   remove_selected_material: ->
-    @parentElement.trigger 'material_removed', @model
+    @parentElement.trigger 'materialRemoved', @model
     @parentElement.render()
   
   render: ->
@@ -121,27 +129,15 @@ window.EditMaterialView = Backbone.View.extend
     @render()
     
   updateModelAttributes: ->
-    @model.set name:          $(@el).find('#link_name')       .val()
-    @model.set description:   $(@el).find('#link_description').val()
-    @model.set Ep:            $(@el).find('#link_Ep')         .val()
-    @model.set jeu:           $(@el).find('#link_jeu')        .val()
-    @model.set R:             $(@el).find('#link_R')          .val()
-    @model.set Lp:            $(@el).find("#link_Lp")         .val()
-    @model.set Dp:            $(@el).find("#link_Dp")         .val()
-    @model.set p:             $(@el).find("#link_p")          .val()
-    @model.set Lr:            $(@el).find("#link_Lr")         .val()
-    @model.set f:             $(@el).find("#link_f")          .val()
-
+    for input in $(@el).find('input, textarea')
+      key = $(input).attr('id').split('material_')[1]
+      value = $(input).val()
+      h = new Object()
+      h[key] = value
+      @model.set h
     @parentElement.render()
     
   render: ->
-    $(@el).find('#link_name')         .val(@model.get("name"))
-    $(@el).find('#link_description')  .val(@model.get("description"))
-    $(@el).find('#link_Ep')           .val(@model.get("Ep"))
-    $(@el).find('#link_jeu')          .val(@model.get("jeu"))
-    $(@el).find('#link_R')            .val(@model.get("R"))
-    $(@el).find("#link_Lp")           .val(@model.get("Lp"))
-    $(@el).find("#link_Dp")           .val(@model.get("Dp"))
-    $(@el).find("#link_p")            .val(@model.get("p"))
-    $(@el).find("#link_Lr")           .val(@model.get("Lr"))
-    $(@el).find("#link_f")            .val(@model.get("f"))
+    for input in $(@el).find('input, textarea')
+      $(input).val(@model.get($(input).attr('id').split("material_")[1]))
+
