@@ -1,40 +1,105 @@
 ## MaterialListView
 window.MaterialListView = Backbone.View.extend
-  tagName: 'table'
-  className: 'grey'
-  id: 'materials_table'
+  el: 'materials_table'
 
   initialize: (options) ->
+    @bind 'material_added', @add_selected_material, this
     @materialViews = []
+    @localMaterialList = new MaterialLocalListView
+    window.localMaterialList = @localMaterialList
     for material in @collection
-      @materialViews.push new MaterialView model: material
+      @materialViews.push new MaterialView model: material, parentElement: this
     @render()
 
   render : ->
-    htmlString = """
-         <thead> 
-            <tr class='no_sorter'> 
-              <th>Nom</th> 
-            </tr> 
-          </thead> 
-          <tbody></tbody>
-    """
-    $(@el).html(htmlString)
-    $('#content').append(@el)
     for materialView in @materialViews
       materialView.render()
+      
+  add_selected_material: (material) ->
+    @localMaterialList.add_material material
 
+window.MaterialLocalListView = Backbone.View.extend
+  el: 'materials_selected_table'
 
+  initialize: (options) ->
+    @bind 'material_added', @add_selected_material, this
+    @bind 'material_removed', @remove_selected_material, this
+    @materialViews = []
 
-## Material View
+  render : ->
+    for materialView in @materialViews
+      materialView.render()    
+      
+  add_material: (material) ->
+    m = material.clone()
+    m.set({name: m.get('name') + ' - copy'})
+    @materialViews.push new SelectedMaterialView model: m, parentElement: this
+    @render()
+  
+  remove_selected_material: (material) ->
+    for materialView, i in @materialViews
+      if materialView.model == material
+        @materialViews.splice(i, 1)
+        materialView.remove()
+        @render()
+        break
+    
+# Material View
 window.MaterialView = Backbone.View.extend
+  initialize: (params) ->
+    @parentElement = params.parentElement
+ 
   tagName   : "tr"
+ 
+  events:
+    "click .add": "add_selected_material"
+  
+  add_selected_material: ->
+    @parentElement.trigger 'material_added', @model
+    @parentElement.render()
+  
   render: ->
     htmlString = """
               <td class="name">
                 #{@model.get("name")}
-              </td> 
+              </td>
+              <td class="family">
+                #{@model.get("family")}
+              </td>
+              <td>
+                <button class="add">+</button>
+              </td>
           """
     $(@el).html(htmlString)
     $("#materials_table tbody").append(@el)
+    return this
+    
+# Material View
+window.SelectedMaterialView = Backbone.View.extend
+  initialize: (params) ->
+    @parentElement = params.parentElement
+ 
+  tagName   : "tr"
+ 
+  events:
+    "click .remove": "remove_selected_material"
+  
+  remove_selected_material: ->
+    @parentElement.trigger 'material_removed', @model
+    @parentElement.render()
+  
+  render: ->
+    htmlString = """
+              <td class="name">
+                #{@model.get("name")}
+              </td>
+              <td class="family">
+                #{@model.get("family")}
+              </td>
+              <td>
+                <button class="remove">-</button>
+              </td>
+          """
+    $(@el).html(htmlString)
+    $("#materials_selected_table tbody").append(@el)
     return this
