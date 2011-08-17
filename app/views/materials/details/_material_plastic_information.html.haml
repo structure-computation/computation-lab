@@ -1,6 +1,6 @@
 / TODO !!!!!!!!!!! CHANGER LES VALEURS DES CHAMPS. Elles ne sont pas adapté à celle présente en BDD
 %h3 Plasticité
-- if material.mtype == "orthotrope"
+- if @material.mtype == "orthotrope"
   %table.grey
     %thead
       %tr.no_sorter
@@ -14,15 +14,15 @@
         %td.label_table
           = label :material, :sigma_p_1, "Sp1 = "
         %td
-          = text_field :material, :sigma_p_1, :value => material.sigma_p_1, :disabled => disabled, :size => '10'
+          = text_field :material, :sigma_p_1, :disabled => disabled, :size => '10'
         %td.label_table 
           = label :material, :sigma_p_2, "Sp2 = "
         %td
-          = text_field :material, :sigma_p_2, :value => material.sigma_p_2, :disabled => disabled, :size => '10'
+          = text_field :material, :sigma_p_2, :disabled => disabled, :size => '10'
         %td.label_table
           = label :material, :sigma_p_2, "Sp3 = "
         %td
-          = text_field :material, :sigma_p_3, :value => material.sigma_p_3, :disabled => disabled, :size => '10'
+          = text_field :material, :sigma_p_3, :disabled => disabled, :size => '10'
       %tr
         %th Taux de plastification
         %td.label_table
@@ -42,17 +42,17 @@
         %td.label_table
           = label :material, :p_1, "p1 = "
         %td
-          = text_field :material, :p_1, :value => material.p_1, :disabled => disabled, :size => '10'
+          = text_field :material, :p_1, :disabled => disabled, :size => '10'
         %td.label_table
           = label :material, :p_2, "p1 = "
         %td
-          = text_field :material, :p_2, :value => material.p_2, :disabled => disabled, :size => '10'
+          = text_field :material, :p_2, :disabled => disabled, :size => '10'
         %td.label_table
           = label :material, :p_3, "p3 = "
         %td
-          = text_field :material, :p_3, :value => material.p_3, :disabled => disabled, :size => '10'
+          = text_field :material, :p_3, :disabled => disabled, :size => '10'
 
-- elsif material.mtype == "isotrope"
+- elsif @material.mtype == "isotrope"
   %table.grey
     %tbody
       %tr
@@ -60,16 +60,16 @@
         %td.label_table
           = label :material, :sigma_p_1, "Sp1 = "
         %td
-          = text_field :material, :sigma_p_1, :value => material.sigma_p_1, :disabled => disabled, :size => '10'
+          = text_field :material, :sigma_p_1, :disabled => disabled, :size => '10'
       %tr
         %th Taux de plastification
         %td.label_table
           = label :material, :dp_1, "dp1 = "
         %td
-          = text_field :material, :dp_1, :value => material.dp_1, :disabled => disabled, :size => '10'
+          = text_field :material, :dp_1, :disabled => disabled, :size => '10'
       %tr
         %th Déformation plastique
         %td.label_table
           = label :material, :p_1, "p1 = "
         %td
-          = text_field :material, :p_1, :value => material.p_1, :disabled => disabled, :size => '10'
+          = text_field :material, :p_1, :disabled => disabled, :size => '10'

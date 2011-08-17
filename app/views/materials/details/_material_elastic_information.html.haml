@@ -1,6 +1,6 @@
 %h3 Elasticité
 
-- if material.mtype == "orthotrope"
+- if @material.mtype == "orthotrope"
   %table.grey
     %thead
       %tr.no_sorter
@@ -14,45 +14,45 @@
         %td.label_table
           = label :material, :E_1, "E1 = "
         %td 
-          = text_field :material, :E_1, :value => material.E_1, :disabled => disabled, :size => '10'
+          = text_field :material, :E_1, :disabled => disabled, :size => '10'
         %td.label_table
           = label :material, :E_2, "E2 = "
         %td 
-          = text_field :material, :E_2, :value => material.E_2, :disabled => disabled, :size => '10'
+          = text_field :material, :E_2, :disabled => disabled, :size => '10'
         %td.label_table
           = label :material, :E_3, "E3 = "
         %td 
-          = text_field :material, :E_3, :value => material.E_3, :disabled => disabled, :size => '10'
+          = text_field :material, :E_3, :disabled => disabled, :size => '10'
       %tr
         %th Coefficient de Poisson
         %td.label_table
           = label :material, :nu_12, "mu12 = "
         %td 
-          = text_field :material, :nu_12, :value => material.nu_12, :disabled => disabled, :size => '10'
+          = text_field :material, :nu_12, :disabled => disabled, :size => '10'
         %td.label_table
           = label :material, :nu_23, "mu23 = "
         %td 
-          = text_field :material, :nu_23, :value => material.nu_23, :disabled => disabled, :size => '10'
+          = text_field :material, :nu_23, :disabled => disabled, :size => '10'
         %td.label_table
           = label :material, :nu_13, "mu13 = "
         %td 
-          = text_field :material, :nu_13, :value => material.nu_13, :disabled => disabled, :size => '10'
+          = text_field :material, :nu_13, :disabled => disabled, :size => '10'
       %tr
         %th Limite de rupture
         %td.label_table
           = label :material, :sigma_r_1, "Sr1 = "
         %td 
-          = text_field :material, :sigma_r_1, :value => material.sigma_r_1, :disabled => disabled, :size => '10'
+          = text_field :material, :sigma_r_1, :disabled => disabled, :size => '10'
         %td.label_table
           = label :material, :sigma_r_2, "Sr2 = "
         %td 
-          = text_field :material, :sigma_r_2, :value => material.sigma_r_2, :disabled => disabled, :size => '10'
+          = text_field :material, :sigma_r_2, :disabled => disabled, :size => '10'
         %td.label_table
           = label :material, :sigma_r_3, "Sr3 = "
         %td 
-          = text_field :material, :sigma_r_3, :value => material.sigma_r_3, :disabled => disabled, :size => '10'
+          = text_field :material, :sigma_r_3, :disabled => disabled, :size => '10'
 
-- elsif material.mtype == "isotrope"
+- elsif @material.mtype == "isotrope"
   %table.grey
     %tbody
       %tr
@@ -60,16 +60,16 @@
         %td.label_table
           = label :material, :E_1, "E1 = "
         %td 
-          = text_field :material, :E_1, :value => material.E_1, :disabled => disabled, :size => '10'
+          = text_field :material, :E_1, :disabled => disabled, :size => '10'
       %tr
         %th Coefficient de poisson
         %td.label_table
           = label :material, :nu_12, "mu12 = "
         %td 
-          = text_field :material, :nu_12, :value => material.nu_12, :disabled => disabled, :size => '10'
+          = text_field :material, :nu_12, :disabled => disabled, :size => '10'
       %tr
         %th Limite de rupture
         %td.label_table
           = label :material, :sigma_r_1, "Sr1 = "
         %td 
-          = text_field :material, :sigma_r_1, :value => material.sigma_r_1, :disabled => disabled, :size => '10'
+          = text_field :material, :sigma_r_1, :disabled => disabled, :size => '10'
