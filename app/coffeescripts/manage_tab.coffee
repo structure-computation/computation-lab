@@ -1,6 +1,6 @@
 # Selectionne le premier onglet du tableau
 selectFirst = ->
-  $($('.tab_submenu > a')[0]).addClass('selected')
+  $($('.tab_submenu a')[0]).addClass('selected')
   $('.tab_content > div').addClass('hide')
   $($('.tab_content > div')[0]).removeClass('hide')
   $($('.tab_content > div')[0]).addClass('show')
@@ -19,7 +19,7 @@ if currentAnchor != ""
   if !badHash
     $('.tab_content > div').addClass('hide')
     $('.tab_content > div').removeClass('show')
-    $('ul.tab_submenu > a').removeClass('selected')
+    $('ul.tab_submenu a').removeClass('selected')
     for tab in $('.tab_submenu a')
       if $(tab).text() == currentAnchor
         $(tab).addClass('selected')
