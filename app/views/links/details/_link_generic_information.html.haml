@@ -1,7 +1,13 @@
+- disabled = false if disabled.nil?
+- show_all = false if show_all.nil?
+
 %h3
   Information générique
 %table.grey
   %tbody
+    %tr
+      %th Name
+      %td{:colspan => 2}= text_field :link, :name, :disabled => disabled
     %tr
       %th Description
       %td{:colspan => 2}= text_area :link, :description, :disabled => disabled
@@ -20,7 +26,7 @@
         = text_field :link, :jeu, :disabled => disabled, :size => '10'
         m
 
-    - if @link.comp_generique.downcase.include? "el"
+    - if @link.comp_generique.downcase.include? "el" or show_all
       %tr
         %th Raideur
         %td.label_table
@@ -30,7 +36,7 @@
           N/m
 
 
-    - if @link.comp_generique.downcase.include? "co"
+    - if @link.comp_generique.downcase.include? "co" or show_all
       %tr
         %th Coefficient de frottement
         %td.label_table

@@ -44,7 +44,7 @@ window.LinkView = Backbone.View.extend
 
 ## LocalLinkListView
 window.LocalLinkListView = Backbone.View.extend
-  id: 'selected_links_table'
+  el: '#selected_links_table'
 
   initialize: (options) ->
     @selectedLinkViews = []
@@ -77,6 +77,7 @@ window.LocalLinkListView = Backbone.View.extend
       linkView.render()
     return this
 
+
 ## Selected Link View
 window.SelectedLinkView = Backbone.View.extend
   tagName   : "tr"
@@ -108,7 +109,7 @@ window.EditLinkView = Backbone.View.extend
     @parentElement = params.parentElement
     
   events: 
-    'keyup input': 'updateModelAttributes'
+    'keyup': 'updateModelAttributes'
 
   updateModel: (model) ->
     @model = model
@@ -116,9 +117,10 @@ window.EditLinkView = Backbone.View.extend
     
   updateModelAttributes: ->
     @model.set name:          $(@el).find('#link_name')       .val()
-    @model.set description :  $(@el).find('#link_description').val()
+    @model.set description:   $(@el).find('#link_description').val()
     @model.set Ep:            $(@el).find('#link_Ep')         .val()
     @model.set jeu:           $(@el).find('#link_jeu')        .val()
+    @model.set R:             $(@el).find('#link_R')          .val()
     @model.set Lp:            $(@el).find("#link_Lp")         .val()
     @model.set Dp:            $(@el).find("#link_Dp")         .val()
     @model.set p:             $(@el).find("#link_p")          .val()
@@ -132,6 +134,7 @@ window.EditLinkView = Backbone.View.extend
     $(@el).find('#link_description')  .val(@model.get("description"))
     $(@el).find('#link_Ep')           .val(@model.get("Ep"))
     $(@el).find('#link_jeu')          .val(@model.get("jeu"))
+    $(@el).find('#link_R')            .val(@model.get("R"))
     $(@el).find("#link_Lp")           .val(@model.get("Lp"))
     $(@el).find("#link_Dp")           .val(@model.get("Dp"))
     $(@el).find("#link_p")            .val(@model.get("p"))

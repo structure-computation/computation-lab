@@ -1,6 +1,9 @@
+- disabled = false if disabled.nil?
+- show_all = false if show_all.nil?
+
 / TODO !!!!!!!!!!! CHANGER LES VALEURS DES CHAMPS. Elles ne sont pas adapté à celle présente en BDD
 %h3 Plasticité
-- if @material.mtype == "orthotrope"
+- if @material.mtype == "orthotrope" or show_all
   %table.grey
     %thead
       %tr.no_sorter

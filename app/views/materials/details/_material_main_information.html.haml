@@ -1,4 +1,7 @@
-- if @material.mtype == "orthotrope"
+- disabled = false if disabled.nil?
+- show_all = false if show_all.nil?
+
+- if @material.mtype == "orthotrope" or show_all
   %h3 Directions principales
   %table.grey
     %thead

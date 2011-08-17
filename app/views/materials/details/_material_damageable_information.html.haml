@@ -1,7 +1,10 @@
+- disabled = false if disabled.nil?
+- show_all = false if show_all.nil?
+
 // TODO Adapter les champs à la BDD
 %h3 Endomagement
 
-- if @material.mtype == "orthotrope"
+- if @material.mtype == "orthotrope" or show_all
   %table.grey
     %thead
       %tr.no_sorter
