@@ -1,10 +1,10 @@
 - content_for :left_list do 
-  %h2 Liste des pièces
+  %h2.grey Liste des pièces
   %ul#pieces
-- content_for :right_list do 
-  %h2 Liste des Matériaux
-  %ul#materials
 
+- content_for :right_list do 
+  %h2.grey Liste des Matériaux
+  %ul#materials
 / %h2 Initialisation du calcul
 / 
 / #steps
@@ -81,7 +81,7 @@
     $ ->
       window.LinkCollection = new Links {company_id: #{current_user.company_id}}
       window.LinkCollection.reset #{@links.to_json.html_safe}
-      window.LinkViews = new LinkListView {collection: LinkCollection.models}
+      window.LinkViews = new LinkListView {collection: LinkCollection}
       window.MaterialCollection = new Materials {company_id: #{current_user.company_id}}
       window.MaterialCollection.reset #{@materials.to_json.html_safe}
       window.MaterialViews = new MaterialListView {collection: MaterialCollection}

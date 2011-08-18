@@ -13,7 +13,7 @@ class CalculsController < ApplicationController
     # respond_to do |format|
     #   format.html {render :layout => false }
     # end 
-    @links      = Link.find_by_company_id(current_user.company_id)
+    @links      = Link.find_all_by_company_id(current_user.company_id)
     @materials  = Material.find_all_by_company_id(current_user.company_id)
     @material   = Material.new
     @link       = Link.new

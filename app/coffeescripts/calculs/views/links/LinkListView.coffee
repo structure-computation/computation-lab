@@ -1,21 +1,25 @@
 ## LinkListView
 window.LinkListView = Backbone.View.extend
-  el: '#links_table'
+  el: 'ul#links'
   
   initialize: (options) ->
-    @linkViews          = []
-    @localLinks = new LocalLinkListView
-    @bind "linkAdded", @addSelectedLink, this
-    
-    for link in @collection
-      @linkViews.push new LinkView model: link, parentElement: this
-    @render()
-    
-  addSelectedLink: (selectedLink) ->
-    @localLinks.addLink(selectedLink)
-    
-  render : ->
+    @editView = new EditLinkView parentElement: this
+    @linkViews = []
+    for link in @collection.models
+      @createLinkView(link)
+    @render() 
 
-    for linkView in @linkViews
-      linkView.render()
+  createLinkView: (link) ->
+    l = new LinkView model: link, parentElement: this
+    l.bind 'update_details_model', @update_details, this
+    @linkViews.push l
+    
+  update_details: (model) ->
+    @editView.updateModel model   
+
+  render : ->
+    for l in @linkViews
+      l.render()
     return this
+
+ 
