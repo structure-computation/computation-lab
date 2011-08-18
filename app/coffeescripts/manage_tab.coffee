@@ -1,3 +1,6 @@
+removeAccent = (string) ->
+  string.replace(/[éèê]/g, 'e').replace(/[ùû]/g, 'u').replace('î', 'i').replace('ô', 'o')
+
 # Selectionne le premier onglet du tableau
 selectFirst = ->
   $($('.js_tab_submenu a')[0]).addClass('selected')
@@ -7,11 +10,11 @@ selectFirst = ->
 
 select_tab = ->
   # Ancre de l'url sans le "#"
-  currentAnchor = unescape(location.hash.slice(1))
-
+  currentAnchor = decodeURI(location.hash.slice(1))
   # Si l'url contient une ancre correcte la section correspondante sera chargé
   if currentAnchor != ""
     badHash = true
+
     # Vérifie si l'ancre éxiste
     for tab in $('.js_tab_submenu a')
       if $(tab).text() == currentAnchor
@@ -45,4 +48,6 @@ nav_links.each( () ->
 )
 
 window.onpopstate = ->
+  select_tab()
+$ ->
   select_tab()

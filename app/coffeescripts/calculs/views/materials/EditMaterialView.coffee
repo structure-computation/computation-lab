@@ -8,7 +8,7 @@ window.EditMaterialView = Backbone.View.extend
 
   events: 
     # 'keyup'       : 'updateModelAttributes'
-    'click .save'       : 'updateModelAttributes'
+    'click .save'       : 'save'
     'click .save_as_new' : 'saveAsNew'
   
   saveAsNew: ->
@@ -22,15 +22,9 @@ window.EditMaterialView = Backbone.View.extend
       m.set h
     @parentElement.collection.add m
     @parentElement.createMaterialView m
-    @render()
-    
-  updateModel: (model) ->
-    @model = model
-    @enableButtons()
-    @render()
+    @render(true)
 
-        
-  updateModelAttributes: ->
+  save: ->
     for input in $(@el).find('input, textarea')
       key = $(input).attr('id').split('material_')[1]
       value = $(input).val()
@@ -38,7 +32,13 @@ window.EditMaterialView = Backbone.View.extend
       h[key] = value
       @model.set h
     @model.save()
-    @resetFields()
+    @render(true)
+
+  updateModel: (model) ->
+    @model = model
+    @enableButtons()
+    @render()
+        
   
   resetFields: ->
     for input in $(@el).find('input, textarea')
@@ -50,8 +50,11 @@ window.EditMaterialView = Backbone.View.extend
   enableButtons: ->
     $(@el).find('button').enable()
     
-  render: ->
+  render: (resetFields = false) ->
     @parentElement.render()
-    for input in $(@el).find('input, textarea')
-      $(input).val(@model.get($(input).attr('id').split("material_")[1]))
+    if resetFields
+      @resetFields()
+    else
+      for input in $(@el).find('input, textarea')
+        $(input).val(@model.get($(input).attr('id').split("material_")[1]))
 
