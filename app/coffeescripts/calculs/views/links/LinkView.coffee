@@ -1,21 +1,22 @@
 ## Link View
 window.LinkView = Backbone.View.extend
-  tagName   : "tr"
   initialize: (params) ->
     @parentElement = params.parentElement
-  events: 
-    'click .add' : 'addLink'
 
-  addLink: ->
-    @parentElement.trigger 'linkAdded', @model
+  tagName   : "li"
+  className : "link_view"
+  events: 
+    "click button.edit"  : "show_details"
+    "click button.clone" : "clone"
+  
+  show_details: ->
+    @trigger 'update_details_model', @model
+
+  clone: ->
+    @parentElement.clone @model
     
   render: ->
-    template = """
-        <td>#{@model.get('name')}</td>
-        <td><button class='add'>Ajouter</button></td>
-            """
-    $(@el).html(template)
-    $("#links_table tbody").append(@el)
+    $(@el).html(@model.get('name'))
+    $(@el).append("<button class='edit'>Editer</button>")
+    $("ul#links").append(@el)
     return this
-
-
