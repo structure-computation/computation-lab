@@ -8,71 +8,38 @@
     %thead
       %tr.no_sorter
         %th
-        %th{:colspan => 2} Selon V1
-        %th{:colspan => 2} Selon V2 
-        %th{:colspan => 2} Selon V3
+        %th Selon V1
+        %th Selon V2 
+        %th Selon V3
     %tbody
       %tr
-        %th Limite de plasticité
-        %td.label_table
-          = label :material, :sigma_p_1, "Sp1 = "
-        %td
-          = text_field :material, :sigma_p_1, :disabled => disabled, :size => '10'
-        %td.label_table 
-          = label :material, :sigma_p_2, "Sp2 = "
-        %td
-          = text_field :material, :sigma_p_2, :disabled => disabled, :size => '10'
-        %td.label_table
-          = label :material, :sigma_p_2, "Sp3 = "
-        %td
-          = text_field :material, :sigma_p_3, :disabled => disabled, :size => '10'
+        %th Limite de plasticité (Sp)
+        %td= custom_text_field(:material, :sigma_p_1, "Sp1", disabled)
+        %td= custom_text_field(:material, :sigma_p_2, "Sp2", disabled)
+        %td= custom_text_field(:material, :sigma_p_3, "Sp3", disabled)
       %tr
-        %th Taux de plastification
-        %td.label_table
-          = label :material, :dp_1, "dp1 = "
+        %th Taux de plastification (dp)
         %td
-          = text_field :material, :dp_1, :value => "TODO", :disabled => disabled, :size => '10'
-        %td.label_table
-          = label :material, :dp_2, "dp2 = "
+          = text_field :material, :dp_1, :value => "TODO", :disabled => disabled, :size => '10', :type => "number", :placeholder => "dp1"
         %td
-          = text_field :material, :dp_2, :value => "TODO", :disabled => disabled, :size => '10'
-        %td.label_table
-          = label :material, :dp_3, "dp3 = "
+          = text_field :material, :dp_2, :value => "TODO", :disabled => disabled, :size => '10', :type => "number", :placeholder => "dp2"
         %td
-          = text_field :material, :dp_3, :value => "TODO", :disabled => disabled, :size => '10'
+          = text_field :material, :dp_3, :value => "TODO", :disabled => disabled, :size => '10', :type => "number", :placeholder => "dp3"
       %tr
-        %th Déformation plastique
-        %td.label_table
-          = label :material, :p_1, "p1 = "
-        %td
-          = text_field :material, :p_1, :disabled => disabled, :size => '10'
-        %td.label_table
-          = label :material, :p_2, "p1 = "
-        %td
-          = text_field :material, :p_2, :disabled => disabled, :size => '10'
-        %td.label_table
-          = label :material, :p_3, "p3 = "
-        %td
-          = text_field :material, :p_3, :disabled => disabled, :size => '10'
+        %th Déformation plastique (p)
+        %td= custom_text_field(:material, :p_1, "p1", disabled)
+        %td= custom_text_field(:material, :p_2, "p2", disabled)
+        %td= custom_text_field(:material, :p_3, "p3", disabled)
 
 - elsif @material.mtype == "isotrope"
   %table.grey
     %tbody
       %tr
-        %th Limite de plasticité
-        %td.label_table
-          = label :material, :sigma_p_1, "Sp1 = "
-        %td
-          = text_field :material, :sigma_p_1, :disabled => disabled, :size => '10'
+        %th Limite de plasticité (Sp)
+        %td= custom_text_field(:material, :sigma_p_1, "Sp1", disabled)
       %tr
-        %th Taux de plastification
-        %td.label_table
-          = label :material, :dp_1, "dp1 = "
-        %td
-          = text_field :material, :dp_1, :disabled => disabled, :size => '10'
+        %th Taux de plastification (dp)
+        %td= custom_text_field(:material, :dp_1, "Sp2", disabled)
       %tr
-        %th Déformation plastique
-        %td.label_table
-          = label :material, :p_1, "p1 = "
-        %td
-          = text_field :material, :p_1, :disabled => disabled, :size => '10'
+        %th Déformation plastique (p)
+        %td= custom_text_field(:material, :p_1, "Sp3", disabled)

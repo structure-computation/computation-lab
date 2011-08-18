@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-  helper :all
 #   protect_from_forgery
   def valid_admin_user
     admin_company = ScAdmin.find_by_company_id(current_user.company.id)

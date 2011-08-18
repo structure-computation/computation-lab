@@ -75,6 +75,11 @@ table.grey
       td.label_table     
         text-align       : right
         border-right     : none
+      td
+        input
+          width: auto
+          margin: 0.1em
+          display: block
       td.action_on_table
         background  : transparent url('/images/arrow_down.png') no-repeat 50% 50%
         width: 6em
@@ -153,3 +158,16 @@ table.grey
     +border-bottom-radius(0.3em)
     background: $background-color-cell
     border : 1px solid #B2B2B2
+
+@media all and (max-width: 768px)
+  table.grey
+    tbody
+      tr    
+        td
+          label
+            width: 98%
+            display: block
+            text-align : left
+          input
+            width: auto
+            display: block

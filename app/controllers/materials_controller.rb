@@ -1,4 +1,5 @@
 class MaterialsController < InheritedResources::Base
+  helper :all
   #session :cookie_only => false, :only => :upload
   before_filter :authenticate_user!
   before_filter :set_page_name
