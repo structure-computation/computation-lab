@@ -3,6 +3,7 @@ class CalculsController < ApplicationController
   require 'socket'
   include Socket::Constants
   before_filter :authenticate_user! , :except => :calcul_valid
+  layout 'calcul'
   
   def index
     # @page = 'SCcompute'

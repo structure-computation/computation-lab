@@ -1,0 +1,12 @@
+-content_for :content do
+  #visu_calcul
+    = yield :visu   
+  #content_calcul
+    #list_calcul
+      #left_list_calcul
+        = yield :left_list
+      #right_list_calcul
+        = yield :right_list     
+    #details_calcul
+      = yield :details_calcul
+=render :file => 'layouts/application'

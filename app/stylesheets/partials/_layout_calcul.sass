@@ -1,0 +1,32 @@
+#visu_calcul
+  +columns(12)
+  +alpha
+  min-height: 40em
+  background-color: blue
+  border: 1px solid black    
+#content_calcul
+  +columns(12)
+  +omega
+  min-height: 40em
+  #list_calcul
+    min-height: 20em
+    +full(12)
+    #left_list_calcul
+      +columns(6, 12)
+      +alpha
+      background-color: #F0F0F0
+      min-height: 20em
+    #right_list_calcul
+      +columns(6, 12)
+      +omega
+      background-color: #F0F0F0
+      min-height: 20em
+  #details_calcul
+    +full(12)
+    min-height: 20em
+    border: 1px solid black
+    
+    
+@media all and (max-width: 768px)
+  header
+    display: none
