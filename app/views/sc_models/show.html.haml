@@ -28,7 +28,7 @@
 
 -content_for :left_content do
 
-  %ul.tab_submenu
+  %ul.tab_submenu.js_tab_submenu
     %li 
       %a#tab_1.selected{:href => "#Outils"} Outils
     %li 
@@ -42,7 +42,7 @@
     = @sc_model.name
   .wrapper
     #left_content
-      %ul.tab_submenu
+      %ul.tab_submenu.js_tab_submenu
         %li 
           %a#tab_1.selected{:href => "#Outils"} Outils
         %li 
