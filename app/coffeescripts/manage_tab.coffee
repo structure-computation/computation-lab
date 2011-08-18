@@ -1,9 +1,9 @@
 # Selectionne le premier onglet du tableau
 selectFirst = ->
   $($('.js_tab_submenu a')[0]).addClass('selected')
-  $('.tab_content > div').addClass('hide')
-  $($('.tab_content > div')[0]).removeClass('hide')
-  $($('.tab_content > div')[0]).addClass('show')
+  $('.js_tab_content > div').addClass('hide')
+  $($('.js_tab_content > div')[0]).removeClass('hide')
+  $($('.js_tab_content > div')[0]).addClass('show')
 
 select_tab = ->
   # Ancre de l'url sans le "#"
@@ -18,8 +18,8 @@ select_tab = ->
         badHash = false
     # Cache les sections si l'ancre de l'URL est correcte
     if !badHash
-      $('.tab_content > div').addClass('hide')
-      $('.tab_content > div').removeClass('show')
+      $('.js_tab_content > div').addClass('hide')
+      $('.js_tab_content > div').removeClass('show')
       $('ul.js_tab_submenu a').removeClass('selected')
       for tab in $('.js_tab_submenu a')
         if $(tab).text() == currentAnchor
@@ -37,8 +37,8 @@ nav_links.each( () ->
   $(this).click( () ->
     nav_links.removeClass('selected')
     $(this).addClass('selected')
-    $('.tab_content .show').addClass('hide')
-    $('.tab_content .show').removeClass('show')
+    $('.js_tab_content .show').addClass('hide')
+    $('.js_tab_content .show').removeClass('show')
     $('#'+$(this).attr('id') + '_content').addClass('show')
   )
 
