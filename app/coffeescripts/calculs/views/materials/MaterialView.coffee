@@ -2,30 +2,20 @@
 window.MaterialView = Backbone.View.extend
   initialize: (params) ->
     @parentElement = params.parentElement
- 
-  tagName   : "tr"
- 
-  events:
-    "click .add": "add_selected_material"
   
-  add_selected_material: ->
-    @parentElement.trigger 'material_added', @model
-    @parentElement.render()
+  tagName   : "li"
+  className : "material_view" 
+  
+  
+  events:
+    "click" : "show_details"
+  
+  show_details: ->
+    @trigger 'update_details_model', @model
   
   render: ->
-    htmlString = """
-              <td class="name">
-                #{@model.get("name")}
-              </td>
-              <td class="family">
-                #{@model.get("family")}
-              </td>
-              <td>
-                <button class="add">+</button>
-              </td>
-          """
-    $(@el).html(htmlString)
-    $("#materials_table tbody").append(@el)
+    $(@el).html(@model.get('name'))
+    $("ul#materials").append(@el)
     return this
 
 

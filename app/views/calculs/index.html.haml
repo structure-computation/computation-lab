@@ -64,9 +64,9 @@
 - content_for :coffee do 
   :coffeescript
     $ ->
-      LinkCollection = new Links {company_id: #{current_user.company_id}}
-      LinkCollection.reset #{@links.to_json.html_safe}
-      LinkViews = new LinkListView {collection: LinkCollection.models}
+      window.LinkCollection = new Links {company_id: #{current_user.company_id}}
+      window.LinkCollection.reset #{@links.to_json.html_safe}
+      window.LinkViews = new LinkListView {collection: LinkCollection.models}
       window.MaterialCollection = new Materials {company_id: #{current_user.company_id}}
-      MaterialCollection.reset #{@materials.to_json.html_safe}
-      MaterialViews = new MaterialListView {collection: MaterialCollection}
+      window.MaterialCollection.reset #{@materials.to_json.html_safe}
+      window.MaterialViews = new MaterialListView {collection: MaterialCollection}

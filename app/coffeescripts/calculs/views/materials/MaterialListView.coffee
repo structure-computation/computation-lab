@@ -25,20 +25,20 @@ window.MaterialListView = Backbone.View.extend
   el: 'ul#materials'
 
   initialize: (options) ->
-    @render()
     @editView = new EditMaterialView parentElement: this
-  render : ->
-    $(@el).html('')
+    @materialViews = []
     for material in @collection.models
-      $(@el).append("<li data-id='#{material.get('id')}'>#{material.get('name')}</li>")
+      m = new MaterialView model: material
+      m.bind 'update_details_model', @update_details, this
+      @materialViews.push m
+    @render()
+    
+  update_details: (model) ->
+    @editView.updateModel model   
+
+  render : ->
+    for m in @materialViews
+      m.render()
     return this
 
-  events: 
-    "click li" : "showDetails"
-
-  showDetails: (event) ->
-    materialId = parseInt($(event.srcElement).attr("data-id"))
-    for material in @collection.models
-      if material.get('id') == materialId
-        @editView.updateModel material
-        break
+ 

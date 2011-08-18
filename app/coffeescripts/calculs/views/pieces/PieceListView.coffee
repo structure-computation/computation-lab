@@ -4,7 +4,7 @@ window.PieceListView = Backbone.View.extend
   
   # You have to pass a PieceCollection at initialisation as follow:
   # new PieceListView({ collection : myPieceCollection })
-  initialize: (options) ->
+  initialize : (options) ->
     @render()
     
   render : ->
