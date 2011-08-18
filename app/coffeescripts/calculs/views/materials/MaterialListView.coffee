@@ -28,10 +28,13 @@ window.MaterialListView = Backbone.View.extend
     @editView = new EditMaterialView parentElement: this
     @materialViews = []
     for material in @collection.models
-      m = new MaterialView model: material
-      m.bind 'update_details_model', @update_details, this
-      @materialViews.push m
+      @createMaterialView(material)
     @render()
+
+  createMaterialView: (material) ->
+    m = new MaterialView model: material, parentElement: this
+    m.bind 'update_details_model', @update_details, this
+    @materialViews.push m
     
   update_details: (model) ->
     @editView.updateModel model   

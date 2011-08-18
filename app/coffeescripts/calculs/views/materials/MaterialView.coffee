@@ -7,15 +7,18 @@ window.MaterialView = Backbone.View.extend
   className : "material_view"   
   
   events:
-    "click" : "show_details"
-    "click button.clone" : "show_details"
+    "click button.edit"  : "show_details"
+    "click button.clone" : "clone"
   
   show_details: ->
     @trigger 'update_details_model', @model
-  
+
+  clone: ->
+    @parentElement.clone @model
+    
   render: ->
     $(@el).html(@model.get('name'))
-    $(@el).append("<button class='clone'>Clone</button>")
+    $(@el).append("<button class='edit'>Editer</button>")
     $("ul#materials").append(@el)
     return this
 

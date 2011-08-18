@@ -1,5 +1,6 @@
 class MaterialsController < InheritedResources::Base
   helper :all
+  helper_method :retrieve_column_fields
   #session :cookie_only => false, :only => :upload
   before_filter :authenticate_user!
   before_filter :set_page_name
@@ -22,7 +23,17 @@ class MaterialsController < InheritedResources::Base
   end
   
   def create
+    if params[:material].nil?
+      @material = Material.create retrieve_column_fields(params)
+    end
     create! { company_materials_path }
+  end
+  def update
+    if params[:material].nil?
+      @material = Material.find(params[:id])
+      @material.update_attributes! retrieve_column_fields(params)
+    end
+    update! { company_materials_path }
   end
   
   def edit
@@ -64,5 +75,13 @@ class MaterialsController < InheritedResources::Base
     end
     new!
   end
-  
+
+  private
+    def retrieve_column_fields(params)
+      to_update = {}
+      Material.column_names.each do |column_name|
+        to_update[column_name] = params[column_name]
+      end
+       to_update
+    end
 end

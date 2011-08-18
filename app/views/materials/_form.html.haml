@@ -16,24 +16,7 @@
   = f.hidden_field :comp
   = f.hidden_field :mtype
 
-  %table.grey
-    %tbody
-      %tr
-        %th
-          = label_tag("Nom")
-        %td
-          = text_field(:material, :name)
-      %tr
-        %th
-          = label_tag("Famille")
-        %td
-          = text_field(:material, :family)  
-      %tr
-        %th
-          = label_tag("Description")
-        %td
-          = text_field(:material, :description)  
-
+  = render "materials/details/material_basic_information"
   #material_information
     = render :partial => "materials/details/material_main_information", :locals => { :material => @material, :disabled => false }
 

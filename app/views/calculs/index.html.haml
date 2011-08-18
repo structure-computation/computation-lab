@@ -62,6 +62,7 @@
 
     .horizontal_tab_content.js_tab_content
       #tab_1_content
+        = render "materials/details/material_basic_information"
         = render :partial => "materials/details/material_main_information", :locals => { :show_all => true }
         = render :partial => "materials/details/material_generic_info", :locals => { :show_all => true }
 

@@ -18,13 +18,11 @@
         %td= custom_text_field(:material, :sigma_p_2, "Sp2", disabled)
         %td= custom_text_field(:material, :sigma_p_3, "Sp3", disabled)
       %tr
+        / TODO Les valeurs sont fausses dp_i n'existe pas en BDD
         %th Taux de plastification (dp)
-        %td
-          = text_field :material, :dp_1, :value => "TODO", :disabled => disabled, :size => '10', :type => "number", :placeholder => "dp1"
-        %td
-          = text_field :material, :dp_2, :value => "TODO", :disabled => disabled, :size => '10', :type => "number", :placeholder => "dp2"
-        %td
-          = text_field :material, :dp_3, :value => "TODO", :disabled => disabled, :size => '10', :type => "number", :placeholder => "dp3"
+        %td= custom_text_field :material, :p_1, "dp1", disabled
+        %td= custom_text_field :material, :p_2, "dp2", disabled
+        %td= custom_text_field :material, :p_3, "dp3", disabled
       %tr
         %th Déformation plastique (p)
         %td= custom_text_field(:material, :p_1, "p1", disabled)
@@ -39,7 +37,7 @@
         %td= custom_text_field(:material, :sigma_p_1, "Sp1", disabled)
       %tr
         %th Taux de plastification (dp)
-        %td= custom_text_field(:material, :dp_1, "Sp2", disabled)
+        %td= custom_text_field(:material, :p_1, "Sp2", disabled)
       %tr
         %th Déformation plastique (p)
         %td= custom_text_field(:material, :p_1, "Sp3", disabled)

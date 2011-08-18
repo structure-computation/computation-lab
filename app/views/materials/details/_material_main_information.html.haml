@@ -4,14 +4,6 @@
 - if @material.mtype == "orthotrope" or show_all
   %h3 Directions principales
   %table.grey
-    %tbody
-      %tr 
-        %th.label_table
-          = label :material, :name, "Nom"
-        %td
-          = text_field :material, :name, :disabled => disabled, :size => '30'
-
-  %table.grey
     %thead
       %tr.no_sorter
         %th
