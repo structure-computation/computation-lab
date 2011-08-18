@@ -1,18 +1,9 @@
-:coffeescript
-  $ ->
-    LinkCollection = new Links {company_id: #{current_user.company_id}}
-    LinkCollection.reset #{@links.to_json.html_safe}
-    LinkViews = new LinkListView {collection: LinkCollection.models}
-    MaterialCollection = new Materials {company_id: #{current_user.company_id}}
-    MaterialCollection.reset #{@materials.to_json.html_safe}
-    MaterialViews = new MaterialListView {collection: MaterialCollection}
-
-
-%h2 Liste des pièces
-%ul#pieces
-
-%h2 Liste des Matériaux
-%ul#materials
+- content_for :left_list do 
+  %h2 Liste des pièces
+  %ul#pieces
+- content_for :right_list do 
+  %h2 Liste des Matériaux
+  %ul#materials
 
 
 / %h2 Initialisation du calcul
@@ -56,16 +47,26 @@
 / 
 / = render 'calculs/partials/materials'
 / 
-#edit_material
-  = render :partial => "materials/details/material_main_information", :locals => { :show_all => true }
-  = render :partial => "materials/details/material_generic_info", :locals => { :show_all => true }
+- content_for :details_calcul do 
+  #edit_material
+    = render :partial => "materials/details/material_main_information", :locals => { :show_all => true }
+    = render :partial => "materials/details/material_generic_info", :locals => { :show_all => true }
 
-  #tab_2_content
-    = render :partial => "materials/details/material_elastic_information", :locals => { :show_all => true }
-  #tab_3_content
-    = render :partial => "materials/details/material_plastic_information", :locals => { :show_all => true }
-  #tab_4_content
-    = render :partial => "materials/details/material_damageable_information", :locals => { :show_all => true }
-  #tab_5_content
-    = render :partial => "materials/details/material_viscous_information", :locals => { :show_all => true }
+    #tab_2_content
+      = render :partial => "materials/details/material_elastic_information", :locals => { :show_all => true }
+    #tab_3_content
+      = render :partial => "materials/details/material_plastic_information", :locals => { :show_all => true }
+    #tab_4_content
+      = render :partial => "materials/details/material_damageable_information", :locals => { :show_all => true }
+    #tab_5_content
+      = render :partial => "materials/details/material_viscous_information", :locals => { :show_all => true }
 
+- content_for :coffee do 
+  :coffeescript
+    $ ->
+      LinkCollection = new Links {company_id: #{current_user.company_id}}
+      LinkCollection.reset #{@links.to_json.html_safe}
+      LinkViews = new LinkListView {collection: LinkCollection.models}
+      window.MaterialCollection = new Materials {company_id: #{current_user.company_id}}
+      MaterialCollection.reset #{@materials.to_json.html_safe}
+      MaterialViews = new MaterialListView {collection: MaterialCollection}
