@@ -17,10 +17,10 @@ window.StepView = Backbone.View.extend
                 <input type='text' value='#{@model.get("initial_time")}' disabled> 
               </td> 
               <td class="time_step"> 
-                <input type='text' value='#{@model.get("time_step")}'> 
+                <input type='number' value='#{@model.get("time_step")}'> 
               </td> 
               <td class="nb_time_steps">
-                <input type='text' value='#{@model.get("nb_time_steps")}'> 
+                <input type='number' value='#{@model.get("nb_time_steps")}'> 
               </td> 
               <td class="final_time">
                 <input type='text' value='#{@model.get("final_time")}' disabled> 

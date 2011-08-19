@@ -2,31 +2,32 @@
   -content_for :content do
     #breadcrumb
       = yield :breadcrumb
-    #visu_calcul
-      = yield :visu
-      = yield :details_calcul   
     #content_calcul
       #list_calcul
         #left_list_calcul
           = yield :left_list
         #right_list_calcul
           = yield :right_list
+    #visu_calcul
+      = yield :visu
+      = yield :details_calcul   
     = yield :coffee
   
 - else
   -content_for :content do
     #breadcrumb
       = yield :breadcrumb
-    #visu_calcul
-      = yield :visu   
-    #content_calcul
+    #content_calcul.js_tab_content.breadcrumb_tab_content
       #list_calcul
+        = yield :top_calcul
         #left_list_calcul
           = yield :left_list
         #right_list_calcul
           = yield :right_list     
       #details_calcul
         = yield :details_calcul
+    #visu_calcul
+      = yield :visu   
     = yield :coffee
     
 =render :file => 'layouts/application'
