@@ -104,3 +104,47 @@ div.horizontal_tab_content
     #left_content  
       min-height: 20em
     #right_content
+
+#breadcrumb
+  ul.horizontal_tab_submenu
+    list-style: none
+    margin: 0
+    padding-left: 0
+    width: 100%
+    background-color: $color-tab-start
+    border: 1px solid rgba(0,0,0,0.5)
+    li
+      font-size: 0.9em
+      display: inline-block
+      width: 20%
+      margin: 0
+      a
+        width: 98.5%
+        text-decoration: none
+        line-height: 2em
+        display: inline-block
+        background-color: $color-tab-start
+        margin: 0
+        +border-top-radius(0)
+        +border-right-radius(1em)
+        +single-box-shadow(rgba(0,0,0,0.4), 0.2em, 0px, 0px)
+        color: $color-font-header
+        text-align: center
+        border-bottom: none
+
+    li:last-child
+      a
+        +border-right-radius(0)
+        +single-box-shadow(#000, 0px, 0px, 0px)
+        width: 100%
+    li.tab_before
+      +background-image(linear-gradient($color-tab-selected-start, $color-tab-selected-end))
+      a
+        +single-box-shadow(rgba(0,0,0,0.6), 0.2em, 0px, 0px)   
+    li
+      a.selected
+        +background-image(linear-gradient($color-tab-selected-start, $color-tab-selected-end))
+        color       : $color-font-selected-tab
+        border-bottom: none      
+        font-weight : bold
+        text-align: center

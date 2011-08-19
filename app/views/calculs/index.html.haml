@@ -5,6 +5,19 @@
 - content_for :right_list do 
   %h2.grey Liste des Matériaux
   %ul#materials
+  
+- content_for :breadcrumb do   
+  %ul.horizontal_tab_submenu.js_tab_submenu
+    %li
+      %a#tab_1{:href => "#Génériques"} Génériques
+    %li
+      %a#tab_2{:href => "#Elasticité"} Elasticité
+    %li
+      %a#tab_3{:href => "#Plasticité"} Plasticité
+    %li
+      %a#tab_4{:href => "#Endommagement"} Endommagement
+    %li
+      %a#tab_5{:href => "#Viscosité"} Viscosité
 / %h2 Initialisation du calcul
 / 
 / #steps

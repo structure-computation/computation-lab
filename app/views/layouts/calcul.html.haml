@@ -1,5 +1,7 @@
 - if is_mobile?
   -content_for :content do
+    #breadcrumb
+      = yield :breadcrumb
     #visu_calcul
       = yield :visu
       = yield :details_calcul   
@@ -10,10 +12,11 @@
         #right_list_calcul
           = yield :right_list
     = yield :coffee
-  =render :file => 'layouts/application'
   
 - else
   -content_for :content do
+    #breadcrumb
+      = yield :breadcrumb
     #visu_calcul
       = yield :visu   
     #content_calcul
@@ -25,4 +28,5 @@
       #details_calcul
         = yield :details_calcul
     = yield :coffee
-  =render :file => 'layouts/application'
+    
+=render :file => 'layouts/application'
