@@ -19,9 +19,9 @@ window.Step = Backbone.Model.extend
 window.StepCollection = Backbone.Collection.extend
   model: Step
   initialize: -> 
-    @bind('add', (step) ->
+    @bind 'add', (step) ->
       @updateModels()
-    )
+      
   updateModels: ->
     for step, i in @models
       step.set({ name: "step_" + i})

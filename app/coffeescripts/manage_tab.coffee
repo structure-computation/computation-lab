@@ -1,9 +1,14 @@
 # Selectionne le premier onglet du tableau
-selectFirst = (sub_menu)->
+selectFirst = (sub_menu, i = 0)->
   $(sub_menu).find('> li > a').removeClass('selected')
   $($(sub_menu).find('> li > a')[0]).addClass('selected')
-  $(sub_menu).find(' > div').addClass('hide')
-  $($(sub_menu).find(' > div')[0]).removeClass('hide').addClass('show')
+  tab_content = $($(".js_tab_content")[i])
+  for tab, j in sub_menu.find('> li > a')
+    tab_content.find('.'+$(tab).attr('id') + '_content
+                    , #'+$(tab).attr('id') + '_content').removeClass('show').addClass('hide')
+  
+  tab_content.find('.'+$(sub_menu.find('> li > a')[0]).attr('id') + '_content
+                  , #'+$(sub_menu.find('> li > a')[0]).attr('id') + '_content').removeClass('hide').addClass('show')
 
 # Selectionne le bon onglet en fonction de l'ancre présente dans l'URL
 select_tab = ->
@@ -36,9 +41,9 @@ select_tab = ->
           else
             tab_content.find('.'+$(tab).attr('id') + '_content, #'+$(tab).attr('id') + '_content').removeClass('show').addClass('hide')
       else
-        selectFirst(sub_menu)
+        selectFirst(sub_menu, i)
     else
-      selectFirst(sub_menu)
+      selectFirst(sub_menu, i)
 
 
 # Ajout d'évènement sur les onglets du menu pour les faires aparaître comme il se doit

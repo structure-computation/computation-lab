@@ -39,6 +39,8 @@ window.StepListView = Backbone.View.extend
   ## -- Events
   events:
     'keyup'                   : 'updateFieldsKeyUp'
+    'change'                  : 'updateFieldsKeyUp'
+    'click'                   : 'updateFieldsKeyUp'
     'click button#add_step'   : 'addStep'
     'change select#step_type' : 'selectChanged'
 
