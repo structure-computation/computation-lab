@@ -50,10 +50,8 @@ window.advancedSearchFilter = (tableId, inputFieldIds, colClasses) ->
   if tableId[0] != '#'
     tableId = '#'.concat(tableId)    
   for i in [0...inputFieldIds.length]
-    if inputFieldIds[i][0] != '#'
-      inputFieldIds[i] = '#'.concat(inputFieldIds[i])
-    if colClasses[i][0] != '.'
-      colClasses[i] = '.'.concat(colClasses[i])
+    inputFieldIds[i] = '#'.concat(inputFieldIds[i]) if inputFieldIds[i][0] != '#'
+    colClasses[i] = '.'.concat(colClasses[i])       if colClasses[i][0] != '.'
 
   for inputFieldId in inputFieldIds
     $(inputFieldId).keyup( ->
