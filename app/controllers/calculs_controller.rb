@@ -17,6 +17,7 @@ class CalculsController < ApplicationController
     @materials  = Material.find_all_by_company_id(current_user.company_id)
     @material   = Material.new
     @link       = Link.new
+    @calculs    = CalculResult.find_all_by_user_id(current_user)
   end
   
   def info_model

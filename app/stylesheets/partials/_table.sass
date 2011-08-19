@@ -140,11 +140,19 @@ table.grey
   #more_details
     display: inline-block
     vertical-align: middle
+  #advanced_search.maximize
+    +transition(0.5s)
+    max-height: 9em
+    border-color: #B2B2B2
   #advanced_search
     width: 100%
-    border-top: 1px solid #B2B2B2
     background-color: #F0F0F0
     +border-bottom-radius(0.2em)
+    +transition(0.5s)
+    border-top: 1px solid #B2B2B2
+    border-color: #D0D1D7
+    overflow: hidden
+    max-height: 0px
     p
       text-align: left
       display: inline-block
@@ -152,7 +160,6 @@ table.grey
         display: block
       label:after
         content: " :"
-
 #right_top
   .search_filter
     +border-bottom-radius(0.3em)

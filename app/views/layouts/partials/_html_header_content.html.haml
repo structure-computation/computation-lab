@@ -22,8 +22,8 @@
 
 / Liens vers les CSS Compass
 = stylesheet_link_tag 'screen.css', :media => 'screen, projection'
-- if is_mobile?
-  = stylesheet_link_tag 'mobile.css', :media => 'screen, projection'
+
+= stylesheet_link_tag 'mobile.css', :media => 'screen, projection'
 = stylesheet_link_tag 'print.css',  :media => 'print'
 /[if IE]
   = stylesheet_link_tag 'ie.css', :media => 'screen, projection'
@@ -59,11 +59,15 @@
 = coffeescript_include_tag "calculs/models/MaterialModel"
 = coffeescript_include_tag "calculs/models/PieceModel"
 = coffeescript_include_tag "calculs/models/StepModel"
+= coffeescript_include_tag "calculs/models/CalculModel"
 / Views
 = coffeescript_include_tag "calculs/views/steps/StepListView"
 = coffeescript_include_tag "calculs/views/steps/StepView"
 
 = coffeescript_include_tag "calculs/views/pieces/PieceListView"
+
+= coffeescript_include_tag "calculs/views/calculs/CalculView"
+= coffeescript_include_tag "calculs/views/calculs/CalculListView"
 
 = coffeescript_include_tag "calculs/views/links/EditLinkView"
 = coffeescript_include_tag "calculs/views/links/LinkListView"

@@ -35,15 +35,11 @@
   $( ->
     $('#links_table').tablesorter()
 
-    $("#advanced_search").toggle()  
     $('#more_details').click( () ->
-      $("#advanced_search").slideToggle()
-      if $(this).hasClass('open')
-        $(this).removeClass('open')
-        $(this).addClass('close')
+      if $('#advanced_search').hasClass('maximize')
+        $('#advanced_search').removeClass('maximize')
       else
-        $(this).removeClass('close')
-        $(this).addClass('open')
+        $('#advanced_search').addClass('maximize')
     )
 
     advancedSearchFilter("links_table",
