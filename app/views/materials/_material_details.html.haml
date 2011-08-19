@@ -1,0 +1,19 @@
+%div.js_tab_content.tab_content'
+  #tab_1_content
+    = render :partial => "materials/details/material_main_information", :locals => { :disabled => true }
+    = render :partial => "materials/details/material_generic_info", :locals => { :disabled => true }
+      
+  - if @material.comp.include? "el"
+    #tab_2_content
+      = render :partial => "materials/details/material_elastic_information", :locals => { :disabled => true }
+  - if @material.comp.include? "pl"
+    #tab_3_content
+      = render :partial => "materials/details/material_plastic_information", :locals => { :disabled => true }
+  - if @material.comp.include? "en"
+    #tab_4_content
+      = render :partial => "materials/details/material_damageable_information", :locals => { :disabled => true }
+  - if @material.comp.include? "vi"
+    #tab_5_content
+      = render :partial => "materials/details/material_viscous_information", :locals => { :disabled => true }
+
+= coffeescript_include_tag "manage_tab"
