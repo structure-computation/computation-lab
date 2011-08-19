@@ -23,7 +23,7 @@ select_tab = ->
       # Cache les sections si l'ancre de l'URL est correcte
       if !badHash
         tab_content = $($(".js_tab_content")[i])
-        tab_content.find(' > div').addClass('hide').removeClass('show')
+        
         sub_menu.find('> li > a').removeClass('selected')
         sub_menu.find('> li').removeClass('tab_before') # Suppression de tous les tab_before
         
@@ -32,7 +32,9 @@ select_tab = ->
             if j > 0
               $(sub_menu.find('> li')[j - 1]).addClass('tab_before')
             $(tab).addClass('selected')
-            tab_content.find('#'+$(tab).attr('id') + '_content').addClass('show')
+            tab_content.find('.'+$(tab).attr('id') + '_content, #'+$(tab).attr('id') + '_content').removeClass('hide').addClass('show')
+          else
+            tab_content.find('.'+$(tab).attr('id') + '_content, #'+$(tab).attr('id') + '_content').removeClass('show').addClass('hide')
       else
         selectFirst(sub_menu)
     else
