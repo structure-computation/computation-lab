@@ -31,22 +31,23 @@
       %input#comp_search_filter{:type => "text"}
 
 :coffeescript
-  $( ->
+  $ ->
     $('#materials_table').tablesorter()
 
     $("#advanced_search").toggle()  
-    $('#more_details').click( () ->
-      $("#advanced_search").slideToggle()
+    $('#more_details').click ->
+      if navigator.userAgent.match(/iPhone/i) or navigator.userAgent.match(/iPad/i)
+        $("#advanced_search").toggle()
+      else
+        $("#advanced_search").slideToggle()
       if $(this).hasClass('open')
         $(this).removeClass('open')
         $(this).addClass('close')
       else
         $(this).removeClass('close')
         $(this).addClass('open')
-    )
 
     advancedSearchFilter("materials_table",
                          ["name_search_filter", "id_search_filter", "reference_search_filter", "family_search_filter","type_search_filter","comp_search_filter"],
                          ["name"              , "id"              , "reference"              , "family"              ,"type"              ,"comp"])
     searchFilter("materials_table", "search_filter")
-  )
