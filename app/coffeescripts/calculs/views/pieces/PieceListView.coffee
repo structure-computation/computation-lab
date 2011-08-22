@@ -19,8 +19,8 @@ window.PieceListView = Backbone.View.extend
   selectPiece: (pieceView) ->
     @selectedPieceView = pieceView
     _.each @pieceViews, (pieceView) ->
-      $(pieceView.el).css('color', 'gray')
-    $(pieceView.el).css('color', 'green')
+      $(pieceView.el).addClass('gray').removeClass('selected')
+    $(pieceView.el).addClass('selected').removeClass('gray')
     if pieceView.model.get('material_id') == 0
       window.MaterialViews.showAssignButtons()
     else
@@ -32,7 +32,7 @@ window.PieceListView = Backbone.View.extend
   # that the selected material.
   materialHasBeenSelected: (material) ->
     _.each @pieceViews, (pieceView) ->
-      $(pieceView.el).css('color', 'gray')
+      $(pieceView.el).addClass('gray').removeClass('selected')
       pieceView.materialHasBeenSelected material
   
   # Assign the pieceModel to the selected Material.

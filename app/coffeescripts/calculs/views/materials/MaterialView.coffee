@@ -11,7 +11,7 @@ window.MaterialView = Backbone.View.extend
     "click button.clone"    : "clone"
     "click button.assign"   : "assign"
     "click button.unassign" : "unassign"
-    "click span"            : "select"
+    "click"                 : "select"
   
   show_details: ->
     @trigger 'update_details_model', @model
@@ -19,9 +19,10 @@ window.MaterialView = Backbone.View.extend
   # Tell the parent that a material have been selected.
   # The row will be highlighted and pieces wich contains 
   # this material will be also highlighted.
-  select: ->
-    @parentElement.selectMaterial @
-    @parentElement.render()
+  select: (event) ->
+    if event.srcElement == @el
+      @parentElement.selectMaterial @
+      @parentElement.render()
 
   # Clone the model of the clicked material view
   clone: ->
@@ -31,7 +32,7 @@ window.MaterialView = Backbone.View.extend
   showUnassignButton: ->
     @parentElement.render()
     @renderWithButton 'unassign', 'Désassigner'
-    $(@el).css('color', 'green')
+    $(el).addClass('selected').removeClass('gray')
   # Unassign the material from the selected Piece
   unassign: ->
     @parentElement.unassignMaterial @model
@@ -44,12 +45,12 @@ window.MaterialView = Backbone.View.extend
   assign: ->
     @parentElement.assignMaterialToSelectedPiece @model
     @parentElement.render()
-    $(@el).css('color', 'green')
+    $(el).addClass('selected').removeClass('gray')
     @showUnassignButton()
     
   # Render the list view with an extra button for assigning or unassigning material.
   renderWithButton: (className, textButton) ->
-    $(@el).html('<span>' + @model.get('name') + '</span>')
+    $(@el).html(@model.get('name'))
     $(@el).append("<button class='#{className}'>#{textButton}</button>")
     $(@parentElement.el).append(@el)
     return this

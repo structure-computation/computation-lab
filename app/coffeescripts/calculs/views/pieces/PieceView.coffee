@@ -7,8 +7,8 @@ window.PieceView = Backbone.View.extend
   className : "piece_view"   
 
   events: 
-    'click span'            : 'select'
-    'click button.assign'   : 'assign'
+    'click'               : 'select'
+    'click button.assign' : 'assign'
 
   # Assign the piece to a material
   assign: ->
@@ -17,9 +17,10 @@ window.PieceView = Backbone.View.extend
   
   # Highlight the selected piece and tell the material list to 
   # show the material of this piece. If it has no material, a material can be assigned to it.
-  select: ->
-    @parentElement.render()
-    @parentElement.selectPiece @
+  select: (event) ->
+    if event.srcElement == @el
+      @parentElement.render()
+      @parentElement.selectPiece @
 
   # Tells the view that a material has been selected.
   # If the piece has no material, it can be assigned to it.
@@ -30,25 +31,25 @@ window.PieceView = Backbone.View.extend
       @addUnassignButton()
     else if @model.get('material_id') == 0
       @renderWithButton 'assign', 'Assigner'
-      $(@el).css('color', 'black')
+      $(@el).removeClass('selected').removeClass('gray')
     else
       @render()
 
   # Add a button for unassigning the piece from the selected material.
   addUnassignButton: ->
     @renderWithButton 'unassign', 'Désassigner'
-    $(@el).css('color', 'green')
+    $(@el).addClass('selected')
   # Render with an action button
   renderWithButton: (className, textButton)->
-    $(@el).html('<span>' + @model.get('name') + '</span>')
+    $(@el).html(@model.get('name'))
     $(@el).append("<button class='#{className}'>#{textButton}</button>")
     $(@parentElement.el).append(@el)
     return this
 
   render: ->
-    $(@el).html('<span>' + @model.get('name') + '</span>')
+    $(@el).html(@model.get('name'))
     $(@parentElement.el).append(@el)
-    $(@el).css('color', 'black')
+    $(@el).removeClass('selected').removeClass('gray')
     return this
 
 

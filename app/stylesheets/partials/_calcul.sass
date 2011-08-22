@@ -1,4 +1,4 @@
-ul#calculs
+ul#calculs, ul#pieces, ul#materials
   border: 1px solid #B2B2B2
   list-style-type: none
   padding-left: 0
@@ -14,7 +14,10 @@ ul#calculs
     font-weight: bold
   li:hover
     background-color: #BBF
-    
+  li.selected
+    color: green
+  li.gray
+    color: gray
 #initialisation_button
   padding: 1em
   button
