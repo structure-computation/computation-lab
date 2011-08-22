@@ -1,8 +1,8 @@
 # Material View
 window.MaterialView = Backbone.View.extend
   initialize: (params) ->
-    @parentElement = params.parentElement
-  
+    @parentElement  = params.parentElement
+    @firstRendering = true
   tagName   : "li"
   className : "material_view"   
   
@@ -32,7 +32,7 @@ window.MaterialView = Backbone.View.extend
   showUnassignButton: ->
     @parentElement.render()
     @renderWithButton 'unassign', 'Désassigner'
-    $(el).addClass('selected').removeClass('gray')
+    $(@el).addClass('selected').removeClass('gray')
   # Unassign the material from the selected Piece
   unassign: ->
     @parentElement.unassignMaterial @model
@@ -45,14 +45,16 @@ window.MaterialView = Backbone.View.extend
   assign: ->
     @parentElement.assignMaterialToSelectedPiece @model
     @parentElement.render()
-    $(el).addClass('selected').removeClass('gray')
+    $(@el).addClass('selected').removeClass('gray')
     @showUnassignButton()
     
   # Render the list view with an extra button for assigning or unassigning material.
   renderWithButton: (className, textButton) ->
     $(@el).html(@model.get('name'))
     $(@el).append("<button class='#{className}'>#{textButton}</button>")
-    $(@parentElement.el).append(@el)
+    if @firstRendering
+      $(@parentElement.el).append(@el)
+      @firstRendering = false
     return this
     
   render: ->

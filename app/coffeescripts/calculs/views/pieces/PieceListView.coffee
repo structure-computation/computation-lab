@@ -9,7 +9,7 @@ window.PieceListView = Backbone.View.extend
     for piece in @collection.models
       @pieceViews.push new PieceView model: piece, parentElement: this
     @selectedPieceView = null
-    @render()
+    @render(true)
         
   # Is executed when user click on a piece.
   # Highlight the selected piece and put others in gray.
@@ -47,7 +47,7 @@ window.PieceListView = Backbone.View.extend
   unassignMaterialToSelectedPiece: ->
     @selectedPieceView.model.set material_id: 0
     
-  render : ->
-    for piece in @pieceViews
+  render : (firstRendering = false)->
+    _.each @pieceViews, (piece) ->
       piece.render()
     return this

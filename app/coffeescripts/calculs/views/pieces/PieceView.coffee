@@ -2,7 +2,8 @@
 window.PieceView = Backbone.View.extend
   initialize: (params) ->
     @parentElement = params.parentElement
-  
+    @firstRendering = true
+    
   tagName   : "li"
   className : "piece_view"   
 
@@ -43,13 +44,13 @@ window.PieceView = Backbone.View.extend
   renderWithButton: (className, textButton)->
     $(@el).html(@model.get('name'))
     $(@el).append("<button class='#{className}'>#{textButton}</button>")
-    $(@parentElement.el).append(@el)
     return this
 
   render: ->
+    if @firstRendering
+      $(@parentElement.el).append(@el)
+      @firstRendering = false
     $(@el).html(@model.get('name'))
-    $(@parentElement.el).append(@el)
     $(@el).removeClass('selected').removeClass('gray')
     return this
-
 
