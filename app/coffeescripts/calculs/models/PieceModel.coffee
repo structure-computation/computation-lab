@@ -6,11 +6,16 @@ window.Piece = Backbone.Model.extend
     @assigned       = piece.assigned
     @id             = piece.id
     @identificateur = piece.identificateur
-    @material_id    = piece.material_id || 0
+    @set material_id: piece.material_id || 0
     @bind 'set_material',  @set_material, this
 
-  set_material: (material_id) ->
-    @material_id = material_id
+  # Object or Id can be passed in parameter
+  setMaterial: (material) ->
+    if _.isNumber(material)
+      @material_id = material
+    else
+      @material_id = material.get('id')
+    @set material_id: @material_id
 
 window.PieceCollection = Backbone.Collection.extend
   model: Piece

@@ -1,25 +1,3 @@
-## Old Material List View - Appears in a table
-# ## MaterialListView
-# window.MaterialListView = Backbone.View.extend
-#   el: '#materials_table'
-# 
-#   initialize: (options) ->
-#     @bind 'material_added', @add_selected_material, this
-#     @materialViews = []
-#     @localMaterialList = new SelectedMaterialListView
-#     window.localMaterialList = @localMaterialList
-#     for material in @collection
-#       @materialViews.push new MaterialView model: material, parentElement: this
-#     @render()
-# 
-#   render : ->
-#     for materialView in @materialViews
-#       materialView.render()
-#       
-#   add_selected_material: (material) ->
-#     @localMaterialList.add_material material
-
-
 ## MaterialListView
 window.MaterialListView = Backbone.View.extend
   el: 'ul#materials'
@@ -29,7 +7,9 @@ window.MaterialListView = Backbone.View.extend
     @materialViews = []
     for material in @collection.models
       @createMaterialView(material)
+    @selectedMaterial = null
     @render()
+    
 
   createMaterialView: (material) ->
     m = new MaterialView model: material, parentElement: this
@@ -44,4 +24,46 @@ window.MaterialListView = Backbone.View.extend
       m.render()
     return this
 
- 
+  # Is executed when a material view has been clicked.
+  # Tell the pieces view to show all pieces who have this material
+  selectMaterial: (materialView) ->
+    _.each @materialViews, (view) -> 
+      $(view.el).addClass('gray').removeClass('selected')
+    $(materialView.el).addClass('selected').removeClass('gray')
+    @selectedMaterial = materialView.model
+    window.pieceListView.materialHasBeenSelected(materialView.model)
+
+  # Highlight the material which have material_id as id
+  highlightMaterial: (material_id) ->
+    _.each @materialViews, (view) ->
+      if view.model.get('id') == material_id
+        $(view.el).addClass('selected').removeClass('gray')
+        view.showUnassignButton()
+
+  # Show an assign button to each material view
+  showAssignButtons: ->
+    _.each @materialViews, (view) ->
+      $(view.el).removeClass('selected').removeClass('gray')
+      view.showAssignButtons()
+
+  # Assign the selected material to currently selected piece
+  assignMaterialToSelectedPiece: (material) ->
+    window.pieceListView.assignMaterialToSelectedPiece material
+
+  # Unassign selected material to currently selected piece
+  unassignMaterial: (material) ->
+    window.pieceListView.unassignMaterialToSelectedPiece material
+    @showAssignButtons()
+
+
+
+
+
+
+
+
+
+
+
+
+
