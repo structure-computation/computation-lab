@@ -26,7 +26,6 @@ window.CalculListView = Backbone.View.extend
   render : ->
     for c in @calculViews
       c.render()
-    $('#initialisation_button').append("<button id=\"load_calcul\" class='yellow_button'>Charger le calcul</button>")
     return this
 
  

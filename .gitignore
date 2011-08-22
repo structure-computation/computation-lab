@@ -15,3 +15,4 @@ public/javascripts/mobile.js
 public/javascripts/calculs/models/*.js
 public/javascripts/calculs/views/*.js
 public/javascripts/calculs/views/
+public/javascripts/calculs/*.js

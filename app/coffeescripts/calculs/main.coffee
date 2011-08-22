@@ -39,3 +39,5 @@ $ ->
         }
         ])
   window.PieceList = new PieceListView collection : pieceCollection
+  window.router = new Router
+  Backbone.history.start()
