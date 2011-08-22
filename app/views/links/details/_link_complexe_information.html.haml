@@ -2,45 +2,28 @@
 - show_all = false if show_all.nil?
 
 - if @link.comp_complexe.downcase.include? "pl" or show_all
-  #material_plastic_information
-    %h3
-      Plastique
-    %table.grey
-      %tbody
-        %tr
-          %th Limite de plasticité
-          %td.label_table
-            = label :link, :Lp, "Lp = "
-          %td
-            = text_field :link, :Lp, :disabled => disabled, :size => '10'
-        %tr
-          %th Taux de plastification
-          %td.label_table
-            = label :link, :Dp, "Dp = "
-          %td
-            = text_field :link, :Dp, :disabled => disabled, :size => '10'
-        %tr
-          %th Déformation plastique
-          %td.label_table
-            = label :link, :p, "p = "
-          %td
-            = text_field :link, :p, :disabled => disabled, :size => '10'
+  %h3
+    Plastique
+  %table.grey
+    %tbody
+      %tr
+        %th Limite de plasticité (Lp)
+        %td= custom_text_field(:link, :Lp, "Lp", disabled)
+      %tr
+        %th Taux de plastification (Dp)
+        %td= custom_text_field(:link, :Dp, "Dp", disabled)
+      %tr
+        %th Déformation plastique (p)
+        %td= custom_text_field(:link, :p, "p", disabled)
     
 - if @link.comp_complexe.downcase.include? "ca" or show_all
-  #material_breakable_information
-    %h3
-      Cassable
-    %table.grey
-      %tbody
-        %tr
-          %th Limite de rupture
-          %td.label_table
-            = label :link, :Lr, "Lr ="
-          %td
-            = text_field :link, :Lr, :disabled => disabled, :size => '10'
-        %tr
-          %th Coefficient de frottement
-          %td.label_table
-            = label :link, :f, "f = "
-          %td
-            = text_field :link, :f, :disabled => disabled, :size => '10'
+  %h3
+    Cassable
+  %table.grey
+    %tbody
+      %tr
+        %th Limite de rupture (Lr)
+        %td= custom_text_field(:link, :Lr, "Lr", disabled)
+      %tr
+        %th Coefficient de frottement (f)
+        %td= custom_text_field(:link, :f, "f", disabled)
