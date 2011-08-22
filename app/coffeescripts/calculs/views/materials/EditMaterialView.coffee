@@ -46,9 +46,9 @@ window.EditMaterialView = Backbone.View.extend
     @disableButtons()
     
   disableButtons: ->
-    $(@el).find('button').enable(false)
+    $(@el).find('button').attr('disabled', 'disabled')
   enableButtons: ->
-    $(@el).find('button').enable()
+    $(@el).find('button').removeAttr('disabled')
     
   render: (resetFields = false) ->
     @parentElement.render()
