@@ -15,6 +15,11 @@ SCInterface::Application.routes.draw do
     end
     resources :members
   end
+  resources :sc_models do 
+    resources :calculs
+  end
+
+
   root :to => "home#index"
   
   # TODO: La partie calcul est à séparer en plusieurs ressources.
