@@ -17,7 +17,7 @@ class CalculsController < ApplicationController
     @materials  = Material.find_all_by_company_id(current_user.company_id)
     @material   = Material.new
     @link       = Link.new
-    @calculs    = CalculResult.find_all_by_user_id(current_user)
+    @calculs    = CalculResult.find_all_by_sc_model_id(params[:sc_model_id])
   end
   
   def info_model
@@ -89,7 +89,7 @@ class CalculsController < ApplicationController
   end
   
   def get_brouillon
-    @current_model = current_user.sc_models.find(params[:id_model])
+    @current_model = current_user.sc_models.find(params[:sc_model_id])
     @current_calcul = @current_model.calcul_results.find(params[:id_calcul])
     send_data = @current_calcul.get_brouillon(params,current_user)
     # envoie de la reponse au client
