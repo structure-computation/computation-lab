@@ -7,10 +7,8 @@ $ ->
       company_id             = location.pathname.match(/\/companies\/([0-9]+)\/*/)[1]
       this.selectedMaterials = []
       this.selectedLinks     = []
-      this.steps             = [] 
-
-
-
+      this.steps             = []
+  
   # Initialisation of a factice PieceCollection
   pieceCollection = new PieceCollection(
     [{
@@ -46,4 +44,7 @@ $ ->
           "identificateur": 3
         }
         ])
-  window.PieceList = new PieceListView collection : pieceCollection
+  # /!\ Le nom ne doit pas être changé ! /!\
+  window.pieceListView = new PieceListView collection : pieceCollection
+  
+  

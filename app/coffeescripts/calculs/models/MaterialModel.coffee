@@ -1,4 +1,9 @@
-window.Material = Backbone.Model.extend()
+window.Material = Backbone.Model.extend
+  initialize: ->
+    @piece = null
+
+  assignPiece: (piece) ->
+    @piece = piece
 
   
 window.Materials = Backbone.Collection.extend
