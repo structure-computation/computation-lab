@@ -1,0 +1,12 @@
+%ul.horizontal_tab_submenu.js_tab_submenu
+  %li
+    %a#tab_l1{:href => "#Liaisons_Génériques"} Génériques
+  %li                   
+    %a#tab_l2{:href => "#Liaisons_Complexe"}   Complexe
+
+.horizontal_tab_content.js_tab_content
+  #tab_l1_content
+    = render :partial => "links/details/link_generic_information", :locals => {:show_all => true}
+  #tab_l2_content
+    = render :partial => "links/details/link_complexe_information", :locals => {:show_all => true}
+= coffeescript_include_tag "manage_tab"
