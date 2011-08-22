@@ -61,4 +61,4 @@ window.Router = Backbone.Router.extend
   
   # Affiche le zone de contenu souhaité en ajoutant le classe css 'show' à cette dernière    
   showContent: (class_name) ->
-    $('.#{class_name}').addClass 'show' 
+    $(".#{class_name}").addClass 'show' 
