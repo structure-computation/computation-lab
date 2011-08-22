@@ -50,6 +50,7 @@ window.MaterialView = Backbone.View.extend
     
   # Render the list view with an extra button for assigning or unassigning material.
   renderWithButton: (className, textButton) ->
+    $(@el).removeClass('selected').removeClass('gray')
     $(@el).html(@model.get('name'))
     $(@el).append("<button class='#{className}'>#{textButton}</button>")
     if @firstRendering
