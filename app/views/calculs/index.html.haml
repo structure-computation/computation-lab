@@ -22,12 +22,18 @@
   .tab_13_content
     %h2.grey Liste des pièces
     %ul#pieces
+  .tab_14_content
+    %h2.grey Liste des interfaces
+    %ul#interfaces
 
 - content_for :right_list do 
 
   .tab_13_content
     %h2.grey Liste des Matériaux
     %ul#materials
+  .tab_14_content
+    %h2.grey Liste des Liaisons
+    %ul#links
   
 
 - content_for :top_calcul do 
@@ -56,6 +62,9 @@
 - content_for :details_calcul do 
   #edit_material.tab_13_content
     = render "calculs/partials/material_details_part"
+
+  #edit_link.tab_14_content
+    = render "calculs/partials/link_details_part"
 
 
 - content_for :coffee do 

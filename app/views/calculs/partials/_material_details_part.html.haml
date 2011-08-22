@@ -1,27 +1,27 @@
 %ul.horizontal_tab_submenu.js_tab_submenu
   %li
-    %a#tab_1{:href => "#Matériaux_Génériques"} Génériques
+    %a#tab_m1{:href => "#Matériaux_Génériques"}    Génériques
   %li                   
-    %a#tab_2{:href => "#Matériaux_Elasticité"} Elasticité
+    %a#tab_m2{:href => "#Matériaux_Elasticité"}    Elasticité
   %li                   
-    %a#tab_3{:href => "#Matériaux_Plasticité"} Plasticité
+    %a#tab_m3{:href => "#Matériaux_Plasticité"}    Plasticité
   %li                   
-    %a#tab_4{:href => "#Matériaux_Endommagement"} Endommagement
+    %a#tab_m4{:href => "#Matériaux_Endommagement"} Endommagement
   %li                   
-    %a#tab_5{:href => "#Matériaux_Viscosité"} Viscosité
+    %a#tab_m5{:href => "#Matériaux_Viscosité"}     Viscosité
 
 .horizontal_tab_content.js_tab_content
-  #tab_1_content
+  #tab_m1_content
     = render "materials/details/material_basic_information"
     = render :partial => "materials/details/material_main_information", :locals => { :show_all => true }
     = render :partial => "materials/details/material_generic_info", :locals => { :show_all => true }
 
-  #tab_2_content
+  #tab_m2_content
     = render :partial => "materials/details/material_elastic_information", :locals => { :show_all => true }
-  #tab_3_content
+  #tab_m3_content
     = render :partial => "materials/details/material_plastic_information", :locals => { :show_all => true }
-  #tab_4_content
+  #tab_m4_content
     = render :partial => "materials/details/material_damageable_information", :locals => { :show_all => true }
-  #tab_5_content
+  #tab_m5_content
     = render :partial => "materials/details/material_viscous_information", :locals => { :show_all => true }
 = coffeescript_include_tag "manage_tab"
