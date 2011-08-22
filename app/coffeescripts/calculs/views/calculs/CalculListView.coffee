@@ -6,6 +6,18 @@ window.CalculListView = Backbone.View.extend
     for calcul in @collection.models
       @createCalculView(calcul)
     @render()
+    
+  events:
+    "click #load_calcul": "load_calcul"
+    
+  load_calcul: ->
+    window.current_calcul = new Calcul @selected_calcul
+  
+  select_calcul:(calcul) ->
+    for calculView in @calculViews
+      $(calculView.el).removeClass('selected')
+    $(calcul.el).addClass 'selected'
+    @selected_calcul = new Calcul calcul.model
 
   createCalculView: (calcul) ->
     c = new CalculView model: calcul, parentElement: this

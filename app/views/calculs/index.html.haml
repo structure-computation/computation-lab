@@ -9,13 +9,11 @@
     %li                
       %a#tab_14{:href => "#Liaisons"} Liaisons 
     %li                
-      %a#tab_15{:href => "#Conditions"} Conditions 
+      %a#tab_15{:href => "#Conditions_Limites"} Conditions Limites
     %li                
-      %a#tab_16{:href => "#Limites"} Limites 
+      %a#tab_16{:href => "#Options"} Options 
     %li                
-      %a#tab_17{:href => "#Options"} Options 
-    %li                
-      %a#tab_18{:href => "#Prévisions"} Prévisions
+      %a#tab_17{:href => "#Prévisions"} Prévisions
 
 
 - content_for :left_list do 
@@ -39,8 +37,12 @@
 - content_for :top_calcul do 
   .tab_11_content
     %h2.grey Liste des calculs
-    %ul#calculs  
-    
+    %ul#calculs
+    #initialisation_button
+      %button{:id => "next_step", :class => 'yellow_button'}
+        Etape suivante
+      %button{:id => "load_calcul", :class => 'yellow_button'}
+        Charger le calcul
   .tab_12_content
     %h2.grey Temps
     #steps

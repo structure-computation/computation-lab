@@ -3,11 +3,17 @@ window.CalculView = Backbone.View.extend
     @parentElement = params.parentElement
   
   tagName   : "li"
-  className : "calcul_view"   
-
+  className : "calcul_view" 
+  
+  events:
+    "click" : 'select_calcul'
+    
+  select_calcul: ->
+    @parentElement.select_calcul this
+    
   render: ->
     $(@el).html(@model.get('name'))
-    $("ul#calculs").append(@el)
+    $(@parentElement.el).append(@el)
     return this
 
 
