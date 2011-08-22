@@ -7,41 +7,25 @@
   %tbody
     %tr
       %th Name
-      %td{:colspan => 2}= text_field :link, :name, :disabled => disabled
+      %td= text_field :link, :name, :disabled => disabled
     %tr
       %th Description
-      %td{:colspan => 2}= text_area :link, :description, :disabled => disabled
+      %td= text_area :link, :description, :disabled => disabled
     %tr
-      %th Epaisseur
-      %td.label_table
-        = label :link, :Ep, "Ep = "
-      %td 
-        = text_field :link, :Ep, :disabled => disabled, :size => '10'
-        m
+      %th Epaisseur (Ep)
+      %td= custom_text_field(:link, :Ep, "Ep", disabled)
     %tr
-      %th Jeu
-      %td.label_table
-        = label :link, :jeu, "j = "
-      %td 
-        = text_field :link, :jeu, :disabled => disabled, :size => '10'
-        m
+      %th Jeu (j)
+      %td= custom_text_field(:link, :jeu, "j", disabled)
 
     - if @link.comp_generique.downcase.include? "el" or show_all
       %tr
-        %th Raideur
-        %td.label_table
-          = label :link, :R, "R = "
-        %td 
-          = text_field :link, :R, :disabled => disabled, :size => '10'
-          N/m
-
+        %th Raideur (R)
+        %td= custom_text_field(:link, :R, "R", disabled)
 
     - if @link.comp_generique.downcase.include? "co" or show_all
       %tr
-        %th Coefficient de frottement
-        %td.label_table
-          = label :link, :f, "f = "
-        %td 
-          = text_field :link, :f, :disabled => disabled, :size => '10'
+        %th Coefficient de frottement (f)
+        %td= custom_text_field(:link, :f, "f", disabled)
 
 
