@@ -7,7 +7,8 @@ window.Router = Backbone.Router.extend
     "Conditions_Limites" : "conditions"
     "Options"            : "options"
     "Prévisions"         : "previsions"
-    
+    "/get_brouillon"     : "get_brouillon"
+  
   initialisation: ->
     @hideAllContent()
     @selectCorrectTab '','Initialisation'

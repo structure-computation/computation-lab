@@ -7,7 +7,8 @@ window.CalculView = Backbone.View.extend
   
   events:
     "click" : 'select_calcul'
-    
+  
+  # Appelle la fonction de selection de l'element parent, donc de la vue correspondant à la liste 
   select_calcul: ->
     @parentElement.select_calcul this
     

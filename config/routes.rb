@@ -16,9 +16,7 @@ SCInterface::Application.routes.draw do
     resources :members
   end
   resources :sc_models do 
-    resources :calculs do 
-      get 'get_brouillon', :on => :collection
-    end 
+    resources :calculs
   end
 
 

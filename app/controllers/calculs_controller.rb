@@ -88,9 +88,9 @@ class CalculsController < ApplicationController
     render :json => @current_calcul.to_json
   end
   
-  def get_brouillon
+  def show
     @current_model = current_user.sc_models.find(params[:sc_model_id])
-    @current_calcul = @current_model.calcul_results.find(params[:id_calcul])
+    @current_calcul = @current_model.calcul_results.find(params[:id])
     send_data = @current_calcul.get_brouillon(params,current_user)
     # envoie de la reponse au client
     render :json => send_data.to_json
@@ -107,10 +107,10 @@ class CalculsController < ApplicationController
     render :text => results
   end
   
-  def send_brouillon
-    @current_model = current_user.sc_models.find(params[:id_model])
-    @current_calcul = @current_model.calcul_results.find(params[:id_calcul])
-    results = @current_calcul.save_brouillon(params)
+  def update
+    @current_model = current_user.sc_models.find(params[:sc_model_id])
+    @current_calcul = @current_model.calcul_results.find(params[:id])
+    results = @current_calcul.save_brouillon(params[:brouillon])
     # envoie de la reponse au client
     render :text => results
   end

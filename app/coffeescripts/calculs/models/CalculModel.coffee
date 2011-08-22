@@ -18,6 +18,9 @@ window.Calcul = Backbone.Model.extend
     @D2type                = calcul.D2type
     @log_type              = calcul.log_type
     @state                 = calcul.state
+    @brouillon             = {}
+    @url = "/sc_models/#{@sc_model_id}/calculs/" + @id
+    
 
 
 window.Calculs = Backbone.Collection.extend
