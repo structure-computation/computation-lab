@@ -2,7 +2,6 @@ $ ->
   Steps   = new StepCollection
   window.StepsView = new StepListView collection: Steps
 
-
   # Initialisation of a factice PieceCollection
   pieceCollection = new PieceCollection(
     [{
@@ -38,6 +37,9 @@ $ ->
           "identificateur": 3
         }
         ])
-  window.PieceList = new PieceListView collection : pieceCollection
+  # /!\ Le nom ne doit pas être changé ! /!\
+  window.pieceListView = new PieceListView collection : pieceCollection
+  
+  
   window.router = new Router
   Backbone.history.start()
