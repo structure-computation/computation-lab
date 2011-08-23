@@ -8,19 +8,25 @@ window.PieceView = Backbone.View.extend
   className : "piece_view"   
 
   events: 
-    'click'               : 'select'
-    'click button.assign' : 'assign'
+    'click'                 : 'select'
+    'click button.assign'   : 'assignPieceToMaterial'
+    'click button.unassign' : 'unassignPieceToMaterial'
 
   # Assign the piece to a material
-  assign: ->
-    @parentElement.assign @model
+  assignPieceToMaterial: ->
+    @parentElement.assignPieceToMaterial @model
     @addUnassignButton()
-  
+
+  # Unassign the piece from his material
+  unassignPieceToMaterial: ->
+    @parentElement.unassignPieceToMaterial @model
+    @addAssignButton()
+    
   # Highlight the selected piece and tell the material list to 
   # show the material of this piece. If it has no material, a material can be assigned to it.
   select: (event) ->
     if event.srcElement == @el
-      @parentElement.render()
+      @parentElement.render() # Clear all buttons from all piece view
       @parentElement.selectPiece @
 
   # Tells the view that a material has been selected.
@@ -31,15 +37,20 @@ window.PieceView = Backbone.View.extend
     if @model.get('material_id') == material.get('id')
       @addUnassignButton()
     else if @model.get('material_id') == 0
-      @renderWithButton 'assign', 'Assigner'
-      $(@el).removeClass('selected').removeClass('gray')
+      @addAssignButton()
     else
       @render()
 
   # Add a button for unassigning the piece from the selected material.
   addUnassignButton: ->
     @renderWithButton 'unassign', 'Désassigner'
-    $(@el).addClass('selected')
+    $(@el).addClass('selected').removeClass('gray')
+
+  # Add a button for assigning the piece from the selected material.
+  addAssignButton: ->
+    @renderWithButton 'assign', 'Assigner'
+    $(@el).removeClass('selected').removeClass('gray')
+
   # Render with an action button
   renderWithButton: (className, textButton)->
     $(@el).html(@model.get('name'))

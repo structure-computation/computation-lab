@@ -21,6 +21,7 @@ window.MaterialView = Backbone.View.extend
   # this material will be also highlighted.
   select: (event) ->
     if event.srcElement == @el
+      @parentElement.render() # Clear all buttons from all material view
       @parentElement.selectMaterial @
 
   # Clone the model of the clicked material view
