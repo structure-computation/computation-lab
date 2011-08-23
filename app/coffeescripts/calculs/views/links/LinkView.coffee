@@ -1,5 +1,5 @@
 ## Link View
-window.LinkView = Backbone.View.extend
+SCVisu.LinkView = Backbone.View.extend
   initialize: (params) ->
     @parentElement = params.parentElement
     @firstRendering = true

@@ -1,5 +1,5 @@
 # Interface View
-window.InterfaceView = Backbone.View.extend
+SCVisu.InterfaceView = Backbone.View.extend
   initialize: (params) ->
     @parentElement = params.parentElement
     @firstRendering = true

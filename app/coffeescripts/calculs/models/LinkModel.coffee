@@ -1,8 +1,13 @@
-window.Link = Backbone.Model.extend()
+# Link
+# Contains all attributes of a Link stored in the database
+# Attributes can be retrieve from the model's JSON or from the database
 
-window.Links = Backbone.Collection.extend
-  model: Link
+SCVisu.Link = Backbone.Model.extend()
+
+# Collection of Link
+SCVisu.Links = Backbone.Collection.extend
+  model: SCVisu.Link
   initialize: (options) ->
-    @company_id = if window.current_company? then window.current_company else 0
+    @company_id = if SCVisu.current_company? then SCVisu.current_company else 0
     @url = "/companies/#{@company_id}/links"
 

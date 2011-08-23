@@ -1,4 +1,8 @@
-window.Piece = Backbone.Model.extend
+# Piece
+# Contains all attributes of a Piece.
+# Attributes are retrieve from the model's JSON
+
+SCVisu.Piece = Backbone.Model.extend
   initialize: (piece) ->
     @set group          : piece.group
     @set name           : piece.name
@@ -18,5 +22,5 @@ window.Piece = Backbone.Model.extend
       @material_id = material.get('id')
     @set material_id: @material_id
 
-window.PieceCollection = Backbone.Collection.extend
-  model: Piece
+SCVisu.PieceCollection = Backbone.Collection.extend
+  model: SCVisu.Piece

@@ -1,21 +1,21 @@
 ## StepListView
-window.StepListView = Backbone.View.extend
+SCVisu.StepListView = Backbone.View.extend
 
   el: "#steps"
   # Have to initialize the StepListView with {collection: StepCollection}
   initialize: ->  
     @stepViews = []
     if @collection.length == 0
-      step = new Step
+      step = new SCVisu.Step
         initial_time  : 0
         time_step     : 1
         nb_time_steps : 1
         final_time    : 1
       @collection.add step
-      @stepViews.push new StepView model: step, parentView: this
+      @stepViews.push new SCVisu.StepView model: step, parentView: this
 
     for step in @collection.models
-      @stepViews.push new StepView model: step, parentView: this
+      @stepViews.push new SCVisu.StepView model: step, parentView: this
 
     @stepViews[0].removeDeleteButton()
     @bind 'step_deleted', @deleteStep, @
@@ -25,13 +25,13 @@ window.StepListView = Backbone.View.extend
     
   ## Create a model and associate it to a new view
   addStep: ->  
-    step = new Step
+    step = new SCVisu.Step
       initial_time  : @collection.models[@collection.models.length - 1].get 'final_time'
       time_step     : 1
       nb_time_steps : 1
 
     @collection.add step
-    @stepViews.push new StepView model: step, parentView: this
+    @stepViews.push new SCVisu.StepView model: step, parentView: this
 
   render : ->
     if $(@el).find('select#step_type').val() == "statique"
@@ -74,7 +74,7 @@ window.StepListView = Backbone.View.extend
     for stepView in @stepViews
       stepView.update()
       @collection.updateModels()
-    window.current_calcul.trigger 'update_time_step', StepsView.collection.models
+    SCVisu.current_calcul.trigger 'update_time_step', SCVisu.stepListView.collection.models
 
   selectChanged: (event) ->
     if $(event.srcElement).val() == "statique"

@@ -1,4 +1,8 @@
-window.Material = Backbone.Model.extend
+# Material
+# Contains all attributes of a Material stored in the database
+# Attributes can be retrieve from the model's JSON or from the database
+
+SCVisu.Material = Backbone.Model.extend
   initialize: ->
     @piece = null
 
@@ -6,17 +10,13 @@ window.Material = Backbone.Model.extend
     @piece = piece
 
   
-window.Materials = Backbone.Collection.extend
-  model: Material
+SCVisu.MaterialCollection = Backbone.Collection.extend
+  model: SCVisu.Material
   initialize: (options) ->
-    @company_id = if window.current_company? then window.current_company else 0
+    @company_id = if SCVisu.current_company? then SCVisu.current_company else 0
     @url = "/companies/#{@company_id}/materials"
-    @bind "add", (ship) ->
-      console.log ship
-      ship.save(
-        success: (response) -> 
-          console.log response
-        error: (response) ->
-          console.log response
-      )
-      
+
+    @bind "add", (material) ->
+      material.save {},
+        success: ->
+          SCVisu.current_calcul.trigger 'update_materials', SCVisu.materialListView.collection.models

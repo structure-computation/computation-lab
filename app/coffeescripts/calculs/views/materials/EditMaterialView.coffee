@@ -1,4 +1,4 @@
-window.EditMaterialView = Backbone.View.extend
+SCVisu.EditMaterialView = Backbone.View.extend
   el: "#edit_material"
   initialize: (params) ->
     @parentElement = params.parentElement
@@ -11,9 +11,11 @@ window.EditMaterialView = Backbone.View.extend
     'click .save'       : 'save'
     'click .save_as_new' : 'saveAsNew'
   
+  # Dupplicate the current material and save it in the database
   saveAsNew: ->
     @disableButtons()
-    m = new Material
+    m = new SCVisu.Material
+    # Retrieve all attributes for the new material
     for input in $(@el).find('input, textarea')
       key = $(input).attr('id').split('material_')[1]
       value = $(input).val()
@@ -31,11 +33,8 @@ window.EditMaterialView = Backbone.View.extend
       h = new Object()
       h[key] = value
       @model.set h
-    @model.save(
-      success: (response) -> 
-        console.log response
-    )
-    window.current_calcul.trigger 'update_materials', MaterialViews.collection.models  
+    @model.save()
+    SCVisu.current_calcul.trigger 'update_materials', SCVisu.materialListView.collection.models  
     @render(true)
 
   updateModel: (model) ->
