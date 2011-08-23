@@ -1,4 +1,10 @@
-window.Calcul = Backbone.Model.extend
+# Calcul
+# Contains all attributes of a calcul : 
+#   Steps
+#   Pieces
+#   Etc.
+#
+SCVisu.Calcul = Backbone.Model.extend
   initialize: (calcul) ->
     @set gpu_allocated         : calcul.gpu_allocated
     @set launch_autorisation   : calcul.launch_autorisation
@@ -24,9 +30,9 @@ window.Calcul = Backbone.Model.extend
       pieces: []
       links: []
       
-    @sc_model_id = calcul.sc_model_id
-    
-    @url = "/sc_models/#{@sc_model_id}/calculs/" + @id
+    @sc_model_id  = calcul.sc_model_id
+
+    @url = "/sc_models/#{@sc_model_id}/calculs/" + @get 'id'
     
     # Bind this object in order to react at the 'update_time_step' event
     @bind 'update_time_step', @updateTimeStep, @
@@ -47,5 +53,5 @@ window.Calcul = Backbone.Model.extend
   updateLinks: (linksArray) ->
     @get('brouillon').links = linksArray
     
-window.Calculs = Backbone.Collection.extend
-  model: Calcul
+SCVisu.Calculs = Backbone.Collection.extend
+  model: SCVisu.Calcul

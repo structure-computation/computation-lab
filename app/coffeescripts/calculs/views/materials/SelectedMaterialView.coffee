@@ -1,5 +1,5 @@
 # Selected Material View
-window.SelectedMaterialView = Backbone.View.extend
+SCVisu.SelectedMaterialView = Backbone.View.extend
   initialize: (params) ->
     @parentElement = params.parentElement
     

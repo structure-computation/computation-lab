@@ -1,5 +1,5 @@
 ## LocalLinkListView
-window.LocalLinkListView = Backbone.View.extend
+SCVisu.LocalLinkListView = Backbone.View.extend
   el: '#selected_links_table'
 
   initialize: (options) ->

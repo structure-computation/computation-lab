@@ -1,4 +1,4 @@
-window.SelectedMaterialListView = Backbone.View.extend
+SCVisu.SelectedMaterialListView = Backbone.View.extend
   el: '#materials_selected_table'
 
   initialize: (options) ->

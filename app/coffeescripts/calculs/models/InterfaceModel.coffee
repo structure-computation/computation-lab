@@ -1,4 +1,4 @@
-window.Interface = Backbone.Model.extend
+SCVisu.Interface = Backbone.Model.extend
   initialize: (interface) ->
     @group            = interface.group        
     @name             = interface.name         
@@ -9,11 +9,11 @@ window.Interface = Backbone.Model.extend
     @adj_num_group    = interface.adj_num_group
     @set      link_id : interface.link_id || 0 # When 0, link is not associated
 
-window.Interfaces = Backbone.Collection.extend
-  model: Interface
+SCVisu.Interfaces = Backbone.Collection.extend
+  model: SCVisu.Interface
   initialize: (interfaceCollection)->
     # Fake initialization
-    @add new Interface {
+    @add new SCVisu.Interface {
             "group": -1
             "name": "piece 0"
             "origine": "from_bulkdata"
@@ -21,7 +21,7 @@ window.Interfaces = Backbone.Collection.extend
             "id": 1
             "identificateur": 26
           }
-    @add new Interface {
+    @add new SCVisu.Interface {
             "group": -1
             "name": "piece 1"
             "origine": "from_bulkdata"
@@ -29,7 +29,7 @@ window.Interfaces = Backbone.Collection.extend
             "id": 2
             "identificateur": 26
           }
-    @add new Interface {
+    @add new SCVisu.Interface {
             "group": -1
             "name": "piece 2"
             "origine": "from_bulkdata"
@@ -37,7 +37,7 @@ window.Interfaces = Backbone.Collection.extend
             "id": 3
             "identificateur": 26
           }
-    @add new Interface {
+    @add new SCVisu.Interface {
             "group": -1
             "name": "piece 3"
             "origine": "from_bulkdata"

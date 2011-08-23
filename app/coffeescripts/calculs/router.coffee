@@ -1,4 +1,4 @@
-window.Router = Backbone.Router.extend
+SCVisu.Router = Backbone.Router.extend
   initialize: ->
     @initialisation()
 

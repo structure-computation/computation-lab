@@ -1,5 +1,5 @@
 ## Selected Link View
-window.SelectedLinkView = Backbone.View.extend
+SCVisu.SelectedLinkView = Backbone.View.extend
   tagName   : "tr"
   initialize: (params) ->
     @parentElement = params.parentElement

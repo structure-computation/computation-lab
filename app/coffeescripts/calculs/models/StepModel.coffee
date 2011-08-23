@@ -1,4 +1,4 @@
-window.Step = Backbone.Model.extend
+SCVisu.Step = Backbone.Model.extend
   initial_time  : 0
   nb_time_steps : 1
   time_step     : 1
@@ -15,8 +15,8 @@ window.Step = Backbone.Model.extend
     @set({ final_time: newFinalTime})
 
 
-window.StepCollection = Backbone.Collection.extend
-  model: Step
+SCVisu.StepCollection = Backbone.Collection.extend
+  model: SCVisu.Step
   initialize: -> 
     @bind 'add', (step) ->
       @updateModels()

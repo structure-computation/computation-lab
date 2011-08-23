@@ -1,4 +1,4 @@
-window.CalculView = Backbone.View.extend
+SCVisu.CalculView = Backbone.View.extend
   initialize: (params) ->
     @parentElement = params.parentElement
   
