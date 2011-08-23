@@ -1,52 +1,54 @@
-# Piece View
-window.PieceView = Backbone.View.extend
+# Interface View
+window.InterfaceView = Backbone.View.extend
   initialize: (params) ->
     @parentElement = params.parentElement
     @firstRendering = true
     
   tagName   : "li"
-  className : "piece_view"   
+  className : "interface_view"   
 
   events: 
-    'click'                 : 'select'
-    'click button.assign'   : 'assignPieceToMaterial'
-    'click button.unassign' : 'unassignPieceToMaterial'
+    "click"                 : "select"
+    'click button.assign'   : 'assignInterfaceToLink'
+    'click button.unassign' : 'unassignInterfaceToLink'
 
   # Assign the piece to a material
-  assignPieceToMaterial: ->
-    @parentElement.assignPieceToMaterial @model
+  assignInterfaceToLink: ->
+    @parentElement.assignInterfaceToLink @model
     @addUnassignButton()
 
   # Unassign the piece from his material
-  unassignPieceToMaterial: ->
-    @parentElement.unassignPieceToMaterial @model
+  unassignInterfaceToLink: ->
+    @parentElement.unassignInterfaceToLink @model
     @addAssignButton()
+
     
-  # Highlight the selected piece and tell the material list to 
-  # show the material of this piece. If it has no material, a material can be assigned to it.
+  # Highlight the selected Interface and tell the Link list to 
+  # show the link of this interface. If it has no link associated, user can assign one to it.
   select: (event) ->
     if event.srcElement == @el
       @parentElement.render() # Clear all buttons from all piece view
-      @parentElement.selectPiece @
+      @parentElement.selectInterface @
 
-  # Tells the view that a material has been selected.
-  # If the piece has no material, it can be assigned to it.
-  # If it already has a material, it can be unassigned to it
-  # else, nothing is rendered.
-  materialHasBeenSelected: (material) ->
-    if @model.get('material_id') == material.get('id')
+
+  # If the interface has no link, it can be assigned to it.
+  # If it already has a link, it can be unassigned to it
+  # else, no button is rendered.
+  linkHasBeenSelected: (linkModel) ->
+    if @model.get('link_id') == linkModel.get('id')
       @addUnassignButton()
-    else if @model.get('material_id') == 0
+    else if @model.get('link_id') == 0
       @addAssignButton()
     else
       @render()
+      $(@el).removeClass('selected').addClass('gray')
 
-  # Add a button for unassigning the piece from the selected material.
+  # Add a button for unassigning the interface from the selected link.
   addUnassignButton: ->
     @renderWithButton 'unassign', 'Désassigner'
     $(@el).addClass('selected').removeClass('gray')
 
-  # Add a button for assigning the piece from the selected material.
+  # Add a button for assigning the interface from the selected link.
   addAssignButton: ->
     @renderWithButton 'assign', 'Assigner'
     $(@el).removeClass('selected').removeClass('gray')

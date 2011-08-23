@@ -3,22 +3,28 @@ window.StepListView = Backbone.View.extend
 
   el: "#steps"
   # Have to initialize the StepListView with {collection: StepCollection}
-  initialize: ->
-    step = new Step
-      initial_time  : 0
-      time_step     : 1
-      nb_time_steps : 1
-      final_time    : 1  
-    @collection.add step
+  initialize: ->  
     @stepViews = []
-    @stepViews.push new StepView model: step, parentView: this
+    if @collection.length == 0
+      step = new Step
+        initial_time  : 0
+        time_step     : 1
+        nb_time_steps : 1
+        final_time    : 1
+      @collection.add step
+      @stepViews.push new StepView model: step, parentView: this
+
+    for step in @collection.models
+      @stepViews.push new StepView model: step, parentView: this
+
     @stepViews[0].removeDeleteButton()
     @bind 'step_deleted', @deleteStep, @
     @disableAddButton() # Because the first select value is 'statique'
+    @clearView()
     @render()
     
   ## Create a model and associate it to a new view
-  addStep: ->
+  addStep: ->  
     step = new Step
       initial_time  : @collection.models[@collection.models.length - 1].get 'final_time'
       time_step     : 1
@@ -35,6 +41,8 @@ window.StepListView = Backbone.View.extend
     if @stepViews.length == 1
       @stepViews[0].removeDeleteButton()
 
+  clearView: ->
+    $(@el).find('table#steps_table tbody').html('')
 
   ## -- Events
   events:
@@ -61,6 +69,7 @@ window.StepListView = Backbone.View.extend
     for stepView in @stepViews
       stepView.update()
       @collection.updateModels()
+    window.current_calcul.trigger 'update_time_step', StepsView.collection.models
 
   selectChanged: (event) ->
     if $(event.srcElement).val() == "statique"

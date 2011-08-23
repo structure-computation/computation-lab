@@ -1,7 +1,6 @@
 $ ->
-  Steps   = new StepCollection
-  window.StepsView = new StepListView collection: Steps
-
+  
+  
   # Initialisation of a factice PieceCollection
   pieceCollection = new PieceCollection(
     [{
@@ -37,9 +36,10 @@ $ ->
           "identificateur": 3
         }
         ])
-  # /!\ Le nom ne doit pas être changé ! /!\
+  # /!\ Les nom de variable attaché à Window ne doivent pas être changés car ils sont appelés aux seins des objets pour les intéractions ! /!\
   window.pieceListView = new PieceListView collection : pieceCollection
-  
+  interfaceCollection = new Interfaces()
+  window.interfaceListView = new InterfaceListView collection : interfaceCollection
   
   window.router = new Router
   Backbone.history.start()

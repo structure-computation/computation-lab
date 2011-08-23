@@ -27,9 +27,7 @@ window.MaterialListView = Backbone.View.extend
   # Is executed when a material view has been clicked.
   # Tell the pieces view to show all pieces who have this material
   selectMaterial: (materialView) ->
-    _.each @materialViews, (view) -> 
-      $(view.el).addClass('gray').removeClass('selected')
-    $(materialView.el).addClass('selected').removeClass('gray')
+    @highlightView materialView
     @selectedMaterial = materialView.model
     window.pieceListView.materialHasBeenSelected(materialView.model)
 
@@ -55,8 +53,10 @@ window.MaterialListView = Backbone.View.extend
     window.pieceListView.unassignMaterialToSelectedPiece material
     @showAssignButtons()
 
-
-
+  highlightView: (materialView) ->
+    _.each @materialViews, (view) -> 
+      $(view.el).addClass('gray').removeClass('selected')
+    $(materialView.el).addClass('selected').removeClass('gray')
 
 
 

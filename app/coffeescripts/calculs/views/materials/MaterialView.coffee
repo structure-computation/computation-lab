@@ -21,8 +21,8 @@ window.MaterialView = Backbone.View.extend
   # this material will be also highlighted.
   select: (event) ->
     if event.srcElement == @el
+      @parentElement.render() # Clear all buttons from all material view
       @parentElement.selectMaterial @
-      @parentElement.render()
 
   # Clone the model of the clicked material view
   clone: ->
@@ -30,9 +30,10 @@ window.MaterialView = Backbone.View.extend
 
   # Show button for unassigning a material
   showUnassignButton: ->
-    @parentElement.render()
+    @parentElement.render() # Remove all buttons from other material view because only one material can be assigned
     @renderWithButton 'unassign', 'Désassigner'
-    $(@el).addClass('selected').removeClass('gray')
+    @parentElement.highlightView @
+
   # Unassign the material from the selected Piece
   unassign: ->
     @parentElement.unassignMaterial @model
@@ -41,10 +42,10 @@ window.MaterialView = Backbone.View.extend
   # assign the material to the selected piece.
   showAssignButtons: ->
     @renderWithButton 'assign', 'Assigner'
+
   # Assign the clicked model to the selected piece
   assign: ->
     @parentElement.assignMaterialToSelectedPiece @model
-    @parentElement.render()
     $(@el).addClass('selected').removeClass('gray')
     @showUnassignButton()
     
