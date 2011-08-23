@@ -1,7 +1,6 @@
 $ ->
-  Steps   = new StepCollection
-  window.StepsView = new StepListView collection: Steps
-
+  
+  
   # Initialisation of a factice PieceCollection
   pieceCollection = new PieceCollection(
     [{
@@ -37,7 +36,7 @@ $ ->
           "identificateur": 3
         }
         ])
-  # /!\ Le nom ne doit pas être changé ! /!\
+  # /!\ Le nom ne doit pas être changé ! Cette variable est appelée à plusieurs endroit /!\
   window.pieceListView = new PieceListView collection : pieceCollection
   
   

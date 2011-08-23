@@ -13,9 +13,12 @@ window.CalculListView = Backbone.View.extend
   # Fonction appellé lorsque l'on clique sur le bouton 'Charger le calcul'. Elle créee alors  le current_calcul qui sera utilisé tout au long du calcul
   load_calcul: ->
     window.current_calcul = new Calcul @selected_calcul
+
     Backbone.sync("read", current_calcul,
       success: (response) ->
         current_calcul.set brouillon: response.brouillon
+        window.Steps = new StepCollection window.current_calcul.get('brouillon').time_step
+        window.StepsView = new StepListView collection: Steps
     )
   
   save_calcul: ->
