@@ -16,3 +16,4 @@ public/javascripts/calculs/models/*.js
 public/javascripts/calculs/views/*.js
 public/javascripts/calculs/views/
 public/javascripts/calculs/*.js
+public/javascripts/manage_tabs_new.js
