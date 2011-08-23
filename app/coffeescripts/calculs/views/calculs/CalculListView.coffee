@@ -17,16 +17,7 @@ SCVisu.CalculListView = Backbone.View.extend
     Backbone.sync("read", SCVisu.current_calcul,
       success: (response) ->
         SCVisu.current_calcul.set brouillon: response.brouillon
-        
-        # /!\ Le nom des variables suivantes ne doit pas être changé ! Ces variables sont appelées à plusieurs endroits /!\
-        SCVisu.pieceCollection = new SCVisu.PieceCollection SCVisu.current_calcul.get('brouillon').pieces
-        SCVisu.pieceListView = new SCVisu.PieceListView collection : SCVisu.pieceCollection
-
-        SCVisu.MaterialCollection = new SCVisu.Materials SCVisu.current_calcul.get('brouillon').materials
-        SCVisu.MaterialViews = new SCVisu.MaterialListView collection: SCVisu.MaterialCollection
-        
-        SCVisu.Steps = new SCVisu.StepCollection SCVisu.current_calcul.get('brouillon').time_step
-        SCVisu.StepsView = new SCVisu.StepListView collection: SCVisu.Steps
+        initializeFromJSON()
     )
   
   save_calcul: ->

@@ -28,6 +28,7 @@ SCVisu.Calcul = Backbone.Model.extend
       time_step: []
       materials: []
       pieces: []
+      links: []
       
     @sc_model_id  = calcul.sc_model_id
 
@@ -37,16 +38,20 @@ SCVisu.Calcul = Backbone.Model.extend
     @bind 'update_time_step', @updateTimeStep, @
     @bind 'update_materials', @updateMaterials, @
     @bind 'update_pieces', @updatePieces, @
+    @bind 'update_links', @updateLinks, @
 
   # Update time_step of the current model with the array of time_step passed in parameters
-  updateTimeStep: (timeStepArray) ->
-    @get('brouillon').time_step = timeStepArray
+  updateTimeStep: (timeStepsArray) ->
+    @get('brouillon').time_step = timeStepsArray
 
-  updateMaterials: (materialArray) ->
-    @get('brouillon').materials = materialArray
+  updateMaterials: (materialsArray) ->
+    @get('brouillon').materials = materialsArray
 
-  updatePieces: (pieceArray) ->
-    @get('brouillon').pieces = pieceArray
-
+  updatePieces: (piecesArray) ->
+    @get('brouillon').pieces = piecesArray
+  
+  updateLinks: (linksArray) ->
+    @get('brouillon').links = linksArray
+    
 SCVisu.Calculs = Backbone.Collection.extend
   model: SCVisu.Calcul
