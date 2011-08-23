@@ -74,7 +74,7 @@ SCVisu.StepListView = Backbone.View.extend
     for stepView in @stepViews
       stepView.update()
       @collection.updateModels()
-    SCVisu.current_calcul.trigger 'update_time_step', SCVisu.StepsView.collection.models
+    SCVisu.current_calcul.trigger 'update_time_step', SCVisu.stepListView.collection.models
 
   selectChanged: (event) ->
     if $(event.srcElement).val() == "statique"

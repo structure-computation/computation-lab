@@ -1,7 +1,10 @@
+# Manage the overall calculus wizard.
+# It handles anchors URLs
 SCVisu.Router = Backbone.Router.extend
   initialize: ->
     @initialisation()
 
+  # Each step of the wizard
   routes:
     "Initialisation"     : "initialisation"
     "Temps"              : "temps"
@@ -11,36 +14,43 @@ SCVisu.Router = Backbone.Router.extend
     "Options"            : "options"
     "Prévisions"         : "previsions"
   
+  # Hide all 'tabs' and show the first one - Initialization part
   initialisation: ->
     @hideAllContent()
     @selectCorrectTab '','Initialisation'
     @showContent 'tab_11_content'
-    
+
+  # Hide all 'tabs' and show the Step part.
   temps: ->
     @hideAllContent()
     @selectCorrectTab 'Initialisation','Temps'
     @showContent 'tab_12_content'
-    
+
+  # Hide all 'tabs' and show the Material part.
   materiaux: ->
     @hideAllContent()
     @selectCorrectTab 'Temps','Matériaux'
     @showContent 'tab_13_content'
 
+  # Hide all 'tabs' and show the Link part.
   liaisons: ->
     @hideAllContent()
     @selectCorrectTab 'Matériaux', 'Liaisons'
     @showContent 'tab_14_content'
 
+  # Hide all 'tabs' and show the Conditions part.
   conditions: ->
     @hideAllContent()
     @selectCorrectTab 'Liaisons', 'Conditions_Limites'
     @showContent 'tab_15_content'
 
+  # Hide all 'tabs' and show the Options part.
   options: ->
     @hideAllContent()
     @selectCorrectTab 'Conditions_Limites', 'Options'
     @showContent 'tab_16_content'
 
+  # Hide all 'tabs' and show the Prevision part.
   previsions: ->
     @hideAllContent()
     @selectCorrectTab 'Options', 'Prévisions'

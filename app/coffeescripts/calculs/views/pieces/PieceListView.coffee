@@ -22,9 +22,9 @@ SCVisu.PieceListView = Backbone.View.extend
       $(pieceView.el).addClass('gray').removeClass('selected')
     $(pieceView.el).addClass('selected').removeClass('gray')
     if pieceView.model.get('material_id') == 0
-      SCVisu.MaterialViews.showAssignButtons()
+      SCVisu.materialListView.showAssignButtons()
     else
-      SCVisu.MaterialViews.highlightMaterial(pieceView.model.get('material_id'))
+      SCVisu.materialListView.highlightMaterial(pieceView.model.get('material_id'))
 
   # Add an "Assign" button to each piece view in order that the user can 
   # assign it to a selected material. 

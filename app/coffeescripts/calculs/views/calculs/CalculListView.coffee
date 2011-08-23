@@ -17,7 +17,7 @@ SCVisu.CalculListView = Backbone.View.extend
     Backbone.sync("read", SCVisu.current_calcul,
       success: (response) ->
         SCVisu.current_calcul.set brouillon: response.brouillon
-        initializeFromJSON()
+        SCVisu.initializeFromJSON()
     )
   
   save_calcul: ->
