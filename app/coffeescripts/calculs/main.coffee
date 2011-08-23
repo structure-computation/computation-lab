@@ -4,23 +4,30 @@ $ ->
   interfaceCollection = new SCVisu.Interfaces()
   SCVisu.interfaceListView = new SCVisu.InterfaceListView collection : interfaceCollection
   
+  # Initialize all variables and views with data retrieved from the JSON sent by the "Visualisateur"
+  # /!\ Variable's name must not be changed! They are used in multiple place in the code. /!\
   SCVisu.initializeFromJSON = () ->
-    # /!\ Le nom des variables suivantes ne doit pas être changé ! Ces variables sont appelées à plusieurs endroits /!\        
-    # Creation of the pieceCollection from the JSON file
+
+    # Initialization of the PieceListView
     pieceCollection = new SCVisu.PieceCollection SCVisu.current_calcul.get('brouillon').pieces
     SCVisu.pieceListView = new SCVisu.PieceListView collection : pieceCollection
 
-    MaterialCollection = new SCVisu.Materials SCVisu.current_calcul.get('brouillon').materials
-    SCVisu.MaterialViews = new SCVisu.MaterialListView collection: MaterialCollection
+    # Initialization of the MaterialListView
+    materialCollection = new SCVisu.MaterialCollection SCVisu.current_calcul.get('brouillon').materials
+    SCVisu.materialListView = new SCVisu.MaterialListView collection: materialCollection
+
+    # Initialization of the StepListView    
+    steps = new SCVisu.StepCollection SCVisu.current_calcul.get('brouillon').time_step
+    SCVisu.stepListView = new SCVisu.StepListView collection: steps
     
-    Steps = new SCVisu.StepCollection SCVisu.current_calcul.get('brouillon').time_step
-    SCVisu.StepsView = new SCVisu.StepListView collection: Steps
-    
-    Links = new SCVisu.Links SCVisu.current_calcul.get('brouillon').links
-    SCVisu.LinksView = new SCVisu.LinkListView collection: Links
+    # Initialization of the LinkListView
+    links = new SCVisu.Links SCVisu.current_calcul.get('brouillon').links
+    SCVisu.linkListView = new SCVisu.LinkListView collection: links
   
+  # To be done
   interfaceCollection = new SCVisu.Interfaces()
   SCVisu.interfaceListView = new SCVisu.InterfaceListView collection : interfaceCollection
   
+  # Initialization of the Router
   SCVisu.router = new SCVisu. Router
   Backbone.history.start()

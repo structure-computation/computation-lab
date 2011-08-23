@@ -6,7 +6,7 @@ SCVisu.Material = Backbone.Model.extend
     @piece = piece
 
   
-SCVisu.Materials = Backbone.Collection.extend
+SCVisu.MaterialCollection = Backbone.Collection.extend
   model: SCVisu.Material
   initialize: (options) ->
     @company_id = if SCVisu.current_company? then SCVisu.current_company else 0
