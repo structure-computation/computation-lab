@@ -1,4 +1,7 @@
 window.Router = Backbone.Router.extend
+  initialize: ->
+    @initialisation()
+
   routes:
     "Initialisation"     : "initialisation"
     "Temps"              : "temps"
