@@ -4,7 +4,7 @@ $ ->
   interfaceCollection = new SCVisu.Interfaces()
   SCVisu.interfaceListView = new SCVisu.InterfaceListView collection : interfaceCollection
   
-  window.initializeFromJSON = () ->
+  SCVisu.initializeFromJSON = () ->
     # /!\ Le nom des variables suivantes ne doit pas être changé ! Ces variables sont appelées à plusieurs endroits /!\        
     # Creation of the pieceCollection from the JSON file
     pieceCollection = new SCVisu.PieceCollection SCVisu.current_calcul.get('brouillon').pieces
