@@ -8,6 +8,7 @@ window.LinkListView = Backbone.View.extend
     for link in @collection.models
       @createLinkView(link)
     @render() 
+    @selectedLinkModel = null
 
   createLinkView: (link) ->
     l = new LinkView model: link, parentElement: this
@@ -17,6 +18,38 @@ window.LinkListView = Backbone.View.extend
   update_details: (model) ->
     @editView.updateModel model   
 
+  # Highlight the link which have link_id as id and add an "Unassign" button
+  highlightLink: (link_id) ->
+    _.each @linkViews, (view) ->
+      if view.model.get('id') == link_id
+        $(view.el).addClass('selected').removeClass('gray')
+        view.showUnassignButton()
+
+  # Show an assign button to each link view
+  showAssignButtons: ->
+    _.each @linkViews, (view) ->
+      $(view.el).removeClass('selected').removeClass('gray')
+      view.showAssignButton()
+
+  # Is executed when a link view has been clicked.
+  # Tell the interfaces view to show all interfaces who have this link
+  selectLink: (linkView) ->
+    @highlightView linkView
+    @selectedLinkModel = linkView.model
+    window.interfaceListView.linkHasBeenSelected(linkView.model)
+ 
+  # Add link to interface
+  assignLinkToSelectedInterface: (linkView) ->
+    window.interfaceListView.selectedInterfaceModel.set link_id : linkView.model.get('id')
+
+  # Highlight the 'linkView' with adding css class
+  highlightView: (linkView) ->
+    _.each @linkViews, (view) -> 
+      $(view.el).addClass('gray').removeClass('selected')
+    $(linkView.el).addClass('selected').removeClass('gray')
+  
+  unassignLinkToSelectedInterface: ->
+    window.interfaceListView.selectedInterfaceModel.set link_id : 0
   render : ->
     for l in @linkViews
       l.render()
