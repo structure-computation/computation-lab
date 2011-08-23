@@ -1,4 +1,7 @@
 window.Router = Backbone.Router.extend
+  initialize: ->
+    @initialisation()
+
   routes:
     "Initialisation"     : "initialisation"
     "Temps"              : "temps"
@@ -7,7 +10,7 @@ window.Router = Backbone.Router.extend
     "Conditions_Limites" : "conditions"
     "Options"            : "options"
     "Prévisions"         : "previsions"
-    
+  
   initialisation: ->
     @hideAllContent()
     @selectCorrectTab '','Initialisation'
