@@ -24,9 +24,8 @@ $ ->
     links = new SCVisu.Links SCVisu.current_calcul.get('brouillon').links
     SCVisu.linkListView = new SCVisu.LinkListView collection: links
   
-  # To be done
-  interfaceCollection = new SCVisu.Interfaces()
-  SCVisu.interfaceListView = new SCVisu.InterfaceListView collection : interfaceCollection
+    interfaceCollection = new Interfaces SCVisu.current_calcul.get('brouillon').interfaces
+    SCVisu.interfaceListView = new SCVisu.InterfaceListView collection : interfaceCollection
   
   # Initialization of the Router
   SCVisu.router = new SCVisu. Router

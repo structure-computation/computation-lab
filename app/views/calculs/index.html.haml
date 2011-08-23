@@ -75,13 +75,9 @@
 - content_for :coffee do 
   :coffeescript
     $ ->
-      SCVisu.LinkCollection = new SCVisu.Links {company_id: #{current_user.company_id}}
-      SCVisu.LinkCollection.reset #{@links.to_json.html_safe}
-      SCVisu.LinkViews = new SCVisu.LinkListView {collection: SCVisu.LinkCollection}
       SCVisu.CalculCollection = new SCVisu.Calculs
       SCVisu.CalculCollection.reset #{@calculs.to_json.html_safe}
       SCVisu.CalculViews = new SCVisu.CalculListView {collection: SCVisu.CalculCollection}
-
 
       SCVisu.current_company = #{current_user.company_id}
 

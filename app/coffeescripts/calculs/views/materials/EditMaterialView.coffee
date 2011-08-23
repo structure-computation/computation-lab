@@ -14,7 +14,7 @@ SCVisu.EditMaterialView = Backbone.View.extend
   # Dupplicate the current material and save it in the database
   saveAsNew: ->
     @disableButtons()
-    m = new Material
+    m = new SCVisu.Material
     # Retrieve all attributes for the new material
     for input in $(@el).find('input, textarea')
       key = $(input).attr('id').split('material_')[1]
@@ -34,7 +34,7 @@ SCVisu.EditMaterialView = Backbone.View.extend
       h[key] = value
       @model.set h
     @model.save()
-    SCVisu.current_calcul.trigger 'update_materials', MaterialViews.collection.models  
+    SCVisu.current_calcul.trigger 'update_materials', SCVisu.materialListView.collection.models  
     @render(true)
 
   updateModel: (model) ->

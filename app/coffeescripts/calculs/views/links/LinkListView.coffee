@@ -41,6 +41,7 @@ SCVisu.LinkListView = Backbone.View.extend
   # Add link to interface
   assignLinkToSelectedInterface: (linkView) ->
     SCVisu.interfaceListView.selectedInterfaceModel.set link_id : linkView.model.get('id')
+    SCVisu.current_calcul.trigger 'update_interfaces', SCVisu.interfaceListView.collection.models
 
   # Highlight the 'linkView' with adding css class
   highlightView: (linkView) ->
@@ -50,6 +51,8 @@ SCVisu.LinkListView = Backbone.View.extend
   
   unassignLinkToSelectedInterface: ->
     SCVisu.interfaceListView.selectedInterfaceModel.set link_id : 0
+    SCVisu.current_calcul.trigger 'update_interfaces', SCVisu.interfaceListView.collection.models
+    
   render : ->
     for l in @linkViews
       l.render()
