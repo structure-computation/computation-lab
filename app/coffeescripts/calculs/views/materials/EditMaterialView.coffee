@@ -31,7 +31,11 @@ window.EditMaterialView = Backbone.View.extend
       h = new Object()
       h[key] = value
       @model.set h
-    @model.save()
+    @model.save(
+      success: (response) -> 
+        console.log response
+    )
+    window.current_calcul.trigger 'update_materials', MaterialViews.collection.models  
     @render(true)
 
   updateModel: (model) ->

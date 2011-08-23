@@ -21,20 +21,27 @@ window.Calcul = Backbone.Model.extend
     @set brouillon             :
       time_step: []
       materials: []
+      pieces: []
       
     @sc_model_id = calcul.sc_model_id
     
     @url = "/sc_models/#{@sc_model_id}/calculs/" + @id
     
     # Bind this object in order to react at the 'update_time_step' event
-    @bind 'update_time_step', @update_time_step, @
+    @bind 'update_time_step', @updateTimeStep, @
+    @bind 'update_materials', @updateMaterials, @
+    @bind 'update_pieces', @updatePieces, @
 
   # Update time_step of the current model with the array of time_step passed in parameters
-  update_time_step: (time_step_array) ->
-    @get('brouillon').time_step = time_step_array
+  updateTimeStep: (timeStepArray) ->
+    @get('brouillon').time_step = timeStepArray
 
-  update_materials: (params) ->
-    @get('brouillon').time_step = params
+  updateMaterials: (materialArray) ->
+    @get('brouillon').materials = materialArray
+
+  updatePieces: (pieceArray) ->
+    console.log pieceArray
+    @get('brouillon').pieces = pieceArray
 
 window.Calculs = Backbone.Collection.extend
   model: Calcul

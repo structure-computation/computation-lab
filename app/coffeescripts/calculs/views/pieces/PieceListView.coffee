@@ -38,18 +38,22 @@ window.PieceListView = Backbone.View.extend
   # Assign the pieceModel to the selected Material.
   assignPieceToMaterial: (pieceModel) ->
     pieceModel.setMaterial(window.MaterialViews.selectedMaterial)
-
+    window.current_calcul.trigger 'update_pieces', pieceListView.collection.models
+    
   # Assign the pieceModel to the selected Material.
   unassignPieceToMaterial: (pieceModel) ->
     pieceModel.setMaterial(0)
-
+    window.current_calcul.trigger 'update_pieces', pieceListView.collection.models
+    
   # Assign the selected material to the currently selected piece.
   assignMaterialToSelectedPiece: (material) ->
     @selectedPieceView.model.set material_id: material.get('id')
-
+    window.current_calcul.trigger 'update_pieces', pieceListView.collection.models
+    
   # Unassign the selected material from the currently selected piece.
   unassignMaterialToSelectedPiece: ->
     @selectedPieceView.model.set material_id: 0
+    window.current_calcul.trigger 'update_pieces', pieceListView.collection.models
     
   render : ->
     _.each @pieceViews, (piece) ->

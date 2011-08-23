@@ -66,9 +66,6 @@
   #edit_link.tab_14_content
     = render "calculs/partials/link_details_part"
 
-- # TODO: Ramener dans ce fichier quand cela sera terminé. On charge dans ce partial le code de visualisation.
-= render "calculs/partials/visualisation_interface"
-
 
 - content_for :coffee do 
   :coffeescript
@@ -76,12 +73,14 @@
       window.LinkCollection = new Links {company_id: #{current_user.company_id}}
       window.LinkCollection.reset #{@links.to_json.html_safe}
       window.LinkViews = new LinkListView {collection: LinkCollection}
-      window.MaterialCollection = new Materials {company_id: #{current_user.company_id}}
-      window.MaterialCollection.reset #{@materials.to_json.html_safe}
-      window.MaterialViews = new MaterialListView {collection: MaterialCollection}
       window.CalculCollection = new Calculs
       window.CalculCollection.reset #{@calculs.to_json.html_safe}
       window.CalculViews = new CalculListView {collection: CalculCollection}
+
+
+      window.current_company = #{current_user.company_id}
+
+
 / %h2 Initialisation du calcul
 
 / 

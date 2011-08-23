@@ -9,8 +9,14 @@ window.Material = Backbone.Model.extend
 window.Materials = Backbone.Collection.extend
   model: Material
   initialize: (options) ->
-    @company_id = if options.company_id? then options.company_id else 0
+    @company_id = if window.current_company? then window.current_company else 0
     @url = "/companies/#{@company_id}/materials"
     @bind "add", (ship) ->
-      ship.save()
+      console.log ship
+      ship.save(
+        success: (response) -> 
+          console.log response
+        error: (response) ->
+          console.log response
+      )
       
