@@ -51,7 +51,7 @@ class CalculResult < ActiveRecord::Base
   end
 
   def save_brouillon(params) #enregistrement du fichier brouillon
-    jsonobject = JSON.parse(params[:file])
+    jsonobject = params
     file = JSON.pretty_generate(jsonobject)
     
     # on enregistre le fichier sur le disque et on change les droit pour que le serveur de calcul y ait acces

@@ -1,7 +1,6 @@
 $ ->
-  Steps   = new StepCollection
-  window.StepsView = new StepListView collection: Steps
-
+  
+  
   # Initialisation of a factice PieceCollection
   pieceCollection = new PieceCollection(
     [{

@@ -1,16 +1,15 @@
 window.Step = Backbone.Model.extend
-  defaults: {
-    name            : "step_",
-    initial_time    : 0,
-    time_step       : 1,
-    nb_time_steps   : 1,
-    final_time      : 1,    
-  }
-  
+  initial_time  : 0
+  nb_time_steps : 1
+  time_step     : 1
+  final_time    : 1
+  name          : "default_name"
+   
   initialize: ->
     @updateFinalTime()
     @bind('add', @updateFinalTime)
     @bind('change', @updateFinalTime)
+
   updateFinalTime: ->
     newFinalTime = @get('initial_time') + (@get('nb_time_steps') * @get('time_step'))
     @set({ final_time: newFinalTime})
