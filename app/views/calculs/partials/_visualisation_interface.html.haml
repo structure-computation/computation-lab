@@ -1,2 +1,16 @@
+
+
+
+
 - content_for :visu do 
-  %canvas#c_0
+  %canvas#visualisationDock
+
+  :coffeescript
+    visualisationDisplay = new window.SCVisu.ScDisp( "visualisationDock" );
+    
+    # Ajout d'un repaire
+    visualisationDisplay.add_item( new window.SCVisu.ScItem_GradiendBackground( [
+        [ 0.0, "rgb( 0, 0,   0 )" ],
+        [ 0.5, "rgb( 0, 0,  40 )" ],
+        [ 1.0, "rgb( 0, 0, 100 )" ]
+    ] ) );
