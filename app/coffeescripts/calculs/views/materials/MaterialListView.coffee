@@ -8,6 +8,7 @@ window.MaterialListView = Backbone.View.extend
     for material in @collection.models
       @createMaterialView(material)
     @selectedMaterial = null
+    @clearView()
     @render()
     
 
@@ -17,8 +18,16 @@ window.MaterialListView = Backbone.View.extend
     @materialViews.push m
     
   update_details: (model) ->
-    @editView.updateModel model   
-
+    @editView.updateModel model
+      
+  # Clears all elements previously loaded in the DOM. 
+  # Indeed, the 'ul#materials' element already exists in the DOM and every time we create a MaterialListView, 
+  # we render the view and we add some element inside. And even if we have many different view, 
+  # each time we render we add elements to the same view. 
+  # So we have to clear the content each time we create a new MaterialListView 
+  clearView: ->
+    $(@el).html('')
+    
   render : ->
     for m in @materialViews
       m.render()

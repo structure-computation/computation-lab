@@ -1,12 +1,13 @@
 window.Piece = Backbone.Model.extend
   initialize: (piece) ->
-    @group          = piece.group
-    @name           = piece.name
-    @origin         = piece.origin
-    @assigned       = piece.assigned
-    @id             = piece.id
-    @identificateur = piece.identificateur
-    @set material_id: piece.material_id || 0
+    @set group          : piece.group
+    @set name           : piece.name
+    @set origin         : piece.origin
+    @set assigned       : piece.assigned
+    @set id             : piece.id
+    @set identificateur : piece.identificateur
+    @set material_id    : piece.material_id || 0
+    
     @bind 'set_material',  @set_material, this
 
   # Object or Id can be passed in parameter

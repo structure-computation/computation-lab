@@ -40,7 +40,12 @@ window.StepListView = Backbone.View.extend
       stepView.render()
     if @stepViews.length == 1
       @stepViews[0].removeDeleteButton()
-
+      
+  # Clears all elements previously loaded in the DOM. 
+  # Indeed, the 'ul#materials' element already exists in the DOM and every time we create a MaterialListView, 
+  # we render the view and we add some element inside. And even if we have many different view, 
+  # each time we render we add elements to the same view. 
+  # So we have to clear the content each time we create a new MaterialListView 
   clearView: ->
     $(@el).find('table#steps_table tbody').html('')
 

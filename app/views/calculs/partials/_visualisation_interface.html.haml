@@ -1,2 +1,24 @@
+
+
+
+
 - content_for :visu do 
-  %canvas#c_0
+  %canvas#visualisationDock
+  #com
+    
+
+  :coffeescript
+    visualisationDisplay = new window.SCVisu.ScDisp( "visualisationDock" );
+    
+    # Ajout d'un repaire
+    visualisationDisplay.add_item( new window.SCVisu.ScItem_GradiendBackground( [
+        [ 0.0, "rgb( 0, 0,   0 )" ],
+        [ 0.5, "rgb( 0, 0,  40 )" ],
+        [ 1.0, "rgb( 0, 0, 100 )" ]
+    ] ) );
+    
+    visualisationDisplay.add_item( new window.SCVisu.ScItem_Axes( "lb" ) );
+
+    visualisationDisplay.click_fun = ( sc, evt ) ->
+        document.getElementById( "com" ).firstChild.data = sc.get_num_group( evt.clientX, evt.clientY )
+    

@@ -49,6 +49,7 @@ window.MaterialView = Backbone.View.extend
     $(@el).addClass('selected').removeClass('gray')
     @showUnassignButton()
     
+    
   # Render the list view with an extra button for assigning or unassigning material.
   renderWithButton: (className, textButton) ->
     $(@el).removeClass('selected').removeClass('gray')

@@ -17,6 +17,14 @@ window.CalculListView = Backbone.View.extend
     Backbone.sync("read", current_calcul,
       success: (response) ->
         current_calcul.set brouillon: response.brouillon
+        
+        # /!\ Le nom des variables suivantes ne doit pas être changé ! Ces variables sont appelées à plusieurs endroits /!\
+        window.pieceCollection = new PieceCollection window.current_calcul.get('brouillon').pieces
+        window.pieceListView = new PieceListView collection : pieceCollection
+
+        window.MaterialCollection = new Materials window.current_calcul.get('brouillon').materials
+        window.MaterialViews = new MaterialListView collection: MaterialCollection
+        
         window.Steps = new StepCollection window.current_calcul.get('brouillon').time_step
         window.StepsView = new StepListView collection: Steps
     )
