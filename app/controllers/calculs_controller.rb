@@ -20,15 +20,15 @@ class CalculsController < ApplicationController
     @calculs    = CalculResult.find_all_by_sc_model_id(params[:sc_model_id])
   end
   
-  def info_model
-    @id_model = params[:id_model]  
-    
-    # lecture du fichier sur le disque
-    path_to_file = "#{SC_MODEL_ROOT}/model_#{@id_model}/MESH/mesh.txt"
-    results = File.read(path_to_file)
-    
-    render :json => results
-  end
+  # def info_model
+#     @id_model = params[:id_model]  
+#     
+#     # lecture du fichier sur le disque
+#     path_to_file = "#{SC_MODEL_ROOT}/model_#{@id_model}/MESH/mesh.txt"
+#     results = File.read(path_to_file)
+#     
+#     render :json => results
+#   end
   
   def calculs
     @id_model = params[:id_model]
@@ -63,14 +63,14 @@ class CalculsController < ApplicationController
     @CLs[1] = BoundaryCondition.new(:ref=>'v1', :type_picto=>'acceleration', :bctype=>'volume', :name=>'effort d\'accélération')
     @CLs[2] = BoundaryCondition.new(:ref=>'v2', :type_picto=>'centrifuge',   :bctype=>'volume', :name=>'effort centrifuge')
 	
-	@CLs[3] = BoundaryCondition.new(:ref=>'e0', :type_picto=>'effort',   :bctype=>'effort', :name=>"densité d'effort")
-	@CLs[4] = BoundaryCondition.new(:ref=>'e1', :type_picto=>'effort',   :bctype=>'effort_normal', :name=>"densité d'effort normal")
-	@CLs[5] = BoundaryCondition.new(:ref=>'e2', :type_picto=>'effort',   :bctype=>'pression', :name=>'pression')
-	
-	@CLs[6] = BoundaryCondition.new(:ref=>'d0', :type_picto=>'depl',   :bctype=>'depl_nul', :name=>'déplacement nul')
-	@CLs[7] = BoundaryCondition.new(:ref=>'d1', :type_picto=>'depl',   :bctype=>'depl', :name=>'déplacement imposé')
-	@CLs[8] = BoundaryCondition.new(:ref=>'d2', :type_picto=>'depl',   :bctype=>'depl_normal', :name=>'déplacement normal imposé')
-	@CLs[9] = BoundaryCondition.new(:ref=>'d3', :type_picto=>'depl',   :bctype=>'sym', :name=>'symétrie')
+  	@CLs[3] = BoundaryCondition.new(:ref=>'e0', :type_picto=>'effort',   :bctype=>'effort', :name=>"densité d'effort")
+  	@CLs[4] = BoundaryCondition.new(:ref=>'e1', :type_picto=>'effort',   :bctype=>'effort_normal', :name=>"densité d'effort normal")
+  	@CLs[5] = BoundaryCondition.new(:ref=>'e2', :type_picto=>'effort',   :bctype=>'pression', :name=>'pression')
+  	
+  	@CLs[6] = BoundaryCondition.new(:ref=>'d0', :type_picto=>'depl',   :bctype=>'depl_nul', :name=>'déplacement nul')
+  	@CLs[7] = BoundaryCondition.new(:ref=>'d1', :type_picto=>'depl',   :bctype=>'depl', :name=>'déplacement imposé')
+  	@CLs[8] = BoundaryCondition.new(:ref=>'d2', :type_picto=>'depl',   :bctype=>'depl_normal', :name=>'déplacement normal imposé')
+  	@CLs[9] = BoundaryCondition.new(:ref=>'d3', :type_picto=>'depl',   :bctype=>'sym', :name=>'symétrie')
 	    
     respond_to do |format|
       format.js   {render :json => @CLs.to_json}
@@ -134,12 +134,9 @@ class CalculsController < ApplicationController
   def calcul_valid
     @id_model = params[:id_model]
     @id_calcul = params[:id_calcul]
-
     @current_model = ScModel.find(@id_model)
     @current_calcul = @current_model.calcul_results.find(@id_calcul)
-    
     @current_calcul.calcul_valid(params) 
-    
     render :text => { :result => 'success' }
   end
   
