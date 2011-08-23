@@ -1,9 +1,9 @@
 ## MaterialListView
-window.MaterialListView = Backbone.View.extend
+SCVisu.MaterialListView = Backbone.View.extend
   el: 'ul#materials'
 
   initialize: (options) ->
-    @editView = new EditMaterialView parentElement: this
+    @editView = new SCVisu.EditMaterialView parentElement: this
     @materialViews = []
     for material in @collection.models
       @createMaterialView(material)
@@ -13,7 +13,7 @@ window.MaterialListView = Backbone.View.extend
     
 
   createMaterialView: (material) ->
-    m = new MaterialView model: material, parentElement: this
+    m = new SCVisu.MaterialView model: material, parentElement: this
     m.bind 'update_details_model', @update_details, this
     @materialViews.push m
     
@@ -38,7 +38,7 @@ window.MaterialListView = Backbone.View.extend
   selectMaterial: (materialView) ->
     @highlightView materialView
     @selectedMaterial = materialView.model
-    window.pieceListView.materialHasBeenSelected(materialView.model)
+    SCVisu.pieceListView.materialHasBeenSelected(materialView.model)
 
   # Highlight the material which have material_id as id
   highlightMaterial: (material_id) ->
@@ -55,11 +55,11 @@ window.MaterialListView = Backbone.View.extend
 
   # Assign the selected material to currently selected piece
   assignMaterialToSelectedPiece: (material) ->
-    window.pieceListView.assignMaterialToSelectedPiece material
+    SCVisu.pieceListView.assignMaterialToSelectedPiece material
 
   # Unassign selected material to currently selected piece
   unassignMaterial: (material) ->
-    window.pieceListView.unassignMaterialToSelectedPiece material
+    SCVisu.pieceListView.unassignMaterialToSelectedPiece material
     @showAssignButtons()
 
   highlightView: (materialView) ->

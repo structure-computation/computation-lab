@@ -1,7 +1,8 @@
+# SCVisu is initialized in the header in order that it is initialize at first
+# window.SCVisu = {} 
 $ ->
+  interfaceCollection = new SCVisu.Interfaces()
+  SCVisu.interfaceListView = new SCVisu.InterfaceListView collection : interfaceCollection
   
-  interfaceCollection = new Interfaces()
-  window.interfaceListView = new InterfaceListView collection : interfaceCollection
-  
-  window.router = new Router
+  SCVisu.router = new SCVisu. Router
   Backbone.history.start()

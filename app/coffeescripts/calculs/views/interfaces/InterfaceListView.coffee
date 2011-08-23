@@ -1,5 +1,5 @@
 ## InterfaceListView
-window.InterfaceListView = Backbone.View.extend
+SCVisu.InterfaceListView = Backbone.View.extend
   el: 'ul#interfaces'
   
   # You have to pass a InterfaceCollection at initialisation as follow:
@@ -7,7 +7,7 @@ window.InterfaceListView = Backbone.View.extend
   initialize: ->
     @interfaceViews = []
     for interface in @collection.models
-      @interfaceViews.push new InterfaceView model: interface, parentElement: this
+      @interfaceViews.push new SCVisu.InterfaceView model: interface, parentElement: this
     @selectedInterfaceModel = null
     @render()
 
@@ -22,9 +22,9 @@ window.InterfaceListView = Backbone.View.extend
       $(interfaceView.el).addClass('gray').removeClass('selected')
     $(interfaceView.el).addClass('selected').removeClass('gray')
     if interfaceView.model.get('link_id') == 0
-      window.LinkViews.showAssignButtons()
+      SCVisu.LinkViews.showAssignButtons()
     else
-      window.LinkViews.highlightLink(interfaceView.model.get('link_id'))
+      SCVisu.LinkViews.highlightLink(interfaceView.model.get('link_id'))
 
   # Add an "Assign" button to each link view in order that the user can 
   # assign it to a selected interface. 
@@ -37,7 +37,7 @@ window.InterfaceListView = Backbone.View.extend
 
   # Assign the pieceModel to the selected Material.
   assignInterfaceToLink: (interfaceModel) ->
-    interfaceModel.set link_id : window.LinkViews.selectedLinkModel.get('id')
+    interfaceModel.set link_id : SCVisu.LinkViews.selectedLinkModel.get('id')
 
   # Assign the pieceModel to the selected Material.
   unassignInterfaceToLink: (interfaceModel) ->

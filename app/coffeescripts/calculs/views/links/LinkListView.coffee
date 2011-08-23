@@ -1,9 +1,9 @@
 ## LinkListView
-window.LinkListView = Backbone.View.extend
+SCVisu.LinkListView = Backbone.View.extend
   el: 'ul#links'
   
   initialize: (options) ->
-    @editView = new EditLinkView parentElement: this
+    @editView = new SCVisu.EditLinkView parentElement: this
     @linkViews = []
     for link in @collection.models
       @createLinkView(link)
@@ -11,7 +11,7 @@ window.LinkListView = Backbone.View.extend
     @selectedLinkModel = null
 
   createLinkView: (link) ->
-    l = new LinkView model: link, parentElement: this
+    l = new SCVisu.LinkView model: link, parentElement: this
     l.bind 'update_details_model', @update_details, this
     @linkViews.push l
     
@@ -36,11 +36,11 @@ window.LinkListView = Backbone.View.extend
   selectLink: (linkView) ->
     @highlightView linkView
     @selectedLinkModel = linkView.model
-    window.interfaceListView.linkHasBeenSelected(linkView.model)
+    SCVisu.interfaceListView.linkHasBeenSelected(linkView.model)
  
   # Add link to interface
   assignLinkToSelectedInterface: (linkView) ->
-    window.interfaceListView.selectedInterfaceModel.set link_id : linkView.model.get('id')
+    SCVisu.interfaceListView.selectedInterfaceModel.set link_id : linkView.model.get('id')
 
   # Highlight the 'linkView' with adding css class
   highlightView: (linkView) ->
@@ -49,7 +49,7 @@ window.LinkListView = Backbone.View.extend
     $(linkView.el).addClass('selected').removeClass('gray')
   
   unassignLinkToSelectedInterface: ->
-    window.interfaceListView.selectedInterfaceModel.set link_id : 0
+    SCVisu.interfaceListView.selectedInterfaceModel.set link_id : 0
   render : ->
     for l in @linkViews
       l.render()

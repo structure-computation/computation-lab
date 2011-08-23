@@ -71,15 +71,15 @@
 - content_for :coffee do 
   :coffeescript
     $ ->
-      window.LinkCollection = new Links {company_id: #{current_user.company_id}}
-      window.LinkCollection.reset #{@links.to_json.html_safe}
-      window.LinkViews = new LinkListView {collection: LinkCollection}
-      window.CalculCollection = new Calculs
-      window.CalculCollection.reset #{@calculs.to_json.html_safe}
-      window.CalculViews = new CalculListView {collection: CalculCollection}
+      SCVisu.LinkCollection = new SCVisu.Links {company_id: #{current_user.company_id}}
+      SCVisu.LinkCollection.reset #{@links.to_json.html_safe}
+      SCVisu.LinkViews = new SCVisu.LinkListView {collection: SCVisu.LinkCollection}
+      SCVisu.CalculCollection = new SCVisu.Calculs
+      SCVisu.CalculCollection.reset #{@calculs.to_json.html_safe}
+      SCVisu.CalculViews = new SCVisu.CalculListView {collection: SCVisu.CalculCollection}
 
 
-      window.current_company = #{current_user.company_id}
+      SCVisu.current_company = #{current_user.company_id}
 
 
 / %h2 Initialisation du calcul

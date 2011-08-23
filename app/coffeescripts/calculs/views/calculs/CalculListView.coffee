@@ -1,4 +1,4 @@
-window.CalculListView = Backbone.View.extend
+SCVisu.CalculListView = Backbone.View.extend
   el: 'ul#calculs'
 
   initialize: (options) ->
@@ -12,34 +12,34 @@ window.CalculListView = Backbone.View.extend
     "click .save_calcul": "save_calcul"
   # Fonction appellé lorsque l'on clique sur le bouton 'Charger le calcul'. Elle créee alors  le current_calcul qui sera utilisé tout au long du calcul
   load_calcul: ->
-    window.current_calcul = new Calcul @selected_calcul
+    SCVisu.current_calcul = new SCVisu.Calcul @selected_calcul
 
-    Backbone.sync("read", current_calcul,
+    Backbone.sync("read", SCVisu.current_calcul,
       success: (response) ->
-        current_calcul.set brouillon: response.brouillon
+        SCVisu.current_calcul.set brouillon: response.brouillon
         
         # /!\ Le nom des variables suivantes ne doit pas être changé ! Ces variables sont appelées à plusieurs endroits /!\
-        window.pieceCollection = new PieceCollection window.current_calcul.get('brouillon').pieces
-        window.pieceListView = new PieceListView collection : pieceCollection
+        SCVisu.pieceCollection = new SCVisu.PieceCollection SCVisu.current_calcul.get('brouillon').pieces
+        SCVisu.pieceListView = new SCVisu.PieceListView collection : SCVisu.pieceCollection
 
-        window.MaterialCollection = new Materials window.current_calcul.get('brouillon').materials
-        window.MaterialViews = new MaterialListView collection: MaterialCollection
+        SCVisu.MaterialCollection = new SCVisu.Materials SCVisu.current_calcul.get('brouillon').materials
+        SCVisu.MaterialViews = new SCVisu.MaterialListView collection: SCVisu.MaterialCollection
         
-        window.Steps = new StepCollection window.current_calcul.get('brouillon').time_step
-        window.StepsView = new StepListView collection: Steps
+        SCVisu.Steps = new SCVisu.StepCollection SCVisu.current_calcul.get('brouillon').time_step
+        SCVisu.StepsView = new SCVisu.StepListView collection: SCVisu.Steps
     )
   
   save_calcul: ->
-    Backbone.sync "update", current_calcul
+    Backbone.sync "update", SCVisu.current_calcul
   
   select_calcul:(calcul) ->
     for calculView in @calculViews
       $(calculView.el).removeClass('selected')
     $(calcul.el).addClass 'selected'
-    @selected_calcul = new Calcul calcul.model
+    @selected_calcul = new SCVisu.Calcul calcul.model
 
   createCalculView: (calcul) ->
-    c = new CalculView model: calcul, parentElement: this
+    c = new SCVisu.CalculView model: calcul, parentElement: this
     @calculViews.push c
 
   render : ->
