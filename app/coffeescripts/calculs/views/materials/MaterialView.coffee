@@ -22,7 +22,6 @@ window.MaterialView = Backbone.View.extend
   select: (event) ->
     if event.srcElement == @el
       @parentElement.selectMaterial @
-      @parentElement.render()
 
   # Clone the model of the clicked material view
   clone: ->
