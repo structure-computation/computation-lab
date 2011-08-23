@@ -5,12 +5,13 @@ visualizationPlaceHolder        = $( "#visu_calcul" )
 
 # Attention, ici il faut l'élément DOM et non jquery.
 visualizationDOMCanvas          = document.getElementById( "visualisation_dock" ); 
-
+visualizationDock               = null
 
 handle_resize_for_visualisation_canevas = ()   ->                              
   visualizationDOMCanvas.height      = visualizationPlaceHolder.innerHeight()
   visualizationDOMCanvas.width       = visualizationPlaceHolder.innerWidth()
   # TODO : est-ce que SCDisp sait gérer le resize ?
+  visualizationDock.draw() if visualizationDock?
 
 
 # A chaque modification de taille on replace correctement les valeurs du canevas.
