@@ -1,3 +1,7 @@
+# Material
+# Contains all attributes of a Material stored in the database
+# Attributes can be retrieve from the model's JSON or from the database
+
 SCVisu.Material = Backbone.Model.extend
   initialize: ->
     @piece = null

@@ -1,5 +1,10 @@
+# Link
+# Contains all attributes of a Link stored in the database
+# Attributes can be retrieve from the model's JSON or from the database
+
 SCVisu.Link = Backbone.Model.extend()
 
+# Collection of Link
 SCVisu.Links = Backbone.Collection.extend
   model: SCVisu.Link
   initialize: (options) ->

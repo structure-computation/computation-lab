@@ -1,3 +1,7 @@
+# Piece
+# Contains all attributes of a Piece.
+# Attributes are retrieve from the model's JSON
+
 SCVisu.Piece = Backbone.Model.extend
   initialize: (piece) ->
     @set group          : piece.group

@@ -3,7 +3,8 @@
 #   Steps
 #   Pieces
 #   Etc.
-#
+# The model is saved in the Database
+
 SCVisu.Calcul = Backbone.Model.extend
   initialize: (calcul) ->
     @set gpu_allocated         : calcul.gpu_allocated
@@ -44,14 +45,18 @@ SCVisu.Calcul = Backbone.Model.extend
   updateTimeStep: (timeStepsArray) ->
     @get('brouillon').time_step = timeStepsArray
 
+  # Update materials of the current model with the array of materials passed in parameters
   updateMaterials: (materialsArray) ->
     @get('brouillon').materials = materialsArray
 
+  # Update pieces of the current model with the array of pieces passed in parameters
   updatePieces: (piecesArray) ->
     @get('brouillon').pieces = piecesArray
-  
+
+  # Update links of the current model with the array of links passed in parameters
   updateLinks: (linksArray) ->
     @get('brouillon').links = linksArray
     
+# Collection of Calcul
 SCVisu.Calculs = Backbone.Collection.extend
   model: SCVisu.Calcul
