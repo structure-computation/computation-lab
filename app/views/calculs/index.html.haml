@@ -71,9 +71,6 @@
 - content_for :coffee do 
   :coffeescript
     $ ->
-      window.LinkCollection = new Links {company_id: #{current_user.company_id}}
-      window.LinkCollection.reset #{@links.to_json.html_safe}
-      window.LinkViews = new LinkListView {collection: LinkCollection}
       window.CalculCollection = new Calculs
       window.CalculCollection.reset #{@calculs.to_json.html_safe}
       window.CalculViews = new CalculListView {collection: CalculCollection}

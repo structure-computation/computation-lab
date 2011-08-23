@@ -11,37 +11,3 @@ window.Interface = Backbone.Model.extend
 
 window.Interfaces = Backbone.Collection.extend
   model: Interface
-  initialize: (interfaceCollection)->
-    # Fake initialization
-    @add new Interface {
-            "group": -1
-            "name": "piece 0"
-            "origine": "from_bulkdata"
-            "assigned": 0
-            "id": 1
-            "identificateur": 26
-          }
-    @add new Interface {
-            "group": -1
-            "name": "piece 1"
-            "origine": "from_bulkdata"
-            "assigned": 0
-            "id": 2
-            "identificateur": 26
-          }
-    @add new Interface {
-            "group": -1
-            "name": "piece 2"
-            "origine": "from_bulkdata"
-            "assigned": 0
-            "id": 3
-            "identificateur": 26
-          }
-    @add new Interface {
-            "group": -1
-            "name": "piece 3"
-            "origine": "from_bulkdata"
-            "assigned": 0
-            "id": 4
-            "identificateur": 26
-          }

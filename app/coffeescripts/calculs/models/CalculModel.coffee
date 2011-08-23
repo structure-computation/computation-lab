@@ -23,6 +23,7 @@ window.Calcul = Backbone.Model.extend
       materials: []
       pieces: []
       links: []
+      interfaces: []
       
     @sc_model_id = calcul.sc_model_id
     
@@ -33,6 +34,7 @@ window.Calcul = Backbone.Model.extend
     @bind 'update_materials', @updateMaterials, @
     @bind 'update_pieces', @updatePieces, @
     @bind 'update_links', @updateLinks, @
+    @bind 'update_interfaces', @updateInterfaces, @
 
   # Update time_step of the current model with the array of time_step passed in parameters
   updateTimeStep: (timeStepsArray) ->
@@ -46,6 +48,9 @@ window.Calcul = Backbone.Model.extend
   
   updateLinks: (linksArray) ->
     @get('brouillon').links = linksArray
+    
+  updateInterfaces: (interfacesArray) ->
+    @get('brouillon').interfaces = interfacesArray
     
 window.Calculs = Backbone.Collection.extend
   model: Calcul

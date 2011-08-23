@@ -15,8 +15,8 @@ $ ->
     window.Links = new Links window.current_calcul.get('brouillon').links
     window.LinksView = new LinkListView collection: Links
   
-  interfaceCollection = new Interfaces()
-  window.interfaceListView = new InterfaceListView collection : interfaceCollection
+    window.interfaceCollection = new Interfaces window.current_calcul.get('brouillon').interfaces
+    window.interfaceListView = new InterfaceListView collection : interfaceCollection
   
   window.router = new Router
   Backbone.history.start()

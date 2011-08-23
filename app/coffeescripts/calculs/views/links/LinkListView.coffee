@@ -41,7 +41,8 @@ window.LinkListView = Backbone.View.extend
   # Add link to interface
   assignLinkToSelectedInterface: (linkView) ->
     window.interfaceListView.selectedInterfaceModel.set link_id : linkView.model.get('id')
-
+    window.current_calcul.trigger 'update_interfaces', interfaceListView.collection.models
+    
   # Highlight the 'linkView' with adding css class
   highlightView: (linkView) ->
     _.each @linkViews, (view) -> 
@@ -50,6 +51,8 @@ window.LinkListView = Backbone.View.extend
   
   unassignLinkToSelectedInterface: ->
     window.interfaceListView.selectedInterfaceModel.set link_id : 0
+    window.current_calcul.trigger 'update_interfaces', interfaceListView.collection.models
+    
   render : ->
     for l in @linkViews
       l.render()
