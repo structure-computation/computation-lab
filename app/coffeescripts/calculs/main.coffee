@@ -47,7 +47,7 @@ $ ->
     steps = new SCVisu.StepCollection SCVisu.current_calcul.get('time_steps')
     SCVisu.stepListView = new SCVisu.StepListView collection: steps
   
-    interfaceCollection = new Interfaces SCVisu.current_calcul.get('interfaces')
+    interfaceCollection = new SCVisu.Interfaces SCVisu.current_calcul.get('interfaces')
     SCVisu.interfaceListView = new SCVisu.InterfaceListView collection : interfaceCollection
 
     SCVisu.edgeView = new SCVisu.NewEdgeView()
