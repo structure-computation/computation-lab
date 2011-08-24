@@ -43,6 +43,8 @@ $ ->
   
     interfaceCollection = new Interfaces SCVisu.current_calcul.get('brouillon').interfaces
     SCVisu.interfaceListView = new SCVisu.InterfaceListView collection : interfaceCollection
+
+    SCVisu.edgeView = new SCVisu.NewEdgeView()
   
   # Initialization of the Router
   SCVisu.router = new SCVisu. Router

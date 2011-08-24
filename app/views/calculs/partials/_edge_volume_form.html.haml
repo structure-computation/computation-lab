@@ -1,0 +1,46 @@
+#volume_geometry
+  %p
+    Choisissez la géométrie 
+  %select
+    %option                       Choisir une géométrie
+    %option{:value => "box"}      Boite
+    %option{:value => "cylinder"} Cylindre
+    %option{:value => "sphere"}   Sphère
+
+#edge_volume_box
+  = render "calculs/partials/edge_basic_information"
+  %table.grey
+    %tbody
+      = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Point 1", 
+                                                                          :labels => {"edge_volume_box_point1_x" => "x",
+                                                                                      "edge_volume_box_point1_y" => "y",
+                                                                                      "edge_volume_box_point1_z" => "z"}}
+      = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Point 2", 
+                                                                          :labels => {"edge_volume_box_point2_x" => "x",
+                                                                                      "edge_volume_box_point2_y" => "y",
+                                                                                      "edge_volume_box_point2_z" => "z"}}
+#edge_volume_cylinder
+  = render "calculs/partials/edge_basic_information"
+  %table.grey
+    %tbody
+      = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Point 1", 
+                                                                          :labels => {"edge_volume_cylinder_point1_x" => "x",
+                                                                                      "edge_volume_cylinder_point1_y" => "y",
+                                                                                      "edge_volume_cylinder_point1_z" => "z"}}
+      = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Direction de l'axe", 
+                                                                          :labels => {"edge_volume_cylinder_axis_direction_x" => "x",
+                                                                                      "edge_volume_cylinder_axis_direction_y" => "y",
+                                                                                      "edge_volume_cylinder_axis_direction_z" => "z"}}
+      = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Rayon", 
+                                                                          :labels => {"edge_cylinder_radius" => "x"}}
+
+#edge_volume_sphere
+  = render "calculs/partials/edge_basic_information"
+  %table.grey
+    %tbody
+      = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Centre", 
+                                                                          :labels => {"edge_volume_sphere_center_x" => "x",
+                                                                                      "edge_volume_sphere_center_y" => "y",
+                                                                                      "edge_volume_sphere_center_z" => "z"}}
+      = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Rayon", 
+                                                                          :labels => {"edge_volume_sphere_radius" => "x"}}

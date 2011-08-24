@@ -1,0 +1,7 @@
+%tr
+  %th 
+    = header
+
+  - labels.each do |label_id, label_text|
+    %td
+      %input{:type => "text", :id => label_id, :placeholder => label_text, :size => 10}

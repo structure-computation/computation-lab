@@ -1,0 +1,69 @@
+#surface_geometry
+  %p
+    Choisissez la géométrie 
+  %select
+    %option                            Choisir une géométrie
+    %option{:value => "plan"}          Plan
+    %option{:value => "disc"}          Disque
+    %option{:value => "cylinder"}      Cylindre
+    %option{:value => "sphere"}        Sphère
+    %option{:value => "parameterized"} Paramétrée
+
+#edge_surface_plan
+  = render "calculs/partials/edge_basic_information"
+  %table.grey
+    %tbody
+      = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Point", 
+                                                                          :labels => {"edge_surface_plan_poin1_x" => "x",
+                                                                                      "edge_surface_plan_point_y" => "y",
+                                                                                      "edge_surface_plan_point_z" => "z"}}
+      = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Direction normal", 
+                                                                          :labels => {"edge_surface_plan_normal_direction_x" => "x",
+                                                                                      "edge_surface_plan_normal_direction_y" => "y",
+                                                                                      "edge_surface_plan_normal_direction_z" => "z"}}
+#edge_surface_disc
+  = render "calculs/partials/edge_basic_information"
+  %table.grey
+    %tbody
+      = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Centre", 
+                                                                          :labels => {"edge_surface_disc_center_x" => "x",
+                                                                                      "edge_surface_disc_center_y" => "y",
+                                                                                      "edge_surface_disc_center_z" => "z"}}
+      = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Direction normal", 
+                                                                          :labels => {"edge_surface_disc_normal_direction_x" => "x",
+                                                                                      "edge_surface_disc_normal_direction_y" => "y",
+                                                                                      "edge_surface_disc_normal_direction_z" => "z"}}
+      = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Rayon", 
+                                                                          :labels => {"edge_surface_disc_radius" => "x"}}
+
+#edge_surface_cylinder
+  = render "calculs/partials/edge_basic_information"
+  %table.grey
+    %tbody
+      = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Point 1", 
+                                                                          :labels => {"edge_surface_cylinder_point_x" => "x",
+                                                                                      "edge_surface_cylinder_point_y" => "y",
+                                                                                      "edge_surface_cylinder_point_z" => "z"}}
+      = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Direction de l'axe", 
+                                                                          :labels => {"edge_surface_cylinder_axis_direction_x" => "x",
+                                                                                      "edge_surface_cylinder_axis_direction_y" => "y",
+                                                                                      "edge_surface_cylinder_axis_direction_z" => "z"}}
+      = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Rayon", 
+                                                                          :labels => {"edge_surface_cylinder_radius" => "x"}}
+
+#edge_surface_sphere
+  = render "calculs/partials/edge_basic_information"
+  %table.grey
+    %tbody
+      = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Centre", 
+                                                                          :labels => {"edge_surface_sphere_center_x" => "x",
+                                                                                      "edge_surface_sphere_center_y" => "y",
+                                                                                      "edge_surface_sphere_center_z" => "z"}}
+      = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Rayon", 
+                                                                          :labels => {"edge_surface_sphere_radius" => "x"}}
+#edge_surface_parameterized
+  = render "calculs/partials/edge_basic_information"
+  %table.grey
+    %tbody
+      = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Rayon", 
+                                                                          :labels => {"edge_surface_parameterized_equation" => "Equation"}}

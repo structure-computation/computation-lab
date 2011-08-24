@@ -48,6 +48,7 @@ SCVisu.EditLinkView = Backbone.View.extend
     
   disableButtons: ->
     $(@el).find('button').attr('disabled', 'disabled')
+
   enableButtons: ->
     $(@el).find('button').removeAttr('disable')
     
