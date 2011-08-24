@@ -14,16 +14,16 @@ SCVisu.EditLinkView = Backbone.View.extend
   
   saveAsNew: ->
     @disableButtons()
-    l = new Link
+    l = new SCVisu.Link
     for input in $(@el).find('input, textarea')
       key = $(input).attr('id').split('link_')[1]
       value = $(input).val()
       h = new Object()
       h[key] = value
       l.set h
-    @parentElement.collection.add l
+    @parentElement.collection.addAndSave l
     @parentElement.createLinkView l
-    @render()
+    @render(true)
     
   updateModel: (model) ->
     @model = model
@@ -50,10 +50,13 @@ SCVisu.EditLinkView = Backbone.View.extend
     $(@el).find('button').attr('disabled', 'disabled')
 
   enableButtons: ->
-    $(@el).find('button').removeAttr('disable')
+    $(@el).find('button').removeAttr('disabled')
     
-  render: ->
+  render: (resetFields = false) ->
     @parentElement.render()
-    for input in $(@el).find('input, textarea')
-      $(input).val(@model.get($(input).attr('id').split("link_")[1]))
-
+    if resetFields
+      @resetFields()
+    else
+      for input in $(@el).find('input, textarea')
+        $(input).val(@model.get($(input).attr('id').split("link_")[1]))
+  

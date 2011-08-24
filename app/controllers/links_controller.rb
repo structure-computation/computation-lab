@@ -1,5 +1,5 @@
 class LinksController < InheritedResources::Base
-  
+  helper :all
   #session :cookie_only => false, :only => :upload
   before_filter :authenticate_user!
   before_filter :set_page_name
@@ -21,7 +21,19 @@ class LinksController < InheritedResources::Base
     index!
   end
   
+  def update
+    # Test pour savoir si les informations sont données en brut (en JSON, envoyées par le javascript)
+    if params[:link].nil?
+      @link = Link.find(params[:id])
+      @link.update_attributes! retrieve_column_fields(params)
+    end
+    update! { company_links_path }
+  end
+  
   def create
+    if params[:link].nil?
+      @link = Link.create retrieve_column_fields(params)
+    end
     create! { company_links_path }
   end
 
@@ -65,5 +77,13 @@ class LinksController < InheritedResources::Base
       new!
     end
   end
-
+  
+  private
+    def retrieve_column_fields(params)
+      to_update = {}
+      Link.column_names.each do |column_name|
+        to_update[column_name] = params[column_name]
+      end
+       to_update
+    end
 end

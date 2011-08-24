@@ -21,7 +21,7 @@ SCInterface::Application.routes.draw do
 
 
   root :to => "home#index"
-  
+
   match ':controller(/:action(/:id(.:format)))'
 
   # La route par défaut héritée de l'application Rails 2, à conserver avant passage au REST.

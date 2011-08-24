@@ -1,6 +1,5 @@
 class MaterialsController < InheritedResources::Base
   helper :all
-  helper_method :retrieve_column_fields
   #session :cookie_only => false, :only => :upload
   before_filter :authenticate_user!
   before_filter :set_page_name
@@ -28,7 +27,9 @@ class MaterialsController < InheritedResources::Base
     end
     create! { company_materials_path }
   end
+  
   def update
+    # Test pour savoir si les informations sont données en brut (en JSON, envoyées par le javascript)
     if params[:material].nil?
       @material = Material.find(params[:id])
       @material.update_attributes! retrieve_column_fields(params)

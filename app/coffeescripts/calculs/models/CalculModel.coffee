@@ -25,11 +25,11 @@ SCVisu.Calcul = Backbone.Model.extend
     @set D2type                : calcul.D2type
     @set log_type              : calcul.log_type
     @set state                 : calcul.state
-    @time_steps  = []
-    @materials  = []
-    @pieces     = []
-    @links      = []
-    @interfaces = []
+    @set time_steps            : []
+    @set materials             : []
+    @set pieces                : []
+    @set links                 : []
+    @set interfaces            : []
       
     @sc_model_id  = calcul.sc_model_id
 
@@ -66,7 +66,8 @@ SCVisu.Calcul = Backbone.Model.extend
     @updateMaterials params.materials
     @updatePieces params.pieces  
     @updateLinks params.links  
-    @updateInterfaces params.interfaces  
+    @updateInterfaces params.interfaces
+     
 # Collection of Calcul
 SCVisu.Calculs = Backbone.Collection.extend
   model: SCVisu.Calcul
