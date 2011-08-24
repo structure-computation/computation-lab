@@ -17,7 +17,8 @@ SCVisu.CalculListView = Backbone.View.extend
     SCVisu.router.calculIsLoading()
     Backbone.sync("read", SCVisu.current_calcul,
       success: (response) ->
-        SCVisu.current_calcul.set brouillon: response.brouillon
+        SCVisu.current_calcul.setElements response
+        #SCVisu.current_calcul.set brouillon: response.brouillon
         SCVisu.initializeFromJSON()
         SCVisu.router.calculHasBeenLoad()
       error: ->
