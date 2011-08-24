@@ -10,15 +10,20 @@ SCVisu.CalculListView = Backbone.View.extend
   events:
     "click .load_calcul": "load_calcul"
     "click .save_calcul": "save_calcul"
+    
   # Fonction appellé lorsque l'on clique sur le bouton 'Charger le calcul'. Elle créee alors  le current_calcul qui sera utilisé tout au long du calcul
   load_calcul: ->
     SCVisu.current_calcul = new SCVisu.Calcul @selected_calcul
-
+    SCVisu.router.calculIsLoading()
     Backbone.sync("read", SCVisu.current_calcul,
       success: (response) ->
         SCVisu.current_calcul.set brouillon: response.brouillon
         SCVisu.initializeFromJSON()
+        SCVisu.router.calculHasBeenLoad()
+      error: ->
+        SCVisu.router.calculLoadError()
     )
+    
   
   save_calcul: ->
     Backbone.sync "update", SCVisu.current_calcul
@@ -39,5 +44,3 @@ SCVisu.CalculListView = Backbone.View.extend
     $(@el).append("<button class=\"load_calcul\">Charger le brouillon</button>")
     $(@el).append("<button class=\"save_calcul\">Save le brouillon</button>")
     return this
-
- 

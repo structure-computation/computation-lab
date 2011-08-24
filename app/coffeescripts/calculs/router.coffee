@@ -3,6 +3,7 @@
 SCVisu.Router = Backbone.Router.extend
   initialize: ->
     @initialisation()
+    @disaleTabs()
 
   # Each step of the wizard
   routes:
@@ -61,7 +62,7 @@ SCVisu.Router = Backbone.Router.extend
   # Le second paramètre est une string correpondant a l'ancre du lien de l'onglet que l'on souhaite séléctionner
   selectCorrectTab: (previousTab, currentTab) ->
     # Supprime la classe 'selected' de tous les liens de tous les onglets et supprime la classe 'tab_before' de tous les 'li' de tous les onglets
-    $('.js_tab_submenu li a').removeClass('selected').parent().removeClass('tab_before')
+    $('.js_tab_breadcrumb li a').removeClass('selected').parent().removeClass('tab_before')
     $("a[href=##{previousTab}]").parent().addClass('tab_before')
     $("a[href=##{currentTab}]").addClass('selected')
     
@@ -75,3 +76,42 @@ SCVisu.Router = Backbone.Router.extend
   # Affiche le zone de contenu souhaité en ajoutant le classe css 'show' à cette dernière    
   showContent: (class_name) ->
     $(".#{class_name}").addClass 'show' 
+
+  # Add a class disable and remove href attributes to all links of the breadcrumb in order 
+  # to prevent the user to go on next step when a calculus has not been load yet
+  disaleTabs: ->
+    $('.js_tab_breadcrumb li').addClass('disable')
+    _.each $('.js_tab_breadcrumb li a'), (element, index) ->
+      $(element).removeAttr('href') if index > 0
+  
+  # Puts back all hrefs for links of the breadcrumb
+  reenableTabs: ->
+    $('.js_tab_breadcrumb li').removeClass('disable')
+    $($('.js_tab_breadcrumb li a')[1]).attr('href', '#Temps')
+    $($('.js_tab_breadcrumb li a')[2]).attr('href', '#Matériaux')
+    $($('.js_tab_breadcrumb li a')[3]).attr('href', '#Liaisons')
+    $($('.js_tab_breadcrumb li a')[4]).attr('href', '#Conditions_Limites')
+    $($('.js_tab_breadcrumb li a')[5]).attr('href', '#Options')
+    $($('.js_tab_breadcrumb li a')[6]).attr('href', '#Prévisions')
+
+  # Is executed when the calcul is loading
+  calculIsLoading: ->
+    $('#ajax-loader').show()
+    @disaleTabs()
+
+  # Is executed when the calcul has been loaded
+  # Drive the user on the Time page and reenable links of the breadcrumbs
+  calculHasBeenLoad: ->
+    @reenableTabs()
+    $('#ajax-loader').hide()
+    # Put the correct anchor in the URL
+    @navigate('Temps', true)
+    @temps()
+
+  # Is executed when the calcul couldn't be loaded
+  calculLoadError: ->
+    $('#ajax-loader').hide()
+    
+    
+    
+  

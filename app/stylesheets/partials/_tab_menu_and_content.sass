@@ -27,6 +27,7 @@ ul.horizontal_tab_submenu
       font-weight : bold
       text-align: center
 
+
 ul.tab_submenu
   list-style: none
   margin-top: 2em
@@ -157,3 +158,12 @@ div.breadcrumb_tab_content
         border-bottom: none      
         font-weight : bold
         text-align: center
+    li.disable
+      background-color: gray
+      a
+        background-image: none
+        background-color: gray
+    li.disable:first-child
+      background-color: gray
+      a
+        +background-image(linear-gradient($color-tab-selected-start, $color-tab-selected-end))

@@ -30,4 +30,6 @@ $ ->
   
   # Initialization of the Router
   SCVisu.router = new SCVisu. Router
-  Backbone.history.start()
+  # Force the redirection to first part of the wizard
+  # Backbone.history.start() returns true when the url contains an anchor
+  SCVisu.router.initialize() if Backbone.history.start()
