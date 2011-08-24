@@ -22,9 +22,6 @@ SCInterface::Application.routes.draw do
 
   root :to => "home#index"
   
-  # TODO: La partie calcul est à séparer en plusieurs ressources.
-  match 'calcul/:action(/:id(.:format))' => "calcul"
-  
   match ':controller(/:action(/:id(.:format)))'
 
   # La route par défaut héritée de l'application Rails 2, à conserver avant passage au REST.

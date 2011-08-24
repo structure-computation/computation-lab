@@ -21,7 +21,7 @@ $ ->
     SCVisu.stepListView = new SCVisu.StepListView collection: steps
     
     # Initialization of the LinkListView
-    links = new SCVisu.Links SCVisu.current_calcul.get('brouillon').links
+    links = new SCVisu.LinkCollection SCVisu.current_calcul.get('brouillon').links
     SCVisu.linkListView = new SCVisu.LinkListView collection: links
   
     interfaceCollection = new Interfaces SCVisu.current_calcul.get('brouillon').interfaces
