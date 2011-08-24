@@ -75,22 +75,20 @@
 - content_for :coffee do 
   :coffeescript
     $ ->
-      SCVisu.StandardLibraryMaterial = new SCVisu.MaterialCollection
-      SCVisu.StandardLibraryMaterial.reset #{@materials.to_json.html_safe}
-      SCVisu.StandardLibraryMaterialView = new SCVisu.MaterialListView {collection: SCVisu.StandardLibraryMaterial}
-      SCVisu.StandardLibraryMaterialView.render()
+      SCVisu.current_company = #{current_user.company_id}
+      
+      SCVisu.standardLibraryMaterial = new SCVisu.MaterialCollection
+      SCVisu.standardLibraryMaterial.reset #{@materials.to_json.html_safe}
 
-      SCVisu.StandardLibraryLink = new SCVisu.LinkCollection
-      SCVisu.StandardLibraryLink.reset #{@links.to_json.html_safe}
-      SCVisu.StandardLibraryLinkView = new SCVisu.LinkListView {collection: SCVisu.StandardLibraryLink}
-      SCVisu.StandardLibraryLinkView.render()
+      SCVisu.standardLibraryLink = new SCVisu.LinkCollection
+      SCVisu.standardLibraryLink.reset #{@links.to_json.html_safe}
       
       SCVisu.CalculCollection = new SCVisu.Calculs
       SCVisu.CalculCollection.reset #{@calculs.to_json.html_safe}
 
       SCVisu.CalculViews = new SCVisu.CalculListView {collection: SCVisu.CalculCollection}
 
-      SCVisu.current_company = #{current_user.company_id}
+
 
 
 / %h2 Initialisation du calcul

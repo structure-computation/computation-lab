@@ -22,7 +22,7 @@ SCVisu.EditMaterialView = Backbone.View.extend
       h = new Object()
       h[key] = value
       m.set h
-    @parentElement.collection.add m
+    @parentElement.collection.addAndSave m
     @parentElement.createMaterialView m
     @render(true)
 

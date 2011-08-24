@@ -5,6 +5,8 @@
 SCVisu.Material = Backbone.Model.extend
   initialize: ->
     @piece = null
+    @company_id = if SCVisu.current_company? then SCVisu.current_company else 0
+    @url= "/companies/#{@company_id}/materials"
 
   assignPiece: (piece) ->
     @piece = piece
@@ -15,8 +17,8 @@ SCVisu.MaterialCollection = Backbone.Collection.extend
   initialize: (options) ->
     @company_id = if SCVisu.current_company? then SCVisu.current_company else 0
     @url = "/companies/#{@company_id}/materials"
-
-    @bind "add", (material) ->
-      material.save {},
-        success: ->
-          SCVisu.current_calcul.trigger 'update_materials', SCVisu.materialListView.collection.models
+  
+  addAndSave: (material) ->
+    material.save {},
+      success: ->
+        SCVisu.current_calcul.trigger 'update_materials', SCVisu.materialListView.collection.models
