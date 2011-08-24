@@ -8,12 +8,18 @@ $ ->
   # When there is a duplicate element, keeps the element from the JSON
   # Params : Two arrays of element (each element must have an id)
   SCVisu.removeDuplicate = (arrayFromDatabase, arrayFromJSON) ->
-    _.map arrayFromDatabase, (standardElement) ->
-      for fromJSONElement in arrayFromJSON
+    # Retains only the elements of the standard library that are different from those contained in the JSON file.
+    tmpArray = _.map arrayFromDatabase, (standardElement) ->
+      for fromJSONElement in arrayFromJSON 
         if standardElement.get('id') == fromJSONElement.id
-          return fromJSONElement
+          return
         else
           return standardElement.attributes
+    # Adds the array that containing all the elements which are in the JSON file
+    tmpArray.push arrayFromJSON
+    # Flattens the nested array in order to have only one depth and return this array
+    _.flatten tmpArray
+  
   
   # Initialize all variables and views with data retrieved from the JSON sent by the "Visualisateur"
   # /!\ Variable's name must not be changed! They are used in multiple place in the code. /!\
@@ -31,17 +37,17 @@ $ ->
     SCVisu.materialListView = new SCVisu.MaterialListView collection: materialCollection
 
     # Initialization of the LinkListView
-    links = SCVisu.removeDuplicate SCVisu.standardLibraryLink.models, SCVisu.current_calcul.get('links')          
+    links = SCVisu.removeDuplicate SCVisu.standardLibraryLink.models, SCVisu.current_calcul.get('links')    
     linkCollection = new SCVisu.LinkCollection
     linkCollection.add links
-    
+
     SCVisu.linkListView = new SCVisu.LinkListView collection: linkCollection
 
     # Initialization of the StepListView    
     steps = new SCVisu.StepCollection SCVisu.current_calcul.get('time_steps')
     SCVisu.stepListView = new SCVisu.StepListView collection: steps
   
-    interfaceCollection = new Interfaces SCVisu.current_calcul.get('interfaces')
+    interfaceCollection = new SCVisu.Interfaces SCVisu.current_calcul.get('interfaces')
     SCVisu.interfaceListView = new SCVisu.InterfaceListView collection : interfaceCollection
 
     SCVisu.edgeView = new SCVisu.NewEdgeView()
