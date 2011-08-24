@@ -15,6 +15,9 @@ class ApplicationController < ActionController::Base
   # Trouver la "bonne methode".
   def current_company_member
     current_user.user_company_memberships.first
+  end    
+  
+  def loggingin
   end
   
 end

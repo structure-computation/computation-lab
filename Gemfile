@@ -3,7 +3,7 @@ source :rubygems
 gem 'rails'       , '~>3.0.9'
 gem 'mysql'       , '~>2.8.1'
 gem 'delayed_job' , '~>2.1.4'
-gem 'mongrel'     , '~>1.1.5'
+gem 'mongrel'     , '~>1.1.5' 
 
 # gem 'resque'  
 
@@ -13,7 +13,6 @@ gem 'barista'     , '~>1.2.1'  # Attention, haml doit être chargé AVANT barris
 gem 'prawn'       , '~>0.8.4'
 
 gem 'jquery-rails', '~>1.0.12'
-gem 'json'                    # Inutile si ruby 1.9
 gem 'transitions' , '~>0.0.9'
 gem 'warden'      , '~>1.0.3'
 gem 'devise'      , '~>1.1.8'
@@ -42,20 +41,22 @@ gem 'inherited_resources'
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
 group :development, :test do
-  # gem 'webrat'
+  gem 'webrat'
   gem 'ruby-debug'          , :require => 'ruby-debug'
   
-  # gem 'factory_girl_rails'  , '~>1.0'
-  # gem 'rspec-rails'         , '~>2.2.1'
-  # gem 'cucumber'            , '~>0.9.4'
-  # gem 'cucumber-rails'      , '~>0.3.2'
+  gem 'factory_girl_rails'  , '~>1.0'    
+  gem 'capybara'            , '=0.3.9'
+  gem 'rspec'
+  gem 'rspec-rails'         , '~>2.2.1'
+  gem 'cucumber'            , '~>0.9.4'
+  gem 'cucumber-rails'      , '~>0.3.2'
   gem 'haml_scaffold'         , '~>1.1.0'
-  # gem 'shoulda'             , '~>2.11.3'
-  # gem 'email_spec'          , '~>1.0.0'
-  # gem 'rcov'                , '~>0.9.9'
-
-  # gem 'autotest-rails'      , '~>4.1.0'
-  # gem 'autotest'            , '~>4.4.1'
+  gem 'shoulda'             , '~>2.11.3'
+  gem 'email_spec'          , '~>1.0.0'
+  gem 'rcov'                , '~>0.9.9'
+  
+  gem 'autotest-rails'      , '~>4.1.0'
+  gem 'autotest'            , '~>4.4.1'
   
   # Utilisation des générateurs haml de devise.
   gem 'hpricot'               , '~>0.8.4'
