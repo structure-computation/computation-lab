@@ -25,12 +25,11 @@ SCVisu.Calcul = Backbone.Model.extend
     @set D2type                : calcul.D2type
     @set log_type              : calcul.log_type
     @set state                 : calcul.state
-    @set brouillon             :
-      time_step: []
-      materials: []
-      pieces: []
-      links: []
-      interfaces: []
+    @time_steps  = []
+    @materials  = []
+    @pieces     = []
+    @links      = []
+    @interfaces = []
       
     @sc_model_id  = calcul.sc_model_id
 
@@ -45,24 +44,29 @@ SCVisu.Calcul = Backbone.Model.extend
 
   # Update time_step of the current model with the array of time_step passed in parameters
   updateTimeStep: (timeStepsArray) ->
-    @get('brouillon').time_step = timeStepsArray
+    @set 'time_steps' : timeStepsArray
 
   # Update materials of the current model with the array of materials passed in parameters
   updateMaterials: (materialsArray) ->
-    @get('brouillon').materials = materialsArray
+    @set 'materials': materialsArray
 
   # Update pieces of the current model with the array of pieces passed in parameters
   updatePieces: (piecesArray) ->
-    @get('brouillon').pieces = piecesArray
+    @set 'pieces' : piecesArray
 
   # Update links of the current model with the array of links passed in parameters
   updateLinks: (linksArray) ->
-    @get('brouillon').links = linksArray
+    @set 'links' : linksArray
     
   updateInterfaces: (interfacesArray) ->
-    @get('brouillon').interfaces = interfacesArray
+    @set 'interfaces' : interfacesArray
     
-    
+  setElements: (params) ->
+    @updateTimeStep params.time_steps
+    @updateMaterials params.materials
+    @updatePieces params.pieces  
+    @updateLinks params.links  
+    @updateInterfaces params.interfaces  
 # Collection of Calcul
 SCVisu.Calculs = Backbone.Collection.extend
   model: SCVisu.Calcul

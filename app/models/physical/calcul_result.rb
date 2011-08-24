@@ -53,7 +53,6 @@ class CalculResult < ActiveRecord::Base
   def save_brouillon(params) #enregistrement du fichier brouillon
     jsonobject = params
     file = JSON.pretty_generate(jsonobject)
-    
     # on enregistre le fichier sur le disque et on change les droit pour que le serveur de calcul y ait acces
     path_to_model = "#{SC_MODEL_ROOT}/model_#{self.sc_model.id}"
     path_to_calcul = "#{SC_MODEL_ROOT}/model_#{self.sc_model.id}/calcul_#{self.id}"
@@ -122,21 +121,28 @@ class CalculResult < ActiveRecord::Base
     results = File.read(path_to_file)
     jsonobject = JSON.parse(results)
     
-    if(self.state == 'temp') 	#si on prend le brouillon d'un calcul non effectué
-      self.description = params[:description]
-      self.save
-      send_data  = {:calcul => self, :brouillon => jsonobject}
-    else			#si on prend le brouillon d'un calcul effectué
-      @new_calcul = self.sc_model.calcul_results.create(:name => params[:name], :description => params[:description], :state => 'temp', :ctype =>params[:ctype], :D2type => params[:D2type], :log_type => 'compute')
-      @new_calcul.user = current_user
-      if (@new_calcul.name == self.name)
-	@new_calcul.name = "brouillon_#{@new_calcul.id}" 
-      end
-      @new_calcul.save
-      send_data  = {:calcul => @new_calcul, :brouillon => jsonobject}
-    end
+    # if(self.state == 'temp') 	#si on prend le brouillon d'un calcul non effectué
+#       self.description = params[:description]
+#       self.save
+#       send_data  = {:calcul => self, :brouillon => jsonobject}
+#     else			#si on prend le brouillon d'un calcul effectué
+#       @new_calcul = self.sc_model.calcul_results.create(
+#         :name => params[:name],
+#         :description => params[:description],
+#         :state => 'temp',
+#         :ctype =>params[:ctype],
+#         :D2type => params[:D2type],
+#         :log_type => 'compute'
+#       )
+#       @new_calcul.user = current_user
+#       if (@new_calcul.name == self.name)
+#         @new_calcul.name = "brouillon_#{@new_calcul.id}" 
+#       end
+#       @new_calcul.save
+#       send_data  = {:calcul => @new_calcul, :brouillon => jsonobject}
+#     end
     
-    return send_data 
+    return jsonobject 
   end
   
   def compute_previsions() # calcul des prevision de temps de calcul et autorisation de calcul
