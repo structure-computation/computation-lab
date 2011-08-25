@@ -45,35 +45,17 @@
     %ul#boundary_conditions  
 
 - content_for :details_calcul do 
-  .initialization
-    %h2.grey Liste des calculs
-    %ul#calculs
-    #initialisation_button
-      %a{:href => "#Temps", :class => 'yellow_button'}
-        Etape suivante
-  .steps
-    %h2.grey Temps
-    #steps
-      %button#add_step Ajouter un Step
-      %select#step_type
-        %option{:value => "statique"} Statique
-        %option{:value => "quasistatique"} Quasistatique
-        %option{:value => "dynamique"} Dynamique
-      %table#steps_table.grey
-        %thead
-          %tr.no_sorter
-            %th Nom
-            %th Temps initial
-            %th Pas de temps
-            %th Nombre de pas de temps
-            %th Temps final
-            %th
-        %tbody
 
-  #edit_material.materials
+  .initialization
+    = render "calculs/partials/calculus_list"
+
+  .steps
+    = render "calculs/partials/step_details"
+
+  .materials
     = render "calculs/partials/material_details_part"
 
-  #edit_link.links
+  .links
     = render "calculs/partials/link_details_part"
 
   .boundary_conditions
@@ -89,6 +71,7 @@
 
 - content_for :coffee do 
   :coffeescript
+    # Initialization of data coming from database
     $ ->
       SCVisu.current_company = #{current_user.company_id}
       
