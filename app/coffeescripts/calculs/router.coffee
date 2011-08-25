@@ -20,49 +20,49 @@ SCVisu.Router = Backbone.Router.extend
   initialisation: ->
     @hideAllContent()
     @selectCorrectTab '','Initialization'
-    @showContent 'initialization'
+    @showContent      'initialization'
 
   # Hide all 'tabs' and show the Step part.
   temps: ->
     @hideAllContent()
     @selectCorrectTab 'Initialization','Steps'
-    @showContent 'steps'
+    @showContent      'steps'
 
   # Hide all 'tabs' and show the Material part.
   materiaux: ->
     @hideAllContent()
     @selectCorrectTab 'Steps','Materials'
-    @showContent 'materials'
+    @showContent      'materials'
 
   # Hide all 'tabs' and show the Link part.
   liaisons: ->
     @hideAllContent()
     @selectCorrectTab 'Materials', 'Links'
-    @showContent 'links'
+    @showContent      'links'
 
   # Hide all 'tabs' and show the Conditions part.
   volumicForces: ->
     @hideAllContent()
     @selectCorrectTab 'Links', 'Volumic_forces'
-    @showContent 'volumic_forces'
+    @showContent      'volumic_forces'
     
   # Hide all 'tabs' and show the Conditions part.
   conditions: ->
     @hideAllContent()
     @selectCorrectTab 'Volumic_forces', 'Boundary_Conditions'
-    @showContent 'boundary_conditions'
+    @showContent      'boundary_conditions'
 
   # Hide all 'tabs' and show the Options part.
   options: ->
     @hideAllContent()
     @selectCorrectTab 'Boundary_Conditions', 'Options'
-    @showContent 'options'
+    @showContent      'options'
 
   # Hide all 'tabs' and show the Prevision part.
   previsions: ->
     @hideAllContent()
     @selectCorrectTab 'Options', 'Forecast'
-    @showContent 'forecast'
+    @showContent      'forecast'
   
   # Ajoute les classes css 'tab_before' et 'selected' aux onglets choisis et de supprimer ces mêmes classes sur tous les autres onglets
   # Le premier paramètre est une string correpondant a l'ancre du lien de l'onglet précédant celui que l'on veut sélectionner  
@@ -71,7 +71,7 @@ SCVisu.Router = Backbone.Router.extend
     # Supprime la classe 'selected' de tous les liens de tous les onglets et supprime la classe 'tab_before' de tous les 'li' de tous les onglets
     $('.js_tab_breadcrumb li a').removeClass('selected').parent().removeClass('tab_before')
     $("a[href=##{previousTab}]").parent().addClass('tab_before')
-    $("a[href=##{currentTab}]").addClass('selected')
+    $("a[href=##{currentTab}]" ).addClass('selected')
     
   # Masque toutes les zones de contenu en ajoutant le classe css 'hide' à ces derniers  
   hideAllContent: ->
@@ -94,13 +94,13 @@ SCVisu.Router = Backbone.Router.extend
   # Puts back all hrefs for links of the breadcrumb
   reenableTabs: ->
     $('.js_tab_breadcrumb li').removeClass('disable')
-    $($('.js_tab_breadcrumb li a')[1]).attr('href', '#Steps')
-    $($('.js_tab_breadcrumb li a')[2]).attr('href', '#Materials')
-    $($('.js_tab_breadcrumb li a')[3]).attr('href', '#Links')
-    $($('.js_tab_breadcrumb li a')[4]).attr('href', '#Volumic_forces')
+    $($('.js_tab_breadcrumb li a')[1]).attr('href', '#Steps'              )
+    $($('.js_tab_breadcrumb li a')[2]).attr('href', '#Materials'          )
+    $($('.js_tab_breadcrumb li a')[3]).attr('href', '#Links'              )
+    $($('.js_tab_breadcrumb li a')[4]).attr('href', '#Volumic_forces'     )
     $($('.js_tab_breadcrumb li a')[5]).attr('href', '#Boundary_Conditions')
-    $($('.js_tab_breadcrumb li a')[6]).attr('href', '#Options')
-    $($('.js_tab_breadcrumb li a')[7]).attr('href', '#Forecast')
+    $($('.js_tab_breadcrumb li a')[6]).attr('href', '#Options'            )
+    $($('.js_tab_breadcrumb li a')[7]).attr('href', '#Forecast'           )
 
   # Is executed when the calcul is loading
   calculIsLoading: ->
