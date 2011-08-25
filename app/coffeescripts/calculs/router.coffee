@@ -11,6 +11,7 @@ SCVisu.Router = Backbone.Router.extend
     "Steps"               : "temps"
     "Materials"           : "materiaux"
     "Links"               : "liaisons"
+    "Volumic_forces"      : "volumicForces"
     "Boundary_Conditions" : "conditions"
     "Options"             : "options"
     "Forecast"            : "previsions"
@@ -40,9 +41,15 @@ SCVisu.Router = Backbone.Router.extend
     @showContent 'links'
 
   # Hide all 'tabs' and show the Conditions part.
+  volumicForces: ->
+    @hideAllContent()
+    @selectCorrectTab 'Links', 'Volumic_forces'
+    @showContent 'volumic_forces'
+    
+  # Hide all 'tabs' and show the Conditions part.
   conditions: ->
     @hideAllContent()
-    @selectCorrectTab 'Links', 'Boundary_Conditions'
+    @selectCorrectTab 'Volumic_forces', 'Boundary_Conditions'
     @showContent 'boundary_conditions'
 
   # Hide all 'tabs' and show the Options part.
@@ -68,10 +75,10 @@ SCVisu.Router = Backbone.Router.extend
     
   # Masque toutes les zones de contenu en ajoutant le classe css 'hide' à ces derniers  
   hideAllContent: ->
-    $('#list_calcul > div').removeClass('show').addClass('hide')
-    $('#details_calcul > div').removeClass('show').addClass('hide')
+    $('#list_calcul       > div').removeClass('show').addClass('hide')
+    $('#details_calcul    > div').removeClass('show').addClass('hide')
     $('#right_list_calcul > div').removeClass('show').addClass('hide')
-    $('#left_list_calcul > div').removeClass('show').addClass('hide')
+    $('#left_list_calcul  > div').removeClass('show').addClass('hide')
   
   # Affiche le zone de contenu souhaité en ajoutant le classe css 'show' à cette dernière    
   showContent: (class_name) ->
@@ -90,9 +97,10 @@ SCVisu.Router = Backbone.Router.extend
     $($('.js_tab_breadcrumb li a')[1]).attr('href', '#Steps')
     $($('.js_tab_breadcrumb li a')[2]).attr('href', '#Materials')
     $($('.js_tab_breadcrumb li a')[3]).attr('href', '#Links')
-    $($('.js_tab_breadcrumb li a')[4]).attr('href', '#Boundary_Conditions')
-    $($('.js_tab_breadcrumb li a')[5]).attr('href', '#Options')
-    $($('.js_tab_breadcrumb li a')[6]).attr('href', '#Forecast')
+    $($('.js_tab_breadcrumb li a')[4]).attr('href', '#Volumic_forces')
+    $($('.js_tab_breadcrumb li a')[5]).attr('href', '#Boundary_Conditions')
+    $($('.js_tab_breadcrumb li a')[6]).attr('href', '#Options')
+    $($('.js_tab_breadcrumb li a')[7]).attr('href', '#Forecast')
 
   # Is executed when the calcul is loading
   calculIsLoading: ->
