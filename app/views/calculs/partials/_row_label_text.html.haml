@@ -6,6 +6,6 @@
   %th 
     = header
 
-  - labels.each do |label_id, label_text|
+  - ids.each_with_index do |input_id, i|
     %td
-      %input{:type => "text", :id => label_id, :placeholder => label_text, :size => 10, :name => label_id, :data => {:type => data_type}}
+      %input{:type => "text", :id => input_id, :placeholder => placeholders[i], :size => 10, :name => input_id, :data => {:type => data_type}}
