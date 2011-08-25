@@ -39,14 +39,14 @@ SCVisu.StepView = Backbone.View.extend
       name          : $(@el).find('.name input').val()
   updateInitialTime: ->
     @model.set
-      initial_time  : parseInt($(@el).find('.initial_time input').val())
+      initial_time  : parseInt($(@el).find('.initial_time input').val(), 10)
   updateTimeStep: ->
 
     @model.set
-      time_step     : parseInt($(@el).find('.time_step input').val())
+      time_step     : parseInt($(@el).find('.time_step input').val(), 10)
   updateNbTimeStep: ->
     @model.set
-      nb_time_steps : parseInt($(@el).find('.nb_time_steps input').val())
+      nb_time_steps : parseInt($(@el).find('.nb_time_steps input').val(), 10)
   update: ->
     @updateTimeStep()
     @updateNbTimeStep()
