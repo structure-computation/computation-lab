@@ -42,6 +42,7 @@
   .links
     %h2.grey Liste des Liaisons
     %ul#links
+    
   .boundary_conditions
     %h2.grey Liste des conditions aux limites
     %ul#boundary_conditions  
@@ -59,7 +60,10 @@
 
   .links
     = render "calculs/partials/link_details_part"
-
+    
+  .volumic_forces
+    = render "calculs/partials/volumic_force_details"
+    
   .boundary_conditions
     = render "calculs/partials/new_edge_form"
 
