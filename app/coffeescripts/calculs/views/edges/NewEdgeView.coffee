@@ -6,11 +6,16 @@ SCVisu.NewEdgeView = Backbone.View.extend
   el: "#new_edge"
   initialize: (params) ->
     $(@el).find('> div:not("#edge_criteria")').hide()
-
+    # Hide save button
+    $(@el).find('button.save').hide()
+    @currentCriteria = null
+    @currentGeometry = null
+    
   events: 
-    "change #edge_criteria select"   : "showSelectGeometry"
-    "change #volume_geometry select" : "showVolumeGeometry"
+    "change #edge_criteria    select" : "showSelectGeometry"
+    "change #volume_geometry  select" : "showVolumeGeometry"
     "change #surface_geometry select" : "showSurfaceGeometry"
+    "click  button.save"              : "save"
     
   # Show the good select box between volume and surface depending of the choice of the criteria
   showSelectGeometry: (event) ->
@@ -49,6 +54,9 @@ SCVisu.NewEdgeView = Backbone.View.extend
   # Let the good geometry select box shown
   # Show the good form regarding the criteria and the geometry choosed
   showGeometry: (criteria, geometry) ->
+    $(@el).find('button.save').show()
+    @currentCriteria = criteria
+    @currentGeometry = geometry
     if criteria == "volume"
       $(@el).find('#volume_geometry').show()    
     else if criteria == "surface"
@@ -57,7 +65,39 @@ SCVisu.NewEdgeView = Backbone.View.extend
 
   # Hide all divs except criteria select box
   hideEveryoneExceptFirstSelectBox: ->
-    $(@el).find('> div:not("#edge_criteria")').hide()    
+    $(@el).find('> div:not("#edge_criteria")').hide()
+    $(@el).find('button.save').hide()
 
+  # Retrieve all attributes and create a new edge
+  save: ->
+    if @attributesAreValid()
+      edgeAttributes = new Object()
+      _.each $(@el).find("#edge_#{@currentCriteria}_#{@currentGeometry} input, #edge_#{@currentCriteria}_#{@currentGeometry} textarea"), (input) ->
+        edgeAttributes[$(input).attr('name')] = $(input).val()
+      edgeAttributes['criteria'] = @currentCriteria
+      edgeAttributes['geometry'] = @currentGeometry
+
+      edge = new SCVisu.Edge(edgeAttributes)
+
+  # Check if inputs are correctly filled and with the good data type
+  # HTML Inputs have an HTML5 data attribute : data-type which tells if it has to be number or text
+  # The function will return false if an input is blank or mal filled. Inputs concerned will be put in red
+  attributesAreValid: ->
+    @resetInputColors()
+    isValid = true
+    for input in $(@el).find("#edge_#{@currentCriteria}_#{@currentGeometry} input, #edge_#{@currentCriteria}_#{@currentGeometry} textarea")
+      if _.isEmpty $(input).val() 
+        isValid = false
+      if isValid and $(input).data('type') == 'number' and !_.isNumber(parseInt($(input).val()))
+        isValid = false
+      if isValid and $(input).data('text') == 'number' and !_.isString $(input).val()
+        isValid = false
+      if !isValid
+         $(input).css('background-color', 'pink')
+
+    return  isValid
+  resetInputColors: ->
+    for input in $(@el).find("#edge_#{@currentCriteria}_#{@currentGeometry} input, #edge_#{@currentCriteria}_#{@currentGeometry} textarea")
+       $(input).css('background-color', 'white')
   render: ->
 
