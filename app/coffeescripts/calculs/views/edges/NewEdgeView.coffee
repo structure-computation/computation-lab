@@ -11,6 +11,11 @@ SCVisu.NewEdgeView = Backbone.View.extend
     @currentCriteria = null
     @currentGeometry = null
     
+  showAndInitialize: ->
+    @hideEveryoneExceptFirstSelectBox()
+    $(@el).show()
+  hide: ->
+    $(@el).hide()
   events: 
     "change #edge_criteria    select" : "showSelectGeometry"
     "change #volume_geometry  select" : "showVolumeGeometry"
@@ -77,7 +82,7 @@ SCVisu.NewEdgeView = Backbone.View.extend
       edgeAttributes['criteria'] = @currentCriteria
       edgeAttributes['geometry'] = @currentGeometry
 
-      edge = new SCVisu.Edge(edgeAttributes)
+      SCVisu.edgeListView.addEdgeModel new SCVisu.Edge(edgeAttributes)
 
   # Check if inputs are correctly filled and with the good data type
   # HTML Inputs have an HTML5 data attribute : data-type which tells if it has to be number or text
@@ -88,7 +93,8 @@ SCVisu.NewEdgeView = Backbone.View.extend
     for input in $(@el).find("#edge_#{@currentCriteria}_#{@currentGeometry} input, #edge_#{@currentCriteria}_#{@currentGeometry} textarea")
       if _.isEmpty $(input).val() 
         isValid = false
-      if isValid and $(input).data('type') == 'number' and !_.isNumber(parseInt($(input).val()))
+      # To improve
+      if isValid and $(input).data('type') == 'number' and !_.isNumber(parseInt($(input).val(), 10))
         isValid = false
       if isValid and $(input).data('text') == 'number' and !_.isString $(input).val()
         isValid = false
@@ -96,8 +102,8 @@ SCVisu.NewEdgeView = Backbone.View.extend
          $(input).css('background-color', 'pink')
 
     return  isValid
+
   resetInputColors: ->
     for input in $(@el).find("#edge_#{@currentCriteria}_#{@currentGeometry} input, #edge_#{@currentCriteria}_#{@currentGeometry} textarea")
        $(input).css('background-color', 'white')
-  render: ->
 

@@ -17,24 +17,33 @@
 
 
 - content_for :left_list do 
+
   .tab_13_content
     %h2.grey Liste des pièces
     %ul#pieces
+
   .tab_14_content
     %h2.grey Liste des interfaces
     %ul#interfaces
+
+  .tab_15_content
+    %h2.grey Liste des bords
+    #edges
+      %ul
+      %button.new_edge Créer un bord
 
 - content_for :right_list do 
 
   .tab_13_content
     %h2.grey Liste des Matériaux
     %ul#materials
+
   .tab_14_content
     %h2.grey Liste des Liaisons
     %ul#links
   
 
-- content_for :top_calcul do 
+- content_for :details_calcul do 
   .tab_11_content
     %h2.grey Liste des calculs
     %ul#calculs
@@ -60,7 +69,6 @@
             %th
         %tbody
 
-- content_for :details_calcul do 
   #edit_material.tab_13_content
     = render "calculs/partials/material_details_part"
 
@@ -69,6 +77,9 @@
 
   .tab_15_content
     = render "calculs/partials/new_edge_form"
+
+  .tab_16_content
+    = render "calculs/partials/calculus_options"
     
 - # TODO: Ramener dans ce fichier quand cela sera terminé. On charge dans ce partial le code de visualisation.
 = render "calculs/partials/visualisation_interface"

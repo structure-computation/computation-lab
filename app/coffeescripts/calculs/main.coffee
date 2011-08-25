@@ -50,8 +50,8 @@ $ ->
     interfaceCollection = new SCVisu.Interfaces SCVisu.current_calcul.get('interfaces')
     SCVisu.interfaceListView = new SCVisu.InterfaceListView collection : interfaceCollection
 
-    SCVisu.edgeView = new SCVisu.NewEdgeView()
-  
+    SCVisu.edgeListView = new SCVisu.EdgeListView()
+
   # Initialization of the Router
   SCVisu.router = new SCVisu. Router
   # Force the redirection to first part of the wizard
