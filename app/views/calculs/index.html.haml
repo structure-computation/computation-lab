@@ -85,32 +85,3 @@
       SCVisu.CalculCollection.reset #{@calculs.to_json.html_safe}
 
       SCVisu.CalculViews = new SCVisu.CalculListView {collection: SCVisu.CalculCollection}
-
-
-
-
-/ %h2 Initialisation du calcul
-
-/ 
-/ %table#links_table.grey
-/   %thead
-/     %tr.no_sorter
-/       %th Nom
-/       %th
-/   %tbody
-/ 
-/ %table#selected_links_table.grey
-/   %thead
-/     %tr.no_sorter
-/       %th Nom
-/       %th
-/       %th
-/   %tbody
-/ 
-/ #edit_link
-/   = render :partial => "links/details/link_generic_information", :locals => { :show_all => true }
-/   = render :partial => "links/details/link_complexe_information", :locals => { :show_all => true }
-/ 
-/ 
-/ = render 'calculs/partials/materials'
-/ 
