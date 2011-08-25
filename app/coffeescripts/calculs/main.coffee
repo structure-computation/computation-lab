@@ -26,32 +26,34 @@ $ ->
   SCVisu.initializeFromJSON = () ->
 
     # Initialization of the PieceListView
-    pieceCollection = new SCVisu.PieceCollection SCVisu.current_calcul.get('pieces')
-    SCVisu.pieceListView = new SCVisu.PieceListView collection : pieceCollection
+    pieceCollection           = new SCVisu.PieceCollection SCVisu.current_calcul.get('pieces')
+    SCVisu.pieceListView      = new SCVisu.PieceListView collection : pieceCollection
 
     # Initialization of the MaterialListView
-    materials = SCVisu.removeDuplicate SCVisu.standardLibraryMaterial.models, SCVisu.current_calcul.get('materials')          
-    materialCollection = new SCVisu.MaterialCollection
+    materials                 = SCVisu.removeDuplicate SCVisu.standardLibraryMaterial.models, SCVisu.current_calcul.get('materials')          
+    materialCollection        = new SCVisu.MaterialCollection
     materialCollection.add materials
     
-    SCVisu.materialListView = new SCVisu.MaterialListView collection: materialCollection
+    SCVisu.materialListView   = new SCVisu.MaterialListView collection: materialCollection
 
     # Initialization of the LinkListView
     links = SCVisu.removeDuplicate SCVisu.standardLibraryLink.models, SCVisu.current_calcul.get('links')    
-    linkCollection = new SCVisu.LinkCollection
+    linkCollection            = new SCVisu.LinkCollection
     linkCollection.add links
 
-    SCVisu.linkListView = new SCVisu.LinkListView collection: linkCollection
+    SCVisu.linkListView       = new SCVisu.LinkListView collection: linkCollection
 
     # Initialization of the StepListView    
-    steps = new SCVisu.StepCollection SCVisu.current_calcul.get('time_steps')
-    SCVisu.stepListView = new SCVisu.StepListView collection: steps
+    steps                     = new SCVisu.StepCollection SCVisu.current_calcul.get('time_steps')
+    SCVisu.stepListView       = new SCVisu.StepListView collection: steps
   
-    interfaceCollection = new SCVisu.Interfaces SCVisu.current_calcul.get('interfaces')
-    SCVisu.interfaceListView = new SCVisu.InterfaceListView collection : interfaceCollection
+    interfaceCollection       = new SCVisu.Interfaces SCVisu.current_calcul.get('interfaces')
+    SCVisu.interfaceListView  = new SCVisu.InterfaceListView collection : interfaceCollection
 
-    SCVisu.edgeListView = new SCVisu.EdgeListView()
+    SCVisu.edgeListView       = new SCVisu.EdgeListView()
 
+    SCVisu.optionView         = new SCVisu.OptionView()
+    
   # Initialization of the Router
   SCVisu.router = new SCVisu. Router
   # Force the redirection to first part of the wizard

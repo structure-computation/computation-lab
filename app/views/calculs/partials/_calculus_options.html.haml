@@ -14,11 +14,12 @@
       %input#latin_method{:type => "checkbox", :checked => "checked"}
     %li
       %label{:for => "calculus_precision"} Précision du calcul
-      %input#calculus_precision{:type => "radio", :checked => "checked"}
+      %input#calculus_precision{:type => "checkbox", :checked => "checked"}
 
 
   %h4 Convergence de la méthode LATIN
   %p
+    Multiechelle : 
     %label{:for => "multiscale_on"} On
     %input#multiscale_on{:type => "radio", :name => "multiscale", :value => "on", :checked => "checked"}
     %label{:for => "multiscale_off"} Off
@@ -36,6 +37,6 @@
   %p
     %label{:for => "zoom"}                Nombre de niveau maximum (zoom)
     %input#zoom{:type => "text"} 
-
-    %label{:for => "error"}               Niveau Erreur de modèle (%
+  %p
+    %label{:for => "error"}               Niveau Erreur de modèle (%) 
     %input#error{:type => "text"} 

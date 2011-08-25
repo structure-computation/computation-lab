@@ -12,35 +12,35 @@
   %table.grey
     %tbody
       = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Point 1", :data_type => "number",
-                                                                          :labels => {"volume_box_point1_x" => "x",
-                                                                                      "volume_box_point1_y" => "y",
-                                                                                      "volume_box_point1_z" => "z"}}
+                                                                          :ids => ["volume_box_point1_x", "volume_box_point1_y", "volume_box_point1_z"], 
+                                                                          :placeholders => ["x", "y", "z"]}
+
       = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Point 2", :data_type => "number",
-                                                                          :labels => {"volume_box_point2_x" => "x",
-                                                                                      "volume_box_point2_y" => "y",
-                                                                                      "volume_box_point2_z" => "z"}}
+                                                                          :ids => ["volume_box_point2_x", "volume_box_point2_y", "volume_box_point2_z"], 
+                                                                          :placeholders => ["x", "y", "z"]}
 #edge_volume_cylinder
   = render "calculs/partials/edge_basic_information"
   %table.grey
     %tbody
       = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Point 1", :data_type => "number",
-                                                                          :labels => {"volume_cylinder_point1_x" => "x",
-                                                                                      "volume_cylinder_point1_y" => "y",
-                                                                                      "volume_cylinder_point1_z" => "z"}}
+                                                                          :ids => ["volume_cylinder_point1_x", "volume_cylinder_point1_y", "volume_cylinder_point1_z"], 
+                                                                          :placeholders => ["x", "y", "z"]}
+
       = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Direction de l'axe", :data_type => "number",
-                                                                          :labels => {"volume_cylinder_axis_direction_x" => "x",
-                                                                                      "volume_cylinder_axis_direction_y" => "y",
-                                                                                      "volume_cylinder_axis_direction_z" => "z"}}
+                                                                          :ids => ["volume_cylinder_axis_direction_x", "volume_cylinder_axis_direction_y", "volume_cylinder_axis_direction_z"], 
+                                                                          :placeholders => ["x", "y", "z"]}
+
       = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Rayon", :data_type => "number",
-                                                                          :labels => {"cylinder_radius" => "x"}}
+                                                                          :ids => ["cylinder_radius"],
+                                                                          :placeholders => ["x"]}
 
 #edge_volume_sphere
   = render "calculs/partials/edge_basic_information"
   %table.grey
     %tbody
       = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Centre", :data_type => "number",
-                                                                          :labels => {"volume_sphere_center_x" => "x",
-                                                                                      "volume_sphere_center_y" => "y",
-                                                                                      "volume_sphere_center_z" => "z"}}
+                                                                          :ids => ["volume_sphere_center_x", "volume_sphere_center_y", "volume_sphere_center_z"], 
+                                                                          :placeholders => ["x", "y", "z"]}
       = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Rayon", :data_type => "number",
-                                                                          :labels => {"volume_sphere_radius" => "x"}}
+                                                                          :ids => ["volume_sphere_radius"], 
+                                                                          :placeholders => ["x"]}

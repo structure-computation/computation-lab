@@ -6,6 +6,7 @@ SCVisu.EditLinkView = Backbone.View.extend
     $(@el).append('<button class="save">Sauvegarder</button>')
     $(@el).append("<button class='save_as_new'>Sauver en tant que nouveau link</button>")
     @disableButtons()
+    $(@el).hide()
 
   events: 
     # 'keyup'       : 'updateModelAttributes'
@@ -24,6 +25,7 @@ SCVisu.EditLinkView = Backbone.View.extend
     @parentElement.collection.addAndSave l
     @parentElement.createLinkView l
     @render(true)
+    $(@el).hide()
     
   updateModel: (model) ->
     @model = model
@@ -40,6 +42,7 @@ SCVisu.EditLinkView = Backbone.View.extend
       @model.set h
     @model.save()
     @resetFields()
+    $(@el).hide()
   
   resetFields: ->
     for input in $(@el).find('input, textarea')
@@ -53,6 +56,7 @@ SCVisu.EditLinkView = Backbone.View.extend
     $(@el).find('button').removeAttr('disabled')
     
   render: (resetFields = false) ->
+    $(@el).show()
     @parentElement.render()
     if resetFields
       @resetFields()

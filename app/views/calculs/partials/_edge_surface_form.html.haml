@@ -14,56 +14,59 @@
   %table.grey
     %tbody
       = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Point", :data_type => "number",
-                                                                          :labels => {"surface_plan_poin1_x" => "x",
-                                                                                      "surface_plan_point_y" => "y",
-                                                                                      "surface_plan_point_z" => "z"}}
+                                                                          :ids => ["surface_plan_point_x", "surface_plan_point_y", "surface_plan_point_z"], 
+                                                                          :placeholders => ["x", "y", "z"]}                                                                          
+
       = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Direction normal", :data_type => "number",
-                                                                          :labels => {"surface_plan_normal_direction_x" => "x",
-                                                                                      "surface_plan_normal_direction_y" => "y",
-                                                                                      "surface_plan_normal_direction_z" => "z"}}
+                                                                          :ids => ["surface_plan_normal_direction_x", "surface_plan_normal_direction_y", "surface_plan_normal_direction_z"], 
+                                                                          :placeholders => ["x", "y", "z"]}                                                                          
 #edge_surface_disc
   = render "calculs/partials/edge_basic_information"
   %table.grey
     %tbody
       = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Centre", :data_type => "number",
-                                                                          :labels => {"surface_disc_center_x" => "x",
-                                                                                      "surface_disc_center_y" => "y",
-                                                                                      "surface_disc_center_z" => "z"}}
+                                                                          :ids => ["surface_disc_center_x", "surface_disc_center_y", "surface_disc_center_z"], 
+                                                                          :placeholders => ["x", "y", "z"]}                                                                          
+
       = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Direction normal", :data_type => "number",
-                                                                          :labels => {"surface_disc_normal_direction_x" => "x",
-                                                                                      "surface_disc_normal_direction_y" => "y",
-                                                                                      "surface_disc_normal_direction_z" => "z"}}
+                                                                          :ids => ["surface_disc_normal_direction_x", "surface_disc_normal_direction_y", "surface_disc_normal_direction_z"], 
+                                                                          :placeholders => ["x", "y", "z"]}                                                                          
+
       = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Rayon", :data_type => "number",
-                                                                          :labels => {"surface_disc_radius" => "x"}}
+                                                                          :ids => ["surface_disc_radius"], 
+                                                                          :placeholders => ["x"]}                                                                          
 
 #edge_surface_cylinder
   = render "calculs/partials/edge_basic_information"
   %table.grey
     %tbody
       = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Point 1", :data_type => "number",
-                                                                          :labels => {"surface_cylinder_point_x" => "x",
-                                                                                      "surface_cylinder_point_y" => "y",
-                                                                                      "surface_cylinder_point_z" => "z"}}
+                                                                          :ids => ["surface_cylinder_point_x", "surface_cylinder_point_y", "surface_cylinder_point_z"], 
+                                                                          :placeholders => ["x", "y", "z"]}                                                                          
+
       = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Direction de l'axe", :data_type => "number",
-                                                                          :labels => {"surface_cylinder_axis_direction_x" => "x",
-                                                                                      "surface_cylinder_axis_direction_y" => "y",
-                                                                                      "surface_cylinder_axis_direction_z" => "z"}}
+                                                                          :ids => ["surface_cylinder_axis_direction_x", "surface_cylinder_axis_direction_y", "surface_cylinder_axis_direction_z"], 
+                                                                          :placeholders => ["x", "y", "z"]}
       = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Rayon", :data_type => "number",
-                                                                          :labels => {"surface_cylinder_radius" => "x"}}
+                                                                          :ids => ["surface_cylinder_radius"], 
+                                                                          :placeholders => ["x"]}
 
 #edge_surface_sphere
   = render "calculs/partials/edge_basic_information"
   %table.grey
     %tbody
       = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Centre", :data_type => "number",
-                                                                          :labels => {"surface_sphere_center_x" => "x",
-                                                                                      "surface_sphere_center_y" => "y",
-                                                                                      "surface_sphere_center_z" => "z"}}
+                                                                          :ids => ["surface_sphere_center_x", "surface_sphere_center_y", "surface_sphere_center_z"], 
+                                                                          :placeholders => ["x", "y", "z"]}
+
       = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Rayon", :data_type => "number",
-                                                                          :labels => {"surface_sphere_radius" => "x"}}
+                                                                          :ids => ["surface_sphere_radius"], 
+                                                                          :placeholders => ["x"]}
+
 #edge_surface_parameterized
   = render "calculs/partials/edge_basic_information"
   %table.grey
     %tbody
       = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Rayon", :data_type => "text",
-                                                                          :labels => {"surface_parameterized_equation" => "Equation"}}
+                                                                          :ids => ["surface_parameterized_equation"], 
+                                                                          :placeholders => ["Equation"]}

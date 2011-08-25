@@ -4,6 +4,7 @@ SCVisu.EditMaterialView = Backbone.View.extend
     @parentElement = params.parentElement
     $(@el).append('<button class="save">Sauvegarder</button>')
     $(@el).append("<button class='save_as_new'>Sauver en tant que nouveau matériau</button>")
+    $(@el).hide()
     @disableButtons()
 
   events: 
@@ -25,6 +26,7 @@ SCVisu.EditMaterialView = Backbone.View.extend
     @parentElement.collection.addAndSave m
     @parentElement.createMaterialView m
     @render(true)
+    $(@el).hide()
 
   save: ->
     for input in $(@el).find('input, textarea')
@@ -36,6 +38,7 @@ SCVisu.EditMaterialView = Backbone.View.extend
     @model.save()
     SCVisu.current_calcul.trigger 'update_materials', SCVisu.materialListView.collection.models  
     @render(true)
+    $(@el).hide()
 
   updateModel: (model) ->
     @model = model
@@ -54,6 +57,7 @@ SCVisu.EditMaterialView = Backbone.View.extend
     $(@el).find('button').removeAttr('disabled')
     
   render: (resetFields = false) ->
+    $(@el).show()
     @parentElement.render()
     if resetFields
       @resetFields()
