@@ -7,55 +7,55 @@ SCVisu.Router = Backbone.Router.extend
 
   # Each step of the wizard
   routes:
-    "Initialization"     : "initialisation"
-    "Steps"              : "temps"
-    "Materials"          : "materiaux"
-    "Links"           : "liaisons"
+    "Initialization"      : "initialisation"
+    "Steps"               : "temps"
+    "Materials"           : "materiaux"
+    "Links"               : "liaisons"
     "Boundary_Conditions" : "conditions"
-    "Options"            : "options"
-    "Forecast"         : "previsions"
+    "Options"             : "options"
+    "Forecast"            : "previsions"
   
   # Hide all 'tabs' and show the first one - Initialization part
   initialisation: ->
     @hideAllContent()
     @selectCorrectTab '','Initialization'
-    @showContent 'tab_11_content'
+    @showContent 'initialization'
 
   # Hide all 'tabs' and show the Step part.
   temps: ->
     @hideAllContent()
     @selectCorrectTab 'Initialization','Steps'
-    @showContent 'tab_12_content'
+    @showContent 'steps'
 
   # Hide all 'tabs' and show the Material part.
   materiaux: ->
     @hideAllContent()
     @selectCorrectTab 'Steps','Materials'
-    @showContent 'tab_13_content'
+    @showContent 'materials'
 
   # Hide all 'tabs' and show the Link part.
   liaisons: ->
     @hideAllContent()
     @selectCorrectTab 'Materials', 'Links'
-    @showContent 'tab_14_content'
+    @showContent 'links'
 
   # Hide all 'tabs' and show the Conditions part.
   conditions: ->
     @hideAllContent()
     @selectCorrectTab 'Links', 'Boundary_Conditions'
-    @showContent 'tab_15_content'
+    @showContent 'boundary_conditions'
 
   # Hide all 'tabs' and show the Options part.
   options: ->
     @hideAllContent()
     @selectCorrectTab 'Boundary_Conditions', 'Options'
-    @showContent 'tab_16_content'
+    @showContent 'options'
 
   # Hide all 'tabs' and show the Prevision part.
   previsions: ->
     @hideAllContent()
     @selectCorrectTab 'Options', 'Forecast'
-    @showContent 'tab_17_content'
+    @showContent 'forecast'
   
   # Ajoute les classes css 'tab_before' et 'selected' aux onglets choisis et de supprimer ces mêmes classes sur tous les autres onglets
   # Le premier paramètre est une string correpondant a l'ancre du lien de l'onglet précédant celui que l'on veut sélectionner  
