@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   # Relations
   # belongs_to  :company
   has_many    :user_company_memberships
-  has_many    :companies, :through => :user_company_memberships
+  has_many    :workspaces, :through => :user_company_memberships
   
   # Relations sur les modèles.
   has_many    :model_ownerships,     :through => :user_company_memberships, :class_name => "CompanyMemberToModelOwnership", :foreign_key => "company_member_id"

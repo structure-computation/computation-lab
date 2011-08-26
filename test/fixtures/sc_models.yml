@@ -2,7 +2,7 @@
 
 avion1:
     name: avion1
-    company: tf_avionics  
+    workspace: tf_avionics  
     model_file_path: 
     image_path:
     description: "premier model d'avion"
@@ -15,7 +15,7 @@ avion1:
     
 bateau1:
     name: bateau1
-    company: tf_avionics  
+    workspace: tf_avionics  
     model_file_path: 
     image_path:
     description: "premier model de bateau"
@@ -28,7 +28,7 @@ bateau1:
     
 voiture1:
     name: voiture1
-    company: tf_avionics  
+    workspace: tf_avionics  
     model_file_path: 
     image_path:
     description: "premier model de voiture"
@@ -41,7 +41,7 @@ voiture1:
     
 avion2:
     name: avion2 
-    company: tf_avionics  
+    workspace: tf_avionics  
     model_file_path: 
     image_path:
     description: "second model d'avion"
@@ -54,7 +54,7 @@ avion2:
     
 bateau2:
     name: bateau2
-    company: tf_avionics  
+    workspace: tf_avionics  
     model_file_path: 
     image_path:
     description: "second model de bateau"
@@ -67,7 +67,7 @@ bateau2:
     
 voiture2:
     name: voiture2  
-    company_id:  674101581   #tf_avionics
+    workspace_id:  674101581   #tf_avionics
     model_file_path: 
     image_path:
     description: "second model de voiture"

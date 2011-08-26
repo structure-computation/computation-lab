@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110809203526) do
+ActiveRecord::Schema.define(:version => 20110826134819) do
 
   create_table "abonnements", :force => true do |t|
     t.string   "name"
@@ -96,16 +96,7 @@ ActiveRecord::Schema.define(:version => 20110809203526) do
     t.integer  "company_member_id"
   end
 
-  create_table "companies", :force => true do |t|
-    t.string   "name"
-    t.string   "address"
-    t.string   "city"
-    t.string   "zipcode"
-    t.string   "country"
-    t.string   "division"
-    t.string   "TVA"
-    t.integer  "siren"
-    t.integer  "user_sc_admin_id"
+  create_table "company_accounts", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -286,7 +277,7 @@ ActiveRecord::Schema.define(:version => 20110809203526) do
   end
 
   create_table "sc_admins", :force => true do |t|
-    t.integer  "company_id"
+    t.integer  "workspace_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -325,7 +316,7 @@ ActiveRecord::Schema.define(:version => 20110809203526) do
 
   create_table "user_company_memberships", :force => true do |t|
     t.integer  "user_id"
-    t.integer  "company_id"
+    t.integer  "workspace_id"
     t.string   "rights"
     t.string   "status"
     t.datetime "created_at"
@@ -350,7 +341,7 @@ ActiveRecord::Schema.define(:version => 20110809203526) do
   end
 
   create_table "users", :force => true do |t|
-    t.integer  "company_id"
+    t.integer  "workspace_id"
     t.string   "firstname",            :limit => 100, :default => ""
     t.string   "lastname",             :limit => 100, :default => ""
     t.string   "telephone",            :limit => 23,  :default => ""
@@ -381,5 +372,20 @@ ActiveRecord::Schema.define(:version => 20110809203526) do
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
+  create_table "workspaces", :force => true do |t|
+    t.string   "name"
+    t.string   "address"
+    t.string   "city"
+    t.string   "zipcode"
+    t.string   "country"
+    t.string   "division"
+    t.string   "TVA"
+    t.integer  "siren"
+    t.integer  "user_sc_admin_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "kind"
+  end
 
 end

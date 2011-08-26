@@ -1,5 +1,12 @@
-class Company < ActiveRecord::Base
+class Workspace < ActiveRecord::Base
   
+  # Un workspace peut posséder plusieurs workspaces grâce à la table :workspace_relationship
+  has_many  :workspace_relationship 
+  has_many  :companies, :through => :workspace_relationship
+  
+  #Un workspace possède un seul unique :account
+  has_one :account   
+                                    
   has_many  :user_company_memberships
   has_many  :users, :through => :user_company_memberships
   # has_many  :managers , :conditions => {:role => "gestionnaire"} # TODO: Appliquer un filtre.
@@ -11,7 +18,8 @@ class Company < ActiveRecord::Base
   has_many  :sc_models      , :readonly => false
   has_many  :materials		  , :readonly => false
   has_many  :links		      , :readonly => false
-  has_many  :factures		    , :readonly => false
+  has_many  :factures		    , :readonly => false    
+
   
   has_many  :solde_calcul_accounts,  :through => :calcul_account		, :readonly => false
 

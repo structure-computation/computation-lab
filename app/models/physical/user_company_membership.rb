@@ -1,6 +1,6 @@
 class UserCompanyMembership < ActiveRecord::Base
   belongs_to  :user
-  belongs_to  :company
+  belongs_to  :workspace
   
   has_many    :model_ownerships, :class_name => "CompanyMemberToModelOwnership", :foreign_key => "company_member_id"
   has_many    :sc_models,                 :through => :model_ownerships

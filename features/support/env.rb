@@ -5,6 +5,20 @@
 # files.
 
 ENV["RAILS_ENV"] ||= "test"
+  
+Before do
+  Fixtures.reset_cache                                   
+  fixtures_folder = File.join(Rails.root.to_s, 'test', 'fixtures')  
+  #fixtures_folder = File.join(RAILS_ROOT, 'spec', 'fixtures')
+  fixtures = Dir[File.join(fixtures_folder, '*.yml')].map {|f| File.basename(f, '.yml') }
+  Fixtures.create_fixtures(fixtures_folder, fixtures)
+end                                                          
+
+# If you want to factories instead of fixtures
+#require "factory_girl"
+#require "factory_girl/step_definitions"
+#require File.dirname(__FILE__) + "/factories"
+
 require File.expand_path(File.dirname(__FILE__) + '/../../config/environment')
 
 require 'cucumber/formatter/unicode' # Remove this line if you don't want Cucumber Unicode support
@@ -32,12 +46,22 @@ Capybara.default_selector = :css
 # of your scenarios, as this makes it hard to discover errors in your application.
 ActionController::Base.allow_rescue = false
 
+# Cucumber::Rails::World.use_transactional_fixtures = true
+# Fixtures.reset_cache  
+# fixtures_folder = File.join(Rails.root.to_s, 'spec', 'fixtures')   
+# fixtures = Dir[File.join(fixtures_folder, '*.yml')].map {|f| File.basename(f, '.yml') }
+# Fixtures.create_fixtures(fixtures_folder, fixtures)          
+
+
+
+
 # How to clean your database when transactions are turned off. See
 # http://github.com/bmabey/database_cleaner for more info.
 if defined?(ActiveRecord::Base)
   begin
     require 'database_cleaner'
     DatabaseCleaner.strategy = :truncation
+	#DatabaseCleaner.strategy = :truncation, {:except => %w[users workspace_relationship workspaces]}
   rescue LoadError => ignore_if_database_cleaner_not_present
   end
 end

@@ -1,7 +1,9 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  company_id:      240607020   #sc_admin
+  workspace_id:      240607020   #sc_admin
+  
+
 # one:
 #   column: value
 #

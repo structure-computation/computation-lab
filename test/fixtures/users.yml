@@ -25,9 +25,18 @@
 #   t.integer  "failed_attempts",                     :default => 0
 #   t.string   "unlock_token"
 #   t.datetime "locked_at"
-# end
+# end                                 
 
-
+jbellec:  
+  id:        440946503
+  firstname: Jérémy
+  lastname:  Bellec
+  
+dvioleau:
+  id:        1013748186
+  firstname: David
+  lastname:  Violeau
+   
 mbleriot:
   firstname:          Michel
   lastname:           Bleriot
