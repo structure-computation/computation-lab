@@ -4,62 +4,109 @@ SCVisu.Router = Backbone.Router.extend
   initialize: ->
     @initialisation()
     @disaleTabs()
+    @currentPage = 0 # First page is 0. 
+    # Bind click event on previous and next button
+    $("#wizard_previous_button").click =>
+      if $(@).attr('disabled') != 'disabled'
+        @previousPage()
+    .attr 'disabled', 'disabled' # Disable the previous button on load.
+    $("#wizard_next_button").click =>
+      @nextPage()
+
+    # Names of breadcrumb's anchors. 
+    # Used in Next And Previous functions
+    @routesPageNumber = [ 
+       "Initialization"
+       "Steps"              
+       "Materials"          
+       "Links"              
+       "Volumic_forces"     
+       "Boundary_Conditions"
+       "Options"            
+       "Forecast"           
+    ]
+  
+  # It is important to call this function AFTER currentPage has changed
+  # Handle to disable Next or Previous button
+  handlePreviousAndNextButtons: ->
+    $("#wizard_previous_button").removeAttr 'disabled'
+    $("#wizard_next_button").removeAttr 'disabled'
+    if @currentPage == 0
+      $("#wizard_previous_button").attr 'disabled', 'disabled'
+    else if @currentPage == (@routesPageNumber.length - 1)
+      $("#wizard_next_button").attr 'disabled', 'disabled'
 
   # Each step of the wizard
   routes:
     "Initialization"      : "initialisation"
-    "Steps"               : "temps"
-    "Materials"           : "materiaux"
-    "Links"               : "liaisons"
+    "Steps"               : "steps"
+    "Materials"           : "materials"
+    "Links"               : "links"
     "Volumic_forces"      : "volumicForces"
     "Boundary_Conditions" : "conditions"
     "Options"             : "options"
-    "Forecast"            : "previsions"
+    "Forecast"            : "forecast"
   
   # Hide all 'tabs' and show the first one - Initialization part
   initialisation: ->
+    @currentPage = 0
+    @handlePreviousAndNextButtons()
     @hideAllContent()
     @selectCorrectTab '','Initialization'
     @showContent      'initialization'
 
   # Hide all 'tabs' and show the Step part.
-  temps: ->
+  steps: ->
+    @currentPage = 1
+    @handlePreviousAndNextButtons()
     @hideAllContent()
     @selectCorrectTab 'Initialization','Steps'
     @showContent      'steps'
 
   # Hide all 'tabs' and show the Material part.
-  materiaux: ->
+  materials: ->
+    @currentPage = 2
+    @handlePreviousAndNextButtons()
     @hideAllContent()
     @selectCorrectTab 'Steps','Materials'
     @showContent      'materials'
 
   # Hide all 'tabs' and show the Link part.
-  liaisons: ->
+  links: ->
+    @currentPage = 3
+    @handlePreviousAndNextButtons()
     @hideAllContent()
     @selectCorrectTab 'Materials', 'Links'
     @showContent      'links'
 
   # Hide all 'tabs' and show the Conditions part.
   volumicForces: ->
+    @currentPage = 4
+    @handlePreviousAndNextButtons()
     @hideAllContent()
     @selectCorrectTab 'Links', 'Volumic_forces'
     @showContent      'volumic_forces'
     
   # Hide all 'tabs' and show the Conditions part.
   conditions: ->
+    @currentPage = 5
+    @handlePreviousAndNextButtons()
     @hideAllContent()
     @selectCorrectTab 'Volumic_forces', 'Boundary_Conditions'
     @showContent      'boundary_conditions'
 
   # Hide all 'tabs' and show the Options part.
   options: ->
+    @currentPage = 6
+    @handlePreviousAndNextButtons()
     @hideAllContent()
     @selectCorrectTab 'Boundary_Conditions', 'Options'
     @showContent      'options'
 
   # Hide all 'tabs' and show the Prevision part.
-  previsions: ->
+  forecast: ->
+    @currentPage = 7
+    @handlePreviousAndNextButtons()
     @hideAllContent()
     @selectCorrectTab 'Options', 'Forecast'
     @showContent      'forecast'
@@ -113,13 +160,19 @@ SCVisu.Router = Backbone.Router.extend
     @reenableTabs()
     $('#ajax-loader').hide()
     # Put the correct anchor in the URL
-    @navigate('Temps', true)
-    @temps()
+    @navigate('Steps', true)
 
   # Is executed when the calcul couldn't be loaded
   calculLoadError: ->
     $('#ajax-loader').hide()
-    
-    
-    
+      
+  # Show previous page if not on the first page
+  previousPage: ->
+    if @currentPage > 0
+      @navigate @routesPageNumber[@currentPage - 1], true
+      
+  # Show next page if not on the last page and only if a calculus has been loaded
+  nextPage: ->
+    if @currentPage < @routesPageNumber.length
+      @navigate @routesPageNumber[@currentPage + 1], true
   

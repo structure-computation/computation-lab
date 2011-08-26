@@ -33,7 +33,6 @@ $ ->
     materials                 = SCVisu.removeDuplicate SCVisu.standardLibraryMaterial.models, SCVisu.current_calcul.get('materials')          
     materialCollection        = new SCVisu.MaterialCollection
     materialCollection.add materials
-    
     SCVisu.materialListView   = new SCVisu.MaterialListView collection: materialCollection
 
     # Initialization of the LinkListView
@@ -47,15 +46,18 @@ $ ->
     steps                     = new SCVisu.StepCollection SCVisu.current_calcul.get('time_steps')
     SCVisu.stepListView       = new SCVisu.StepListView collection: steps
   
+    # Initialization of the InterfaceListView
     interfaceCollection       = new SCVisu.Interfaces SCVisu.current_calcul.get('interfaces')
     SCVisu.interfaceListView  = new SCVisu.InterfaceListView collection : interfaceCollection
 
+    # Initialization of the EdgeListView
     SCVisu.edgeListView       = new SCVisu.EdgeListView()
 
+    # Initialization of the OptionView
     SCVisu.optionView         = new SCVisu.OptionView()
     
   # Initialization of the Router
-  SCVisu.router = new SCVisu. Router
+  SCVisu.router = new SCVisu. Router pushState: true
   # Force the redirection to first part of the wizard
   # Backbone.history.start() returns true when the url contains an anchor
-  SCVisu.router.initialize() if Backbone.history.start()
+  SCVisu.router.navigate "Initialization", true if Backbone.history.start()
