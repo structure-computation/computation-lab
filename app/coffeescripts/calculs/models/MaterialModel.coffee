@@ -12,7 +12,15 @@ SCVisu.Material = Backbone.Model.extend
   assignPiece: (piece) ->
     @piece = piece
 
-  
+  isFromJson: ->
+    if _.isUndefined @get 'library' then true else false
+
+  isStandard: ->
+    if @get 'library' == 'standard' then true else false
+
+  isCompany: ->
+    if @get 'library' == 'company' then true else false  
+
 SCVisu.MaterialCollection = Backbone.Collection.extend
   model: SCVisu.Material
   initialize: (options) ->
@@ -23,3 +31,8 @@ SCVisu.MaterialCollection = Backbone.Collection.extend
     material.save {},
       success: ->
         SCVisu.current_calcul.trigger 'update_materials', SCVisu.materialListView.collection.models
+
+  setAs: (library) ->
+    _.each @models, (model) ->
+      model.set library : library
+    return this

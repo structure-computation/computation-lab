@@ -5,7 +5,6 @@
 SCVisu.Interface = Backbone.Model.extend
   isAssigned: ->
     if _.isUndefined(@get("link_id")) then false else true
-    
 
 
 # Collection of Interface

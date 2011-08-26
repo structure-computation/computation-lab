@@ -44,7 +44,7 @@ SCVisu.PieceListView = Backbone.View.extend
     
   # Assign the pieceModel to the selected Material.
   unassignPieceToMaterial: (pieceModel) ->
-    pieceModel.setMaterial(0)
+    pieceModel.unset 'material_id'
     SCVisu.current_calcul.trigger 'update_pieces', SCVisu.pieceListView.collection.models
     
   # Assign the selected material to the currently selected piece.

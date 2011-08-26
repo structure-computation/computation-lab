@@ -87,8 +87,16 @@
     $ ->
       SCVisu.current_company = #{current_user.company_id}
       
-      SCVisu.standardLibraryMaterial = new SCVisu.MaterialCollection
-      SCVisu.standardLibraryMaterial.reset #{@materials.to_json.html_safe}
+      SCVisu.standardLibraryMaterial  = new SCVisu.MaterialCollection
+      SCVisu.companyLibraryMaterial   = new SCVisu.MaterialCollection
+      SCVisu.standardLibraryLink      = new SCVisu.LinkCollection
+      SCVisu.companyLibraryLink       = new SCVisu.LinkCollection
+
+      SCVisu.standardLibraryMaterial.reset #{@standard_materials.to_json.html_safe}
+      SCVisu.companyLibraryMaterial.reset #{@company_materials.to_json.html_safe}
+
+      SCVisu.standardLibraryLink.reset #{@standard_links.to_json.html_safe}
+      SCVisu.companyLibraryLink.reset #{@company_links.to_json.html_safe}
 
       SCVisu.standardLibraryLink = new SCVisu.LinkCollection
       SCVisu.standardLibraryLink.reset #{@links.to_json.html_safe}

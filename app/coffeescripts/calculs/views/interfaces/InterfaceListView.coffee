@@ -21,7 +21,7 @@ SCVisu.InterfaceListView = Backbone.View.extend
     _.each @interfaceViews, (interfaceView) ->
       $(interfaceView.el).addClass('gray').removeClass('selected')
     $(interfaceView.el).addClass('selected').removeClass('gray')
-    if interfaceView.model.isAssigned()
+    if interfaceView.model.isAssigned() 
       SCVisu.linkListView.highlightLink(interfaceView.model.get('link_id'))
     else
       SCVisu.linkListView.showAssignButtons()

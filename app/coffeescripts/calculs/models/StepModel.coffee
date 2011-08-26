@@ -2,12 +2,7 @@
 # A Step is depedent of all other existant step.
 # When a step is updated, all existant one must be kept up to date.
 SCVisu.Step = Backbone.Model.extend
-  initial_time  : 0
-  nb_time_steps : 1
-  time_step     : 1
-  final_time    : 1
-  name          : "default_name"
-   
+
   initialize: ->
     @updateFinalTime()
     @bind('add', @updateFinalTime)
