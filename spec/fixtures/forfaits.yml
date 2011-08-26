@@ -1,0 +1,59 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: "Forfait 500"
+  price: 900
+  price_jeton: 1.5
+  nb_jetons: 500
+  nb_jetons_tempon: 100
+  validity: 3
+  state: "active"
+  start_date: 2009-12-16 23:48:15
+  end_date: 
+  
+two:
+  name: "Forfait 1000"
+  price: 1740
+  price_jeton: 1.45
+  nb_jetons: 1000
+  nb_jetons_tempon: 200
+  validity: 6
+  state: "active"
+  start_date: 2009-12-16 23:48:15
+  end_date: 
+  
+three:
+  name: "Forfait 5000"
+  price: 8400
+  price_jeton: 1.4
+  nb_jetons: 5000
+  nb_jetons_tempon: 1000
+  validity: 6
+  state: "active"
+  start_date: 2009-12-16 23:48:15
+  end_date: 
+  
+four:
+  name: "Forfait 10000"
+  price: 14300
+  price_jeton: 1.3
+  nb_jetons: 10000
+  nb_jetons_tempon: 1000
+  validity: 12
+  state: "active"
+  start_date: 2009-12-16 23:48:15
+  end_date: 
+  
+five:
+  name: "Forfait 50000"
+  price: 61200
+  price_jeton: 1.2
+  nb_jetons: 50000
+  nb_jetons_tempon: 1000
+  validity: 12
+  state: "active"
+  start_date: 2009-12-16 23:48:15
+  end_date: 
+#
+# two:
+#   column: value

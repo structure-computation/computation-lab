@@ -1,0 +1,105 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name : 'metal 1'
+  family : 'métaux'
+  company_id : -1
+  reference : -1
+  id_select : 
+  name_select : ''
+  description : 'description'
+  mtype : 'isotrope'
+  comp : 'el'
+  type_num : 0
+  dir_1_x : 1
+  dir_2_x : 0
+  dir_3_x : 0
+  dir_1_y : 0
+  dir_2_y : 1
+  dir_3_y : 0
+  dir_1_z : 0
+  dir_2_z : 0
+  dir_3_z : 1
+  E_1 : 200e3
+  E_2 : 200e3
+  E_3 : 200e3
+  cis_1 : 0
+  cis_2 : 0
+  cis_3 : 0
+  nu_12 : 0.3
+  nu_23 : 0.3
+  nu_13 : 0.3
+  alpha_1 : 0
+  alpha_2 : 0
+  alpha_3 : 0
+  rho : 2e3
+  sigma_p_1 : 200
+  sigma_p_2 : 200
+  sigma_p_3 : 200
+  sigma_r_1 : 300
+  sigma_r_2 : 300
+  sigma_r_3 : 300
+  sigma_e_1 : 200
+  sigma_e_2 : 200
+  sigma_e_3 : 200
+  H_1 : 200
+  H_2 : 200
+  H_3 : 200
+  p_1 : 200
+  p_2 : 200
+  p_3 : 200
+  ed_1 : 200
+  ed_2 : 200
+  ed_3 : 200
+  
+two:
+  name : 'metal 2'
+  family : 'métaux'
+  company_id : -1
+  reference : -1
+  id_select : 
+  name_select : ''
+  description : 'description'
+  mtype : 'orthotrope'
+  comp : 'el pl en'
+  type_num : 0
+  dir_1_x : 1
+  dir_2_x : 0
+  dir_3_x : 0
+  dir_1_y : 0
+  dir_2_y : 1
+  dir_3_y : 0
+  dir_1_z : 0
+  dir_2_z : 0
+  dir_3_z : 1
+  E_1 : 200e3
+  E_2 : 200e3
+  E_3 : 200e3
+  cis_1 : 0
+  cis_2 : 0
+  cis_3 : 0
+  nu_12 : 0.3
+  nu_23 : 0.3
+  nu_13 : 0.3
+  alpha_1 : 0
+  alpha_2 : 0
+  alpha_3 : 0
+  rho : 2e3
+  sigma_p_1 : 200
+  sigma_p_2 : 200
+  sigma_p_3 : 200
+  sigma_r_1 : 300
+  sigma_r_2 : 300
+  sigma_r_3 : 300
+  sigma_e_1 : 200
+  sigma_e_2 : 200
+  sigma_e_3 : 200
+  H_1 : 200
+  H_2 : 200
+  H_3 : 200
+  p_1 : 200
+  p_2 : 200
+  p_3 : 200
+  ed_1 : 200
+  ed_2 : 200
+  ed_3 : 200

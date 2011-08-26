@@ -1,0 +1,80 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+avion1:
+    name: avion1
+    company: tf_avionics  
+    model_file_path: 
+    image_path:
+    description: "premier model d'avion"
+    dimension: 2
+    parts: 10
+    interfaces: 20
+    used_memory: 0
+    state: "void"
+    deleted_at:
+    
+bateau1:
+    name: bateau1
+    company: tf_avionics  
+    model_file_path: 
+    image_path:
+    description: "premier model de bateau"
+    dimension: 2
+    parts: 20
+    interfaces: 30
+    used_memory: 0
+    state: "void"
+    deleted_at:
+    
+voiture1:
+    name: voiture1
+    company: tf_avionics  
+    model_file_path: 
+    image_path:
+    description: "premier model de voiture"
+    dimension: 2
+    parts: 30
+    interfaces: 10
+    used_memory: 0
+    state: "void"
+    deleted_at:
+    
+avion2:
+    name: avion2 
+    company: tf_avionics  
+    model_file_path: 
+    image_path:
+    description: "second model d'avion"
+    dimension: 2
+    parts: 10
+    interfaces: 20
+    used_memory: 0
+    state: "void"
+    deleted_at:
+    
+bateau2:
+    name: bateau2
+    company: tf_avionics  
+    model_file_path: 
+    image_path:
+    description: "second model de bateau"
+    dimension: 2
+    parts: 20
+    interfaces: 30
+    used_memory: 0
+    state: "void"
+    deleted_at:
+    
+voiture2:
+    name: voiture2  
+    company_id:  674101581   #tf_avionics
+    model_file_path: 
+    image_path:
+    description: "second model de voiture"
+    dimension: 2
+    parts: 30
+    interfaces: 10
+    used_memory: 0
+    state: "void"
+    deleted_at:
+    

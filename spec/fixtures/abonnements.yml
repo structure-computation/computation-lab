@@ -1,0 +1,41 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+    name: "Base 100"
+    price: 1000
+    assigned_memory: 100
+    security_level: 0
+    nb_max_user: 1000
+    state: "active"
+    start_date: 2009-12-16 23:48:15
+    end_date:
+    
+two:
+    name: "Base 300"
+    price: 2700
+    assigned_memory: 300
+    security_level: 0
+    nb_max_user: 1000
+    state: "active"
+    start_date: 2009-12-16 23:48:15
+    end_date:
+    
+three:
+    name: "Base 500"
+    price: 4200
+    assigned_memory: 500
+    security_level: 0
+    nb_max_user: 1000
+    state: "active"
+    start_date: 2009-12-16 23:48:15
+    end_date:
+    
+four:
+    name: "Base 1000"
+    price: 7500
+    assigned_memory: 1000
+    security_level: 0
+    nb_max_user: 1000
+    state: "active"
+    start_date: 2009-12-16 23:48:15
+    end_date:

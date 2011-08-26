@@ -1,0 +1,20 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+<% mbleriot_models = [ "avion1", "bateau1", "voiture1", "avion2", "bateau2", "voiture2" ] 
+   jlinder_models  = [ "avion2", "bateau2", "voiture2" ]
+%>
+
+<% mbleriot_models.each do |model_name| %>
+<%= "mbleriot_#{model_name}:" %>
+  company_member: mbleriot
+  rights: #TODO
+  sc_model: <%= model_name %>
+  
+<% end %>
+
+<% jlinder_models.each do |model_name| %>
+<%= "jlinder_#{model_name}:" %>
+  company_member: jlinder
+  rights: #TODO
+  sc_model: <%= model_name %>
+
+<% end %>
