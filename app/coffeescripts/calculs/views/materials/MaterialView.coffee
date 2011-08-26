@@ -61,6 +61,6 @@ SCVisu.MaterialView = Backbone.View.extend
     return this
     
   render: ->
-    @renderWithButton 'edit', 'Editer'
+    @renderWithButton 'assign', 'Assigner'
 
 

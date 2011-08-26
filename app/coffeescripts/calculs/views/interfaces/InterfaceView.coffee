@@ -37,7 +37,7 @@ SCVisu.InterfaceView = Backbone.View.extend
   linkHasBeenSelected: (linkModel) ->
     if @model.get('link_id') == linkModel.get('id')
       @addUnassignButton()
-    else if @model.get('link_id') == 0
+    else if !@model.isAssigned()
       @addAssignButton()
     else
       @render()
@@ -64,6 +64,10 @@ SCVisu.InterfaceView = Backbone.View.extend
       $(@parentElement.el).append(@el)
       @firstRendering = false
     $(@el).html(@model.get('name'))
+    if @model.isAssigned()
+      $(@el).append('<span class="is_assigned">✓</span>')
+    else
+      $(@el).append('<span class="is_not_assigned">?</span>')
     $(@el).removeClass('selected').removeClass('gray')
     return this
 

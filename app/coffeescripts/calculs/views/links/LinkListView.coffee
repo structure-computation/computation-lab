@@ -50,7 +50,7 @@ SCVisu.LinkListView = Backbone.View.extend
     $(linkView.el).addClass('selected').removeClass('gray')
   
   unassignLinkToSelectedInterface: ->
-    SCVisu.interfaceListView.selectedInterfaceModel.set link_id : 0
+    SCVisu.interfaceListView.selectedInterfaceModel.unset 'link_id'
     SCVisu.current_calcul.trigger 'update_interfaces', SCVisu.interfaceListView.collection.models
     
   render : ->

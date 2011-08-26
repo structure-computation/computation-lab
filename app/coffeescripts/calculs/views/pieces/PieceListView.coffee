@@ -18,13 +18,15 @@ SCVisu.PieceListView = Backbone.View.extend
   # Else, he will be able to select a material for the selected piece.
   selectPiece: (pieceView) ->
     @selectedPieceView = pieceView
-    _.each @pieceViews, (pieceView) ->
-      $(pieceView.el).addClass('gray').removeClass('selected')
-    $(pieceView.el).addClass('selected').removeClass('gray')
-    if pieceView.model.get('material_id') == 0
-      SCVisu.materialListView.showAssignButtons()
-    else
+    @highlightPieceView pieceView
+    if pieceView.model.isAssigned()
       SCVisu.materialListView.highlightMaterial(pieceView.model.get('material_id'))
+    else
+      SCVisu.materialListView.showAssignButtons()
+  highlightPieceView: (pieceView) ->
+    _.each @pieceViews, (piece) ->
+      $(piece.el).addClass('gray').removeClass('selected')
+    $(pieceView.el).addClass('selected').removeClass('gray')
 
   # Add an "Assign" button to each piece view in order that the user can 
   # assign it to a selected material. 
@@ -37,7 +39,7 @@ SCVisu.PieceListView = Backbone.View.extend
   
   # Assign the pieceModel to the selected Material.
   assignPieceToMaterial: (pieceModel) ->
-    pieceModel.setMaterial(SCVisu.materialListView.selectedMaterial)
+    pieceModel.set 'material_id' : SCVisu.materialListView.selectedMaterial.get('id')
     SCVisu.current_calcul.trigger 'update_pieces', SCVisu.pieceListView.collection.models
     
   # Assign the pieceModel to the selected Material.
@@ -49,11 +51,15 @@ SCVisu.PieceListView = Backbone.View.extend
   assignMaterialToSelectedPiece: (material) ->
     @selectedPieceView.model.set material_id: material.get('id')
     SCVisu.current_calcul.trigger 'update_pieces', SCVisu.pieceListView.collection.models
+    @render()
+    @highlightPieceView @selectedPieceView
     
   # Unassign the selected material from the currently selected piece.
   unassignMaterialToSelectedPiece: ->
-    @selectedPieceView.model.set material_id: 0
+    @selectedPieceView.model.unset 'material_id'
     SCVisu.current_calcul.trigger 'update_pieces', SCVisu.pieceListView.collection.models
+    @render()
+    @highlightPieceView @selectedPieceView
     
   render : ->
     _.each @pieceViews, (piece) ->
