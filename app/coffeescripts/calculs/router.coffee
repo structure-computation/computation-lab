@@ -6,12 +6,17 @@ SCVisu.Router = Backbone.Router.extend
     @disaleTabs()
     @currentPage = 0 # First page is 0. 
     # Bind click event on previous and next button
+    # Load next page
     $("#wizard_previous_button").click =>
       if $(@).attr('disabled') != 'disabled'
         @previousPage()
     .attr 'disabled', 'disabled' # Disable the previous button on load.
+    # If user is on the first page, then the selected calculus is loaded, else it loads next page.
     $("#wizard_next_button").click =>
-      @nextPage()
+      if @currentPage == 0
+        SCVisu.calculViews.loadCalcul()
+      else
+        @nextPage()
 
     # Names of breadcrumb's anchors. 
     # Used in Next And Previous functions

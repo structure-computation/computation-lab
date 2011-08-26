@@ -93,7 +93,7 @@
       SCVisu.standardLibraryLink = new SCVisu.LinkCollection
       SCVisu.standardLibraryLink.reset #{@links.to_json.html_safe}
       
-      SCVisu.CalculCollection = new SCVisu.Calculs
-      SCVisu.CalculCollection.reset #{@calculs.to_json.html_safe}
+      SCVisu.calculCollection = new SCVisu.Calculs
+      SCVisu.calculCollection.reset #{@calculs.to_json.html_safe}
 
-      SCVisu.CalculViews = new SCVisu.CalculListView {collection: SCVisu.CalculCollection}
+      SCVisu.calculViews = new SCVisu.CalculListView {collection: SCVisu.calculCollection}

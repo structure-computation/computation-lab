@@ -8,11 +8,11 @@ SCVisu.CalculListView = Backbone.View.extend
     @render()
     
   events:
-    "click .load_calcul": "load_calcul"
-    "click .save_calcul": "save_calcul"
+    "click .load_calcul": "loadCalcul"
+    "click .save_calcul": "saveCalcul"
     
   # Fonction appellé lorsque l'on clique sur le bouton 'Charger le calcul'. Elle créee alors  le current_calcul qui sera utilisé tout au long du calcul
-  load_calcul: ->
+  loadCalcul: ->
     SCVisu.current_calcul = new SCVisu.Calcul @selected_calcul
     SCVisu.router.calculIsLoading()
     Backbone.sync("read", SCVisu.current_calcul,
@@ -26,7 +26,7 @@ SCVisu.CalculListView = Backbone.View.extend
     )
     
   
-  save_calcul: ->
+  saveCalcul: ->
     Backbone.sync "update", SCVisu.current_calcul
   
   select_calcul:(calcul) ->
