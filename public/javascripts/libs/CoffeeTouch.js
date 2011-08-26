@@ -120,20 +120,20 @@
     return GenericState;
   })();
   NoTouch = (function() {
+    __extends(NoTouch, GenericState);
     function NoTouch() {
       NoTouch.__super__.constructor.apply(this, arguments);
     }
-    __extends(NoTouch, GenericState);
     NoTouch.prototype.touchstart = function() {
       return this.machine.setState(new FirstTouch(this.machine));
     };
     return NoTouch;
   })();
   FirstTouch = (function() {
+    __extends(FirstTouch, GenericState);
     function FirstTouch() {
       FirstTouch.__super__.constructor.apply(this, arguments);
     }
-    __extends(FirstTouch, GenericState);
     FirstTouch.prototype.init = function() {
       var _machine;
       _machine = this.machine;
@@ -154,10 +154,10 @@
     return FirstTouch;
   })();
   Fixed = (function() {
+    __extends(Fixed, GenericState);
     function Fixed() {
       Fixed.__super__.constructor.apply(this, arguments);
     }
-    __extends(Fixed, GenericState);
     Fixed.prototype.init = function() {
       return this.notify("fixed");
     };
@@ -168,10 +168,10 @@
     return Fixed;
   })();
   Drag = (function() {
+    __extends(Drag, GenericState);
     function Drag() {
       Drag.__super__.constructor.apply(this, arguments);
     }
-    __extends(Drag, GenericState);
     Drag.prototype.init = function() {
       var that;
       this.isTap = true;
@@ -514,13 +514,8 @@
       }
     };
     Analyser.prototype.triggerPinchOrSpread = function() {
-      var finger, sameDirection, _i, _len, _ref;
+      var sameDirection;
       sameDirection = false;
-      _ref = this.fingers;
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        finger = _ref[_i];
-        alert(finger.params.dragDirection);
-      }
       if (this.informations.scale < 1.1 && !sameDirection) {
         this.targetElement.trigger("" + (digit_name(this.fingers.length)) + ":pinch", this.informations);
         return this.targetElement.trigger("pinch", this.informations);
