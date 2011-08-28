@@ -18,3 +18,4 @@ public/javascripts/calculs/views/
 public/javascripts/calculs/*.js
 public/javascripts/manage_tabs_new.js
 public/javascripts/visualisation/*.js
+*.sql
