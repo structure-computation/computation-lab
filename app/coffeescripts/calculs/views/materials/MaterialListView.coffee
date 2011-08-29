@@ -19,8 +19,6 @@ SCVisu.MaterialListView = Backbone.View.extend
     $('#materials_database').show()
     @editView.hide()
 
-  removeMaterialFromCollection: ->
-
   # Add a material to the collection and create an associated view
   add: (materialModel) ->
     @collection.models.push materialModel

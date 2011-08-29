@@ -6,6 +6,7 @@
 SCVisu.VolumicForce = Backbone.Model.extend()
 
 
+
 # Collection of Step. Keep all steps up to date with each others.
 SCVisu.VolumicForceCollection = Backbone.Collection.extend
   model: SCVisu.VolumicForce

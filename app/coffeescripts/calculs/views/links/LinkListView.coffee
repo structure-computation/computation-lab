@@ -72,7 +72,7 @@ SCVisu.LinkListView = Backbone.View.extend
     SCVisu.interfaceListView.selectedInterfaceView.model.unset 'link_id'
     SCVisu.interfaceListView.renderAndHighlightCurrentInterface()
     SCVisu.current_calcul.trigger 'update_interfaces', SCVisu.interfaceListView.collection.models
-    
+   
   render : ->
     for l in @linkViews
       l.render()    
