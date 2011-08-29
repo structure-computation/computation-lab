@@ -25,7 +25,7 @@ SCVisu.VolumicForceListView = Backbone.View.extend
   # It set the current selected model to "non selected" (which trigger an event that redraw its line).
 
   setNewSelectedModel: (volumicForceView) ->
-    @selectedVolumicForce.unset "selected"   if @selectedVolumicForce
+    @selectedVolumicForce.unset "selected" if @selectedVolumicForce
     @selectedVolumicForceView = volumicForceView
   
   

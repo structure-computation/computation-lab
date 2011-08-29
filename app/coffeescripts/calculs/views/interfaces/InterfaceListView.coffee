@@ -48,6 +48,14 @@ SCVisu.InterfaceListView = Backbone.View.extend
   unassignInterfaceToLink: (interfaceModel) ->
     interfaceModel.unset "link_id"
     SCVisu.current_calcul.trigger 'update_interfaces', SCVisu.interfaceListView.collection.models    
+
+  # Check if an interface had the link associated to it before. 
+  # If it is the case, then it removes the association
+  linkHasBeenRemoved: (link) ->
+    _.each @collection.models, (interface) ->
+      if interface.get('link_id') == link.get('id')
+        interface.unset 'link_id'
+    @render()
     
   render : ->
     _.each @interfaceViews, (interface) ->

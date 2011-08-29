@@ -17,6 +17,7 @@ SCVisu.MaterialView = Backbone.View.extend
   # Removing model from collection passing silent prevent from destroying from database
   # Also removing the view
   removeMaterial: ->
+    SCVisu.pieceListView.materialHasBeenRemoved(@model)
     @parentElement.collection.remove @model, silent: true
     @remove()
 

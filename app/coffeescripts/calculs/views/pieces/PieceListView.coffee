@@ -60,7 +60,15 @@ SCVisu.PieceListView = Backbone.View.extend
     SCVisu.current_calcul.trigger 'update_pieces', SCVisu.pieceListView.collection.models
     @render()
     @highlightPieceView @selectedPieceView
-    
+
+  # Check if a piece had the material associated to it before. 
+  # If it is the case, then it removes the association
+  materialHasBeenRemoved: (material) ->
+    _.each @collection.models, (piece) ->
+      if piece.get('material_id') == material.get('id')
+        piece.unset 'material_id'
+    @render()
+
   render : ->
     _.each @pieceViews, (piece) ->
       piece.render()

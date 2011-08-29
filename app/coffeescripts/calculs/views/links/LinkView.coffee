@@ -11,12 +11,13 @@ SCVisu.LinkView = Backbone.View.extend
     "click button.clone"    : "clone"
     "click button.assign"   : "assign"
     "click button.unassign" : "unassign"
-    "click button.remove" : "removeLink"
+    "click button.remove"   : "removeLink"
     "click"                 : "select"
     
   # Removing model from collection passing silent prevent from destroying from database
   # Also removing the view
   removeLink: ->
+    SCVisu.interfaceListView.linkHasBeenRemoved @model
     @parentElement.collection.remove @model, silent: true
     @remove()
 

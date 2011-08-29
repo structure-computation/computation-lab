@@ -41,7 +41,7 @@ $ ->
     SCVisu.interfaceListView  = new SCVisu.InterfaceListView collection : interfaceCollection
 
     # Initialisation of VolumicForcesListView
-    volumicForcesCollection      = new SCVisu.StepCollection        SCVisu.current_calcul.get('volumic_forces')
+    volumicForcesCollection      = new SCVisu.VolumicForceCollection SCVisu.current_calcul.get('volumic_forces')
     SCVisu.volumicForcesListView = new SCVisu.VolumicForceListView  collection : volumicForcesCollection 
 
     # Initialization of the EdgeListView
