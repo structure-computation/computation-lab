@@ -36,7 +36,7 @@ SCVisu.PieceView = Backbone.View.extend
   materialHasBeenSelected: (material) ->
     if @model.get('material_id') == material.get('id')
       @addUnassignButton()
-    else if @model.get('material_id') == 0
+    else if _.isUndefined @model.get('material_id')
       @addAssignButton()
     else
       @render()
@@ -62,6 +62,10 @@ SCVisu.PieceView = Backbone.View.extend
       $(@parentElement.el).append(@el)
       @firstRendering = false
     $(@el).html(@model.get('name'))
+    if @model.isAssigned()
+      $(@el).append('<span class="is_assigned">✓</span>')
+    else
+      $(@el).append('<span class="is_not_assigned">?</span>')
     $(@el).removeClass('selected').removeClass('gray')
     return this
 

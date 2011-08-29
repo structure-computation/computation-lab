@@ -6,11 +6,13 @@ class CalculsController < ApplicationController
   layout 'calcul'
   
   def index
-    @links      = Link.find_all_by_company_id(current_user.company_id)
-    @materials  = Material.find_all_by_company_id(current_user.company_id)
-    @material   = Material.new
-    @link       = Link.new
-    @calculs    = CalculResult.find_all_by_sc_model_id(params[:sc_model_id])
+    @standard_links     = Link.standard
+    @company_links      = Link.user_company(current_user.company)
+    @standard_materials = Material.standard
+    @company_materials  = Material.user_company(current_user.company)
+    @material           = Material.new
+    @link               = Link.new
+    @calculs            = CalculResult.find_all_by_sc_model_id(params[:sc_model_id])
   end
   
   def show

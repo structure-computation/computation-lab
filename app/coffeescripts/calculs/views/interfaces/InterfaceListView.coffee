@@ -21,10 +21,10 @@ SCVisu.InterfaceListView = Backbone.View.extend
     _.each @interfaceViews, (interfaceView) ->
       $(interfaceView.el).addClass('gray').removeClass('selected')
     $(interfaceView.el).addClass('selected').removeClass('gray')
-    if interfaceView.model.get('link_id') == 0
-      SCVisu.linkListView.showAssignButtons()
-    else
+    if interfaceView.model.isAssigned() 
       SCVisu.linkListView.highlightLink(interfaceView.model.get('link_id'))
+    else
+      SCVisu.linkListView.showAssignButtons()
 
   # Add an "Assign" button to each link view in order that the user can 
   # assign it to a selected interface. 
@@ -42,7 +42,7 @@ SCVisu.InterfaceListView = Backbone.View.extend
 
   # Assign the pieceModel to the selected Material.
   unassignInterfaceToLink: (interfaceModel) ->
-    interfaceModel.set link_id : 0
+    interfaceModel.unset "link_id"
     SCVisu.current_calcul.trigger 'update_interfaces', SCVisu.interfaceListView.collection.models    
     
   render : ->
