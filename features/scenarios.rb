@@ -61,7 +61,7 @@ Scenario outline: Evaluating for current straights
   Then the current right straights should be <rights>
 
   Examples:                                              
-    | user         | role       | owmner     |    rights_sc_models          |   rights_manager_user        |    rights_account             | 
+    | user         | role       | owner      |    rights_sc_models          |   rights_manager_user        |    rights_account             | 
     | current_user | admin      | undefined  | create, update, read, delete | create, update, read, delete |  create, update, read, delete | 
     | current_user | manager    | manager    |                              | create, update, read, delete |  create, update, read, delete |  
     | current_user | accountant | accountant |                              |                              |  create, update, read, delete | 
