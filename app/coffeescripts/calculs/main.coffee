@@ -1,8 +1,8 @@
 # SCVisu is initialized in the header in order that it is initialize at first
 # window.SCVisu = {} 
 $ ->
-  interfaceCollection = new SCVisu.Interfaces()
-  SCVisu.interfaceListView = new SCVisu.InterfaceListView collection : interfaceCollection
+  interfaceCollection       = new SCVisu.Interfaces()
+  SCVisu.interfaceListView  = new SCVisu.InterfaceListView collection : interfaceCollection
   
   # # Return an array without duplicate element. Check is done by the id of the element in the array.
   # # When there is a duplicate element, keeps the element from the JSON
@@ -62,6 +62,10 @@ $ ->
     # Initialization of the InterfaceListView
     interfaceCollection       = new SCVisu.Interfaces SCVisu.current_calcul.get('interfaces')
     SCVisu.interfaceListView  = new SCVisu.InterfaceListView collection : interfaceCollection
+
+    # Initialisation of VolumicForcesListView
+    volumicForcesCollection      = new SCVisu.StepCollection        SCVisu.current_calcul.get('volumic_forces')
+    SCVisu.volumicForcesListView = new SCVisu.VolumicForceListView  collection : volumicForcesCollection 
 
     # Initialization of the EdgeListView
     SCVisu.edgeListView       = new SCVisu.EdgeListView()
