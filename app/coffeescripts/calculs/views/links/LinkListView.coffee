@@ -1,5 +1,5 @@
 ## LinkListView
-SCVisu.LinkListView = Backbone.View.extend
+SCModels.LinkListView = Backbone.View.extend
   el: 'ul#links'
   
   initialize: (options) ->
@@ -26,7 +26,7 @@ SCVisu.LinkListView = Backbone.View.extend
     
   # Create a view giving it a model
   createLinkView: (link) ->
-    l = new SCVisu.LinkView model: link, parentElement: this
+    l = new SCModels.LinkView model: link, parentElement: this
     l.bind 'show_details', @showDetails, this
     @linkViews.push l
     @render()

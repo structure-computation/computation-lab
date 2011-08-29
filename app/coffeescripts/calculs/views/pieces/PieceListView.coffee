@@ -1,5 +1,5 @@
 ## PieceListView
-SCVisu.PieceListView = Backbone.View.extend
+SCModels.PieceListView = Backbone.View.extend
   el: 'ul#pieces'
   
   # You have to pass a PieceCollection at initialisation as follow:
@@ -7,7 +7,7 @@ SCVisu.PieceListView = Backbone.View.extend
   initialize: ->
     @pieceViews = []
     for piece in @collection.models
-      @pieceViews.push new SCVisu.PieceView model: piece, parentElement: this
+      @pieceViews.push new SCModels.PieceView model: piece, parentElement: this
     @selectedPieceView = null
     @render()
         

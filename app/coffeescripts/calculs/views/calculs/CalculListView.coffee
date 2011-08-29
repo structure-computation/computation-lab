@@ -1,4 +1,4 @@
-SCVisu.CalculListView = Backbone.View.extend
+SCModels.CalculListView = Backbone.View.extend
   el: 'ul#calculs'
 
   initialize: (options) ->
@@ -13,7 +13,7 @@ SCVisu.CalculListView = Backbone.View.extend
     
   # Fonction appellé lorsque l'on clique sur le bouton 'Charger le calcul'. Elle créee alors  le current_calcul qui sera utilisé tout au long du calcul
   loadCalcul: ->
-    SCVisu.current_calcul = new SCVisu.Calcul @selected_calcul
+    SCVisu.current_calcul = new SCModels.Calcul @selected_calcul
     SCVisu.router.calculIsLoading()
     Backbone.sync("read", SCVisu.current_calcul,
       success: (response) ->
@@ -33,10 +33,10 @@ SCVisu.CalculListView = Backbone.View.extend
     for calculView in @calculViews
       $(calculView.el).removeClass('selected')
     $(calcul.el).addClass 'selected'
-    @selected_calcul = new SCVisu.Calcul calcul.model
+    @selected_calcul = new SCModels.Calcul calcul.model
 
   createCalculView: (calcul) ->
-    c = new SCVisu.CalculView model: calcul, parentElement: this
+    c = new SCModels.CalculView model: calcul, parentElement: this
     @calculViews.push c
 
   render : ->

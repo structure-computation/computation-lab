@@ -1,5 +1,5 @@
 # Option
-SCVisu.Option = Backbone.Model.extend
+SCModels.Option = Backbone.Model.extend
   resetAllAttributes: ->
     @unset @attributes['mode']
     @unset @attributes['convergence_method_LATIN']

@@ -1,7 +1,7 @@
 ## VolumicForceListView
 
 # TODO: Le render doit réagir à l'ajout ou la suppression d'un élément de la collection.
-SCVisu.VolumicForceListView = Backbone.View.extend
+SCModels.VolumicForceListView = Backbone.View.extend
   # el: 'table#volumic_force_table > tbody'
   el: '#volumic_forces'
   ## -- Events
@@ -34,7 +34,7 @@ SCVisu.VolumicForceListView = Backbone.View.extend
     vf_table.empty()
     parent   = this
     @collection.each ( volumicForce ) ->
-      subview = new SCVisu.VolumicForceView model: volumicForce, parentElement: parent
+      subview = new SCModels.VolumicForceView model: volumicForce, parentElement: parent
       subview.render()
       vf_table.append(subview.el)
 
@@ -42,5 +42,5 @@ SCVisu.VolumicForceListView = Backbone.View.extend
 
   ## Create add a new volumic_force model and view.
   addVolumicForce: ->  
-    newVolForce = new SCVisu.VolumicForce
+    newVolForce = new SCModels.VolumicForce
     @collection.add newVolForce

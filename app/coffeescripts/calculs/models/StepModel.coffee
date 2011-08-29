@@ -1,7 +1,7 @@
 # Step
 # A Step is depedent of all other existant step.
 # When a step is updated, all existant one must be kept up to date.
-SCVisu.Step = Backbone.Model.extend
+SCModels.Step = Backbone.Model.extend
 
   initialize: ->
     @updateFinalTime()
@@ -15,8 +15,8 @@ SCVisu.Step = Backbone.Model.extend
 
 
 # Collection of Step. Keep all steps up to date with each others.
-SCVisu.StepCollection = Backbone.Collection.extend
-  model: SCVisu.Step
+SCModels.StepCollection = Backbone.Collection.extend
+  model: SCModels.Step
   initialize: -> 
     @bind 'add', (step) ->
       @updateModels()

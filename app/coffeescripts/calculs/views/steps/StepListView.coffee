@@ -1,21 +1,21 @@
 ## StepListView
-SCVisu.StepListView = Backbone.View.extend
+SCModels.StepListView = Backbone.View.extend
 
   el: "#steps"
   # Have to initialize the StepListView with {collection: StepCollection}
   initialize: ->  
     @stepViews = []
     if @collection.length == 0
-      step = new SCVisu.Step
+      step = new SCModels.Step
         initial_time  : 0
         time_step     : 1
         nb_time_steps : 1
         final_time    : 1
       @collection.add step
-      @stepViews.push new SCVisu.StepView model: step, parentView: this
+      @stepViews.push new SCModels.StepView model: step, parentView: this
 
     for step in @collection.models
-      @stepViews.push new SCVisu.StepView model: step, parentView: this
+      @stepViews.push new SCModels.StepView model: step, parentView: this
 
     @stepViews[0].removeDeleteButton()
     @bind 'step_deleted', @deleteStep, @
@@ -25,13 +25,13 @@ SCVisu.StepListView = Backbone.View.extend
     
   ## Create a model and associate it to a new view
   addStep: ->  
-    step = new SCVisu.Step
+    step = new SCModels.Step
       initial_time  : @collection.models[@collection.models.length - 1].get 'final_time'
       time_step     : 1
       nb_time_steps : 1
 
     @collection.add step
-    @stepViews.push new SCVisu.StepView model: step, parentView: this
+    @stepViews.push new SCModels.StepView model: step, parentView: this
 
   render : ->
     if $(@el).find('select#step_type').val() == "statique"

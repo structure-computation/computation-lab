@@ -1,9 +1,9 @@
 ## Option
-SCVisu.OptionView = Backbone.View.extend
+SCModels.OptionView = Backbone.View.extend
   el: "#calculus_option"
   
   initialize: ->
-    @model = new SCVisu.Option()
+    @model = new SCModels.Option()
 
   events:
     "change input#test_mode"          : "testModeSelected"

@@ -82,7 +82,7 @@ SCVisu.NewEdgeView = Backbone.View.extend
       edgeAttributes['criteria'] = @currentCriteria
       edgeAttributes['geometry'] = @currentGeometry
 
-      SCVisu.edgeListView.addEdgeModel new SCVisu.Edge(edgeAttributes)
+      SCVisu.edgeListView.addEdgeModel new SCModels.Edge(edgeAttributes)
 
   # Check if inputs are correctly filled and with the good data type
   # HTML Inputs have an HTML5 data attribute : data-type which tells if it has to be number or text

@@ -1,2 +1,2 @@
 # CalculOption
-SCVisu.CalculOption = Backbone.Model.extend()
+SCModels.CalculOption = Backbone.Model.extend()

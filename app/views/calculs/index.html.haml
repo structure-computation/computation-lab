@@ -87,10 +87,10 @@
     $ ->
       SCVisu.current_company = #{current_user.company_id}
       
-      SCVisu.standardLibraryMaterial  = new SCVisu.MaterialCollection
-      SCVisu.companyLibraryMaterial   = new SCVisu.MaterialCollection
-      SCVisu.standardLibraryLink      = new SCVisu.LinkCollection
-      SCVisu.companyLibraryLink       = new SCVisu.LinkCollection
+      SCVisu.standardLibraryMaterial  = new SCModels.MaterialCollection
+      SCVisu.companyLibraryMaterial   = new SCModels.MaterialCollection
+      SCVisu.standardLibraryLink      = new SCModels.LinkCollection
+      SCVisu.companyLibraryLink       = new SCModels.LinkCollection
 
       SCVisu.standardLibraryMaterial.reset #{@standard_materials.to_json.html_safe}
       SCVisu.companyLibraryMaterial.reset #{@company_materials.to_json.html_safe}
@@ -98,7 +98,7 @@
       SCVisu.standardLibraryLink.reset #{@standard_links.to_json.html_safe}
       SCVisu.companyLibraryLink.reset #{@company_links.to_json.html_safe}
       
-      SCVisu.calculCollection = new SCVisu.Calculs
+      SCVisu.calculCollection = new SCModels.Calculs
       SCVisu.calculCollection.reset #{@calculs.to_json.html_safe}
 
-      SCVisu.calculViews = new SCVisu.CalculListView {collection: SCVisu.calculCollection}
+      SCVisu.calculViews = new SCModels.CalculListView {collection: SCVisu.calculCollection}

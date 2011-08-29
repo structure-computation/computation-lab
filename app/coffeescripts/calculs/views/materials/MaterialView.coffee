@@ -1,5 +1,5 @@
 # Material View
-SCVisu.MaterialView = Backbone.View.extend
+SCModels.MaterialView = Backbone.View.extend
   initialize: (params) ->
     @parentElement  = params.parentElement
     @firstRendering = true

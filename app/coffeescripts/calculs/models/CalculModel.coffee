@@ -5,7 +5,7 @@
 #   Etc.
 # The model is saved in the Database
 
-SCVisu.Calcul = Backbone.Model.extend
+SCModels.Calcul = Backbone.Model.extend
   initialize: ->
     @set time_steps            : []
     @set materials             : []
@@ -51,5 +51,5 @@ SCVisu.Calcul = Backbone.Model.extend
     @updateInterfaces params.interfaces
      
 # Collection of Calcul
-SCVisu.Calculs = Backbone.Collection.extend
-  model: SCVisu.Calcul
+SCModels.Calculs = Backbone.Collection.extend
+  model: SCModels.Calcul

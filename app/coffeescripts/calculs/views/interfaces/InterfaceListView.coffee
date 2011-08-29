@@ -1,5 +1,5 @@
 ## InterfaceListView
-SCVisu.InterfaceListView = Backbone.View.extend
+SCModels.InterfaceListView = Backbone.View.extend
   el: 'ul#interfaces'
   
   # You have to pass a InterfaceCollection at initialisation as follow:
@@ -7,7 +7,7 @@ SCVisu.InterfaceListView = Backbone.View.extend
   initialize: ->
     @interfaceViews = []
     for interface in @collection.models
-      @interfaceViews.push new SCVisu.InterfaceView model: interface, parentElement: this
+      @interfaceViews.push new SCModels.InterfaceView model: interface, parentElement: this
     @selectedInterfaceView = null
     @render()
 
