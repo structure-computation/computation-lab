@@ -11,8 +11,13 @@ SCVisu.MaterialView = Backbone.View.extend
     "click button.clone"    : "clone"
     "click button.assign"   : "assign"
     "click button.unassign" : "unassign"
+    "click button.remove"   : "remove"
     "click"                 : "select"
   
+  remove: ->
+    @parentElement.removeMaterialFromCollection @
+    @remove()
+
   showDetails: ->
     @trigger 'show_details_model', @model
 
@@ -55,6 +60,7 @@ SCVisu.MaterialView = Backbone.View.extend
     $(@el).removeClass('selected').removeClass('gray')
     $(@el).html(@model.get('name'))
     $(@el).append("<button class='#{className}'>#{textButton}</button>")
+    $(@el).append("<button class='remove'>X</button>")
     if @firstRendering
       $(@parentElement.el).append(@el)
       @firstRendering = false

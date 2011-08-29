@@ -42,7 +42,7 @@ SCVisu.VolumicForceView = Backbone.View.extend
     $(@el).html(template) 
       
     if ( @model.get('selected') )
-      $(el) .addClass   ('selected').removeClass('gray')
+      $(@el) .addClass   ('selected').removeClass('gray')
     else
       $(@el).removeClass('selected').removeClass('gray')
     

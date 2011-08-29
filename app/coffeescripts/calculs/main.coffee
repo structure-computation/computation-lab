@@ -1,8 +1,8 @@
 # SCVisu is initialized in the header in order that it is initialize at first
 # window.SCVisu = {} 
 $ ->
-  interfaceCollection = new SCVisu.Interfaces()
-  SCVisu.interfaceListView = new SCVisu.InterfaceListView collection : interfaceCollection
+  interfaceCollection       = new SCVisu.Interfaces()
+  SCVisu.interfaceListView  = new SCVisu.InterfaceListView collection : interfaceCollection
 
   # Initialize all variables and views with data retrieved from the JSON sent by the "Visualisateur"
   # /!\ Variable's name must not be changed! They are used in multiple place in the code. /!\
@@ -39,6 +39,10 @@ $ ->
     # Initialization of the InterfaceListView
     interfaceCollection       = new SCVisu.Interfaces SCVisu.current_calcul.get('interfaces')
     SCVisu.interfaceListView  = new SCVisu.InterfaceListView collection : interfaceCollection
+
+    # Initialisation of VolumicForcesListView
+    volumicForcesCollection      = new SCVisu.StepCollection        SCVisu.current_calcul.get('volumic_forces')
+    SCVisu.volumicForcesListView = new SCVisu.VolumicForceListView  collection : volumicForcesCollection 
 
     # Initialization of the EdgeListView
     SCVisu.edgeListView       = new SCVisu.EdgeListView()
