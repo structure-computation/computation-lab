@@ -57,9 +57,11 @@
 
   .materials
     = render "calculs/partials/material_details_part"
+    = render "calculs/partials/materials_database_view"
 
   .links
     = render "calculs/partials/link_details_part"
+    = render "calculs/partials/links_database_view"
     
   .volumic_forces
     = render "calculs/partials/volumic_force_details"
@@ -79,8 +81,6 @@
 - # TODO: Ramener dans ce fichier quand cela sera terminé. On charge dans ce partial le code de visualisation.
 = render "calculs/partials/visualisation_interface"
 
-
-
 - content_for :coffee do 
   :coffeescript
     # Initialization of data coming from database
@@ -97,9 +97,6 @@
 
       SCVisu.standardLibraryLink.reset #{@standard_links.to_json.html_safe}
       SCVisu.companyLibraryLink.reset #{@company_links.to_json.html_safe}
-
-      SCVisu.standardLibraryLink = new SCVisu.LinkCollection
-      SCVisu.standardLibraryLink.reset #{@links.to_json.html_safe}
       
       SCVisu.calculCollection = new SCVisu.Calculs
       SCVisu.calculCollection.reset #{@calculs.to_json.html_safe}

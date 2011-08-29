@@ -13,11 +13,8 @@ class MaterialsController < InheritedResources::Base
 
   def index 
     @company = current_user.company
-    if params[:type] == "standard"
-      @materials = Material.standard
-    else
-        @materials = Material.find_all_by_company_id(@company.id)
-    end
+    @standard_materials = Material.standard
+    @company_materials  = Material.user_company @company.id
     index!
   end
   

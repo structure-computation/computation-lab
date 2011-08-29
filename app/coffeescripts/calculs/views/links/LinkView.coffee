@@ -35,7 +35,7 @@ SCVisu.LinkView = Backbone.View.extend
 
   
   show_details: ->
-    @trigger 'update_details_model', @model
+    @trigger 'show_details', @model
 
   clone: ->
     @parentElement.clone @model

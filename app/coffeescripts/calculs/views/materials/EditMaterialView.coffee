@@ -2,60 +2,39 @@ SCVisu.EditMaterialView = Backbone.View.extend
   el: "#edit_material"
   initialize: (params) ->
     @parentElement = params.parentElement
-    $(@el).append('<button class="save">Sauvegarder</button>')
-    $(@el).append("<button class='save_as_new'>Sauver en tant que nouveau matériau</button>")
-    $(@el).hide()
-    @disableButtons()
+    $(@el).append('<button class="close">Fermer</button>')    
+    @hide()
 
   events: 
-    # 'keyup'       : 'updateModelAttributes'
-    'click .save'       : 'save'
-    'click .save_as_new' : 'saveAsNew'
-  
-  # Dupplicate the current material and save it in the database
-  saveAsNew: ->
-    @disableButtons()
-    m = new SCVisu.Material
-    # Retrieve all attributes for the new material
-    for input in $(@el).find('input, textarea')
-      key = $(input).attr('id').split('material_')[1]
-      value = $(input).val()
-      h = new Object()
-      h[key] = value
-      m.set h
-    @parentElement.collection.addAndSave m
-    @parentElement.createMaterialView m
-    @render(true)
-    $(@el).hide()
+    'keyup'               : 'updateModelAttributes'
+    'click button.close'  : 'hide'
 
-  save: ->
+
+  #Hide itself
+  hide: ->
+    $(@el).hide()
+    
+  # Update moddel with values which are in inputs
+  updateModelAttributes: ->
     for input in $(@el).find('input, textarea')
       key = $(input).attr('id').split('material_')[1]
       value = $(input).val()
       h = new Object()
       h[key] = value
       @model.set h
-    @model.save()
     SCVisu.current_calcul.trigger 'update_materials', SCVisu.materialListView.collection.models  
-    @render(true)
-    $(@el).hide()
 
+  # Update view with the given model
   updateModel: (model) ->
     @model = model
-    @enableButtons()
     @render()
         
-  
+  # Reset all fields of the view
   resetFields: ->
     for input in $(@el).find('input, textarea')
       $(input).val("")
-    @disableButtons()
     
-  disableButtons: ->
-    $(@el).find('button').attr('disabled', 'disabled')
-  enableButtons: ->
-    $(@el).find('button').removeAttr('disabled')
-    
+  
   render: (resetFields = false) ->
     $(@el).show()
     @parentElement.render()

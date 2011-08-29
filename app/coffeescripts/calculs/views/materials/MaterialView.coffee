@@ -7,14 +7,19 @@ SCVisu.MaterialView = Backbone.View.extend
   className : "material_view"   
   
   events:
-    "click button.edit"     : "show_details"
+    "click button.edit"     : "showDetails"
     "click button.clone"    : "clone"
     "click button.assign"   : "assign"
     "click button.unassign" : "unassign"
+    "click button.remove"   : "remove"
     "click"                 : "select"
   
-  show_details: ->
-    @trigger 'update_details_model', @model
+  remove: ->
+    @parentElement.removeMaterialFromCollection @
+    @remove()
+
+  showDetails: ->
+    @trigger 'show_details_model', @model
 
   # Tell the parent that a material have been selected.
   # The row will be highlighted and pieces wich contains 
@@ -55,6 +60,7 @@ SCVisu.MaterialView = Backbone.View.extend
     $(@el).removeClass('selected').removeClass('gray')
     $(@el).html(@model.get('name'))
     $(@el).append("<button class='#{className}'>#{textButton}</button>")
+    $(@el).append("<button class='remove'>X</button>")
     if @firstRendering
       $(@parentElement.el).append(@el)
       @firstRendering = false

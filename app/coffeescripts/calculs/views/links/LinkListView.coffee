@@ -7,16 +7,34 @@ SCVisu.LinkListView = Backbone.View.extend
     @linkViews = []
     for link in @collection.models
       @createLinkView(link)
-    @render() 
+    $('#links_database').hide()
+    $('#links_database button.close').click -> $('#links_database').hide()
     @selectedLinkModel = null
 
+  events: 
+    "click button.add_link" : "showDatabaseLinks"
+  
+  # Show links which are from database and hide edit view
+  showDatabaseLinks: ->
+    $('#links_database').show()
+    @editView.hide()
+  
+  # Add a model to the collection and creates an associated view
+  add: (linkModel) ->
+    @collection.model.push
+    @createLinkView linkModel
+    
+  # Create a view giving it a model
   createLinkView: (link) ->
     l = new SCVisu.LinkView model: link, parentElement: this
-    l.bind 'update_details_model', @update_details, this
+    l.bind 'show_details', @showDetails, this
     @linkViews.push l
-    
-  update_details: (model) ->
-    @editView.updateModel model   
+    @render()
+
+  # Show edit view for a given link
+  showDetails: (model) ->
+    $('#links_database').hide()
+    @editView.updateModel model
 
   # Highlight the link which have link_id as id and add an "Unassign" button
   highlightLink: (link_id) ->
@@ -40,7 +58,8 @@ SCVisu.LinkListView = Backbone.View.extend
  
   # Add link to interface
   assignLinkToSelectedInterface: (linkView) ->
-    SCVisu.interfaceListView.selectedInterfaceModel.set link_id : linkView.model.get('id')
+    SCVisu.interfaceListView.selectedInterfaceView.model.set link_id : linkView.model.get('id')
+    SCVisu.interfaceListView.renderAndHighlightCurrentInterface()
     SCVisu.current_calcul.trigger 'update_interfaces', SCVisu.interfaceListView.collection.models
 
   # Highlight the 'linkView' with adding css class
@@ -50,12 +69,15 @@ SCVisu.LinkListView = Backbone.View.extend
     $(linkView.el).addClass('selected').removeClass('gray')
   
   unassignLinkToSelectedInterface: ->
-    SCVisu.interfaceListView.selectedInterfaceModel.unset 'link_id'
+    SCVisu.interfaceListView.selectedInterfaceView.model.unset 'link_id'
+    SCVisu.interfaceListView.renderAndHighlightCurrentInterface()
     SCVisu.current_calcul.trigger 'update_interfaces', SCVisu.interfaceListView.collection.models
     
   render : ->
     for l in @linkViews
-      l.render()
+      l.render()    
+    $(@el).find(".add_link").remove() if $(@el).find(".add_link")
+    $(@el).append('<button class="add_link">Ajouter une liaison</button>')
     return this
 
  

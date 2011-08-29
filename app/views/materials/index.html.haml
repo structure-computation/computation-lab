@@ -12,7 +12,7 @@
     = render :partial => "search_filter"
 
 -content_for :company_content do
-  - if !@materials.empty?
+  - if !@standard_materials.empty? or !@standard_materials.empty?
     %table.grey#materials_table
       %thead
         %tr
@@ -25,19 +25,5 @@
           %th Comportement
           %th.no_sorter Actions
       %tbody
-        - @materials.each do |material|
-          %tr
-            %td.escape_search.details_link=  link_to "Détails", [@company, material]
-            %td.name=           material.name
-            %td.id=             material.id
-            %td.reference=      material.reference            
-            %td.family=         material.family
-            %td.type=           material.mtype
-            %td.comp=           material.comp
-            %td.action_on_table.escape_search
-              - if material.company and material.company.id == current_user.company.id
-                %ul
-                  %li
-                    = link_to "Editer"   , edit_company_material_path(@company, material)
-                  %li
-                    = link_to "Supprimer", {:action=>"destroy", :controller=>"materials", :id => material.id}, :method => :delete    
+        = render :partial => "material", :collection => @standard_materials, :locals => {:type => "standard"}
+        = render :partial => "material", :collection => @company_materials,  :locals => {:type => "company"}

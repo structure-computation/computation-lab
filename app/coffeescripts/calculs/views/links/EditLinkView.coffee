@@ -3,36 +3,23 @@ SCVisu.EditLinkView = Backbone.View.extend
   el: "#edit_link"
   initialize: (params) ->
     @parentElement = params.parentElement
-    $(@el).append('<button class="save">Sauvegarder</button>')
-    $(@el).append("<button class='save_as_new'>Sauver en tant que nouveau link</button>")
-    @disableButtons()
+    $(@el).append('<button class="close">Fermer</button>')
     $(@el).hide()
 
   events: 
-    # 'keyup'       : 'updateModelAttributes'
-    'click .save'       : 'updateModelAttributes'
-    'click .save_as_new' : 'saveAsNew'
+    'keyup'               : 'updateModelAttributes'
+    'click button.close'  : 'hide'
   
-  saveAsNew: ->
-    @disableButtons()
-    l = new SCVisu.Link
-    for input in $(@el).find('input, textarea')
-      key = $(input).attr('id').split('link_')[1]
-      value = $(input).val()
-      h = new Object()
-      h[key] = value
-      l.set h
-    @parentElement.collection.addAndSave l
-    @parentElement.createLinkView l
-    @render(true)
-    $(@el).hide()
-    
+  # Update edit view with the given model
   updateModel: (model) ->
     @model = model
-    @enableButtons()
     @render()
 
-        
+  # Hide itself
+  hide: ->
+    $(@el).hide()
+  
+  # Update model from all input values
   updateModelAttributes: ->
     for input in $(@el).find('input, textarea')
       key = $(input).attr('id').split('link_')[1]
@@ -40,27 +27,16 @@ SCVisu.EditLinkView = Backbone.View.extend
       h = new Object()
       h[key] = value
       @model.set h
-    @model.save()
-    @resetFields()
-    $(@el).hide()
   
+  # Reset all fields of the edit view
   resetFields: ->
     for input in $(@el).find('input, textarea')
       $(input).val("")
-    @disableButtons()
-    
-  disableButtons: ->
-    $(@el).find('button').attr('disabled', 'disabled')
 
-  enableButtons: ->
-    $(@el).find('button').removeAttr('disabled')
-    
+  
   render: (resetFields = false) ->
     $(@el).show()
     @parentElement.render()
-    if resetFields
-      @resetFields()
-    else
-      for input in $(@el).find('input, textarea')
-        $(input).val(@model.get($(input).attr('id').split("link_")[1]))
+    for input in $(@el).find('input, textarea')
+      $(input).val(@model.get($(input).attr('id').split("link_")[1]))
   

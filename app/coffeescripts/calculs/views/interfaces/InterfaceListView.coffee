@@ -8,7 +8,7 @@ SCVisu.InterfaceListView = Backbone.View.extend
     @interfaceViews = []
     for interface in @collection.models
       @interfaceViews.push new SCVisu.InterfaceView model: interface, parentElement: this
-    @selectedInterfaceModel = null
+    @selectedInterfaceView = null
     @render()
 
   # Is executed when user click on an interface.
@@ -17,7 +17,7 @@ SCVisu.InterfaceListView = Backbone.View.extend
   # possibility to unassign it.
   # Else, he will be able to select a link for the selected interface.
   selectInterface: (interfaceView) ->
-    @selectedInterfaceModel = interfaceView.model
+    @selectedInterfaceView = interfaceView
     _.each @interfaceViews, (interfaceView) ->
       $(interfaceView.el).addClass('gray').removeClass('selected')
     $(interfaceView.el).addClass('selected').removeClass('gray')
@@ -26,6 +26,10 @@ SCVisu.InterfaceListView = Backbone.View.extend
     else
       SCVisu.linkListView.showAssignButtons()
 
+  renderAndHighlightCurrentInterface: ->
+    @selectedInterfaceView.render()
+    $(@selectedInterfaceView.el).addClass('selected')
+    
   # Add an "Assign" button to each link view in order that the user can 
   # assign it to a selected interface. 
   # And an unassigned button to link whith which have the same link_id 
