@@ -7,14 +7,14 @@ SCVisu.MaterialView = Backbone.View.extend
   className : "material_view"   
   
   events:
-    "click button.edit"     : "show_details"
+    "click button.edit"     : "showDetails"
     "click button.clone"    : "clone"
     "click button.assign"   : "assign"
     "click button.unassign" : "unassign"
     "click"                 : "select"
   
-  show_details: ->
-    @trigger 'update_details_model', @model
+  showDetails: ->
+    @trigger 'show_details_model', @model
 
   # Tell the parent that a material have been selected.
   # The row will be highlighted and pieces wich contains 

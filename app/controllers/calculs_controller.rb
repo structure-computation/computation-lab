@@ -12,6 +12,7 @@ class CalculsController < ApplicationController
     @company_materials  = Material.user_company(current_user.company)
     @material           = Material.new
     @link               = Link.new
+    @company            = current_user.company
     @calculs            = CalculResult.find_all_by_sc_model_id(params[:sc_model_id])
   end
   
