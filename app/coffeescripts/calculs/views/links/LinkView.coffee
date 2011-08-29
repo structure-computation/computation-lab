@@ -11,7 +11,14 @@ SCVisu.LinkView = Backbone.View.extend
     "click button.clone"    : "clone"
     "click button.assign"   : "assign"
     "click button.unassign" : "unassign"
+    "click button.remove" : "removeLink"
     "click"                 : "select"
+    
+  # Removing model from collection passing silent prevent from destroying from database
+  # Also removing the view
+  removeLink: ->
+    @parentElement.collection.remove @model, silent: true
+    @remove()
 
   # Assign the link to the selected interface
   # Add an "Unassign" Button and remove all other "Assign" buttons (Because an interface can only have one link)
@@ -51,6 +58,7 @@ SCVisu.LinkView = Backbone.View.extend
   renderWithButton: (className, textButton) ->
     $(@el).removeClass('selected').removeClass('gray')
     $(@el).html(@model.get('name'))
+    $(@el).append("<button class='remove'>X</button>")
     $(@el).append("<button class='#{className}'>#{textButton}</button>")
     if @firstRendering
       $(@parentElement.el).append(@el)
