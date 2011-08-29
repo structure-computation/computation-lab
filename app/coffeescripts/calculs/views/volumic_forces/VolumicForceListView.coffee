@@ -32,8 +32,9 @@ SCVisu.VolumicForceListView = Backbone.View.extend
   render : ->
     vf_table = $(@el).find("#volumic_force_table_content") 
     vf_table.empty()
+    parent   = this
     @collection.each ( volumicForce ) ->
-      subview = new SCVisu.VolumicForceView model: volumicForce, parentElement: this
+      subview = new SCVisu.VolumicForceView model: volumicForce, parentElement: parent
       subview.render()
       vf_table.append(subview.el)
 
