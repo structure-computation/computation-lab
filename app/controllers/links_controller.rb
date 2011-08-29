@@ -13,11 +13,8 @@ class LinksController < InheritedResources::Base
   
   def index 
     @company  = current_user.company
-    if params[:type] == "standard"
-      @links = Link.standard
-    else
-      @links = Link.find_all_by_company_id(@company.id)
-    end
+    @standard_links = Link.standard
+    @company_links  = Link.user_company @company.id
     index!
   end
   

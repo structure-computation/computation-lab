@@ -1,9 +1,16 @@
 .search_filter
-  = form_tag company_links_path, :method => :get do
-  
-    = select_tag "type", options_for_select([["Bibliothèque standard", "standard"],["Ma bibliothèque", "owner"]], (params[:type] == "standard" ? "standard" : "owner"))
-  
-    = submit_tag "Filtrer", :class => 'yellow_button'
+
+  %a.yellow_button.pressed_button#company_link   Ma bibliothèque
+  %a.yellow_button.pressed_button#standard_link  Bibliothèque standard
+  :coffeescript
+    $('a#company_link').click ->
+      $(this).toggleClass('pressed_button')
+      $('#links_table tbody tr.company').toggle()
+
+    $('a#standard_link').click ->
+      $(this).toggleClass('pressed_button')
+      $('#links_table tbody tr.standard').toggle()
+        
 
   %p
     %label{:for => "search_filter"} Recherche

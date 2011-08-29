@@ -1,0 +1,17 @@
+%tr{:class => type}
+  %td.escape_search.details_link
+    - if link.company
+      =  link_to "Détails", [@company, link]
+  %td.name=           link.name
+  %td.id=             link.id
+  %td.reference=      link.reference
+  %td.family=         link.family
+  %td.comp_generic=   link.comp_generique
+  %td.comp_complex=   link.comp_complexe
+  %td.action_on_table.escape_search
+    - if link.company and link.company.id == current_user.company.id
+      %ul
+        %li
+          = link_to "Editer"   , edit_company_link_path(@company, link)
+        %li
+          = link_to "Supprimer", {:action=>"destroy", :controller=>"link", :id => link.id}, :method => :delete
