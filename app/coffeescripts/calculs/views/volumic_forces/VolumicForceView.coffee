@@ -10,7 +10,8 @@ SCVisu.VolumicForceView = Backbone.View.extend
   events: 
     'click'                 : 'select'
     'click button.destroy'  : 'destroyVolumicForce'
-
+    'keyup'                 : 'updateFields'
+    'change'                : 'updateFields'
     
   # Ask the parent table to supress the "selected" status on the currently selected model
   # (which trigger a onchange that supress highlight on this line) and set the "selected" attribute
@@ -18,33 +19,29 @@ SCVisu.VolumicForceView = Backbone.View.extend
   # Highlight the selected line and tell the volumic force list to 
   # show the details of this line.
   select: (event) ->
-    if event.srcElement == @el # Utilisé pour savoir si l'on clique sur le bouton ou la ligne.
+    # if event.srcElement == @el # Utilisé pour savoir si l'on clique sur le bouton ou la ligne.
       @parentElement.setNewSelectedModel(@model)
       @model.set({selected:true}) 
 
   destroyVolumicForce: (event) ->
     if event.srcElement == @el # est-ce necessaire ?
       @model.destroy()
-    
-  # Render with an action button
-  renderWithButton: (className, textButton)->
-    $(@el).html(@model.get('name'))
-    $(@el).append("<button class='#{className}'>#{textButton}</button>")
-    return this
 
   render: ->
     template = """
-              <td class="name"> <input type='text'   value='#{@model.get("name")}' > </td> 
-              <td class="dx"  > <input type='number' value='#{@model.get("dx")}'   > </td> 
-              <td class="dy"  > <input type='number' value='#{@model.get("dy")}'   > </td> 
-              <td class="dz"  > <input type='number' value='#{@model.get("dz")}'   > </td> 
+              <td class="name" > <input type='text'   value='#{@model.get("name")}'  > </td> 
+              <td class="gamma"> <input type='number' value='#{@model.get("gamma")}' > </td>                 
+              <td class="dx"   > <input type='number' value='#{@model.get("dx")}'    > </td> 
+              <td class="dy"   > <input type='number' value='#{@model.get("dy")}'    > </td> 
+              <td class="dz"   > <input type='number' value='#{@model.get("dz")}'    > </td> 
           """ 
     $(@el).html(template) 
       
     if ( @model.get('selected') )
-      $(@el) .addClass   ('selected').removeClass('gray')
+      $(@el).addClass   ('selected').removeClass('gray')
     else
       $(@el).removeClass('selected').removeClass('gray')
     
     return this
-
+  updateFields: (event) ->
+    # TODO
