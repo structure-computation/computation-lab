@@ -1,33 +1,43 @@
 ## VolumicForceListView
+
+# TODO: Le render doit réagir à l'ajout ou la suppression d'un élément de la collection.
 SCVisu.VolumicForceListView = Backbone.View.extend
   el: 'ul#pieces'
+  ## -- Events
+  events:
+    'click button#add_volumic_force'   : 'addVolumicForce'
   
   # A VolumicForceListView is use to render and populate a table of "VolumicForces" (weight, centrifugal accelleration, accelleration...).
-  # It is created with a VolumicForceCollection as follow:
-  # new SCVisu.volumicForceListView({ collection : myVolumicForceListView })
-  # Each model of this collection is used to make a single VolumicForceView
+  # Each model of this collection is declared "not selected" when initialized. 
   initialize: ->
-    @volumicForceViews = []
-    for volumicForce in @collection.models
-      @volumicForceViews.push new SCVisu.VolumicForceView model: volumicForce, parentElement: this
-    @selectedVolumicForceView = null
+    # Set all models unselected
+    @collection.each( (model)-> model.unset('selected') )
+    @selectedVolumicForce = null
+    
+    # Bind to collection event
+    @collection.bind('add'   , this.render, this)
+    @collection.bind('remove', this.render, this)
+    
     @render()
         
-  # selectLine is executed when user click on a line (here a VolumicForce).
-  # Highlight the selected line and put others in gray.
-  # In the case of VolumicForce, the user has the right to delete it.
-  selectLine: (volumicForceView) ->
-    @selectedVolumicForceView = volumicForceView
-    
-    _.each @VolumicForceViews, (lineView) ->                  # For each line :
-      $(lineView.el).addClass('gray').removeClass('selected') # supress the "selected" class and add the "gray" class
-    
-    # and do the reverse only for the selected line.
-    $(volumicForceView.el).addClass('selected').removeClass('gray')
-    # TODO: show details
+  # setNewSelectedModel is executed when a child view indicate it has been selected.
+  # It set the current selected model to "non selected" (which trigger an event that redraw its line).
 
-    
+  setNewSelectedModel: (volumicForceView) ->
+    @selectedVolumicForce.unset "selected"   if @selectedVolumicForce
+    @selectedVolumicForceView = volumicForceView
+  
+  
   render : ->
-    _.each @volumicForceViews, (volumicForce) ->
-      volumicForce.render()
+    $(el).empty()
+    @collection.each ( volumicForce ) ->
+      subview = new SCVisu.VolumicForceView model: volumicForce, parentElement: this
+      subview.render()
+      $(el).append(subview.el)
+
     return this
+
+  ## Create add a new volumic_force model and view.
+  addVolumicForce: ->  
+    newVolForce = new SCVisu.VolumicForce
+    @collection.add newVolForce

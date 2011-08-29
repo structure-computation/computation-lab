@@ -12,6 +12,8 @@
 = coffeescript_include_tag "calculs/models/CalculModel"
 = coffeescript_include_tag "calculs/models/EdgeModel"
 = coffeescript_include_tag "calculs/models/OptionModel"
+= coffeescript_include_tag "calculs/models/VolumicForceModel"
+
 
 / Views
 / -- Step
@@ -40,6 +42,10 @@
 = coffeescript_include_tag "calculs/views/materials/MaterialListView"
 = coffeescript_include_tag "calculs/views/materials/MaterialView"
 
+/ -- VolumicForces
+= coffeescript_include_tag "calculs/views/volumic_forces/VolumicForceView"
+= coffeescript_include_tag "calculs/views/volumic_forces/VolumicForceListView"
+
 / -- Edge
 = coffeescript_include_tag "calculs/views/edges/NewEdgeView"
 = coffeescript_include_tag "calculs/views/edges/EdgeView"
@@ -47,6 +53,7 @@
 
 / -- Option
 = coffeescript_include_tag "calculs/views/options/OptionView"
+
 
 
 / Router
