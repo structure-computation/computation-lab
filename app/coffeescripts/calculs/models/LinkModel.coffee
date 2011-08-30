@@ -6,8 +6,8 @@ SCModels.Link = Backbone.Model.extend
   initialize: ->
     @company_id = if SCVisu.current_company? then SCVisu.current_company else 0
     @url = "/companies/#{@company_id}/links/"
-    @url += @get 'id' if !@isNew()
-  
+
+  # Get the ID of the link in the JSON
   getId: ->
     @get 'id_in_calcul'
 
@@ -21,4 +21,4 @@ SCModels.LinkCollection = Backbone.Collection.extend
   addAndSave: (link) ->
       link.save {},
         success: ->
-          SCVisu.current_calcul.trigger 'update_links', SCVisu.linkListView.collection.models
+          SCVisu.current_calcul.set links: SCVisu.linkListView.collection.models

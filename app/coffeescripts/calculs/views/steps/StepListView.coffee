@@ -4,7 +4,11 @@ SCModels.StepListView = Backbone.View.extend
   el: "#steps"
   # Have to initialize the StepListView with {collection: StepCollection}
   initialize: (params) ->  
+    @clearView()
     @stepViews = []
+    time_scheme = SCVisu.current_calcul.get('time_steps').time_scheme
+    @setSelectList time_scheme
+    @collection.meta 'time_scheme', time_scheme
     if @collection.size() == 0
       step = new SCModels.Step
         initial_time  : 0
@@ -18,15 +22,15 @@ SCModels.StepListView = Backbone.View.extend
 
     if @collection.size() == 1 
       @disableAddButton() # Because the first select value is 'statique'
+      
     @stepViews[0].removeDeleteButton()
     @bind 'step_deleted', @deleteStep, @
-    @clearView()
     @render()
     
   ## Create a model and associate it to a new view
   addStep: ->  
     step = new SCModels.Step
-      initial_time  : @collection.models[@collection.models.length - 1].get 'final_time'
+      initial_time  : @collection.last().get 'final_time'
       time_step     : 1
       nb_time_steps : 1
 
@@ -49,7 +53,6 @@ SCModels.StepListView = Backbone.View.extend
   clearView: ->
     $(@el).find('table#steps_table tbody').html('')
 
-  ## -- Events
   events:
     'keyup'                   : 'updateFieldsKeyUp'
     'change'                  : 'updateFieldsKeyUp'
@@ -59,7 +62,7 @@ SCModels.StepListView = Backbone.View.extend
 
   # Update all step fields if a number is typed
   updateFieldsKeyUp: (event) ->
-#    if (48 <= event.keyCode <= 57)
+  # if (48 <= event.keyCode <= 57)
     @updateFields()
 
   deleteStep: (step_deleted) ->
@@ -74,11 +77,14 @@ SCModels.StepListView = Backbone.View.extend
     for stepView in @stepViews
       stepView.update()
       @collection.updateModels()
-    SCVisu.current_calcul.trigger 'update_time_step', SCVisu.stepListView.collection.models
-
+    SCVisu.current_calcul.setTimeStepsCollection SCVisu.stepListView.collection.models
+    
   selectChanged: (event) ->
-    if $(event.srcElement).val() == "statique"
-      ## Delete all except first element
+    # Change the value of the calcul type according to the value of the select list
+    @setTimeScheme($(event.srcElement).val())
+  
+    if $(event.srcElement).val() == "static"
+      # Delete all except first element
       for i in [0..@stepViews.length - 1]
         @stepViews[1].delete() if i > 0
       $(@el).find("button#add_step").attr('disabled', 'disabled')
@@ -87,4 +93,10 @@ SCModels.StepListView = Backbone.View.extend
 
   disableAddButton: ->
     $(@el).find("button#add_step").attr('disabled', 'disabled')
-
+    
+  setTimeScheme: (value) ->
+    @collection.meta('time_scheme', value)
+    SCVisu.current_calcul.setTimeScheme value
+    
+  setSelectList: (value) ->
+    $(@el).find('select#step_type').val(value)    

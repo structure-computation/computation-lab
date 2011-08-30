@@ -7,23 +7,14 @@ SCVisu.EditMaterialView = Backbone.View.extend
     @hide()
 
   events: 
-    'keyup'                         : 'updateModelAttributes'
+    'change'                        : 'updateModelAttributes'
     'click button.close_edit_view'  : 'hide'
     'click button.save_in_workspace': 'saveInWorkspace'
 
-
+  # Save the model in the Database in the urser's workspace
   saveInWorkspace: ->
-    l = new SCVisu.Link
-    for input in $(@el).find('input, textarea')
-      key = $(input).attr('id').split('link_')[1]
-      value = $(input).val()
-      h = new Object()
-      h[key] = value
-      l.set h
-    @parentElement.collection.addAndSave l
-    @parentElement.createLinkView l
-    @render(true)
-    $(@el).hide()
+    @model.unset 'id'
+    @model.save()
 
   # Hide itself
   hide: ->
@@ -32,12 +23,14 @@ SCVisu.EditMaterialView = Backbone.View.extend
   # Update moddel with values which are in inputs
   updateModelAttributes: ->
     for input in $(@el).find('input, textarea')
-      key = $(input).attr('id').split('material_')[1]
+      # Get the name of the attribute
+      # HTML Is formatted as follow: <input id="material_family"...
+      key = $(input).attr('id').split('material_')[1] 
       value = $(input).val()
       h = new Object()
       h[key] = value
       @model.set h
-    SCVisu.current_calcul.trigger 'update_materials', SCVisu.materialListView.collection.models  
+    SCVisu.current_calcul.set materials: SCVisu.materialListView.collection.models  
 
   # Update view with the given model
   updateModel: (model) ->

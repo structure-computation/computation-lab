@@ -178,6 +178,7 @@ SCVisu.Router = Backbone.Router.extend
       
   # Show next page if not on the last page and only if a calculus has been loaded
   nextPage: ->
+    SCVisu.calculViews.saveCalcul()
     if @currentPage < @routesPageNumber.length
       @navigate @routesPageNumber[@currentPage + 1], true
   

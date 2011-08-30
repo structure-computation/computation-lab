@@ -28,6 +28,7 @@ SCModels.MaterialView = Backbone.View.extend
   # The row will be highlighted and pieces wich contains 
   # this material will be also highlighted.
   select: (event) ->
+    @showDetails()
     if event.srcElement == @el
       @parentElement.render() # Clear all buttons from all material view
       @parentElement.selectMaterial @
@@ -60,7 +61,6 @@ SCModels.MaterialView = Backbone.View.extend
     
   # Render the list view with an extra button for assigning or unassigning material.
   renderWithButton: (className, textButton) ->
-    $(@el).removeClass('selected').removeClass('gray')
     $(@el).html(@model.get('name'))
     $(@el).append("<button class='remove'>X</button>")
     $(@el).append("<button class='#{className}'>#{textButton}</button>")

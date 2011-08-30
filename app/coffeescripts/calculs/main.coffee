@@ -33,8 +33,8 @@ $ ->
     #   new SCVisu.DatabaseLinkView el:  el, model: link, linkListView: SCVisu.linkListView
 
     # Initialization of the StepListView    
-    steps                       = new SCModels.StepCollection SCVisu.current_calcul.get('time_steps')
-    SCVisu.stepListView         = new SCModels.StepListView collection: steps
+    steps                     = new SCModels.StepCollection SCVisu.current_calcul.get('time_steps').collection
+    SCVisu.stepListView       = new SCModels.StepListView collection: steps
   
     # Initialization of the InterfaceListView
     interfaceCollection         = new SCModels.Interfaces SCVisu.current_calcul.get('interfaces')

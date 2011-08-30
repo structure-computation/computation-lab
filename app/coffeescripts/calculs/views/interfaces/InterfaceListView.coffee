@@ -5,11 +5,20 @@ SCModels.InterfaceListView = Backbone.View.extend
   # You have to pass a InterfaceCollection at initialisation as follow:
   # new PieceListView({ collection : myInterfaceCollection })
   initialize: ->
+    @clearView()
     @interfaceViews = []
     for interface in @collection.models
       @interfaceViews.push new SCModels.InterfaceView model: interface, parentElement: this
     @selectedInterfaceView = null
     @render()
+
+  # Clears all elements previously loaded in the DOM. 
+  # Indeed, the 'ul#interfaces' element already exists in the DOM and every time we create a InterfacesListView, 
+  # we render the view and we add some element inside. And even if we have many different view, 
+  # each time we render we add elements to the same view. 
+  # So we have to clear the content each time we create a new InterfacesListView 
+  clearView: ->
+    $(@el).html('')
 
   # Is executed when user click on an interface.
   # Highlight the selected interface and put others in gray.
@@ -42,12 +51,12 @@ SCModels.InterfaceListView = Backbone.View.extend
   # Assign the pieceModel to the selected Material.
   assignInterfaceToLink: (interfaceModel) ->
     interfaceModel.set link_id : SCVisu.linkListView.selectedLinkModel.getId()
-    SCVisu.current_calcul.trigger 'update_interfaces', SCVisu.interfaceListView.collection.models
+    SCVisu.current_calcul.set interfaces: SCVisu.interfaceListView.collection.models
 
   # Assign the pieceModel to the selected Material.
   unassignInterfaceToLink: (interfaceModel) ->
     interfaceModel.unset "link_id"
-    SCVisu.current_calcul.trigger 'update_interfaces', SCVisu.interfaceListView.collection.models    
+    SCVisu.current_calcul.set interfaces: SCVisu.interfaceListView.collection.models
 
   # Check if an interface had the link associated to it before. 
   # If it is the case, then it removes the association

@@ -12,18 +12,17 @@
     = render :partial => "search_filter"
 
 -content_for :company_content do
-  - if !@standard_materials.empty? or !@standard_materials.empty?
-    %table.grey#materials_table
-      %thead
-        %tr
-          %th.no_sorter 
-          %th Nom
-          %th ID
-          %th Référence
-          %th Famille
-          %th Type
-          %th Comportement
-          %th.no_sorter Actions
-      %tbody
-        = render :partial => "material", :collection => @standard_materials, :locals => {:type => "standard"}
-        = render :partial => "material", :collection => @company_materials,  :locals => {:type => "company"}
+  %table.grey#materials_table
+    %thead
+      %tr
+        %th.no_sorter 
+        %th Nom
+        %th ID
+        %th Référence
+        %th Famille
+        %th Type
+        %th Comportement
+        %th.no_sorter Actions
+    %tbody
+      = render :partial => "material", :collection => @standard_materials, :locals => {:type => "standard"}
+      = render :partial => "material", :collection => @company_materials,  :locals => {:type => "company"}
