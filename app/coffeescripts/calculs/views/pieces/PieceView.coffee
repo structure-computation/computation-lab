@@ -34,7 +34,7 @@ SCModels.PieceView = Backbone.View.extend
   # If it already has a material, it can be unassigned to it
   # else, nothing is rendered.
   materialHasBeenSelected: (material) ->
-    if @model.get('material_id') == material.get('id')
+    if @model.get('material_id') == material.getId()
       @addUnassignButton()
     else if _.isUndefined @model.get('material_id')
       @addAssignButton()

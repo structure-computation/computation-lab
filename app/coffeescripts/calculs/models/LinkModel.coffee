@@ -7,6 +7,9 @@ SCModels.Link = Backbone.Model.extend
     @company_id = if SCVisu.current_company? then SCVisu.current_company else 0
     @url = "/companies/#{@company_id}/links/"
     @url += @get 'id' if !@isNew()
+  
+  getId: ->
+    @get 'id_in_calcul'
 
 # Collection of Link
 SCModels.LinkCollection = Backbone.Collection.extend

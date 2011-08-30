@@ -8,7 +8,6 @@ SCModels.MaterialListView = Backbone.View.extend
     for material in @collection.models
       @createMaterialView(material)
     @selectedMaterial = null
-    $('#materials_database').hide()
     $('#materials_database button.close').click -> $('#materials_database').hide()
     @render()
   
@@ -19,8 +18,12 @@ SCModels.MaterialListView = Backbone.View.extend
     $('#materials_database').show()
     @editView.hide()
 
+  getNewMaterialId: ->
+    @collection.last().get('id_in_calcul') + 1
+    
   # Add a material to the collection and create an associated view
   add: (materialModel) ->
+    materialModel.set id_in_calcul : @getNewMaterialId()
     @collection.models.push materialModel
     @createMaterialView materialModel
 
@@ -53,7 +56,7 @@ SCModels.MaterialListView = Backbone.View.extend
   # Highlight the material which have material_id as id
   highlightMaterial: (material_id) ->
     _.each @materialViews, (view) ->
-      if view.model.get('id') == material_id
+      if view.model.getId() == material_id
         $(view.el).addClass('selected').removeClass('gray')
         view.showUnassignButton()
 

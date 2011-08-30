@@ -9,4 +9,7 @@ SCVisu.DatabaseMaterialView = Backbone.View.extend
     "click button.add"     : "addToCalculus"
   
   addToCalculus: ->
-    @materialListView.add @model
+    newModel         = @model.clone()
+    newModel.set    'id_from_database' : @model.get 'id'
+    newModel.unset  'id'
+    @materialListView.add newModel

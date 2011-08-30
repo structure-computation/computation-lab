@@ -14,9 +14,9 @@
   %p
     %label{:for => "search_filter"} Recherche :
     %input#search_filter{:type => "text"}
-    %button#more_details.close.yellow_button Recherche avancée
+    %button#materials_more_details.yellow_button Recherche avancée
 
-  #advanced_search
+  #materials_advanced_search.advanced_search
     %p
       %label{:for => "name_search_filter"} Nom
       %input#name_search_filter{:type => "text"}
@@ -40,11 +40,8 @@
   $ ->
     $('#materials_table').tablesorter()
 
-    $('#more_details').click( () ->
-      if $('#advanced_search').hasClass('maximize')
-        $('#advanced_search').removeClass('maximize')
-      else
-        $('#advanced_search').addClass('maximize')
+    $('#materials_more_details').click( () ->
+      $('#materials_advanced_search').toggleClass('maximize')
     )
 
     advancedSearchFilter("materials_table",

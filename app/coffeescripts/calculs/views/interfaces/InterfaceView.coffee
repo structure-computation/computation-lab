@@ -35,7 +35,7 @@ SCModels.InterfaceView = Backbone.View.extend
   # If it already has a link, it can be unassigned to it
   # else, no button is rendered.
   linkHasBeenSelected: (linkModel) ->
-    if @model.get('link_id') == linkModel.get('id')
+    if @model.get('link_id') == linkModel.getId()
       @addUnassignButton()
     else if !@model.isAssigned()
       @addAssignButton()

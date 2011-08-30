@@ -16,9 +16,10 @@ SCModels.StepListView = Backbone.View.extend
     for step in @collection.models
       @stepViews.push new SCModels.StepView model: step, parentView: this
 
+    if @collection.size() == 1 
+      @disableAddButton() # Because the first select value is 'statique'
     @stepViews[0].removeDeleteButton()
     @bind 'step_deleted', @deleteStep, @
-    @disableAddButton() # Because the first select value is 'statique'
     @clearView()
     @render()
     

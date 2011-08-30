@@ -12,6 +12,9 @@ SCModels.Material = Backbone.Model.extend
   assignPiece: (piece) ->
     @piece = piece
 
+  getId: ->
+    @get 'id_in_calcul'
+
 SCModels.MaterialCollection = Backbone.Collection.extend
   model: SCModels.Material
   initialize: (options) ->
