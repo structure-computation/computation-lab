@@ -3,6 +3,8 @@ SCModels.LinkListView = Backbone.View.extend
   el: 'ul#links'
   
   initialize: (options) ->
+    @collection.bind 'change', =>
+      @render()
     @editView = new SCVisu.EditLinkView parentElement: this
     @linkViews = []
     for link in @collection.models

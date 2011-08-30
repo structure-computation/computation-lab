@@ -7,7 +7,7 @@ SCVisu.EditLinkView = Backbone.View.extend
     $(@el).hide()
 
   events: 
-    'keyup'               : 'updateModelAttributes'
+    'change'              : 'updateModelAttributes'
     'click button.close'  : 'hide'
   
   # Update edit view with the given model

@@ -3,6 +3,8 @@ SCModels.MaterialListView = Backbone.View.extend
   el: 'ul#materials'
 
   initialize: (options) ->
+    @collection.bind 'change', =>
+      @render()
     @editView = new SCVisu.EditMaterialView parentElement: this
     @materialViews = []
     for material in @collection.models
