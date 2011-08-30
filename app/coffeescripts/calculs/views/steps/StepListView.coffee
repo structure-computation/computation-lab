@@ -3,18 +3,14 @@ SCViews.StepListView = Backbone.View.extend
 
   el: "#steps"
   # Have to initialize the StepListView with {collection: StepCollection}
-  initialize: (params) ->  
+  initialize: (params) ->
     @clearView()
     @stepViews = []
     time_scheme = SCVisu.current_calcul.get('time_steps').time_scheme
     @setSelectList time_scheme
     @collection.meta 'time_scheme', time_scheme
     if @collection.size() == 0
-      step = new SCModels.Step
-        initial_time  : 0
-        time_step     : 1
-        nb_time_steps : 1
-        final_time    : 1
+      step = new SCModels.Step()
       @collection.add step
 
     for step in @collection.models
@@ -39,6 +35,7 @@ SCViews.StepListView = Backbone.View.extend
   render : ->
     if $(@el).find('select#step_type').val() == "statique"
       @disableAddButton()
+
     for stepView in @stepViews
       stepView.render()
     @stepViews[0].removeDeleteButton()
