@@ -44,17 +44,17 @@ $ ->
     volumicForcesCollection       = new SCModels.VolumicForceCollection  SCVisu.current_calcul.get('volumic_forces')
     SCVisu.volumicForcesListView  = new SCViews.VolumicForceListView    collection : volumicForcesCollection 
 
-    # Initialisation of VolumicForcesListView
+    # Initialisation of boundaryConditionListView
     boundaryConditionCollection  = new SCModels.BoundaryConditionCollection  SCVisu.current_calcul.get('boundary_condition')
     SCVisu.boundaryConditionListView = new SCViews.BoundaryConditionListView collection : boundaryConditionCollection 
-    #console.log SCVisu.current_calcul.get('boundary_condition')
     #SCVisu.volumicForcesListView = new SCViews.VolumicForceListView    collection : volumicForcesCollection 
 
     # Initialization of the EdgeListView
     SCVisu.edgeListView           = new SCViews.EdgeListView()
 
+    option = new SCModels.Option SCVisu.current_calcul.get('options')
     # Initialization of the OptionView
-    SCVisu.optionView             = new SCViews.OptionView()
+    SCVisu.optionView             = new SCViews.OptionView model: option
     
   # Initialization of the Router
   SCVisu.router = new SCVisu. Router pushState: true
