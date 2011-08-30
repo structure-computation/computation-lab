@@ -3,20 +3,30 @@ SCModels.OptionView = Backbone.View.extend
   el: "#calculus_option"
   
   initialize: ->
-    # Initialize the view from the informations get back in the JSON file
-    @setMode(@model.get('mode'))    
-    
-    if @model.get('convergence_method_LATIN')
+    # If a model is passed to the constructor, the view will represent this one…
+    if @model? 
+      # Initialize the view from the informations get back in the JSON file
+      if @model.get('mode') == 'test'   
+        @setCheckBoxOrRadioButtonChecked('#test_mode', true) 
+  
+      else if @model.get('mode') == 'normal'
+        @setCheckBoxOrRadioButtonChecked('#normal_mode', true) 
+        if @model.get('convergence_method_LATIN')
+          @setLatinMethod true
+          @setMultiScale(@model.get('convergence_method_LATIN').multiscale == 'on' ? true : false)        
+          @setMaxIteration(@model.get('convergence_method_LATIN').max_iteration) if @model.get('convergence_method_LATIN').max_iteration
+          @setConvergenceRate(@model.get('convergence_method_LATIN').convergence_rate) if @model.get('convergence_method_LATIN').convergence_rate
+         
+        if @model.get('precision_calcul')
+          @setPrecisionCalcul true
+          @setZoom(@model.get('precision_calcul').zoom) if @model.get('precision_calcul').zoom
+          @setError(@model.get('precision_calcul').error) if @model.get('precision_calcul').error
+    #… Otherwise, some defaults parameters are set
+    else
+      @setCheckBoxOrRadioButtonChecked('#normal_mode', true)
       @setLatinMethod true
-      @setMultiScale(@model.get('convergence_method_LATIN').multiscale == 'on' ? true : false)        
-      @setMaxIteration(@model.get('convergence_method_LATIN').max_iteration) if @model.get('convergence_method_LATIN').max_iteration
-      @setConvergenceRate(@model.get('convergence_method_LATIN').convergence_rate) if @model.get('convergence_method_LATIN').convergence_rate
-     
-    if @model.get('precision_calcul')
       @setPrecisionCalcul true
-      @setZoom(@model.get('precision_calcul').zoom) if @model.get('precision_calcul').zoom
-      @setError(@model.get('precision_calcul').error) if @model.get('precision_calcul').error
-     
+      
   events:
     "change input#test_mode"          : "testModeSelected"
     "change input:not('#test_mode')"  : "normalModeSelected"
@@ -24,6 +34,8 @@ SCModels.OptionView = Backbone.View.extend
   testModeSelected: ->
     $(@el).find('input:not("#test_mode, #normal_mode")').attr 'disabled', 'disabled'
     @model.resetAllAttributes()
+    @model.set mode: 'test'
+    SCVisu.current_calcul.set options: @model
         
   # Jquery returns an array, that's why you have to specify [0] to get the HTML Element
   normalModeSelected: (event) ->
@@ -70,7 +82,7 @@ SCModels.OptionView = Backbone.View.extend
 
   # Sets checked or not according to the boolean passed in parameters the input whose id is #precision_calcul
   setPrecisionCalcul: (boolean) ->
-    @setCheckBoxOrRadioButtonChecked('#precision_calcul', boolean)    
+    @setCheckBoxOrRadioButtonChecked('#calculus_precision', boolean)    
 
   # Sets checked or not according to the boolean passed in parameters the input whose id is #latin_method
   setLatinMethod: (boolean) ->
@@ -82,13 +94,6 @@ SCModels.OptionView = Backbone.View.extend
       @setCheckBoxOrRadioButtonChecked('#multiscale_on', true) 
     else 
      @setCheckBoxOrRadioButtonChecked('#multiscale_off', true) 
-
-  # Sets checked the correct radio button according the boolean passed in parameters the input whose id is #normal_mode or #test_mode    
-  setMode: (mode) ->
-    if mode == "normal"
-      @setCheckBoxOrRadioButtonChecked('#normal_mode', true) 
-    else if mode == "test"
-     @setCheckBoxOrRadioButtonChecked('#test_mode', true)    
 
    
 # "options": {

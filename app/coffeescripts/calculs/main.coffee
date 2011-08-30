@@ -55,7 +55,7 @@ $ ->
 
     option = new SCModels.Option SCVisu.current_calcul.get('options')
     # Initialization of the OptionView
-    SCVisu.optionView         = new SCModels.OptionView(model: option)
+    SCVisu.optionView         = new SCModels.OptionView model: option
     
   # Initialization of the Router
   SCVisu.router = new SCVisu. Router pushState: true
