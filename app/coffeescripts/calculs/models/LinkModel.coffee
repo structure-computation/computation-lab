@@ -21,4 +21,4 @@ SCModels.LinkCollection = Backbone.Collection.extend
   addAndSave: (link) ->
       link.save {},
         success: ->
-          SCVisu.current_calcul.trigger 'update_links', SCVisu.linkListView.collection.models
+          SCVisu.current_calcul.set links: SCVisu.linkListView.collection.models

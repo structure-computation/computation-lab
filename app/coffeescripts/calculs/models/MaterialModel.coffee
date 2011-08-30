@@ -24,4 +24,4 @@ SCModels.MaterialCollection = Backbone.Collection.extend
   addAndSave: (material) ->
     material.save {},
       success: ->
-        SCVisu.current_calcul.trigger 'update_materials', SCVisu.materialListView.collection.models
+        SCVisu.current_calcul.set materials: SCVisu.materialListView.collection.models

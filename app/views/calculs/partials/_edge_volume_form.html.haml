@@ -41,6 +41,8 @@
       = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Centre", :data_type => "number",
                                                                           :ids => ["volume_sphere_center_x", "volume_sphere_center_y", "volume_sphere_center_z"], 
                                                                           :placeholders => ["x", "y", "z"]}
+  %table.grey
+    %tbody
       = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Rayon", :data_type => "number",
                                                                           :ids => ["volume_sphere_radius"], 
                                                                           :placeholders => ["x"]}
