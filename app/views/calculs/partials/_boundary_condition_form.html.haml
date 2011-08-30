@@ -1,0 +1,26 @@
+#boundary_condition
+  %table.grey
+    %tbody
+      = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Nom",         
+                                                                          :ids     => ["boundary_condition_name"],
+                                                                          :classes => ["name"]}
+
+      = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Description", 
+                                                                          :ids => ["boundary_condition_description"],
+                                                                          :classes => ["description"],
+                                                                          :type => "textarea"}
+
+  %table.grey
+    %tbody
+      = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Fonction spatiale (x, y, z)", 
+                                                                          :ids => ["spatial_function_x", "spatial_function_y", "spatial_function_z"],
+                                                                          :classes => ["x", "y", "z"],
+                                                                          :placeholders => ["x", "y", "z"],
+                                                                          :type => "number"}
+  %table.grey
+    %tbody
+      = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Fonction temporelle (ft)", 
+                                                                          :ids => ["time_function"], 
+                                                                          :classes => ["ft"],
+                                                                          :placeholdes => ["ft"],
+                                                                          :type => "number"}

@@ -1,7 +1,7 @@
 ## LinkListView
 SCViews.LinkListView = Backbone.View.extend
   el: 'ul#links'
-  
+    
   initialize: (options) ->
     @collection.bind 'change', =>
       @render()

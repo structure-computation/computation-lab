@@ -22,30 +22,30 @@
 
   .materials
     %h2.grey Liste des pièces
-    %ul#pieces
+    %ul#pieces.data_list
 
   .links
     %h2.grey Liste des interfaces
-    %ul#interfaces
+    %ul#interfaces.data_list
 
   .boundary_conditions
     %h2.grey Liste des bords
     #edges
-      %ul
+      %ul.data_list
       %button.new_edge Créer un bord
 
 - content_for :right_list do 
   .materials
     %h2.grey Liste des Matériaux
-    %ul#materials
+    %ul#materials.data_list
 
   .links
     %h2.grey Liste des Liaisons
-    %ul#links
+    %ul#links.data_list
     
   .boundary_conditions
     %h2.grey Liste des conditions aux limites
-    %ul#boundary_conditions  
+    %ul#boundary_conditions.data_list
 
 - content_for :details_calcul do 
 
@@ -68,6 +68,7 @@
     
   .boundary_conditions
     = render "calculs/partials/new_edge_form"
+    = render "calculs/partials/boundary_condition_form"
 
   .options
     = render "calculs/partials/calculus_options"

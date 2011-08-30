@@ -1,5 +1,5 @@
-## PieceListView
-SCModels.BoundaryConditionListView = Backbone.View.extend
+## BaoundaryConditionListView
+SCViews.BoundaryConditionListView = Backbone.View.extend
   el: 'ul#boundary_conditions'
   
   # You have to pass a PieceCollection at initialisation as follow:
@@ -7,9 +7,22 @@ SCModels.BoundaryConditionListView = Backbone.View.extend
   initialize: ->
     @clearView()
     @boundaryConditionViews = []
+    @selectedBoundaryCondition = null
+    @editBoundaryConditionView = new SCViews.EditBoundaryConditionView()
+    
     for boundaryCondition in @collection.models
-      @boundaryConditionViews.push new SCModels.BoundaryConditionView model: boundaryCondition, parentElement: this
+      @boundaryConditionViews.push new SCViews.BoundaryConditionView model: boundaryCondition, parentElement: this
     @render()
+
+
+
+  # setNewSelectedModel is executed when a child view indicate it has been selected.
+  # It set the current selected model to "non selected" (which trigger an event that redraw its line).
+  setNewSelectedModel: (boundaryConditionView) ->
+    @selectedBoundaryCondition.model.unset "selected" if @selectedBoundaryCondition
+    @selectedBoundaryCondition = boundaryConditionView
+    @editBoundaryConditionView.setModel boundaryConditionView.model
+
 
   # Clears all elements previously loaded in the DOM. 
   # Indeed, the 'ul#pieces' element already exists in the DOM and every time we create a PiecesListView, 
