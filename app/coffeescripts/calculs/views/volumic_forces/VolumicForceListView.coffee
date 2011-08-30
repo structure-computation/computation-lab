@@ -23,10 +23,9 @@ SCViews.VolumicForceListView = Backbone.View.extend
         
   # setNewSelectedModel is executed when a child view indicate it has been selected.
   # It set the current selected model to "non selected" (which trigger an event that redraw its line).
-
-  setNewSelectedModel: (volumicForceView) ->
+  setNewSelectedModel: (volumicForce) ->
     @selectedVolumicForce.unset "selected" if @selectedVolumicForce
-    @selectedVolumicForceView = volumicForceView
+    @selectedVolumicForce = volumicForce
   
   
   render : ->
