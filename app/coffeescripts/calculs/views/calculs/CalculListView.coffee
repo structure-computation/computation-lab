@@ -1,4 +1,4 @@
-SCModels.CalculListView = Backbone.View.extend
+SCViews.CalculListView = Backbone.View.extend
   el: 'ul#calculs'
 
   initialize: (options) ->
@@ -36,7 +36,7 @@ SCModels.CalculListView = Backbone.View.extend
     @selected_calcul = new SCModels.Calcul calcul.model
 
   createCalculView: (calcul) ->
-    c = new SCModels.CalculView model: calcul, parentElement: this
+    c = new SCViews.CalculView model: calcul, parentElement: this
     @calculViews.push c
 
   render : ->

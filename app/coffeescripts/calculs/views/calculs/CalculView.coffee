@@ -1,4 +1,4 @@
-SCModels.CalculView = Backbone.View.extend
+SCViews.CalculView = Backbone.View.extend
   initialize: (params) ->
     @parentElement = params.parentElement
   

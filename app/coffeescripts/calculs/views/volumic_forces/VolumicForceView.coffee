@@ -1,5 +1,5 @@
 # Piece View
-SCModels.VolumicForceView = Backbone.View.extend
+SCViews.VolumicForceView = Backbone.View.extend
   initialize: (params) ->
     @parentElement  = params.parentElement  # La vue tableau comportant la ligne crée et gérée par cet objet vue.
     @model.bind('change', this.render, this)

@@ -1,5 +1,5 @@
 # Piece View
-SCModels.PieceView = Backbone.View.extend
+SCViews.PieceView = Backbone.View.extend
   initialize: (params) ->
     @parentElement = params.parentElement
     @firstRendering = true

@@ -1,5 +1,5 @@
 ## Option
-SCModels.OptionView = Backbone.View.extend
+SCViews.OptionView = Backbone.View.extend
   el: "#calculus_option"
   
   initialize: ->

@@ -2,7 +2,7 @@
 #   First:  A select box (#edge_criteria) where the user will choose the criteria of the edge
 #     From this choice another select box another one pops up : #volume_geometry or #surface_geometry
 #     From this new choice the correct div will be displayed
-SCVisu.NewEdgeView = Backbone.View.extend
+SCViews.NewEdgeView = Backbone.View.extend
   el: "#new_edge"
   initialize: (params) ->
     $(@el).find('> div:not("#edge_criteria")').hide()

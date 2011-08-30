@@ -1,5 +1,5 @@
 # Interface View
-SCModels.InterfaceView = Backbone.View.extend
+SCViews.InterfaceView = Backbone.View.extend
   initialize: (params) ->
     @parentElement = params.parentElement
     @firstRendering = true

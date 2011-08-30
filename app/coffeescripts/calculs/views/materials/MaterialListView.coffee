@@ -1,12 +1,12 @@
 ## MaterialListView
-SCModels.MaterialListView = Backbone.View.extend
+SCViews.MaterialListView = Backbone.View.extend
   el: 'ul#materials'
 
   initialize: (options) ->
     @collection.bind 'change', =>
       @render()
     @clearView()
-    @editView = new SCVisu.EditMaterialView parentElement: this
+    @editView = new SCViews.EditMaterialView parentElement: this
     @materialViews = []
     for material in @collection.models
       @createMaterialView(material)
@@ -31,7 +31,7 @@ SCModels.MaterialListView = Backbone.View.extend
     @createMaterialView materialModel
 
   createMaterialView: (material) ->
-    m = new SCModels.MaterialView model: material, parentElement: this
+    m = new SCViews.MaterialView model: material, parentElement: this
     m.bind 'show_details_model', @showDetails, this
     @materialViews.push m
     @render()

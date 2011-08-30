@@ -101,4 +101,4 @@
       SCVisu.calculCollection = new SCModels.Calculs
       SCVisu.calculCollection.reset #{@calculs.to_json.html_safe}
 
-      SCVisu.calculViews = new SCModels.CalculListView {collection: SCVisu.calculCollection}
+      SCVisu.calculViews = new SCViews.CalculListView {collection: SCVisu.calculCollection}

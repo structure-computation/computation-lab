@@ -1,5 +1,5 @@
 ## EdgeView
-SCModels.EdgeView = Backbone.View.extend
+SCViews.EdgeView = Backbone.View.extend
   tagname   : 'li'
   className : 'edge_view'
 

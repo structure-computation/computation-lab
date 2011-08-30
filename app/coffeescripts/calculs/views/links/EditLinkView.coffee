@@ -1,5 +1,5 @@
 ## Edit Link View
-SCVisu.EditLinkView = Backbone.View.extend
+SCViews.EditLinkView = Backbone.View.extend
   el: "#edit_link"
   initialize: (params) ->
     @parentElement = params.parentElement

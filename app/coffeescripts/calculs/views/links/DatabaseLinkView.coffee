@@ -1,7 +1,7 @@
 # Database Link View
 # View of all links which are in the database
 # 'el' is passed at creation
-SCVisu.DatabaseLinkView = Backbone.View.extend
+SCViews.DatabaseLinkView = Backbone.View.extend
   initialize: (params) ->
     @linkListView  = params.linkListView
 

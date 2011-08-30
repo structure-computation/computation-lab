@@ -1,4 +1,4 @@
-SCVisu.EditMaterialView = Backbone.View.extend
+SCViews.EditMaterialView = Backbone.View.extend
   el: "#edit_material"
   initialize: (params) ->
     @parentElement = params.parentElement
