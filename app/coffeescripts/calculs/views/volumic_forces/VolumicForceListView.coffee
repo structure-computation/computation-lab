@@ -44,3 +44,4 @@ SCModels.VolumicForceListView = Backbone.View.extend
   addVolumicForce: ->  
     newVolForce = new SCModels.VolumicForce
     @collection.add newVolForce
+    

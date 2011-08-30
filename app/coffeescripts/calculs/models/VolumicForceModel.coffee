@@ -10,3 +10,6 @@ SCModels.VolumicForce = Backbone.Model.extend()
 # Collection of Step. Keep all steps up to date with each others.
 SCModels.VolumicForceCollection = Backbone.Collection.extend
   model: SCModels.VolumicForce
+  initialize: () ->
+    @bind 'change', () =>                 # Note the '=>' opérator to bind this to the collection object.
+      SCVisu.current_calcul.set { volumic_forces : this}
