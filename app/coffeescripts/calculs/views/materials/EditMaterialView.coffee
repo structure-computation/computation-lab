@@ -2,12 +2,12 @@ SCVisu.EditMaterialView = Backbone.View.extend
   el: "#edit_material"
   initialize: (params) ->
     @parentElement = params.parentElement
-    $(@el).append('<button class="close">Fermer</button>')    
+    $(@el).append('<button class="close_edit_view">Fermer</button>')    
     @hide()
 
   events: 
-    'keyup'               : 'updateModelAttributes'
-    'click button.close'  : 'hide'
+    'keyup'                         : 'updateModelAttributes'
+    'click button.close_edit_view'  : 'hide'
 
 
   #Hide itself

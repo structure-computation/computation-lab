@@ -8,7 +8,6 @@ SCModels.MaterialListView = Backbone.View.extend
     for material in @collection.models
       @createMaterialView(material)
     @selectedMaterial = null
-    $('#materials_database').hide()
     $('#materials_database button.close').click -> $('#materials_database').hide()
     @render()
   

@@ -7,7 +7,6 @@ SCModels.LinkListView = Backbone.View.extend
     @linkViews = []
     for link in @collection.models
       @createLinkView(link)
-    $('#links_database').hide()
     $('#links_database button.close').click -> $('#links_database').hide()
     @selectedLinkModel = null
 
