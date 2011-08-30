@@ -2,7 +2,8 @@
 SCViews.VolumicForceView = Backbone.View.extend
   initialize: (params) ->
     @parentElement  = params.parentElement  # La vue tableau comportant la ligne crée et gérée par cet objet vue.
-    @model.bind('change', this.render, this)
+    # @model.bind('change', this.render, this) Ne fonctionne pas dans la pratique : fait perdre le focus sur les champs input.
+    @model.bind('change:selected', @showSelectedState, this)
     
   tagName   : "tr"                    # TODO: plutôt une table row ?
   className : "volumic_force_view"    # TODO: add to style.
@@ -14,18 +15,27 @@ SCViews.VolumicForceView = Backbone.View.extend
     'change'                : 'updateFields'
     
   # Ask the parent table to supress the "selected" status on the currently selected model
-  # (which trigger a onchange that supress highlight on this line) and set the "selected" attribute
-  # on current model, which trigger a new render and higlight the model. 
-  # Highlight the selected line and tell the volumic force list to 
-  # show the details of this line.
+  # (which trigger a change:selected event that supress highlight on this line) and set 
+  # the "selected" attribute on current model, which trigger again a change:selected event
+  # which is handled by highlight the selected line.
   select: (event) ->
     # if event.srcElement == @el # Utilisé pour savoir si l'on clique sur le bouton ou la ligne.
       @parentElement.setNewSelectedModel(@model)
       @model.set({selected:true}) 
 
+  # this functions set or unset CSS classes indicating a line is (or is not) selected.
+  # It is called either by hand (in render) or in a change:selected event on the model.
+  showSelectedState  : (event) =>
+    if ( @model.get('selected') )
+      $(@el).addClass(   'selected').removeClass('gray')
+    else
+      $(@el).removeClass('selected').removeClass('gray')
+    
+  # As named...
   destroyVolumicForce: (event) ->
     if event.srcElement == @el # est-ce necessaire ?
       @model.destroy()
+
 
   render: ->
     template = """
@@ -36,11 +46,8 @@ SCViews.VolumicForceView = Backbone.View.extend
               <td class="dz"   > <input type='number' value='#{@model.get("dz")}'    > </td> 
           """ 
     $(@el).html(template) 
-      
-    if ( @model.get('selected') )
-      $(@el).addClass(   'selected').removeClass('gray')
-    else
-      $(@el).removeClass('selected').removeClass('gray')
+    @showSelectedState()  
+
     
     return this
     
@@ -51,3 +58,4 @@ SCViews.VolumicForceView = Backbone.View.extend
     dyValue      = $(@el).find('.dy    input').val()
     dzValue      = $(@el).find('.dz    input').val()
     @model.set {name: nameValue, gamma: gammaValue, dx: dxValue, dy: dyValue, dz: dzValue }
+
