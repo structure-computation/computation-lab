@@ -13,18 +13,17 @@
     = render :partial => "search_filter"
 
 -content_for :company_content do
-  - if !@links.empty?
-    %table.grey#links_table
-      %thead
-        %tr
-          %th.no_sorter
-          %th Nom
-          %th ID
-          %th Référence
-          %th Famille
-          %th Générique
-          %th Complexe
-          %th.no_sorter Actions
-      %tbody
-        = render :partial => "link", :collection => @standard_links, :locals => {:type => "standard"}
-        = render :partial => "link", :collection => @company_links,  :locals => {:type => "company"} 
+  %table.grey#links_table
+    %thead
+      %tr
+        %th.no_sorter
+        %th Nom
+        %th ID
+        %th Référence
+        %th Famille
+        %th Générique
+        %th Complexe
+        %th.no_sorter Actions
+    %tbody
+      = render :partial => "link", :collection => @standard_links, :locals => {:type => "standard"}
+      = render :partial => "link", :collection => @company_links,  :locals => {:type => "company"} 
