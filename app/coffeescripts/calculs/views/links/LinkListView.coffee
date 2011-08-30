@@ -35,7 +35,7 @@ SCModels.LinkListView = Backbone.View.extend
   # Add a model to the collection and creates an associated view
   add: (linkModel) ->
     linkModel.set id_in_calcul: @getNewMaterialId()
-    @collection.model.push linkModel
+    @collection.add linkModel
     @createLinkView linkModel
     
   # Create a view giving it a model

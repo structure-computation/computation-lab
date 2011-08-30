@@ -6,8 +6,8 @@ SCModels.Link = Backbone.Model.extend
   initialize: ->
     @company_id = if SCVisu.current_company? then SCVisu.current_company else 0
     @url = "/companies/#{@company_id}/links/"
-    @url += @get 'id' if !@isNew()
-  
+
+  # Get the ID of the link in the JSON
   getId: ->
     @get 'id_in_calcul'
 

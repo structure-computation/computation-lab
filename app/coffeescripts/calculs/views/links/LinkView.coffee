@@ -57,7 +57,6 @@ SCModels.LinkView = Backbone.View.extend
     @renderWithButton 'assign', 'Assigner'
     
   renderWithButton: (className, textButton) ->
-    $(@el).removeClass('selected').removeClass('gray')
     $(@el).html(@model.get('name'))
     $(@el).append("<button class='remove'>X</button>")
     $(@el).append("<button class='#{className}'>#{textButton}</button>")

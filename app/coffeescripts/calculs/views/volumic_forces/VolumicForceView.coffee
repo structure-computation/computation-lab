@@ -43,5 +43,11 @@ SCModels.VolumicForceView = Backbone.View.extend
       $(@el).removeClass('selected').removeClass('gray')
     
     return this
+    
   updateFields: (event) ->
-    # TODO
+    nameValue    = $(@el).find('.name  input').val()
+    gammaValue   = $(@el).find('.gamma input').val()
+    dxValue      = $(@el).find('.dx    input').val()
+    dyValue      = $(@el).find('.dy    input').val()
+    dzValue      = $(@el).find('.dz    input').val()
+    @model.set {name: nameValue, gamma: gammaValue, dx: dxValue, dy: dyValue, dz: dzValue }
