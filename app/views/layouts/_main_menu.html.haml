@@ -5,24 +5,24 @@
     =link_to 'Accueil', root_path
   
   %li{:class => ( @page == :manage ? "selected" : "")}
-    = link_to 'Gestion', companies_path(:anchor => 'Factures')
+    = link_to 'Gestion', workspaces_path(:anchor => 'Factures')
   %li{:class => ( @page == :lab ? "selected" : "")}
     %a
       Laboratoire
     %ul#drop_down_menu               
       %li
-        = link_to 'Mes modèles', company_sc_models_path(current_company_member.company)
+        = link_to 'Mes modèles', workspace_sc_models_path(current_company_member.workspace)
       %li
         %a Mes Projets
-        -#= link_to 'Modèles', company_sc_models_path(current_user.company)
+        -#= link_to 'Modèles', workspace_sc_models_path(current_user.workspace)
   %li{:class => ( @page == :bibliotheque ? "selected" : "")}
     %a
       Bibliothèque
     %ul#drop_down_menu      
       %li
-        = link_to 'Matériaux', company_materials_path(current_company_member.company)
+        = link_to 'Matériaux', workspace_materials_path(current_company_member.workspace)
       %li
-        = link_to 'Liaisons', company_links_path(current_company_member.company)
+        = link_to 'Liaisons', workspace_links_path(current_company_member.workspace)
 
 -# TODO: Utiliser un helper pour le style "selected"
 -#   %li{:id => "menu_accueil"     , :class => "main_menu_item " + menu_item_selected_class( @page, :accueil   ) }

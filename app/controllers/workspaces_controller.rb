@@ -17,12 +17,12 @@ class WorkspacesController < InheritedResources::Base
   # Suppr
   def create_solde
     # Creation d'une liste fictive d'opération.
-    @solde_calculs = current_company_member.company.solde_calcul_accounts.find(:all)
+    @solde_calculs = current_company_member.workspace.solde_calcul_accounts.find(:all)
   end
   
   
   def index
-    redirect_to company_path(current_company_member.company)
+    redirect_to company_path(current_company_member.workspace)
     # @page = 'SCmanage' 
     # respond_to do |format|
     #   format.html {render :layout => true }
@@ -32,7 +32,7 @@ class WorkspacesController < InheritedResources::Base
     
   protected
     def begin_of_association_chain
-      Company.accessible_by_user(current_user)
+      Workspace.accessible_by_user(current_user)
     end   
       
   def create     

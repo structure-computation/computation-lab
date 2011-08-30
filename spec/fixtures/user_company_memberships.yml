@@ -1,4 +1,6 @@
-
+ # one:
+ #  user_id:          440946503   #jbellec
+ #  workspace_id:     240607020   #sc_admin  
 
 # Liaison des 6 utilisateurs de TF Avionics avec l'entreprise.
 <% tf_avionics_members = ["mbleriot", "fcolac"  , "mleroy"  , "jlinder"] 

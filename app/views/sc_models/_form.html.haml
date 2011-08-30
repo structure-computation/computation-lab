@@ -1,9 +1,9 @@
-= semantic_form_for [@company, @sc_model] do |f|
+= semantic_form_for [@workspace, @sc_model] do |f|
   - f.inputs do
     = f.input :dimension, :as => :select, :collection => [["2D", 2], ["3D", 3]], :include_blank => false
     = f.input :name
     = f.input :description
     = f.input :state,       :as => :hidden, :value => "void"
-    = f.input :company_id,  :as => :hidden, :value => current_company_member.company.id
+    = f.input :workspace_id,  :as => :hidden, :value => current_company_member.workspace.id
 
   = f.buttons

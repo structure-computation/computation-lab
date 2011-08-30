@@ -15,11 +15,11 @@
           
             -#header_top_cadena
         %p#header_company_name
-          - if user_signed_in? && current_company_member.company
-            = current_company_member.company.name
+          - if user_signed_in? && current_company_member.workspace
+            = current_company_member.workspace.name
             / 
               TODO: Supprimer la ligne suivante dans une version ultérieure. C'est une mauvaise façon de se connecter.
-              - if(current_company_member.company.id == 240607020)
+              - if(current_company_member.workspace.id == 240607020)
                 %br
                 %a{:href => "/sc_admin_company", :id=>"administration_link" }
                   administration

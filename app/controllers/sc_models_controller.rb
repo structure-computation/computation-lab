@@ -5,7 +5,7 @@ class ScModelsController < InheritedResources::Base
   include Socket::Constants
   before_filter :authenticate_user!
   before_filter :set_page_name
-  belongs_to :company
+  belongs_to :workspace
   respond_to :html, :json
   
   layout 'company'

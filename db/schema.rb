@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110826134819) do
+ActiveRecord::Schema.define(:version => 20110829075857) do
 
   create_table "abonnements", :force => true do |t|
     t.string   "name"
@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(:version => 20110826134819) do
   end
 
   create_table "calcul_accounts", :force => true do |t|
-    t.integer  "company_id"
+    t.integer  "workspace_id"
     t.date     "start_date"
     t.date     "end_date"
     t.string   "status"
@@ -134,6 +134,27 @@ ActiveRecord::Schema.define(:version => 20110826134819) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
+
+  create_table "factures", :force => true do |t|
+    t.integer  "company_id"
+    t.integer  "credit_id"
+    t.integer  "log_abonnement_id"
+    t.string   "facture_type"
+    t.float    "price_calcul_HT"
+    t.float    "price_calcul_TVA"
+    t.float    "price_calcul_TTC"
+    t.float    "price_memory_HT"
+    t.float    "price_memory_TVA"
+    t.float    "price_memory_TTC"
+    t.float    "total_price_HT"
+    t.float    "total_price_TVA"
+    t.float    "total_price_TTC"
+    t.string   "ref"
+    t.string   "statut"
+    t.date     "paid_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "files_sc_models", :force => true do |t|
     t.integer  "sc_model_id"
@@ -314,6 +335,19 @@ ActiveRecord::Schema.define(:version => 20110826134819) do
     t.datetime "updated_at"
   end
 
+  create_table "tasks", :force => true do |t|
+    t.integer  "project_id"
+    t.integer  "created_by"
+    t.integer  "attributed_to"
+    t.string   "name"
+    t.text     "description"
+    t.date     "due_date"
+    t.string   "state"
+    t.integer  "estimated_done"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "user_company_memberships", :force => true do |t|
     t.integer  "user_id"
     t.integer  "workspace_id"
@@ -333,9 +367,34 @@ ActiveRecord::Schema.define(:version => 20110826134819) do
 
   add_index "user_model_ownerships", ["user_id", "sc_model_id"], :name => "index_user_model_informations_on_user_id_and_model_id"
 
+  create_table "user_projects", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.integer  "is_admin"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "user_sc_admins", :force => true do |t|
     t.integer  "user_id"
     t.integer  "sc_admin_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "user_sc_models", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "sc_model_id"
+    t.integer  "role"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "user_tasks", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "task_id"
+    t.integer  "is_creator"
+    t.integer  "is_assigned_to"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -372,6 +431,19 @@ ActiveRecord::Schema.define(:version => 20110826134819) do
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
+  create_table "workspace_relationship", :force => true do |t|
+    t.integer  "workspace_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "workspace_relationships", :force => true do |t|
+    t.integer  "workspace_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "workspace_id2"
+  end
 
   create_table "workspaces", :force => true do |t|
     t.string   "name"

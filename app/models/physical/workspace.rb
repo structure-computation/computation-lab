@@ -1,8 +1,9 @@
 class Workspace < ActiveRecord::Base
   
-  # Un workspace peut posséder plusieurs workspaces grâce à la table :workspace_relationship
-  has_many  :workspace_relationship 
-  has_many  :companies, :through => :workspace_relationship
+  # Un workspace peut posséder plusieurs workspaces grâce à la table :workspace_relationship 
+  has_many :workspace_relationship
+  has_many :workspace, :through => :workspace_relationship
+  
   
   #Un workspace possède un seul unique :account
   has_one :account   
@@ -35,8 +36,9 @@ class Workspace < ActiveRecord::Base
   
   # TODO: pour faire foncitonner la chaine d'association Inherited ressource. 
   # Trouver une meilleure solution à terme.
-  scope :companies
-  
+  scope :companies                             
+  # si on passe en multi tenant,  companies devint workspaces
+  #scope :workspace_relationship                    
   
   def members
     users
