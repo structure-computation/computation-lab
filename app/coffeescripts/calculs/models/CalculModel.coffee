@@ -10,6 +10,7 @@ SCModels.Calcul = Backbone.Model.extend
     @set time_steps            :
       time_scheme : "static"
       collection  : []
+    @set boundary_condition    : []
     @set materials             : []
     @set pieces                : []
     @set links                 : []
@@ -27,7 +28,8 @@ SCModels.Calcul = Backbone.Model.extend
     @set pieces     : params.pieces  
     @set links      : params.links  
     @set interfaces : params.interfaces
-     
+    @set boundary_condition : params.boundary_condition
+    
   setTimeStepsCollection: (time_steps) ->
     @get('time_steps').collection = time_steps
 
