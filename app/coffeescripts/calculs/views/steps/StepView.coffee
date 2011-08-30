@@ -62,8 +62,7 @@ SCViews.StepView = Backbone.View.extend
   ## -- Events
   events: 
     'click button.delete' : 'delete'
+
   delete: ->
     @model.destroy()
-    @update()
-    @parentView.trigger('step_deleted', this)
     @remove()

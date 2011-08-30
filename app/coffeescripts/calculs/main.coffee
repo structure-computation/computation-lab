@@ -1,28 +1,28 @@
 # SCVisu is initialized in the header in order that it is initialize at first
 # window.SCVisu = {} 
 $ ->
-  interfaceCollection       = new SCModels.Interfaces()
-  SCViews.interfaceListView  = new SCViews.InterfaceListView collection : interfaceCollection
+  interfaceCollection             = new SCModels.Interfaces()
+  SCViews.interfaceListView       = new SCViews.InterfaceListView collection : interfaceCollection
 
   # Initialize all variables and views with data retrieved from the JSON sent by the "Visualisateur"
   # /!\ Variable's name must not be changed! They are used in multiple place in the code. /!\
   SCVisu.initializeFromJSON = () ->
 
     # Initialization of the PieceListView
-    pieceCollection           = new SCModels.PieceCollection SCVisu.current_calcul.get('pieces')
-    SCVisu.pieceListView      = new SCViews.PieceListView collection : pieceCollection
+    pieceCollection               = new SCModels.PieceCollection SCVisu.current_calcul.get('pieces')
+    SCVisu.pieceListView          = new SCViews.PieceListView collection : pieceCollection
 
     # Initialization of the MaterialListView
-    materialCollection        = new SCModels.MaterialCollection SCVisu.current_calcul.get('materials')     
-    SCVisu.materialListView   = new SCViews.MaterialListView collection: materialCollection
+    materialCollection            = new SCModels.MaterialCollection SCVisu.current_calcul.get('materials')     
+    SCVisu.materialListView       = new SCViews.MaterialListView collection: materialCollection
     # Initialize views for database materials
     for material in SCVisu.standardLibraryMaterial.models.concat SCVisu.companyLibraryMaterial.models
       el = $('#materials_table tbody tr#material_' + material.get("id"))
       new SCViews.DatabaseMaterialView el: el, model: material, materialListView: SCVisu.materialListView
 
     # Initialization of the LinkListView
-    linkCollection            = new SCModels.LinkCollection SCVisu.current_calcul.get('links') 
-    SCVisu.linkListView       = new SCViews.LinkListView collection: linkCollection
+    linkCollection                = new SCModels.LinkCollection SCVisu.current_calcul.get('links') 
+    SCVisu.linkListView           = new SCViews.LinkListView collection: linkCollection
     # Initialize views for database links
     for link in SCVisu.standardLibraryLink.models.concat SCVisu.companyLibraryLink.models
       el = $('#links_table tbody tr#link_' + link.get("id"))
@@ -33,24 +33,22 @@ $ ->
     #   new SCViews.DatabaseLinkView el:  el, model: link, linkListView: SCVisu.linkListView
 
     # Initialization of the StepListView    
-    steps                     = new SCModels.StepCollection SCVisu.current_calcul.get('time_steps').collection
-    if SCVisu.stepListView
-      delete SCVisu.stepListView
-    SCVisu.stepListView       = new SCViews.StepListView collection: steps
+    steps                         = new SCModels.StepCollection SCVisu.current_calcul.get('time_steps').collection
+    SCVisu.stepListView           = new SCViews.StepListView collection: steps
   
     # Initialization of the InterfaceListView
-    interfaceCollection         = new SCModels.Interfaces SCVisu.current_calcul.get('interfaces')
-    SCVisu.interfaceListView    = new SCViews.InterfaceListView collection : interfaceCollection
+    interfaceCollection           = new SCModels.Interfaces SCVisu.current_calcul.get('interfaces')
+    SCVisu.interfaceListView      = new SCViews.InterfaceListView collection : interfaceCollection
 
     # Initialisation of VolumicForcesListView
-    volumicForcesCollection      = new SCModels.VolumicForceCollection  SCVisu.current_calcul.get('volumic_forces')
-    SCVisu.volumicForcesListView = new SCViews.VolumicForceListView    collection : volumicForcesCollection 
+    volumicForcesCollection       = new SCModels.VolumicForceCollection  SCVisu.current_calcul.get('volumic_forces')
+    SCVisu.volumicForcesListView  = new SCViews.VolumicForceListView    collection : volumicForcesCollection 
 
     # Initialization of the EdgeListView
-    SCVisu.edgeListView       = new SCViews.EdgeListView()
+    SCVisu.edgeListView           = new SCViews.EdgeListView()
 
     # Initialization of the OptionView
-    SCVisu.optionView         = new SCViews.OptionView()
+    SCVisu.optionView             = new SCViews.OptionView()
     
   # Initialization of the Router
   SCVisu.router = new SCVisu. Router pushState: true
