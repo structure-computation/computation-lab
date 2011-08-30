@@ -3,16 +3,15 @@ SCModels.StepListView = Backbone.View.extend
 
   el: "#steps"
   # Have to initialize the StepListView with {collection: StepCollection}
-  initialize: ->  
+  initialize: (params) ->  
     @stepViews = []
-    if @collection.length == 0
+    if @collection.size() == 0
       step = new SCModels.Step
         initial_time  : 0
         time_step     : 1
         nb_time_steps : 1
         final_time    : 1
       @collection.add step
-      @stepViews.push new SCModels.StepView model: step, parentView: this
 
     for step in @collection.models
       @stepViews.push new SCModels.StepView model: step, parentView: this
