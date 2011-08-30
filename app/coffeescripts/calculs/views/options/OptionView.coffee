@@ -3,8 +3,20 @@ SCModels.OptionView = Backbone.View.extend
   el: "#calculus_option"
   
   initialize: ->
-    @model = new SCModels.Option()
-
+    # Initialize the view from the informations get back in the JSON file
+    @setMode(@model.get('mode'))    
+    
+    if @model.get('convergence_method_LATIN')
+      @setLatinMethod true
+      @setMultiScale(@model.get('convergence_method_LATIN').multiscale == 'on' ? true : false)        
+      @setMaxIteration(@model.get('convergence_method_LATIN').max_iteration) if @model.get('convergence_method_LATIN').max_iteration
+      @setConvergenceRate(@model.get('convergence_method_LATIN').convergence_rate) if @model.get('convergence_method_LATIN').convergence_rate
+     
+    if @model.get('precision_calcul')
+      @setPrecisionCalcul true
+      @setZoom(@model.get('precision_calcul').zoom) if @model.get('precision_calcul').zoom
+      @setError(@model.get('precision_calcul').error) if @model.get('precision_calcul').error
+     
   events:
     "change input#test_mode"          : "testModeSelected"
     "change input:not('#test_mode')"  : "normalModeSelected"
@@ -30,8 +42,55 @@ SCModels.OptionView = Backbone.View.extend
         @model.set precision_calcul :
                         zoom  : $(@el).find('input#zoom').val()
                         error : $(@el).find('input#error').val()
+    SCVisu.current_calcul.set options: @model
 
-#              
+  # Generic method usefull to set value of an input whose ID is passed as a parameter.
+  setInputValue: (inputId, value) ->
+    $(@el).find("input#{inputId}").val(value)
+
+  # Generic method usefull to set checked or not an input whose ID is passed as a parameter.    
+  setCheckBoxOrRadioButtonChecked: (checkBoxId, boolean) ->
+      $(@el).find("input#{checkBoxId}").attr 'checked', boolean
+  
+  # Sets value of the input whose id is #error
+  setError: (value) ->
+    @setInputValue('#error', value)
+
+  # Sets value of the input whose id is #zoom
+  setZoom: (value) ->
+    @setInputValue('#zoom', value)
+
+  # Sets value of the input whose id is #convergence_rate
+  setConvergenceRate: (value) ->
+    @setInputValue('#convergence_rate', value)
+    
+  # Sets value of the input whose id is #max_iteration
+  setMaxIteration: (value) ->
+    @setInputValue('#max_iteration', value)
+
+  # Sets checked or not according to the boolean passed in parameters the input whose id is #precision_calcul
+  setPrecisionCalcul: (boolean) ->
+    @setCheckBoxOrRadioButtonChecked('#precision_calcul', boolean)    
+
+  # Sets checked or not according to the boolean passed in parameters the input whose id is #latin_method
+  setLatinMethod: (boolean) ->
+    @setCheckBoxOrRadioButtonChecked('#latin_method', boolean)
+
+  # Sets checked the correct radio button according the boolean passed in parameters the input whose id is #multiscale_on or #multiscale_off   
+  setMultiScale: (boolean) ->
+    if boolean
+      @setCheckBoxOrRadioButtonChecked('#multiscale_on', true) 
+    else 
+     @setCheckBoxOrRadioButtonChecked('#multiscale_off', true) 
+
+  # Sets checked the correct radio button according the boolean passed in parameters the input whose id is #normal_mode or #test_mode    
+  setMode: (mode) ->
+    if mode == "normal"
+      @setCheckBoxOrRadioButtonChecked('#normal_mode', true) 
+    else if mode == "test"
+     @setCheckBoxOrRadioButtonChecked('#test_mode', true)    
+
+   
 # "options": {
 #   "mode"                      : "test " // Ou "normal"
 # 
