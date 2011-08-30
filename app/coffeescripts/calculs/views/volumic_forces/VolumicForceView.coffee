@@ -25,7 +25,7 @@ SCModels.VolumicForceView = Backbone.View.extend
 
   # this functions set or unset CSS classes indicating a line is (or is not) selected.
   # It is called either by hand (in render) or in a change:selected event on the model.
-  showSelectedState  : (event) =>
+  showSelectedState  : (event) ->
     if ( @model.get('selected') )
       $(@el).addClass(   'selected').removeClass('gray')
     else
