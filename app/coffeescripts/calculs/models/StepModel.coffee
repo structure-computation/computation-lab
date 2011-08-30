@@ -17,10 +17,17 @@ SCModels.Step = Backbone.Model.extend
 # Collection of Step. Keep all steps up to date with each others.
 SCModels.StepCollection = Backbone.Collection.extend
   model: SCModels.Step
-  initialize: -> 
+  initialize: ->
+    @._meta = {}
     @bind 'add', (step) ->
       @updateModels()
-      
+
+  meta: (property, value) ->
+    if value == undefined
+      return @._meta[property]
+    else
+      @._meta[property] = value
+
   updateModels: ->
     for step, i in @models
       step.set({ name: "step_" + i})

@@ -5,11 +5,20 @@ SCModels.PieceListView = Backbone.View.extend
   # You have to pass a PieceCollection at initialisation as follow:
   # new SCVisu.pieceListView({ collection : myPieceCollection })
   initialize: ->
+    @clearView()
     @pieceViews = []
     for piece in @collection.models
       @pieceViews.push new SCModels.PieceView model: piece, parentElement: this
     @selectedPieceView = null
     @render()
+
+  # Clears all elements previously loaded in the DOM. 
+  # Indeed, the 'ul#pieces' element already exists in the DOM and every time we create a PiecesListView, 
+  # we render the view and we add some element inside. And even if we have many different view, 
+  # each time we render we add elements to the same view. 
+  # So we have to clear the content each time we create a new PiecesListView 
+  clearView: ->
+    $(@el).html('')
         
   # Is executed when user click on a piece.
   # Highlight the selected piece and put others in gray.
@@ -40,24 +49,24 @@ SCModels.PieceListView = Backbone.View.extend
   # Assign the pieceModel to the selected Material.
   assignPieceToMaterial: (pieceModel) ->
     pieceModel.set 'material_id' : SCVisu.materialListView.selectedMaterial.getId()
-    SCVisu.current_calcul.trigger 'update_pieces', SCVisu.pieceListView.collection.models
+    SCVisu.current_calcul.set pieces: SCVisu.pieceListView.collection.models
     
   # Assign the pieceModel to the selected Material.
   unassignPieceToMaterial: (pieceModel) ->
     pieceModel.unset 'material_id'
-    SCVisu.current_calcul.trigger 'update_pieces', SCVisu.pieceListView.collection.models
-    
+    SCVisu.current_calcul.set pieces: SCVisu.pieceListView.collection.models  
+      
   # Assign the selected material to the currently selected piece.
   assignMaterialToSelectedPiece: (material) ->
     @selectedPieceView.model.set material_id: material.getId()
-    SCVisu.current_calcul.trigger 'update_pieces', SCVisu.pieceListView.collection.models
+    SCVisu.current_calcul.set pieces: SCVisu.pieceListView.collection.models
     @render()
     @highlightPieceView @selectedPieceView
     
   # Unassign the selected material from the currently selected piece.
   unassignMaterialToSelectedPiece: ->
     @selectedPieceView.model.unset 'material_id'
-    SCVisu.current_calcul.trigger 'update_pieces', SCVisu.pieceListView.collection.models
+    SCVisu.current_calcul.set pieces: SCVisu.pieceListView.collection.models
     @render()
     @highlightPieceView @selectedPieceView
 

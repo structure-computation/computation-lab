@@ -37,7 +37,7 @@ SCVisu.EditMaterialView = Backbone.View.extend
       h = new Object()
       h[key] = value
       @model.set h
-    SCVisu.current_calcul.trigger 'update_materials', SCVisu.materialListView.collection.models  
+    SCVisu.current_calcul.set materials: SCVisu.materialListView.collection.models  
 
   # Update view with the given model
   updateModel: (model) ->

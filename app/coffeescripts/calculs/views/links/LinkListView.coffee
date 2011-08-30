@@ -3,6 +3,7 @@ SCModels.LinkListView = Backbone.View.extend
   el: 'ul#links'
   
   initialize: (options) ->
+    @clearView()
     @editView = new SCVisu.EditLinkView parentElement: this
     @linkViews = []
     for link in @collection.models
@@ -12,6 +13,14 @@ SCModels.LinkListView = Backbone.View.extend
 
   events: 
     "click button.add_link" : "showDatabaseLinks"
+  
+  # Clears all elements previously loaded in the DOM. 
+  # Indeed, the 'ul#links' element already exists in the DOM and every time we create a LinkListView, 
+  # we render the view and we add some element inside. And even if we have many different view, 
+  # each time we render we add elements to the same view. 
+  # So we have to clear the content each time we create a new LinkListView 
+  clearView: ->
+    $(@el).html('')
   
   # Show links which are from database and hide edit view
   showDatabaseLinks: ->
@@ -63,7 +72,7 @@ SCModels.LinkListView = Backbone.View.extend
   assignLinkToSelectedInterface: (linkView) ->
     SCVisu.interfaceListView.selectedInterfaceView.model.set link_id : linkView.model.getId()
     SCVisu.interfaceListView.renderAndHighlightCurrentInterface()
-    SCVisu.current_calcul.trigger 'update_interfaces', SCVisu.interfaceListView.collection.models
+    SCVisu.current_calcul.set interfaces: SCVisu.interfaceListView.collection.models
 
   # Highlight the 'linkView' with adding css class
   highlightView: (linkView) ->
@@ -74,7 +83,7 @@ SCModels.LinkListView = Backbone.View.extend
   unassignLinkToSelectedInterface: ->
     SCVisu.interfaceListView.selectedInterfaceView.model.unset 'link_id'
     SCVisu.interfaceListView.renderAndHighlightCurrentInterface()
-    SCVisu.current_calcul.trigger 'update_interfaces', SCVisu.interfaceListView.collection.models
+    SCVisu.current_calcul.set interfaces: SCVisu.interfaceListView.collection.models
    
   render : ->
     for l in @linkViews
