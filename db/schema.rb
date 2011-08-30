@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110801153735) do
+ActiveRecord::Schema.define(:version => 20110829075857) do
 
   create_table "abonnements", :force => true do |t|
     t.string   "name"
@@ -49,7 +49,6 @@ ActiveRecord::Schema.define(:version => 20110801153735) do
   create_table "boundary_conditions", :force => true do |t|
     t.string   "name"
     t.integer  "user_id"
-    t.integer  "project_id"
     t.integer  "ref"
     t.integer  "id_select"
     t.string   "name_select"
@@ -61,7 +60,7 @@ ActiveRecord::Schema.define(:version => 20110801153735) do
   end
 
   create_table "calcul_accounts", :force => true do |t|
-    t.integer  "company_id"
+    t.integer  "workspace_id"
     t.date     "start_date"
     t.date     "end_date"
     t.string   "status"
@@ -94,18 +93,18 @@ ActiveRecord::Schema.define(:version => 20110801153735) do
     t.integer  "used_memory"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "company_member_id"
   end
 
-  create_table "companies", :force => true do |t|
-    t.string   "name"
-    t.string   "address"
-    t.string   "city"
-    t.string   "zipcode"
-    t.string   "country"
-    t.string   "division"
-    t.string   "TVA"
-    t.integer  "siren"
-    t.integer  "user_sc_admin_id"
+  create_table "company_accounts", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "company_member_to_model_ownerships", :force => true do |t|
+    t.integer  "company_member_id"
+    t.integer  "sc_model_id"
+    t.string   "rights"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -136,6 +135,27 @@ ActiveRecord::Schema.define(:version => 20110801153735) do
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
+  create_table "factures", :force => true do |t|
+    t.integer  "company_id"
+    t.integer  "credit_id"
+    t.integer  "log_abonnement_id"
+    t.string   "facture_type"
+    t.float    "price_calcul_HT"
+    t.float    "price_calcul_TVA"
+    t.float    "price_calcul_TTC"
+    t.float    "price_memory_HT"
+    t.float    "price_memory_TVA"
+    t.float    "price_memory_TTC"
+    t.float    "total_price_HT"
+    t.float    "total_price_TVA"
+    t.float    "total_price_TTC"
+    t.string   "ref"
+    t.string   "statut"
+    t.date     "paid_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "files_sc_models", :force => true do |t|
     t.integer  "sc_model_id"
     t.integer  "user_id"
@@ -146,6 +166,7 @@ ActiveRecord::Schema.define(:version => 20110801153735) do
     t.float    "size"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "company_member_id"
   end
 
   create_table "forfaits", :force => true do |t|
@@ -276,20 +297,8 @@ ActiveRecord::Schema.define(:version => 20110801153735) do
     t.datetime "updated_at"
   end
 
-  create_table "projects", :force => true do |t|
-    t.string   "name"
-    t.text     "description"
-    t.date     "start_date"
-    t.date     "estimated_end_date"
-    t.date     "end_date"
-    t.integer  "estimated_done"
-    t.string   "state"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "sc_admins", :force => true do |t|
-    t.integer  "company_id"
+    t.integer  "workspace_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -297,7 +306,6 @@ ActiveRecord::Schema.define(:version => 20110801153735) do
   create_table "sc_models", :force => true do |t|
     t.string   "name"
     t.integer  "company_id"
-    t.integer  "project_id"
     t.string   "model_file_path"
     t.string   "image_path"
     t.text     "description"
@@ -340,6 +348,15 @@ ActiveRecord::Schema.define(:version => 20110801153735) do
     t.datetime "updated_at"
   end
 
+  create_table "user_company_memberships", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "workspace_id"
+    t.string   "rights"
+    t.string   "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "user_model_ownerships", :force => true do |t|
     t.integer  "user_id"
     t.integer  "sc_model_id"
@@ -365,6 +382,14 @@ ActiveRecord::Schema.define(:version => 20110801153735) do
     t.datetime "updated_at"
   end
 
+  create_table "user_sc_models", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "sc_model_id"
+    t.integer  "role"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "user_tasks", :force => true do |t|
     t.integer  "user_id"
     t.integer  "task_id"
@@ -375,7 +400,7 @@ ActiveRecord::Schema.define(:version => 20110801153735) do
   end
 
   create_table "users", :force => true do |t|
-    t.integer  "company_id"
+    t.integer  "workspace_id"
     t.string   "firstname",            :limit => 100, :default => ""
     t.string   "lastname",             :limit => 100, :default => ""
     t.string   "telephone",            :limit => 23,  :default => ""
@@ -406,5 +431,33 @@ ActiveRecord::Schema.define(:version => 20110801153735) do
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
+  create_table "workspace_relationship", :force => true do |t|
+    t.integer  "workspace_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "workspace_relationships", :force => true do |t|
+    t.integer  "workspace_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "workspace_id2"
+  end
+
+  create_table "workspaces", :force => true do |t|
+    t.string   "name"
+    t.string   "address"
+    t.string   "city"
+    t.string   "zipcode"
+    t.string   "country"
+    t.string   "division"
+    t.string   "TVA"
+    t.integer  "siren"
+    t.integer  "user_sc_admin_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "kind"
+  end
 
 end
