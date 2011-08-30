@@ -41,7 +41,7 @@ SCModels.InterfaceListView = Backbone.View.extend
 
   # Assign the pieceModel to the selected Material.
   assignInterfaceToLink: (interfaceModel) ->
-    interfaceModel.set link_id : SCVisu.linkListView.selectedLinkModel.get('id')
+    interfaceModel.set link_id : SCVisu.linkListView.selectedLinkModel.getId()
     SCVisu.current_calcul.trigger 'update_interfaces', SCVisu.interfaceListView.collection.models
 
   # Assign the pieceModel to the selected Material.
@@ -53,7 +53,7 @@ SCModels.InterfaceListView = Backbone.View.extend
   # If it is the case, then it removes the association
   linkHasBeenRemoved: (link) ->
     _.each @collection.models, (interface) ->
-      if interface.get('link_id') == link.get('id')
+      if interface.get('link_id') == link.getId()
         interface.unset 'link_id'
     @render()
     

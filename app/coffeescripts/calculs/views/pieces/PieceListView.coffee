@@ -39,7 +39,7 @@ SCModels.PieceListView = Backbone.View.extend
   
   # Assign the pieceModel to the selected Material.
   assignPieceToMaterial: (pieceModel) ->
-    pieceModel.set 'material_id' : SCVisu.materialListView.selectedMaterial.get('id')
+    pieceModel.set 'material_id' : SCVisu.materialListView.selectedMaterial.getId()
     SCVisu.current_calcul.trigger 'update_pieces', SCVisu.pieceListView.collection.models
     
   # Assign the pieceModel to the selected Material.
@@ -49,7 +49,7 @@ SCModels.PieceListView = Backbone.View.extend
     
   # Assign the selected material to the currently selected piece.
   assignMaterialToSelectedPiece: (material) ->
-    @selectedPieceView.model.set material_id: material.get('id')
+    @selectedPieceView.model.set material_id: material.getId()
     SCVisu.current_calcul.trigger 'update_pieces', SCVisu.pieceListView.collection.models
     @render()
     @highlightPieceView @selectedPieceView
@@ -65,7 +65,7 @@ SCModels.PieceListView = Backbone.View.extend
   # If it is the case, then it removes the association
   materialHasBeenRemoved: (material) ->
     _.each @collection.models, (piece) ->
-      if piece.get('material_id') == material.get('id')
+      if piece.get('material_id') == material.getId()
         piece.unset 'material_id'
     @render()
 

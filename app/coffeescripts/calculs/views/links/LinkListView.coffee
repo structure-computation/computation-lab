@@ -18,8 +18,12 @@ SCModels.LinkListView = Backbone.View.extend
     $('#links_database').show()
     @editView.hide()
   
+  getNewMaterialId: ->
+    @collection.last().get('id_in_calcul') + 1    
+
   # Add a model to the collection and creates an associated view
   add: (linkModel) ->
+    linkModel.set id_in_calcul: @getNewMaterialId()
     @collection.model.push
     @createLinkView linkModel
     
@@ -38,7 +42,7 @@ SCModels.LinkListView = Backbone.View.extend
   # Highlight the link which have link_id as id and add an "Unassign" button
   highlightLink: (link_id) ->
     _.each @linkViews, (view) ->
-      if view.model.get('id') == link_id
+      if view.model.getId() == link_id
         $(view.el).addClass('selected').removeClass('gray')
         view.showUnassignButton()
 
@@ -57,7 +61,7 @@ SCModels.LinkListView = Backbone.View.extend
  
   # Add link to interface
   assignLinkToSelectedInterface: (linkView) ->
-    SCVisu.interfaceListView.selectedInterfaceView.model.set link_id : linkView.model.get('id')
+    SCVisu.interfaceListView.selectedInterfaceView.model.set link_id : linkView.model.getId()
     SCVisu.interfaceListView.renderAndHighlightCurrentInterface()
     SCVisu.current_calcul.trigger 'update_interfaces', SCVisu.interfaceListView.collection.models
 
