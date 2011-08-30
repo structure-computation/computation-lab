@@ -7,11 +7,8 @@ SCModels.Material = Backbone.Model.extend
     @piece = null
     @company_id = if SCVisu.current_company? then SCVisu.current_company else 0
     @url = "/companies/#{@company_id}/materials/"
-    @url += @get 'id' if !@isNew()
 
-  assignPiece: (piece) ->
-    @piece = piece
-
+  # Get the ID of the material in the JSON
   getId: ->
     @get 'id_in_calcul'
 
