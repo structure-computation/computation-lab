@@ -27,7 +27,7 @@ SCViews.StepView = Backbone.View.extend
               <td class="final_time">
                 <input type='text' value='<%= final_time %>' disabled> 
               </td> 
-              <td class="final_time">
+              <td>
                 <button class='delete'>x</button>
               </td> 
           """
@@ -42,18 +42,17 @@ SCViews.StepView = Backbone.View.extend
     return this
 
   updateName: ->
-    @model.set
-      name          : $(@el).find('.name input').val()
+    @model.set name : $(@el).find('.name input').val()
+      
   updateInitialTime: ->
-    @model.set
-      initial_time  : parseInt($(@el).find('.initial_time input').val(), 10)
+    @model.set initial_time : parseInt($(@el).find('.initial_time input').val(), 10)
+      
   updateTimeStep: ->
-
-    @model.set
-      time_step     : parseInt($(@el).find('.time_step input').val(), 10)
+    @model.set time_step : parseInt($(@el).find('.time_step input').val(), 10)
+      
   updateNbTimeStep: ->
-    @model.set
-      nb_time_steps : parseInt($(@el).find('.nb_time_steps input').val(), 10)
+    @model.set nb_time_steps : parseInt($(@el).find('.nb_time_steps input').val(), 10)
+      
   update: ->
     @updateTimeStep()
     @updateNbTimeStep()
