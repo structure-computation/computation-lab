@@ -18,4 +18,10 @@
                   :name => input_id, 
                   :data => {:type => local_assigns.has_key?(:data_type) ? data_type : ""}}
       - else
-        %input{:type => "text", :id => input_id, :placeholder => (local_assigns.has_key?(:placeholders) ? placeholders[i] : ""), :size => 10, :name => input_id, :data => {:type => local_assigns.has_key?(:data_type) ? data_type : ""}}
+        %input{:type => "text", 
+                  :id => input_id, 
+                  :class => (local_assigns.has_key?(:classes) ? classes[i] : ""), 
+                  :placeholder =>  (local_assigns.has_key?(:placeholders) ? placeholders[i] : ""), 
+                  :size => 10, 
+                  :name => input_id, 
+                  :data => {:type => local_assigns.has_key?(:data_type) ? data_type : ""}}

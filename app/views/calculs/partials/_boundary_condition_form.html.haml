@@ -1,4 +1,15 @@
-#boundary_condition
+#boundary_condition_form 
+  %p
+    Type :
+    %select.boundary_condition_type
+      %option                             -
+      %optgroup{:label => "Condition Limites en effort"}
+        %option{:value => "effort"}       Densité d'effort
+      %optgroup{:label => "Conditions limites en déplacement"}
+        %option{:value => "imposed"}      Déplacement imposé
+        %option{:value => "normal"}       Déplacement normal
+        %option{:value => "symetry"}      Symétrie
+
   %table.grey
     %tbody
       = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Nom",         
