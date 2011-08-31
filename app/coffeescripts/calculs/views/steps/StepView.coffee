@@ -2,10 +2,12 @@
 SCViews.StepView = Backbone.View.extend
   ## @params: Option
   ##    model:          Model of the Step directly bind to the StepView
-  ##    parentView: ListView object. Useful to get its element and be able to update all models when a step is removed
+  ##    parentElement: ListView object. Useful to get its element and be able to update all models when a step is removed
   initialize:  (options)->
-    @parentView = options.parentView
+    @parentElement = options.parentElement
     @render()
+    $(@parentElement.el).find('tbody').append(@el)
+
   tagName   : "tr"
 
   render : ->
@@ -31,7 +33,6 @@ SCViews.StepView = Backbone.View.extend
           """
 
     $(@el).html(template)
-    $("#steps").find('tbody').append(@el)
     return this
 
   updateName: ->

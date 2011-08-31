@@ -2,11 +2,13 @@
 SCViews.StepListView = Backbone.View.extend
 
   el: "#steps"
-  # Have to initialize the StepListView with {collection: StepCollection}
-  initialize: (params) ->
-    @clearView()
+
+  # Init the list with the new collection.
+  # The init method is here to prevent having multiple reference of a step list view
+  init: (collection) ->
     @stepViews = []
-    
+    @clearView()
+    @collection = collection
     time_scheme = SCVisu.current_calcul.get('time_steps').time_scheme
     
     # Select the list item according to the JSON
@@ -18,7 +20,7 @@ SCViews.StepListView = Backbone.View.extend
       @collection.add step
 
     for step in @collection.models
-      @stepViews.push new SCViews.StepView model: step, parentView: this
+      @stepViews.push new SCViews.StepView model: step, parentElement: this
 
     if @collection.size() == 1 
       @disableAddButton() # Because the first select value is 'statique'
@@ -33,7 +35,7 @@ SCViews.StepListView = Backbone.View.extend
       time_step     : 1
       nb_time_steps : 1
     @collection.add step
-    @stepViews.push new SCViews.StepView model: step, parentView: this
+    @stepViews.push new SCViews.StepView model: step, parentElement: this
 
   render : ->
     if $(@el).find('select#step_type').val() == "statique"
