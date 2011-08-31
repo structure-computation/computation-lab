@@ -22,6 +22,7 @@ SCViews.BoundaryConditionListView = Backbone.View.extend
 
   show: ->
     $(@el).show()
+    
   add_condition: ->
     $("#new_edge_form").hide()
     @show()
@@ -47,6 +48,7 @@ SCViews.BoundaryConditionListView = Backbone.View.extend
     $(@el).html('')
     
   render : ->
+    SCVisu.current_calcul.set boundary_condition: @collection
     _.each @boundaryConditionViews, (boundaryCondition) ->
       boundaryCondition.render()
     $(@el).find('button.add').remove()
