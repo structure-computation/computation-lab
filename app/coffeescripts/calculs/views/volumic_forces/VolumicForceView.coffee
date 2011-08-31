@@ -57,5 +57,5 @@ SCViews.VolumicForceView = Backbone.View.extend
     dxValue      = $(@el).find('.dx    input').val()
     dyValue      = $(@el).find('.dy    input').val()
     dzValue      = $(@el).find('.dz    input').val()
-    @model.set {name: nameValue, gamma: gammaValue, dx: dxValue, dy: dyValue, dz: dzValue }
+    @model.set {name: nameValue, gamma: gammaValue, dx: dxValue, dy: dyValue, dz: dzValue } 
 
