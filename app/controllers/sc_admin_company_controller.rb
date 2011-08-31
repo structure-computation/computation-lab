@@ -6,7 +6,7 @@ class ScAdminCompanyController < ApplicationController
   
   def index 
     @page = 'SCadmin'
-    @companys = Company.all
+    @companys = Workspace.all
     
     respond_to do |format|
       format.html {render :layout => true }
@@ -15,7 +15,7 @@ class ScAdminCompanyController < ApplicationController
   end
   
   def create
-    @new_company = Company.create(params[:company])
+    @new_company = Workspace.create(params[:workspace])
     @new_company.init_account
     render :json => { :result => 'success' }
   end

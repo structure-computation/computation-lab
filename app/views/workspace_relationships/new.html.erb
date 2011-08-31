@@ -1,5 +1,9 @@
-<h1>New workspace_relationship</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Back', workspace_relationships_path %>
+= semantic_form_for @workspace do |f|
+  = render :partial => "globale", :object => @workspaces
+  = f.inputs do
+    = f.input :name
+    = f.input :mail 
+    = f.input :phone
+    
+  = f.buttons do
+    = f.commit_button

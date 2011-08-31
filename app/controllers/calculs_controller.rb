@@ -35,9 +35,9 @@ class CalculsController < ApplicationController
   end
   
   def materiaux
-    @current_company = current_company_member.company
-    all_materials = Material.find(:all, :conditions => {:reference => 1, :company_id => -1})
-    company_materials = @current_company.materials.find(:all)
+    @current_company = current_company_member.workspace
+    all_materials = Material.find(:all, :conditions => {:reference => 1, :workspace_id => -1})
+    company_materials = @current_workspace.materials.find(:all)
     @materials = all_materials.concat( company_materials )
     respond_to do |format|
       format.js   {render :json => @materials.to_json}

@@ -2,7 +2,7 @@ class MaterialsController < InheritedResources::Base
   #session :cookie_only => false, :only => :upload
   before_filter :authenticate_user!
   before_filter :set_page_name
-  belongs_to    :company
+  belongs_to    :workspace
   respond_to    :json
   layout 'company'
 
@@ -11,11 +11,11 @@ class MaterialsController < InheritedResources::Base
   end
 
   def index 
-    @company = current_company_member.company
+    @company = current_company_member.workspace
     if params[:type] == "standard"
       @materials = Material.standard
     else
-        @materials = Material.find_all_by_company_id(@company.id)
+        @materials = Material.find_all_by_workspace_id(@workspace.id)
     end
     index!
   end
@@ -26,9 +26,9 @@ class MaterialsController < InheritedResources::Base
   
   def edit
     @material = Material.find(params[:id])
-    if @material.company_id == -1
+    if @material.workspace_id == -1
       flash[:notice] = "Vous n'avez pas le droit d'éditer cette pièce !"
-      redirect_to company_materials_path
+      redirect_to workspace_materials_path
     else
       edit!
     end
@@ -37,14 +37,14 @@ class MaterialsController < InheritedResources::Base
   # Essayer de faire une ressources accessibles par /material
   def show
     @material = Material.find(params[:id])
-    @company = Company.find(params[:company_id])
-    if @material.company_id == -1
+    @company = Workspace.find(params[:workspace_id])
+    if @material.workspace_id == -1
       render :action => "show"
-    elsif @material.company_id == current_company_member.company.id
+    elsif @material.workspace_id == current_company_member.workspace.id
       render :action => "show"
     else
       flash[:notice] = "Vous n'avez pas accès à cette pièce !"
-      redirect_to company_materials_path
+      redirect_to workspace_materials_path
     end
   end
 

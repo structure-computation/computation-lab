@@ -3,7 +3,7 @@ class LinksController < InheritedResources::Base
   #session :cookie_only => false, :only => :upload
   before_filter :authenticate_user!
   before_filter :set_page_name
-  belongs_to    :company
+  belongs_to    :workspace
   layout 'company'
   
   def set_page_name
@@ -11,24 +11,24 @@ class LinksController < InheritedResources::Base
   end
   
   def index 
-    @company  = current_company_member.company
+    @workspace  = current_company_member.workspace
     if params[:type] == "standard"
       @links = Link.standard
     else
-      @links = Link.find_all_by_company_id(@company.id)
+      @links = Link.find_all_by_workspace_id(@workspace.id)
     end
     index!
   end
   
   def create
-    create! { company_links_path }
+    create! { workspace_links_path }
   end
 
   def edit
     @link = Link.find(params[:id])
-    if @link.company_id == -1
+    if @link.workspace_id == -1
       flash[:notice] = "Vous n'avez pas le droit d'éditer cette liaison !"
-      redirect_to company_materials_path
+      redirect_to workspace_materials_path
     else
       edit!
     end
@@ -36,14 +36,14 @@ class LinksController < InheritedResources::Base
 
   def show
     @link = Link.find(params[:id])
-    @company = Company.find(params[:company_id])
-    if @link.company_id == -1
+    @workspace = Workspace.find(params[:workspace_id])
+    if @link.workspace_id == -1
       render :action => "show"
-    elsif @link.company_id == current_company_member.company.id
+    elsif @link.workspace_id == current_workspace_member.workspace.id
       render :action => "show"
     else
       flash[:notice] = "Vous n'avez pas accès à cette liaison !"
-      redirect_to company_links_path
+      redirect_to workspace_links_path
     end
   end
 
@@ -61,7 +61,7 @@ class LinksController < InheritedResources::Base
     end
     if params[:next] and (@link.comp_complexe.empty? or @link.comp_complexe.empty?)
       flash[:notice] = "Vous avez mal rempli le formulaire."
-      redirect_to new_company_link_path
+      redirect_to new_workspace_link_path
     else
       new!
     end

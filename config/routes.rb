@@ -1,5 +1,7 @@
 SCInterface::Application.routes.draw do
 
+  resources :workspace_relationships
+
   resources :customers
 
   devise_for  :users,   :controllers => { :sessions => "users/sessions", :registrations => "users/registrations" }
