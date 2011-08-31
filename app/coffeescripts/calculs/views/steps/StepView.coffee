@@ -11,28 +11,34 @@ SCViews.StepView = Backbone.View.extend
   tagName   : "tr"
 
   render : ->
-    template = """
+    template = _.template """
               <td class="name">
-                <input type='text' value='#{@model.get("name")}' disabled> 
+                <input type='text' value='<%= name %>' disabled> 
               </td> 
               <td class="initial_time">
-                <input type='text' value='#{@model.get("initial_time")}' disabled> 
+                <input type='text' value='<%= initial_time %>' disabled> 
               </td> 
               <td class="time_step"> 
-                <input type='number' value='#{@model.get("time_step")}'> 
+                <input type='number' value='<%= time_step %>'> 
               </td> 
               <td class="nb_time_steps">
-                <input type='number' value='#{@model.get("nb_time_steps")}'> 
+                <input type='number' value='<%= nb_time_steps %>'> 
               </td> 
               <td class="final_time">
-                <input type='text' value='#{@model.get("final_time")}' disabled> 
+                <input type='text' value='<%= final_time %>' disabled> 
               </td> 
               <td class="final_time">
-                <button class='delete'>X</button>
+                <button class='delete'>x</button>
               </td> 
           """
 
-    $(@el).html(template)
+    $(@el).html template
+      name          : @model.get('name')
+      initial_time  : @model.get('initial_time')
+      time_step     : @model.get('time_step')
+      nb_time_steps : @model.get('nb_time_steps')
+      final_time    : @model.get('final_time')      
+      
     return this
 
   updateName: ->
