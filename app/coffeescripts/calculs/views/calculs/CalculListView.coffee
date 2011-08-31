@@ -43,5 +43,5 @@ SCViews.CalculListView = Backbone.View.extend
     for c in @calculViews
       c.render()
     $(@el).append("<button class=\"load_calcul\">Charger le brouillon</button>")
-    $(@el).append("<button class=\"save_calcul\">Save le brouillon</button>")
+    $(@el).append("<button class=\"save_calcul\">Sauvegarder le brouillon</button>")
     return this
