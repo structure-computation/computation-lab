@@ -12,9 +12,23 @@ SCViews.BoundaryConditionListView = Backbone.View.extend
     
     for boundaryCondition in @collection.models
       @boundaryConditionViews.push new SCViews.BoundaryConditionView model: boundaryCondition, parentElement: this
+    
     @render()
+    @collection.bind 'change', @render, this
+    @collection.bind 'add'   , @render, this
 
+  events:
+    "click .add" : "add_condition"
 
+  show: ->
+    $(@el).show()
+  add_condition: ->
+    $("#new_edge_form").hide()
+    @show()
+    boundaryCondition           = new SCModels.BoundaryCondition
+    @boundaryConditionViews.push  new SCViews.BoundaryConditionView model: boundaryCondition, parentElement: this
+    @collection.add               boundaryCondition
+    @editBoundaryConditionView.setModel boundaryCondition
 
   # setNewSelectedModel is executed when a child view indicate it has been selected.
   # It set the current selected model to "non selected" (which trigger an event that redraw its line).
@@ -22,7 +36,7 @@ SCViews.BoundaryConditionListView = Backbone.View.extend
     @selectedBoundaryCondition.model.unset "selected" if @selectedBoundaryCondition
     @selectedBoundaryCondition = boundaryConditionView
     @editBoundaryConditionView.setModel boundaryConditionView.model
-
+    $("#new_edge_form").hide()
 
   # Clears all elements previously loaded in the DOM. 
   # Indeed, the 'ul#pieces' element already exists in the DOM and every time we create a PiecesListView, 
@@ -35,4 +49,6 @@ SCViews.BoundaryConditionListView = Backbone.View.extend
   render : ->
     _.each @boundaryConditionViews, (boundaryCondition) ->
       boundaryCondition.render()
+    $(@el).find('button.add').remove()
+    $(@el).append "<button class='add'>Ajouter une condition limite</button>"
     return this

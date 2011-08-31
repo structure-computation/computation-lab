@@ -1,13 +1,12 @@
 #surface_geometry
   %p
     Choisissez la géométrie 
-  %select
-    %option                            Choisir une géométrie
-    %option{:value => "plan"}          Sur un Plan
-    %option{:value => "disc"}          Sur un Disque
-    %option{:value => "cylinder"}      Sur un Cylindre
-    %option{:value => "sphere"}        Sur un Sphère
-    %option{:value => "parameterized"} Surface Paramétrée
+  %p
+    %button.yellow_button.geometry{:value => "surface_plan"}          Plan
+    %button.yellow_button.geometry{:value => "surface_disc"}          Disque
+    %button.yellow_button.geometry{:value => "surface_cylinder"}      Cylindre
+    %button.yellow_button.geometry{:value => "surface_sphere"}        Sphère
+    %button.yellow_button.geometry{:value => "surface_parameterized"} Surface Paramétrée
 
 #edge_surface_plan
   = render "calculs/partials/edge_basic_information"

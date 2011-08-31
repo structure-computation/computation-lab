@@ -1,0 +1,15 @@
+#new_edge_form
+  #edge_criteria
+    %p
+      Choisissez un critière pour définir le nouveau bord
+    %p
+      %button.yellow_button.criteria{:value => "volume"}  Dans un volume
+      %button.yellow_button.criteria{:value => "surface"} Sur une surface
+    
+  / Si volume a été selectionné
+  = render "calculs/partials/edge_volume_form"
+
+  / Si surface a été selectionné
+  = render "calculs/partials/edge_surface_form"
+  
+  %button.save Sauvegarder

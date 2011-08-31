@@ -15,6 +15,8 @@ SCViews.EdgeListView = Backbone.View.extend
     "click button.new_edge"  : "showNewEdgeForm"
 
   showNewEdgeForm: ->
+    $('#boundary_condition_form').hide()
+    @newEdgeViewForm.show()
     @newEdgeViewForm.showAndInitialize()
     
 

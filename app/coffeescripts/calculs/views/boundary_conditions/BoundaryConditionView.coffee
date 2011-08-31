@@ -5,12 +5,13 @@ SCViews.BoundaryConditionView = Backbone.View.extend
 
   tagName   : "li"
   className : "boundary_condition_view"
-  events  : 
+
+  events: 
     "click"   : "select"
   
   select: ->
     @parentElement.setNewSelectedModel(this)
-    @model.set 'selected', true
+    @model.set selected: true
 
   render: ->
     $(@el).html(@model.get('name'))

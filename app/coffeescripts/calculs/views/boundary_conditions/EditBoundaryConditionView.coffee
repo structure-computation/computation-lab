@@ -1,20 +1,35 @@
 SCViews.EditBoundaryConditionView = Backbone.View.extend
-  el: '#boundary_condition'
+  el: '#boundary_condition_form'
   
   initialize: ->
     @hide()
     @model = null
     
+  events:
+    "change" : "updateModelAttributes"
+
+  updateModelAttributes: ->
+    @model.set
+      condition_type      : $(@el).find('select.boundary_condition_type') .val()
+      name                : $(@el).find('input.name')                     .val()
+      description         : $(@el).find('textarea.description')           .val()
+      spatial_function_x  : $(@el).find('input.x')                        .val()
+      spatial_function_y  : $(@el).find('input.y')                        .val()
+      spatial_function_z  : $(@el).find('input.y')                        .val()
+      temporal_function_t : $(@el).find('input.ft')                       .val()
+
+
+
   setModel: (model) ->
     @show()
     @model = model
-    console.log @model
-    $(@el).find('.name input')        .val(@model.get('name'))
-    $(@el).find('.description input') .val(@model.get('description'))
-    $(@el).find('.x input')           .val(@model.get('time_step'))
-    $(@el).find('.y input')           .val(@model.get('nb_time_steps'))
-    $(@el).find('.y input')           .val(@model.get('final_time'))
-    $(@el).find('.ft input')          .val(@model.get('final_time'))
+    $(@el).find('select.boundary_condition_type')       .val(@model.get('condition_type'))
+    $(@el).find('input.name')           .val(@model.get('name'))
+    $(@el).find('textarea.description') .val(@model.get('description'))
+    $(@el).find('input.x')              .val(@model.get('spatial_function_x'))
+    $(@el).find('input.y')              .val(@model.get('spatial_function_y'))
+    $(@el).find('input.y')              .val(@model.get('spatial_function_z'))
+    $(@el).find('input.ft')             .val(@model.get('temporal_function_t'))
           
 
   hide: ->

@@ -1,11 +1,10 @@
 #volume_geometry
   %p
     Choisissez la géométrie 
-  %select
-    %option                       Choisir une géométrie
-    %option{:value => "box"}      Dans une Boite
-    %option{:value => "cylinder"} Dans un Cylindre
-    %option{:value => "sphere"}   Dans une Sphère
+  %p
+    %button.yellow_button.geometry{:value => "volume_box"}      Boite
+    %button.yellow_button.geometry{:value => "volume_cylinder"} Cylindre
+    %button.yellow_button.geometry{:value => "volume_sphere"}   Sphère
 
 #edge_volume_box
   = render "calculs/partials/edge_basic_information"
