@@ -4,13 +4,18 @@ SCViews.EdgeView = Backbone.View.extend
   className : 'edge_view'
 
   initialize: (options) ->
-    console.log @model
     @first = true
     @parentElement = options.parentElement
 
+  events:
+    "click" : "select"
+
+  select: ->
+    @parentElement.setNewSelectedModel(this)
+    @model.set selected: true
+    
   render: ->
     $(@el).html @model.get 'name'
-    console.log @el
     if @first
       $(@parentElement.el).find('ul').append @el
       @first = false

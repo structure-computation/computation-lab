@@ -51,12 +51,12 @@ $ ->
     SCVisu.volumicForcesListView  = new SCViews.VolumicForceListView    collection : volumicForcesCollection 
 
     # Initialisation of boundaryConditionListView
-    boundaryConditionCollection  = new SCModels.BoundaryConditionCollection  SCVisu.current_calcul.get('boundary_condition')
+    boundaryConditionCollection   = new SCModels.BoundaryConditionCollection  SCVisu.current_calcul.get('boundary_condition')
     SCVisu.boundaryConditionListView = new SCViews.BoundaryConditionListView collection : boundaryConditionCollection 
     #SCVisu.volumicForcesListView = new SCViews.VolumicForceListView    collection : volumicForcesCollection 
 
     # Initialization of the EdgeListView
-    edgeCollection = new SCModels.EdgeCollection SCVisu.current_calcul.get('edges')
+    edgeCollection                = new SCModels.EdgeCollection SCVisu.current_calcul.get('edges')
     SCVisu.edgeListView           = new SCViews.EdgeListView collection: edgeCollection
 
     option = new SCModels.Option SCVisu.current_calcul.get('options')
