@@ -1,0 +1,26 @@
+-#.ligne_resume_table
+%p Coordonées
+%p liste des gestionnaires
+%p Profil de votre société
+%p N gestionnaires
+%ul
+  %li
+    %a{ :onclick => "affich_gestionnaire()", :style => "cursor: pointer;" }
+      Gestionaires
+  %li
+    %a{ :onclick => "affich_detail_company()", :style => "cursor: pointer;" }
+      Détail
+%table.grey
+  %thead
+    %tr
+      %th Date d'inscription
+      %th Nom                   
+      %th Email
+  %tbody
+    - company.users.managers.each do |manager|
+      %tr
+        %td= manager.created_at.to_date
+        %td= manager.lastname + " " + manager.firstname
+        %td= manager.email
+        
+= render 'form'

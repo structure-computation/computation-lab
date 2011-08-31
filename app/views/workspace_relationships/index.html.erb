@@ -1,0 +1,22 @@
+<h1>Listing workspace_relationships</h1>
+ 
+<h2>Your Related Workspace</h2>  
+<ul>  
+  <% for workspace_relationships in @workspace.workspace_relationships %>  
+  <li>  
+    <%= h workspace_relationships.workspace.name %>  
+    (<%= link_to "remove", workspace_relationships, :method => :delete %>)  
+  </li>  
+  <% end %>    
+</ul>      
+
+<p>
+  <%= link_to "Add Friend", workshop_relationships_path(:related_workspace_id => user), :method => :post %>  
+</p>
+
+<h2> Les espaces de travail qui vous ont ajouté</h2>  
+<ul>  
+  <% for workspace in @workspace.inverse_workshop_relationships %>  
+  <li><%= h workspace.name %></li>  
+  <% end %>  
+</ul>  

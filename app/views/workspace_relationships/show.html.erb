@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Workspace1:</b>
+  <%= @workspace_relationship.workspace1_id %>
+</p>
+
+<p>
+  <b>Workspace2:</b>
+  <%= @workspace_relationship.workspace2_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_workspace_relationship_path(@workspace_relationship) %> |
+<%= link_to 'Back', workspace_relationships_path %>
