@@ -18,6 +18,7 @@ SCViews.VolumicForceListView = Backbone.View.extend
     # Bind to collection event
     @collection.bind('add'   , this.render, this)
     @collection.bind('remove', this.render, this)
+    @collection.bind('change', @saveCollection, this)
     
     @render()
         
@@ -44,3 +45,5 @@ SCViews.VolumicForceListView = Backbone.View.extend
     newVolForce = new SCModels.VolumicForce
     @collection.add newVolForce
     
+  saveCollection: ->
+    SCVisu.current_calcul.set volumic_forces: @collection

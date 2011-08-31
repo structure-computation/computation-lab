@@ -35,7 +35,7 @@ $ ->
     # Initialization of the StepListView    
     steps                         = new SCModels.StepCollection SCVisu.current_calcul.get('time_steps').collection
     SCVisu.stepListView           = new SCViews.StepListView collection: steps
-  
+    
     # Initialization of the InterfaceListView
     interfaceCollection           = new SCModels.Interfaces SCVisu.current_calcul.get('interfaces')
     SCVisu.interfaceListView      = new SCViews.InterfaceListView collection : interfaceCollection

@@ -6,9 +6,13 @@ SCViews.StepListView = Backbone.View.extend
   initialize: (params) ->
     @clearView()
     @stepViews = []
+    
     time_scheme = SCVisu.current_calcul.get('time_steps').time_scheme
+    
+    # Select the list item according to the JSON
     @setSelectList time_scheme
     @collection.meta 'time_scheme', time_scheme
+    
     if @collection.size() == 0
       step = new SCModels.Step()
       @collection.add step
@@ -28,7 +32,6 @@ SCViews.StepListView = Backbone.View.extend
       initial_time  : @collection.last().get 'final_time'
       time_step     : 1
       nb_time_steps : 1
-
     @collection.add step
     @stepViews.push new SCViews.StepView model: step, parentView: this
 
@@ -54,6 +57,7 @@ SCViews.StepListView = Backbone.View.extend
     'click'                   : 'updateFields'
     'click button#add_step'   : 'addStep'
     'change select#step_type' : 'selectChanged'
+
 
   # Delete a step in the list
   deleteStep: (step_deleted) ->
