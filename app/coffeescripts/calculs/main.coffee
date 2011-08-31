@@ -3,6 +3,11 @@
 $ ->
   interfaceCollection             = new SCModels.Interfaces()
   SCViews.interfaceListView       = new SCViews.InterfaceListView collection : interfaceCollection
+  
+  # Initialize the step view before the calcul load to prevent the following error:
+  #   When two calculs was loaded and users clicked on 'add step', two steps were added...
+  #   In fact, two references of StepListViews were created but I couldn't tell why.
+  SCVisu.stepListView             = new SCViews.StepListView()
 
   # Initialize all variables and views with data retrieved from the JSON sent by the "Visualisateur"
   # /!\ Variable's name must not be changed! They are used in multiple place in the code. /!\
@@ -34,7 +39,8 @@ $ ->
 
     # Initialization of the StepListView    
     steps                         = new SCModels.StepCollection SCVisu.current_calcul.get('time_steps').collection
-    SCVisu.stepListView           = new SCViews.StepListView collection: steps
+    # Initialize the step list view passing it a step collection
+    SCVisu.stepListView.init(steps)
     
     # Initialization of the InterfaceListView
     interfaceCollection           = new SCModels.Interfaces SCVisu.current_calcul.get('interfaces')

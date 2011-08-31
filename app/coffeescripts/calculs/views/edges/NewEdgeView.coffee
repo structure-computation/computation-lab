@@ -45,9 +45,9 @@ SCViews.NewEdgeView = Backbone.View.extend
     $(event.srcElement).addClass('pressed_button')
 
     switch event.srcElement.value
-      when 'volume_box'           then @showGeometry 'volume', 'box'
-      when 'volume_cylinder'      then @showGeometry 'volume', 'cylinder'
-      when 'volume_sphere'        then @showGeometry 'volume', 'sphere'
+      when 'volume_box'            then @showGeometry 'volume', 'box'
+      when 'volume_cylinder'       then @showGeometry 'volume', 'cylinder'
+      when 'volume_sphere'         then @showGeometry 'volume', 'sphere'
 
       when 'surface_plan'          then @showGeometry 'surface', 'plan'
       when 'surface_disc'          then @showGeometry 'surface', 'disc'
