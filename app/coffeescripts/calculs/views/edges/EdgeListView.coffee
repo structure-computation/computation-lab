@@ -6,11 +6,15 @@ SCViews.EdgeListView = Backbone.View.extend
     @edgeViews = []
     @newEdgeViewForm = new SCViews.NewEdgeView()
     @newEdgeViewForm.hide()
+    for edge in @collection.models
+      @addEdgeModel edge
+    @render()
 
   addEdgeModel: (edgeModel) ->
     @newEdgeViewForm.hide()
     @edgeViews.push new SCViews.EdgeView model: edgeModel, parentElement: @
     @render()
+    
   events: 
     "click button.new_edge"  : "showNewEdgeForm"
 

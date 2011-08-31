@@ -16,8 +16,8 @@ SCViews.VolumicForceListView = Backbone.View.extend
     @selectedVolumicForce = null
     
     # Bind to collection event
-    @collection.bind('add'   , this.render, this)
-    @collection.bind('remove', this.render, this)
+    @collection.bind('add'   , @render, this)
+    @collection.bind('remove', @render, this)
     @collection.bind('change', @saveCollection, this)
     
     @render()

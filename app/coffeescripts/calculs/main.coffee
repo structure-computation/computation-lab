@@ -56,7 +56,8 @@ $ ->
     #SCVisu.volumicForcesListView = new SCViews.VolumicForceListView    collection : volumicForcesCollection 
 
     # Initialization of the EdgeListView
-    SCVisu.edgeListView           = new SCViews.EdgeListView()
+    edgeCollection = new SCModels.EdgeCollection SCVisu.current_calcul.get('edges')
+    SCVisu.edgeListView           = new SCViews.EdgeListView collection: edgeCollection
 
     option = new SCModels.Option SCVisu.current_calcul.get('options')
     # Initialization of the OptionView

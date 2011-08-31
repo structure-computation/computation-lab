@@ -13,6 +13,7 @@ SCModels.Calcul = Backbone.Model.extend
     @set links                 : []
     @set interfaces            : []
     @set volumic_forces        : []
+    @set edges        : []
     @set time_steps            :
       time_scheme : "static"
       collection  : []
@@ -33,6 +34,7 @@ SCModels.Calcul = Backbone.Model.extend
     @set boundary_condition : params.boundary_condition
     @set options            : params.options
     @set volumic_forces     : params.volumic_forces
+    @set edges              : params.edges
     
   setTimeStepsCollection: (time_steps) ->
     @get('time_steps').collection = time_steps
