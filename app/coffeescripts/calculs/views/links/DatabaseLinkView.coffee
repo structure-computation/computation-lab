@@ -6,7 +6,7 @@ SCViews.DatabaseLinkView = Backbone.View.extend
     @linkListView  = params.linkListView
 
   events:
-    "click button.add"     : "addToCalculus"
+    "click button.add" : "addToCalculus"
   
   addToCalculus: ->
     @linkListView.add @model

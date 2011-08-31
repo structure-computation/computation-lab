@@ -1,4 +1,4 @@
-## BaoundaryConditionListView
+## BoundaryConditionListView
 SCViews.BoundaryConditionListView = Backbone.View.extend
   el: 'ul#boundary_conditions'
   
@@ -39,10 +39,10 @@ SCViews.BoundaryConditionListView = Backbone.View.extend
     $("#new_edge_form").hide()
 
   # Clears all elements previously loaded in the DOM. 
-  # Indeed, the 'ul#pieces' element already exists in the DOM and every time we create a PiecesListView, 
+  # Indeed, the 'ul#boundary_conditions' element already exists in the DOM and every time we create a BoundaryConditionListView, 
   # we render the view and we add some element inside. And even if we have many different view, 
   # each time we render we add elements to the same view. 
-  # So we have to clear the content each time we create a new PiecesListView 
+  # So we have to clear the content each time we create a new BoundaryConditionListView 
   clearView: ->
     $(@el).html('')
     

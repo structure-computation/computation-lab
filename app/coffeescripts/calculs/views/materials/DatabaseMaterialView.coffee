@@ -6,7 +6,7 @@ SCViews.DatabaseMaterialView = Backbone.View.extend
     @materialListView  = params.materialListView
 
   events:
-    "click button.add"     : "addToCalculus"
+    "click button.add" : "addToCalculus"
   
   addToCalculus: ->
     newModel         = @model.clone()

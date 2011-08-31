@@ -7,9 +7,9 @@ SCViews.EditMaterialView = Backbone.View.extend
     @hide()
 
   events: 
-    'change'                        : 'updateModelAttributes'
-    'click button.close_edit_view'  : 'hide'
-    'click button.save_in_workspace': 'saveInWorkspace'
+    'change'                         : 'updateModelAttributes'
+    'click button.close_edit_view'   : 'hide'
+    'click button.save_in_workspace' : 'saveInWorkspace'
 
   # Save the model in the Database in the urser's workspace
   saveInWorkspace: ->

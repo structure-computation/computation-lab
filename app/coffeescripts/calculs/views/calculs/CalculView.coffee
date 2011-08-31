@@ -6,11 +6,11 @@ SCViews.CalculView = Backbone.View.extend
   className : "calcul_view" 
   
   events:
-    "click" : 'select_calcul'
+    "click" : 'selectCalcul'
   
-  # Appelle la fonction de selection de l'element parent, donc de la vue correspondant à la liste 
-  select_calcul: ->
-    @parentElement.select_calcul this
+  # Calls the parent's method to select a calcul 
+  selectCalcul: ->
+    @parentElement.selectCalcul this
     
   render: ->
     $(@el).html(@model.get('name'))
