@@ -17,8 +17,6 @@
   = f.hidden_field :mtype
 
   = render "materials/details/material_basic_information"
-  #material_information
-    = render :partial => "materials/details/material_main_information", :locals => { :material => @material, :disabled => false }
 
   #material_generic_information
     = render :partial => "materials/details/material_generic_info", :locals => { :material => @material, :disabled => false }
