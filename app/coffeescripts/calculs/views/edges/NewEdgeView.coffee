@@ -19,9 +19,9 @@ SCViews.NewEdgeView = Backbone.View.extend
   show: ->
     $(@el).show()
   events: 
-    "click  button.criteria"          : "showSelectGeometry"
-    "click  button.geometry"          : "showGoodGeometry"
-    "click  button.save"              : "save"
+    "click  button.criteria" : "showSelectGeometry"
+    "click  button.geometry" : "showGoodGeometry"
+    "click  button.save"     : "save"
     
     
   # Show the good select box between volume and surface depending of the choice of the criteria
@@ -31,10 +31,10 @@ SCViews.NewEdgeView = Backbone.View.extend
     $(event.srcElement).addClass('pressed_button')
     switch event.srcElement.value
       when 'surface'
-        $(@el).find('#volume_geometry').hide()
+        $(@el).find('#volume_geometry') .hide()
         $(@el).find('#surface_geometry').show()
       when 'volume'
-        $(@el).find('#volume_geometry').show()
+        $(@el).find('#volume_geometry') .show()
         $(@el).find('#surface_geometry').hide()
 
 

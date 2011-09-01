@@ -8,9 +8,9 @@ SCViews.EditLinkView = Backbone.View.extend
     $(@el).hide()
 
   events: 
-    'change'              : 'updateModelAttributes'
-    'click button.close'  : 'hide'
-    'click button.save_in_workspace': 'saveInWorkspace'
+    'change'                         : 'updateModelAttributes'
+    'click button.close'             : 'hide'
+    'click button.save_in_workspace' : 'saveInWorkspace'
 
   # Save the model in the Database in the urser's workspace
   saveInWorkspace: ->
@@ -29,9 +29,9 @@ SCViews.EditLinkView = Backbone.View.extend
   # Update model from all input values
   updateModelAttributes: ->
     for input in $(@el).find('input, textarea')
-      key = $(input).attr('id').split('link_')[1]
-      value = $(input).val()
-      h = new Object()
+      key    = $(input).attr('id').split('link_')[1]
+      value  = $(input).val()
+      h      = new Object()
       h[key] = value
       @model.set h
   
