@@ -2,7 +2,6 @@
 - show_all = false if show_all.nil?
 
 %h2 Propriétés physiques
-
 %h3 Masse volumique
 %table.grey
   %tbody
@@ -10,8 +9,10 @@
       %th Masse volumique (&rho;)
       %td= custom_text_field(:material, :rho, "&rho;￼", disabled)
 
-%h2 Propriétés mécaniques
 
+%h2 Propriétés mécanique
+
+%h2 Propriétés thermiques
 %h3 Dilatation thermique
         
 %table.grey
@@ -29,5 +30,3 @@
       - if @material.mtype == "orthotrope" or show_all
         %td= custom_text_field(:material, :alpha_1, "&alpha;￼2", disabled)
         %td= custom_text_field(:material, :alpha_1, "&alpha;3", disabled) 
-
-%h2 Propriétés thermiques

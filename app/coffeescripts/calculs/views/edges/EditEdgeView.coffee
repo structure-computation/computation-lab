@@ -26,7 +26,8 @@ SCViews.EditEdgeView = Backbone.View.extend
     "click  button.criteria"          : "showSelectGeometry"
     "click  button.geometry"          : "showCorrectGeometry"
     "click  button.save"              : "save"
-    
+    "change"                          : "updateSelectedModelAttributes"
+      
   setModel: (edge) ->
     @currentEdge = edge
     @showCriteriaPartAndDisableButtons()
@@ -127,19 +128,26 @@ SCViews.EditEdgeView = Backbone.View.extend
   emptyInputs: ->
     $(@el).find('input, textarea').val('')
     
-  # Retrieve all attributes and create a new edge
+  # Create a new edge
   save: ->
     if @attributesAreValid()
-      edgeAttributes = new Object()
-      edgeAttributes['name']                              = $(@el).find("#edge_name").val()
-      edgeAttributes['description']                       = $(@el).find("#edge_description").val()
-      edgeAttributes[@currentCriteria]                    = new Object()
-      edgeAttributes[@currentCriteria][@currentGeometry]  = new Object()
-      _.each $(@el).find("#edge_#{@currentCriteria}_#{@currentGeometry} input"), (input) =>
-        edgeAttributes[@currentCriteria][@currentGeometry][$(input).attr('name')] = $(input).val() if !_.isEmpty $(input).val()
+      SCVisu.edgeListView.addEdgeModel new SCModels.Edge(@retrieveModelAttributesFromInput())
 
-      SCVisu.edgeListView.addEdgeModel new SCModels.Edge(edgeAttributes)
+  updateSelectedModelAttributes: ->
+    @currentEdge.set @retrieveModelAttributesFromInput()
 
+  # Regarding the currentCriteria and the currentGeometry, retrieve and returns 
+  # all good data from inputs
+  retrieveModelAttributesFromInput: ->
+    edgeAttributes = new Object()
+    edgeAttributes['name']                              = $(@el).find("#edge_name").val()
+    edgeAttributes['description']                       = $(@el).find("#edge_description").val()
+    edgeAttributes[@currentCriteria]                    = new Object()
+    edgeAttributes[@currentCriteria][@currentGeometry]  = new Object()
+
+    _.each $(@el).find("#edge_#{@currentCriteria}_#{@currentGeometry} input, #edge_#{@currentCriteria}_#{@currentGeometry} textarea"), (input) =>
+      edgeAttributes[@currentCriteria][@currentGeometry][$(input).attr('name')] = $(input).val() if !_.isEmpty $(input).val()
+    return edgeAttributes
 
   # Check if inputs are correctly filled and with the good data type
   # HTML Inputs have an HTML5 data attribute : data-type which tells if it has to be number or text

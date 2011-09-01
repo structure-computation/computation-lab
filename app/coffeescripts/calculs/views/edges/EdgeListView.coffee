@@ -12,6 +12,7 @@ SCViews.EdgeListView = Backbone.View.extend
     @render()
     @selectedEdgeView = null
     @collection.bind 'add', @render, this
+    @collection.bind 'change', @render, this
 
   # Called from edit view when user wants to create a new edge.
   # Create a view associated to the given model
