@@ -4,6 +4,31 @@
 %h3 Elasticité
 
 - if @material.mtype == "orthotrope" or show_all
+  %h3 Directions principales
+  %table.grey
+    %thead
+      %tr.no_sorter
+        %th
+        %th Selon V1
+        %th Selon V2 
+        %th Selon V3
+    %tbody
+      %tr
+        %th x
+        %td= custom_text_field(:material, :dir_1_x, "x1", disabled)
+        %td= custom_text_field(:material, :dir_2_x, "x2", disabled)
+        %td= custom_text_field(:material, :dir_3_x, "x3", disabled)
+      %tr
+        %th y 
+        %td= custom_text_field(:material, :dir_1_y, "y1", disabled)
+        %td= custom_text_field(:material, :dir_2_y, "y2", disabled)
+        %td= custom_text_field(:material, :dir_3_y, "y3", disabled)
+      %tr
+        %th z
+        %td= custom_text_field(:material, :dir_1_y, "z1", disabled)
+        %td= custom_text_field(:material, :dir_2_y, "z2", disabled)
+        %td= custom_text_field(:material, :dir_3_y, "z3", disabled)
+       
   %table.grey
     %thead
       %tr.no_sorter
