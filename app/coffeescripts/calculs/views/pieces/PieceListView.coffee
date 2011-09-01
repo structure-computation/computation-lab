@@ -49,24 +49,24 @@ SCViews.PieceListView = Backbone.View.extend
   # Assign the pieceModel to the selected Material.
   assignPieceToMaterial: (pieceModel) ->
     pieceModel.set 'material_id' : SCVisu.materialListView.selectedMaterial.getId()
-    SCVisu.current_calcul.trigger 'update_pieces', SCVisu.pieceListView.collection.models
+    SCVisu.current_calcul.set pieces: SCVisu.pieceListView.collection.models
     
   # Assign the pieceModel to the selected Material.
   unassignPieceToMaterial: (pieceModel) ->
     pieceModel.unset 'material_id'
-    SCVisu.current_calcul.trigger 'update_pieces', SCVisu.pieceListView.collection.models
+    SCVisu.current_calcul.set pieces: SCVisu.pieceListView.collection.models
     
   # Assign the selected material to the currently selected piece.
   assignMaterialToSelectedPiece: (material) ->
     @selectedPieceView.model.set material_id: material.getId()
-    SCVisu.current_calcul.trigger 'update_pieces', SCVisu.pieceListView.collection.models
+    SCVisu.current_calcul.set pieces: SCVisu.pieceListView.collection.models
     @render()
     @highlightPieceView @selectedPieceView
     
   # Unassign the selected material from the currently selected piece.
   unassignMaterialToSelectedPiece: ->
     @selectedPieceView.model.unset 'material_id'
-    SCVisu.current_calcul.trigger 'update_pieces', SCVisu.pieceListView.collection.models
+    SCVisu.current_calcul.set pieces: SCVisu.pieceListView.collection.models
     @render()
     @highlightPieceView @selectedPieceView
 
