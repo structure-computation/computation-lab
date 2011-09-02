@@ -13,11 +13,11 @@
 %h3 Comportement
 %p
   Elastique
-  = check_box "material_comp", "el", {:checked => @material.comp.include?("el"), :disabled => true}
+  = check_box_tag "material_comp", "el", @material.comp.include?("el"), :disabled => true
   Plastique
-  = check_box "material_comp", "pl", {:checked => @material.comp.include?("pl"), :disabled => true}
+  = check_box_tag "material_comp", "pl", @material.comp.include?("pl"), :disabled => true
   Endommageable
-  = check_box "material_comp", "en", {:checked => @material.comp.include?("en"), :disabled => true}
+  = check_box_tag "material_comp", "en", @material.comp.include?("en"), :disabled => true
 
 %h2 Propriétés physiques
 %h3 Masse volumique / Densité
