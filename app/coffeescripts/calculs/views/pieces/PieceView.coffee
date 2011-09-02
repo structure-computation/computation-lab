@@ -53,7 +53,7 @@ SCViews.PieceView = Backbone.View.extend
 
   # Render with an action button
   renderWithButton: (className, textButton)->
-    $(@el).html(@model.get('name'))
+    $(@el).html(@model.get('id') + " - " + @model.get('name'))
     $(@el).append("<button class='#{className}'>#{textButton}</button>")
     return this
 
@@ -61,7 +61,7 @@ SCViews.PieceView = Backbone.View.extend
     if @firstRendering
       $(@parentElement.el).append(@el)
       @firstRendering = false
-    $(@el).html(@model.get('name'))
+    $(@el).html(@model.get('id') + " - " + @model.get('name'))
     if @model.isAssigned()
       $(@el).append('<span class="is_assigned">✓</span>')
     else

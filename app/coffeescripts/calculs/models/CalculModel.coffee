@@ -21,7 +21,10 @@ SCModels.Calcul = Backbone.Model.extend
       
     @sc_model_id  = @get 'sc_model_id'
 
-    @url = "/sc_models/#{@sc_model_id}/calculs/" + @get 'id'
+    if _.isUndefined @get('id') 
+      @url = "/sc_models/#{@sc_model_id}/calculs/"
+    else 
+      @url = "/sc_models/#{@sc_model_id}/calculs/" + @get 'id'
 
     
   setElements: (params) ->

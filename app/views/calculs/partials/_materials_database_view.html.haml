@@ -6,10 +6,10 @@
         %th.no_sorter 
         %th Nom
         %th ID
-        %th Référence
-        -#%th Famille
-        -#%th Type
-        -#%th Comportement
+        -#%th Référence
+        %th Famille
+        %th Type
+        %th Comportement
     %tbody
       - @standard_materials.each do |material|
         %tr.standard{:id => "material_#{material.id}"}
@@ -17,10 +17,10 @@
             %button.add Ajouter au calcul
           %td.name=           material.name
           %td.id=             material.id
-          %td.reference=      material.reference            
-          -#%td.family=         material.family
-          -#%td.type=           material.mtype
-          -#%td.comp=           material.comp
+          -#%td.reference=      material.reference            
+          %td.family=         material.family
+          %td.type=           material.mtype
+          %td.comp=           material.comp
         
       - @company_materials.each do |material|
         %tr.company{:id => "material_#{material.id}"}
@@ -28,8 +28,8 @@
             %button.add Ajouter au calcul
           %td.name=           material.name
           %td.id=             material.id
-          %td.reference=      material.reference            
-          -#%td.family=         material.family
-          -#%td.type=           material.mtype
-          -#%td.comp=           material.comp
+          -#%td.reference=      material.reference            
+          %td.family=         material.family
+          %td.type=           material.mtype
+          %td.comp=           material.comp
   %button.close Fermer
