@@ -19,6 +19,9 @@
     #breadcrumb
       = yield :breadcrumb
     #content_calcul.js_tab_content.breadcrumb_tab_content
+      #wizard_buttons
+        = yield :wizard_buttons
+
       #list_calcul
         = yield :top_calcul
         #left_list_calcul
@@ -27,8 +30,6 @@
           = yield :right_list     
       #details_calcul
         = yield :details_calcul
-      #wizard_buttons
-        = yield :wizard_buttons
     #visu_calcul
       = yield :visu   
     = yield :coffee
