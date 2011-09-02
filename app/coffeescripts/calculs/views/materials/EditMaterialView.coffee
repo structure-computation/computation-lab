@@ -39,11 +39,28 @@ SCViews.EditMaterialView = Backbone.View.extend
 
 
   getAndSetMaterialCompAndType: ->
-    # if      @model.get('comp').indexOf('el') != -1
-    # else if @model.get('comp').indexOf('pl') != -1
-    # else if @model.get('comp').indexOf('en') != -1
+    # First, uncheck all radio and checkboxes input and hide useless tabs
+    $(@el).find("input[type=radio], input[type=checkbox]").removeAttr('checked')
+    $(@el).find("> ul li a:not(':first')").hide()
 
+    if !_.isNull(@model.get('comp'))
+      # Checking good checkboxes regarding material behavior
+      if @model.get('comp').indexOf('el') != -1
+        $('#material_comp_el').attr('checked', 'checked')
+        $(@el).find("#tab_elastic").show()
+      if @model.get('comp').indexOf('pl') != -1
+        $('#material_comp_pl').attr('checked', 'checked')
+        $(@el).find("#tab_plastic").show()
+      if @model.get('comp').indexOf('en') != -1
+        $('#material_comp_en').attr('checked', 'checked')
+        $(@el).find("#tab_damage").show()
 
+    if !_.isNull(@model.get('mtype'))
+      # Checking good checkboxes regarding material behavior
+      if @model.get('mtype').indexOf('isotrope') != -1
+        $('#material_mtype_isotrope').attr('checked', 'checked')
+      else if @model.get('mtype').indexOf('orthotrope') != -1
+        $('#material_mtype_orthotrope').attr('checked', 'checked')
   # Reset all fields of the view
   resetFields: ->
     for input in $(@el).find('input, textarea')
