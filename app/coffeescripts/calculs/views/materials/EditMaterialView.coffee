@@ -36,7 +36,14 @@ SCViews.EditMaterialView = Backbone.View.extend
   updateModel: (model) ->
     @model = model
     @render()
-        
+
+
+  getAndSetMaterialCompAndType: ->
+    # if      @model.get('comp').indexOf('el') != -1
+    # else if @model.get('comp').indexOf('pl') != -1
+    # else if @model.get('comp').indexOf('en') != -1
+
+
   # Reset all fields of the view
   resetFields: ->
     for input in $(@el).find('input, textarea')
@@ -49,6 +56,7 @@ SCViews.EditMaterialView = Backbone.View.extend
     if resetFields
       @resetFields()
     else
-      for input in $(@el).find('input, textarea')
+      @getAndSetMaterialCompAndType()
+      for input in $(@el).find('textarea, input:not("input[type=radio], input[type=checkbox]")')
         $(input).val(@model.get($(input).attr('id').split("material_")[1]))
 

@@ -11,8 +11,5 @@
   - if @material.comp.include? "en"
     #tab_4_content
       = render :partial => "materials/details/material_damageable_information", :locals => { :disabled => true }
-  - if @material.comp.include? "vi"
-    #tab_5_content
-      = render :partial => "materials/details/material_viscous_information", :locals => { :disabled => true }
 
 = coffeescript_include_tag "manage_tab"
