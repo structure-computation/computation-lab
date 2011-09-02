@@ -1,17 +1,58 @@
 - disabled = false if disabled.nil?
 - show_all = false if show_all.nil?
 
+%h2 Propriétés mécanique
+%h3 Type
+%p
+  Isotrope
+  = radio_button_tag "material_mtype", "isotrope"  , (!@material.mtype.nil? and @material.mtype.include?("isotrope")), {:disabled => true}
+  Orthotrope
+  = radio_button_tag "material_mtype", "orthotrope", (!@material.mtype.nil? and @material.mtype.include?("orthotrope")), {:disabled => true}
+
+
+%h3 Comportement
+%p
+  Elastique
+  = check_box "material_comp", "el", {:checked => @material.comp.include?("el"), :disabled => true}
+  Plastique
+  = check_box "material_comp", "pl", {:checked => @material.comp.include?("pl"), :disabled => true}
+  Endommageable
+  = check_box "material_comp", "en", {:checked => @material.comp.include?("en"), :disabled => true}
+
 %h2 Propriétés physiques
-%h3 Masse volumique
+%h3 Masse volumique / Densité
 %table.grey
   %tbody
     %tr.no_sorter
-      %th Masse volumique (&rho;)
+      %th Masse volumique / Densité (&rho;)
       %td= custom_text_field(:material, :rho, "&rho;￼", disabled)
 
 
-%h2 Propriétés mécanique
-
+%h3 Directions principales
+%table.grey
+  %thead
+    %tr.no_sorter
+      %th
+      %th Selon V1
+      %th Selon V2 
+      %th Selon V3
+  %tbody
+    %tr
+      %th x
+      %td= custom_text_field(:material, :dir_1_x, "x1", disabled)
+      %td= custom_text_field(:material, :dir_2_x, "x2", disabled)
+      %td= custom_text_field(:material, :dir_3_x, "x3", disabled)
+    %tr
+      %th y 
+      %td= custom_text_field(:material, :dir_1_y, "y1", disabled)
+      %td= custom_text_field(:material, :dir_2_y, "y2", disabled)
+      %td= custom_text_field(:material, :dir_3_y, "y3", disabled)
+    %tr
+      %th z
+      %td= custom_text_field(:material, :dir_1_y, "z1", disabled)
+      %td= custom_text_field(:material, :dir_2_y, "z2", disabled)
+      %td= custom_text_field(:material, :dir_3_y, "z3", disabled)
+     
 %h2 Propriétés thermiques
 %h3 Dilatation thermique
         
