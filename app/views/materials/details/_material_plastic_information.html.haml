@@ -3,32 +3,31 @@
 
 / TODO !!!!!!!!!!! CHANGER LES VALEURS DES CHAMPS. Elles ne sont pas adapté à celle présente en BDD
 %h3 Plasticité
-- if @material.mtype == "orthotrope" or show_all
-  %table.grey
-    %thead
-      %tr.no_sorter
-        %th
-        %th Selon V1
-        - if @material.mtype == "orthotrope" or show_all
-          %th.orthotropic_information Selon V2 
-          %th.orthotropic_information Selon V3
-    %tbody
-      %tr
-        %th Limite de plasticité (Sp)
-        %td= custom_text_field(:material, :sigma_p_1, "Sp1", disabled)
-        - if @material.mtype == "orthotrope" or show_all
-          %td.orthotropic_information= custom_text_field(:material, :sigma_p_2, "Sp2", disabled)
-          %td.orthotropic_information= custom_text_field(:material, :sigma_p_3, "Sp3", disabled)
-      %tr
-        / TODO Les valeurs sont fausses dp_i n'existe pas en BDD
-        %th Taux de plastification (dp)
-        %td= custom_text_field :material, :p_1, "dp1", disabled
-        - if @material.mtype == "orthotrope" or show_all
-          %td.orthotropic_information= custom_text_field :material, :p_2, "dp2", disabled
-          %td.orthotropic_information= custom_text_field :material, :p_3, "dp3", disabled
-      %tr
-        %th Déformation plastique (p)
-        %td= custom_text_field(:material, :p_1, "p1", disabled)
-        - if @material.mtype == "orthotrope" or show_all
-          %td.orthotropic_information= custom_text_field(:material, :p_2, "p2", disabled)
-          %td.orthotropic_information= custom_text_field(:material, :p_3, "p3", disabled)
+%table.grey
+  %thead
+    %tr.no_sorter
+      %th
+      %th Selon V1
+      - if @material.mtype == "orthotrope" or show_all
+        %th.orthotropic_information Selon V2 
+        %th.orthotropic_information Selon V3
+  %tbody
+    %tr
+      %th Limite de plasticité (Sp)
+      %td= custom_text_field(:material, :sigma_p_1, "Sp1", disabled)
+      - if @material.mtype == "orthotrope" or show_all
+        %td.orthotropic_information= custom_text_field(:material, :sigma_p_2, "Sp2", disabled)
+        %td.orthotropic_information= custom_text_field(:material, :sigma_p_3, "Sp3", disabled)
+    %tr
+      / TODO Les valeurs sont fausses dp_i n'existe pas en BDD
+      %th Taux de plastification (dp)
+      %td= custom_text_field :material, :p_1, "dp1", disabled
+      - if @material.mtype == "orthotrope" or show_all
+        %td.orthotropic_information= custom_text_field :material, :p_2, "dp2", disabled
+        %td.orthotropic_information= custom_text_field :material, :p_3, "dp3", disabled
+    %tr
+      %th Déformation plastique (p)
+      %td= custom_text_field(:material, :p_1, "p1", disabled)
+      - if @material.mtype == "orthotrope" or show_all
+        %td.orthotropic_information= custom_text_field(:material, :p_2, "p2", disabled)
+        %td.orthotropic_information= custom_text_field(:material, :p_3, "p3", disabled)
