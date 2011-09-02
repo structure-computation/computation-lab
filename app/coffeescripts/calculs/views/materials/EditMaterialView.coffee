@@ -42,6 +42,7 @@ SCViews.EditMaterialView = Backbone.View.extend
     # First, uncheck all radio and checkboxes input and hide useless tabs
     $(@el).find("input[type=radio], input[type=checkbox]").removeAttr('checked')
     $(@el).find("> ul li a:not(':first')").hide()
+    $(@el).find(".orthotropic_information").hide()
 
     if !_.isNull(@model.get('comp'))
       # Checking good checkboxes regarding material behavior
@@ -61,6 +62,8 @@ SCViews.EditMaterialView = Backbone.View.extend
         $('#material_mtype_isotrope').attr('checked', 'checked')
       else if @model.get('mtype').indexOf('orthotrope') != -1
         $('#material_mtype_orthotrope').attr('checked', 'checked')
+        $(@el).find(".orthotropic_information").show()
+        
   # Reset all fields of the view
   resetFields: ->
     for input in $(@el).find('input, textarea')

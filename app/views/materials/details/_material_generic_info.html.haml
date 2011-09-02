@@ -34,24 +34,28 @@
     %tr.no_sorter
       %th
       %th Selon V1
-      %th Selon V2 
-      %th Selon V3
+      - if @material.mtype == "orthotrope" or show_all
+        %th.orthotropic_information Selon V2 
+        %th.orthotropic_information Selon V3
   %tbody
     %tr
       %th x
       %td= custom_text_field(:material, :dir_1_x, "x1", disabled)
-      %td= custom_text_field(:material, :dir_2_x, "x2", disabled)
-      %td= custom_text_field(:material, :dir_3_x, "x3", disabled)
+      - if @material.mtype == "orthotrope" or show_all
+        %td.orthotropic_information= custom_text_field(:material, :dir_2_x, "x2", disabled)
+        %td.orthotropic_information= custom_text_field(:material, :dir_3_x, "x3", disabled)
     %tr
       %th y 
       %td= custom_text_field(:material, :dir_1_y, "y1", disabled)
-      %td= custom_text_field(:material, :dir_2_y, "y2", disabled)
-      %td= custom_text_field(:material, :dir_3_y, "y3", disabled)
+      - if @material.mtype == "orthotrope" or show_all
+        %td.orthotropic_information= custom_text_field(:material, :dir_2_y, "y2", disabled)
+        %td.orthotropic_information= custom_text_field(:material, :dir_3_y, "y3", disabled)
     %tr
       %th z
       %td= custom_text_field(:material, :dir_1_y, "z1", disabled)
-      %td= custom_text_field(:material, :dir_2_y, "z2", disabled)
-      %td= custom_text_field(:material, :dir_3_y, "z3", disabled)
+      - if @material.mtype == "orthotrope" or show_all
+        %td.orthotropic_information= custom_text_field(:material, :dir_2_y, "z2", disabled)
+        %td.orthotropic_information= custom_text_field(:material, :dir_3_y, "z3", disabled)
      
 %h2 Propriétés thermiques
 %h3 Dilatation thermique
@@ -62,12 +66,12 @@
       %th
       %th Selon V1
       - if @material.mtype == "orthotrope" or show_all
-        %th Selon V2
-        %th Selon V3
+        %th.orthotropic_information Selon V2
+        %th.orthotropic_information Selon V3
   %tbody
     %tr
       %th Dilatation thermique (&alpha;)
       %td= custom_text_field(:material, :alpha_1, "&alpha;1", disabled)
       - if @material.mtype == "orthotrope" or show_all
-        %td= custom_text_field(:material, :alpha_1, "&alpha;￼2", disabled)
-        %td= custom_text_field(:material, :alpha_1, "&alpha;3", disabled) 
+        %td.orthotropic_information= custom_text_field(:material, :alpha_1, "&alpha;￼2", disabled)
+        %td.orthotropic_information= custom_text_field(:material, :alpha_1, "&alpha;3", disabled) 
