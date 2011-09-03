@@ -13,9 +13,9 @@ SCModels.EdgeCollection = Backbone.Collection.extend
     # Get ID of the last model.
     # Last model because if models have been added and then removed, 
     # we can't presume the last ID will be the length of this.models
-    @meta "id_last_model", (@last().get('id') || 1)
+    @meta "id_last_model", ((@last() && @last().get('id_in_calcul') + 1) || 1) # @last() && is here to prevent from @last() = undefined
     @bind 'add', (edge) =>
-      edge.set 'id' : @meta("id_last_model")
+      edge.set 'id_in_calcul' : @meta("id_last_model")
       @incrementIdLastModel()
 
   # Increment by 1 id_last_model

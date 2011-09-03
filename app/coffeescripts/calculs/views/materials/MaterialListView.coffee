@@ -20,12 +20,12 @@ SCViews.MaterialListView = Backbone.View.extend
   showDatabaseMaterials: ->
     $('#materials_database').show()
 
-  getNewMaterialId: ->
-    @collection.last().get('id_in_calcul') + 1
+  # getNewMaterialId: ->
+  #   @collection.last().get('id_in_calcul') + 1
     
   # Add a material to the collection and create an associated view
   add: (materialModel) ->
-    materialModel.set id_in_calcul : @getNewMaterialId()
+    #materialModel.set id_in_calcul : @getNewMaterialId()
     @collection.add materialModel
     @createMaterialView materialModel
 

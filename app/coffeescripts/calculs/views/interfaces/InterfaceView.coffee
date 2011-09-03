@@ -65,7 +65,7 @@ SCViews.InterfaceView = Backbone.View.extend
       @firstRendering = false
     $(@el).html(@model.get('id') + " - " + @model.get('name'))
     if @model.isAssigned()
-      $(@el).append('<span class="is_assigned">✓</span>')
+      $(@el).append("<span class='is_assigned'>✓ [#{@model.get('link_id')}]</span>")
     else
       $(@el).append('<span class="is_not_assigned">?</span>')
     $(@el).removeClass('selected').removeClass('gray')

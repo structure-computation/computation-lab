@@ -62,7 +62,7 @@ SCViews.MaterialView = Backbone.View.extend
     
   # Render the list view with an extra button for assigning or unassigning material.
   renderWithButton: (className, textButton) ->
-    $(@el).html(@model.get('name'))
+    $(@el).html(@model.get('id_in_calcul') + " - " + @model.get('name'))
     $(@el).append("<button class='remove'>X</button>")
     $(@el).append("<button class='#{className}'>#{textButton}</button>")
     if @firstRendering

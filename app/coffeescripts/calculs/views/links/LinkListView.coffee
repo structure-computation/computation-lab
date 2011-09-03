@@ -28,12 +28,12 @@ SCViews.LinkListView = Backbone.View.extend
   showDatabaseLinks: ->
     $('#links_database').show()
   
-  getNewMaterialId: ->
-    @collection.last().get('id_in_calcul') + 1    
+  # getNewLinkId: ->
+  #   @collection.last().get('id_in_calcul') + 1    
 
   # Add a model to the collection and creates an associated view
   add: (linkModel) ->
-    linkModel.set id_in_calcul: @getNewMaterialId()
+#    linkModel.set id_in_calcul: @getNewLinkId()
     @collection.add linkModel
     @createLinkView linkModel
     
