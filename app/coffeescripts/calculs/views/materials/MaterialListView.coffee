@@ -19,7 +19,6 @@ SCViews.MaterialListView = Backbone.View.extend
     
   showDatabaseMaterials: ->
     $('#materials_database').show()
-    @editView.hide()
 
   getNewMaterialId: ->
     @collection.last().get('id_in_calcul') + 1
@@ -32,13 +31,13 @@ SCViews.MaterialListView = Backbone.View.extend
 
   createMaterialView: (material) ->
     m = new SCViews.MaterialView model: material, parentElement: this
-    m.bind 'show_details_model', @showDetails, this
     @materialViews.push m
     @render()
-    
-  showDetails: (model) ->
-    $('#materials_database').hide()
-    @editView.updateModel model
+  
+  # Show edit view of the given model.
+  # Readonly make all inputs unaccessible
+  showDetails: (model, readonly = false) ->
+    @editView.updateModel model, readonly
     
   # Clears all elements previously loaded in the DOM. 
   # Indeed, the 'ul#materials' element already exists in the DOM and every time we create a MaterialListView, 

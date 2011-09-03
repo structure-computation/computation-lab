@@ -27,7 +27,6 @@ SCViews.LinkListView = Backbone.View.extend
   # Show links which are from database and hide edit view
   showDatabaseLinks: ->
     $('#links_database').show()
-    @editView.hide()
   
   getNewMaterialId: ->
     @collection.last().get('id_in_calcul') + 1    
@@ -46,9 +45,9 @@ SCViews.LinkListView = Backbone.View.extend
     @render()
 
   # Show edit view for a given link
-  showDetails: (model) ->
-    $('#links_database').hide()
-    @editView.updateModel model
+  # If readonly = true, all inputs will be disabled
+  showDetails: (model, readonly = false) ->
+    @editView.updateModel model, readonly
 
   # Highlight the link which have link_id as id and add an "Unassign" button
   highlightLink: (link_id) ->

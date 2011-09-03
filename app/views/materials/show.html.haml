@@ -24,17 +24,6 @@
       %li
         Famille :
         = @material.family
-      %li
-        Type :
-        = @material.mtype
-      %li
-        Comportement :
-        - if @material.comp.include? "el"
-          %span.material_behavior Elastique
-        - if @material.comp.include? "pl"
-          %span.material_behavior Plastique
-        - if @material.comp.include? "en"
-          %span.material_behavior Endommageable
           
 -content_for :company_content do
   %h2.grey

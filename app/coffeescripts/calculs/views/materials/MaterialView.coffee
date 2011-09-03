@@ -7,7 +7,7 @@ SCViews.MaterialView = Backbone.View.extend
   className : "material_view"   
   
   events:
-    "click button.edit"     : "showDetails"
+    "click button.edit"     : "showMaterialDetails"
     "click button.clone"    : "clone"
     "click button.assign"   : "assign"
     "click button.unassign" : "unassign"
@@ -21,15 +21,16 @@ SCViews.MaterialView = Backbone.View.extend
     @parentElement.collection.remove @model, silent: true
     @remove()
 
-  showDetails: ->
-    @trigger 'show_details_model', @model
+  # Show details of a material
+  showMaterialDetails: ->
+    @parentElement.showDetails @model    
 
   # Tell the parent that a material have been selected.
   # The row will be highlighted and pieces wich contains 
   # this material will be also highlighted.
   select: (event) ->
-    @showDetails()
     if event.srcElement == @el
+      @showMaterialDetails()
       @parentElement.render() # Clear all buttons from all material view
       @parentElement.selectMaterial @
 
