@@ -1,5 +1,5 @@
 SCViews.CalculListView = Backbone.View.extend
-  el: 'ul#calculs'
+  el: 'table#calculs'
 
   initialize: (options) ->
     @calculViews = []
@@ -42,7 +42,14 @@ SCViews.CalculListView = Backbone.View.extend
   render : ->
     for c in @calculViews
       c.render()
-    $(@el).append("<button class=\"load_calcul\">Charger le brouillon</button>")
-    $(@el).append("<button class=\"save_calcul\">Sauvegarder le brouillon</button>")
-    $(@el).append("<button class=\"new_calcul\">Nouveau brouillon</button>")
+    tableFooter = """
+        <tr>
+          <td colspan='4'>
+            <button class=\"load_calcul\">Charger le brouillon</button>
+            <button class=\"save_calcul\">Sauvegarder le brouillon</button>
+            <button class=\"new_calcul\">Nouveau brouillon</button>
+          </td>
+        </tr>
+    """
+    $(@el).find('tfoot').append(tableFooter)
     return this

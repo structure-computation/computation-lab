@@ -17,6 +17,7 @@ SCViews.BoundaryConditionListView = Backbone.View.extend
     @collection.bind 'change', @render, this
     @collection.bind 'add'   , @render, this
 
+
   events:
     "click .add" : "add_condition"
 
@@ -37,6 +38,7 @@ SCViews.BoundaryConditionListView = Backbone.View.extend
     @selectedBoundaryCondition.model.unset "selected" if @selectedBoundaryCondition
     @selectedBoundaryCondition = boundaryConditionView
     @editBoundaryConditionView.setModel boundaryConditionView.model
+    SCVisu.edgeListView.boundaryConditionHasBeenSelected @editBoundaryConditionView
     $("#new_edge_form").hide()
 
   # Clears all elements previously loaded in the DOM. 
@@ -47,7 +49,7 @@ SCViews.BoundaryConditionListView = Backbone.View.extend
   clearView: ->
     $(@el).html('')
     
-  render : ->
+  render: ->
     SCVisu.current_calcul.set boundary_condition: @collection
     _.each @boundaryConditionViews, (boundaryCondition) ->
       boundaryCondition.render()
