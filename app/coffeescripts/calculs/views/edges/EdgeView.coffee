@@ -1,11 +1,12 @@
 ## EdgeView
 SCViews.EdgeView = Backbone.View.extend
-  tagName   : 'li'
+  tagName   : 'tr'
   className : 'edge_view'
 
   initialize: (options) ->
     @parentElement = options.parentElement
-    $(@parentElement.el).find('ul').append @el
+    $(@parentElement.el).find('table tbody').append @el
+
   events:
     "click" : "select"
 
@@ -17,5 +18,10 @@ SCViews.EdgeView = Backbone.View.extend
   
 
   render: ->
-    $(@el).html(@model.get('id') + " - " + @model.get 'name')
+    template = """
+      <td>#{@model.get('id')}</td>
+      <td>#{@model.get('name')}</td>
+      <td></td>
+    """
+    $(@el).html(template)
     return this

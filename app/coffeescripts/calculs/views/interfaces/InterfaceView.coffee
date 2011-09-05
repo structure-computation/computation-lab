@@ -2,9 +2,9 @@
 SCViews.InterfaceView = Backbone.View.extend
   initialize: (params) ->
     @parentElement = params.parentElement
-    @firstRendering = true
-    
-  tagName   : "li"
+    $(@parentElement.el).append(@el)    
+
+  tagName   : "tr"
   className : "interface_view"   
 
   events: 
@@ -26,7 +26,7 @@ SCViews.InterfaceView = Backbone.View.extend
   # Highlight the selected Interface and tell the Link list to 
   # show the link of this interface. If it has no link associated, user can assign one to it.
   select: (event) ->
-    if event.srcElement == @el
+    if event.srcElement.tagName != "BUTTON"
       @parentElement.render() # Clear all buttons from all piece view
       @parentElement.selectInterface @
 
@@ -54,20 +54,21 @@ SCViews.InterfaceView = Backbone.View.extend
     $(@el).removeClass('selected').removeClass('gray')
 
   # Render with an action button
-  renderWithButton: (className, textButton)->
-    $(@el).html(@model.get('name'))
-    $(@el).append("<button class='#{className}'>#{textButton}</button>")
+  renderWithButton: (className, textButton) ->
+    @render()
+    $(@el).find('td:last').html("<button class='#{className}'>#{textButton}</button>")
     return this
 
   render: ->
-    if @firstRendering
-      $(@parentElement.el).append(@el)
-      @firstRendering = false
-    $(@el).html(@model.get('id') + " - " + @model.get('name'))
+    template = """
+      <td>#{@model.get('id')}</td>
+      <td>#{@model.get('name')}</td>
+    """
+    $(@el).html(template)
     if @model.isAssigned()
-      $(@el).append("<span class='is_assigned'>✓ [#{@model.get('link_id')}]</span>")
+      $(@el).append("<td class='is_assigned'>#{@model.get('link_id')}</td>")
     else
-      $(@el).append('<span class="is_not_assigned">?</span>')
+      $(@el).append('<td>-</td>')
     $(@el).removeClass('selected').removeClass('gray')
     return this
 

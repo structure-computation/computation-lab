@@ -1,6 +1,6 @@
 ## InterfaceListView
 SCViews.InterfaceListView = Backbone.View.extend
-  el: 'ul#interfaces'
+  el: 'table#interfaces'
   
   # You have to pass a InterfaceCollection at initialisation as follow:
   # new PieceListView({ collection : myInterfaceCollection })
@@ -11,6 +11,7 @@ SCViews.InterfaceListView = Backbone.View.extend
       @interfaceViews.push new SCViews.InterfaceView model: interface, parentElement: this
     @selectedInterfaceView = null
     @render()
+    $(@el).tablesorter()
 
   # Clears all elements previously loaded in the DOM. 
   # Indeed, the 'ul#interfaces' element already exists in the DOM and every time we create a InterfacesListView, 
@@ -18,7 +19,7 @@ SCViews.InterfaceListView = Backbone.View.extend
   # each time we render we add elements to the same view. 
   # So we have to clear the content each time we create a new InterfacesListView 
   clearView: ->
-    $(@el).html('')
+    $(@el).find('tbody').html('')
 
   # Is executed when user click on an interface.
   # Highlight the selected interface and put others in gray.

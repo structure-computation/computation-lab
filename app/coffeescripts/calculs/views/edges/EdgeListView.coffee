@@ -14,6 +14,7 @@ SCViews.EdgeListView = Backbone.View.extend
       if !_.isUndefined(edge.get('id_in_calcul'))
         return @selectedEdgeView = edge
     @render()
+    $(@el).find('table').tablesorter()
     @collection.bind 'add', @render, this
     @collection.bind 'change', @render, this
 
@@ -40,7 +41,7 @@ SCViews.EdgeListView = Backbone.View.extend
   # each time we render we add elements to the same view. 
   # So we have to clear the content each time we create a new MaterialListView 
   clearView: ->
-    $(@el).find('ul.data_list').html('')  
+    $(@el).find('table tbody').html('')  
 
   boundaryConditionHasBeenSelected: ->
     _.each @edgeViews, (edgeView) ->
@@ -55,4 +56,4 @@ SCViews.EdgeListView = Backbone.View.extend
   render: ->
     for edgeView in @edgeViews
       edgeView.render()
-    return @
+    return this

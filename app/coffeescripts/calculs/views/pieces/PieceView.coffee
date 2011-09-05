@@ -2,9 +2,9 @@
 SCViews.PieceView = Backbone.View.extend
   initialize: (params) ->
     @parentElement = params.parentElement
-    $(@parentElement.el).append(@el)
+    $(@parentElement.el).find('tbody').append(@el)
 
-  tagName   : "li"
+  tagName   : "tr"
   className : "piece_view"   
 
   events: 
@@ -25,7 +25,7 @@ SCViews.PieceView = Backbone.View.extend
   # Highlight the selected piece and tell the material list to 
   # show the material of this piece. If it has no material, a material can be assigned to it.
   select: (event) ->
-    if event.srcElement == @el
+    if event.srcElement.tagName != "BUTTON"
       @parentElement.render() # Clear all buttons from all piece view
       @parentElement.selectPiece @
 
@@ -53,16 +53,20 @@ SCViews.PieceView = Backbone.View.extend
 
   # Render with an action button
   renderWithButton: (className, textButton)->
-    $(@el).html(@model.get('id') + " - " + @model.get('name'))
-    $(@el).append("<button class='#{className}'>#{textButton}</button>")
+    @render()
+    $(@el).find('td:last').html("<button class='#{className}'>#{textButton}</button>")
     return this
 
   render: ->
-    $(@el).html(@model.get('id') + " - " + @model.get('name'))
+    template = """
+      <td>#{@model.get('id')}</td>
+      <td>#{@model.get('name')}</td>
+    """
+    $(@el).html(template)
     if @model.isAssigned()
-      $(@el).append "<span class='is_assigned'>✓ [#{@model.get('material_id')}]</span>"
+      $(@el).append "<td class='is_assigned'>#{@model.get('material_id')}</td>"
     else
-      $(@el).append('<span class="is_not_assigned">?</span>')
+      $(@el).append "<td>-</td>"
     $(@el).removeClass('selected').removeClass('gray')
     return this
 
