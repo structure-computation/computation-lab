@@ -6,6 +6,7 @@ SCViews.CalculListView = Backbone.View.extend
     for calcul in @collection.models
       @createCalculView(calcul)
     @render()
+    $(@el).tablesorter()
     
   events:
     "click .load_calcul": "loadCalcul"

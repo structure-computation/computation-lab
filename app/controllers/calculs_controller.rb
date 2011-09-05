@@ -27,10 +27,11 @@ class CalculsController < ApplicationController
   def update
     @current_model = current_user.sc_models.find(params[:sc_model_id])
     @current_calcul = @current_model.calcul_results.find(params[:id])
-    results = @current_calcul.save_brouillon(params)
-    if params[:name]
+    if params[:name] and params[:update_name]
       @current_calcul.name = params[:name]
       @current_calcul.save
+    else
+      results = @current_calcul.save_brouillon(params)
     end
     render :text => results
   end

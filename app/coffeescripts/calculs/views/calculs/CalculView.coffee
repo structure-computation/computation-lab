@@ -23,7 +23,7 @@ SCViews.CalculView = Backbone.View.extend
   renameCalcul: (event) ->
     if $(event.srcElement).hasClass('validateRenaming')
       @model.set name: $(@el).find('.name input').val()
-      @model.save()
+      @model.save("update_name" : "true")
       $(@el).find('.name').html "#{@model.get('name')}"
       $(event.srcElement).html("Renommer").removeClass('validateRenaming')
     else
