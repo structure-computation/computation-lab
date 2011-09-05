@@ -1,6 +1,40 @@
 SCViews.CalculView = Backbone.View.extend
   initialize: (params) ->
     @parentElement = params.parentElement
+    
+    # Creates a row right after itself containing its description
+    after = """
+      <tr>
+        <td>
+          <button class="edit_information">Editer</button>
+        </td>
+        <td class='description' colspan="3">
+          #{@model.get('description')}
+        </td>
+      </tr>
+    """
+    $(@parentElement.el).find('tbody').append(@el)
+    $(@el).after(after)
+    $(@el).next().hide()
+    
+    # Click handler for the description edit button
+    $(@el).next().find('button.edit_information').click( =>
+      # When user validate
+      if $(@el).next().find('button.edit_information').hasClass('confirm')
+        @model.set description : $(@el).next().find('td.description textarea').val()
+        @model.save("update_db_info" : "true")
+        $(@el).next().find('td.description').html "#{@model.get('description')}"
+        $(@el).next().find('button.edit_information').html("Editer").removeClass("confirm")
+        
+      # When user edit
+      else
+        $(@el).next().find('td.description').html """
+          <textarea rows="5" cols="50">#{@model.get('description')}</textarea>
+        """
+        $(@el).next().find('td.description textarea').focus() # Set the focus to the textarea 
+        $(@el).next().find('button.edit_information').html("Valider").addClass("confirm")
+
+    )
   
   tagName   : "tr"
   className : "calcul_view" 
@@ -9,8 +43,17 @@ SCViews.CalculView = Backbone.View.extend
     "click"                         : "selectCalcul"
     "click button.rename"           : "renameCalcul"
     "click button.delete"           : "deleteCalcul"
+    "click button.information"      : "toggleInfo"
   
   
+  toggleInfo: (event) ->
+    $(@el).next().toggle()
+    if $(@el).next().is(':visible')
+      $(event.srcElement).html('Cacher les informations')
+    else
+      $(event.srcElement).html('Montrer les informations')
+
+  # Delete the calcul from the database
   deleteCalcul: (event) ->
     that = this
     @model.destroy(
@@ -20,10 +63,12 @@ SCViews.CalculView = Backbone.View.extend
         that.remove()
     )
     
+  # Let the user rename the calcul selected by adding an input fields
+  # The model is kept to date and is saved in the database.
   renameCalcul: (event) ->
     if $(event.srcElement).hasClass('validateRenaming')
       @model.set name: $(@el).find('.name input').val()
-      @model.save("update_name" : "true")
+      @model.save("update_db_info" : "true")
       $(@el).find('.name').html "#{@model.get('name')}"
       $(event.srcElement).html("Renommer").removeClass('validateRenaming')
     else
@@ -43,10 +88,10 @@ SCViews.CalculView = Backbone.View.extend
       <td>
         <button class="rename">Renommer</button>
         <button class="delete">Supprimer</button>
+        <button class="information">Montrer les informations</button>
       </td>
     """
     $(@el).html(template)
-    $(@parentElement.el).find('tbody').append(@el)
     return this
 
 
