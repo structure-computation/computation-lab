@@ -13,6 +13,7 @@ SCViews.EditEdgeView = Backbone.View.extend
     @currentEdge     = null
   showAndInitialize: ->
     @hideEverythingExceptCriteriaPart()
+    @currentEdge = null
     $(@el).show()
   hide: ->
     $(@el).hide()
@@ -134,7 +135,7 @@ SCViews.EditEdgeView = Backbone.View.extend
       SCVisu.edgeListView.addEdgeModel new SCModels.Edge(@retrieveModelAttributesFromInput())
 
   updateSelectedModelAttributes: ->
-    @currentEdge.set @retrieveModelAttributesFromInput()
+    @currentEdge.set @retrieveModelAttributesFromInput() if @currentEdge
 
   # Regarding the currentCriteria and the currentGeometry, retrieve and returns 
   # all good data from inputs

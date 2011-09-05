@@ -15,7 +15,7 @@ SCViews.EdgeView = Backbone.View.extend
     @model.set selected: true
     
   render: ->
-    $(@el).html @model.get 'name'
+    $(@el).html(@model.get('id') + " - " + @model.get 'name')
     if @first
       $(@parentElement.el).find('ul').append @el
       @first = false

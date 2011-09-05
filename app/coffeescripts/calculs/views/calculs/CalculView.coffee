@@ -13,7 +13,10 @@ SCViews.CalculView = Backbone.View.extend
     @parentElement.selectCalcul this
     
   render: ->
-    $(@el).html(@model.get('name'))
+    template = """
+      #{@model.get('id')} - #{@model.get('name')}
+    """
+    $(@el).html(template)
     $(@parentElement.el).append(@el)
     return this
 

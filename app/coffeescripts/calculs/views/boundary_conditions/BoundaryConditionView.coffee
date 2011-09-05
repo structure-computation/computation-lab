@@ -14,5 +14,5 @@ SCViews.BoundaryConditionView = Backbone.View.extend
     @model.set selected: true
 
   render: ->
-    $(@el).html(@model.get('name'))
+    $(@el).html(@model.get('id_in_calcul') + " - " + @model.get('name'))
     $(@parentElement.el).append(@el)

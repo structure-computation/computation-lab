@@ -24,7 +24,7 @@ SCViews.CalculListView = Backbone.View.extend
       error: ->
         SCVisu.router.calculLoadError()
     )
-    
+        
   # Saves the current_calcul to the server side
   saveCalcul: ->
     Backbone.sync "update", SCVisu.current_calcul
@@ -44,4 +44,5 @@ SCViews.CalculListView = Backbone.View.extend
       c.render()
     $(@el).append("<button class=\"load_calcul\">Charger le brouillon</button>")
     $(@el).append("<button class=\"save_calcul\">Sauvegarder le brouillon</button>")
+    $(@el).append("<button class=\"new_calcul\">Nouveau brouillon</button>")
     return this

@@ -1,3 +1,4 @@
+$hover-color: #BBF
 ul.data_list
   border: 1px solid #B2B2B2
   list-style-type: none
@@ -16,13 +17,13 @@ ul.data_list
     background-color: #CCF
     font-weight: bold
   li:hover
-    background-color: #BBF
+    background-color: $hover-color
   li.selected
     color: green
     background-color: #CCF
   li.gray
     color: gray
-
+        
 .breadcrumb_button
   padding: 1em
   button
@@ -30,7 +31,8 @@ ul.data_list
   a  
     float: right
 #wizard_buttons
-  float: right
+  margin-top  : 1em
+  float       : right
   div
     display: inline
 
@@ -46,10 +48,14 @@ ul.data_list
   float: right
 table#volumic_force_table
   tr.selected
-    background-color: #BBF
+    background-color: $hover-color
   
 #details_calcul
   padding-top: 1em
   table
     font-size: 95%
 
+#materials_database, #links_database
+  tbody
+    tr:hover
+      background-color: $hover-color

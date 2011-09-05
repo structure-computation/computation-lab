@@ -4,40 +4,25 @@
 // TODO Adapter les champs à la BDD
 %h3 Endomagement
 
-- if @material.mtype == "orthotrope" or show_all
-  %table.grey
-    %thead
-      %tr.no_sorter
-        %th
-        %th Selon V1
-        %th Selon V2 
-        %th Selon V3
-    %tbody
-      %tr
-        %th Limite d'endomagement (Se) 
-        %td
-          = text_field :material, :sigma_p_1, :value => "TODO", :disabled => disabled, :size => '10'
-        %td
-          = text_field :material, :sigma_p_2, :value => "TODO", :disabled => disabled, :size => '10'
-        %td
-          = text_field :material, :sigma_p_3, :value => "TODO", :disabled => disabled, :size => '10'
-      %tr
-        %th Endomagement (e)
-        %td
-          = text_field :material, :sigma_p_3, :value => "TODO", :disabled => disabled, :size => '10'
-        %td
-          = text_field :material, :sigma_p_3, :value => "TODO", :disabled => disabled, :size => '10'
-        %td
-          = text_field :material, :sigma_p_3, :value => "TODO", :disabled => disabled, :size => '10'
+%table.grey
+  %thead
+    %tr.no_sorter
+      %th
+      %th Selon V1
+      - if @material.mtype == "orthotrope" or show_all
+        %th.orthotropic_information Selon V2 
+        %th.orthotropic_information Selon V3
+  %tbody
+    %tr
+      %th Limite d'endomagement (Se) 
+      %td= text_field :material, :sigma_p_1, :value => "TODO", :disabled => disabled, :size => '10'
+      - if @material.mtype == "orthotrope" or show_all
+        %td.orthotropic_information= text_field :material, :sigma_p_2, :value => "TODO", :disabled => disabled, :size => '10'
+        %td.orthotropic_information= text_field :material, :sigma_p_3, :value => "TODO", :disabled => disabled, :size => '10'
+    %tr
+      %th Endomagement (e)
+      %td= text_field :material, :sigma_p_3, :value => "TODO", :disabled => disabled, :size => '10'
+      - if @material.mtype == "orthotrope" or show_all
+        %td.orthotropic_information= text_field :material, :sigma_p_3, :value => "TODO", :disabled => disabled, :size => '10'
+        %td.orthotropic_information= text_field :material, :sigma_p_3, :value => "TODO", :disabled => disabled, :size => '10'
           
-- elsif @material.mtype == "isotrope"
-  %table.grey
-    %tbody
-      %tr
-        %th Limite d'endomagement (Se)
-        %td
-          = text_field :material, :sigma_p_1, :value => "TODO", :disabled => disabled
-      %tr
-        %th Endomagement (e)
-        %td 
-          = text_field :material, :sigma_p_3, :value => "TODO", :disabled => disabled
