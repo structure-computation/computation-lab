@@ -1,0 +1,42 @@
+#calculus_option
+  %p
+    %label{:for => "test_mode"} Mode Test
+    %input#test_mode{:type => "radio", :name => "mode", :checked => "checked"}
+    %p
+      Aucune option n'est disponible dans ce mode. Le calcul est linéaire sans zoom structurel, et le niveau de convergence est faible. L'objectif de ce mode est de vérifier le paramétrage de votre calcul
+
+  %p
+    %label{:for => "normal_mode"} Mode Normal
+    %input#normal_mode{:type => "radio", :name => "mode", :checked => "checked"}
+  %ul
+    %li
+      %label{:for => "latin_method"} Convergence méthode LATIN
+      %input#latin_method{:type => "checkbox"}
+    %li
+      %label{:for => "calculus_precision"} Précision du calcul
+      %input#calculus_precision{:type => "checkbox"}
+
+
+  %h4 Convergence de la méthode LATIN
+  %p
+    Multiechelle : 
+    %label{:for => "multiscale_on"} On
+    %input#multiscale_on{:type => "radio", :name => "multiscale", :value => "on"}
+    %label{:for => "multiscale_off"} Off
+    %input#multiscale_off{:type => "radio", :name => "multiscale", :value => "off"}                       
+
+  %p
+    %label{:for => "max_iteration"}       Nombre d'itération maximum
+    %input#max_iteration{:type => "text"} 
+
+  %p
+    %label{:for => "convergence_rate"}    Taux de convergence de la méthode 
+    %input#convergence_rate{:type => "text"} 
+
+  %h4 Précision du calcul
+  %p
+    %label{:for => "zoom"}                Nombre de niveau maximum (zoom)
+    %input#zoom{:type => "text"} 
+  %p
+    %label{:for => "error"}               Niveau Erreur de modèle (%) 
+    %input#error{:type => "text"} 

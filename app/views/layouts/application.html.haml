@@ -12,8 +12,8 @@
     = yield :additionnal_javascript
     
     
-  %body
-    = render :partial => "layouts/partials/header"      
+  %body{:onload => "window.scrollTo(0, 1)"}
+    = yield :header
     .container
       = render :partial => "layouts/partials/breadcrumb"
       = render :partial => "layouts/partials/flashs_and_notices"

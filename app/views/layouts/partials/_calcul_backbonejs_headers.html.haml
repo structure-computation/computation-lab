@@ -1,0 +1,76 @@
+:coffeescript
+  window.SCVisu   = {} 
+  window.SCModels = {} 
+  window.SCViews  = {} 
+
+= javascript_include_tag "libs/backbone"
+
+/ Models
+= coffeescript_include_tag "calculs/models/LinkModel"
+= coffeescript_include_tag "calculs/models/MaterialModel"
+= coffeescript_include_tag "calculs/models/PieceModel"
+= coffeescript_include_tag "calculs/models/InterfaceModel"
+= coffeescript_include_tag "calculs/models/StepModel"
+= coffeescript_include_tag "calculs/models/CalculModel"
+= coffeescript_include_tag "calculs/models/EdgeModel"
+= coffeescript_include_tag "calculs/models/OptionModel"
+= coffeescript_include_tag "calculs/models/VolumicForceModel"
+= coffeescript_include_tag "calculs/models/BoundaryConditionModel"
+
+/ Views
+/ -- Step
+= coffeescript_include_tag "calculs/views/steps/StepListView"
+= coffeescript_include_tag "calculs/views/steps/StepView"
+
+/ -- Piece
+= coffeescript_include_tag "calculs/views/pieces/PieceView"
+= coffeescript_include_tag "calculs/views/pieces/PieceListView"
+
+/ -- Calcul
+= coffeescript_include_tag "calculs/views/calculs/CalculView"
+= coffeescript_include_tag "calculs/views/calculs/CalculListView"
+
+/ -- Link
+= coffeescript_include_tag "calculs/views/links/EditLinkView"
+= coffeescript_include_tag "calculs/views/links/LinkListView"
+= coffeescript_include_tag "calculs/views/links/LinkView"
+= coffeescript_include_tag "calculs/views/links/DatabaseLinkView"
+/ -- Interface
+= coffeescript_include_tag "calculs/views/interfaces/InterfaceView"
+= coffeescript_include_tag "calculs/views/interfaces/InterfaceListView"
+
+/ -- Material
+= coffeescript_include_tag "calculs/views/materials/EditMaterialView"
+= coffeescript_include_tag "calculs/views/materials/MaterialListView"
+= coffeescript_include_tag "calculs/views/materials/MaterialView"
+= coffeescript_include_tag "calculs/views/materials/DatabaseMaterialView"
+
+/ -- VolumicForces
+= coffeescript_include_tag "calculs/views/volumic_forces/VolumicForceView"
+= coffeescript_include_tag "calculs/views/volumic_forces/VolumicForceListView"
+
+/ -- Edge
+= coffeescript_include_tag "calculs/views/edges/EditEdgeView"
+= coffeescript_include_tag "calculs/views/edges/EdgeView"
+= coffeescript_include_tag "calculs/views/edges/EdgeListView"
+
+/ -- BoundaryCondition
+
+= coffeescript_include_tag "calculs/views/boundary_conditions/BoundaryConditionView"
+= coffeescript_include_tag "calculs/views/boundary_conditions/BoundaryConditionListView"
+= coffeescript_include_tag "calculs/views/boundary_conditions/EditBoundaryConditionView"
+
+/ -- Option
+= coffeescript_include_tag "calculs/views/options/OptionView"
+
+
+
+/ Router
+= coffeescript_include_tag "calculs/router"
+= coffeescript_include_tag "calculs/main"
+
+/ Javascripts concernants la visualisation.
+= coffeescript_include_tag "visualisation/ScClient"
+= coffeescript_include_tag "visualisation/ScDisp"
+
+

@@ -1,0 +1,36 @@
+#links_database
+  = render :partial => "links/search_filter"
+  %table.grey#links_table
+    %thead
+      %tr
+        %th.no_sorter
+        %th Nom
+        %th ID
+        %th Référence
+        -#%th Famille
+        -#%th Générique
+        -#%th Complexe
+
+    %tbody
+      - @standard_links.each do |link|
+        %tr.standard{:id => "link_#{link.id}"}
+          %td.escape_search.details_link
+            %button.add Ajouter au calcul
+          %td.name=           link.name
+          %td.id=             link.id
+          %td.reference=      link.reference
+          -#%td.family=         link.family
+          -#%td.comp_generic=   link.comp_generique
+          -#%td.comp_complex=   link.comp_complexe
+
+      - @company_links.each do |link|
+        %tr.company{:id => "link_#{link.id}"}
+          %td.escape_search.details_link
+            %button.add Ajouter au calcul
+          %td.name=           link.name
+          %td.id=             link.id
+          %td.reference=      link.reference
+          -#%td.family=         link.family
+          -#%td.comp_generic=   link.comp_generique
+          -#%td.comp_complex=   link.comp_complexe
+  %button.close Fermer

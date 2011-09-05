@@ -28,7 +28,7 @@
 
 -content_for :left_content do
 
-  %ul.tab_submenu
+  %ul.tab_submenu.js_tab_submenu
     %li 
       %a#tab_1.selected{:href => "#Outils"} Outils
     %li 
@@ -42,7 +42,7 @@
     = @sc_model.name
   .wrapper
     #left_content
-      %ul.tab_submenu
+      %ul.tab_submenu.js_tab_submenu
         %li 
           %a#tab_1.selected{:href => "#Outils"} Outils
         %li 
@@ -51,7 +51,7 @@
           %a#tab_3{:href => "#Utilisateurs"} Utilisateurs
                        
     #right_content
-      .tab_content
+      .tab_content.js_tab_content
         #tab_1_content.show
           %h3
             Pour accéder aux outils, vous devez d'abord charger un maillage pour ce modèle
@@ -62,7 +62,7 @@
               = f.input :file, :as => :file
             = f.buttons
           %ul
-            %li= link_to "Calcul des structures", :controller => "calculs", :action => "index", :model_id => @sc_model.id
+            %li= link_to "Calcul des structures", sc_model_calculs_path(@sc_model) #:controller => "calculs", :action => "index", :model_id => @sc_model.id
             %li= link_to "Visualisation"        , :controller => "visualisations", :action => "index", :model_id => @sc_model.id
             %li= link_to "Partager un fichier"
         #tab_2_content.hide

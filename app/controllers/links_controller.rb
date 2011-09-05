@@ -1,26 +1,36 @@
 class LinksController < InheritedResources::Base
-  
+  helper :all
   #session :cookie_only => false, :only => :upload
   before_filter :authenticate_user!
   before_filter :set_page_name
   belongs_to    :workspace
   layout 'company'
+  respond_to :html, :json
   
   def set_page_name
     @page = :bibliotheque
   end
   
   def index 
-    @workspace  = current_company_member.workspace
-    if params[:type] == "standard"
-      @links = Link.standard
-    else
-      @links = Link.find_all_by_workspace_id(@workspace.id)
-    end
+    @company  = current_user.company
+    @standard_links = Link.standard
+    @company_links  = Link.user_company @company.id
     index!
   end
   
+  def update
+    # Test pour savoir si les informations sont données en brut (en JSON, envoyées par le javascript)
+    if params[:link].nil?
+      @link = Link.find(params[:id])
+      @link.update_attributes! retrieve_column_fields(params)
+    end
+    update! { company_links_path }
+  end
+  
   def create
+    if params[:link].nil?
+      @link = Link.create retrieve_column_fields(params)
+    end
     create! { workspace_links_path }
   end
 
@@ -36,11 +46,13 @@ class LinksController < InheritedResources::Base
 
   def show
     @link = Link.find(params[:id])
+
+    # TODO: Revoir le controle d'accès, cela ne se fait pas comme ça mais plutôt comme :
+    # current_workspace.links.find params[:id]
+    # De plus je ne vois pas ici comment l'on affiche un lien de la lib standard.
     @workspace = Workspace.find(params[:workspace_id])
-    if @link.workspace_id == -1
-      render :action => "show"
-    elsif @link.workspace_id == current_workspace_member.workspace.id
-      render :action => "show"
+    if @link.company_id == current_user.company.id
+      show!
     else
       flash[:notice] = "Vous n'avez pas accès à cette liaison !"
       redirect_to workspace_links_path
@@ -66,5 +78,13 @@ class LinksController < InheritedResources::Base
       new!
     end
   end
-
+  
+  private
+    def retrieve_column_fields(params)
+      to_update = {}
+      Link.column_names.each do |column_name|
+        to_update[column_name] = params[column_name]
+      end
+       to_update
+    end
 end

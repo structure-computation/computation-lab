@@ -1,56 +1,43 @@
+- disabled = false if disabled.nil?
+- show_all = false if show_all.nil?
+
 // TODO Adapter les champs à la BDD
 %h3 Endomagement
 
-- if material.mtype == "orthotrope"
+- if @material.mtype == "orthotrope" or show_all
   %table.grey
     %thead
       %tr.no_sorter
         %th
-        %th{:colspan => 2} Selon V1
-        %th{:colspan => 2} Selon V2 
-        %th{:colspan => 2} Selon V3
+        %th Selon V1
+        %th Selon V2 
+        %th Selon V3
     %tbody
       %tr
-        %th Limite d'endomagement 
-        %td.label_table
-          = label :material, :sigma_p_1, "Se1 = "
-        %td 
-          = text_field :material, :sigma_p_1, :value => "TODO", :disabled => disabled
-        %td.label_table 
-          = label :material, :sigma_p_1, "Se2 = "
-        %td 
-          = text_field :material, :sigma_p_2, :value => "TODO", :disabled => disabled
-        %td.label_table
-          = label :material, :sigma_p_1, "Se3 = "
-        %td 
-          = text_field :material, :sigma_p_3, :value => "TODO", :disabled => disabled
+        %th Limite d'endomagement (Se) 
+        %td
+          = text_field :material, :sigma_p_1, :value => "TODO", :disabled => disabled, :size => '10'
+        %td
+          = text_field :material, :sigma_p_2, :value => "TODO", :disabled => disabled, :size => '10'
+        %td
+          = text_field :material, :sigma_p_3, :value => "TODO", :disabled => disabled, :size => '10'
       %tr
-        %th Endomagement
-        %td.label_table
-          = label :material, :sigma_p_1, "e1 = "
-        %td 
-          = text_field :material, :sigma_p_3, :value => "TODO", :disabled => disabled
-        %td.label_table
-          = label :material, :sigma_p_1, "e2 = "
-        %td 
-          = text_field :material, :sigma_p_3, :value => "TODO", :disabled => disabled
-        %td.label_table
-          = label :material, :sigma_p_1, "e3 = "
-        %td 
-          = text_field :material, :sigma_p_3, :value => "TODO", :disabled => disabled
+        %th Endomagement (e)
+        %td
+          = text_field :material, :sigma_p_3, :value => "TODO", :disabled => disabled, :size => '10'
+        %td
+          = text_field :material, :sigma_p_3, :value => "TODO", :disabled => disabled, :size => '10'
+        %td
+          = text_field :material, :sigma_p_3, :value => "TODO", :disabled => disabled, :size => '10'
           
-- elsif material.mtype == "isotrope"
+- elsif @material.mtype == "isotrope"
   %table.grey
     %tbody
       %tr
-        %th Limite d'endomagement 
-        %td.label_table
-          = label :material, :sigma_p_1, "Se1 = "
-        %td 
+        %th Limite d'endomagement (Se)
+        %td
           = text_field :material, :sigma_p_1, :value => "TODO", :disabled => disabled
       %tr
-        %th Endomagement
-        %td.label_table
-          = label :material, :sigma_p_1, "e1 = "
+        %th Endomagement (e)
         %td 
           = text_field :material, :sigma_p_3, :value => "TODO", :disabled => disabled

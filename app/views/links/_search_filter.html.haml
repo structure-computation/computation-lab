@@ -1,16 +1,22 @@
 .search_filter
-  = form_tag company_links_path, :method => :get do
-  
-    = select_tag "type", options_for_select([["Bibliothèque standard", "standard"],["Ma bibliothèque", "owner"]], (params[:type] == "standard" ? "standard" : "owner"))
-  
-    = submit_tag "Filtrer", :class => 'yellow_button'
+  %a.yellow_button.pressed_button#company_link   Ma bibliothèque
+  %a.yellow_button.pressed_button#standard_link  Bibliothèque standard
+  :coffeescript
+    $('a#company_link').click ->
+      $(this).toggleClass('pressed_button')
+      $('#links_table tbody tr.company').toggle()
+
+    $('a#standard_link').click ->
+      $(this).toggleClass('pressed_button')
+      $('#links_table tbody tr.standard').toggle()
+        
 
   %p
     %label{:for => "search_filter"} Recherche
     %input#search_filter{:type => "text"}
-    %button#more_details.close.yellow_button Recherche avancée
+    %button#links_more_details.yellow_button Recherche avancée
 
-  #advanced_search
+  #links_advanced_search.advanced_search
     %p
       %label{:for => "name_search_filter"} Nom
       %input#name_search_filter{:type => "text"}
@@ -35,15 +41,8 @@
   $( ->
     $('#links_table').tablesorter()
 
-    $("#advanced_search").toggle()  
-    $('#more_details').click( () ->
-      $("#advanced_search").slideToggle()
-      if $(this).hasClass('open')
-        $(this).removeClass('open')
-        $(this).addClass('close')
-      else
-        $(this).removeClass('close')
-        $(this).addClass('open')
+    $('#links_more_details').click( () ->
+      $('#links_advanced_search').toggleClass('maximize')
     )
 
     advancedSearchFilter("links_table",

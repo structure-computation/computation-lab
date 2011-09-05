@@ -1,36 +1,32 @@
+- disabled = false if disabled.nil?
+- show_all = false if show_all.nil?
+
+%h2 Propriétés physiques
 %h3 Masse volumique
 %table.grey
   %tbody
     %tr.no_sorter
-      %th Masse volumique :
-      %td 
-        %label m1 = 
-        %input{:disabled => disabled, :value => "#{@material.rho}"}
+      %th Masse volumique (&rho;)
+      %td= custom_text_field(:material, :rho, "&rho;￼", disabled)
 
+
+%h2 Propriétés mécanique
+
+%h2 Propriétés thermiques
 %h3 Dilatation thermique
         
 %table.grey
   %thead
     %tr.no_sorter
       %th
-      %th{:colspan => 2} Selon V1
-      - if material.mtype == "orthotrope"
-        %th{:colspan => 2} Selon V2
-        %th{:colspan => 2} Selon V3
+      %th Selon V1
+      - if @material.mtype == "orthotrope" or show_all
+        %th Selon V2
+        %th Selon V3
   %tbody
     %tr
-      %th Dilatation thermique
-      %td.label_table
-        = label :material, :alpha_1, "a1 = "
-      %td 
-        = text_field :material, :alpha_1, :value => material.alpha_1, :disabled => disabled
-      - if material.mtype == "orthotrope"
-        %td.label_table
-          = label :material, :alpha_2, "a2 = "
-        %td 
-          = text_field :material, :alpha_2, :value => material.alpha_2, :disabled => disabled
-        %td.label_table
-          = label :material, :alpha_3, "a3 = "
-        %td 
-          = text_field :material, :alpha_3, :value => material.alpha_3, :disabled => disabled
-
+      %th Dilatation thermique (&alpha;)
+      %td= custom_text_field(:material, :alpha_1, "&alpha;1", disabled)
+      - if @material.mtype == "orthotrope" or show_all
+        %td= custom_text_field(:material, :alpha_1, "&alpha;￼2", disabled)
+        %td= custom_text_field(:material, :alpha_1, "&alpha;3", disabled) 

@@ -1,3 +1,6 @@
+# Dans l'interface Structure Computation, de nombreux tableaux (modèles, membres d'une équipe...) utilisent
+# un menu déroulant caché dans la dernière colone. Cette colonne est appellée la colone action. Ce fichier 
+# Javascript gère l'affichage du menu.
 $( ->
   # Fait apparaitre ou disparaitre le menu déroulant lors du click sur la flêche dans la colonne "action"
   $('.action_on_table').click( ->

@@ -4,7 +4,7 @@
     %input#search_filter{:type => "text"}
     %button#more_details.close.yellow_button Recherche avancée
 
-  #advanced_search
+  #sc_models_advanced_search.advanced_search
     %p
       %label{:for => "name_search_filter"} Nom
       %input#name_search_filter{:type => "text"}
@@ -23,19 +23,12 @@
   $( ->
     $('#models_table').tablesorter()
 
-    $("#advanced_search").toggle()  
     $('#more_details').click( () ->
-      $("#advanced_search").slideToggle()
-      if $(this).hasClass('open')
-        $(this).removeClass('open')
-        $(this).addClass('close')
-      else
-        $(this).removeClass('close')
-        $(this).addClass('open')
+      $('#sc_models_advanced_search').toggleClass('maximize')
     )
 
     advancedSearchFilter("models_table",
-                         ["name_search_filter","id_search_filter", "project_search_filter","result_search_filter"],
+                         ["name_search_filter","id_search_filter","project_search_filter","result_generic_search_filter"],
                          ["name"              ,"id"              ,"project"              ,"result"])
     searchFilter("models_table", "search_filter")
   )
