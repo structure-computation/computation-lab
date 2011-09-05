@@ -45,7 +45,7 @@ SCViews.CalculView = Backbone.View.extend
     "click button.delete"           : "deleteCalcul"
     "click button.information"      : "toggleInfo"
   
-  
+  # Show or hide information of the current calcul
   toggleInfo: (event) ->
     $(@el).next().toggle()
     if $(@el).next().is(':visible')
