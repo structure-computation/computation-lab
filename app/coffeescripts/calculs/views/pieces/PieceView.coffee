@@ -2,8 +2,8 @@
 SCViews.PieceView = Backbone.View.extend
   initialize: (params) ->
     @parentElement = params.parentElement
-    @firstRendering = true
-    
+    $(@parentElement.el).append(@el)
+
   tagName   : "li"
   className : "piece_view"   
 
@@ -58,9 +58,6 @@ SCViews.PieceView = Backbone.View.extend
     return this
 
   render: ->
-    if @firstRendering
-      $(@parentElement.el).append(@el)
-      @firstRendering = false
     $(@el).html(@model.get('id') + " - " + @model.get('name'))
     if @model.isAssigned()
       $(@el).append "<span class='is_assigned'>✓ [#{@model.get('material_id')}]</span>"
