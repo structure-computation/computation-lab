@@ -11,7 +11,7 @@
   %td.type=           material.mtype
   %td.comp=           material.comp
   %td.action_on_table.escape_search
-    - if material.workspace and material.workspace.id == current_user.workspace.id
+    - if material.workspace and material.workspace.id == current_workspace_member.workspace.id
       %ul
         %li
           = link_to "Editer"   , edit_workspace_material_path(material.workspace, material)

@@ -23,7 +23,7 @@
           -#%td.comp_generic=   link.comp_generique
           -#%td.comp_complex=   link.comp_complexe
 
-      - @company_links.each do |link|
+      - @workspace_links.each do |link|
         %tr.company{:id => "link_#{link.id}"}
           %td.escape_search.details_link
             %button.add Ajouter au calcul

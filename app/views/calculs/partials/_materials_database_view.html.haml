@@ -22,7 +22,7 @@
           %td.type=           material.mtype
           %td.comp=           material.comp
         
-      - @company_materials.each do |material|
+      - @workspace_materials.each do |material|
         %tr.company{:id => "material_#{material.id}"}
           %td.escape_search.details_link
             %button.add Ajouter au calcul

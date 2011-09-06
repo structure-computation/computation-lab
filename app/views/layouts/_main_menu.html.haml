@@ -14,7 +14,7 @@
         = link_to 'Mes modèles', workspace_sc_models_path(current_workspace_member.workspace)
       %li
         %a Mes Projets
-        -#= link_to 'Modèles', workspace_sc_models_path(current_user.workspace)
+        -#= link_to 'Modèles', workspace_sc_models_path(current_workspace_member.workspace)
   %li{:class => ( @page == :bibliotheque ? "selected" : "")}
     %a
       Bibliothèque

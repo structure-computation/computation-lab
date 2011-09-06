@@ -95,10 +95,10 @@
       SCVisu.companyLibraryLink       = new SCModels.LinkCollection
 
       SCVisu.standardLibraryMaterial.reset #{@standard_materials.to_json.html_safe}
-      SCVisu.companyLibraryMaterial.reset #{@company_materials.to_json.html_safe}
+      SCVisu.companyLibraryMaterial.reset #{@workspace_materials.to_json.html_safe}
 
       SCVisu.standardLibraryLink.reset #{@standard_links.to_json.html_safe}
-      SCVisu.companyLibraryLink.reset #{@company_links.to_json.html_safe}
+      SCVisu.companyLibraryLink.reset #{@workspace_links.to_json.html_safe}
       
       SCVisu.calculCollection = new SCModels.Calculs
       SCVisu.calculCollection.reset #{@calculs.to_json.html_safe}

@@ -136,7 +136,7 @@ class CalculResult < ActiveRecord::Base
 #         :D2type => params[:D2type],
 #         :log_type => 'compute'
 #       )
-#       @new_calcul.user = current_user
+#       @new_calcul.user = current_workspace_member
 #       if (@new_calcul.name == self.name)
 #         @new_calcul.name = "brouillon_#{@new_calcul.id}" 
 #       end

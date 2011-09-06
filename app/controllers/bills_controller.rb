@@ -51,7 +51,7 @@ class BillsController < InheritedResources::Base
   # end
   
   def show
-    @company = Company.find(params[:workspace_id])
+    @company = Workspace.find(params[:workspace_id])
     @manager = @company.users.find(:first, :conditions => {:role => "gestionnaire"})
     if @manager
       show!

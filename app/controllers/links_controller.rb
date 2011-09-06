@@ -12,9 +12,9 @@ class LinksController < InheritedResources::Base
   end
   
   def index 
-    @company        = current_user.workspace
+    @workspace        = current_workspace_member.workspace
     @standard_links = Link.standard
-    @company_links  = Link.from_workspace @workspace.id
+    @workspace_links  = Link.from_workspace @workspace.id
     index!
   end
   
@@ -51,7 +51,7 @@ class LinksController < InheritedResources::Base
     # current_workspace.links.find params[:id]
     # De plus je ne vois pas ici comment l'on affiche un lien de la lib standard.
     @workspace = Workspace.find(params[:workspace_id])
-    if @link.workspace_id == current_user.workspace.id
+    if @link.workspace_id == current_workspace_member.workspace.id
       show!
     else
       flash[:notice] = "Vous n'avez pas accès à cette liaison !"

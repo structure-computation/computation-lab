@@ -4,7 +4,7 @@
       Menu
     %ul
       %li.LM_pic_model
-        = link_to "Retour à la liste de modèles", company_sc_models_path(@company) 
+        = link_to "Retour à la liste de modèles", company_sc_models_path(@workspace) 
 
 -content_for :right_top do
   %h2.grey
@@ -57,7 +57,7 @@
             Pour accéder aux outils, vous devez d'abord charger un maillage pour ce modèle
           %p
             Charger votre maillage
-          - semantic_form_for [@company, @sc_model], :url => {:controller => "sc_models", :action => "load_mesh"}, :html => {:multipart => true, :method => :post} do |f|
+          - semantic_form_for [@workspace, @sc_model], :url => {:controller => "sc_models", :action => "load_mesh"}, :html => {:multipart => true, :method => :post} do |f|
             = f.inputs do
               = f.input :file, :as => :file
             = f.buttons

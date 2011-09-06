@@ -7,25 +7,25 @@ class CalculsController < ApplicationController
   
   def index
     @standard_links     = Link.standard
-    @company_links      = Link.from_workspace(current_workspace_member.workspace)
+    @workspace_links      = Link.from_workspace(current_workspace_member.workspace)
     @standard_materials = Material.standard
-    @company_materials  = Material.from_workspace(current_workspace_member.workspace)
+    @workspace_materials  = Material.from_workspace(current_workspace_member.workspace)
     @material           = Material.new
     @link               = Link.new
-    @company            = current_user.company
+    @workspace            = current_workspace_member.workspace
     @calculs            = CalculResult.find_all_by_sc_model_id(params[:sc_model_id])
   end
   
   def show
-    @current_model = current_user.sc_models.find(params[:sc_model_id])
+    @current_model = current_workspace_member.sc_models.find(params[:sc_model_id])
     @current_calcul = @current_model.calcul_results.find(params[:id])
-    send_data = @current_calcul.get_brouillon(params,current_user)
+    send_data = @current_calcul.get_brouillon(params,current_workspace_member)
     render :json => send_data.to_json
   end
  
   # Enregistre les informations du calcul dans un fichier brouillon
   def update
-    @current_model = current_user.sc_models.find(params[:sc_model_id])
+    @current_model = current_workspace_member.sc_models.find(params[:sc_model_id])
     @current_calcul = @current_model.calcul_results.find(params[:id])
     results = @current_calcul.save_brouillon(params)
     render :text => results
