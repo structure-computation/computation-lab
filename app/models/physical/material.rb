@@ -1,8 +1,8 @@
 class Material < ActiveRecord::Base
   
-  belongs_to  :company
+  belongs_to  :workspace
   
-  scope :standard     , where(:company_id => -1)
+  scope :standard       , where(:workspace_id => -1)
   scope :from_workspace , lambda { |workspace_id|
     where(:workspace_id => workspace_id)
   }

@@ -6,7 +6,7 @@ module ApplicationHelper
   
   # TODO: fait doublon avec la même procédure dans ApplicationController. 
   # Trouver la "bonne methode".
-  def current_company_member
+  def current_workspace_member
     current_user.user_workspace_memberships.first
   end
   

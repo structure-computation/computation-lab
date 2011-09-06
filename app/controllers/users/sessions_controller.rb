@@ -17,7 +17,7 @@ class Users::SessionsController < Devise::SessionsController
   #     # button. Uncomment if you understand the tradeoffs.
   #     # reset_session
   #     self.current_user = user
-  #     # current_company = user.Company.find(current_user.company_id)
+  #     # current_company = user.Company.find(current_user.workspace_id)
   #     current_company = user.company
   #     session[:current_user_name] = current_user.firstname + " " + current_user.lastname
   #     session[:current_company_name] = current_company.name

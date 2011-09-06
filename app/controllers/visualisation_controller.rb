@@ -7,7 +7,7 @@ class VisualisationController < ApplicationController
   def index
     @page = 'SCcompute'
     @id_model = params[:id_model]
-    current_model = current_company_member.sc_models.find(@id_model)
+    current_model = current_workspace_member.sc_models.find(@id_model)
     @dim_model = current_model.dimension
     respond_to do |format|
       format.html {render :layout => false }

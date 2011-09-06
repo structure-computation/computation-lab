@@ -38,12 +38,12 @@ class WorkspacesController < InheritedResources::Base
   # Suppr
   def create_solde
     # Creation d'une liste fictive d'opération.
-    @solde_calculs = current_company_member.workspace.solde_calcul_accounts.find(:all)
+    @solde_calculs = current_workspace_member.workspace.solde_calcul_accounts.find(:all)
   end
   
   
   def index
-    redirect_to workspace_path(current_company_member.workspace)
+    redirect_to workspace_path(current_workspace_member.workspace)
     # @page = 'SCmanage' 
     # respond_to do |format|
     #   format.html {render :layout => true }

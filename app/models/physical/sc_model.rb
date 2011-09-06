@@ -28,7 +28,7 @@ class ScModel < ActiveRecord::Base
     File.chmod 0777, path_to_sc_model
   end
   
-  def send_mesh(file,current_company_member)
+  def send_mesh(file,current_workspace_member)
     # on enregistre les fichier sur le disque et on change les droit pour que le serveur de calcul y ai acces
     name = file.original_filename
     if name.match(/.bdf/)
@@ -55,7 +55,7 @@ class ScModel < ActiveRecord::Base
     end
     
     # création du fichier json_model 
-    identite_calcul = { :id_societe => self.company.id, :id_user => current_company_member.id, :id_projet => '', :id_model => self.id, :id_calcul => '', :dimension  => self.dimension};
+    identite_calcul = { :id_societe => self.company.id, :id_user => current_workspace_member.id, :id_projet => '', :id_model => self.id, :id_calcul => '', :dimension  => self.dimension};
     priorite_calcul = { :priorite => 0 };                               
     mesh = { :mesh_directory => "MESH", :mesh_name  => "mesh", :extension  => extension};
     json_model = { :identite_calcul => identite_calcul, :priorite_calcul => priorite_calcul, :mesh => mesh}; 
@@ -67,7 +67,7 @@ class ScModel < ActiveRecord::Base
     end
     
 #     # envoi de la requette de création de model au serveur de calcul
-#     send_data = { :id_user => current_company_member.id, :mode => "create", :identite_calcul => identite_calcul };   
+#     send_data = { :id_user => current_workspace_member.id, :mode => "create", :identite_calcul => identite_calcul };   
 #     # socket d'envoie au serveur
 #     socket    = Socket.new( AF_INET, SOCK_STREAM, 0 )
 #     sockaddr  = Socket.pack_sockaddr_in( SC_CALCUL_PORT, SC_CALCUL_SERVER )
@@ -85,7 +85,7 @@ class ScModel < ActiveRecord::Base
   end
   
   
-  def send_file(params,current_company_member)
+  def send_file(params,current_workspace_member)
     # on enregistre les fichier sur le disque et on change les droit pour que le serveur de calcul y ai acces
     file = params[:file] 
     name = file.original_filename
@@ -102,7 +102,7 @@ class ScModel < ActiveRecord::Base
         f.write(file.read)
     end
     
-    self.files_sc_models.create(:name => name, :user_id => current_company_member.id, :state =>'uploaded', :size => File.stat(path_to_file).size)
+    self.files_sc_models.create(:name => name, :user_id => current_workspace_member.id, :state =>'uploaded', :size => File.stat(path_to_file).size)
     self.save
     
     # on retourne le resultats
@@ -116,7 +116,7 @@ class ScModel < ActiveRecord::Base
     id_company_member=params[:id_user]
     calcul_time=params[:time]
     calcul_state = Integer(params[:state])
-    current_company_member = UserCompanyMembership.find(id_company_member)
+    current_workspace_member = UserCompanyMembership.find(id_company_member)
     
     if(calcul_state == 0) #si le calcul est arrivé au bout
       path_to_file = "#{SC_MODEL_ROOT}/model_#{self.id}/MESH/mesh.txt"
@@ -134,7 +134,7 @@ class ScModel < ActiveRecord::Base
       
       #mise à jour du résultat de calcul
       @calcul_result = self.calcul_results.build(:calcul_time => calcul_time, :log_type => 'create', :state => 'finish', :gpu_allocated => 1) 
-      @calcul_result.company_member = current_company_member
+      @calcul_result.company_member = current_workspace_member
       @calcul_result.result_date = Time.now
       @calcul_result.save
       

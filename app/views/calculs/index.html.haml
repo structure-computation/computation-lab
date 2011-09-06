@@ -87,7 +87,7 @@
     # Initialization of data coming from database
     $ ->
       SCVisu.current_model_id = #{params[:sc_model_id]}
-      SCVisu.current_company  = #{current_user.company_id}
+      SCVisu.current_company  = #{current_workspace_member.workspace_id}
       
       SCVisu.standardLibraryMaterial  = new SCModels.MaterialCollection
       SCVisu.companyLibraryMaterial   = new SCModels.MaterialCollection

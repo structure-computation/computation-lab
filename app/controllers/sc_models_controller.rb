@@ -16,7 +16,7 @@ class ScModelsController < InheritedResources::Base
   end
 
   def index
-    @sc_models = current_company_member.sc_models
+    @sc_models = current_workspace_member.sc_models
     @sc_models.each{ |sc_model|
       sc_model[:results]  = sc_model.calcul_results.find(:all, :conditions => {:log_type => "compute", :state => "finish"}).size }
     index!
@@ -28,7 +28,7 @@ class ScModelsController < InheritedResources::Base
     #     f.write(params[:json])
     # end
     @sc_model = ScModel.new(params[:sc_model])
-    @company_member_to_model_ownership = CompanyMemberToModelOwnership.create(:sc_model => @sc_model , :company_member => current_company_member, :rights => "all") 
+    @company_member_to_model_ownership = CompanyMemberToModelOwnership.create(:sc_model => @sc_model , :company_member => current_workspace_member, :rights => "all") 
 
     respond_to do |format|
       if @sc_model.save
@@ -55,7 +55,7 @@ class ScModelsController < InheritedResources::Base
     if params[:model].nil?
       flash[:error] = "Vous n'avez pas séléctionné de fichier !"
     else
-      @sc_model.send_mesh(params[:model][:file], current_company_member) unless params[:model][:file].nil?
+      @sc_model.send_mesh(params[:model][:file], current_workspace_member) unless params[:model][:file].nil?
     end
     redirect_to company_model_path(@sc_model)
   end

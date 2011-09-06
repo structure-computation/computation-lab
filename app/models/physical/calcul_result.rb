@@ -76,7 +76,7 @@ class CalculResult < ActiveRecord::Base
     return results
   end
   
-  def load_brouillon_from_ext_file(params,current_company_member) # verification et enregistrement du brouillon envoyé par l'utilisateur
+  def load_brouillon_from_ext_file(params,current_workspace_member) # verification et enregistrement du brouillon envoyé par l'utilisateur
     file = params[:file]
     path_to_mesh = "#{SC_MODEL_ROOT}/model_#{self.sc_model.id}/MESH/mesh.txt"
     mesh = File.read(path_to_mesh)
@@ -94,7 +94,7 @@ class CalculResult < ActiveRecord::Base
     if results
       file_save           = JSON.pretty_generate(jsonbrouillon)
       self.save 
-      self.company_member = current_company_member
+      self.company_member = current_workspace_member
       self.name           = "brouillon_#{self.id}"
       self.save
       
@@ -117,7 +117,7 @@ class CalculResult < ActiveRecord::Base
     return results
   end
   
-  def get_brouillon(params,current_company_member) # lecture du fichier brouillon sur le disque
+  def get_brouillon(params,current_workspace_member) # lecture du fichier brouillon sur le disque
     path_to_file = "#{SC_MODEL_ROOT}/model_#{self.sc_model.id}/calcul_#{self.id}/brouillon.txt"
     results = File.read(path_to_file)
     jsonobject = JSON.parse(results)

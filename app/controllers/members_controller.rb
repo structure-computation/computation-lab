@@ -33,7 +33,7 @@ class MembersController < InheritedResources::Base
 
     def create
       @user = User.new(params["user"])
-      @user.workspace = current_company_member.workspace
+      @user.workspace = current_workspace_member.workspace
       create!
     end
     

@@ -1,14 +1,50 @@
-/* DO NOT MODIFY. This file was compiled Wed, 17 Aug 2011 20:49:19 GMT from
- * /Users/StephieChou/rails_project/sc_interface/app/coffeescripts/calculs/models/LinkModel.coffee
+/* DO NOT MODIFY. This file was compiled Tue, 06 Sep 2011 14:34:40 GMT from
+ * /Users/raphael/Documents/StructComp/SC_Interface/app/coffeescripts/calculs/models/LinkModel.coffee
  */
 
 (function() {
-  window.Link = Backbone.Model.extend();
-  window.Links = Backbone.Collection.extend({
-    model: Link,
+  var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+  SCModels.Link = Backbone.Model.extend({
+    initialize: function() {
+      this.workspace_id = SCVisu.current_company != null ? SCVisu.current_company : 0;
+      return this.url = "/companies/" + this.workspace_id + "/links/";
+    },
+    getId: function() {
+      return this.get('id_in_calcul');
+    }
+  });
+  SCModels.LinkCollection = Backbone.Collection.extend({
+    model: SCModels.Link,
     initialize: function(options) {
-      this.company_id = options.company_id != null ? options.company_id : 1;
-      return this.url = "/companies/" + this.company_id + "/links";
+      this.workspace_id = SCVisu.current_company != null ? SCVisu.current_company : 0;
+      this.url = "/companies/" + this.workspace_id + "/links";
+      this._meta = {};
+      this.meta("id_last_model", (this.last() && this.last().get('id') + 1) ||  1);
+      return this.bind('add', __bind(function(link) {
+        link.set({
+          'id': this.meta("id_last_model")
+        });
+        return this.incrementIdLastModel();
+      }, this));
+    },
+    addAndSave: function(link) {
+      return link.save({}, {
+        success: function() {
+          return SCVisu.current_calcul.set({
+            links: SCVisu.linkListView.collection.models
+          });
+        }
+      });
+    },
+    incrementIdLastModel: function() {
+      return this.meta('id_last_model', this.meta('id_last_model') + 1);
+    },
+    meta: function(property, value) {
+      if (value === void 0) {
+        return this._meta[property];
+      } else {
+        return this._meta[property] = value;
+      }
     }
   });
 }).call(this);
