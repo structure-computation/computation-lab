@@ -4,8 +4,7 @@ class Link < ActiveRecord::Base
   
   # TODO: On n'avait pas dit "null" pour la lib standard ?
   scope :standard, where(:workspace_id => -1)
-  # TODO: Renommer plus explicitement comme (from_workspace ou workspace_links ou workspace_library...)
-  scope :user_company , lambda { |workspace_id|
+  scope :from_workspace , lambda { |workspace_id|
     where(:workspace_id => workspace_id)
   }
 

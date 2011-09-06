@@ -7,9 +7,9 @@ class CalculsController < ApplicationController
   
   def index
     @standard_links     = Link.standard
-    @company_links      = Link.user_company(current_user.company)
+    @company_links      = Link.from_workspace(current_user.company)
     @standard_materials = Material.standard
-    @company_materials  = Material.user_company(current_user.company)
+    @company_materials  = Material.from_workspace(current_user.company)
     @material           = Material.new
     @link               = Link.new
     @company            = current_user.company

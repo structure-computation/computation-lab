@@ -14,7 +14,7 @@ class LinksController < InheritedResources::Base
   def index 
     @company  = current_user.workspace
     @standard_links = Link.standard
-    @company_links  = Link.user_company @workspace.id
+    @company_links  = Link.from_workspace @workspace.id
     index!
   end
   
