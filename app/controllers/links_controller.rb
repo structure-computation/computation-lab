@@ -12,7 +12,7 @@ class LinksController < InheritedResources::Base
   end
   
   def index 
-    @workspace  = current_user.workspace
+    @company  = current_user.workspace
     @standard_links = Link.standard
     @company_links  = Link.user_company @workspace.id
     index!

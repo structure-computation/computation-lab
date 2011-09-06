@@ -12,9 +12,9 @@ class MaterialsController < InheritedResources::Base
   end
 
   def index 
-    @workspace          = current_company_member.workspace
-    @standard_materials = Material.standard
-    @company_materials  = Material.user_company @workspace.id
+    @workspace           = current_company_member.workspace
+    @standard_materials  = Material.standard
+    @workspace_materials = Material.user_workspace @workspace.id
     index!
   end
   
@@ -22,7 +22,7 @@ class MaterialsController < InheritedResources::Base
     if params[:material].nil?
       @material = Material.create retrieve_column_fields(params)
     end
-    create! { company_materials_path }
+    create! { workspace_materials_path }
   end
   
   def update
@@ -31,7 +31,7 @@ class MaterialsController < InheritedResources::Base
       @material = Material.find(params[:id])
       @material.update_attributes! retrieve_column_fields(params)
     end
-    update! { company_materials_path }
+    update! { workspace_materials_path }
   end
   
   def edit
@@ -54,7 +54,7 @@ class MaterialsController < InheritedResources::Base
         format.html { render :action => "show"}
         format.json { render :json => @material.to_json }
       end
-    # elsif @material.company_id == current_user.company.id
+    # elsif @material.workspace_id == current_user.workspace.id
     #   render :action => "show"
     else
       flash[:notice] = "Vous n'avez pas accès à cette pièce !" # TODO: C'est un materiaux et non une pièce et c'est à mettre  dans les locales...
