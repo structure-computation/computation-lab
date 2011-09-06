@@ -8,7 +8,7 @@
   - if @material.mtype.include? "en"
     Endo
 
-= form_for [@company, @material] do |f|
+= form_for [@workspace, @material] do |f|
   %h3 Informations
 
   = f.hidden_field :comp
@@ -30,4 +30,4 @@
     = submit_tag "Editer", :class => 'yellow_button'
   - else 
     = submit_tag "Créer", :class => 'yellow_button'
-    = link_to "Annuler", company_materials_path, :class => 'yellow_button'
+    = link_to "Annuler", workspace_materials_path, :class => 'yellow_button'

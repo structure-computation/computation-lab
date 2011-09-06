@@ -10,7 +10,7 @@
   %tbody
     - members_list.each do |member|
       %tr
-        %td.escape_search.details_link= link_to "Détails", company_member_path( current_company_member.company, member)
+        %td.escape_search.details_link= link_to "Détails", workspace_member_path( current_company_member.workspace, member)
         %td= member.email
         %td= member.firstname
         %td= member.role
@@ -18,11 +18,11 @@
         %td.action_on_table.escape_search
           %ul
             %li
-              = link_to "Supprimer", company_member_path(current_company_member.company, member), :confirm => "Êtes vous sûr ?", :method => :delete
+              = link_to "Supprimer", workspace_member_path(current_company_member.workspace, member), :confirm => "Êtes vous sûr ?", :method => :delete
             %li 
-              = link_to "Editer", edit_company_member_path(current_company_member.company, member)
+              = link_to "Editer", edit_workspace_member_path(current_company_member.workspace, member)
 
-= link_to 'Ajouter un membre', new_company_member_path(@company), :class => 'yellow_button'
+= link_to 'Ajouter un membre', new_workspace_member_path(@workspace), :class => 'yellow_button'
 
 :coffeescript
   $('#members_table').tablesorter()

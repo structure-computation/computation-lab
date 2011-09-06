@@ -1,7 +1,7 @@
 %tr{:class => type}
   %td.escape_search.details_link
-    - if material.company
-      =  link_to "Détails", [material.company, material]
+    - if material.workspace
+      =  link_to "Détails", [material.workspace, material]
     / - else
     /   =  link_to "Détails", [material]
   %td.name=           material.name
@@ -11,9 +11,9 @@
   %td.type=           material.mtype
   %td.comp=           material.comp
   %td.action_on_table.escape_search
-    - if material.company and material.company.id == current_user.company.id
+    - if material.workspace and material.workspace.id == current_user.workspace.id
       %ul
         %li
-          = link_to "Editer"   , edit_company_material_path(material.company, material)
+          = link_to "Editer"   , edit_workspace_material_path(material.workspace, material)
         %li
           = link_to "Supprimer", {:action=>"destroy", :controller=>"materials", :id => material.id}, :method => :delete    
