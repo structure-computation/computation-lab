@@ -1,34 +1,44 @@
 class MaterialsController < InheritedResources::Base
+  helper :all
   #session :cookie_only => false, :only => :upload
   before_filter :authenticate_user!
   before_filter :set_page_name
-  belongs_to    :company
+  belongs_to    :workspace
   respond_to    :json
-  layout 'company'
+  layout 'workspace'
 
   def set_page_name
     @page = :bibliotheque
   end
 
   def index 
-    @company = current_user.company
-    if params[:type] == "standard"
-      @materials = Material.standard
-    else
-        @materials = Material.find_all_by_company_id(@company.id)
-    end
+    @workspace           = current_workspace_member.workspace
+    @standard_materials  = Material.standard
+    @workspace_materials = Material.from_workspace @workspace.id
     index!
   end
   
   def create
-    create! { company_materials_path }
+    if params[:material].nil?
+      @material = Material.create retrieve_column_fields(params)
+    end
+    create! { workspace_materials_path }
+  end
+  
+  def update
+    # Test pour savoir si les informations sont données en brut (en JSON, envoyées par le javascript)
+    if params[:material].nil?
+      @material = Material.find(params[:id])
+      @material.update_attributes! retrieve_column_fields(params)
+    end
+    update! { workspace_materials_path }
   end
   
   def edit
     @material = Material.find(params[:id])
-    if @material.company_id == -1
+    if @material.workspace_id == -1
       flash[:notice] = "Vous n'avez pas le droit d'éditer cette pièce !"
-      redirect_to company_materials_path
+      redirect_to workspace_materials_path
     else
       edit!
     end
@@ -36,15 +46,19 @@ class MaterialsController < InheritedResources::Base
   
   # Essayer de faire une ressources accessibles par /material
   def show
-    @material = Material.find(params[:id])
-    @company = Company.find(params[:company_id])
-    if @material.company_id == -1
-      render :action => "show"
-    elsif @material.company_id == current_user.company.id
-      render :action => "show"
+    @material   = Material.find(params[:id])
+    @workspace  = Workspace.find(params[:workspace_id])
+    # TODO: Idem commentaire sur les liens. Cette manière de faire est trop dépendante du modèle. (on cherche dans les colonnes... qui vont changer ici !)
+    if @material.workspace_id == -1 or @material.workspace_id == workspace
+      respond_to do |format|
+        format.html { render :action => "show"}
+        format.json { render :json => @material.to_json }
+      end
+    # elsif @material.workspace_id == current_workspace_member.workspace.id
+    #   render :action => "show"
     else
-      flash[:notice] = "Vous n'avez pas accès à cette pièce !"
-      redirect_to company_materials_path
+      flash[:notice] = "Vous n'avez pas accès à cette pièce !" # TODO: C'est un materiaux et non une pièce et c'est à mettre  dans les locales...
+      redirect_to workspace_materials_path
     end
   end
 
@@ -52,7 +66,7 @@ class MaterialsController < InheritedResources::Base
     if params[:type]
       @material = Material.new
       @material.mtype = params[:type].downcase
-      @material.comp = ""
+      @material.comp  = ""
       @material.comp += "el " if params[:Elastique]
       @material.comp += "pl " if params[:Plastique]
       @material.comp += "en " if params[:Endomageable]
@@ -60,5 +74,13 @@ class MaterialsController < InheritedResources::Base
     end
     new!
   end
-  
+
+  private
+    def retrieve_column_fields(params)
+      to_update = {}
+      Material.column_names.each do |column_name|
+        to_update[column_name] = params[column_name]
+      end
+       to_update
+    end
 end

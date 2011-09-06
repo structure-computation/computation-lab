@@ -1,41 +1,31 @@
+- disabled = false if disabled.nil?
+- show_all = false if show_all.nil?
+
 %h3
   Information générique
 %table.grey
   %tbody
     %tr
-      %td Description :
-      %td{:colspan => 2}= text_area :link, :description, :value => @link.description, :disabled => disabled
+      %th Name
+      %td= text_field :link, :name, :disabled => disabled
     %tr
-      %td Epaisseur :
-      %td.label_table
-        = label :link, :Ep, "Ep = "
-      %td 
-        = text_field :link, :Ep, :value => @link.Ep, :disabled => disabled
-        m
+      %th Description
+      %td= text_area :link, :description, :disabled => disabled
     %tr
-      %td Jeu :
-      %td.label_table
-        = label :link, :jeu, "j = "
-      %td 
-        = text_field :link, :jeu, :value => @link.jeu, :disabled => disabled
-        m
+      %th Epaisseur (Ep)
+      %td= custom_text_field(:link, :Ep, "Ep", disabled)
+    %tr
+      %th Jeu (j)
+      %td= custom_text_field(:link, :jeu, "j", disabled)
 
-    - if @link.comp_generique.downcase.include? "el"
+    - if @link.comp_generique.downcase.include? "el" or show_all
       %tr
-        %td Raideur :
-        %td.label_table
-          = label :link, :R, "R = "
-        %td 
-          = text_field :link, :R, :value => @link.R, :disabled => disabled
-          N/m
+        %th Raideur (R)
+        %td= custom_text_field(:link, :R, "R", disabled)
 
-
-    - if @link.comp_generique.downcase.include? "co"
+    - if @link.comp_generique.downcase.include? "co" or show_all
       %tr
-        %td Coefficient de frottement :
-        %td.label_table
-          = label :link, :f, "f = "
-        %td 
-          = text_field :link, :f, :value => @link.f, :disabled => disabled
+        %th Coefficient de frottement (f)
+        %td= custom_text_field(:link, :f, "f", disabled)
 
 

@@ -1,0 +1,17 @@
+%h2.grey Temps
+#steps
+  %button#add_step Ajouter un Step
+  %select#step_type
+    %option{:value => "static"} Static
+    %option{:value => "quasistatic"} Quasistatic
+    %option{:value => "dynamic"} Dynamic
+  %table#steps_table.grey
+    %thead
+      %tr.no_sorter
+        %th Nom
+        %th Temps initial
+        %th Pas de temps
+        %th Nombre de pas de temps
+        %th Temps final
+        %th
+    %tbody

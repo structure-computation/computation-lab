@@ -4,7 +4,7 @@
       Menu
     %ul
       %li.LM_pic_model
-        = link_to "Retour à la liste de modèles", company_sc_models_path(@company) 
+        = link_to "Retour à la liste de modèles", workspace_sc_models_path(@workspace) 
 
 -content_for :right_top do
   %h2.grey
@@ -28,7 +28,7 @@
 
 -content_for :left_content do
 
-  %ul.tab_submenu
+  %ul.tab_submenu.js_tab_submenu
     %li 
       %a#tab_1.selected{:href => "#Outils"} Outils
     %li 
@@ -36,13 +36,13 @@
     %li 
       %a#tab_3{:href => "#Utilisateurs"} Utilisateurs
                    
--content_for :company_content do
+-content_for :workspace_content do
   %h2.grey
     Modèle : 
     = @sc_model.name
   .wrapper
     #left_content
-      %ul.tab_submenu
+      %ul.tab_submenu.js_tab_submenu
         %li 
           %a#tab_1.selected{:href => "#Outils"} Outils
         %li 
@@ -51,18 +51,18 @@
           %a#tab_3{:href => "#Utilisateurs"} Utilisateurs
                        
     #right_content
-      .tab_content
+      .tab_content.js_tab_content
         #tab_1_content.show
           %h3
             Pour accéder aux outils, vous devez d'abord charger un maillage pour ce modèle
           %p
             Charger votre maillage
-          - semantic_form_for [@company, @sc_model], :url => {:controller => "sc_models", :action => "load_mesh"}, :html => {:multipart => true, :method => :post} do |f|
+          - semantic_form_for [@workspace, @sc_model], :url => {:controller => "sc_models", :action => "load_mesh"}, :html => {:multipart => true, :method => :post} do |f|
             = f.inputs do
               = f.input :file, :as => :file
             = f.buttons
           %ul
-            %li= link_to "Calcul des structures", :controller => "calculs", :action => "index", :model_id => @sc_model.id
+            %li= link_to "Calcul des structures", sc_model_calculs_path(@sc_model) #:controller => "calculs", :action => "index", :model_id => @sc_model.id
             %li= link_to "Visualisation"        , :controller => "visualisations", :action => "index", :model_id => @sc_model.id
             %li= link_to "Partager un fichier"
         #tab_2_content.hide
@@ -103,14 +103,14 @@
                 %th Nom
                 %th Role
             %tbody
-              - @sc_model.user_model_ownerships.each do |info|
+              - @sc_model.workspace_member_to_model_ownerships.each do |ownerships|
                 %tr
                   %td
-                    = info.user.email
+                    = ownerships.workspace_member.user.email
                   %td
-                    = info.user.firstname
+                    = ownerships.workspace_member.user.firstname
                   %td
-                    = info.rights
+                    = ownerships.rights
         = coffeescript_include_tag "manage_tab"
 
 :coffeescript

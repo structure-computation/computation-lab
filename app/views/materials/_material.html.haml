@@ -1,0 +1,19 @@
+%tr{:class => type}
+  %td.escape_search.details_link
+    - if material.workspace
+      =  link_to "Détails", [material.workspace, material]
+    / - else
+    /   =  link_to "Détails", [material]
+  %td.name=           material.name
+  %td.id=             material.id
+  %td.reference=      material.reference            
+  %td.family=         material.family
+  %td.type=           material.mtype
+  %td.comp=           material.comp
+  %td.action_on_table.escape_search
+    - if material.workspace and material.workspace.id == current_workspace_member.workspace.id
+      %ul
+        %li
+          = link_to "Editer"   , edit_workspace_material_path(material.workspace, material)
+        %li
+          = link_to "Supprimer", {:action=>"destroy", :controller=>"materials", :id => material.id}, :method => :delete    

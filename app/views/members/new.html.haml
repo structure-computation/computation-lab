@@ -4,7 +4,7 @@
       Menu
     %ul
       %li.LM_pic_materiau
-        =link_to 'Retour à la liste des membres', company_path(@company, :anchor => 'Membres')
+        =link_to 'Retour à la liste des membres', workspace_path(@workspace, :anchor => 'Membres')
 
--content_for :company_content do        
+-content_for :workspace_content do        
   = render "form"

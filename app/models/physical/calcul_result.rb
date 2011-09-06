@@ -9,6 +9,7 @@ class CalculResult < ActiveRecord::Base
   include Socket::Constants
   
   belongs_to  :user         # utilisateur ayant lance le calcul
+  belongs_to  :workspace_member, :class_name => "UserWorkspaceMembership", :foreign_key => "workspace_member_id"
   belongs_to  :sc_model
   has_one     :log_calcul
   
@@ -51,9 +52,8 @@ class CalculResult < ActiveRecord::Base
   end
 
   def save_brouillon(params) #enregistrement du fichier brouillon
-    jsonobject = JSON.parse(params[:file])
+    jsonobject = params
     file = JSON.pretty_generate(jsonobject)
-    
     # on enregistre le fichier sur le disque et on change les droit pour que le serveur de calcul y ait acces
     path_to_model = "#{SC_MODEL_ROOT}/model_#{self.sc_model.id}"
     path_to_calcul = "#{SC_MODEL_ROOT}/model_#{self.sc_model.id}/calcul_#{self.id}"
@@ -76,7 +76,7 @@ class CalculResult < ActiveRecord::Base
     return results
   end
   
-  def load_brouillon_from_ext_file(params,current_user) # verification et enregistrement du brouillon envoyé par l'utilisateur
+  def load_brouillon_from_ext_file(params,current_workspace_member) # verification et enregistrement du brouillon envoyé par l'utilisateur
     file = params[:file]
     path_to_mesh = "#{SC_MODEL_ROOT}/model_#{self.sc_model.id}/MESH/mesh.txt"
     mesh = File.read(path_to_mesh)
@@ -92,10 +92,10 @@ class CalculResult < ActiveRecord::Base
     
     #enregistrement
     if results
-      file_save = JSON.pretty_generate(jsonbrouillon)
+      file_save           = JSON.pretty_generate(jsonbrouillon)
       self.save 
-      self.user = current_user
-      self.name = "brouillon_#{self.id}"
+      self.workspace_member = current_workspace_member
+      self.name           = "brouillon_#{self.id}"
       self.save
       
       # on enregistre le fichier sur le disque et on change les droit pour que le serveur de calcul y ait acces
@@ -117,26 +117,34 @@ class CalculResult < ActiveRecord::Base
     return results
   end
   
-  def get_brouillon(params,current_user) # lecture du fichier brouillon sur le disque
+  def get_brouillon(params,current_workspace_member) # lecture du fichier brouillon sur le disque
     path_to_file = "#{SC_MODEL_ROOT}/model_#{self.sc_model.id}/calcul_#{self.id}/brouillon.txt"
     results = File.read(path_to_file)
     jsonobject = JSON.parse(results)
     
-    if(self.state == 'temp') 	#si on prend le brouillon d'un calcul non effectué
-      self.description = params[:description]
-      self.save
-      send_data  = {:calcul => self, :brouillon => jsonobject}
-    else			#si on prend le brouillon d'un calcul effectué
-      @new_calcul = self.sc_model.calcul_results.create(:name => params[:name], :description => params[:description], :state => 'temp', :ctype =>params[:ctype], :D2type => params[:D2type], :log_type => 'compute')
-      @new_calcul.user = current_user
-      if (@new_calcul.name == self.name)
-	@new_calcul.name = "brouillon_#{@new_calcul.id}" 
-      end
-      @new_calcul.save
-      send_data  = {:calcul => @new_calcul, :brouillon => jsonobject}
-    end
+
+    # if(self.state == 'temp') 	#si on prend le brouillon d'un calcul non effectué
+#       self.description = params[:description]
+#       self.save
+#       send_data  = {:calcul => self, :brouillon => jsonobject}
+#     else			#si on prend le brouillon d'un calcul effectué
+#       @new_calcul = self.sc_model.calcul_results.create(
+#         :name => params[:name],
+#         :description => params[:description],
+#         :state => 'temp',
+#         :ctype =>params[:ctype],
+#         :D2type => params[:D2type],
+#         :log_type => 'compute'
+#       )
+#       @new_calcul.user = current_workspace_member
+#       if (@new_calcul.name == self.name)
+#         @new_calcul.name = "brouillon_#{@new_calcul.id}" 
+#       end
+#       @new_calcul.save
+#       send_data  = {:calcul => @new_calcul, :brouillon => jsonobject}
+#     end
     
-    return send_data 
+    return jsonobject 
   end
   
   def compute_previsions() # calcul des prevision de temps de calcul et autorisation de calcul
@@ -170,15 +178,15 @@ class CalculResult < ActiveRecord::Base
     @debit_jeton = ((self.estimated_calcul_time * self.gpu_allocated)/15).ceil+1
         
     #autorisation de calcul
-    @solde_jeton = self.sc_model.company.calcul_account.solde_jeton
-    @solde_jeton_tempon = self.sc_model.company.calcul_account.solde_jeton_tempon
+    @solde_jeton = self.sc_model.workspace.calcul_account.solde_jeton
+    @solde_jeton_tempon = self.sc_model.workspace.calcul_account.solde_jeton_tempon
     self.launch_autorisation = false
     if(@debit_jeton > (@solde_jeton - @solde_jeton_tempon)) 		#si le debit depasse le nb de jetons restants
       self.launch_autorisation = false
     else                                       #si il y a assez de jetons , les jetons sont placé sur la reserve				
       self.launch_autorisation = true
-      self.sc_model.company.calcul_account.solde_jeton_tempon = self.sc_model.company.calcul_account.solde_jeton_tempon + @debit_jeton
-      self.sc_model.company.calcul_account.save
+      self.sc_model.workspace.calcul_account.solde_jeton_tempon = self.sc_model.workspace.calcul_account.solde_jeton_tempon + @debit_jeton
+      self.sc_model.workspace.calcul_account.save
     end
     #TEMP
     #self.launch_autorisation = true
@@ -209,7 +217,7 @@ class CalculResult < ActiveRecord::Base
     #debugger
     
     #mise à jour du compte de calcul
-    self.sc_model.company.calcul_account.log_calcul(self.id, calcul_state)
+    self.sc_model.workspace.calcul_account.log_calcul(self.id, calcul_state)
   end
   
   def get_used_memory()

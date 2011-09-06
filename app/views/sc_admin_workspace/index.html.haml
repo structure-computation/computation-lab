@@ -1,0 +1,10 @@
+- content_for :left_top do 
+  = render :partial => "partials/raccourcis_admin"
+  = render :partial => "context_leftbox"
+
+- content_for :workspace_content do 
+  %h2.grey
+    Liste des société clientes
+  = render :partial => "workspace_detail"
+  = render :partial => "filtre_des_workspace"
+  = render :partial => "workspace_list"

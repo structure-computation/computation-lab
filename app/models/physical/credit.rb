@@ -1,7 +1,7 @@
 class Credit < ActiveRecord::Base
   belongs_to :calcul_account
   belongs_to :forfait
-  has_one    :company ,  :through => :calcul_account
+  has_one    :workspace ,  :through => :calcul_account
   has_one    :solde_calcul_account
   has_one    :bill
   
@@ -18,7 +18,7 @@ class Credit < ActiveRecord::Base
     
     #création de la facture
     current_facture = self.build_facture() 
-    current_facture.company = self.calcul_account.company
+    current_facture.workspace = self.calcul_account.workspace
     current_facture.save
     
     #derniere mise a jour des info du compte et sauvegarde

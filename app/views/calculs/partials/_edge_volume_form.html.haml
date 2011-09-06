@@ -1,0 +1,54 @@
+#volume_geometry
+  %p
+    Choisissez la géométrie 
+  %p
+    %button.yellow_button.geometry{:value => "volume_box"}      Boite
+    %button.yellow_button.geometry{:value => "volume_cylinder"} Cylindre
+    %button.yellow_button.geometry{:value => "volume_sphere"}   Sphère
+
+#edge_volume_box
+
+  %table.grey
+    %tbody
+      = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Point 1 (x,y,z)", :data_type => "number",
+                                                                          :ids => ["volume_box_point_1_x", "volume_box_point_1_y", "volume_box_point_1_z"], 
+                                                                          :names => ["point_1_x", "point_1_y", "point_1_z"], 
+                                                                          :placeholders => ["x", "y", "z"]}
+
+      = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Point 2 (x,y,z)", :data_type => "number",
+                                                                          :ids => ["volume_box_point_2_x", "volume_box_point_2_y", "volume_box_point_2_z"], 
+                                                                          :names => ["point_2_x", "point_2_y", "point_2_z"], 
+                                                                          :placeholders => ["x", "y", "z"]}
+#edge_volume_cylinder
+
+  %table.grey
+    %tbody
+      = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Point 1 (x,y,z)", :data_type => "number",
+                                                                          :ids => ["volume_cylinder_point_1_x", "volume_cylinder_point_1_y", "volume_cylinder_point_1_z"], 
+                                                                          :names => ["point_1_x", "point_1_y", "point_1_z"], 
+                                                                          :placeholders => ["x", "y", "z"]}
+
+      = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Direction de l'axe (x,y,z)", :data_type => "number",
+                                                                          :ids => ["volume_cylinder_axis_direction_x", "volume_cylinder_axis_direction_y", "volume_cylinder_axis_direction_z"], 
+                                                                          :names => ["axis_direction_x", "axis_direction_y", "axis_direction_z"], 
+                                                                          :placeholders => ["x", "y", "z"]}
+
+      = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Rayon (x)", :data_type => "number",
+                                                                          :ids => ["volume_cylinder_radius"],
+                                                                          :names => ["radius"],
+                                                                          :placeholders => ["x"]}
+
+#edge_volume_sphere
+
+  %table.grey
+    %tbody
+      = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Centre (x,y,z)", :data_type => "number",
+                                                                          :ids => ["volume_sphere_center_x", "volume_sphere_center_y", "volume_sphere_center_z"], 
+                                                                          :names => ["center_x", "center_y", "center_z"], 
+                                                                          :placeholders => ["x", "y", "z"]}
+  %table.grey
+    %tbody
+      = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Rayon (x)", :data_type => "number",
+                                                                          :ids => ["volume_sphere_radius"], 
+                                                                          :names => ["radius"], 
+                                                                          :placeholders => ["x"]}

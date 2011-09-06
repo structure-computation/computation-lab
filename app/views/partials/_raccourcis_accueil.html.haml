@@ -3,10 +3,10 @@
     Racourcis
   %ul
     %li.manage_pic_liste_compte
-      = link_to "Ma société", companies_path    
+      = link_to "Ma société", workspaces_path    
     %li.LM_pic_model
       %a{ :href => "/modele" }
         Mes modèles
     %li.manage_pic_liste_factures
-      = link_to 'Forum des utilisateurs', company_bills_path(current_user.company)
+      = link_to 'Forum des utilisateurs', workspace_bills_path(current_workspace_member.workspace)
         

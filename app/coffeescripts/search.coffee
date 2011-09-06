@@ -1,3 +1,6 @@
+removeAccent = (string) ->
+  string.replace(/[éèê]/g, 'e').replace(/[ùû]/g, 'u').replace('î', 'i').replace('ô', 'o')
+
 # Cherche une occurence dans tout un tableau
 # @params: tableId
 #   ID du tableau dans laquelle la recherche doit être faite
@@ -14,6 +17,7 @@ window.searchFilter = (tableId, inputFieldId) ->
     
   $(inputFieldId).keyup( ->
     searchText = $(this).attr('value').toLowerCase()
+    searchText = removeAccent(searchText)
     searchText = searchText.split(" ")
     rows = $(tableId + " tbody tr")
     if searchText?
@@ -22,7 +26,8 @@ window.searchFilter = (tableId, inputFieldId) ->
 
         tableContainsOccurence = true
         for text in searchText
-          tableContainsOccurence = false if row.text().toLowerCase().indexOf(text) == -1
+          rowText = removeAccent (row.text().toLowerCase())
+          tableContainsOccurence = false if rowText.indexOf(text) == -1
         if tableContainsOccurence
           row.parent().css('display', 'table-row')
         else
@@ -45,10 +50,8 @@ window.advancedSearchFilter = (tableId, inputFieldIds, colClasses) ->
   if tableId[0] != '#'
     tableId = '#'.concat(tableId)    
   for i in [0...inputFieldIds.length]
-    if inputFieldIds[i][0] != '#'
-      inputFieldIds[i] = '#'.concat(inputFieldIds[i])
-    if colClasses[i][0] != '.'
-      colClasses[i] = '.'.concat(colClasses[i])
+    inputFieldIds[i] = '#'.concat(inputFieldIds[i]) if inputFieldIds[i][0] != '#'
+    colClasses[i] = '.'.concat(colClasses[i])       if colClasses[i][0] != '.'
 
   for inputFieldId in inputFieldIds
     $(inputFieldId).keyup( ->

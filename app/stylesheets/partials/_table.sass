@@ -19,6 +19,8 @@ $color-border-cell           : #555
 $padding-left-cell           : 0.5em
 $background-color-cell       : #d0d1d7
 
+
+
 table.grey
   width           : 100%
   border-collapse : collapse
@@ -28,7 +30,7 @@ table.grey
     //color: #333
   a:hover
     //color: lighten(#333, 15%)
-  thead
+  thead, tfoot
     border-bottom : 1px solid $color-border-cell
     +background-image(linear-gradient($color-thead-start, $color-thead-end))
     tr
@@ -75,6 +77,12 @@ table.grey
       td.label_table     
         text-align       : right
         border-right     : none
+      td
+        input
+          width: 90%
+          margin: 0.1em
+          display: block
+          max-width: 20em
       td.action_on_table
         background  : transparent url('/images/arrow_down.png') no-repeat 50% 50%
         width: 6em
@@ -112,8 +120,16 @@ table.grey
         a
           color: #202c6b
             
-    tr:nth-child(odd)    
+    tr:nth-child(odd)
       background-color : $background-color-cell
+
+table.data_table
+  tbody
+    tr.selected
+      background-color: #BBF
+    tr:hover
+      background-color: #BBF
+
 
 .search_filter
   color: #333
@@ -135,11 +151,15 @@ table.grey
   #more_details
     display: inline-block
     vertical-align: middle
-  #advanced_search
+  .advanced_search
     width: 100%
-    border-top: 1px solid #B2B2B2
     background-color: #F0F0F0
     +border-bottom-radius(0.2em)
+    +transition(0.5s)
+    border-top: 1px solid #B2B2B2
+    border-color: #D0D1D7
+    overflow: hidden
+    max-height: 0px
     p
       text-align: left
       display: inline-block
@@ -147,9 +167,26 @@ table.grey
         display: block
       label:after
         content: " :"
-
+  /* MUST BE AFTER .advanced_search in order to not kill some attributes */
+  .maximize
+    +transition(0.5s)
+    max-height: 9em
+    border-color: #B2B2B2
 #right_top
   .search_filter
     +border-bottom-radius(0.3em)
     background: $background-color-cell
     border : 1px solid #B2B2B2
+
+@media all and (max-width: 768px)
+  table.grey
+    tbody
+      tr    
+        td
+          label
+            width: 98%
+            display: block
+            text-align : left
+          input
+            width: 90%
+            display: block

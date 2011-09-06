@@ -3,7 +3,7 @@
     = render :partial => "partials/raccourcis_accueil"
     = render :partial => "left_submenu"
 
--content_for :content_company do  
+-content_for :content_workspace do  
   .large_ligne
     %h2
       Mes outils
@@ -15,7 +15,7 @@
         %h3
           Mes modèles 
       .ligne
-        =link_to '>', companies_path
+        =link_to '>', workspaces_path
         %p.description
           Gestion des comptes et des droits d'accès
         %h3
@@ -35,10 +35,10 @@
           Mes profil  
       = render :partial => "contenu_mon_profil"
       .ligne
-        %a{ :style => "cursor: pointer;", :onclick => "affich_contenu_profil_company()" }
+        %a{ :style => "cursor: pointer;", :onclick => "affich_contenu_profil_workspace()" }
           >
         %p.description
           Contactez vos gestionnaires
         %h3
           Liste de vos gestionnaires
-      = render :partial => "contenu_company"
+      = render :partial => "contenu_workspace"

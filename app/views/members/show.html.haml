@@ -4,7 +4,7 @@
       Menu
     %ul
       %li.LM_pic_materiau
-        =link_to 'Retour à la liste des membres', company_path(@company, :anchor => 'Membres')
+        =link_to 'Retour à la liste des membres', workspace_path(@workspace, :anchor => 'Membres')
 
 -content_for :right_top do
   %h2.grey
@@ -27,7 +27,7 @@
         %td= @member.state
         %td= @member.created_at.to_date
   
-  = link_to 'Editer', edit_company_member_path(@company, @member), :class => 'yellow_button'
-  = link_to 'Désactiver', edit_company_member_path(@company, @member), :class => 'yellow_button'
+  = link_to 'Editer', edit_workspace_member_path(@workspace, @member), :class => 'yellow_button'
+  = link_to 'Désactiver', edit_workspace_member_path(@workspace, @member), :class => 'yellow_button'
   -# TODO Créer un fonction pour désactiver un user 
-  = link_to 'Editer', edit_company_member_path(@company, @member), :class => 'yellow_button'
+  = link_to 'Editer', edit_workspace_member_path(@workspace, @member), :class => 'yellow_button'

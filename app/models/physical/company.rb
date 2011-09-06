@@ -1,5 +1,7 @@
 class Company < ActiveRecord::Base
-  has_many  :users
+  
+  has_many  :user_workspace_memberships
+  has_many  :users, :through => :user_workspace_memberships
   # has_many  :managers , :conditions => {:role => "gestionnaire"} # TODO: Appliquer un filtre.
   
   has_one   :calcul_account	, :readonly => false
@@ -42,7 +44,16 @@ class Company < ActiveRecord::Base
     
     current_memory_account = self.create_memory_account
     current_memory_account.init
-  end  
+  end
+  
+  def percent_of(n)
+    self.to_f/n.to_f * 100.0
+    nbr jeton
+    nbr consommer
+    
+    abonnement valeur gloabal
+    taille memoire
+  end
   
   def percent_of(n)
     self.to_f/n.to_f * 100.0

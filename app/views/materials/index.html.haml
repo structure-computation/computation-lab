@@ -4,40 +4,26 @@
       Menu
     %ul
       %li.LM_pic_new_mat
-        = link_to "Nouveau materiaux", new_company_material_path
+        = link_to "Nouveau materiaux", new_workspace_material_path
 -content_for :right_top do
   %h2.grey
     Liste des matériaux 
   %div
     = render :partial => "search_filter"
 
--content_for :company_content do
-  - if !@materials.empty?
-    %table.grey#materials_table
-      %thead
-        %tr
-          %th.no_sorter 
-          %th Nom
-          %th ID
-          %th Référence
-          %th Famille
-          %th Type
-          %th Comportement
-          %th.no_sorter Actions
-      %tbody
-        - @materials.each do |material|
-          %tr
-            %td.escape_search.details_link=  link_to "Détails", [@company, material]
-            %td.name=           material.name
-            %td.id=             material.id
-            %td.reference=      material.reference            
-            %td.family=         material.family
-            %td.type=           material.mtype
-            %td.comp=           material.comp
-            %td.action_on_table.escape_search
-              - if material.company and material.company.id == current_user.company.id
-                %ul
-                  %li
-                    = link_to "Editer"   , edit_company_material_path(@company, material)
-                  %li
-                    = link_to "Supprimer", {:action=>"destroy", :controller=>"materials", :id => material.id}, :method => :delete    
+-content_for :workspace_content do
+
+  %table.grey#materials_table
+    %thead
+      %tr
+        %th.no_sorter 
+        %th Nom
+        %th ID
+        %th Référence
+        %th Famille
+        %th Type
+        %th Comportement
+        %th.no_sorter Actions
+    %tbody
+      = render :partial => "material", :collection => @standard_materials, :locals => {:type => "standard"}
+      = render :partial => "material", :collection => @workspace_materials,  :locals => {:type => "workspace"}

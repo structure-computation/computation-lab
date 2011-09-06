@@ -1,75 +1,32 @@
+- disabled = false if disabled.nil?
+- show_all = false if show_all.nil?
+
 %h3 Elasticité
 
-- if material.mtype == "orthotrope"
-  %table.grey
-    %thead
-      %tr.no_sorter
-        %th
-        %th{:colspan => 2} Selon V1
-        %th{:colspan => 2} Selon V2 
-        %th{:colspan => 2} Selon V3
-    %tbody
-      %tr
-        %th Module d'Young
-        %td.label_table
-          = label :material, :E_1, "E1 = "
-        %td 
-          = text_field :material, :E_1, :value => material.E_1, :disabled => disabled
-        %td.label_table
-          = label :material, :E_2, "E2 = "
-        %td 
-          = text_field :material, :E_2, :value => material.E_2, :disabled => disabled
-        %td.label_table
-          = label :material, :E_3, "E3 = "
-        %td 
-          = text_field :material, :E_3, :value => material.E_3, :disabled => disabled
-      %tr
-        %th Coefficient de Poisson
-        %td.label_table
-          = label :material, :nu_12, "mu12 = "
-        %td 
-          = text_field :material, :nu_12, :value => material.nu_12, :disabled => disabled
-        %td.label_table
-          = label :material, :nu_23, "mu23 = "
-        %td 
-          = text_field :material, :nu_23, :value => material.nu_23, :disabled => disabled
-        %td.label_table
-          = label :material, :nu_13, "mu13 = "
-        %td 
-          = text_field :material, :nu_13, :value => material.nu_13, :disabled => disabled
-      %tr
-        %th Limite de rupture
-        %td.label_table
-          = label :material, :sigma_r_1, "Sr1 = "
-        %td 
-          = text_field :material, :sigma_r_1, :value => material.sigma_r_1, :disabled => disabled
-        %td.label_table
-          = label :material, :sigma_r_2, "Sr2 = "
-        %td 
-          = text_field :material, :sigma_r_2, :value => material.sigma_r_2, :disabled => disabled
-        %td.label_table
-          = label :material, :sigma_r_3, "Sr3 = "
-        %td 
-          = text_field :material, :sigma_r_3, :value => material.sigma_r_3, :disabled => disabled
-
-- elsif material.mtype == "isotrope"
-  %table.grey
-    %tbody
-      %tr
-        %th Module d'Young
-        %td.label_table
-          = label :material, :E_1, "E1 = "
-        %td 
-          = text_field :material, :E_1, :value => material.E_1, :disabled => disabled
-      %tr
-        %th Coefficient de poisson
-        %td.label_table
-          = label :material, :nu_12, "mu12 = "
-        %td 
-          = text_field :material, :nu_12, :value => material.nu_12, :disabled => disabled
-      %tr
-        %th Limite de rupture
-        %td.label_table
-          = label :material, :sigma_r_1, "Sr1 = "
-        %td 
-          = text_field :material, :sigma_r_1, :value => material.sigma_r_1, :disabled => disabled
+%table.grey
+  %thead
+    %tr.no_sorter
+      %th
+      %th Selon V1
+      - if @material.mtype == "orthotrope" or show_all
+        %th.orthotropic_information Selon V2 
+        %th.orthotropic_information Selon V3
+  %tbody
+    %tr
+      %th Module d'Young (E)
+      %td= custom_text_field(:material, :E_1, "E1", disabled)
+      - if @material.mtype == "orthotrope" or show_all
+        %td.orthotropic_information= custom_text_field(:material, :E_2, "E2", disabled)
+        %td.orthotropic_information= custom_text_field(:material, :E_3, "E3", disabled)
+    %tr
+      %th Coefficient de Poisson (&nu;)
+      %td= custom_text_field(:material, :nu_12, "&nu;12", disabled)
+      - if @material.mtype == "orthotrope" or show_all
+        %td.orthotropic_information= custom_text_field(:material, :nu_23, "&nu;23", disabled)
+        %td.orthotropic_information= custom_text_field(:material, :nu_13, "&nu;13", disabled)
+    %tr
+      %th Limite de rupture (&sigma;r)
+      %td= custom_text_field(:material, :sigma_r_1, "&sigma;r1", disabled)
+      - if @material.mtype == "orthotrope" or show_all
+        %td.orthotropic_information= custom_text_field(:material, :sigma_r_2, "&sigma;r2", disabled)
+        %td.orthotropic_information= custom_text_field(:material, :sigma_r_3, "&sigma;r3", disabled)

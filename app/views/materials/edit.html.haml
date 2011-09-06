@@ -4,8 +4,8 @@
       Menu
     %ul
       %li.LM_pic_materiau
-        =link_to 'Retour à la liste des matériaux', company_materials_path(@company)
+        =link_to 'Retour à la liste des matériaux', workspace_materials_path(@workspace)
         
--content_for :company_content do
+-content_for :workspace_content do
   .grey
     = render "form"

@@ -36,11 +36,11 @@ end
 
 pdf.bounding_box [300, 650], :width => 245, :height => 150 do
     pdf.text @current_gestionnaire.firstname + " " + @current_gestionnaire.lastname , :align => :right
-    pdf.text @current_company.name, :align => :right
-    pdf.text @current_company.division, :align => :right
-    pdf.text @current_company.address, :align => :right
-    pdf.text @current_company.zipcode + " " + @current_company.city, :align => :right
-    pdf.text @current_company.country, :align => :right
+    pdf.text @current_workspace.name, :align => :right
+    pdf.text @current_workspace.division, :align => :right
+    pdf.text @current_workspace.address, :align => :right
+    pdf.text @current_workspace.zipcode + " " + @current_workspace.city, :align => :right
+    pdf.text @current_workspace.country, :align => :right
 end
 
 #entete du tableau des prix

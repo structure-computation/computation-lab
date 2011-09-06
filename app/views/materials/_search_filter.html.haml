@@ -1,16 +1,22 @@
 .search_filter
-  = form_tag company_materials_path, :method => :get do
   
-    = select_tag "type", options_for_select([["Bibliothèque standard", "standard"],["Ma bibliothèque", "owner"]], (params[:type] == "standard" ? "standard" : "owner"))
-  
-    = submit_tag "Filtrer", :class => 'yellow_button'
+  %a.yellow_button.pressed_button#workspace_material   Ma bibliothèque
+  %a.yellow_button.pressed_button#standard_material  Bibliothèque standard
+  :coffeescript
+    $('a#workspace_material').click ->
+      $(this).toggleClass('pressed_button')
+      $('#materials_table tbody tr.workspace').toggle()
 
+    $('a#standard_material').click ->
+      $(this).toggleClass('pressed_button')
+      $('#materials_table tbody tr.standard').toggle()
+        
   %p
     %label{:for => "search_filter"} Recherche :
     %input#search_filter{:type => "text"}
-    %button#more_details.close.yellow_button Recherche avancée
+    %button#materials_more_details.yellow_button Recherche avancée
 
-  #advanced_search
+  #materials_advanced_search.advanced_search
     %p
       %label{:for => "name_search_filter"} Nom
       %input#name_search_filter{:type => "text"}
@@ -31,22 +37,14 @@
       %input#comp_search_filter{:type => "text"}
 
 :coffeescript
-  $( ->
+  $ ->
     $('#materials_table').tablesorter()
 
-    $("#advanced_search").toggle()  
-    $('#more_details').click( () ->
-      $("#advanced_search").slideToggle()
-      if $(this).hasClass('open')
-        $(this).removeClass('open')
-        $(this).addClass('close')
-      else
-        $(this).removeClass('close')
-        $(this).addClass('open')
+    $('#materials_more_details').click( () ->
+      $('#materials_advanced_search').toggleClass('maximize')
     )
 
     advancedSearchFilter("materials_table",
                          ["name_search_filter", "id_search_filter", "reference_search_filter", "family_search_filter","type_search_filter","comp_search_filter"],
                          ["name"              , "id"              , "reference"              , "family"              ,"type"              ,"comp"])
     searchFilter("materials_table", "search_filter")
-  )

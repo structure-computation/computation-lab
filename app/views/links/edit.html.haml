@@ -4,8 +4,8 @@
       Menu
     %ul
       %li.LM_pic_liaison
-        =link_to 'Retour à la liste des liaisons', company_links_path(@company)
+        =link_to 'Retour à la liste des liaisons', workspace_links_path(@workspace)
 
--content_for :company_content do 
+-content_for :workspace_content do 
   .grey
     = render "form"

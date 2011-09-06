@@ -1,42 +1,102 @@
+# create_table "users", :force => true do |t|
+#   t.integer  "workspace_id"
+#   t.string   "firstname",            :limit => 100, :default => ""
+#   t.string   "lastname",             :limit => 100, :default => ""
+#   t.string   "telephone",            :limit => 23,  :default => ""
+#   t.string   "email",                :limit => 100
+#   t.string   "role",                 :limit => 100
+#   t.datetime "created_at"
+#   t.datetime "updated_at"
+#   t.string   "state",                               :default => "passive"
+#   t.datetime "deleted_at"
+#   t.string   "encrypted_password",                  :default => "",        :null => false
+#   t.string   "password_salt",                       :default => "",        :null => false
+#   t.string   "confirmation_token"
+#   t.datetime "confirmed_at"
+#   t.datetime "confirmation_sent_at"
+#   t.string   "reset_password_token"
+#   t.string   "remember_token"
+#   t.datetime "remember_created_at"
+#   t.integer  "sign_in_count",                       :default => 0
+#   t.datetime "current_sign_in_at"
+#   t.datetime "last_sign_in_at"
+#   t.string   "current_sign_in_ip"
+#   t.string   "last_sign_in_ip"
+#   t.integer  "failed_attempts",                     :default => 0
+#   t.string   "unlock_token"
+#   t.datetime "locked_at"
+# end                                 
 
-quentin:
-  id:                        1
-  login:                     quentin
-  email:                     quentin@example.com
-  salt:                      356a192b7913b04c54574d18c28d46e6395428ab # SHA1('0')
-  crypted_password:          dd6cf9a284744e04c073e7c496f128e3339d68fe # 'monkey'
-  created_at:                <%= 5.days.ago.to_s :db  %>
-  remember_token_expires_at: <%= 1.days.from_now.to_s %>
-  remember_token:            77de68daecd823babbb58edb1c8e14d7106e83bb
-  activation_code:           
-  activated_at:              <%= 5.days.ago.to_s :db %>
-  state:                     active
-      
-aaron:
-  id:                        2
-  login:                     aaron
-  email:                     aaron@example.com
-  salt:                      da4b9237bacccdf19c0760cab7aec4a8359010b0 # SHA1('1')
-  crypted_password:          e5914dfc76f2651c1b09c3c3e56953f5476d5e38 # 'monkey'
-  created_at:                <%= 1.days.ago.to_s :db %>
-  remember_token_expires_at: 
-  remember_token:            
-  activation_code:           1b6453892473a467d07372d45eb05abc2031647a
-  activated_at:              
+jbellec:  
+  id:        440946503
+  firstname: Jérémy
+  lastname:  Bellec
+  
+dvioleau:
+  id:        1013748186
+  firstname: David
+  lastname:  Violeau
+   
+mbleriot:
+  firstname:          Michel
+  lastname:           Bleriot
+  telephone:          +33 5 12 34 56 78
+  email:              mb@tf.structure-computation.com
+  password_salt:      $2a$10$GHKauNVO.9iUVB8jbcDKI.YlGIwP1crEsnV/w5SJI/.E... 
+  encrypted_password: $2a$10$GHKauNVO.9iUVB8jbcDKI. # 'monkey'
 
-  state:                     pending
+  # created_at:      
+  # updated_at:  
+  
 
-
-old_password_holder:
-  id:                        3
-  login:                     old_password_holder
-  email:                     salty_dog@example.com
-  salt:                      7e3041ebc2fc05a40c60028e2c4901a81035d3cd
-  crypted_password:          00742970dc9e6319f8019fd54864d3ea740f04b1 # test
-  created_at:                <%= 1.days.ago.to_s :db %>
-
-  activation_code:           
-  activated_at:              <%= 5.days.ago.to_s :db %>
+jlinder:
+  firstname:          Jean
+  lastname:           linder
+  telephone:          +33 5 12 34 56 78
+  email:              jl@tf.structure-computation.com
+  password_salt:      $2a$10$GHKauNVO.9iUVB8jbcDKI.YlGIwP1crEsnV/w5SJI/.E... 
+  encrypted_password: $2a$10$GHKauNVO.9iUVB8jbcDKI. # 'monkey'
 
 
-  state:                     active
+mleroy:
+  firstname:          Marc
+  lastname:           Leroy
+  telephone:          +33 5 12 34 56 78
+  email:              ml@tf.structure-computation.com
+  password_salt:      $2a$10$GHKauNVO.9iUVB8jbcDKI.YlGIwP1crEsnV/w5SJI/.E... 
+  encrypted_password: $2a$10$GHKauNVO.9iUVB8jbcDKI. # 'monkey'
+  # created_at:      
+  # updated_at:  
+
+#
+fcolac:
+  firstname:          François
+  lastname:           Colac
+  telephone:          +33 5 12 34 56 78
+  email:              fc@tf.structure-computation.com
+  password_salt:      $2a$10$GHKauNVO.9iUVB8jbcDKI.YlGIwP1crEsnV/w5SJI/.E... 
+  encrypted_password: $2a$10$GHKauNVO.9iUVB8jbcDKI. # 'monkey'
+  # created_at:      
+  # updated_at:  
+  
+#
+gselec:
+  firstname:          Gilles
+  lastname:           Selec
+  telephone:          +33 5 12 34 56 78
+  email:              gd@bec.structure-computation.com
+  password_salt:      $2a$10$GHKauNVO.9iUVB8jbcDKI.YlGIwP1crEsnV/w5SJI/.E... 
+  encrypted_password: $2a$10$GHKauNVO.9iUVB8jbcDKI. # 'monkey'
+  # created_at:      
+  # updated_at:
+
+#
+htrasset:
+  firstname:          Herve
+  lastname:           Trasset
+  telephone:          +33 1 23 45 67 89
+  email:              ht@bec.structure-computation.com
+  password_salt:      $2a$10$GHKauNVO.9iUVB8jbcDKI.YlGIwP1crEsnV/w5SJI/.E... 
+  encrypted_password: $2a$10$GHKauNVO.9iUVB8jbcDKI. # 'monkey'
+  # created_at:      
+  # updated_at:

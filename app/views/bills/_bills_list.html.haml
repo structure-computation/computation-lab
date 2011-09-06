@@ -15,12 +15,13 @@
   %body
     - bills_list.each do |bill|
       %tr
-        %td.escape_search.details_link= link_to "Détails", [@company, bill]      
+        %td.escape_search.details_link= link_to "Détails", [@workspace, bill]      
         %td= bill.ref
         %td= bill.facture_type
         %td= bill.total_price_HT
         %td= bill.total_price_TTC
         %td= bill.statut
+
 :coffeescript
   $( ->
     $('#bills_table').tablesorter()

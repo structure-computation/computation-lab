@@ -13,15 +13,21 @@
 
 /* Imports des autres fichiers sass -------------------------------------- */
 
+@import partials/mixins
 @import partials/header
 @import partials/sub_menu
 @import partials/table
 @import partials/footer
-@import partials/layout_company
 @import partials/large_ligne
 @import partials/tab_menu_and_content
-@import partials/companies_show
-@import partials/modeles_show
+
+@import specifics/companies_show
+@import specifics/modeles_show
+@import specifics/calcul
+
+@import layouts/layout_workspace
+@import layouts/layout_calcul
+@import layouts/layout_calcul_breadcrumb
 
 /* Notifications : Error - Notice ---------------------------------------- */
 
@@ -74,14 +80,17 @@ $padding-right-button     : $padding-left-button
   font-size: 0.9em
   font-family: Helvetica, Arial, sans-serif
 
-.yellow_button:hover
+.yellow_button:hover, .pressed_button
   +background-image(linear-gradient($color-button-start-hover, $color-button-end-hover))
+.yellow_button[disabled]
+  +background-image(linear-gradient(#7f7d75, #e5e2d3))
+  cursor: default
 
 /* Global ---------------------------------------------------------------- */
 
 /* -- Variables pour la partie global -- */
 
-$largeur-min : 950px
+$largeur-min : 860px
 $largeur-max : 90%
 
 $background-color-content       : #F0F0F0
@@ -132,3 +141,6 @@ div.grey
   
 fieldset
   border: none
+  
+#content
+  +full

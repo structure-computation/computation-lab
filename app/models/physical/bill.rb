@@ -1,5 +1,5 @@
 class Bill < ActiveRecord::Base
-  belongs_to :company
+  belongs_to :workspace
   belongs_to :credit
   belongs_to :log_abonnement
   
@@ -73,8 +73,8 @@ class Bill < ActiveRecord::Base
   #on génère le fichier pdf de la facture
   def generate_pdf_facture()
     
-    @current_company = self.company
-    @current_gestionnaire = @current_company.users.find(:first, :conditions => {:role => "gestionnaire"})
+    @current_workspace = self.workspace
+    @current_gestionnaire = @current_workspace.users.find(:first, :conditions => {:role => "gestionnaire"})
     pdf = Prawn::Document.new(:page_size => 'A4',:background => "#{RAILS_ROOT}/public/images/fond_facture.jpg", :margin => [0,0,0,0])
     
     pdf.font "Helvetica" 
@@ -115,11 +115,11 @@ class Bill < ActiveRecord::Base
 
     pdf.bounding_box [300, 650], :width => 245, :height => 150 do
 	pdf.text @current_gestionnaire.firstname + " " + @current_gestionnaire.lastname , :align => :right
-	pdf.text @current_company.name, :align => :right
-	pdf.text @current_company.division, :align => :right
-	pdf.text @current_company.address, :align => :right
-	pdf.text @current_company.zipcode + " " + @current_company.city, :align => :right
-	pdf.text @current_company.country, :align => :right
+	pdf.text @current_workspace.name, :align => :right
+	pdf.text @current_workspace.division, :align => :right
+	pdf.text @current_workspace.address, :align => :right
+	pdf.text @current_workspace.zipcode + " " + @current_workspace.city, :align => :right
+	pdf.text @current_workspace.country, :align => :right
     end
 
     #entete du tableau des prix

@@ -1,0 +1,22 @@
+/ contenu
+#FactureContent.largeBoxContentCompte1.off
+  / menu du compte calcul
+  .CompteMenu
+    %ul
+      %li#FMListe.selected
+        %a{ :onclick => "affich_liste_facture()", :style => "cursor: pointer;" }
+          liste des factures
+      %li#FMDetail
+        %a{ :onclick => "affich_detail_facture()", :style => "cursor: pointer;" }
+          Détail
+
+  .CompteContent#FCListe.on
+    .CompteContentHeightMin
+    = render :partial => "companies/facture/decompte_facture"
+  .CompteContent#FCDetail.off
+    .CompteContentHeightMin
+    /= render :partial => "contenu_workspace_detail"
+  
+  
+/ fin menu compte calcul
+/ fin du contenu

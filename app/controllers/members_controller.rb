@@ -1,13 +1,13 @@
 # Controlleur permettant de gerer les utilisateurs (user) au sein d'une équipe.
-# Ulterieurement pourra être une ressource incluse dans une ressource company
+# Ulterieurement pourra être une ressource incluse dans une ressource workspace
 
 class MembersController < InheritedResources::Base
   
-    layout 'company'
+    layout 'workspace'
     
     # Configuration de inherited ressource.
     defaults      :resource_class => User, :collection_name => 'members', :instance_name => 'member'
-    belongs_to    :company
+    belongs_to    :workspace
     
     respond_to    :html, :json, :js
 
@@ -33,12 +33,12 @@ class MembersController < InheritedResources::Base
 
     def create
       @user = User.new(params["user"])
-      @user.company = current_user.company
+      @user.workspace = current_workspace_member.workspace
       create!
     end
     
     def destroy
-      destroy!{ company_path(:anchor => 'Membres') }
+      destroy!{ workspace_path(:anchor => 'Membres') }
     end
 
     # There's no page here to update or destroy a user.  If you add those, be
@@ -48,7 +48,7 @@ class MembersController < InheritedResources::Base
   protected
     # Configuration de InheritedRessource
     def begin_of_association_chain
-      Company.accessible_by_user(current_user)
+      Workspace.accessible_by_user(current_user)
     end
   
     

@@ -1,0 +1,39 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+# turbine:
+#   name: Usure Turbine SC12 304
+#   description: Analyse de l'usure des éléments mobiles de la turbine.
+#   start_date: 2009-11-01
+#   estimated_end_date: 2010-06-31
+#   end_date: 
+#   estimated_done: 1
+#   state: active
+# 
+# liaisonb:
+#   name: Liaison boulonée pour client.
+#   description: Analyse de resistance de la liaison en mode élastique.
+#   start_date: 2010-01-04
+#   estimated_end_date: 2010-12-22
+#   end_date: 
+#   estimated_done: 
+#   state: active
+# 
+# #
+# poutrelle:
+#   name: Poutrelle droite pour hangar.
+#   description: Analyse de la poutrelle dans le cas de la supression du pillier central.
+#   start_date: 2010-01-10
+#   estimated_end_date: 2010-06-31
+#   end_date: 
+#   estimated_done: 
+#   state: active
+# 
+# #
+# portefaux:
+#   name: "assemblage cantilever, étude."
+#   description: modele classique cantilever.
+#   start_date: 2009-06-10
+#   estimated_end_date: 2010-07-05
+#   end_date: 2010-07-01
+#   estimated_done: 
+#   state: closed

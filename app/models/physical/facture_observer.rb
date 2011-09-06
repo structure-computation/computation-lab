@@ -1,10 +1,11 @@
+# TODO: supprimer ce fichier ou lui donner un rôle.
 class FactureObserver < ActiveRecord::Observer
 #   def after_create(facture)  
 #     # ecripture de la facture au format pdf
 #     facture.reload
 #     facture.ref = Date.today.to_s() + "-" + facture.id.to_s() 
-#     @current_company = facture.company
-#     @current_gestionnaire = @current_company.users.find(:first, :conditions => {:role => "gestionnaire"})
+#     @current_workspace = facture.workspace
+#     @current_gestionnaire = @current_workspace.users.find(:first, :conditions => {:role => "gestionnaire"})
 #     
 #     pdf = Prawn::Document.new(:page_size => 'A4',:background => "#{RAILS_ROOT}/public/images/fond_facture.jpg", :margin => [0,0,0,0])
 #      
@@ -46,11 +47,11 @@ class FactureObserver < ActiveRecord::Observer
 # 
 #     pdf.bounding_box [300, 650], :width => 245, :height => 150 do
 # 	pdf.text @current_gestionnaire.firstname + " " + @current_gestionnaire.lastname , :align => :right
-# 	pdf.text @current_company.name, :align => :right
-# 	pdf.text @current_company.division, :align => :right
-# 	pdf.text @current_company.address, :align => :right
-# 	pdf.text @current_company.zipcode + " " + @current_company.city, :align => :right
-# 	pdf.text @current_company.country, :align => :right
+# 	pdf.text @current_workspace.name, :align => :right
+# 	pdf.text @current_workspace.division, :align => :right
+# 	pdf.text @current_workspace.address, :align => :right
+# 	pdf.text @current_workspace.zipcode + " " + @current_workspace.city, :align => :right
+# 	pdf.text @current_workspace.country, :align => :right
 #     end
 # 
 #     #entete du tableau des prix

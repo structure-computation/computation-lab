@@ -1,9 +1,13 @@
 SCInterface::Application.routes.draw do
 
+  resources :workspace_relationships
+
+  resources :customers
+
   devise_for  :users,   :controllers => { :sessions => "users/sessions", :registrations => "users/registrations" }
 
   match 'companies/get_gestionnaire'   => "companies#get_gestionnaire"  
-  resources :companies do
+  resources :workspaces do
     resources :materials
     resources :links
     resources :sc_models do 
@@ -15,14 +19,13 @@ SCInterface::Application.routes.draw do
     end
     resources :members
   end
-  root :to => "home#index"
-  
+  resources :sc_models do 
+    resources :calculs
+  end
 
-  # TODO: La partie calcul est à séparer en plusieurs ressources.
-  match 'calcul/:action(/:id(.:format))' => "calcul"
-  
-  
-  
+
+  root :to => "home#index"
+
   match ':controller(/:action(/:id(.:format)))'
 
   # La route par défaut héritée de l'application Rails 2, à conserver avant passage au REST.

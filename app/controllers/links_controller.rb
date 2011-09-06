@@ -1,34 +1,44 @@
 class LinksController < InheritedResources::Base
-  
+  helper :all
   #session :cookie_only => false, :only => :upload
   before_filter :authenticate_user!
   before_filter :set_page_name
-  belongs_to    :company
-  layout 'company'
+  belongs_to    :workspace
+  layout 'workspace'
+  respond_to :html, :json
   
   def set_page_name
     @page = :bibliotheque
   end
   
   def index 
-    @company  = current_user.company
-    if params[:type] == "standard"
-      @links = Link.standard
-    else
-      @links = Link.find_all_by_company_id(@company.id)
-    end
+    @workspace        = current_workspace_member.workspace
+    @standard_links = Link.standard
+    @workspace_links  = Link.from_workspace @workspace.id
     index!
   end
   
+  def update
+    # Test pour savoir si les informations sont données en brut (en JSON, envoyées par le javascript)
+    if params[:link].nil?
+      @link = Link.find(params[:id])
+      @link.update_attributes! retrieve_column_fields(params)
+    end
+    update! { workspace_links_path }
+  end
+  
   def create
-    create! { company_links_path }
+    if params[:link].nil?
+      @link = Link.create retrieve_column_fields(params)
+    end
+    create! { workspace_links_path }
   end
 
   def edit
     @link = Link.find(params[:id])
-    if @link.company_id == -1
+    if @link.workspace_id == -1
       flash[:notice] = "Vous n'avez pas le droit d'éditer cette liaison !"
-      redirect_to company_materials_path
+      redirect_to workspace_materials_path
     else
       edit!
     end
@@ -36,14 +46,16 @@ class LinksController < InheritedResources::Base
 
   def show
     @link = Link.find(params[:id])
-    @company = Company.find(params[:company_id])
-    if @link.company_id == -1
-      render :action => "show"
-    elsif @link.company_id == current_user.company.id
-      render :action => "show"
+
+    # TODO: Revoir le controle d'accès, cela ne se fait pas comme ça mais plutôt comme :
+    # current_workspace.links.find params[:id]
+    # De plus je ne vois pas ici comment l'on affiche un lien de la lib standard.
+    @workspace = Workspace.find(params[:workspace_id])
+    if @link.workspace_id == current_workspace_member.workspace.id
+      show!
     else
       flash[:notice] = "Vous n'avez pas accès à cette liaison !"
-      redirect_to company_links_path
+      redirect_to workspace_links_path
     end
   end
 
@@ -61,10 +73,18 @@ class LinksController < InheritedResources::Base
     end
     if params[:next] and (@link.comp_complexe.empty? or @link.comp_complexe.empty?)
       flash[:notice] = "Vous avez mal rempli le formulaire."
-      redirect_to new_company_link_path
+      redirect_to new_workspace_link_path
     else
       new!
     end
   end
-
+  
+  private
+    def retrieve_column_fields(params)
+      to_update = {}
+      Link.column_names.each do |column_name|
+        to_update[column_name] = params[column_name]
+      end
+       to_update
+    end
 end

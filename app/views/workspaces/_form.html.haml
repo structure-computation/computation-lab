@@ -1,0 +1,21 @@
+.grey
+= semantic_form_for @workspace :url => {:controller => "workspaces", :action => "create"}do |form| 
+  = form.inputs do                     
+    - if @workspace.kind.nil? 
+      = f.input :kind, :as => :select, :collection => ["Company", "Fillial", "Project"], :include_blank => false,     
+    - else   
+      - case @workspace.kind
+        - when "Company"                                 
+        = form.input :name, :input_html => { :disabled => true }
+        = form.input :division, :input_html => { :disabled => true }
+        = form.input :address, :input_html => { :disabled => true }
+        = form.input :city, :input_html => { :disabled => true }
+        = form.input :zipcode, :input_html => { :disabled => true }
+        = form.input :country, :as => :string, :input_html => { :disabled => true }
+        = form.input :TVA, :input_html => { :disabled => true }
+        = form.input :siren, :input_html => { :disabled => true }           
+        - when "Fillial"   
+        = form.input :name, :input_html => { :disabled => true }           
+        - when "Project"       
+        = form.input :main_workspace, :input_html => { :disabled => true }     
+    = form.buttons

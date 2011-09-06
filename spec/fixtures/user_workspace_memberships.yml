@@ -1,0 +1,28 @@
+ # one:
+ #  user_id:          440946503   #jbellec
+ #  workspace_id:     240607020   #sc_admin  
+
+# Liaison des 6 utilisateurs de TF Avionics avec l'entreprise.
+<% tf_avionics_members = ["mbleriot", "fcolac"  , "mleroy"  , "jlinder"] 
+   be_civil_members    = ["htrasset", "gselec"]
+%>
+   
+# Membres de tf_avionics
+<% tf_avionics_members.each do |member_name| %>
+<%="ucm_tf_avionics_#{member_name}:"%>
+  user:    <%=member_name%>
+  workspace: tf_avionics   #674101581
+  rights:       # TODO
+  status:     # active
+  
+<% end %>
+
+# Membres de be_civil
+<% be_civil_members.each do |member_name| %>
+<%="ucm_be_civil_#{member_name}:"%>
+  user:    <%=member_name%>
+  workspace: be_civil   #725745063
+  rights:       # TODO
+  status:     # active
+  
+<% end %>

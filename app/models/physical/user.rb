@@ -1,21 +1,3 @@
-
-
-
-# Intégration de devise 
-# class User < ActiveRecord::Base
-#   # Include default devise modules. Others available are:
-#   # :token_authenticatable, :confirmable, :lockable and :timeoutable
-#   devise :database_authenticatable, :registerable,
-#          :recoverable, :rememberable, :trackable, :validatable
-# 
-#   # Setup accessible (or protected) attributes for your model
-#   attr_accessible :email, :password, :password_confirmation, :remember_me
-# end
-
-
-
-
-
 class User < ActiveRecord::Base
   
   # Configuration de devise
@@ -30,22 +12,29 @@ class User < ActiveRecord::Base
   scope       :managers     ,   where(:role => "gestionnaire")
   
   # Relations
-  belongs_to  :company
-
-  has_many    :user_model_ownerships
-  has_many    :sc_models,                 :through => :user_model_ownerships
+  # belongs_to  :workspace
+  has_many    :user_workspace_memberships
+  has_many    :workspaces, :through => :user_workspace_memberships
   
-  has_many    :user_projects,  :dependent => :destroy # Pour les gestionnaires, reattribuer ce projet.
-  has_many    :projects     ,  :through => :user_projects
-  has_many    :owned_projects, :through => :user_projects, :source => :task , :conditions => { "user_projects.is_admin"     => true }
+  # Relations sur les modèles.
+  has_many    :model_ownerships,     :through => :user_workspace_memberships, :class_name => "WorkspaceMemberToModelOwnership", :foreign_key => "workspace_member_id"
   
-  # Gestion des tâches. 2 types de tâches + toutes les tâches : 3 relations + la relation de jointure.
-  has_many    :user_tasks
-  has_many    :tasks         , :through => :user_tasks,                   :dependent => :destroy
-  has_many    :created_tasks , :through => :user_tasks, :source => :task    , :conditions => { "user_tasks.is_creator"      => true }
-  has_many    :assigned_tasks, :through => :user_tasks, :source => :task    , :conditions => { "user_tasks.is_assigned_to"  => true }
+  
+  # TODO: Ancienne relation !
+  has_many    :old_user_model_ownerships, :class_name => "UserModelOwnership", :foreign_key => "user_id"
+  # has_many    :old_relation_sc_models, :through => :old_user_model_ownerships, :class_name => "ScModel", :foreign_key => "sc_model_id"
+  has_many    :sc_models, :through => :old_user_model_ownerships #, :class_name => "ScModel", :foreign_key => "sc_model_id"
+  
+  
+  
+  # has_many    :user_projects , :dependent => :destroy # Pour les gestionnaires, reattribuer ce projet.
+  # has_many    :projects      , :through   => :user_projects
+  # has_many    :owned_projects, :through   => :user_projects, :source => :task , :conditions => { "user_projects.is_admin"     => true }
+  
 
+  has_many    :calcul_results  
   has_many    :log_calculs
+  has_many    :files_sc_models
   
   
   # TODO: La validation de format n'est plus disponible (suppr du module Authentication)
@@ -58,17 +47,20 @@ class User < ActiveRecord::Base
   # validates_format_of       :lastname,     :with => Authentication.name_regex,  :message => Authentication.bad_name_message, :allow_nil => true
   validates_length_of       :lastname,     :maximum => 100
 
-  # Normalement pris en compte par Devise
-  # validates_presence_of     :email
-  # validates_length_of       :email,    :within => 6..100 #r@a.wk
-  # validates_uniqueness_of   :email
-  # validates_format_of       :email,    :with => Authentication.email_regex, :message => Authentication.bad_email_message
+  
+  # TODO: Supprimer à la fin de la migration vers le multi tenant :
+  def workspace
+    companies.first    
+  end
+  
+  def all_models
+    model_ownerships.map &:sc_model
+    
+  end
 
-  # validates_format_of       :password, :with => /^(?=.\d)(?=.([a-z]|[A-Z]))([\x20-\x7E]){6,40}$/, :if => :require_password?, :message => "must include one number, one letter and be between 6 and 40 characters"  
 
-  # TODO: Ajouter des validation d'association avec une entreprise.
-
-  # Voir documentation devise : https://github.com/plataformatec/devise/wiki/How-To%3a-Allow-users-to-edit-their-account-without-providing-a-password
+  # Voir documentation devise : 
+  # https://github.com/plataformatec/devise/wiki/How-To%3a-Allow-users-to-edit-their-account-without-providing-a-password
   def password_required?
     new_record?
   end
@@ -81,17 +73,6 @@ class User < ActiveRecord::Base
   def email=(value)
     write_attribute :email, (value ? value.downcase : nil)
   end
-  
-  # Definition des champs accessibles dans les retours JSON et/ou xml
-#   api_accessible :std do |template|
-#     template.add :id
-#     template.add :last_name
-#     template.add :firstname 
-#     template.add :lastname 
-#     template.add :telephone 
-#     template.add :email 
-#     template.add :role
-#   end
 
   # Pour éviter toute erreur...
   def as_json(options = {})
@@ -118,15 +99,7 @@ class User < ActiveRecord::Base
     return true
   end
   
-  # Le mot de passe n'est necessaire que si l'utilisateur est "actif".
-  # TODO: A supprimer au passage à devise.
-  # def password_required?
-  #   if (self.active?)
-  #     crypted_password.blank? || !password.blank?
-  #   else
-  #     false
-  #   end
-  # end
+
 
   protected
     

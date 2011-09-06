@@ -1,157 +1,102 @@
-jbellec:
-  company_id:       240607020   #sc_admin
-  firstname:        Jérémie
-  lastname:         Bellec
-  telephone:        +33 6 03 72 40 20
-  email:            j.bellec@structure-computation.com
-  role:             gestionnaire
-  password_salt:             2880364ddecfe17b3551d077db9c0d5de7b024b7 # SHA1('0')
-  encrypted_password: c6dcc183fb752f0162726b5028832bf1f5848020 # 'monkey'
-  #activation_code:
-  state:            active
-  deleted_at:
+# create_table "users", :force => true do |t|
+#   t.integer  "workspace_id"
+#   t.string   "firstname",            :limit => 100, :default => ""
+#   t.string   "lastname",             :limit => 100, :default => ""
+#   t.string   "telephone",            :limit => 23,  :default => ""
+#   t.string   "email",                :limit => 100
+#   t.string   "role",                 :limit => 100
+#   t.datetime "created_at"
+#   t.datetime "updated_at"
+#   t.string   "state",                               :default => "passive"
+#   t.datetime "deleted_at"
+#   t.string   "encrypted_password",                  :default => "",        :null => false
+#   t.string   "password_salt",                       :default => "",        :null => false
+#   t.string   "confirmation_token"
+#   t.datetime "confirmed_at"
+#   t.datetime "confirmation_sent_at"
+#   t.string   "reset_password_token"
+#   t.string   "remember_token"
+#   t.datetime "remember_created_at"
+#   t.integer  "sign_in_count",                       :default => 0
+#   t.datetime "current_sign_in_at"
+#   t.datetime "last_sign_in_at"
+#   t.string   "current_sign_in_ip"
+#   t.string   "last_sign_in_ip"
+#   t.integer  "failed_attempts",                     :default => 0
+#   t.string   "unlock_token"
+#   t.datetime "locked_at"
+# end                                 
+
+jbellec:  
+  id:        440946503
+  firstname: Jérémy
+  lastname:  Bellec
+  
+dvioleau:
+  id:        1013748186
+  firstname: David
+  lastname:  Violeau
+   
+mbleriot:
+  firstname:          Michel
+  lastname:           Bleriot
+  telephone:          +33 5 12 34 56 78
+  email:              mb@tf.structure-computation.com
+  password_salt:      $2a$10$GHKauNVO.9iUVB8jbcDKI.YlGIwP1crEsnV/w5SJI/.E... 
+  encrypted_password: $2a$10$GHKauNVO.9iUVB8jbcDKI. # 'monkey'
+
   # created_at:      
   # updated_at:  
   
-dvioleau:
-  company_id:       240607020   #sc_admin
-  firstname:        David
-  lastname:         Violeau
-  telephone:        +33 6 03 72 40 20
-  email:            d.violeau@structure-computation.com
-  role:             gestionnaire
-  password_salt:             2880364ddecfe17b3551d077db9c0d5de7b024b7 # SHA1('0')
-  encrypted_password: c6dcc183fb752f0162726b5028832bf1f5848020 # 'monkey'
-  #activation_code:
-  state:            active
-  deleted_at:
+
+jlinder:
+  firstname:          Jean
+  lastname:           linder
+  telephone:          +33 5 12 34 56 78
+  email:              jl@tf.structure-computation.com
+  password_salt:      $2a$10$GHKauNVO.9iUVB8jbcDKI.YlGIwP1crEsnV/w5SJI/.E... 
+  encrypted_password: $2a$10$GHKauNVO.9iUVB8jbcDKI. # 'monkey'
+
+
+mleroy:
+  firstname:          Marc
+  lastname:           Leroy
+  telephone:          +33 5 12 34 56 78
+  email:              ml@tf.structure-computation.com
+  password_salt:      $2a$10$GHKauNVO.9iUVB8jbcDKI.YlGIwP1crEsnV/w5SJI/.E... 
+  encrypted_password: $2a$10$GHKauNVO.9iUVB8jbcDKI. # 'monkey'
   # created_at:      
   # updated_at:  
 
-acaignot:
-  company_id:       240607020   #sc_admin
-  firstname:        ALain
-  lastname:         Caignot
-  telephone:        +33 6 03 72 40 20
-  email:            a.caignot@structure-computation.com
-  role:             gestionnaire
-  password_salt:             2880364ddecfe17b3551d077db9c0d5de7b024b7 # SHA1('0')
-  encrypted_password: c6dcc183fb752f0162726b5028832bf1f5848020 # 'monkey'
-  #activation_code:
-  state:            active
-  deleted_at:
+#
+fcolac:
+  firstname:          François
+  lastname:           Colac
+  telephone:          +33 5 12 34 56 78
+  email:              fc@tf.structure-computation.com
+  password_salt:      $2a$10$GHKauNVO.9iUVB8jbcDKI.YlGIwP1crEsnV/w5SJI/.E... 
+  encrypted_password: $2a$10$GHKauNVO.9iUVB8jbcDKI. # 'monkey'
   # created_at:      
   # updated_at:  
   
-#  mbleriot:
-#    company_id:       674101581   #tf_avionics
-#    firstname:        Michel
-#    lastname:         Bleriot
-#    telephone:        +33 5 12 34 56 78
-#    email:            mb@tf.structure-computation.com
-#    role:             gestionnaire
-#    salt:             2880364ddecfe17b3551d077db9c0d5de7b024b7 # SHA1('0')
-#    crypted_password: c6dcc183fb752f0162726b5028832bf1f5848020 # 'monkey'
-#    remember_token:
-#    remember_token_expires_at:
-#    activation_code:
-#    activated_at:
-#    state:            active
-#    deleted_at:
-#    # created_at:      
-#    # updated_at:  
-#    
-#  #
-#  jlinder:
-#    company_id:       674101581  #tf_avionics
-#    firstname:        Jean
-#    lastname:         linder
-#    telephone:        +33 5 12 34 56 78
-#    email:            jl@tf.structure-computation.com
-#    role:             gestionnaire
-#    salt:             2880364ddecfe17b3551d077db9c0d5de7b024b7 # SHA1('0')
-#    crypted_password: c6dcc183fb752f0162726b5028832bf1f5848020 # 'monkey'
-#    remember_token:
-#    remember_token_expires_at:
-#    activation_code:
-#    activated_at:
-#    state:            active
-#    deleted_at:
-#    # created_at:      
-#    # updated_at:  
-#  
-#  #
-#  mleroy:
-#    company_id:       674101581  #tf_avionics
-#    firstname:        Marc
-#    lastname:         Leroy
-#    telephone:        +33 5 12 34 56 78
-#    email:            ml@tf.structure-computation.com
-#    role:             ingenieur
-#    salt:             2880364ddecfe17b3551d077db9c0d5de7b024b7 # SHA1('0')
-#    crypted_password: c6dcc183fb752f0162726b5028832bf1f5848020 # 'monkey'
-#    remember_token:
-#    remember_token_expires_at:
-#    activation_code:
-#    activated_at:
-#    state:            active
-#    deleted_at:
-#    # created_at:      
-#    # updated_at:  
-#  
-#  #
-#  fcolac:
-#    company_id:       674101581  #tf_avionics
-#    firstname:        François
-#    lastname:         Colac
-#    telephone:        +33 5 12 34 56 78
-#    email:            fc@tf.structure-computation.com
-#    role:             ingenieur
-#    salt:             2880364ddecfe17b3551d077db9c0d5de7b024b7 # SHA1('0')
-#    crypted_password: c6dcc183fb752f0162726b5028832bf1f5848020 # 'monkey'
-#    remember_token:
-#    remember_token_expires_at:
-#    activation_code:
-#    activated_at:
-#    state:            active
-#    deleted_at:
-#    # created_at:      
-#    # updated_at:  
-#    
-#  #
-#  gselec:
-#    company_id:       725745063   #be_civil
-#    firstname:        Gilles
-#    lastname:         Selec
-#    telephone:        +33 5 12 34 56 78
-#    email:            gd@bec.structure-computation.com
-#    role:             gestionnaire
-#    salt:             2880364ddecfe17b3551d077db9c0d5de7b024b7 # SHA1('0')
-#    crypted_password: c6dcc183fb752f0162726b5028832bf1f5848020 # 'monkey'
-#    remember_token:
-#    remember_token_expires_at:
-#    activation_code:
-#    activated_at:
-#    state:            active
-#    deleted_at:
-#    # created_at:      
-#    # updated_at:
-#  
-#  #
-#  htrasset:
-#    company_id:       725745063   #be_civil
-#    firstname:        Herve
-#    lastname:         Trasset
-#    telephone:        +33 1 23 45 67 89
-#    email:            ht@bec.structure-computation.com
-#    role:             ingenieur
-#    salt:             2880364ddecfe17b3551d077db9c0d5de7b024b7 # SHA1('0')
-#    crypted_password: c6dcc183fb752f0162726b5028832bf1f5848020 # 'monkey'
-#    remember_token:
-#    remember_token_expires_at:
-#    activation_code:
-#    activated_at:
-#    state:            active
-#    deleted_at:
-#    # created_at:      
-#    # updated_at:
+#
+gselec:
+  firstname:          Gilles
+  lastname:           Selec
+  telephone:          +33 5 12 34 56 78
+  email:              gd@bec.structure-computation.com
+  password_salt:      $2a$10$GHKauNVO.9iUVB8jbcDKI.YlGIwP1crEsnV/w5SJI/.E... 
+  encrypted_password: $2a$10$GHKauNVO.9iUVB8jbcDKI. # 'monkey'
+  # created_at:      
+  # updated_at:
+
+#
+htrasset:
+  firstname:          Herve
+  lastname:           Trasset
+  telephone:          +33 1 23 45 67 89
+  email:              ht@bec.structure-computation.com
+  password_salt:      $2a$10$GHKauNVO.9iUVB8jbcDKI.YlGIwP1crEsnV/w5SJI/.E... 
+  encrypted_password: $2a$10$GHKauNVO.9iUVB8jbcDKI. # 'monkey'
+  # created_at:      
+  # updated_at:

@@ -4,7 +4,7 @@
       Ajouts
     %ul
       %li.LM_pic_new_liaison
-        = link_to 'Nouvelle liaison', new_company_link_path
+        = link_to 'Nouvelle liaison', new_workspace_link_path
 
 -content_for :right_top do
   %h2.grey
@@ -12,33 +12,18 @@
   %div
     = render :partial => "search_filter"
 
--content_for :company_content do
-  - if !@links.empty?
-    %table.grey#links_table
-      %thead
-        %tr
-          %th.no_sorter
-          %th Nom
-          %th ID
-          %th Référence
-          %th Famille
-          %th Générique
-          %th Complexe
-          %th.no_sorter Actions
-      %tbody
-        - @links.each do |link|
-          %tr
-            %td.escape_search.details_link=  link_to "Détails", [@company, link]
-            %td.name=           link.name
-            %td.id=             link.id
-            %td.reference=      link.reference
-            %td.family=         link.family
-            %td.comp_generic=   link.comp_generique
-            %td.comp_complex=   link.comp_complexe
-            %td.action_on_table.escape_search
-              - if link.company and link.company.id == current_user.company.id
-                %ul
-                  %li
-                    = link_to "Editer"   , edit_company_link_path(@company, link)
-                  %li
-                    = link_to "Supprimer", {:action=>"destroy", :controller=>"link", :id => link.id}, :method => :delete
+-content_for :workspace_content do
+  %table.grey#links_table
+    %thead
+      %tr
+        %th.no_sorter
+        %th Nom
+        %th ID
+        %th Référence
+        %th Famille
+        %th Générique
+        %th Complexe
+        %th.no_sorter Actions
+    %tbody
+      = render :partial => "link", :collection => @standard_links, :locals => {:type => "standard"}
+      = render :partial => "link", :collection => @workspace_links,  :locals => {:type => "workspace"} 

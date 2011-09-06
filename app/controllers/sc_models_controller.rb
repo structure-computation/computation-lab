@@ -5,10 +5,10 @@ class ScModelsController < InheritedResources::Base
   include Socket::Constants
   before_filter :authenticate_user!
   before_filter :set_page_name
-  belongs_to :company
+  belongs_to :workspace
   respond_to :html, :json
   
-  layout 'company'
+  layout 'workspace'
 #  belongs_to :member
   
   def set_page_name
@@ -16,7 +16,7 @@ class ScModelsController < InheritedResources::Base
   end
 
   def index
-    @sc_models = current_user.sc_models
+    @sc_models = current_workspace_member.sc_models
     @sc_models.each{ |sc_model|
       sc_model[:results]  = sc_model.calcul_results.find(:all, :conditions => {:log_type => "compute", :state => "finish"}).size }
     index!
@@ -28,7 +28,8 @@ class ScModelsController < InheritedResources::Base
     #     f.write(params[:json])
     # end
     @sc_model = ScModel.new(params[:sc_model])
-    @user_model_ownership = UserModelOwnership.create(:sc_model => @sc_model , :user => current_user, :rights => "all") 
+    @workspace_member_to_model_ownership = WorkspaceMemberToModelOwnership.create(:sc_model => @sc_model , :workspace_member => current_workspace_member, :rights => "all") 
+
     respond_to do |format|
       if @sc_model.save
     	  format.html { redirect_to(:action => :index) }
@@ -54,9 +55,9 @@ class ScModelsController < InheritedResources::Base
     if params[:model].nil?
       flash[:error] = "Vous n'avez pas séléctionné de fichier !"
     else
-      @sc_model.send_mesh(params[:model][:file], current_user) unless params[:model][:file].nil?
+      @sc_model.send_mesh(params[:model][:file], current_workspace_member) unless params[:model][:file].nil?
     end
-    redirect_to company_model_path(@sc_model)
+    redirect_to workspace_model_path(@sc_model)
   end
 
 end

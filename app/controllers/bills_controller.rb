@@ -2,17 +2,17 @@ class BillsController < InheritedResources::Base
   before_filter :authenticate_user!
   before_filter :set_page_name
   respond_to :html, :json
-  belongs_to :company
+  belongs_to :workspace
   actions :index, :show, :new, :create
-  layout 'company'
+  layout 'workspace'
   
   def set_page_name
     @page = :manage
   end
   #TODO remplacer chargement JSON par chargement normal (sans requête ajax)
   # def index
-  #   @id_company = @current_company.id
-  #   #@current_gestionnaire = @current_company.users.find(:first, :conditions => {:role => "gestionnaire"})
+  #   @id_workspace = @current_workspace.id
+  #   #@current_gestionnaire = @current_workspace.users.find(:first, :conditions => {:role => "gestionnaire"})
   # 
   #   @bills_forfaits = []
   #   @bills.each{ |bill_i|
@@ -51,27 +51,27 @@ class BillsController < InheritedResources::Base
   # end
   
   def show
-    @company = Company.find(params[:company_id])
-    @manager = @company.users.find(:first, :conditions => {:role => "gestionnaire"})
+    @workspace = Workspace.find(params[:workspace_id])
+    @manager = @workspace.users.find(:first, :conditions => {:role => "gestionnaire"})
     if @manager
       show!
     else
-      redirect_to company_path
+      redirect_to workspace_path
     end
   end
 
   def download_bill
-    @current_company = current_user.company
-    @current_bill = @current_company.bills.find(params[:id])
+    @current_workspace = current_workspace_member.workspace
+    @current_bill = @current_workspace.bills.find(params[:id])
     name_file = "#{SC_FACTURE_ROOT}/facture_" + params[:id] + ".pdf"
     name_bill = 'Facture_' + @current_bill.ref.to_s() + '.pdf'
     send_file name_file, :filename => name_bill
   end
 
  def generate_pdf_facture
-    @current_company = current_user.company
-    @current_bill = @current_company.bills.find(params[:id_facture])
-    @current_gestionnaire = @current_company.users.find(:first, :conditions => {:role => "gestionnaire"})
+    @current_workspace = current_workspace_member.workspace
+    @current_bill = @current_workspace.bills.find(params[:id_facture])
+    @current_gestionnaire = @current_workspace.users.find(:first, :conditions => {:role => "gestionnaire"})
     prawnto :inline => false
     prawnto :prawn => { 
                  :background => "#{RAILS_ROOT}/public/images/fond_facture.jpg", 
