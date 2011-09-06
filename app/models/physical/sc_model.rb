@@ -4,13 +4,12 @@ class ScModel < ActiveRecord::Base
   require 'socket'
   include Socket::Constants
   
-  belongs_to  :company
-  belongs_to  :project
+  belongs_to  :workspace
   
   has_many    :files_sc_models 
 
-  has_many    :company_member_to_model_ownerships
-  has_many    :company_member,                  :through => :company_member_to_model_ownerships
+  has_many    :model_ownerships, :class_name => "WorkspaceMemberToModelOwnership"
+  has_many    :workspace_member,                  :through => :model_ownerships
 
   has_many    :calcul_results
   has_many    :forum_sc_models
@@ -113,10 +112,10 @@ class ScModel < ActiveRecord::Base
   
   #def mesh_valid(id_user,calcul_time,json)
   def mesh_valid(params)
-    id_company_member=params[:id_user]
+    id_workspace_member=params[:id_user]
     calcul_time=params[:time]
     calcul_state = Integer(params[:state])
-    current_workspace_member = UserCompanyMembership.find(id_company_member)
+    current_workspace_member = UserCompanyMembership.find(id_workspace_member)
     
     if(calcul_state == 0) #si le calcul est arrivé au bout
       path_to_file = "#{SC_MODEL_ROOT}/model_#{self.id}/MESH/mesh.txt"
@@ -134,7 +133,7 @@ class ScModel < ActiveRecord::Base
       
       #mise à jour du résultat de calcul
       @calcul_result = self.calcul_results.build(:calcul_time => calcul_time, :log_type => 'create', :state => 'finish', :gpu_allocated => 1) 
-      @calcul_result.company_member = current_workspace_member
+      @calcul_result.workspace_member = current_workspace_member
       @calcul_result.result_date = Time.now
       @calcul_result.save
       

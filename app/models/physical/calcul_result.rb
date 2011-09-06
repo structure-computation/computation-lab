@@ -9,7 +9,7 @@ class CalculResult < ActiveRecord::Base
   include Socket::Constants
   
   belongs_to  :user         # utilisateur ayant lance le calcul
-  belongs_to  :company_member, :class_name => "UserCompanyMembership", :foreign_key => "company_member_id"
+  belongs_to  :workspace_member, :class_name => "UserCompanyMembership", :foreign_key => "workspace_member_id"
   belongs_to  :sc_model
   has_one     :log_calcul
   
@@ -94,7 +94,7 @@ class CalculResult < ActiveRecord::Base
     if results
       file_save           = JSON.pretty_generate(jsonbrouillon)
       self.save 
-      self.company_member = current_workspace_member
+      self.workspace_member = current_workspace_member
       self.name           = "brouillon_#{self.id}"
       self.save
       

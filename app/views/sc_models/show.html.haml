@@ -103,12 +103,12 @@
                 %th Nom
                 %th Role
             %tbody
-              - @sc_model.company_member_to_model_ownerships.each do |ownerships|
+              - @sc_model.workspace_member_to_model_ownerships.each do |ownerships|
                 %tr
                   %td
-                    = ownerships.company_member.user.email
+                    = ownerships.workspace_member.user.email
                   %td
-                    = ownerships.company_member.user.firstname
+                    = ownerships.workspace_member.user.firstname
                   %td
                     = ownerships.rights
         = coffeescript_include_tag "manage_tab"

@@ -7,7 +7,7 @@ class CalculsController < ApplicationController
   
   def index
     @standard_links     = Link.standard
-    @workspace_links      = Link.from_workspace(current_workspace_member.workspace)
+    @workspace_links    = Link.from_workspace(current_workspace_member.workspace)
     @standard_materials = Material.standard
     @workspace_materials  = Material.from_workspace(current_workspace_member.workspace)
     @material           = Material.new
@@ -43,7 +43,7 @@ class CalculsController < ApplicationController
       :D2type => params[:D2type], 
       :log_type => 'compute'
     )
-    @current_calcul.company_member = current_workspace_member
+    @current_calcul.workspace_member = current_workspace_member
     @current_calcul.name = "brouillon_#{@current_calcul.id}"
     @current_calcul.save
     render :json => @current_calcul.to_json
