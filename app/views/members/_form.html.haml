@@ -1,5 +1,5 @@
 .grey
-  = semantic_form_for [@company, @member], :url => {:controller => "members", :action => "create"} do |form|
+  = semantic_form_for [@workspace, @member], :url => {:controller => "members", :action => "create"} do |form|
     = form.inputs do
       = form.input :email
       = form.input :password, :as => :password
