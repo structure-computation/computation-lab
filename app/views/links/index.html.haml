@@ -4,7 +4,7 @@
       Ajouts
     %ul
       %li.LM_pic_new_liaison
-        = link_to 'Nouvelle liaison', new_company_link_path
+        = link_to 'Nouvelle liaison', new_workspace_link_path
 
 -content_for :right_top do
   %h2.grey
@@ -26,4 +26,4 @@
         %th.no_sorter Actions
     %tbody
       = render :partial => "link", :collection => @standard_links, :locals => {:type => "standard"}
-      = render :partial => "link", :collection => @company_links,  :locals => {:type => "company"} 
+      = render :partial => "link", :collection => @workspace_links,  :locals => {:type => "company"} 

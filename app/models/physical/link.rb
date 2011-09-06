@@ -6,7 +6,7 @@ class Link < ActiveRecord::Base
   scope :standard, where(:workspace_id => -1)
   # TODO: Renommer plus explicitement comme (from_workspace ou workspace_links ou workspace_library...)
   scope :user_company , lambda { |workspace_id|
-    where(:company_id => workspace_id)
+    where(:workspace_id => workspace_id)
   }
 
   

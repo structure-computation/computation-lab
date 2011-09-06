@@ -13,7 +13,7 @@
   - if @link.comp_complexe.downcase.include? "ca"
     %span Cassable
 
-= form_for [@company, @link] do |f|
+= form_for [@workspace, @link] do |f|
 
   = f.hidden_field :comp_generique
   = f.hidden_field :comp_complexe
@@ -37,4 +37,4 @@
     = submit_tag "Editer", :class => 'yellow_button'
   - else 
     = submit_tag "Créer", :class => 'yellow_button'
-    = link_to "Annuler", company_links_path, :class => 'yellow_button'
+    = link_to "Annuler", workspace_links_path, :class => 'yellow_button'
