@@ -17,7 +17,7 @@
       %th Nom                   
       %th Email
   %tbody
-    - company.users.managers.each do |manager|
+    - workspace.users.managers.each do |manager|
       %tr
         %td= manager.created_at.to_date
         %td= manager.lastname + " " + manager.firstname
