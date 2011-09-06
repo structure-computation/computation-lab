@@ -4,9 +4,9 @@
       Menu
     %ul
       %li.manage_pic_liste_factures
-        = link_to "Retour à la liste des factures", company_path(@company, :anchor => 'Factures') 
+        = link_to "Retour à la liste des factures", workspace_path(@workspace, :anchor => 'Factures') 
       %li.manage_pic_liste_factures
-        = link_to "Télécharger la facture", download_bill_company_bill_path(@company, @bill)
+        = link_to "Télécharger la facture", download_bill_workspace_bill_path(@workspace, @bill)
         
 -content_for :right_top do
   %h2.grey
@@ -26,13 +26,13 @@
       = @manager.firstname
       = @manager.lastname
     %p
-      = @company.name
-      = @company.division
+      = @workspace.name
+      = @workspace.division
     %p 
-      = @company.address
-      = @company.zipcode
-      = @company.city
-      = @company.country
+      = @workspace.address
+      = @workspace.zipcode
+      = @workspace.city
+      = @workspace.country
 
 -content_for :company_content do
   = render :partial => 'bill_detail', :object => @bill

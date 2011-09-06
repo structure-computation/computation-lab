@@ -4,13 +4,13 @@
       Menu
     %ul
       %li.manage_pic_compte_memoire
-        = link_to "Nouvel abonnement", company_sc_models_path(@company) 
+        = link_to "Nouvel abonnement", workspace_sc_models_path(@workspace) 
       %li.manage_pic_compte_abonnement
-        = link_to "Nouveau forfait", company_sc_models_path(@company)
+        = link_to "Nouveau forfait", workspace_sc_models_path(@workspace)
                  
 -content_for :right_top do
   %h2.grey
     Liste des factures
 
 -content_for :company_content do
-  =render :partial => 'bills_list', :object => @company.bills
+  =render :partial => 'bills_list', :object => @workspace.bills
