@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110831083956) do
+ActiveRecord::Schema.define(:version => 20110906083232) do
 
   create_table "abonnements", :force => true do |t|
     t.string   "name"
@@ -94,6 +94,21 @@ ActiveRecord::Schema.define(:version => 20110831083956) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_member_id"
+  end
+
+  create_table "companies", :force => true do |t|
+    t.string   "name"
+    t.string   "address"
+    t.string   "city"
+    t.string   "zipcode"
+    t.string   "country"
+    t.string   "division"
+    t.string   "TVA"
+    t.integer  "siren"
+    t.integer  "user_sc_admin_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "kind"
   end
 
   create_table "company_accounts", :force => true do |t|
@@ -314,15 +329,6 @@ ActiveRecord::Schema.define(:version => 20110831083956) do
     t.datetime "updated_at"
   end
 
-  create_table "user_company_memberships", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "workspace_id"
-    t.string   "rights"
-    t.string   "status"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "user_model_ownerships", :force => true do |t|
     t.integer  "user_id"
     t.integer  "sc_model_id"
@@ -336,6 +342,15 @@ ActiveRecord::Schema.define(:version => 20110831083956) do
   create_table "user_sc_admins", :force => true do |t|
     t.integer  "user_id"
     t.integer  "sc_admin_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "user_workspace_memberships", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "company_id"
+    t.string   "rights"
+    t.string   "status"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   # TODO: fait doublon avec la même procédure dans ApplicationHelper. 
   # Trouver la "bonne methode".
   def current_company_member
-    current_user.user_company_memberships.first
+    current_user.user_workspace_memberships.first
   end    
 
   

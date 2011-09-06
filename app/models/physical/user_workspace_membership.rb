@@ -1,4 +1,4 @@
-class UserCompanyMembership < ActiveRecord::Base
+class UserWorkspaceMembership < ActiveRecord::Base
   belongs_to  :user
   belongs_to  :workspace
   

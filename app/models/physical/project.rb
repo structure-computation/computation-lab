@@ -1,7 +1,7 @@
 class Company < ActiveRecord::Base
   
-  has_many  :user_company_memberships
-  has_many  :users, :through => :user_company_memberships
+  has_many  :user_workspace_memberships
+  has_many  :users, :through => :user_workspace_memberships
   # has_many  :managers , :conditions => {:role => "gestionnaire"} # TODO: Appliquer un filtre.
   
   has_one   :calcul_account	, :readonly => false

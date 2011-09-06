@@ -52,9 +52,9 @@ class WorkspacesController < InheritedResources::Base
   end
     
   protected
-    def begin_of_association_chain
-      Workspace.accessible_by_user(current_user)
-    end      
+    # def begin_of_association_chain
+    #   Workspace.accessible_by_user(current_user)
+    # end      
 
   def percent_of(n)
    self.to_f / n.to_f * 100.0
