@@ -58,7 +58,7 @@ function refresh_page(){
 
 function cadres_off(){
   list_str_id = new Array('CadreFactures','CadreAbonnement', 'CadreForfait', 'CadreGestionnaires', 'CadreDescription');
-  list_str_menu_id = new Array('MenuCompanyFactures','MenuCompanyAbonnement', 'MenuCompanyForfait', 'MenuCompanyGestionnaires', 'MenuCompanyDescription');
+  list_str_menu_id = new Array('MenuWorkspaceFactures','MenuWorkspaceAbonnement', 'MenuWorkspaceForfait', 'MenuWorkspaceGestionnaires', 'MenuWorkspaceDescription');
   for(i=0; i<list_str_id.length; i++){
     strtemp = list_str_id[i];
     id_off = document.getElementById(strtemp);
@@ -83,7 +83,7 @@ function affich_Factures(){
   id_on = document.getElementById('CadreFactures');	
   id_on.className = 'on';
   
-  id_selected = document.getElementById('MenuCompanyFactures');	
+  id_selected = document.getElementById('MenuWorkspaceFactures');	
   id_selected.className = 'selected';
 }
 
@@ -92,7 +92,7 @@ function affich_Abonnement(){
   id_on = document.getElementById('CadreAbonnement');	
   id_on.className = 'on';
   
-  id_selected = document.getElementById('MenuCompanyAbonnement');	
+  id_selected = document.getElementById('MenuWorkspaceAbonnement');	
   id_selected.className = 'selected';
 }
 
@@ -101,7 +101,7 @@ function affich_Forfait(){
   id_on = document.getElementById('CadreForfait');	
   id_on.className = 'on';
   
-  id_selected = document.getElementById('MenuCompanyForfait');	
+  id_selected = document.getElementById('MenuWorkspaceForfait');	
   id_selected.className = 'selected';
 }
 
@@ -111,7 +111,7 @@ function affich_Gestionnaires(){
   id_on = document.getElementById('CadreGestionnaires');	
   id_on.className = 'on';
   
-  id_selected = document.getElementById('MenuCompanyGestionnaires');	
+  id_selected = document.getElementById('MenuWorkspaceGestionnaires');	
   id_selected.className = 'selected';
 }
 
@@ -120,7 +120,7 @@ function affich_Description(){
   id_on = document.getElementById('CadreDescription');	
   id_on.className = 'on';
   
-  id_selected = document.getElementById('MenuCompanyDescription');	
+  id_selected = document.getElementById('MenuWorkspaceDescription');	
   id_selected.className = 'selected';
 }
 

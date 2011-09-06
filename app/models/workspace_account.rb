@@ -1,2 +1,2 @@
-class CompanyAccount < ActiveRecord::Base
+class WorkspaceAccount < ActiveRecord::Base
 end

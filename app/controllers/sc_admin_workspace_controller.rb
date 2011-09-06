@@ -1,4 +1,4 @@
-class ScAdminCompanyController < ApplicationController
+class ScAdminWorkspaceController < ApplicationController
   before_filter :authenticate_user!
   before_filter :valid_admin_user
   

@@ -1,2 +1,2 @@
-module ScAdminDetailCompanyHelper
+module ScAdminDetailWorkspaceHelper
 end

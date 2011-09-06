@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   has_many    :workspaces, :through => :user_workspace_memberships
   
   # Relations sur les modèles.
-  has_many    :model_ownerships,     :through => :user_workspace_memberships, :class_name => "CompanyMemberToModelOwnership", :foreign_key => "workspace_member_id"
+  has_many    :model_ownerships,     :through => :user_workspace_memberships, :class_name => "WorkspaceMemberToModelOwnership", :foreign_key => "workspace_member_id"
   
   
   # TODO: Ancienne relation !

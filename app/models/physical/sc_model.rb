@@ -115,7 +115,7 @@ class ScModel < ActiveRecord::Base
     id_workspace_member=params[:id_user]
     calcul_time=params[:time]
     calcul_state = Integer(params[:state])
-    current_workspace_member = UserCompanyMembership.find(id_workspace_member)
+    current_workspace_member = UserWorkspaceMembership.find(id_workspace_member)
     
     if(calcul_state == 0) #si le calcul est arrivé au bout
       path_to_file = "#{SC_MODEL_ROOT}/model_#{self.id}/MESH/mesh.txt"

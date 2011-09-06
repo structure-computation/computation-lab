@@ -220,20 +220,20 @@ function affich_detail_workspace(num){
 	    }
     }
  
-    strModelListe = 'SCAdminCompanyListe';    
+    strModelListe = 'SCAdminWorkspaceListe';    
     IdModelListe     = document.getElementById(strModelListe);
     IdModelListe.className = "off";
-    strModelDetail = 'SCAdminCompanyDetail';    
+    strModelDetail = 'SCAdminWorkspaceDetail';    
     IdModelDetail  = document.getElementById(strModelDetail);
     IdModelDetail.className = "on";
     //setTimeout($('#ModelListe').slideUp("slow"),1250);
 }
 // fermer le détail d'un workspacee
 function ferme_detail_workspace(){
-    strModelDetail = 'SCAdminCompanyDetail';    
+    strModelDetail = 'SCAdminWorkspaceDetail';    
     IdModelDetail  = document.getElementById(strModelDetail);
     IdModelDetail.className = "off";
-    trModelListe = 'SCAdminCompanyListe';    
+    trModelListe = 'SCAdminWorkspaceListe';    
     IdModelListe     = document.getElementById(strModelListe);
     IdModelListe.className = "on";
     //setTimeout($('#ModelDetail').slideUp("slow"),1250);
@@ -244,7 +244,7 @@ function ferme_detail_workspace(){
 // wizard de creation membre
 //---------------------------------------------------------------------------------------------------------
 
-function displayNewCompany(interupteur) {
+function displayNewWorkspace(interupteur) {
     displayBlack(interupteur);
     document.getElementById('New_wiz_layer').className = interupteur;
     NMcurrent_stape = 'page_information';
@@ -261,7 +261,7 @@ function displayNewCompany(interupteur) {
 
 // fin du wizard nouveau modele
 function NM_fin_wizard(){
-    displayNewCompany('off');
+    displayNewWorkspace('off');
     get_Tableau_workspace();
 }
 

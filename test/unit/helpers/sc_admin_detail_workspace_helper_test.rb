@@ -1,4 +1,4 @@
 require 'test_helper'
 
-class ScAdminDetailCompanyHelperTest < ActionView::TestCase
+class ScAdminDetailWorkspaceHelperTest < ActionView::TestCase
 end
