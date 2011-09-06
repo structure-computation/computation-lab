@@ -103,7 +103,7 @@
                 %th Nom
                 %th Role
             %tbody
-              - @sc_model.workspace_member_to_model_ownerships.each do |ownerships|
+              - @sc_model.model_ownerships.each do |ownerships|
                 %tr
                   %td
                     = ownerships.workspace_member.user.email

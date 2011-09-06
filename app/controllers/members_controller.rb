@@ -37,6 +37,11 @@ class MembersController < InheritedResources::Base
       create!
     end
     
+    def show  
+      @workspace_member = UserWorkspaceMembership.find params["id"]
+      @member           = @workspace_member.user
+    end
+    
     def destroy
       destroy!{ workspace_path(:anchor => 'Membres') }
     end

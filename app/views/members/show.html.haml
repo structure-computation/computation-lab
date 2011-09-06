@@ -27,7 +27,7 @@
         %td= @member.state
         %td= @member.created_at.to_date
   
-  = link_to 'Editer', edit_workspace_member_path(@workspace, @member), :class => 'yellow_button'
+  = link_to 'Editer',     edit_workspace_member_path(@workspace, @member), :class => 'yellow_button'
   = link_to 'Désactiver', edit_workspace_member_path(@workspace, @member), :class => 'yellow_button'
   -# TODO Créer un fonction pour désactiver un user 
-  = link_to 'Editer', edit_workspace_member_path(@workspace, @member), :class => 'yellow_button'
+  = link_to 'Editer',     edit_workspace_member_path(@workspace, @member), :class => 'yellow_button'
