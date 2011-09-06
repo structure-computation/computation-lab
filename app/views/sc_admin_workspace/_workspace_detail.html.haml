@@ -1,44 +1,51 @@
-#CadreDescription.off
+.DetailCadre{ :style => "height: 420px;" }
+  .DetailCadreModelTitre
+    Company
+    %span#workspace_detail_name
+      nom
   .DetailCadreModel1
-    .DetailCadreModelMarge
-    .DetailCadreModelMarge
     .DetailCadreModelMarge
     .DetailCadreModelLigne
       .DetailCadreModelCase1
         Division
-      .DetailCadreModelCase2#company_detail_division
+      .DetailCadreModelCase2#workspace_detail_division
         recherche et developpement
 
     .DetailCadreModelMarge
     .DetailCadreModelLigne
       .DetailCadreModelCase1
         Adresse
-      .DetailCadreModelCase2#company_detail_address
+      .DetailCadreModelCase2#workspace_detail_address
         80 rue de paris, Bâtiment érable
     .DetailCadreModelLigne
       .DetailCadreModelCase1
         Ville
-      .DetailCadreModelCase2#company_detail_city
+      .DetailCadreModelCase2#workspace_detail_city
         Orsay
     .DetailCadreModelLigne
       .DetailCadreModelCase1
         Code Postal
-      .DetailCadreModelCase2#company_detail_zipcode
+      .DetailCadreModelCase2#workspace_detail_zipcode
         91160
     .DetailCadreModelLigne
       .DetailCadreModelCase1
         Pays
-      .DetailCadreModelCase2#company_detail_country
+      .DetailCadreModelCase2#workspace_detail_country
         France
 
     .DetailCadreModelMarge
     .DetailCadreModelLigne
       .DetailCadreModelCase1
         TVA intracommunautaire
-      .DetailCadreModelCase2#company_detail_TVA
+      .DetailCadreModelCase2#workspace_detail_TVA
         100000001010101
     .DetailCadreModelLigne  
       .DetailCadreModelCase1
         SIREN
-      .DetailCadreModelCase2#company_detail_siren
+      .DetailCadreModelCase2#workspace_detail_siren
         368928102
+  
+.DetailFermeture
+  %a{:style => "cursor: pointer;", :onclick => "ferme_detail_workspace()" }
+    .DetailTextFermeture
+      Fermer le détail

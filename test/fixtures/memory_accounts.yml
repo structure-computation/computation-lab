@@ -1,7 +1,7 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 compte_actif_tf_avionics:
-    company_id: 674101581
+    workspace_id: 674101581
     description:
     inscription_date:
     assigned_memory: 0
@@ -11,7 +11,7 @@ compte_actif_tf_avionics:
     status: "active"
 
 compte_actif_be_civil:
-    company_id: 725745063
+    workspace_id: 725745063
     description:
     inscription_date:
     assigned_memory: 0
@@ -21,7 +21,7 @@ compte_actif_be_civil:
     status: "active"
 
 compte_actif_sc_admin:
-    company_id: 240607020   #sc_admin
+    workspace_id: 240607020   #sc_admin
     description:
     inscription_date:
     assigned_memory: 0

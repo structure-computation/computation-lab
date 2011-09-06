@@ -12,7 +12,7 @@ end
 
 
 
-Feature: Creata a company
+Feature: Creata a workspace
   In order to separate ressources
   As an SCadmin                         
   
@@ -77,11 +77,11 @@ Scenario: An Engineer want to start a calcul
 require 'spec_helper'
 
 describe "CreateCompany" do
-  it "create a new company when i'm logged in as an AdminSC" do
-  company = Factory(:user)
-  visit new_company_path
-  fill_in "Name", :with=> company.name
-  fill_in "Phone", :with => company.phonr
+  it "create a new workspace when i'm logged in as an AdminSC" do
+  workspace = Factory(:user)
+  visit new_workspace_path
+  fill_in "Name", :with=> workspace.name
+  fill_in "Phone", :with => workspace.phonr
   click_button "Reset Password"
   current_path
   end
@@ -120,19 +120,19 @@ end
 
 #Histoire principale
 Feature: Manage Rights on Application
-  In order to create a staff in a company with roles
+  In order to create a staff in a workspace with roles
   As AdminSC
   I want to create an user and assign to it a role     
 
 #Créer une Company par un administrateur de Structure Computation si un User existe 
-Scenario: Create a company by an AdminSC
+Scenario: Create a workspace by an AdminSC
   Background: the following activated users exists
     | name         | email                    | role    |
     | Alice Hunter | alice.hunter@example.com | AdminSC |
     | Bob Hunter   | bob.hunter@example.com   | Manager |    
   Given I am logged in as "Alice Hunter"
-	When I create a company named "StarCompany" 
-	And I associate this company to "Bob Hunter"
+	When I create a workspace named "StarCompany" 
+	And I associate this workspace to "Bob Hunter"
 	Then I should find "StarCompany" in companies list  
 	And I should find "Bob Hunter" in StarCompanyMembership  
 	
@@ -140,9 +140,9 @@ Scenario: Create a company by an AdminSC
 Scenario: Create a Company by an AdminSC 
   Given I am logged in as an AdminSC
   When I create a Company
-  Then I should create a User  for this company 
+  Then I should create a User  for this workspace 
   And this User has the role of Manager
-  And I should see this company
+  And I should see this workspace
   
 # Créer une Company par un utilisateur existant
 Scenario: Create a Company by an User
@@ -164,12 +164,12 @@ Scenario: Create a Fillial between Companies
   Given I am logged in as a Manager
   When I create a Fillial
   And I specify the MainCompany
-  Then I should see "You assigned #{@maincompany}"
+  Then I should see "You assigned #{@mainworkspace}"
   
   #Step definitions
   class Fillial 
     def fillialSuccess
-    "You've juste created a new company and its manager"   
+    "You've juste created a new workspace and its manager"   
     end
   end
   When /^I create a Fillial$/ do 
@@ -177,8 +177,8 @@ Scenario: Create a Fillial between Companies
     @fillial.type = fillial
   end
   And /^I specify who is the MainCompany$/
-    @maincompany = Company.first
-    @maincompany.main = true 
+    @mainworkspace = Company.first
+    @mainworkspace.main = true 
   end   
   Then /^I should see "([^"]*)"$/ do |i|
     @fillialCompany.should == i
@@ -211,12 +211,12 @@ Scenario: Create a Company through the website
 Scenario: Create a Company through the website
   Given I am a new user
   And I am on the subscription page
-  When I fill the email "manager@starcompany.com"
+  When I fill the email "manager@starworkspace.com"
   And I fill the Company name "StarCompany"    
   And I fill the phone number  "0164408989"
   Then I should receive a confirmation email
   And I should log in
-  And I should see "manager@starcompany.com" and "StarCompany" and "0164408989" on my homepage
+  And I should see "manager@starworkspace.com" and "StarCompany" and "0164408989" on my homepage
   
  
 Scenario: Manager
@@ -232,15 +232,15 @@ Feature: A Manager can add others Companies to a Project
   
 #Attention, pensez au cas où si on delete un user qui possède des droits, il ne faut pas perdre accès à certaines ressources                                                       
 #Attention, au cas où le Manager essaye de se supprimer => forbidden
-tables: user, company, memberCompany (spécifie les droits, pas de rôles) 
-#workspace (company, user) , un compte, un ensemble de modeles, un jeu de droit                                                      
+tables: user, workspace, memberCompany (spécifie les droits, pas de rôles) 
+#workspace (workspace, user) , un compte, un ensemble de modeles, un jeu de droit                                                      
 
 Scenario: A Manager delete himself
   Given I am logged as a Manager
   When I delete my account
   Then I can't delete my account'
                                                         
-Scenario: Create a company through the website  
+Scenario: Create a workspace through the website  
   Given I have nothing
   When  I fill all the fields from the registration page                    
   Then  I can access to a trial
@@ -281,7 +281,7 @@ Feature: Create a Fillial
 Feature: Create a workspaceCompany 
   In order to create a Company
   As an admin(SC)
-  I want to create a company
+  I want to create a workspace
   
   Scenario:
     Given I have created a Company
@@ -369,13 +369,13 @@ Scenario: Upgrade credits
 	
 Scenario: Access to Bills List
   Background: I am logged in as an Manager
-  And specific company
+  And specific workspace
   Given I have bills named as bill0001
   Then I should find "bill0001" in bills list
   
 Scenario: Acces to Bills List
   Background: I am logged in as an Engeneer
-  And a specific company
+  And a specific workspace
   Given I
   Then I should find "You're not allowed"
   
@@ -445,14 +445,14 @@ Scenario: Upgrade Credits
   And I could add Credits
   And 
   
-Scenario: Create a company
+Scenario: Create a workspace
   Given that I am logged in
   When I create a Company named MyCompany
-  Then I should see that a company named MyCompany exists   
+  Then I should see that a workspace named MyCompany exists   
   
   
-#Gestion d'un sous partie company: filliale ou projet
-Feature: Management of a fillial or a company
+#Gestion d'un sous partie workspace: filliale ou projet
+Feature: Management of a fillial or a workspace
   In order to manage the finance part: my account, distribute tokens between Companies
   As an manager or an accountent
   I want to distribute tokens between account in a project or a fillial

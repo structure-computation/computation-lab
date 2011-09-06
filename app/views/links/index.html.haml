@@ -12,7 +12,7 @@
   %div
     = render :partial => "search_filter"
 
--content_for :company_content do
+-content_for :workspace_content do
   %table.grey#links_table
     %thead
       %tr
@@ -26,4 +26,4 @@
         %th.no_sorter Actions
     %tbody
       = render :partial => "link", :collection => @standard_links, :locals => {:type => "standard"}
-      = render :partial => "link", :collection => @workspace_links,  :locals => {:type => "company"} 
+      = render :partial => "link", :collection => @workspace_links,  :locals => {:type => "workspace"} 

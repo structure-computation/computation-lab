@@ -1,0 +1,11 @@
+.left_submenu
+  %h2
+    Menu
+  %ul
+    %li.manage_pic_liste_compte
+      = link_to "Tableau de bord", workspace_path(current_workspace_member.workspace)
+    %li.manage_pic_liste_membre
+      = link_to 'Liste des membres', workspace_members_path(current_workspace_member.workspace)
+    %li.manage_pic_liste_factures
+      = link_to 'Liste des factures', workspace_bills_path(current_workspace_member.workspace)
+

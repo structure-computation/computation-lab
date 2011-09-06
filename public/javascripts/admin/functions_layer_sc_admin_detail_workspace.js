@@ -4,7 +4,7 @@
 //---------------------------------------------------------------------------------------------------------
 
 
-var Current_company                   =  new Array();              // company courrante
+var Current_workspace                   =  new Array();              // workspace courrante
 var Current_calcul_account             =  new Array();              // calcul account courrant
 var Current_memory_account             =  new Array();              // memory account courrant
 
@@ -46,9 +46,9 @@ for(i=0; i<content_tableau_page.length ; i++){
 // pour rafraichir la page
 //---------------------------------------------------------------------------------------------------------
 function refresh_page(){
-	get_Tableau_factures(Current_company['id']);
-	get_current_memory_account(Current_company['id']);
-	get_current_calcul_account(Current_company['id']);
+	get_Tableau_factures(Current_workspace['id']);
+	get_current_memory_account(Current_workspace['id']);
+	get_current_calcul_account(Current_workspace['id']);
 }
 
 
@@ -78,7 +78,7 @@ function cadres_off(){
 }
 
 function affich_Factures(){
-  get_Tableau_factures(Current_company['id']);
+  get_Tableau_factures(Current_workspace['id']);
   cadres_off();
   id_on = document.getElementById('CadreFactures');	
   id_on.className = 'on';
@@ -106,7 +106,7 @@ function affich_Forfait(){
 }
 
 function affich_Gestionnaires(){
-  get_Tableau_gestionnaires(Current_company['id']);
+  get_Tableau_gestionnaires(Current_workspace['id']);
   cadres_off();
   id_on = document.getElementById('CadreGestionnaires');	
   id_on.className = 'on';
@@ -145,10 +145,10 @@ function init_Tableau_gestionnaires(Tableau_gestionnaires_temp)
     affiche_Tableau_gestionnaires();
 }
 // requette pour l'obtention du tableau des gestionnaires
-function get_Tableau_gestionnaires(id_company)
+function get_Tableau_gestionnaires(id_workspace)
 { 
-    var url_php = "/sc_admin_detail_company/get_list_gestionnaires";
-    $.getJSON(url_php,{"id_company": id_company},init_Tableau_gestionnaires);
+    var url_php = "/sc_admin_detail_workspace/get_list_gestionnaires";
+    $.getJSON(url_php,{"id_workspace": id_workspace},init_Tableau_gestionnaires);
 }
 
 // filtre du tableau
@@ -199,10 +199,10 @@ function init_Tableau_factures(Tableau_factures_temp)
     affiche_Tableau_factures();
 }
 // requette pour l'obtention du tableau des factures
-function get_Tableau_factures(id_company)
+function get_Tableau_factures(id_workspace)
 { 
-    var url_php = "/sc_admin_detail_company/get_list_factures";
-    $.getJSON(url_php,{"id_company": id_company},init_Tableau_factures);
+    var url_php = "/sc_admin_detail_workspace/get_list_factures";
+    $.getJSON(url_php,{"id_workspace": id_workspace},init_Tableau_factures);
 }
 
 // filtre du tableau
@@ -265,10 +265,10 @@ function go_page_facture(num){
 // valider une facture et ajouter les credit de calcul ou l'espace memoire
 function valid_facture(num){
     var num_select = content_tableau_connect['facture'][num];
-    var id_company = Tableau_factures_filter[num_select]['facture']['company_id'];
+    var id_workspace = Tableau_factures_filter[num_select]['facture']['workspace_id'];
     var id_facture = Tableau_factures_filter[num_select]['facture']['id'];
-    var url_php = "/sc_admin_detail_company/valid_facture";
-    $.get(url_php,{"id_company": id_company, "id_facture": id_facture},fin_valid_facture);
+    var url_php = "/sc_admin_detail_workspace/valid_facture";
+    $.get(url_php,{"id_workspace": id_workspace, "id_facture": id_facture},fin_valid_facture);
 }
 
 // valider une facture et ajouter les credit de calcul ou l'espace memoire
@@ -356,36 +356,36 @@ function affiche_Tableau_content(current_tableau, strname, strnamebdd, stridenti
 
 
 //---------------------------------------------------------------------------------------------------------
-// fonctions utiles pour l'affichage du detail de la company
+// fonctions utiles pour l'affichage du detail de la workspace
 //---------------------------------------------------------------------------------------------------------
 
-// traitement en fin de requette pour laffichage de la company
-function init_Current_company(Current_company_temp)
+// traitement en fin de requette pour laffichage de la workspace
+function init_Current_workspace(Current_workspace_temp)
 {
     // var Tableau_calcul_temp = eval('[' + response + ']');
-    if (Current_company_temp)
+    if (Current_workspace_temp)
     {   
-        Current_company = Current_company_temp['company'];
+        Current_workspace = Current_workspace_temp['workspace'];
     }
     //alert('ok');
-    //alert(array2json(Current_company));
-    affich_detail_company();
+    //alert(array2json(Current_workspace));
+    affich_detail_workspace();
 }
 // requette pour l'obtention du tableau des resultats
-function get_Current_company(id_company)
+function get_Current_workspace(id_workspace)
 { 
-    var url_php = "/sc_admin_detail_company/index";
-    $.getJSON(url_php,{"id_company": id_company},init_Current_company);
+    var url_php = "/sc_admin_detail_workspace/index";
+    $.getJSON(url_php,{"id_workspace": id_workspace},init_Current_workspace);
 }
 
 
 
-// afficher le détail d'une company
-function affich_detail_company(){
-    var table_detail = Current_company;
+// afficher le détail d'une workspace
+function affich_detail_workspace(){
+    var table_detail = Current_workspace;
     //afficher le detail d'un model
     for(key in table_detail){
-	    var strContent_detail_key = 'company_detail_' + key ;
+	    var strContent_detail_key = 'workspace_detail_' + key ;
 	    var id_detail_key = document.getElementById(strContent_detail_key);
 	    if(id_detail_key != null){
 		strContent = new String();
@@ -401,7 +401,7 @@ function affich_detail_company(){
 // fonctions utiles pour l'affichage du detail du calcul account
 //---------------------------------------------------------------------------------------------------------
 
-// traitement en fin de requette pour laffichage de la company
+// traitement en fin de requette pour laffichage de la workspace
 function init_current_calcul_account(Current_calcul_account_temp)
 {
     // var Tableau_calcul_temp = eval('[' + response + ']');
@@ -410,19 +410,19 @@ function init_current_calcul_account(Current_calcul_account_temp)
         Current_calcul_account = Current_calcul_account_temp['calcul_account'];
     }
     //alert('ok');
-    //alert(array2json(Current_company));
+    //alert(array2json(Current_workspace));
     affich_detail_calcul_account();
 }
 // requette pour l'obtention du tableau des resultats
-function get_current_calcul_account(id_company)
+function get_current_calcul_account(id_workspace)
 { 
-    var url_php = "/sc_admin_detail_company/get_calcul_account";
-    $.getJSON(url_php,{"id_company": id_company},init_current_calcul_account);
+    var url_php = "/sc_admin_detail_workspace/get_calcul_account";
+    $.getJSON(url_php,{"id_workspace": id_workspace},init_current_calcul_account);
 }
 
 
 
-// afficher le détail d'une company
+// afficher le détail d'une workspace
 function affich_detail_calcul_account(){
     var table_detail = Current_calcul_account;
     //afficher le detail d'un model
@@ -476,19 +476,19 @@ function init_current_memory_account(Current_memory_account_temp)
         Current_memory_account = Current_memory_account_temp['memory_account'];
     }
     //alert('ok');
-    //alert(array2json(Current_company));
+    //alert(array2json(Current_workspace));
     affich_detail_memory_account();
 }
 // requette pour l'obtention du tableau des resultats
-function get_current_memory_account(id_company)
+function get_current_memory_account(id_workspace)
 { 
-    var url_php = "/sc_admin_detail_company/get_memory_account";
-    $.getJSON(url_php,{"id_company": id_company},init_current_memory_account);
+    var url_php = "/sc_admin_detail_workspace/get_memory_account";
+    $.getJSON(url_php,{"id_workspace": id_workspace},init_current_memory_account);
 }
 
 
 
-// afficher le détail d'une company
+// afficher le détail d'une workspace
 function affich_detail_memory_account(){
     var table_detail = Current_memory_account;
     //afficher le detail d'un model

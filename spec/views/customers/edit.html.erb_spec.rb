@@ -6,7 +6,7 @@ describe "customers/edit.html.erb" do
       :name => "MyString",
       :mail => "MyString",
       :phonenumber => 1,
-      :companyname => "MyString"
+      :workspacename => "MyString"
     ))
   end
 
@@ -18,7 +18,7 @@ describe "customers/edit.html.erb" do
       assert_select "input#customer_name", :name => "customer[name]"
       assert_select "input#customer_mail", :name => "customer[mail]"
       assert_select "input#customer_phonenumber", :name => "customer[phonenumber]"
-      assert_select "input#customer_companyname", :name => "customer[companyname]"
+      assert_select "input#customer_workspacename", :name => "customer[workspacename]"
     end
   end
 end

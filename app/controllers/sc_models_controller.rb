@@ -8,7 +8,7 @@ class ScModelsController < InheritedResources::Base
   belongs_to :workspace
   respond_to :html, :json
   
-  layout 'company'
+  layout 'workspace'
 #  belongs_to :member
   
   def set_page_name
@@ -57,7 +57,7 @@ class ScModelsController < InheritedResources::Base
     else
       @sc_model.send_mesh(params[:model][:file], current_workspace_member) unless params[:model][:file].nil?
     end
-    redirect_to company_model_path(@sc_model)
+    redirect_to workspace_model_path(@sc_model)
   end
 
 end

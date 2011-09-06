@@ -1,9 +1,9 @@
 class MemoryAccount < ActiveRecord::Base
   
-  belongs_to :company
+  belongs_to :workspace
   has_many   :log_abonnements
   
-  # initialisation d'un nouveau compte lors de la création d'une nouvelle company
+  # initialisation d'un nouveau compte lors de la création d'une nouvelle workspace
   def init()
     self.assigned_memory = 0
     self.status = 'pause'
@@ -37,7 +37,7 @@ class MemoryAccount < ActiveRecord::Base
   
   def get_used_memory()
     used_memory = 0
-    list_sc_models = self.company.sc_models.find(:all, :conditions => {:state => "active"})
+    list_sc_models = self.workspace.sc_models.find(:all, :conditions => {:state => "active"})
     list_sc_models.each{ |model_i|
        used_memory += (model_i.used_memory/10000)*0.01          
     }

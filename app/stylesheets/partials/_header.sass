@@ -3,8 +3,8 @@
 $header-logo-cols           : 8  // Largeur de la zone du logo en colonne 
 $header-user-connected-cols : 16 // Largeur de la zone du nom de l'entreprise et des infos utilisateur en colonne
                             
-$gap-company-name-separator : 10px // Ecart entre le nom de l'entreprise et l'image qui le sépare du nom d'utilisateur
-$gap-user-infos-separator   : $gap-company-name-separator // Idem mais entre le nom d'utilisateur et l'image séparateur
+$gap-workspace-name-separator : 10px // Ecart entre le nom de l'entreprise et l'image qui le sépare du nom d'utilisateur
+$gap-user-infos-separator   : $gap-workspace-name-separator // Idem mais entre le nom d'utilisateur et l'image séparateur
 $gap-cadena-user-infos      : 6px  // Ecart entre le nom d'utilisateur et le logo du cadena
                             
 $gap-top-page-header        : 10px  // Ecart entre le haut de la page et le header
@@ -31,7 +31,7 @@ $color-tab-start            : #535781 // Couleur du début du gradient en fond d
 $color-tab-end              : #515783 // Couleur du fin du gradient en fond des onglets non selectionnés
                             
 $lock-image                 : 'header_cadena.png' // Nom de l'image se situant à coté du nom d'utilisateur
-$separator-image            : 'header_bg_separateur.png' // Nom de l'image séparant le nom de la company et le nom d'utilisateur
+$separator-image            : 'header_bg_separateur.png' // Nom de l'image séparant le nom de la workspace et le nom d'utilisateur
 
 /* Mixins ---------------------------------------------------------------- */
 
@@ -70,13 +70,13 @@ header
       #header_user_connected //TODO Trouver un nom d'ID plus clair et penser à le changer aussi dans le fichier haml
         +columns($header-user-connected-cols)
         +omega
-        #header_company_name
+        #header_workspace_name
           display        : inline-block
           text-align     : right
           float          : right
           margin-top     : 0
           background     : transparent url('/images/' + $separator-image) no-repeat top right
-          padding-right  : image-width($separator-image) + $gap-company-name-separator + 1
+          padding-right  : image-width($separator-image) + $gap-workspace-name-separator + 1
           padding-bottom : 20px // Nécéssaire pour pourvoir afficher le cadenas en entier
           padding-top    : $gap-top-page-header
 

@@ -1,9 +1,9 @@
 # Controlleur permettant de gerer les utilisateurs (user) au sein d'une équipe.
-# Ulterieurement pourra être une ressource incluse dans une ressource company
+# Ulterieurement pourra être une ressource incluse dans une ressource workspace
 
 class MembersController < InheritedResources::Base
   
-    layout 'company'
+    layout 'workspace'
     
     # Configuration de inherited ressource.
     defaults      :resource_class => User, :collection_name => 'members', :instance_name => 'member'

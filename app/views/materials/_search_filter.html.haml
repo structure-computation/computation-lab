@@ -1,11 +1,11 @@
 .search_filter
   
-  %a.yellow_button.pressed_button#company_material   Ma bibliothèque
+  %a.yellow_button.pressed_button#workspace_material   Ma bibliothèque
   %a.yellow_button.pressed_button#standard_material  Bibliothèque standard
   :coffeescript
-    $('a#company_material').click ->
+    $('a#workspace_material').click ->
       $(this).toggleClass('pressed_button')
-      $('#materials_table tbody tr.company').toggle()
+      $('#materials_table tbody tr.workspace').toggle()
 
     $('a#standard_material').click ->
       $(this).toggleClass('pressed_button')

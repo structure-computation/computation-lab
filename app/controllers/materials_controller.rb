@@ -5,7 +5,7 @@ class MaterialsController < InheritedResources::Base
   before_filter :set_page_name
   belongs_to    :workspace
   respond_to    :json
-  layout 'company'
+  layout 'workspace'
 
   def set_page_name
     @page = :bibliotheque

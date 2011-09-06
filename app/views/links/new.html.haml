@@ -6,7 +6,7 @@
       %li.LM_pic_liaison
         =link_to 'Retour à la liste des liaisons', workspace_links_path(@workspace)
 
--content_for :company_content do
+-content_for :workspace_content do
   .grey
     - if @link.comp_complexe.nil?
       - @comp_generique  = ["Parfaite", "Elastique", "Contact"]

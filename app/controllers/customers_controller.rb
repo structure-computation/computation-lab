@@ -1,5 +1,5 @@
 class CustomersController < InheritedResources::Base
-    layout 'company'
+    layout 'workspace'
 
     def create
       @new_customer = Customer.create(params[:customer])

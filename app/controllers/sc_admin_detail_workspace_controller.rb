@@ -4,18 +4,18 @@ class ScAdminDetailCompanyController < ApplicationController
   
   def index
     @page = 'SCadmin'
-    @id_company = params[:id_company]
-    @current_company = Company.find(@id_company)
+    @id_workspace = params[:id_workspace]
+    @current_workspace = Company.find(@id_workspace)
     respond_to do |format|
       format.html {render :layout => true }
-      format.js   {render :json => @current_company.to_json}
+      format.js   {render :json => @current_workspace.to_json}
     end 
   end
   
   def get_list_gestionnaires
-    @id_company = params[:id_company]
-    @current_company = Company.find(@id_company)
-    gestionnaire = @current_company.users.find(:all, :conditions => {:role => "gestionnaire"})
+    @id_workspace = params[:id_workspace]
+    @current_workspace = Company.find(@id_workspace)
+    gestionnaire = @current_workspace.users.find(:all, :conditions => {:role => "gestionnaire"})
     @users = []
     gestionnaire.each{ |gestionnaire_i|
       user = Hash.new
@@ -29,9 +29,9 @@ class ScAdminDetailCompanyController < ApplicationController
   end
   
   def get_list_factures
-    @id_company = params[:id_company]
-    @current_company = Company.find(@id_company)
-    @factures = @current_company.factures.find(:all)
+    @id_workspace = params[:id_workspace]
+    @current_workspace = Company.find(@id_workspace)
+    @factures = @current_workspace.factures.find(:all)
     respond_to do |format|
       format.js   {render :json => @factures.to_json}
     end 
@@ -45,18 +45,18 @@ class ScAdminDetailCompanyController < ApplicationController
   end
   
   def get_calcul_account
-    @id_company = params[:id_company]
-    @current_company = Company.find(@id_company)
-    @calcul_account = @current_company.calcul_account
+    @id_workspace = params[:id_workspace]
+    @current_workspace = Company.find(@id_workspace)
+    @calcul_account = @current_workspace.calcul_account
     respond_to do |format|
       format.js   {render :json => @calcul_account.to_json}
     end 
   end
   
   def valid_new_forfait
-    @id_company = params[:id_company]
-    @current_company = Company.find(@id_company)
-    @calcul_account = @current_company.calcul_account
+    @id_workspace = params[:id_workspace]
+    @current_workspace = Company.find(@id_workspace)
+    @calcul_account = @current_workspace.calcul_account
     @calcul_account.add_forfait(params[:id_forfait])
     respond_to do |format|
       format.js   {render :json => { :result => 'success' }}
@@ -71,18 +71,18 @@ class ScAdminDetailCompanyController < ApplicationController
   end
   
   def get_memory_account
-    @id_company = params[:id_company]
-    @current_company = Company.find(@id_company)
-    @memory_account = @current_company.memory_account
+    @id_workspace = params[:id_workspace]
+    @current_workspace = Company.find(@id_workspace)
+    @memory_account = @current_workspace.memory_account
     respond_to do |format|
       format.js   {render :json => @memory_account.to_json}
     end 
   end
   
   def valid_new_abonnement
-    @id_company = params[:id_company]
-    @current_company = Company.find(@id_company)
-    @memory_account = @current_company.memory_account
+    @id_workspace = params[:id_workspace]
+    @current_workspace = Company.find(@id_workspace)
+    @memory_account = @current_workspace.memory_account
     @memory_account.add_abonnement(params[:id_abonnement])
     respond_to do |format|
       format.js   {render :json => { :result => 'success' }}
@@ -90,10 +90,10 @@ class ScAdminDetailCompanyController < ApplicationController
   end
   
   def valid_facture
-    @id_company = params[:id_company]
-    @current_company = Company.find(@id_company)
+    @id_workspace = params[:id_workspace]
+    @current_workspace = Company.find(@id_workspace)
     @id_facture = params[:id_facture]
-    @current_facture = @current_company.factures.find(@id_facture)
+    @current_facture = @current_workspace.factures.find(@id_facture)
     @current_facture.valid_facture()
     render :text => "crédit alloués"
   end

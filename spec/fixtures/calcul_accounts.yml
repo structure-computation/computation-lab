@@ -1,7 +1,7 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
  
 compte_actif_tf_avionics:
-  company_id: 674101581   #tf_avionics
+  workspace_id: 674101581   #tf_avionics
   start_date: 2010-01-01
   end_date: 2010-12-31
   status: active
@@ -14,7 +14,7 @@ compte_actif_tf_avionics:
   used_jeton_tempon: 0
 
 compte_actif_be_civil:
-  company_id: 725745063   #be_civil
+  workspace_id: 725745063   #be_civil
   start_date: 2010-01-01
   end_date: 2010-12-31
   status: active
@@ -27,7 +27,7 @@ compte_actif_be_civil:
   used_jeton_tempon: 0
   
 compte_actif_sc_admin:
-  company_id: 240607020   #sc_admin
+  workspace_id: 240607020   #sc_admin
   start_date: 2010-01-01
   end_date: 2010-12-31
   status: active

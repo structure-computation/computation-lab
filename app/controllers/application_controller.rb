@@ -3,8 +3,8 @@ class ApplicationController < ActionController::Base
 
   # TODO: Refaire.
   def valid_admin_user
-    admin_company = ScAdmin.find_by_workspace_id(current_workspace_member.company.id)
-    admin_user = admin_company.user_sc_admins.find(:first, :conditions => {:user_id => current_user.id})
+    admin_workspace = ScAdmin.find_by_workspace_id(current_workspace_member.workspace.id)
+    admin_user = admin_workspace.user_sc_admins.find(:first, :conditions => {:user_id => current_user.id})
     if !admin_user
       redirect_back_or_default(root_path)
     end

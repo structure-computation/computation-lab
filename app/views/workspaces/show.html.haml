@@ -16,7 +16,7 @@
     %p Abonnement
     %p Forfait
     
--content_for :company_content do
+-content_for :workspace_content do
   %h2.grey
     Détails de la société
   .wrapper
@@ -85,7 +85,7 @@
           = render :partial => "members/members_list", :object => @workspace.members
           
         #tab_5_content
-          %table.grey#company_information_table
+          %table.grey#workspace_information_table
             %tr
               %th Division
               %td= @workspace.division

@@ -11,8 +11,8 @@
     });
     window.Calcul = Backbone.Model.extend({
       initialize: function() {
-        var company_id;
-        company_id = location.pathname.match(/\/companies\/([0-9]+)\/*/)[1];
+        var workspace_id;
+        workspace_id = location.pathname.match(/\/companies\/([0-9]+)\/*/)[1];
         this.selectedMaterials = [];
         this.selectedLinks = [];
         return this.steps = [];

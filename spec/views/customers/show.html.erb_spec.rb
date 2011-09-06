@@ -6,7 +6,7 @@ describe "customers/show.html.erb" do
       :name => "Name",
       :mail => "Mail",
       :phonenumber => 1,
-      :companyname => "Companyname"
+      :workspacename => "Companyname"
     ))
   end
 

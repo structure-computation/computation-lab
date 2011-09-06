@@ -23,7 +23,7 @@
           %td.comp=           material.comp
         
       - @workspace_materials.each do |material|
-        %tr.company{:id => "material_#{material.id}"}
+        %tr.workspace{:id => "material_#{material.id}"}
           %td.escape_search.details_link
             %button.add Ajouter au calcul
           %td.name=           material.name

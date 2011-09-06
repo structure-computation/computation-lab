@@ -1,17 +1,17 @@
 / Vue Index des resultats.
 / Liens vers les CSS
-%link{ :href => "/stylesheets/main_sc_admin_detail_company.css", :rel => "stylesheet", :media => "screen" }
+%link{ :href => "/stylesheets/main_sc_admin_detail_workspace.css", :rel => "stylesheet", :media => "screen" }
 
 / Javascript particulier a la page resultat
-%script{ :src => "/javascripts/admin/functions_layer_sc_admin_detail_company.js" ,   :type => "text/javascript" }
+%script{ :src => "/javascripts/admin/functions_layer_sc_admin_detail_workspace.js" ,   :type => "text/javascript" }
 %script{ :src => "/javascripts/admin/forfait/functions_forfait.js" ,   :type => "text/javascript" }
 %script{ :src => "/javascripts/admin/abonnement/functions_abonnement.js" ,   :type => "text/javascript" }
 / wizard création de projet en premier plan
 .content
   #bl_5.black.off
   / wizard d'ajout d'un nouveau forfait
-  = render :partial => "sc_admin_detail_company/forfait/forfait_nouveau"
-  = render :partial => "sc_admin_detail_company/abonnement/abonnement_nouveau"
+  = render :partial => "sc_admin_detail_workspace/forfait/forfait_nouveau"
+  = render :partial => "sc_admin_detail_workspace/abonnement/abonnement_nouveau"
   
   / partie gauche du contenu, raccourci
   #contentleft
@@ -29,17 +29,17 @@
       / taille minimum du contenu du contenu
       .contentheightmin
       / taille minimum du contenu du contenu
-      = render :partial => "info_company"
+      = render :partial => "info_workspace"
       / liste des projet
-      = render :partial => "contenu_company"
+      = render :partial => "contenu_workspace"
       / fin largeBoxcontent de la liste des projet
       
 / fin de #contentright, partie droite du contenu
 %script{ :type => "text/javascript" }
-  $(document).ready(function() {get_Current_company( #{@id_company} )});
-  $(document).ready(function() {get_current_calcul_account( #{@id_company} )});
-  $(document).ready(function() {get_current_memory_account( #{@id_company} )});
-  $(document).ready(function() {get_Tableau_factures( #{@id_company} )});
+  $(document).ready(function() {get_Current_workspace( #{@id_workspace} )});
+  $(document).ready(function() {get_current_calcul_account( #{@id_workspace} )});
+  $(document).ready(function() {get_current_memory_account( #{@id_workspace} )});
+  $(document).ready(function() {get_Tableau_factures( #{@id_workspace} )});
   $(document).ready(function() {get_Tableau_forfait_list()});
   $(document).ready(function() {get_Tableau_abonnement_list()});
   

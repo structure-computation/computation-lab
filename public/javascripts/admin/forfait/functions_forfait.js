@@ -136,7 +136,7 @@ function init_Tableau_forfait_list(Tableau_forfait_temp)
 // requette pour l'obtention du tableau des resultats
 function get_Tableau_forfait_list()
 { 
-    var url_php = "/sc_admin_detail_company/get_list_forfait";
+    var url_php = "/sc_admin_detail_workspace/get_list_forfait";
     $.getJSON(url_php,{},init_Tableau_forfait_list);
 }
 
@@ -301,7 +301,7 @@ function ok_new_forfait_info(result)
 	//alert(result);
 	document.getElementById('new_forfait_pic_wait').classname = 'off';
 	document.getElementById('new_forfait_pic_ok').classname = 'on';
-	get_current_calcul_account(Current_company['id']);
+	get_current_calcul_account(Current_workspace['id']);
 }
 
 
@@ -309,8 +309,8 @@ function send_new_forfait_info()
 { 
     document.getElementById('new_forfait_pic_wait').classname = 'on';
     document.getElementById('new_forfait_pic_ok').classname = 'off';
-    var url_php = "/sc_admin_detail_company/valid_new_forfait";
-    $.getJSON(url_php,{"id_company": Current_company['id'], "id_forfait":Tableau_forfait['forfait']['id']},ok_new_forfait_info);
+    var url_php = "/sc_admin_detail_workspace/valid_new_forfait";
+    $.getJSON(url_php,{"id_workspace": Current_workspace['id'], "id_forfait":Tableau_forfait['forfait']['id']},ok_new_forfait_info);
 }
 
 -->

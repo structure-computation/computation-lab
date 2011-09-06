@@ -7,6 +7,6 @@ class LogCalcul < ActiveRecord::Base
   
   # Utilisateur ayant lance ce calcul (utilisateur facture)
   belongs_to  :calcul_account
-  has_one     :company ,  :through => :calcul_account
+  has_one     :workspace ,  :through => :calcul_account
   has_one     :solde_calcul_account
 end

@@ -24,7 +24,7 @@
           -#%td.comp_complex=   link.comp_complexe
 
       - @workspace_links.each do |link|
-        %tr.company{:id => "link_#{link.id}"}
+        %tr.workspace{:id => "link_#{link.id}"}
           %td.escape_search.details_link
             %button.add Ajouter au calcul
           %td.name=           link.name

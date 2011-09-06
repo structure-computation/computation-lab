@@ -16,7 +16,7 @@ class WorkspacesController < InheritedResources::Base
   # Actions inherited ressource. 
   actions :all, :except => [ :index, :edit, :update, :destroy ]
   
-  layout 'company'  
+  layout 'workspace'  
   
   def create     
     kind = params[:workspace][:kind]
@@ -47,7 +47,7 @@ class WorkspacesController < InheritedResources::Base
     # @page = 'SCmanage' 
     # respond_to do |format|
     #   format.html {render :layout => true }
-    #   format.js   {render :json => @current_company.to_json}
+    #   format.js   {render :json => @current_workspace.to_json}
     # end
   end
     

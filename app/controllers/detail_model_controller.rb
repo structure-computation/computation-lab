@@ -50,8 +50,8 @@ class DetailModelController < ApplicationController
   end
   
   def get_list_utilisateur_new
-    @current_company = current_workspace_member.company
-    list_utilisateur_new = @current_company.users
+    @current_workspace = current_workspace_member.workspace
+    list_utilisateur_new = @current_workspace.users
     @users = []
     list_utilisateur_new.each{ |utilisateur_i| 
       user = Hash.new
@@ -68,11 +68,11 @@ class DetailModelController < ApplicationController
   def valid_new_utilisateur
     @id_model = params[:id_model]
     @current_model = current_workspace_member.sc_models.find(@id_model)
-    @current_company = @current_model.company
+    @current_workspace = @current_model.workspace
     jsonobject = JSON.parse(params[:file])
     num_user = 0
     jsonobject.each{ |utilisateur_i| 
-            user = @current_company.users.find(utilisateur_i['user']['id']) 
+            user = @current_workspace.users.find(utilisateur_i['user']['id']) 
             if(@current_model.users.exists?(user.id))
             else
 		@current_model.users << user

@@ -4,7 +4,7 @@
       Menu
     %ul
       %li.LM_pic_model
-        = link_to "Retour à la liste de modèles", company_sc_models_path(@workspace) 
+        = link_to "Retour à la liste de modèles", workspace_sc_models_path(@workspace) 
 
 -content_for :right_top do
   %h2.grey
@@ -36,7 +36,7 @@
     %li 
       %a#tab_3{:href => "#Utilisateurs"} Utilisateurs
                    
--content_for :company_content do
+-content_for :workspace_content do
   %h2.grey
     Modèle : 
     = @sc_model.name

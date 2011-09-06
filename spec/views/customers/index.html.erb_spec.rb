@@ -7,13 +7,13 @@ describe "customers/index.html.erb" do
         :name => "Name",
         :mail => "Mail",
         :phonenumber => 1,
-        :companyname => "Companyname"
+        :workspacename => "Companyname"
       ),
       stub_model(Customer,
         :name => "Name",
         :mail => "Mail",
         :phonenumber => 1,
-        :companyname => "Companyname"
+        :workspacename => "Companyname"
       )
     ])
   end

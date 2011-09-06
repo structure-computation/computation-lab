@@ -3,7 +3,7 @@
 one:
   name : 'metal 1'
   family : 'métaux'
-  company_id : -1
+  workspace_id : -1
   reference : -1
   id_select : 
   name_select : ''
@@ -55,7 +55,7 @@ one:
 two:
   name : 'metal 2'
   family : 'métaux'
-  company_id : -1
+  workspace_id : -1
   reference : -1
   id_select : 
   name_select : ''

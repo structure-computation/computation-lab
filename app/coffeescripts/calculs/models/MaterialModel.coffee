@@ -5,7 +5,7 @@
 SCModels.Material = Backbone.Model.extend
   initialize: ->
     @piece = null
-    @workspace_id = if SCVisu.current_company? then SCVisu.current_company else 0
+    @workspace_id = if SCVisu.current_workspace? then SCVisu.current_workspace else 0
     @url = "/companies/#{@workspace_id}/materials/"
 
   # Get the ID of the material in the JSON
@@ -15,7 +15,7 @@ SCModels.Material = Backbone.Model.extend
 SCModels.MaterialCollection = Backbone.Collection.extend
   model: SCModels.Material
   initialize: (options) ->
-    @workspace_id = if SCVisu.current_company? then SCVisu.current_company else 0
+    @workspace_id = if SCVisu.current_workspace? then SCVisu.current_workspace else 0
     @url = "/companies/#{@workspace_id}/materials"
     # Have to initialize _meta for the meta function
     @._meta = {}

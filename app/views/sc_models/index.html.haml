@@ -12,7 +12,7 @@
   %div
     = render :partial => "search_filter"
 
--content_for :company_content do
+-content_for :workspace_content do
   %table.grey#models_table
     %thead
       %tr
@@ -25,7 +25,7 @@
     %tbody
       - @sc_models.each do |sc_model|
         %tr
-          %td.escape_search.details_link= link_to 'Détails', company_sc_model_path(@workspace, sc_model)
+          %td.escape_search.details_link= link_to 'Détails', workspace_sc_model_path(@workspace, sc_model)
           %td.name=           sc_model.name ? sc_model.name : 'Undefined'
           %td.id=             sc_model.id
           %td.project=        sc_model.project ? sc_model.project : 'Undefined'
@@ -37,4 +37,4 @@
               %li
                 %a Calcul
               %li
-                = link_to 'Supprimer', company_sc_model_path(@workspace, sc_model), :method => :delete
+                = link_to 'Supprimer', workspace_sc_model_path(@workspace, sc_model), :method => :delete

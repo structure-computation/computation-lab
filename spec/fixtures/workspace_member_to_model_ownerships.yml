@@ -5,7 +5,7 @@
 
 <% mbleriot_models.each do |model_name| %>
 <%= "mbleriot_#{model_name}:" %>
-  company_member: mbleriot
+  workspace_member: mbleriot
   rights: #TODO
   sc_model: <%= model_name %>
   
@@ -13,7 +13,7 @@
 
 <% jlinder_models.each do |model_name| %>
 <%= "jlinder_#{model_name}:" %>
-  company_member: jlinder
+  workspace_member: jlinder
   rights: #TODO
   sc_model: <%= model_name %>
 

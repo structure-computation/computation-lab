@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   scope       :managers     ,   where(:role => "gestionnaire")
   
   # Relations
-  # belongs_to  :company
+  # belongs_to  :workspace
   has_many    :user_workspace_memberships
   has_many    :workspaces, :through => :user_workspace_memberships
   
@@ -49,7 +49,7 @@ class User < ActiveRecord::Base
 
   
   # TODO: Supprimer à la fin de la migration vers le multi tenant :
-  def company
+  def workspace
     companies.first    
   end
   

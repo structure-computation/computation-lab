@@ -54,7 +54,7 @@ class ScModel < ActiveRecord::Base
     end
     
     # création du fichier json_model 
-    identite_calcul = { :id_societe => self.company.id, :id_user => current_workspace_member.id, :id_projet => '', :id_model => self.id, :id_calcul => '', :dimension  => self.dimension};
+    identite_calcul = { :id_societe => self.workspace.id, :id_user => current_workspace_member.id, :id_projet => '', :id_model => self.id, :id_calcul => '', :dimension  => self.dimension};
     priorite_calcul = { :priorite => 0 };                               
     mesh = { :mesh_directory => "MESH", :mesh_name  => "mesh", :extension  => extension};
     json_model = { :identite_calcul => identite_calcul, :priorite_calcul => priorite_calcul, :mesh => mesh}; 
@@ -138,7 +138,7 @@ class ScModel < ActiveRecord::Base
       @calcul_result.save
       
       #mise à jour du compte de calcul
-      self.company.calcul_account.log_model(@calcul_result.id)
+      self.workspace.calcul_account.log_model(@calcul_result.id)
     else
       self.change_state('void')
     end
@@ -153,7 +153,7 @@ class ScModel < ActiveRecord::Base
     end 
     self.used_memory = dirsize
     self.save
-    self.company.memory_account.get_used_memory()
+    self.workspace.memory_account.get_used_memory()
   end
   
   def self.save_mesh_file(upload)

@@ -6,7 +6,7 @@
       %li.LM_pic_liaison
         =link_to 'Retour à la liste des matériaux', workspace_materials_path(@workspace)
     
--content_for :company_content do
+-content_for :workspace_content do
   .grey
     - if @material.mtype.nil?
       - @behaviors = ["Elastique", "Plastique", "Endomageable", "Visqueux"]

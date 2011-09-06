@@ -87,18 +87,18 @@
     # Initialization of data coming from database
     $ ->
       SCVisu.current_model_id = #{params[:sc_model_id]}
-      SCVisu.current_company  = #{current_workspace_member.workspace_id}
+      SCVisu.current_workspace  = #{current_workspace_member.workspace_id}
       
       SCVisu.standardLibraryMaterial  = new SCModels.MaterialCollection
-      SCVisu.companyLibraryMaterial   = new SCModels.MaterialCollection
+      SCVisu.workspaceLibraryMaterial   = new SCModels.MaterialCollection
       SCVisu.standardLibraryLink      = new SCModels.LinkCollection
-      SCVisu.companyLibraryLink       = new SCModels.LinkCollection
+      SCVisu.workspaceLibraryLink       = new SCModels.LinkCollection
 
       SCVisu.standardLibraryMaterial.reset #{@standard_materials.to_json.html_safe}
-      SCVisu.companyLibraryMaterial.reset #{@workspace_materials.to_json.html_safe}
+      SCVisu.workspaceLibraryMaterial.reset #{@workspace_materials.to_json.html_safe}
 
       SCVisu.standardLibraryLink.reset #{@standard_links.to_json.html_safe}
-      SCVisu.companyLibraryLink.reset #{@workspace_links.to_json.html_safe}
+      SCVisu.workspaceLibraryLink.reset #{@workspace_links.to_json.html_safe}
       
       SCVisu.calculCollection = new SCModels.Calculs
       SCVisu.calculCollection.reset #{@calculs.to_json.html_safe}

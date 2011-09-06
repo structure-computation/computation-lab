@@ -21,7 +21,7 @@ $ ->
     materialCollection            = new SCModels.MaterialCollection SCVisu.current_calcul.get('materials')     
     SCVisu.materialListView       = new SCViews.MaterialListView collection: materialCollection
     # Initialize views for database materials
-    for material in SCVisu.standardLibraryMaterial.models.concat SCVisu.companyLibraryMaterial.models
+    for material in SCVisu.standardLibraryMaterial.models.concat SCVisu.workspaceLibraryMaterial.models
       el = $('#materials_table tbody tr#material_' + material.get("id"))
       new SCViews.DatabaseMaterialView el: el, model: material, materialListView: SCVisu.materialListView
 
@@ -29,11 +29,11 @@ $ ->
     linkCollection                = new SCModels.LinkCollection SCVisu.current_calcul.get('links') 
     SCVisu.linkListView           = new SCViews.LinkListView collection: linkCollection
     # Initialize views for database links
-    for link in SCVisu.standardLibraryLink.models.concat SCVisu.companyLibraryLink.models
+    for link in SCVisu.standardLibraryLink.models.concat SCVisu.workspaceLibraryLink.models
       el = $('#links_table tbody tr#link_' + link.get("id"))
       new SCViews.DatabaseLinkView el: el, model: link, linkListView: SCVisu.linkListView
 
-    # for link in SCVisu.companyLibraryLink.models
+    # for link in SCVisu.workspaceLibraryLink.models
     #   el = $('#links_table tbody tr#link_' + link.get("id"))
     #   new SCViews.DatabaseLinkView el:  el, model: link, linkListView: SCVisu.linkListView
 

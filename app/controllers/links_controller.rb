@@ -4,7 +4,7 @@ class LinksController < InheritedResources::Base
   before_filter :authenticate_user!
   before_filter :set_page_name
   belongs_to    :workspace
-  layout 'company'
+  layout 'workspace'
   respond_to :html, :json
   
   def set_page_name

@@ -3,10 +3,10 @@
 // initialisation
 //---------------------------------------------------------------------------------------------------------
 
-var NMcurrent_stape                 =  0;                        // étape pour le wizzard nouveau company
+var NMcurrent_stape                 =  0;                        // étape pour le wizzard nouveau workspace
 
-var Tableau_company                   =  new Array();              // tableau des companys
-var Tableau_company_filter            =  new Array();              // tableau des companys filtres pour l'affichage
+var Tableau_workspace                   =  new Array();              // tableau des workspaces
+var Tableau_workspace_filter            =  new Array();              // tableau des workspaces filtres pour l'affichage
 
 //initialisation de la taille du tableau pour la box content et de la table de correspondance
 var taille_tableau_content          =  20;                       // taille du tableau dans la content box
@@ -14,10 +14,10 @@ var content_tableau_connect         =  new Array();              // connectivit�
 var content_tableau_current_page    =  new Array();              // numéro de la page du tableau (sert pour la définition de la connectivité)    
 var content_tableau_curseur_page    =  new Array();              // nombre de page du tableau (sert pour l'affichage des page en bas des tableaux)
 var content_tableau_liste_page      =  new Array();              // liste des pages du tableau (sert pour l'affichage des page en bas des tableaux)
-var content_tableau_page            =  new Array('company');    // initialisation des pages avec tableau dynamique
+var content_tableau_page            =  new Array('workspace');    // initialisation des pages avec tableau dynamique
 
 var taille_tableau_content_page     =  new Array()               // taille du tableau dans la content box
-taille_tableau_content_page['company'] = 20;
+taille_tableau_content_page['workspace'] = 20;
 
 
 
@@ -32,16 +32,16 @@ for(i=0; i<content_tableau_page.length ; i++){
     }
 }
 
-// initialisation du tableau des info sur la nouvelle company
-var Tableau_new_company  =  new Array();
-Tableau_new_company["name"] = 'test';
-Tableau_new_company["address"] = 'test';
-Tableau_new_company["city"] = 'test';
-Tableau_new_company["zipcode"] = 91160;
-Tableau_new_company["country"] = 'test';
-Tableau_new_company["division"] = 'test';
-Tableau_new_company["TVA"] = 101010010;
-Tableau_new_company["siren"] = 345345345;
+// initialisation du tableau des info sur la nouvelle workspace
+var Tableau_new_workspace  =  new Array();
+Tableau_new_workspace["name"] = 'test';
+Tableau_new_workspace["address"] = 'test';
+Tableau_new_workspace["city"] = 'test';
+Tableau_new_workspace["zipcode"] = 91160;
+Tableau_new_workspace["country"] = 'test';
+Tableau_new_workspace["division"] = 'test';
+Tableau_new_workspace["TVA"] = 101010010;
+Tableau_new_workspace["siren"] = 345345345;
 
 // initialisation du tableau des info sur le nouveau gestionaire
 var Tableau_new_membre  =  new Array();
@@ -52,62 +52,62 @@ Tableau_new_membre['role'] = 'gestionaire';
 
 
 //-------------------------------------------------------------------------------------------------
-// fonctions utiles pour l'obtention de la liste des companys (tableau)
+// fonctions utiles pour l'obtention de la liste des workspaces (tableau)
 //-------------------------------------------------------------------------------------------------
-// traitement en fin de requette pour laffichage du tableau des companys
-function init_Tableau_company(Tableau_company_temp)
+// traitement en fin de requette pour laffichage du tableau des workspaces
+function init_Tableau_workspace(Tableau_workspace_temp)
 {
     // var Tableau_calcul_temp = eval('[' + response + ']');
-    if (Tableau_company_temp)
+    if (Tableau_workspace_temp)
     {   
-        Tableau_company = Tableau_company_temp;
+        Tableau_workspace = Tableau_workspace_temp;
     }
     else
     {
-        Tableau_company[0]         =  new Array();
-        Tableau_company[0]['name'] = 'aucun company';
+        Tableau_workspace[0]         =  new Array();
+        Tableau_workspace[0]['name'] = 'aucun workspace';
     }
-    affiche_Tableau_company();
+    affiche_Tableau_workspace();
 }
-// requette pour l'obtention du tableau des companys
-function get_Tableau_company()
+// requette pour l'obtention du tableau des workspaces
+function get_Tableau_workspace()
 { 
-    var url_php = "/sc_admin_company/index";
-    $.getJSON(url_php,[],init_Tableau_company);
+    var url_php = "/sc_admin_workspace/index";
+    $.getJSON(url_php,[],init_Tableau_workspace);
 }
 
 
 //------------------------------------------------------------------------------------------------------
-// fonctions utiles pour l'affichage de la liste des companys (tableau)
+// fonctions utiles pour l'affichage de la liste des workspaces (tableau)
 //------------------------------------------------------------------------------------------------------
 
-function filtre_Tableau_company(){
-    Tableau_company_filter = Tableau_company;
+function filtre_Tableau_workspace(){
+    Tableau_workspace_filter = Tableau_workspace;
 }
 
 
 // affichage du tableau membre
-function affiche_Tableau_company(){
-    taille_tableau_content  =  taille_tableau_content_page['company'];
-    filtre_Tableau_company();
-    var current_tableau     =  Tableau_company_filter;
-    var strname             =  'company';
-    var strnamebdd          =  'company';
+function affiche_Tableau_workspace(){
+    taille_tableau_content  =  taille_tableau_content_page['workspace'];
+    filtre_Tableau_workspace();
+    var current_tableau     =  Tableau_workspace_filter;
+    var strname             =  'workspace';
+    var strnamebdd          =  'workspace';
     var stridentificateur   =  new Array('name','created_at','city','country');
     affiche_Tableau_content(current_tableau, strname, strnamebdd, stridentificateur);
 }
 
-// affiche la page num pour la liste des companys
-function go_page_company(num){
+// affiche la page num pour la liste des workspaces
+function go_page_workspace(num){
     if(num=='first'){
-        content_tableau_current_page['company'] = 0;
+        content_tableau_current_page['workspace'] = 0;
     }else if(num=='end'){
-        content_tableau_current_page['company'] = content_tableau_liste_page['company'].length-1;
+        content_tableau_current_page['workspace'] = content_tableau_liste_page['workspace'].length-1;
     }else{
-        var num_page = num + content_tableau_curseur_page['company'];
-        content_tableau_current_page['company'] = content_tableau_liste_page['company'][num_page]-1;    
+        var num_page = num + content_tableau_curseur_page['workspace'];
+        content_tableau_current_page['workspace'] = content_tableau_liste_page['workspace'][num_page]-1;    
     }
-    affiche_Tableau_company();
+    affiche_Tableau_workspace();
 }
 
 
@@ -190,32 +190,32 @@ function affiche_Tableau_content(current_tableau, strname, strnamebdd, stridenti
 
 
 //---------------------------------------------------------------------------------------------------------------------
-// fonctions utiles pour l'affichage du detail d'une company
+// fonctions utiles pour l'affichage du detail d'une workspace
 //---------------------------------------------------------------------------------------------------------------------
 
-// afficher le détail d'une company
-function go_detail_company(num){
-    var num_select = content_tableau_connect['company'][num];
-    var id_company = Tableau_company_filter[num_select]['company']['id'];
-    var url_php = "/sc_admin_detail_company/index?id_company=" + id_company ;
+// afficher le détail d'une workspace
+function go_detail_workspace(num){
+    var num_select = content_tableau_connect['workspace'][num];
+    var id_workspace = Tableau_workspace_filter[num_select]['workspace']['id'];
+    var url_php = "/sc_admin_detail_workspace/index?id_workspace=" + id_workspace ;
     $(location).attr('href',url_php);
 }
 
 
-// afficher le détail d'une company
-function affich_detail_company(num){
-    var num_select = content_tableau_connect['company'][num];
-    var table_detail = Tableau_company_filter[num_select]['company'];
+// afficher le détail d'une workspace
+function affich_detail_workspace(num){
+    var num_select = content_tableau_connect['workspace'][num];
+    var table_detail = Tableau_workspace_filter[num_select]['workspace'];
     //test1=array2json(table_detail);
     //alert(test1);
-    //afficher le detail d'un company
+    //afficher le detail d'un workspace
     for(key in table_detail){
-	    var strContent_detail_key = 'company_detail_' + key ;
+	    var strContent_detail_key = 'workspace_detail_' + key ;
 	    var id_detail_key = document.getElementById(strContent_detail_key);
 	    if(id_detail_key != null){
 		strContent = new String();
 		strContent = table_detail[key];
-		//id_detail_key.value = Tableau_company_filter[num_select][key] ;
+		//id_detail_key.value = Tableau_workspace_filter[num_select][key] ;
 		remplacerTexte(id_detail_key, strContent);
 	    }
     }
@@ -228,8 +228,8 @@ function affich_detail_company(num){
     IdModelDetail.className = "on";
     //setTimeout($('#ModelListe').slideUp("slow"),1250);
 }
-// fermer le détail d'un companye
-function ferme_detail_company(){
+// fermer le détail d'un workspacee
+function ferme_detail_workspace(){
     strModelDetail = 'SCAdminCompanyDetail';    
     IdModelDetail  = document.getElementById(strModelDetail);
     IdModelDetail.className = "off";
@@ -249,7 +249,7 @@ function displayNewCompany(interupteur) {
     document.getElementById('New_wiz_layer').className = interupteur;
     NMcurrent_stape = 'page_information';
     if(interupteur=='on'){
-	new_company_affiche_value();
+	new_workspace_affiche_value();
 	new_membre_affiche_value();
     }
     document.getElementById('wiz_annul').className    =  'on' ;
@@ -262,7 +262,7 @@ function displayNewCompany(interupteur) {
 // fin du wizard nouveau modele
 function NM_fin_wizard(){
     displayNewCompany('off');
-    get_Tableau_company();
+    get_Tableau_workspace();
 }
 
 // afficher la page suivante ou la page precedente
@@ -276,7 +276,7 @@ function NM_next_stape(){
         affiche_NM_page();
     }
     else if(NMcurrent_stape == 'page_fichier'){
-        send_new_company();
+        send_new_workspace();
 	NMcurrent_stape = 'page_resume';
 	document.getElementById('wiz_annul').className    =  'off' ;
 	document.getElementById('wiz_suiv').className    =  'off' ;
@@ -352,24 +352,24 @@ function affiche_NM_page(){
     }
 }
 
-//afficher les info de la nouvelle company
-function new_company_affiche_value(){
-	for(key in Tableau_new_company){
-		var strContent_info_key = 'new_company_' + key ;
+//afficher les info de la nouvelle workspace
+function new_workspace_affiche_value(){
+	for(key in Tableau_new_workspace){
+		var strContent_info_key = 'new_workspace_' + key ;
 		var id_info_key = document.getElementById(strContent_info_key);
 		if(id_info_key != null){
-			id_info_key.value = Tableau_new_company[key] ;
+			id_info_key.value = Tableau_new_workspace[key] ;
 		}
 	}
 }
 
-//changer les info d'une nouvelle company
-function new_company_change_value(){
-	for(key in Tableau_new_company){
-		var strContent_info_key = 'new_company_' + key ;
+//changer les info d'une nouvelle workspace
+function new_workspace_change_value(){
+	for(key in Tableau_new_workspace){
+		var strContent_info_key = 'new_workspace_' + key ;
 		var id_info_key = document.getElementById(strContent_info_key);
 		if(id_info_key != null){
-			Tableau_new_company[key] = id_info_key.value ;
+			Tableau_new_workspace[key] = id_info_key.value ;
 		}
 	}
 }
@@ -396,13 +396,13 @@ function new_membre_change_value(){
 	}
 }
 
-// afficher le resumé d'une company
-function affich_new_company_resume(){
-   for(key in Tableau_new_company){
-		var str_info_key = 'new_company_resume_' + key ;
+// afficher le resumé d'une workspace
+function affich_new_workspace_resume(){
+   for(key in Tableau_new_workspace){
+		var str_info_key = 'new_workspace_resume_' + key ;
 		var id_info_key = document.getElementById(str_info_key);
 		if(id_info_key != null){
-			strContent_info_key = Tableau_new_company[key] ; 
+			strContent_info_key = Tableau_new_workspace[key] ; 
 			remplacerTexte(id_info_key, strContent_info_key);
 		}
 	}
@@ -414,25 +414,25 @@ function affich_new_company_resume(){
 
 
 // telecharger le nom et la description du membre
-function send_new_company()
+function send_new_workspace()
 {
-    var param1 = array2object(Tableau_new_company);
+    var param1 = array2object(Tableau_new_workspace);
     var param2 = array2object(Tableau_new_membre);
-    var Tableau_new_company_post         =  new Object();
-    Tableau_new_company_post['company'] =  new Object(); 
-    Tableau_new_company_post['company'] = param1;
-    Tableau_new_company_post['user'] =  new Object(); 
-    Tableau_new_company_post['user'] = param2;
+    var Tableau_new_workspace_post         =  new Object();
+    Tableau_new_workspace_post['workspace'] =  new Object(); 
+    Tableau_new_workspace_post['workspace'] = param1;
+    Tableau_new_workspace_post['user'] =  new Object(); 
+    Tableau_new_workspace_post['user'] = param2;
     $.ajax({
-	url: "/sc_admin_company/create",
+	url: "/sc_admin_workspace/create",
 	type: 'POST',
 	dataType: 'json',
-	data: $.toJSON(Tableau_new_company_post),
+	data: $.toJSON(Tableau_new_workspace_post),
 	contentType: 'application/json; charset=utf-8',
 	success: function(json) {
 	    alert('depot ok');
 	    NMcurrent_stape = 'page_resume';
-	    affich_new_company_resume();
+	    affich_new_workspace_resume();
 	    affiche_NM_page();
 	}
     });

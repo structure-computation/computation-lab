@@ -1,7 +1,7 @@
 class LogAbonnement < ActiveRecord::Base
   belongs_to :memory_account
   belongs_to :abonnement
-  has_one    :company ,  :through => :memory_account
+  has_one    :workspace ,  :through => :memory_account
   has_one    :facture
   
   # nouvelle ligne de log_abonnement et nouvelle facture non validé
@@ -16,7 +16,7 @@ class LogAbonnement < ActiveRecord::Base
     
     #création de la facture
     current_facture = self.build_facture() 
-    current_facture.company = self.memory_account.company
+    current_facture.workspace = self.memory_account.workspace
     current_facture.save
     
     #derniere mise a jour des info du compte et sauvegarde

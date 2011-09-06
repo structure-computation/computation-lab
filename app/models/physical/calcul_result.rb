@@ -178,15 +178,15 @@ class CalculResult < ActiveRecord::Base
     @debit_jeton = ((self.estimated_calcul_time * self.gpu_allocated)/15).ceil+1
         
     #autorisation de calcul
-    @solde_jeton = self.sc_model.company.calcul_account.solde_jeton
-    @solde_jeton_tempon = self.sc_model.company.calcul_account.solde_jeton_tempon
+    @solde_jeton = self.sc_model.workspace.calcul_account.solde_jeton
+    @solde_jeton_tempon = self.sc_model.workspace.calcul_account.solde_jeton_tempon
     self.launch_autorisation = false
     if(@debit_jeton > (@solde_jeton - @solde_jeton_tempon)) 		#si le debit depasse le nb de jetons restants
       self.launch_autorisation = false
     else                                       #si il y a assez de jetons , les jetons sont placé sur la reserve				
       self.launch_autorisation = true
-      self.sc_model.company.calcul_account.solde_jeton_tempon = self.sc_model.company.calcul_account.solde_jeton_tempon + @debit_jeton
-      self.sc_model.company.calcul_account.save
+      self.sc_model.workspace.calcul_account.solde_jeton_tempon = self.sc_model.workspace.calcul_account.solde_jeton_tempon + @debit_jeton
+      self.sc_model.workspace.calcul_account.save
     end
     #TEMP
     #self.launch_autorisation = true
@@ -217,7 +217,7 @@ class CalculResult < ActiveRecord::Base
     #debugger
     
     #mise à jour du compte de calcul
-    self.sc_model.company.calcul_account.log_calcul(self.id, calcul_state)
+    self.sc_model.workspace.calcul_account.log_calcul(self.id, calcul_state)
   end
   
   def get_used_memory()
