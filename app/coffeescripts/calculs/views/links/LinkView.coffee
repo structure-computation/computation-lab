@@ -1,5 +1,5 @@
 ## Link View
-SCModels.LinkView = Backbone.View.extend
+SCViews.LinkView = Backbone.View.extend
   initialize: (params) ->
     @parentElement = params.parentElement
     @firstRendering = true
@@ -57,8 +57,7 @@ SCModels.LinkView = Backbone.View.extend
     @renderWithButton 'assign', 'Assigner'
     
   renderWithButton: (className, textButton) ->
-    $(@el).removeClass('selected').removeClass('gray')
-    $(@el).html(@model.get('name'))
+    $(@el).html(@model.get('id_in_calcul') + " - " + @model.get('name'))
     $(@el).append("<button class='remove'>X</button>")
     $(@el).append("<button class='#{className}'>#{textButton}</button>")
     if @firstRendering

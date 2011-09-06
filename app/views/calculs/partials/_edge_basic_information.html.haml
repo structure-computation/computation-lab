@@ -1,8 +1,5 @@
 #edge_information_box
-  %label
-    Nom
-    %input#edge_name{:type => "text", :name => "name"}
-
-  %label
-    Description
-    %textarea#edge_description{:name => "description"}
+  %table.grey
+    %tbody
+      = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Nom",         :ids => ["edge_name"]}
+      = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Description", :ids => ["edge_description"], :type => "textarea"}

@@ -1,15 +1,27 @@
 ## EdgeView
-SCModels.EdgeView = Backbone.View.extend
-  tagname   : 'li'
+SCViews.EdgeView = Backbone.View.extend
+  tagName   : 'tr'
   className : 'edge_view'
 
   initialize: (options) ->
-    @first = true
     @parentElement = options.parentElement
+    $(@parentElement.el).find('table tbody').append @el
+
+  events:
+    "click" : "select"
+
+  select: ->
+    @parentElement.setNewSelectedModel(this)
+    @model.set selected: true
+
+  showAssignButton: ->
+  
 
   render: ->
-    $(@el).html @model.get 'name'
-    if @first
-      $(@parentElement.el).find('ul').append @el
-      @first = false
-    return @
+    template = """
+      <td>#{@model.get('id')}</td>
+      <td>#{@model.get('name')}</td>
+      <td></td>
+    """
+    $(@el).html(template)
+    return this

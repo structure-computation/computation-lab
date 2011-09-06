@@ -1,4 +1,5 @@
-ul#calculs, ul#pieces, ul#materials, ul#interfaces, ul#links
+$hover-color: #BBF
+ul.data_list
   border: 1px solid #B2B2B2
   list-style-type: none
   padding-left: 0
@@ -16,12 +17,13 @@ ul#calculs, ul#pieces, ul#materials, ul#interfaces, ul#links
     background-color: #CCF
     font-weight: bold
   li:hover
-    background-color: #BBF
+    background-color: $hover-color
   li.selected
     color: green
+    background-color: #CCF
   li.gray
     color: gray
-
+        
 .breadcrumb_button
   padding: 1em
   button
@@ -29,7 +31,8 @@ ul#calculs, ul#pieces, ul#materials, ul#interfaces, ul#links
   a  
     float: right
 #wizard_buttons
-  float: right
+  margin-top  : 1em
+  float       : right
   div
     display: inline
 
@@ -43,3 +46,13 @@ ul#calculs, ul#pieces, ul#materials, ul#interfaces, ul#links
 
 .is_not_assigned, .is_assigned
   float: right
+
+#details_calcul
+  padding-top: 1em
+  table
+    font-size: 95%
+
+#materials_database, #links_database
+  tbody
+    tr:hover
+      background-color: $hover-color

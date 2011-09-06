@@ -7,27 +7,38 @@
 
 SCModels.Calcul = Backbone.Model.extend
   initialize: ->
-    @set time_steps            :
-      time_scheme : "static"
-      collection  : []
+    @set boundary_condition    : []
     @set materials             : []
     @set pieces                : []
     @set links                 : []
     @set interfaces            : []
+    @set volumic_forces        : []
+    @set edges        : []
+    @set time_steps            :
+      time_scheme : "static"
+      collection  : []
+    @set options               : {}
       
     @sc_model_id  = @get 'sc_model_id'
 
-    @url = "/sc_models/#{@sc_model_id}/calculs/" + @get 'id'
+    if _.isUndefined @get('id') 
+      @url = "/sc_models/#{@sc_model_id}/calculs/"
+    else 
+      @url = "/sc_models/#{@sc_model_id}/calculs/" + @get 'id'
 
     
   setElements: (params) ->
     @setTimeStepsCollection params.time_steps.collection
     @setTimeScheme params.time_steps.time_scheme
-    @set materials  : params.materials
-    @set pieces     : params.pieces  
-    @set links      : params.links  
-    @set interfaces : params.interfaces
-     
+    @set materials          : params.materials
+    @set pieces             : params.pieces  
+    @set links              : params.links  
+    @set interfaces         : params.interfaces
+    @set boundary_condition : params.boundary_condition
+    @set options            : params.options
+    @set volumic_forces     : params.volumic_forces
+    @set edges              : params.edges
+    
   setTimeStepsCollection: (time_steps) ->
     @get('time_steps').collection = time_steps
 

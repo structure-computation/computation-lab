@@ -1,30 +1,31 @@
 ## StepListView
-SCModels.StepListView = Backbone.View.extend
+SCViews.StepListView = Backbone.View.extend
 
   el: "#steps"
-  # Have to initialize the StepListView with {collection: StepCollection}
-  initialize: (params) ->  
-    @clearView()
+
+  # Init the list with the new collection.
+  # The init method is here to prevent having multiple reference of a step list view
+  init: (collection) ->
     @stepViews = []
+    @clearView()
+    @collection = collection
     time_scheme = SCVisu.current_calcul.get('time_steps').time_scheme
+    
+    # Select the list item according to the JSON
     @setSelectList time_scheme
     @collection.meta 'time_scheme', time_scheme
+    
     if @collection.size() == 0
-      step = new SCModels.Step
-        initial_time  : 0
-        time_step     : 1
-        nb_time_steps : 1
-        final_time    : 1
+      step = new SCModels.Step()
       @collection.add step
 
     for step in @collection.models
-      @stepViews.push new SCModels.StepView model: step, parentView: this
+      @stepViews.push new SCViews.StepView model: step, parentElement: this
 
     if @collection.size() == 1 
       @disableAddButton() # Because the first select value is 'statique'
       
-    @stepViews[0].removeDeleteButton()
-    @bind 'step_deleted', @deleteStep, @
+    @collection.bind 'destroy', @deleteStep, @
     @render()
     
   ## Create a model and associate it to a new view
@@ -33,17 +34,16 @@ SCModels.StepListView = Backbone.View.extend
       initial_time  : @collection.last().get 'final_time'
       time_step     : 1
       nb_time_steps : 1
-
     @collection.add step
-    @stepViews.push new SCModels.StepView model: step, parentView: this
+    @stepViews.push new SCViews.StepView model: step, parentElement: this
 
   render : ->
     if $(@el).find('select#step_type').val() == "statique"
       @disableAddButton()
+
     for stepView in @stepViews
       stepView.render()
-    if @stepViews.length == 1
-      @stepViews[0].removeDeleteButton()
+    @stepViews[0].removeDeleteButton()
       
   # Clears all elements previously loaded in the DOM. 
   # Indeed, the 'ul#materials' element already exists in the DOM and every time we create a MaterialListView, 
@@ -54,17 +54,14 @@ SCModels.StepListView = Backbone.View.extend
     $(@el).find('table#steps_table tbody').html('')
 
   events:
-    'keyup'                   : 'updateFieldsKeyUp'
-    'change'                  : 'updateFieldsKeyUp'
-    'click'                   : 'updateFieldsKeyUp'
+    'keyup'                   : 'updateFields'
+    'change'                  : 'updateFields'
+    'click'                   : 'updateFields'
     'click button#add_step'   : 'addStep'
     'change select#step_type' : 'selectChanged'
 
-  # Update all step fields if a number is typed
-  updateFieldsKeyUp: (event) ->
-  # if (48 <= event.keyCode <= 57)
-    @updateFields()
 
+  # Delete a step in the list
   deleteStep: (step_deleted) ->
     for step, i in @stepViews
       if step == step_deleted
@@ -73,6 +70,7 @@ SCModels.StepListView = Backbone.View.extend
         break
     @updateFields()
     
+  # Update all steps as they all depend of each other 
   updateFields: ->
     for stepView in @stepViews
       stepView.update()

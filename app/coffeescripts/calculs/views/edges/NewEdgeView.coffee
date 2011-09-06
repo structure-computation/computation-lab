@@ -2,8 +2,8 @@
 #   First:  A select box (#edge_criteria) where the user will choose the criteria of the edge
 #     From this choice another select box another one pops up : #volume_geometry or #surface_geometry
 #     From this new choice the correct div will be displayed
-SCVisu.NewEdgeView = Backbone.View.extend
-  el: "#new_edge"
+SCViews.NewEdgeView = Backbone.View.extend
+  el: "#new_edge_form"
   initialize: (params) ->
     $(@el).find('> div:not("#edge_criteria")').hide()
     # Hide save button
@@ -16,43 +16,44 @@ SCVisu.NewEdgeView = Backbone.View.extend
     $(@el).show()
   hide: ->
     $(@el).hide()
+  show: ->
+    $(@el).show()
   events: 
-    "change #edge_criteria    select" : "showSelectGeometry"
-    "change #volume_geometry  select" : "showVolumeGeometry"
-    "change #surface_geometry select" : "showSurfaceGeometry"
-    "click  button.save"              : "save"
+    "click  button.criteria" : "showSelectGeometry"
+    "click  button.geometry" : "showGoodGeometry"
+    "click  button.save"     : "save"
+    
     
   # Show the good select box between volume and surface depending of the choice of the criteria
   showSelectGeometry: (event) ->
     @hideEveryoneExceptFirstSelectBox()
+    $('button.criteria').removeClass('pressed_button')
+    $(event.srcElement).addClass('pressed_button')
     switch event.srcElement.value
       when 'surface'
-        $(@el).find('#volume_geometry').hide()
+        $(@el).find('#volume_geometry') .hide()
         $(@el).find('#surface_geometry').show()
       when 'volume'
-        $(@el).find('#volume_geometry').show()
+        $(@el).find('#volume_geometry') .show()
         $(@el).find('#surface_geometry').hide()
 
 
   # Show the good form regarding the choice of the geometry
-  showVolumeGeometry: (event) ->
+  showGoodGeometry: (event) ->
     @hideEveryoneExceptFirstSelectBox()
-    switch event.srcElement.value
-      when 'box'      then @showGeometry 'volume', 'box'
-      when 'cylinder' then @showGeometry 'volume', 'cylinder'
-      when 'sphere'   then @showGeometry 'volume', 'sphere'
-      else                 $(@el).find('#volume_geometry').show()
+    $('button.geometry').removeClass('pressed_button')
+    $(event.srcElement).addClass('pressed_button')
 
-  # Show the good form regarding the choice of the geometry
-  showSurfaceGeometry: (event) ->
-    @hideEveryoneExceptFirstSelectBox()
     switch event.srcElement.value
-      when 'plan'          then @showGeometry 'surface', 'plan'
-      when 'disc'          then @showGeometry 'surface', 'disc'
-      when 'cylinder'      then @showGeometry 'surface', 'cylinder'
-      when 'sphere'        then @showGeometry 'surface', 'sphere'
-      when 'parameterized' then @showGeometry 'surface', 'parameterized'
-      else                 $(@el).find('#surface_geometry').show()
+      when 'volume_box'            then @showGeometry 'volume', 'box'
+      when 'volume_cylinder'       then @showGeometry 'volume', 'cylinder'
+      when 'volume_sphere'         then @showGeometry 'volume', 'sphere'
+
+      when 'surface_plan'          then @showGeometry 'surface', 'plan'
+      when 'surface_disc'          then @showGeometry 'surface', 'disc'
+      when 'surface_cylinder'      then @showGeometry 'surface', 'cylinder'
+      when 'surface_sphere'        then @showGeometry 'surface', 'sphere'
+      when 'surface_parameterized' then @showGeometry 'surface', 'parameterized'
 
 
   # Hide everything except the criteria select box

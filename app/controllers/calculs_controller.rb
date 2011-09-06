@@ -27,7 +27,13 @@ class CalculsController < ApplicationController
   def update
     @current_model = current_user.sc_models.find(params[:sc_model_id])
     @current_calcul = @current_model.calcul_results.find(params[:id])
-    results = @current_calcul.save_brouillon(params)
+    if params[:name] and params[:update_db_info]
+      @current_calcul.name = params[:name]
+      @current_calcul.description = params[:description]
+      @current_calcul.save
+    else
+      results = @current_calcul.save_brouillon(params)
+    end
     render :text => results
   end
   
@@ -49,4 +55,11 @@ class CalculsController < ApplicationController
     render :json => @current_calcul.to_json
   end
 
+  #TODO: Supprimer le fichier calcul après X jours
+  def destroy
+    @current_model = current_user.sc_models.find(params[:sc_model_id])
+    @current_calcul = @current_model.calcul_results.find(params[:id]) 
+    @current_calcul.destroy
+    render :json => @current_calcul.to_json
+  end
 end

@@ -1,6 +1,6 @@
 ## PieceListView
-SCModels.PieceListView = Backbone.View.extend
-  el: 'ul#pieces'
+SCViews.PieceListView = Backbone.View.extend
+  el: 'table#pieces'
   
   # You have to pass a PieceCollection at initialisation as follow:
   # new SCVisu.pieceListView({ collection : myPieceCollection })
@@ -8,18 +8,19 @@ SCModels.PieceListView = Backbone.View.extend
     @clearView()
     @pieceViews = []
     for piece in @collection.models
-      @pieceViews.push new SCModels.PieceView model: piece, parentElement: this
+      @pieceViews.push new SCViews.PieceView model: piece, parentElement: this
     @selectedPieceView = null
     @render()
-
+    $('#pieces').tablesorter()
+ 
   # Clears all elements previously loaded in the DOM. 
   # Indeed, the 'ul#pieces' element already exists in the DOM and every time we create a PiecesListView, 
   # we render the view and we add some element inside. And even if we have many different view, 
   # each time we render we add elements to the same view. 
   # So we have to clear the content each time we create a new PiecesListView 
   clearView: ->
-    $(@el).html('')
-        
+   $(@el).find('tbody').html('')
+
   # Is executed when user click on a piece.
   # Highlight the selected piece and put others in gray.
   # If the selected piece has already a material, it will be highlighted and the user will have the 
@@ -54,8 +55,8 @@ SCModels.PieceListView = Backbone.View.extend
   # Assign the pieceModel to the selected Material.
   unassignPieceToMaterial: (pieceModel) ->
     pieceModel.unset 'material_id'
-    SCVisu.current_calcul.set pieces: SCVisu.pieceListView.collection.models  
-      
+    SCVisu.current_calcul.set pieces: SCVisu.pieceListView.collection.models
+    
   # Assign the selected material to the currently selected piece.
   assignMaterialToSelectedPiece: (material) ->
     @selectedPieceView.model.set material_id: material.getId()

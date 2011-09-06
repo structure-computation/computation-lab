@@ -13,7 +13,7 @@ $calcul-right-list-cols: $calcul-section-cols - $calcul-left-list-cols
   background-color: blue
   #visualisation_dock
     // La taille du canevas est gérée par le JS.
-    background-color:black
+    background-color: black
     
 #content_calcul
   +columns($calcul-section-cols)
@@ -31,8 +31,4 @@ $calcul-right-list-cols: $calcul-section-cols - $calcul-left-list-cols
       background-color: #F0F0F0
   #details_calcul
     +full($calcul-section-cols)
-    
-@media all and (max-width: 768px)
-  #advanced_search
-    -webkit-transform: translateY(50%)
-    -webkit-transition: all 0.3s ease-in-out
+

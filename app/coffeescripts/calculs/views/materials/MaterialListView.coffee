@@ -1,12 +1,12 @@
 ## MaterialListView
-SCModels.MaterialListView = Backbone.View.extend
+SCViews.MaterialListView = Backbone.View.extend
   el: 'ul#materials'
 
   initialize: (options) ->
     @collection.bind 'change', =>
       @render()
     @clearView()
-    @editView = new SCVisu.EditMaterialView parentElement: this
+    @editView = new SCViews.EditMaterialView parentElement: this
     @materialViews = []
     for material in @collection.models
       @createMaterialView(material)
@@ -19,26 +19,25 @@ SCModels.MaterialListView = Backbone.View.extend
     
   showDatabaseMaterials: ->
     $('#materials_database').show()
-    @editView.hide()
 
-  getNewMaterialId: ->
-    @collection.last().get('id_in_calcul') + 1
+  # getNewMaterialId: ->
+  #   @collection.last().get('id_in_calcul') + 1
     
   # Add a material to the collection and create an associated view
   add: (materialModel) ->
-    materialModel.set id_in_calcul : @getNewMaterialId()
-    @collection.models.push materialModel
+    #materialModel.set id_in_calcul : @getNewMaterialId()
+    @collection.add materialModel
     @createMaterialView materialModel
 
   createMaterialView: (material) ->
-    m = new SCModels.MaterialView model: material, parentElement: this
-    m.bind 'show_details_model', @showDetails, this
+    m = new SCViews.MaterialView model: material, parentElement: this
     @materialViews.push m
     @render()
-    
-  showDetails: (model) ->
-    $('#materials_database').hide()
-    @editView.updateModel model
+  
+  # Show edit view of the given model.
+  # Readonly make all inputs unaccessible
+  showDetails: (model, readonly = false) ->
+    @editView.updateModel model, readonly
     
   # Clears all elements previously loaded in the DOM. 
   # Indeed, the 'ul#materials' element already exists in the DOM and every time we create a MaterialListView, 

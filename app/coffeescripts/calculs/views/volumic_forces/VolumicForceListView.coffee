@@ -1,7 +1,7 @@
 ## VolumicForceListView
 
 # TODO: Le render doit réagir à l'ajout ou la suppression d'un élément de la collection.
-SCModels.VolumicForceListView = Backbone.View.extend
+SCViews.VolumicForceListView = Backbone.View.extend
   # el: 'table#volumic_force_table > tbody'
   el: '#volumic_forces'
   ## -- Events
@@ -16,17 +16,17 @@ SCModels.VolumicForceListView = Backbone.View.extend
     @selectedVolumicForce = null
     
     # Bind to collection event
-    @collection.bind('add'   , this.render, this)
-    @collection.bind('remove', this.render, this)
+    @collection.bind('add'   , @render, this)
+    @collection.bind('remove', @render, this)
+    @collection.bind('change', @saveCollection, this)
     
     @render()
         
   # setNewSelectedModel is executed when a child view indicate it has been selected.
   # It set the current selected model to "non selected" (which trigger an event that redraw its line).
-
-  setNewSelectedModel: (volumicForceView) ->
+  setNewSelectedModel: (volumicForce) ->
     @selectedVolumicForce.unset "selected" if @selectedVolumicForce
-    @selectedVolumicForceView = volumicForceView
+    @selectedVolumicForce = volumicForce
   
   
   render : ->
@@ -34,7 +34,7 @@ SCModels.VolumicForceListView = Backbone.View.extend
     vf_table.empty()
     parent   = this
     @collection.each ( volumicForce ) ->
-      subview = new SCModels.VolumicForceView model: volumicForce, parentElement: parent
+      subview = new SCViews.VolumicForceView model: volumicForce, parentElement: parent
       subview.render()
       vf_table.append(subview.el)
 
@@ -44,3 +44,6 @@ SCModels.VolumicForceListView = Backbone.View.extend
   addVolumicForce: ->  
     newVolForce = new SCModels.VolumicForce
     @collection.add newVolForce
+    
+  saveCollection: ->
+    SCVisu.current_calcul.set volumic_forces: @collection

@@ -30,7 +30,7 @@ table.grey
     //color: #333
   a:hover
     //color: lighten(#333, 15%)
-  thead
+  thead, tfoot
     border-bottom : 1px solid $color-border-cell
     +background-image(linear-gradient($color-thead-start, $color-thead-end))
     tr
@@ -120,8 +120,16 @@ table.grey
         a
           color: #202c6b
             
-    tr:nth-child(odd)    
+    tr:nth-child(odd)
       background-color : $background-color-cell
+
+table.data_table
+  tbody
+    tr.selected
+      background-color: #BBF
+    tr:hover
+      background-color: #BBF
+
 
 .search_filter
   color: #333

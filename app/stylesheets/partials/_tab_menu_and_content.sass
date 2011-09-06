@@ -19,15 +19,14 @@ ul.horizontal_tab_submenu
       color: $color-font-header
       text-align: center
       border-bottom: none
-  li
     a.selected
       +background-image(linear-gradient($color-tab-selected-start, $color-tab-selected-end))
       color       : $color-font-selected-tab
       border-bottom: none      
       font-weight : bold
       text-align: center
-
-
+    a.disabled
+      background-color: gray
 ul.tab_submenu
   list-style: none
   margin-top: 2em

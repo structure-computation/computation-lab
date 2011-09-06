@@ -7,8 +7,6 @@
     Plastique
   - if @material.mtype.include? "en"
     Endo
-  - if @material.mtype.include? "vi"
-    Visqueux
 
 = form_for [@company, @material] do |f|
   %h3 Informations
@@ -17,8 +15,6 @@
   = f.hidden_field :mtype
 
   = render "materials/details/material_basic_information"
-  #material_information
-    = render :partial => "materials/details/material_main_information", :locals => { :material => @material, :disabled => false }
 
   #material_generic_information
     = render :partial => "materials/details/material_generic_info", :locals => { :material => @material, :disabled => false }
@@ -29,8 +25,6 @@
     = render :partial => "materials/details/material_plastic_information", :locals => { :material => @material, :disabled => false }
   - if @material.comp.include? "en"
     = render :partial => "materials/details/material_damageable_information", :locals => { :material => @material, :disabled => false }
-  - if @material.comp.include? "vi"
-    = render :partial => "materials/details/material_viscous_information", :locals => { :material => @material, :disabled => false }
   
   - if action_name == "edit"
     = submit_tag "Editer", :class => 'yellow_button'

@@ -1,12 +1,12 @@
 ## LinkListView
-SCModels.LinkListView = Backbone.View.extend
+SCViews.LinkListView = Backbone.View.extend
   el: 'ul#links'
-  
+    
   initialize: (options) ->
     @collection.bind 'change', =>
       @render()
     @clearView()
-    @editView = new SCVisu.EditLinkView parentElement: this
+    @editView = new SCViews.EditLinkView parentElement: this
     @linkViews = []
     for link in @collection.models
       @createLinkView(link)
@@ -27,28 +27,27 @@ SCModels.LinkListView = Backbone.View.extend
   # Show links which are from database and hide edit view
   showDatabaseLinks: ->
     $('#links_database').show()
-    @editView.hide()
   
-  getNewMaterialId: ->
-    @collection.last().get('id_in_calcul') + 1    
+  # getNewLinkId: ->
+  #   @collection.last().get('id_in_calcul') + 1    
 
   # Add a model to the collection and creates an associated view
   add: (linkModel) ->
-    linkModel.set id_in_calcul: @getNewMaterialId()
-    @collection.model.push linkModel
+#    linkModel.set id_in_calcul: @getNewLinkId()
+    @collection.add linkModel
     @createLinkView linkModel
     
   # Create a view giving it a model
   createLinkView: (link) ->
-    l = new SCModels.LinkView model: link, parentElement: this
+    l = new SCViews.LinkView model: link, parentElement: this
     l.bind 'show_details', @showDetails, this
     @linkViews.push l
     @render()
 
   # Show edit view for a given link
-  showDetails: (model) ->
-    $('#links_database').hide()
-    @editView.updateModel model
+  # If readonly = true, all inputs will be disabled
+  showDetails: (model, readonly = false) ->
+    @editView.updateModel model, readonly
 
   # Highlight the link which have link_id as id and add an "Unassign" button
   highlightLink: (link_id) ->
