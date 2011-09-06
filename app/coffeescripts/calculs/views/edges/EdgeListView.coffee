@@ -9,8 +9,12 @@ SCViews.EdgeListView = Backbone.View.extend
     @editEdgeView.hide()
     for edge in @collection.models
       @edgeViews.push new SCViews.EdgeView model: edge, parentElement: @
-    @render()
     @selectedEdgeView = null
+    for edge in @collection.models
+      if !_.isUndefined(edge.get('id_in_calcul'))
+        return @selectedEdgeView = edge
+    @render()
+    $(@el).find('table').tablesorter()
     @collection.bind 'add', @render, this
     @collection.bind 'change', @render, this
 
@@ -23,7 +27,6 @@ SCViews.EdgeListView = Backbone.View.extend
     @editEdgeView.hide()
     @edgeViews.push new SCViews.EdgeView model: edgeModel, parentElement: @
     @collection.add edgeModel
-
     
   # setNewSelectedModel is executed when a child view indicate it has been selected.
   # It set the current selected model to "non selected" (which trigger an event that redraw its line).
@@ -38,15 +41,19 @@ SCViews.EdgeListView = Backbone.View.extend
   # each time we render we add elements to the same view. 
   # So we have to clear the content each time we create a new MaterialListView 
   clearView: ->
-    $(@el).find('ul.data_list').html('')  
+    $(@el).find('table tbody').html('')  
 
+  boundaryConditionHasBeenSelected: ->
+    _.each @edgeViews, (edgeView) ->
+      if _.isUndefined(edgeView.model.get('boundary_condition_id'))
+        edgeView.showAssignButton()
+      
   showNewEdgeForm: ->
     $('#boundary_condition_form').hide()
     @editEdgeView.show()
     @editEdgeView.showAndInitialize()
     
-
   render: ->
     for edgeView in @edgeViews
       edgeView.render()
-    return @
+    return this

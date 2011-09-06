@@ -1,6 +1,6 @@
 ## PieceListView
 SCViews.PieceListView = Backbone.View.extend
-  el: 'ul#pieces'
+  el: 'table#pieces'
   
   # You have to pass a PieceCollection at initialisation as follow:
   # new SCVisu.pieceListView({ collection : myPieceCollection })
@@ -11,6 +11,7 @@ SCViews.PieceListView = Backbone.View.extend
       @pieceViews.push new SCViews.PieceView model: piece, parentElement: this
     @selectedPieceView = null
     @render()
+    $('#pieces').tablesorter()
  
   # Clears all elements previously loaded in the DOM. 
   # Indeed, the 'ul#pieces' element already exists in the DOM and every time we create a PiecesListView, 
@@ -18,7 +19,7 @@ SCViews.PieceListView = Backbone.View.extend
   # each time we render we add elements to the same view. 
   # So we have to clear the content each time we create a new PiecesListView 
   clearView: ->
-   $(@el).html('')
+   $(@el).find('tbody').html('')
 
   # Is executed when user click on a piece.
   # Highlight the selected piece and put others in gray.

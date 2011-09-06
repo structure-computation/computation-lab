@@ -22,16 +22,34 @@
 
   .materials
     %h2.grey Liste des pièces
-    %ul#pieces.data_list
+    %table#pieces.data_table.grey
+      %thead
+        %tr
+          %th ID
+          %th Nom
+          %th ID Matériau
+      %tbody
 
   .links
     %h2.grey Liste des interfaces
-    %ul#interfaces.data_list
+    %table#interfaces.data_table.grey
+      %thead
+        %tr
+          %th ID
+          %th Nom
+          %th ID Liaison
+      %tbody
 
   .boundary_conditions
     %h2.grey Liste des bords
     #edges
-      %ul.data_list
+      %table.data_table.grey
+        %thead
+          %tr
+            %th ID
+            %th Nom
+            %th ID CL
+        %tbody
       %button.new_edge Créer un bord
 
 - content_for :right_list do 
