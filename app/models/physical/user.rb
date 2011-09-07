@@ -49,9 +49,9 @@ class User < ActiveRecord::Base
 
   
   # TODO: Supprimer à la fin de la migration vers le multi tenant :
-  def workspace
-    companies.first    
-  end
+  # def workspace
+  #   companies.first    
+  # end
   
   def all_models
     model_ownerships.map &:sc_model

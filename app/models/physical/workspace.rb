@@ -35,9 +35,7 @@ class Workspace < ActiveRecord::Base
           joins(:users).where("users.id = ?", user.id)
   }
   
-  # TODO: pour faire foncitonner la chaine d'association Inherited ressource. 
-  # Trouver une meilleure solution à terme.
-  scope :companies                             
+                          
   # si on passe en multi tenant,  companies devint workspaces
   #scope :workspace_relationship                    
   

@@ -4,4 +4,4 @@
   %td= member.firstname
   %td= member.role
   %td= member.state
-  %td= link_to "X", {:controller => "companies", :action => workspace_member_path( current_workspace_member.workspace, member), :id_membre => member.id}, :confirm => "Êtes vous sûr ?", :method => :delete
+  %td= link_to "X", {:controller => "workspaces", :action => workspace_member_path( current_workspace_member.workspace, member), :id_membre => member.id}, :confirm => "Êtes vous sûr ?", :method => :delete

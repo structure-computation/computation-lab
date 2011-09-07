@@ -4,7 +4,7 @@
 # Nous avons choisi de pouvoir séléctionner l'onglet de la page en le passant dans 
 # la partie "ancre" de l'url. Les "sous onglets" sur la page sont séparés par un underscore '_' Par exemple :
 # 
-# * http://localhost:3000/companies/12345#Forfait 
+# * http://localhost:3000/workspaces/12345#Forfait 
 #   Ouvre l'onglet "Forfait" dans la page de gestion de l'entreprise d'id 12345
 # * http://localhost:3000/calculs?model_id=28#Temps_Elasticité
 #   Ouvre l'onglet "Temps" et le sous onglet "Elasticité" dans l'interface de calcul sur le modèle 28. 

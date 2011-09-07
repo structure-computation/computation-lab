@@ -25,9 +25,6 @@ class Company < ActiveRecord::Base
           joins(:users).where("users.id = ?", user.id)
   }
   
-  # TODO: pour faire foncitonner la chaine d'association Inherited ressource. 
-  # Trouver une meilleure solution à terme.
-  scope :companies
   
   
   def members

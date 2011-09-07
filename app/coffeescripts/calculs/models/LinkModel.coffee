@@ -5,7 +5,7 @@
 SCModels.Link = Backbone.Model.extend
   initialize: ->
     @workspace_id = if SCVisu.current_workspace? then SCVisu.current_workspace else 0
-    @url = "/companies/#{@workspace_id}/links/"
+    @url = "/workspaces/#{@workspace_id}/links/"
 
   # Get the ID of the link in the JSON
   getId: ->
@@ -16,7 +16,7 @@ SCModels.LinkCollection = Backbone.Collection.extend
   model: SCModels.Link
   initialize: (options) ->
     @workspace_id = if SCVisu.current_workspace? then SCVisu.current_workspace else 0
-    @url = "/companies/#{@workspace_id}/links"
+    @url = "/workspaces/#{@workspace_id}/links"
 
     # Have to initialize _meta for the meta function
     @._meta = {}

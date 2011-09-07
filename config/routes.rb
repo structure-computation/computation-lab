@@ -6,7 +6,7 @@ SCInterface::Application.routes.draw do
 
   devise_for  :users,   :controllers => { :sessions => "users/sessions", :registrations => "users/registrations" }
 
-  match 'companies/get_gestionnaire'   => "companies#get_gestionnaire"  
+  match 'workspaces/get_gestionnaire'   => "workspaces#get_gestionnaire"  
   resources :workspaces do
     resources :materials
     resources :links
