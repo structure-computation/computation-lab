@@ -159,6 +159,14 @@ SCVisu.Router = Backbone.Router.extend
     $('#ajax-loader').show()
     @disaleTabs()
 
+  # Is executed when the calcul is loading
+  calculIsCreating: ->
+    @calculIsLoading()
+
+  calculHasBeenCreated: ->
+    @reenableTabs()
+    $('#ajax-loader').hide()
+
   # Is executed when the calcul has been loaded
   # Drive the user on the Time page and reenable links of the breadcrumbs
   calculHasBeenLoad: ->
