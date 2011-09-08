@@ -15,6 +15,10 @@
     = yield :coffee
   
 - else
+  -content_for :header do
+    %header#calcul
+      .container
+        #header_logo
   -content_for :content do
     #breadcrumb
       = yield :breadcrumb
