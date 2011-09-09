@@ -69,7 +69,7 @@ class CalculsController < ApplicationController
 
   #TODO: Supprimer le fichier calcul après X jours
   def destroy
-    @current_model = current_user.sc_models.find(params[:sc_model_id])
+    @current_model = current_workspace_member.sc_models.find(params[:sc_model_id])
     @current_calcul = @current_model.calcul_results.find(params[:id]) 
     @current_calcul.destroy
     render :json => @current_calcul.to_json
