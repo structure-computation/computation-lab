@@ -20,11 +20,13 @@ div.breadcrumb_tab_content
     background-color: $color-tab-start
     border: 1px solid rgba(0,0,0,0.5)
     border-top: none
+    display: table
     li
       font-size: 0.9em
-      display: inline-block
+      display: table-cell
       width: $breadcrumb_tabs_size
       margin: 0
+      vertical-align: middle
       a
         cursor: pointer
         width: 98.5%
@@ -39,6 +41,8 @@ div.breadcrumb_tab_content
         color: $color-font-header
         text-align: center
         border-bottom: none
+        height: 100%
+        vertical-align: middle
 
     li:last-child
       a
