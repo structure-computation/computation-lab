@@ -96,7 +96,8 @@
     %a.yellow_button#wizard_previous_button Etape précédente
   .next_button
     %a.yellow_button#wizard_next_button     Etape suivante
-
+  %div
+    = link_to 'Retour au model',  workspace_sc_model_path(@workspace, @model_id), :class => 'yellow_button'
 - # TODO: Ramener dans ce fichier quand cela sera terminé. On charge dans ce partial le code de visualisation.
 = render "calculs/partials/visualisation_interface"
 
@@ -104,7 +105,7 @@
   :coffeescript
     # Initialization of data coming from database
     $ ->
-      SCVisu.current_model_id = #{params[:sc_model_id]}
+      SCVisu.current_model_id = #{@model_id}
       SCVisu.current_workspace  = #{current_workspace_member.workspace_id}
       
       SCVisu.standardLibraryMaterial  = new SCModels.MaterialCollection

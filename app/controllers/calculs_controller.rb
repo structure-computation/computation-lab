@@ -6,14 +6,15 @@ class CalculsController < ApplicationController
   layout 'calcul'
   
   def index
-    @standard_links     = Link.standard
-    @workspace_links    = Link.from_workspace(current_workspace_member.workspace)
-    @standard_materials = Material.standard
-    @workspace_materials  = Material.from_workspace(current_workspace_member.workspace)
-    @material           = Material.new
-    @link               = Link.new
-    @workspace          = current_workspace_member.workspace
-    @calculs            = CalculResult.find_all_by_sc_model_id(params[:sc_model_id])
+    @standard_links      = Link.standard
+    @workspace_links     = Link.from_workspace(current_workspace_member.workspace)
+    @standard_materials  = Material.standard
+    @workspace_materials = Material.from_workspace(current_workspace_member.workspace)
+    @material            = Material.new
+    @link                = Link.new
+    @model_id            = params[:sc_model_id]
+    @workspace           = current_workspace_member.workspace
+    @calculs             = CalculResult.find_all_by_sc_model_id(params[:sc_model_id])
   end
   
   def show
