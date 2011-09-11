@@ -17,7 +17,17 @@ SCVisu.Router = Backbone.Router.extend
         SCVisu.calculViews.loadCalcul()
       else
         @nextPage()
-
+    $("#return_to_model").click =>
+      if SCVisu.current_calcul
+        Backbone.sync "update", SCVisu.current_calcul,
+          success: (response) ->
+            window.location.replace("/workspaces/#{SCVisu.current_workspace}/sc_models/#{SCVisu.current_model_id}/")
+          error: (response) ->
+            console.log response
+            alert "L'enregistrement à échoué vous n'êtes pas redirigé pour ne pas perdre vos données"
+      else 
+        window.location.replace("/workspaces/#{SCVisu.current_workspace}/sc_models/#{SCVisu.current_model_id}/")
+        
     # Names of breadcrumb's anchors. 
     # Used in Next And Previous functions
     @routesPageNumber = [ 

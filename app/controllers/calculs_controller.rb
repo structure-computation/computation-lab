@@ -35,7 +35,7 @@ class CalculsController < ApplicationController
     else
       results = @current_calcul.save_brouillon(params)
     end
-    render :text => results
+    render :json => @current_calcul
   end
   
   def create

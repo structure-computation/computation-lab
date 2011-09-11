@@ -97,7 +97,7 @@
   .next_button
     %a.yellow_button#wizard_next_button     Etape suivante
   %div
-    = link_to 'Retour au model',  workspace_sc_model_path(@workspace, @model_id), :class => 'yellow_button'
+    %a.yellow_button#return_to_model     Retour au model
 - # TODO: Ramener dans ce fichier quand cela sera terminé. On charge dans ce partial le code de visualisation.
 = render "calculs/partials/visualisation_interface"
 
