@@ -1,10 +1,10 @@
-%h2.grey Temps
+%h2#time_parameters Paramètres temporels 
 #steps
-  %button#add_step Ajouter un Step
   %select#step_type
     %option{:value => "static"} Static
     %option{:value => "quasistatic"} Quasistatic
     %option{:value => "dynamic"} Dynamic
+  %button#add_step Ajouter un Step
   %table#steps_table.grey
     %thead
       %tr.no_sorter
@@ -15,3 +15,15 @@
         %th Temps final
         %th
     %tbody
+  :coffeescript
+    SCVisu.stepHideOrShow = () ->
+      if $('#steps').hasClass 'maximize'
+        $('#steps').removeClass 'maximize'
+      else
+        $('#steps').addClass 'maximize'
+    $ ->      
+      $('#time_parameters').click( () ->
+        SCVisu.stepHideOrShow()
+      )
+      
+      $('#time_parameters')[0].onGesture('tap', SCVisu.stepHideOrShow())

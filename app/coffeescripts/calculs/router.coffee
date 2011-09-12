@@ -31,14 +31,14 @@ SCVisu.Router = Backbone.Router.extend
     # Names of breadcrumb's anchors. 
     # Used in Next And Previous functions
     @routesPageNumber = [ 
-       "Initialization"
-       "Steps"              
+       "Initialization"      
        "Materials"          
        "Links"              
        "Volumic_forces"     
        "Boundary_Conditions"
-       "Options"
-       "Forecast"
+       "Parameters"            
+       "Forecast"           
+
     ]
     # Hide calcul details and show visu and when he is not on the first page
     $('body').click (event) =>
@@ -60,12 +60,11 @@ SCVisu.Router = Backbone.Router.extend
   # Each step of the wizard
   routes:
     "Initialization"      : "initialisation"
-    "Steps"               : "steps"
     "Materials"           : "materials"
     "Links"               : "links"
     "Volumic_forces"      : "volumicForces"
     "Boundary_Conditions" : "conditions"
-    "Options"             : "options"
+    "Parameters"          : "parameters"
     "Forecast"            : "forecast"
   
   # Hide all 'tabs' and show the first one - Initialization part
@@ -78,25 +77,17 @@ SCVisu.Router = Backbone.Router.extend
     @selectCorrectTab '','Initialization'
     @showContent      'initialization'
 
-  # Hide all 'tabs' and show the Step part.
-  steps: ->
+  # Hide all 'tabs' and show the Material part.
+  materials: ->
     @currentPage = 1
     @handlePreviousAndNextButtons()
     @hideAllContent()
-    @selectCorrectTab 'Initialization','Steps'
-    @showContent      'steps'
-
-  # Hide all 'tabs' and show the Material part.
-  materials: ->
-    @currentPage = 2
-    @handlePreviousAndNextButtons()
-    @hideAllContent()
-    @selectCorrectTab 'Steps','Materials'
+    @selectCorrectTab 'Initialization','Materials'
     @showContent      'materials'
 
   # Hide all 'tabs' and show the Link part.
   links: ->
-    @currentPage = 3
+    @currentPage = 2
     @handlePreviousAndNextButtons()
     @hideAllContent()
     @selectCorrectTab 'Materials', 'Links'
@@ -104,7 +95,7 @@ SCVisu.Router = Backbone.Router.extend
 
   # Hide all 'tabs' and show the Conditions part.
   volumicForces: ->
-    @currentPage = 4
+    @currentPage = 3
     @handlePreviousAndNextButtons()
     @hideAllContent()
     @selectCorrectTab 'Links', 'Volumic_forces'
@@ -112,26 +103,26 @@ SCVisu.Router = Backbone.Router.extend
     
   # Hide all 'tabs' and show the Conditions part.
   conditions: ->
-    @currentPage = 5
+    @currentPage = 4
     @handlePreviousAndNextButtons()
     @hideAllContent()
     @selectCorrectTab 'Volumic_forces', 'Boundary_Conditions'
     @showContent      'boundary_conditions'
 
   # Hide all 'tabs' and show the Options part.
-  options: ->
-    @currentPage = 6
+  parameters: ->
+    @currentPage = 5
     @handlePreviousAndNextButtons()
     @hideAllContent()
-    @selectCorrectTab 'Boundary_Conditions', 'Options'
+    @selectCorrectTab 'Boundary_Conditions', 'Parameters'
     @showContent      'options'
 
   # Hide all 'tabs' and show the Prevision part.
   forecast: ->
-    @currentPage = 7
+    @currentPage = 6
     @handlePreviousAndNextButtons()
     @hideAllContent()
-    @selectCorrectTab 'Options', 'Forecast'
+    @selectCorrectTab 'Parameters', 'Forecast'
     @showContent      'forecast'
   
   # Ajoute les classes css 'tab_before' et 'selected' aux onglets choisis et de supprimer ces mêmes classes sur tous les autres onglets
@@ -143,7 +134,7 @@ SCVisu.Router = Backbone.Router.extend
     $("a[href=##{previousTab}]").parent().addClass('tab_before')
     $("a[href=##{currentTab}]" ).addClass('selected')
     
-  # Masque toutes les zones de contenu en ajoutant le classe css 'hide' à ces derniers  
+  # Masque toutes les zones de contenu en ajoutant le classe css 'Al' à ces derniers  
   hideAllContent: ->
     $('#list_calcul       > div').removeClass('show').addClass('hide')
     $('#bottom_list_calcul> div').removeClass('show').addClass('hide')
@@ -165,13 +156,12 @@ SCVisu.Router = Backbone.Router.extend
   # Puts back all hrefs for links of the breadcrumb
   reenableTabs: ->
     $('.js_tab_breadcrumb li').removeClass('disable')
-    $($('.js_tab_breadcrumb li a')[1]).attr('href', '#Steps'              )
-    $($('.js_tab_breadcrumb li a')[2]).attr('href', '#Materials'          )
-    $($('.js_tab_breadcrumb li a')[3]).attr('href', '#Links'              )
-    $($('.js_tab_breadcrumb li a')[4]).attr('href', '#Volumic_forces'     )
-    $($('.js_tab_breadcrumb li a')[5]).attr('href', '#Boundary_Conditions')
-    $($('.js_tab_breadcrumb li a')[6]).attr('href', '#Options'            )
-    $($('.js_tab_breadcrumb li a')[7]).attr('href', '#Forecast'           )
+    $($('.js_tab_breadcrumb li a')[1]).attr('href', '#Materials'          )
+    $($('.js_tab_breadcrumb li a')[2]).attr('href', '#Links'              )
+    $($('.js_tab_breadcrumb li a')[3]).attr('href', '#Volumic_forces'     )
+    $($('.js_tab_breadcrumb li a')[4]).attr('href', '#Boundary_Conditions')
+    $($('.js_tab_breadcrumb li a')[5]).attr('href', '#Parameters'         )
+    $($('.js_tab_breadcrumb li a')[6]).attr('href', '#Forecast'           )
 
   # Is executed when the calcul is loading
   calculIsLoading: ->
@@ -192,7 +182,7 @@ SCVisu.Router = Backbone.Router.extend
     @reenableTabs()
     $('#ajax-loader').hide()
     # Put the correct anchor in the URL
-    @navigate('Steps', true)
+    @navigate('Materials', true)
 
   # Is executed when the calcul couldn't be loaded
   calculLoadError: ->
@@ -208,4 +198,4 @@ SCVisu.Router = Backbone.Router.extend
     SCVisu.calculViews.saveCalcul()
     if @currentPage < @routesPageNumber.length
       @navigate @routesPageNumber[@currentPage + 1], true
-  
+

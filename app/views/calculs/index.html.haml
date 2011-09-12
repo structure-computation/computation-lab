@@ -3,8 +3,6 @@
     %li
       %a{:href => "#Initialization"}      Initialisation 
     %li                
-      %a{:href => "#Steps"}               Temps 
-    %li                
       %a{:href => "#Materials"}           Matériaux 
     %li                
       %a{:href => "#Links"}               Liaisons 
@@ -13,7 +11,7 @@
     %li                
       %a{:href => "#Boundary_Conditions"} Conditions Limites
     %li                
-      %a{:href => "#Options"}             Options 
+      %a{:href => "#Parameters"}          Paramètres 
     %li                
       %a{:href => "#Forecast"}            Prévisions
 
@@ -70,9 +68,6 @@
   .initialization
     = render "calculs/partials/calculus_list"
 
-  .steps
-    = render "calculs/partials/step_details"
-
   .materials
     = render "calculs/partials/materials_database_view"
 
@@ -87,6 +82,7 @@
     = render "calculs/partials/boundary_condition_form"
 
   .options
+    = render "calculs/partials/step_details"
     = render "calculs/partials/calculus_options"
 
 - content_for :details_calcul do 
