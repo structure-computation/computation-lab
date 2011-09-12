@@ -23,15 +23,23 @@ SCViews.CalculListView = Backbone.View.extend
         SCVisu.current_calcul.setElements response
         SCVisu.initializeFromJSON()
         SCVisu.router.calculHasBeenLoad()
-        
+        $('#saved_for').append "Dernière sauvegarde : " + SCVisu.current_calcul.get 'last_saved'
       error: ->
         SCVisu.router.calculLoadError()
     )
         
   # Saves the current_calcul to the server side
   saveCalcul: ->
+    previousSaveDate = SCVisu.current_calcul.get 'last_saved'
+    date = new Date()
+    dateString = date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear() + " " + date.toTimeString()
+    SCVisu.current_calcul.set last_saved: dateString
     Backbone.sync "update", SCVisu.current_calcul
-  
+    $('#saved_for').html('')
+    $('#saved_for').append "Dernière sauvegarde : " + dateString
+    $('#save_calcul').disable()
+
+    
   newCalcul: ->
     SCVisu.current_calcul = new SCModels.Calcul
     SCVisu.router.calculIsCreating()

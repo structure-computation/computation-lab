@@ -98,10 +98,12 @@
 - content_for :wizard_buttons do 
   .previous_button
     %a.yellow_button#wizard_previous_button Etape précédente
+  .save_div
+    %a.yellow_button#save_calcul            Sauvegarder
   .next_button
     %a.yellow_button#wizard_next_button     Etape suivante
-  %div
-    %a.yellow_button#return_to_model        Retour au modèle
+  #saved_for
+
 
 - # TODO: Ramener dans ce fichier quand cela sera terminé. On charge dans ce partial le code de visualisation.
 = render "calculs/partials/visualisation_interface"

@@ -18,7 +18,7 @@ SCViews.LinkView = Backbone.View.extend
   # Also removing the view
   removeLink: ->
     SCVisu.interfaceListView.linkHasBeenRemoved @model
-    @parentElement.collection.remove @model, silent: true
+    @parentElement.collection.remove @model
     @remove()
 
   # Assign the link to the selected interface

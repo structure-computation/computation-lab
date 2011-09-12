@@ -25,7 +25,10 @@ SCModels.Calcul = Backbone.Model.extend
       @url = "/sc_models/#{@sc_model_id}/calculs/"
     else 
       @url = "/sc_models/#{@sc_model_id}/calculs/" + @get 'id'
+    @bind('change', @test)
 
+  test: ->
+    #console.log 'test' + new 
     
   setElements: (params) ->
     @setTimeStepsCollection params.time_steps.collection
@@ -38,6 +41,7 @@ SCModels.Calcul = Backbone.Model.extend
     @set options            : params.options
     @set volumic_forces     : params.volumic_forces
     @set edges              : params.edges
+    @set last_saved         : params.last_saved
     
   setTimeStepsCollection: (time_steps) ->
     @get('time_steps').collection = time_steps

@@ -31,10 +31,10 @@ ul.data_list
   a  
     float: right
 #wizard_buttons
-  margin-top  : 1em
-  float       : right
+  margin-top : 1%
+  +full
   div
-    display: inline
+    display: inline-block
 
 #ajax-loader
   background-image : url(../images/ajax-loader.gif)
@@ -70,3 +70,17 @@ ul.data_list
   +transition-in(1s)
   max-height: 100em
   visibility: visible
+
+.previous_button
+  float : left
+  a
+    +border-left-radius(1em)
+.next_button
+  float : right
+  a
+    +border-right-radius(1em)  
+.save_div
+  margin-left: 2%
+  
+#saved_for
+  display: block
