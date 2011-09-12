@@ -1,4 +1,4 @@
-class Company < ActiveRecord::Base
+class Fillial < ActiveRecord::Base
   
   has_many  :user_workspace_memberships
   has_many  :users, :through => :user_workspace_memberships
