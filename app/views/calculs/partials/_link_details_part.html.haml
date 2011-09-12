@@ -1,19 +1,18 @@
-#edit_link
-  %h2.grey Détail
-  %ul.horizontal_tab_submenu
-    %li
-      %a#tab_l1{:href => "#Génériques"} Génériques
-    %li                   
-      %a#tab_l2{:href => "#Complexe"}   Complexe
+%h2.grey Détail
+%ul.horizontal_tab_submenu
+  %li
+    %a#tab_l1{:href => "#Génériques"} Génériques
+  %li                   
+    %a#tab_l2{:href => "#Complexe"}   Complexe
 
-  .horizontal_tab_content
-    #tab_l1_content
-      = render :partial => "links/details/link_generic_information", :locals => {:show_all => true}
-    #tab_l2_content
-      = render :partial => "links/details/link_complexe_information", :locals => {:show_all => true}
+.horizontal_tab_content
+  #tab_l1_content
+    = render :partial => "links/details/link_generic_information", :locals => {:show_all => true}
+  #tab_l2_content
+    = render :partial => "links/details/link_complexe_information", :locals => {:show_all => true}
 
-  :coffeescript
-    $ ->
-      manage_tabs
-        "#tab_l1" : "#tab_l1_content"
-        "#tab_l2" : "#tab_l2_content"
+:coffeescript
+  $ ->
+    manage_tabs
+      "#tab_l1" : "#tab_l1_content"
+      "#tab_l2" : "#tab_l2_content"

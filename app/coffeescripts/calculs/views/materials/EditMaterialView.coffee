@@ -11,6 +11,8 @@ SCViews.EditMaterialView = Backbone.View.extend
 
   # Hide itself
   hide: ->
+    # Put back the visu
+    $('#visu_calcul').show()
     $(@el).hide()
     
   # Update moddel with values which are in inputs
@@ -72,6 +74,8 @@ SCViews.EditMaterialView = Backbone.View.extend
     
   
   render: (resetFields = false) ->
+    # Hide the visu when show itself
+    $('#visu_calcul').hide()
     $(@el).show()
     @parentElement.render()
     if resetFields

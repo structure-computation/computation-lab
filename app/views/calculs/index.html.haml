@@ -63,17 +63,15 @@
     %h2.grey Liste des conditions aux limites
     %ul#boundary_conditions.data_list
 
-- content_for :details_calcul do 
+- content_for :bottom_list do 
 
   .initialization
     = render "calculs/partials/calculus_list"
 
   .materials
-    = render "calculs/partials/material_details_part"
     = render "calculs/partials/materials_database_view"
 
   .links
-    = render "calculs/partials/link_details_part"
     = render "calculs/partials/links_database_view"
     
   .volumic_forces
@@ -87,13 +85,22 @@
     = render "calculs/partials/step_details"
     = render "calculs/partials/calculus_options"
 
+- content_for :details_calcul do 
+
+  .materials#edit_material
+    = render "calculs/partials/material_details_part"
+
+  .links#edit_link
+    = render "calculs/partials/link_details_part"
+  
 - content_for :wizard_buttons do 
   .previous_button
     %a.yellow_button#wizard_previous_button Etape précédente
   .next_button
     %a.yellow_button#wizard_next_button     Etape suivante
   %div
-    %a.yellow_button#return_to_model     Retour au model
+    %a.yellow_button#return_to_model        Retour au model
+
 - # TODO: Ramener dans ce fichier quand cela sera terminé. On charge dans ce partial le code de visualisation.
 = render "calculs/partials/visualisation_interface"
 
