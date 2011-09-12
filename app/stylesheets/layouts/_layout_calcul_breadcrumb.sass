@@ -56,16 +56,20 @@ div.breadcrumb_tab_content
     li
       a.selected
         +background-image(linear-gradient($color-tab-selected-start, $color-tab-selected-end))
-        color       : $color-font-selected-tab
-        border-bottom: none      
-        font-weight : bold
-        text-align: center
+        color         : $color-font-selected-tab
+        border-bottom : none      
+        font-weight   : bold
+        text-align    : center
     li.disable
-      background-color: gray
+      +background-image(linear-gradient(#97958b, #86847b))
+      cursor: default
       a
-        background-image: none
-        background-color: gray
+        +background-image(linear-gradient(#97958b, #86847b))
+        color  : darken($color-font-header, 10%)
+        cursor : default
+
     li.disable:first-child
       background-color: gray
       a
         +background-image(linear-gradient($color-tab-selected-start, $color-tab-selected-end))
+        color : $color-font-selected-tab
