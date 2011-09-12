@@ -2,7 +2,7 @@ SCViews.EditMaterialView = Backbone.View.extend
   el: "#edit_material"
   initialize: (params) ->
     @parentElement = params.parentElement
-    $(@el).append('<button class="close_edit_view">Fermer</button>')    
+    $(@el).find('h2:first').prepend('<button class="close_edit_view">Fermer</button>')    
     @hide()
 
   events: 
