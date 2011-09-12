@@ -5,6 +5,7 @@ SCViews.CalculListView = Backbone.View.extend
     @calculViews = []
     for calcul in @collection.models
       @createCalculView(calcul)
+    @calculInformationView = new SCViews.CalculInformation()
     @render()
     $(@el).tablesorter()
     
