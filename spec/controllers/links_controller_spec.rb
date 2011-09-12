@@ -14,13 +14,18 @@ describe LinksController do
   let :mock_link          do mock_model(Link).as_null_object      end
   let :current_workspace  do mock_model(Workspace).as_null_object end
   
+  # NOTE: pour screencast : before != begin... et before(:all) ne marche pas pour cela : controller n'est pas 
+  # encore défini !
+  before(:each) do
+    controller.stub(:authenticate_user! => true) # .and_return(true)
+    controller.stub(:current_workspace_member =>  current_workspace)    
+  end
 
 
   describe "GET index" do
     
+    
     it "ask for links from std links slibrary and from workspace library" do
-      controller.stub(:authenticate_user! => true) # .and_return(true)
-      controller.stub(:current_workspace_member =>  current_workspace)
       Link.should_receive(:standard)
       Link.should_receive(:from_workspace)
       
