@@ -1,13 +1,14 @@
-#new_edge_form
+#edit_edge_form
 
   = render "calculs/partials/edge_basic_information"
 
   #edge_criteria
-    %p
-      Choisissez un critière pour définir le nouveau bord
-    %p
-      %button.yellow_button.criteria{:value => "volume"}  Dans un volume
-      %button.yellow_button.criteria{:value => "surface"} Sur une surface
+    %h3
+      Critière :
+    %label{:for => "edge_criteria_volume"} Dans un volume
+    = radio_button_tag 'edge_criteria', 'volume'
+    %label{:for => "edge_criteria_surface"} Sur une surface
+    = radio_button_tag 'edge_criteria', 'surface'
     
   / Si volume a été selectionné
   = render "calculs/partials/edge_volume_form"

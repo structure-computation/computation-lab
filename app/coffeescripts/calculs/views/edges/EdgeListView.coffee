@@ -50,7 +50,6 @@ SCViews.EdgeListView = Backbone.View.extend
       
   showNewEdgeForm: ->
     $('#boundary_condition_form').hide()
-    @editEdgeView.show()
     @editEdgeView.showAndInitialize()
     
   render: ->
