@@ -19,6 +19,7 @@ SCViews.MaterialView = Backbone.View.extend
   removeMaterial: ->
     SCVisu.pieceListView.materialHasBeenRemoved(@model)
     @parentElement.collection.remove @model
+    SCVisu.current_calcul.trigger 'change'
     @remove()
 
   # Show details of a material

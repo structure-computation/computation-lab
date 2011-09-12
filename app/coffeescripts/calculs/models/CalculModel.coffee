@@ -25,10 +25,10 @@ SCModels.Calcul = Backbone.Model.extend
       @url = "/sc_models/#{@sc_model_id}/calculs/"
     else 
       @url = "/sc_models/#{@sc_model_id}/calculs/" + @get 'id'
-    @bind('change', @test)
+    @bind('change', @enableSaveButton)
 
-  test: ->
-    #console.log 'test' + new 
+  enableSaveButton: ->
+    $('#save_calcul').removeAttr("disabled")
     
   setElements: (params) ->
     @setTimeStepsCollection params.time_steps.collection
