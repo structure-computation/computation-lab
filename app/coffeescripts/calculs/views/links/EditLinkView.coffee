@@ -26,6 +26,8 @@ SCViews.EditLinkView = Backbone.View.extend
 
   # Hide itself
   hide: ->
+    # Put back the visu
+    $('#visu_calcul').show()
     $(@el).hide()
   
   # Update model from all input values
@@ -44,6 +46,7 @@ SCViews.EditLinkView = Backbone.View.extend
 
   
   render: (resetFields = false) ->
+    $('#visu_calcul').hide()
     $(@el).show()
     @parentElement.render()
     for input in $(@el).find('input, textarea')

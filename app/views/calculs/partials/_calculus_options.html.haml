@@ -1,3 +1,4 @@
+%h2#multiresolution_parameters Paramètres multirésolution
 #calculus_option
   %p
     %label{:for => "test_mode"} Mode Test
@@ -40,3 +41,15 @@
   %p
     %label{:for => "error"}               Niveau Erreur de modèle (%) 
     %input#error{:type => "text"} 
+  :coffeescript
+    SCVisu.optionsHideOrShow = () ->
+      if $('#calculus_option').hasClass 'maximize'
+        $('#calculus_option').removeClass 'maximize'
+      else
+        $('#calculus_option').addClass 'maximize'
+    $ ->      
+      $('#multiresolution_parameters').click( () ->
+        SCVisu.optionsHideOrShow()
+      )
+      
+      $('#multiresolution_parameters')[0].onGesture('tap', SCVisu.optionsHideOrShow())

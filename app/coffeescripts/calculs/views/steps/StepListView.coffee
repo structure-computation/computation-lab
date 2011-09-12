@@ -38,9 +38,11 @@ SCViews.StepListView = Backbone.View.extend
     @stepViews.push new SCViews.StepView model: step, parentElement: this
 
   render : ->
-    if $(@el).find('select#step_type').val() == "statique"
+    if $(@el).find('select#step_type').val() == "static"
       @disableAddButton()
-
+      $('#steps_table').hide()
+    else
+      $('#steps_table').show()
     for stepView in @stepViews
       stepView.render()
     @stepViews[0].removeDeleteButton()
@@ -82,12 +84,14 @@ SCViews.StepListView = Backbone.View.extend
     @setTimeScheme($(event.srcElement).val())
   
     if $(event.srcElement).val() == "static"
+      $('#steps_table').hide()
       # Delete all except first element
       for i in [0..@stepViews.length - 1]
         @stepViews[1].delete() if i > 0
       $(@el).find("button#add_step").attr('disabled', 'disabled')
     else
       $("#add_step").removeAttr('disabled')
+      $('#steps_table').show()
 
   disableAddButton: ->
     $(@el).find("button#add_step").attr('disabled', 'disabled')

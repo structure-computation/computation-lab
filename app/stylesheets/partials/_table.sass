@@ -16,7 +16,7 @@ $border-between-cell-width   : 1px
                              
 $line-height-cell            : 1.5em
 $color-border-cell           : #555
-$padding-left-cell           : 0.5em
+$padding-left-cell           : 0.6%
 $background-color-cell       : #d0d1d7
 
 
@@ -35,19 +35,25 @@ table.grey
     +background-image(linear-gradient($color-thead-start, $color-thead-end))
     tr
       th
-        padding-left: $padding-left-cell
-        line-height : $line-height-thead
-        font-size   : $font-size-thead
-        color       : $font-color-table-header
-        text-align  : left
-        font-weight : normal
-        background  : transparent url('/images/bg_asc_desc.gif') no-repeat center right
-        border-right     : 1px solid $color-border-cell
+        padding-left        : $padding-left-cell
+        line-height         : $line-height-thead
+        font-size           : $font-size-thead
+        color               : $font-color-table-header
+        text-align          : left
+        font-weight         : normal
+        background          : transparent url('/images/bg_asc_desc.gif') no-repeat
+        background-position : 95% 50%
+        padding-right       : 9px
+        border-right        : 1px solid $color-border-cell
         cursor: pointer
       th.headerSortDown       
-        background  : transparent url('/images/desc.gif') no-repeat center right
+        background          : transparent url('/images/desc.gif') no-repeat
+        background-position : 95% 50%
+        padding-right       : 9px
       th.headerSortUp       
-        background  : transparent url('/images/asc.gif') no-repeat center right
+        background          : transparent url('/images/asc.gif') no-repeat
+        background-position : 95% 50%
+        padding-right       : 9px
       th.no_sorter
         background  : none
         cursor: default 

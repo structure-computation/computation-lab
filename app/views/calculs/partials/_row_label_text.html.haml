@@ -9,7 +9,7 @@
 
   - ids.each_with_index do |input_id, i|
     %td
-      - if type == "textarea"
+      - if local_assigns.has_key?(:input_type) and input_type == "textarea"
         %textarea{:type => "text", 
                   :id => input_id, 
                   :class => (local_assigns.has_key?(:classes) ? classes[i] : ""), 
@@ -18,7 +18,7 @@
                   :name => (local_assigns.has_key?(:names) ? names[i] : ""),
                   :data => {:type => local_assigns.has_key?(:data_type) ? data_type : ""}}
       - else
-        %input{:type => "text", 
+        %input{   :type => "text", 
                   :id => input_id, 
                   :class => (local_assigns.has_key?(:classes) ? classes[i] : ""), 
                   :placeholder =>  (local_assigns.has_key?(:placeholders) ? placeholders[i] : ""), 

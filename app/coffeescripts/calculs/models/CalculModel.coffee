@@ -19,7 +19,7 @@ SCModels.Calcul = Backbone.Model.extend
       collection  : []
     @set options               : {}
       
-    @sc_model_id  = @get 'sc_model_id'
+    @sc_model_id  = SCVisu.current_model_id
 
     if _.isUndefined @get('id') 
       @url = "/sc_models/#{@sc_model_id}/calculs/"

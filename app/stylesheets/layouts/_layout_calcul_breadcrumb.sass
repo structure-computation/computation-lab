@@ -19,11 +19,14 @@ div.breadcrumb_tab_content
     width: 100%
     background-color: $color-tab-start
     border: 1px solid rgba(0,0,0,0.5)
+    border-top: none
+    display: table
     li
       font-size: 0.9em
-      display: inline-block
+      display: table-cell
       width: $breadcrumb_tabs_size
       margin: 0
+      vertical-align: middle
       a
         cursor: pointer
         width: 98.5%
@@ -38,6 +41,8 @@ div.breadcrumb_tab_content
         color: $color-font-header
         text-align: center
         border-bottom: none
+        height: 100%
+        vertical-align: middle
 
     li:last-child
       a
@@ -51,16 +56,20 @@ div.breadcrumb_tab_content
     li
       a.selected
         +background-image(linear-gradient($color-tab-selected-start, $color-tab-selected-end))
-        color       : $color-font-selected-tab
-        border-bottom: none      
-        font-weight : bold
-        text-align: center
+        color         : $color-font-selected-tab
+        border-bottom : none      
+        font-weight   : bold
+        text-align    : center
     li.disable
-      background-color: gray
+      +background-image(linear-gradient(#97958b, #86847b))
+      cursor: default
       a
-        background-image: none
-        background-color: gray
+        +background-image(linear-gradient(#97958b, #86847b))
+        color  : darken($color-font-header, 10%)
+        cursor : default
+
     li.disable:first-child
       background-color: gray
       a
         +background-image(linear-gradient($color-tab-selected-start, $color-tab-selected-end))
+        color : $color-font-selected-tab

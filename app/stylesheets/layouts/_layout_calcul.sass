@@ -6,6 +6,10 @@ $calcul-right-list-cols: $calcul-section-cols - $calcul-left-list-cols
 
 #breadcrumb
   +full
+#details_calcul
+  +columns($visualisation-cols)
+  +omega
+
 #visu_calcul
   +columns($visualisation-cols)
   +omega
@@ -18,7 +22,7 @@ $calcul-right-list-cols: $calcul-section-cols - $calcul-left-list-cols
 #content_calcul
   +columns($calcul-section-cols)
   +alpha
-  min-height: 40em
+  min-height: 45em
   #list_calcul
     +full($calcul-section-cols)
     #left_list_calcul
@@ -29,6 +33,6 @@ $calcul-right-list-cols: $calcul-section-cols - $calcul-left-list-cols
       +columns(6, $calcul-section-cols)
       +omega
       background-color: #F0F0F0
-  #details_calcul
+  #bottom_list_calcul
     +full($calcul-section-cols)
 

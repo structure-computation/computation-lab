@@ -47,7 +47,7 @@ ul.data_list
 .is_not_assigned, .is_assigned
   float: right
 
-#details_calcul
+#bottom_list_calcul
   padding-top: 1em
   table
     font-size: 95%
@@ -56,3 +56,17 @@ ul.data_list
   tbody
     tr:hover
       background-color: $hover-color
+
+#steps, #calculus_option
+  +transition-out(1s)
+  max-height: 0px
+  overflow: hidden
+  background-color: white
+  border: 1px solid #CCC
+  padding: 1%
+  visibility: hidden
+  
+#steps.maximize, #calculus_option.maximize
+  +transition-in(1s)
+  max-height: 100em
+  visibility: visible

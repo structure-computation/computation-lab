@@ -5,12 +5,14 @@ SCViews.CalculListView = Backbone.View.extend
     @calculViews = []
     for calcul in @collection.models
       @createCalculView(calcul)
+    @calculInformationView = new SCViews.CalculInformation()
     @render()
     $(@el).tablesorter()
     
   events:
-    "click .load_calcul": "loadCalcul"
-    "click .save_calcul": "saveCalcul"
+    "click .load_calcul" : "loadCalcul"
+    "click .save_calcul" : "saveCalcul"
+    "click .new_calcul"  : "newCalcul"
     
   # Get a JSON from the server containing calcul information and create current_calcul which will be used all along the calcul's setup.
   loadCalcul: ->
@@ -30,6 +32,23 @@ SCViews.CalculListView = Backbone.View.extend
   saveCalcul: ->
     Backbone.sync "update", SCVisu.current_calcul
   
+  newCalcul: ->
+    SCVisu.current_calcul = new SCModels.Calcul
+    SCVisu.router.calculIsCreating()
+    Backbone.sync("create", SCVisu.current_calcul,
+      success: (response) ->
+        SCVisu.current_calcul.set 'name' : response.name, 'id' : response.id, 'state' : response.state, 'description' : 'null'
+        calculView = SCVisu.calculViews.createCalculView SCVisu.current_calcul
+        SCVisu.calculViews.renderChildViews()
+        SCVisu.router.calculHasBeenCreated()
+        SCVisu.calculViews.selectCalcul calculView
+        
+      error: (response) ->
+        SCVisu.router.calculLoadError()
+        console.log "erreur lors de la sauvegarde"
+    )
+
+  
   selectCalcul:(calcul) ->
     for calculView in @calculViews
       $(calculView.el).removeClass('selected')
@@ -39,10 +58,10 @@ SCViews.CalculListView = Backbone.View.extend
   createCalculView: (calcul) ->
     c = new SCViews.CalculView model: calcul, parentElement: this
     @calculViews.push c
-
+    return c
+    
   render : ->
-    for c in @calculViews
-      c.render()
+    @renderChildViews()
     tableFooter = """
         <tr>
           <td colspan='4'>
@@ -54,3 +73,7 @@ SCViews.CalculListView = Backbone.View.extend
     """
     $(@el).find('tfoot').append(tableFooter)
     return this
+    
+  renderChildViews : ->
+    for c in @calculViews
+      c.render()

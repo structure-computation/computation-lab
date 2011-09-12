@@ -3,8 +3,6 @@
     %li
       %a{:href => "#Initialization"}      Initialisation 
     %li                
-      %a{:href => "#Steps"}               Temps 
-    %li                
       %a{:href => "#Materials"}           Matériaux 
     %li                
       %a{:href => "#Links"}               Liaisons 
@@ -13,7 +11,7 @@
     %li                
       %a{:href => "#Boundary_Conditions"} Conditions Limites
     %li                
-      %a{:href => "#Options"}             Options 
+      %a{:href => "#Parameters"}          Paramètres 
     %li                
       %a{:href => "#Forecast"}            Prévisions
 
@@ -65,20 +63,15 @@
     %h2.grey Liste des conditions aux limites
     %ul#boundary_conditions.data_list
 
-- content_for :details_calcul do 
+- content_for :bottom_list do 
 
   .initialization
     = render "calculs/partials/calculus_list"
 
-  .steps
-    = render "calculs/partials/step_details"
-
   .materials
-    = render "calculs/partials/material_details_part"
     = render "calculs/partials/materials_database_view"
 
   .links
-    = render "calculs/partials/link_details_part"
     = render "calculs/partials/links_database_view"
     
   .volumic_forces
@@ -89,13 +82,26 @@
     = render "calculs/partials/boundary_condition_form"
 
   .options
+    = render "calculs/partials/step_details"
     = render "calculs/partials/calculus_options"
 
+- content_for :details_calcul do 
+
+  .initialization#calcul_information
+    = render "calculs/partials/calcul_information"
+  .materials#edit_material
+    = render "calculs/partials/material_details_part"
+
+  .links#edit_link
+    = render "calculs/partials/link_details_part"
+  
 - content_for :wizard_buttons do 
   .previous_button
     %a.yellow_button#wizard_previous_button Etape précédente
   .next_button
     %a.yellow_button#wizard_next_button     Etape suivante
+  %div
+    %a.yellow_button#return_to_model        Retour au modèle
 
 - # TODO: Ramener dans ce fichier quand cela sera terminé. On charge dans ce partial le code de visualisation.
 = render "calculs/partials/visualisation_interface"
@@ -104,7 +110,7 @@
   :coffeescript
     # Initialization of data coming from database
     $ ->
-      SCVisu.current_model_id = #{params[:sc_model_id]}
+      SCVisu.current_model_id = #{@model_id}
       SCVisu.current_workspace  = #{current_workspace_member.workspace_id}
       
       SCVisu.standardLibraryMaterial  = new SCModels.MaterialCollection

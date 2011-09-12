@@ -6,14 +6,15 @@ class CalculsController < ApplicationController
   layout 'calcul'
   
   def index
-    @standard_links     = Link.standard
-    @workspace_links    = Link.from_workspace(current_workspace_member.workspace)
-    @standard_materials = Material.standard
-    @workspace_materials  = Material.from_workspace(current_workspace_member.workspace)
-    @material           = Material.new
-    @link               = Link.new
-    @workspace            = current_workspace_member.workspace
-    @calculs            = CalculResult.find_all_by_sc_model_id(params[:sc_model_id])
+    @standard_links      = Link.standard
+    @workspace_links     = Link.from_workspace(current_workspace_member.workspace)
+    @standard_materials  = Material.standard
+    @workspace_materials = Material.from_workspace(current_workspace_member.workspace)
+    @material            = Material.new
+    @link                = Link.new
+    @model_id            = params[:sc_model_id]
+    @workspace           = current_workspace_member.workspace
+    @calculs             = CalculResult.find_all_by_sc_model_id(params[:sc_model_id])
   end
   
   def show
@@ -34,7 +35,19 @@ class CalculsController < ApplicationController
     else
       results = @current_calcul.save_brouillon(params)
     end
-    render :text => results
+    render :json => @current_calcul
+  end
+  
+  def create
+    @current_model              = current_workspace_member.sc_models.find(params[:sc_model_id])
+    @current_calcul             = CalculResult.new
+    @current_calcul.name        = "brouillon_" + (CalculResult.find_all_by_sc_model_id(@current_model).length + 1).to_s
+    @current_calcul.sc_model_id = @current_model.id
+    @current_calcul.user_id     = current_workspace_member.user_id
+    @current_calcul.state       = "temp"
+    @current_calcul.save!
+    results = @current_calcul.save_brouillon(params)
+    render :json => @current_calcul.to_json
   end
   
   def new
@@ -57,7 +70,7 @@ class CalculsController < ApplicationController
 
   #TODO: Supprimer le fichier calcul après X jours
   def destroy
-    @current_model = current_user.sc_models.find(params[:sc_model_id])
+    @current_model = current_workspace_member.sc_models.find(params[:sc_model_id])
     @current_calcul = @current_model.calcul_results.find(params[:id]) 
     @current_calcul.destroy
     render :json => @current_calcul.to_json
