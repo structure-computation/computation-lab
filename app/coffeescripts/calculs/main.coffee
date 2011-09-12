@@ -12,7 +12,7 @@ $ ->
   # Initialize all variables and views with data retrieved from the JSON sent by the "Visualisateur"
   # /!\ Variable's name must not be changed! They are used in multiple place in the code. /!\
   SCVisu.initializeFromJSON = () ->
-
+    $('#visu_calcul').show()
     # Initialization of the PieceListView
     pieceCollection               = new SCModels.PieceCollection SCVisu.current_calcul.get('pieces')
     SCVisu.pieceListView          = new SCViews.PieceListView collection : pieceCollection

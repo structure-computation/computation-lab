@@ -37,9 +37,15 @@ SCVisu.Router = Backbone.Router.extend
        "Links"              
        "Volumic_forces"     
        "Boundary_Conditions"
-       "Options"            
-       "Forecast"           
+       "Options"
+       "Forecast"
     ]
+    # Hide calcul details and show visu and when he is not on the first page
+    $('body').click (event) =>
+      if event.srcElement.tagName != "LI" and event.srcElement.tagName != "BUTTON" and event.srcElement.tagName != "TD" and @currentPage > 0
+        $('#details_calcul    > div').hide()
+        $('#visu_calcul')            .show()
+    
   
   # It is important to call this function AFTER currentPage has changed
   # Handle to disable Next or Previous button
@@ -64,6 +70,8 @@ SCVisu.Router = Backbone.Router.extend
   
   # Hide all 'tabs' and show the first one - Initialization part
   initialisation: ->
+    # The visu part is put visible (.show()) in the main when a calcul has been loaded.
+    $('#visu_calcul').hide()
     @currentPage = 0
     @handlePreviousAndNextButtons()
     @hideAllContent()
@@ -138,7 +146,8 @@ SCVisu.Router = Backbone.Router.extend
   # Masque toutes les zones de contenu en ajoutant le classe css 'hide' à ces derniers  
   hideAllContent: ->
     $('#list_calcul       > div').removeClass('show').addClass('hide')
-    $('#details_calcul    > div').removeClass('show').addClass('hide')
+    $('#bottom_list_calcul> div').removeClass('show').addClass('hide')
+    $('#details_calcul    > div').hide()
     $('#right_list_calcul > div').removeClass('show').addClass('hide')
     $('#left_list_calcul  > div').removeClass('show').addClass('hide')
   
