@@ -1,11 +1,13 @@
 #volume_geometry
-  %p
-    Choisissez la géométrie 
-  %p
-    %button.yellow_button.geometry{:value => "volume_box"}      Boite
-    %button.yellow_button.geometry{:value => "volume_cylinder"} Cylindre
-    %button.yellow_button.geometry{:value => "volume_sphere"}   Sphère
+  %h3
+    Géométrie 
 
+  %label{:for => "edge_volume_geometry_box"}      Boite
+  = radio_button_tag 'edge_volume_geometry', 'box'
+  %label{:for => "edge_volume_geometry_cylinder"} Cylindre                                                  
+  = radio_button_tag 'edge_volume_geometry', 'cylinder'
+  %label{:for => "edge_volume_geometry_sphere"}   Sphère                                                    
+  = radio_button_tag 'edge_volume_geometry', 'sphere'
 #edge_volume_box
 
   %table.grey

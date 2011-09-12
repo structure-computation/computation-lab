@@ -1,12 +1,17 @@
 #surface_geometry
-  %p
-    Choisissez la géométrie 
-  %p
-    %button.yellow_button.geometry{:value => "surface_plan"}          Plan
-    %button.yellow_button.geometry{:value => "surface_disc"}          Disque
-    %button.yellow_button.geometry{:value => "surface_cylinder"}      Cylindre
-    %button.yellow_button.geometry{:value => "surface_sphere"}        Sphère
-    %button.yellow_button.geometry{:value => "surface_parameterized"} Surface Paramétrée
+  %h3
+    Géométrie 
+
+  %label{:for => "edge_surface_geometry_plan"}          Plan
+  = radio_button_tag 'edge_surface_geometry', 'plan'
+  %label{:for => "edge_surface_geometry_disc"}          Disque                                                    
+  = radio_button_tag 'edge_surface_geometry', 'disc'
+  %label{:for => "edge_surface_geometry_cylinder"}      Cylindre                                                  
+  = radio_button_tag 'edge_surface_geometry', 'cylinder'
+  %label{:for => "edge_surface_geometry_sphere"}        Sphère                                                    
+  = radio_button_tag 'edge_surface_geometry', 'sphere'
+  %label{:for => "edge_surface_geometry_parameterized"} Surface paramétrée                                        
+  = radio_button_tag 'edge_surface_geometry', 'parameterized'
 
 #edge_surface_plan
 
