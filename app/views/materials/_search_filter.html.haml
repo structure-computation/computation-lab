@@ -1,15 +1,14 @@
 .search_filter
-  
-  %a.yellow_button.pressed_button#workspace_material   Ma bibliothèque
-  %a.yellow_button.pressed_button#standard_material  Bibliothèque standard
-  :coffeescript
-    $('a#workspace_material').click ->
-      $(this).toggleClass('pressed_button')
-      $('#materials_table tbody tr.workspace').toggle()
 
-    $('a#standard_material').click ->
-      $(this).toggleClass('pressed_button')
-      $('#materials_table tbody tr.standard').toggle()
+  #materials_library_filter
+    %label{:for => "materials_library_workspace"}   Ma bibliothèque
+    = check_box_tag 'materials_library_workspace', 'workspace', true
+    %label{:for => "materials_library_standard"}    Bibliothèque standard
+    = check_box_tag 'materials_library_standard', 'standard', true
+
+  :coffeescript
+    $('#materials_library_filter input[type=checkbox]').click (event) ->
+      $("#materials_table tbody tr." + event.srcElement.value).toggle()
         
   %p
     %label{:for => "search_filter"} Recherche :
