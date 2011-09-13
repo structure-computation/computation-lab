@@ -12,7 +12,6 @@ SCViews.EdgeView = Backbone.View.extend
 
   select: ->
     @parentElement.setNewSelectedModel(this)
-    @model.set selected: true
 
   showAssignButton: ->
   
@@ -23,5 +22,5 @@ SCViews.EdgeView = Backbone.View.extend
       <td>#{@model.get('name')}</td>
       <td></td>
     """
-    $(@el).html(template)
+    $(@el).html(template).removeClass('selected')
     return this

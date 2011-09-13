@@ -31,9 +31,10 @@ SCViews.EdgeListView = Backbone.View.extend
   # setNewSelectedModel is executed when a child view indicate it has been selected.
   # It set the current selected model to "non selected" (which trigger an event that redraw its line).
   setNewSelectedModel: (edgeView) ->
-    @selectedEdgeView.model.unset "selected" if @selectedEdgeView
+    $('#boundary_condition_form').hide()
     @selectedEdgeView = edgeView
     @editEdgeView.setModel edgeView.model
+    @render()
 
   # Clears all elements previously loaded in the DOM. 
   # Indeed, the 'ul#materials' element already exists in the DOM and every time we create a MaterialListView, 
@@ -55,4 +56,5 @@ SCViews.EdgeListView = Backbone.View.extend
   render: ->
     for edgeView in @edgeViews
       edgeView.render()
+    $(@selectedEdgeView.el).addClass("selected") if @selectedEdgeView
     return this

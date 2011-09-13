@@ -8,12 +8,19 @@ SCViews.BoundaryConditionView = Backbone.View.extend
   className : "boundary_condition_view"
 
   events: 
-    "click"   : "select"
+    "click"         : "select"
+    "click .remove" : "removeCondition"
+  
+  removeCondition: ->
+    # SCVisu.edgeListView.conditionHasBeenRemoved(@model)
+    @parentElement.collection.remove @model
+    SCVisu.current_calcul.trigger 'change'
+    @remove()
+
   
   select: ->
     @parentElement.setNewSelectedModel(this)
-    @model.set selected: true
 
   render: ->
-    if @model.get 'selected' then $(@el).addClass 'selected' else $(@el).removeClass 'selected'
-    $(@el).html(@model.get('id_in_calcul') + " - " + @model.get('name'))
+    $(@el).html(@model.get('id_in_calcul') + " - " + @model.get('name') + "<button class='remove''>X</button>").removeClass('selected')
+    this
