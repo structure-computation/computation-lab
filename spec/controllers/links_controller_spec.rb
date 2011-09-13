@@ -11,8 +11,10 @@ describe LinksController do
   #   end
   # end
   
+  # NOTE: Il semble important d'adopter une convention de nommage : mock_ pour les objet mock, un nom non préfixé
+  # pour les objets issus des factories.
   let :mock_link                do mock_model(Link).as_null_object                    end
-  let :current_workspace        do FactoryGirl.create(:workspace)                     end
+  let :current_workspace        do FactoryGirl.build(:workspace)                     end
   let :mock_workspace_member do 
     mock_model(UserWorkspaceMembership, :workspace => current_workspace).as_null_object 
   end
@@ -42,7 +44,7 @@ describe LinksController do
       # NOTE: Je n'ai pas réussi à faire un stub sur un objet.
       # Link.stub(:standard_links) { [mock_link] }    
       get :index
-      assigns(:standard_links).should eq([@standard_links])
+      assigns(:standard_links).should eq( [@standard_links] )
     end
     
     it "assigns all links for workspace links library as @standard_links" do
