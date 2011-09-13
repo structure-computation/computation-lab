@@ -66,30 +66,43 @@ describe LinksController do
       assigns(:link).should eq(@workspace_link)
       response.should render_template("links/show")
     end
+    
+    context "When a forbidden (outside of current_workspace) or non existant link is asked" do 
+      before(:each) do
+        other_workspace             = FactoryGirl.create(:workspace)
+        @link_from_other_workspace  = FactoryGirl.create(:link, :workspace => other_workspace)
 
-    #TODO: Ecrire plutôt "redirect to" une page d'erreur.
-    it "send an error if the requested link belongs to an other workspace than current workspace." do
-      tmp_workspace   = FactoryGirl.create(:workspace)
-      tmp_link        = FactoryGirl.create(:link, :workspace => tmp_workspace)
-      get :show, :id => tmp_link.id
-      assigns(:link).should be nil
-      response.should redirect_to(workspace_links_path(current_workspace))
-      flash[:notice].should eq("Ce lien n'existe pas ou n'est pas accessible à partir de cet espace de travail.")
-    end    
-    
-    it "send an error if no link is available with this id." do
-      # Construction puis destruction d'un lien pour avoir un id inexistant
-      tmp_link        = FactoryGirl.create(:link)
-      tmp_id          = tmp_link.id
-      tmp_link.destroy
+        # Construction puis destruction d'un lien pour avoir un id inexistant
+        tmp_link                    = FactoryGirl.create(:link)
+        @non_existing_link_id       = tmp_link.id
+        tmp_link.destroy
+      end
       
-      # Get de l'id inexistant.
-      get :show, :id => tmp_link.id
-      assigns(:link).should be nil
-      response.should redirect_to(workspace_links_path(current_workspace))
-      flash[:notice].should eq("Ce lien n'existe pas ou n'est pas accessible à partir de cet espace de travail.")
-    end
+      it "in html, redirect to Links list if the requested link belongs to an other workspace than current workspace." do
+        get :show, :id => @link_from_other_workspace.id
+        assigns(:link).should be nil
+        response.should redirect_to(workspace_links_path(current_workspace))
+        flash[:notice].should eq("Ce lien n'existe pas ou n'est pas accessible à partir de cet espace de travail.")
+      end    
     
+      it "in html, redirect to Links list if no link is available with this id." do
+        # Get de l'id inexistant.
+        get :show, :id => @non_existing_link_id
+        assigns(:link).should be nil
+        response.should redirect_to(workspace_links_path(current_workspace))
+        flash[:notice].should eq("Ce lien n'existe pas ou n'est pas accessible à partir de cet espace de travail.")
+      end
+      
+      it "in json, send a 404 error if the requested link belongs to an other workspace than current workspace." do
+        get :show, :format => "json", :id => @link_from_other_workspace.id
+        assert_response 404
+      end
+      
+      it "in json, send a 404 error if no link is available with this id." do
+        get :show, :format => "json", :id => @non_existing_link_id
+        assert_response 404
+      end
+    end
   end
   
   # describe "GET new" do

@@ -61,7 +61,7 @@ class LinksController < InheritedResources::Base
       respond_to do |format|
         format.html {redirect_to workspace_links_path(current_workspace_member.workspace.id), 
                     :notice => "Ce lien n'existe pas ou n'est pas accessible à partir de cet espace de travail."}
-        format.json {render :status => 403}
+        format.json {render :status => 404, :json => {}}
       end
     end
      
