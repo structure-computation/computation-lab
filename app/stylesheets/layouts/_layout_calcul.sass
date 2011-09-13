@@ -13,8 +13,7 @@ $calcul-right-list-cols: $calcul-section-cols - $calcul-left-list-cols
 #visu_calcul
   +columns($visualisation-cols)
   +omega
-  min-height: 40em
-  background-color: blue
+  min-height: 45em
   #visualisation_dock
     // La taille du canevas est gérée par le JS.
     background-color: black
@@ -22,17 +21,18 @@ $calcul-right-list-cols: $calcul-section-cols - $calcul-left-list-cols
 #content_calcul
   +columns($calcul-section-cols)
   +alpha
-  min-height: 45em
   #list_calcul
     +full($calcul-section-cols)
     #left_list_calcul
       +columns(6, $calcul-section-cols)
       +alpha
-      background-color: #F0F0F0
     #right_list_calcul
       +columns(6, $calcul-section-cols)
       +omega
-      background-color: #F0F0F0
   #bottom_list_calcul
     +full($calcul-section-cols)
 
+#calcul_container
+  min-height: 45em
+  background-color: #F0F0F0
+  overflow: auto
