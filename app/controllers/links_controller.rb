@@ -45,18 +45,23 @@ class LinksController < InheritedResources::Base
   end
 
   def show
-    @link = Link.find(params[:id])
-
-    # TODO: Revoir le controle d'accès, cela ne se fait pas comme ça mais plutôt comme :
-    # current_workspace.links.find params[:id]
-    # De plus je ne vois pas ici comment l'on affiche un lien de la lib standard.
-    @workspace = Workspace.find(params[:workspace_id])
-    if @link.workspace_id == current_workspace_member.workspace.id
-      show!
+    # On préfère find_by_id qui renvoie nil si aucun enregistrement n'est trouvé car il y a au moins une 
+    # des deux ligne renvoyant nil (une liaison ne peux être standard et appartenir à un Workspace).
+    std_link  = Link.standard.find_by_id(params[:id])
+    ws_links  = Link.from_workspace(current_workspace_member.workspace.id).find_by_id(params[:id])
+    
+    # We take the std_link if not nil, the ws_link otherwise
+    @link     = std_link ? std_link : ws_links
+    
+    # If we have a link, it is rendered, otherwise we send an error (forbidden or missing, ).  
+    if @link 
+      # show!
+      render
     else
       flash[:notice] = "Vous n'avez pas accès à cette liaison !"
-      redirect_to workspace_links_path
-    end
+      redirect_to workspace_links_path(current_workspace_member.workspace_id), :status => 404, 
+                  :notice => "Ce lien n'existe pas ou n'es pas accessible à partir de cet espace de travail."
+     end
   end
 
   def new
