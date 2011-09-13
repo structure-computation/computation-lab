@@ -6,8 +6,6 @@ SCModels.BoundaryCondition = Backbone.Model.extend
   defaults:
     name: "Condition"
 
-
-
 # Collection of Boundary Condition
 SCModels.BoundaryConditionCollection = Backbone.Collection.extend
   model: SCModels.BoundaryCondition
