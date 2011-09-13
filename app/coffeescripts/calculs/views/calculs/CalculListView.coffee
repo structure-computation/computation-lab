@@ -10,8 +10,6 @@ SCViews.CalculListView = Backbone.View.extend
     $(@el).tablesorter()
     
   events:
-    "click .load_calcul" : "loadCalcul"
-    "click .save_calcul" : "saveCalcul"
     "click .new_calcul"  : "newCalcul"
     
   # Get a JSON from the server containing calcul information and create current_calcul which will be used all along the calcul's setup.
@@ -74,8 +72,6 @@ SCViews.CalculListView = Backbone.View.extend
     tableFooter = """
         <tr>
           <td colspan='4'>
-            <button class=\"load_calcul\">Charger le brouillon</button>
-            <button class=\"save_calcul\">Sauvegarder le brouillon</button>
             <button class=\"new_calcul\">Nouveau brouillon</button>
           </td>
         </tr>
