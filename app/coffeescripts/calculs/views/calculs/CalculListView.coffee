@@ -8,6 +8,7 @@ SCViews.CalculListView = Backbone.View.extend
     @calculInformationView = new SCViews.CalculInformation()
     @render()
     $(@el).tablesorter()
+    $(window).unload @beforeClosePage
     
   events:
     "click .new_calcul"  : "newCalcul"
@@ -37,7 +38,13 @@ SCViews.CalculListView = Backbone.View.extend
     $('#saved_for').html('')
     $('#saved_for').append "Dernière sauvegarde : " + dateString
     $('#save_calcul').attr("disabled", "disabled")
+    
 
+  beforeClosePage: (event) ->
+    date = new Date()
+    dateString = date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear() + " " + date.toTimeString()
+    SCVisu.current_calcul.set last_saved: dateString
+    Backbone.sync "update", SCVisu.current_calcul, async: false
     
   newCalcul: ->
     SCVisu.current_calcul = new SCModels.Calcul
