@@ -18,7 +18,7 @@ $ ->
     SCVisu.pieceListView          = new SCViews.PieceListView collection : pieceCollection
 
     # Initialization of the MaterialListView
-    materialCollection            = new SCModels.MaterialCollection SCVisu.current_calcul.get('materials')     
+    window.materialCollection            = new SCModels.MaterialCollection SCVisu.current_calcul.get('materials')     
     SCVisu.materialListView       = new SCViews.MaterialListView collection: materialCollection
     # Initialize views for database materials
     for material in SCVisu.standardLibraryMaterial.models.concat SCVisu.workspaceLibraryMaterial.models

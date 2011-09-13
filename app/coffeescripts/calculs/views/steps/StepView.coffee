@@ -71,4 +71,5 @@ SCViews.StepView = Backbone.View.extend
 
   delete: ->
     @model.destroy()
+    SCVisu.current_calcul.trigger 'change'
     @remove()
