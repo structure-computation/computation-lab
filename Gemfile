@@ -44,7 +44,7 @@ group :development, :test do
   gem 'webrat'
   gem 'ruby-debug'          , :require => 'ruby-debug'
   
-  gem 'factory_girl_rails'  , '~>1.0'    
+  gem 'factory_girl_rails'  , '~>1.2'    
   gem 'capybara'            , '=0.3.9'
   gem 'rspec'
   gem 'rspec-rails'         , '~>2.2.1'

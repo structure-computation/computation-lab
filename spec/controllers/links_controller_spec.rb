@@ -32,16 +32,17 @@ describe LinksController do
       get :index
     end
     
-    # it "assigns all links for standard links library as @standard_links" do
-    #   Link.stub(:standard_links) { [mock_link] }    
-    #   get :index
-    #   assigns(:standard_links).should eq([mock_link])
-    # end
-    # 
+    it "assigns all links for standard links library as @standard_links" do
+      @standard_links = FactoryGirl.create(:standard_link )
+      # Link.stub(:standard_links) { [mock_link] }    
+      get :index
+      assigns(:standard_links).should eq([@standard_links])
+    end
+    
     # it "assigns all links for workspace links library as @standard_links" do
-    #   # Link.stub(:workspace_links) { [mock_link] }    
-    #   # get :index
-    #   # assigns(:workspace_links).should eq([mock_link])
+    #   Link.stub(:workspace_links) { [mock_link] }    
+    #   get :index
+    #   assigns(:workspace_links).should be( [mock_link] )
     # end
     
   end
