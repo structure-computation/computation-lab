@@ -11,39 +11,44 @@ describe LinksController do
   #   end
   # end
   
-  let :mock_link          do mock_model(Link).as_null_object      end
-  let :current_workspace  do mock_model(Workspace).as_null_object end
+  let :mock_link                do mock_model(Link).as_null_object                    end
+  let :current_workspace        do FactoryGirl.create(:workspace)                     end
+  let :mock_workspace_member do 
+    mock_model(UserWorkspaceMembership, :workspace => current_workspace).as_null_object 
+  end
   
   # NOTE: pour screencast : before != begin... et before(:all) ne marche pas pour cela : controller n'est pas 
   # encore défini !
   before(:each) do
-    controller.stub(:authenticate_user! => true) # .and_return(true)
-    controller.stub(:current_workspace_member =>  current_workspace)    
+    controller.stub(:authenticate_user!       =>  true              ) # .and_return(true)
+    controller.stub(:current_workspace_member =>  mock_workspace_member )    
   end
 
 
   describe "GET index" do
+    before(:each) do 
+      @standard_links   = FactoryGirl.create(:standard_link )
+      @workspace_links  = FactoryGirl.create(:link , :workspace =>  current_workspace )
+    end
     
     
     it "ask for links from std links slibrary and from workspace library" do
       Link.should_receive(:standard)
       Link.should_receive(:from_workspace)
-      
       get :index
     end
     
     it "assigns all links for standard links library as @standard_links" do
-      @standard_links = FactoryGirl.create(:standard_link )
+      # NOTE: Je n'ai pas réussi à faire un stub sur un objet.
       # Link.stub(:standard_links) { [mock_link] }    
       get :index
       assigns(:standard_links).should eq([@standard_links])
     end
     
-    # it "assigns all links for workspace links library as @standard_links" do
-    #   Link.stub(:workspace_links) { [mock_link] }    
-    #   get :index
-    #   assigns(:workspace_links).should be( [mock_link] )
-    # end
+    it "assigns all links for workspace links library as @standard_links" do
+      get :index
+      assigns(:workspace_links).should eq( [@workspace_links] )
+    end
     
   end
 
