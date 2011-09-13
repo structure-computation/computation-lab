@@ -17,6 +17,7 @@ SCViews.DatabaseMaterialView = Backbone.View.extend
     newModel.unset  'id'
     @materialListView.add newModel
   
+  # Show details of the selected model but disable all inputs
   showDatabaseMaterialDetails: (event) ->
     if event.srcElement != $(@el).find('button.add')[0]
       @materialListView.showDetails @model, true

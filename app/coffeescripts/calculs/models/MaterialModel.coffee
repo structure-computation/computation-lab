@@ -4,7 +4,6 @@
 
 SCModels.Material = Backbone.Model.extend
   initialize: ->
-    @piece = null
     @workspace_id = if SCVisu.current_workspace? then SCVisu.current_workspace else 0
     @url = "/workspaces/#{@workspace_id}/materials/"
 
@@ -12,11 +11,13 @@ SCModels.Material = Backbone.Model.extend
   getId: ->
     @get 'id_in_calcul'
 
+# Collection of Material
 SCModels.MaterialCollection = Backbone.Collection.extend
   model: SCModels.Material
   initialize: (options) ->
     @workspace_id = if SCVisu.current_workspace? then SCVisu.current_workspace else 0
     @url = "/workspaces/#{@workspace_id}/materials"
+
     # Have to initialize _meta for the meta function
     @._meta = {}
 
@@ -32,8 +33,6 @@ SCModels.MaterialCollection = Backbone.Collection.extend
     material.save {},
       success: ->
         SCVisu.current_calcul.set materials: SCVisu.materialListView.collection.models
-
-    
 
   # Increment by 1 id_last_model
   incrementIdLastModel: ->

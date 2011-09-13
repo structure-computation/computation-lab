@@ -24,15 +24,15 @@ SCModels.LinkCollection = Backbone.Collection.extend
     # Get ID of the last model.
     # Last model because if models have been added and then removed, 
     # we can't presume the last ID will be the length of this.models
-    @meta "id_last_model", ((@last() && @last().get('id') + 1) || 1) # @last() && is here to prevent from @last() = undefined
+    @meta "id_last_model", ((@last() && @last().get('id_in_calcul') + 1) || 1) # @last() && is here to prevent from @last() = undefined
     @bind 'add', (link) =>
-      link.set 'id' : @meta("id_last_model")
+      link.set 'id_in_calcul' : @meta("id_last_model")
       @incrementIdLastModel()
 
   addAndSave: (link) ->
-      link.save {},
-        success: ->
-          SCVisu.current_calcul.set links: SCVisu.linkListView.collection.models
+    link.save {},
+      success: ->
+        SCVisu.current_calcul.set links: SCVisu.linkListView.collection.models
 
   # Increment by 1 id_last_model
   incrementIdLastModel: ->
