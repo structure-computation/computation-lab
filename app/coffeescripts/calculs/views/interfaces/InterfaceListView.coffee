@@ -53,11 +53,13 @@ SCViews.InterfaceListView = Backbone.View.extend
   assignInterfaceToLink: (interfaceModel) ->
     interfaceModel.set link_id : SCVisu.linkListView.selectedLinkModel.getId()
     SCVisu.current_calcul.set interfaces: SCVisu.interfaceListView.collection.models
+    SCVisu.current_calcul.trigger 'change'
 
   # Assign the pieceModel to the selected Material.
   unassignInterfaceToLink: (interfaceModel) ->
     interfaceModel.unset "link_id"
     SCVisu.current_calcul.set interfaces: SCVisu.interfaceListView.collection.models
+    SCVisu.current_calcul.trigger 'change'
 
   # Check if an interface had the link associated to it before. 
   # If it is the case, then it removes the association

@@ -36,6 +36,8 @@ SCViews.LinkListView = Backbone.View.extend
 #    linkModel.set id_in_calcul: @getNewLinkId()
     @collection.add linkModel
     @createLinkView linkModel
+    SCVisu.current_calcul.set links: @collection.models  
+    SCVisu.current_calcul.trigger 'change'
     
   # Create a view giving it a model
   createLinkView: (link) ->
@@ -74,7 +76,8 @@ SCViews.LinkListView = Backbone.View.extend
     SCVisu.interfaceListView.selectedInterfaceView.model.set link_id : linkView.model.getId()
     SCVisu.interfaceListView.renderAndHighlightCurrentInterface()
     SCVisu.current_calcul.set interfaces: SCVisu.interfaceListView.collection.models
-
+    SCVisu.current_calcul.trigger 'change'
+    
   # Highlight the 'linkView' with adding css class
   highlightView: (linkView) ->
     _.each @linkViews, (view) -> 
@@ -85,7 +88,8 @@ SCViews.LinkListView = Backbone.View.extend
     SCVisu.interfaceListView.selectedInterfaceView.model.unset 'link_id'
     SCVisu.interfaceListView.renderAndHighlightCurrentInterface()
     SCVisu.current_calcul.set interfaces: SCVisu.interfaceListView.collection.models
-   
+    SCVisu.current_calcul.trigger 'change'
+    
   render : ->
     for l in @linkViews
       l.render()    

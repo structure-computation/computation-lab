@@ -47,7 +47,9 @@ SCViews.EditLinkView = Backbone.View.extend
       h      = new Object()
       h[key] = value
       @model.set h
-  
+    SCVisu.current_calcul.set links: SCVisu.linkListView.collection.models  
+    SCVisu.current_calcul.trigger 'change'
+    
   # Reset all fields of the edit view
   resetFields: ->
     for input in $(@el).find('input, textarea')

@@ -26,7 +26,8 @@ SCViews.EditMaterialView = Backbone.View.extend
       h[key] = value
       @model.set h
     SCVisu.current_calcul.set materials: SCVisu.materialListView.collection.models  
-
+    SCVisu.current_calcul.trigger 'change'
+    
   # Select the first tab
   selectFirstTab: ->
     $(@el).find(".horizontal_tab_submenu a")      .removeClass('selected')

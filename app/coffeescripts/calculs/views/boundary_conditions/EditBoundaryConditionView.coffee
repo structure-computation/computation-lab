@@ -17,8 +17,7 @@ SCViews.EditBoundaryConditionView = Backbone.View.extend
       spatial_function_y  : $(@el).find('input.y')                        .val()
       spatial_function_z  : $(@el).find('input.z')                        .val()
       temporal_function_t : $(@el).find('input.ft')                       .val()
-
-
+    SCVisu.current_calcul.trigger 'change'
 
   setModel: (model) ->
     @show()

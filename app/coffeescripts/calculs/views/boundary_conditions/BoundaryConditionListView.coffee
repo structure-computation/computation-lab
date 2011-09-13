@@ -31,7 +31,8 @@ SCViews.BoundaryConditionListView = Backbone.View.extend
     @boundaryConditionViews.push  new SCViews.BoundaryConditionView model: boundaryCondition, parentElement: this
     @collection.add               boundaryCondition
     @editBoundaryConditionView.setModel boundaryCondition
-
+    SCVisu.current_calcul.trigger 'change'
+    
   # setNewSelectedModel is executed when a child view indicate it has been selected.
   # It set the current selected model to "non selected" (which trigger an event that redraw its line).
   setNewSelectedModel: (boundaryConditionView) ->
