@@ -15,7 +15,7 @@ SCViews.DatabaseLinkView = Backbone.View.extend
     newModel         = @model.clone()
     newModel.set    'id_from_database' : @model.get 'id'
     newModel.unset  'id'
-    @linkListView.add @model
+    @linkListView.add newModel
 
   # Show details of the selected model but disable all inputs
   showDatabaseLinksDetails: (event) ->
