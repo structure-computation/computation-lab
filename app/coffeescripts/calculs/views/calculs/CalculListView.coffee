@@ -45,6 +45,7 @@ SCViews.CalculListView = Backbone.View.extend
     Backbone.sync("create", SCVisu.current_calcul,
       success: (response) ->
         SCVisu.current_calcul.set 'name' : response.name, 'id' : response.id, 'state' : response.state, 'description' : 'null'
+        SCVisu.current_calcul.resetUrl()
         calculView = SCVisu.calculViews.createCalculView SCVisu.current_calcul
         SCVisu.calculViews.renderChildViews()
         SCVisu.router.calculHasBeenCreated()

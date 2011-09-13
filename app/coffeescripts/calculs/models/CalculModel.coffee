@@ -30,6 +30,9 @@ SCModels.Calcul = Backbone.Model.extend
   enableSaveButton: ->
     $('#save_calcul').removeAttr("disabled")
     
+  resetUrl: ->
+    @url = "/sc_models/#{@sc_model_id}/calculs/" + @get 'id'
+     
   setElements: (params) ->
     @setTimeStepsCollection params.time_steps.collection
     @setTimeScheme params.time_steps.time_scheme
