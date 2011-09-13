@@ -36,6 +36,7 @@ describe LinksController do
       Link.should_receive(:standard)
       Link.should_receive(:from_workspace)
       get :index
+      response.should render_template("links/index")
     end
     
     it "assigns all links for standard links library as @standard_links" do
@@ -56,24 +57,38 @@ describe LinksController do
     
     it "assigns the requested link as @link if link is a standard link" do
       get :show, :id => @standard_link.id 
-      assigns(:link).should eq(@standard_link)     
+      assigns(:link).should eq(@standard_link)    
+      response.should render_template("links/show") 
     end
     
-    # it "assigns the requested link as @link if link is a a link from current workspace." do
-    #   get :show, :id => @workspace_link.id
-    #   assigns(:link).should eq(@workspace_link)
-    # end
-    # 
-    # #TODO: Ecrire plutôt "redirect to" une page d'erreur.
-    # it "send an error if the requested link belongs to an other workspace than current workspace." do
-    #   workspace2  = FactoryGirl.create(:workspace)      
-    #   get :show, :id => @workspace_link.id , :workspace_id => workspace2.id
-    #   assigns(:link).should be nil
-    # end    
-    # 
-    # it "send an error if no link is available with this id." do
-    #   pending ""
-    # end
+    it "assigns the requested link as @link if link is a a link from current workspace." do
+      get :show, :id => @workspace_link.id
+      assigns(:link).should eq(@workspace_link)
+      response.should render_template("links/show")
+    end
+
+    #TODO: Ecrire plutôt "redirect to" une page d'erreur.
+    it "send an error if the requested link belongs to an other workspace than current workspace." do
+      tmp_workspace   = FactoryGirl.create(:workspace)
+      tmp_link        = FactoryGirl.create(:link, :workspace => tmp_workspace)
+      get :show, :id => tmp_link.id
+      assigns(:link).should be nil
+      response.should redirect_to(workspace_links_path(current_workspace))
+      flash[:notice].should eq("Ce lien n'existe pas ou n'est pas accessible à partir de cet espace de travail.")
+    end    
+    
+    it "send an error if no link is available with this id." do
+      # Construction puis destruction d'un lien pour avoir un id inexistant
+      tmp_link        = FactoryGirl.create(:link)
+      tmp_id          = tmp_link.id
+      tmp_link.destroy
+      
+      # Get de l'id inexistant.
+      get :show, :id => tmp_link.id
+      assigns(:link).should be nil
+      response.should redirect_to(workspace_links_path(current_workspace))
+      flash[:notice].should eq("Ce lien n'existe pas ou n'est pas accessible à partir de cet espace de travail.")
+    end
     
   end
   

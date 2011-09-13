@@ -58,10 +58,13 @@ class LinksController < InheritedResources::Base
       # show!
       render
     else
-      flash[:notice] = "Vous n'avez pas accès à cette liaison !"
-      redirect_to workspace_links_path(current_workspace_member.workspace_id), :status => 404, 
-                  :notice => "Ce lien n'existe pas ou n'es pas accessible à partir de cet espace de travail."
-     end
+      respond_to do |format|
+        format.html {redirect_to workspace_links_path(current_workspace_member.workspace.id), 
+                    :notice => "Ce lien n'existe pas ou n'est pas accessible à partir de cet espace de travail."}
+        format.json {render :status => 403}
+      end
+    end
+     
   end
 
   def new
