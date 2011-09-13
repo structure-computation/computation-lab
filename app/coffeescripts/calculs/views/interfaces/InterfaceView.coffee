@@ -68,7 +68,7 @@ SCViews.InterfaceView = Backbone.View.extend
     if @model.isAssigned()
       $(@el).append("<td class='is_assigned'>#{@model.get('link_id')}</td>")
     else
-      $(@el).append('<td>-</td>')
+      $(@el).append('<td>Parfaite</td>')
     $(@el).removeClass('selected').removeClass('gray')
     return this
 

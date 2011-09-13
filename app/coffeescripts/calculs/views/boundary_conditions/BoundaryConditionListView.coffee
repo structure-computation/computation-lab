@@ -25,9 +25,30 @@ SCViews.BoundaryConditionListView = Backbone.View.extend
   events:
     "click .add" : "addCondition"
 
+  # Show itself
   show: ->
     $(@el).show()
-    
+
+  # Show an assign button to each condition view
+  showAssignButtons: ->
+    _.each @boundaryConditionViews, (view) ->
+      view.showAssignButton()
+
+  # Highlight the condition with the given "condition_id".
+  # Also show unassign button because it is called when an edge is selected
+  highlightCondition: (condition_id)->
+    for conditionView in @boundaryConditionViews
+      if conditionView.model.get('id_in_calcul') == condition_id
+        @render()
+        conditionView.showUnassignButton()
+        break
+
+  # Update the calcul json
+  updateCalcul: ->
+    SCVisu.current_calcul.set boundary_conditions: @collection.models
+    SCVisu.current_calcul.trigger 'change'
+
+  # Add a new boundary condition (model and view)
   addCondition: ->
     $("#edit_edge_form").hide()
     @show()
@@ -40,7 +61,7 @@ SCViews.BoundaryConditionListView = Backbone.View.extend
   setNewSelectedModel: (boundaryConditionView) ->
     @selectedBoundaryCondition = boundaryConditionView
     @editBoundaryConditionView.setModel boundaryConditionView.model
-    SCVisu.edgeListView.boundaryConditionHasBeenSelected @editBoundaryConditionView
+    SCVisu.edgeListView.boundaryConditionHasBeenSelected(boundaryConditionView.model)
     $("#edit_edge_form").hide()
     @render()
 
