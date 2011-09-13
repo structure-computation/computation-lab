@@ -55,7 +55,8 @@ class LinksController < InheritedResources::Base
     
     # If we have a link, it is rendered, otherwise we send an error (forbidden or missing, ).  
     if @link 
-      show!
+      # show!
+      render
     else
       flash[:notice] = "Vous n'avez pas accès à cette liaison !"
       redirect_to workspace_links_path(current_workspace_member.workspace_id), :status => 404, 
