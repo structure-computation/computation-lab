@@ -8,16 +8,20 @@
 
 -content_for :workspace_content do
   .grey
-    - if @link.comp_complexe.nil?
+    - if @link.comp_complexe.empty?
       - @comp_generique  = ["Parfaite", "Elastique", "Contact"]
       - @comp_complexe = ["Plastique", "Cassable"]
   
+      %h2 Comportement de la liaison
       = form_for new_workspace_material_path, :html => {:method => :get} do 
-  
+        
+        %h3 Comportement générique
         %p
           - @comp_generique.each do |comp|
             = label_tag  comp
             = check_box_tag comp, true
+
+        %h3 Comportement complexe
         %p
           - @comp_complexe.each do |comp|
             = label_tag  comp
