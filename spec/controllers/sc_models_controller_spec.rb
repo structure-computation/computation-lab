@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe ScModelsController do 
   
-  let :mock_sc_models            do mock_model(ScModel).as_null_object              end
-  let :current_workspace        do FactoryGirl.build(:workspace)                    end
+  let :mock_sc_models           do mock_model(ScModel).as_null_object              end
+  let :current_workspace        do FactoryGirl.build(:workspace)                   end
   let :mock_workspace_member    do 
     mock_model(UserWorkspaceMembership, #:workspace_id => current_workspace.id 
                                         :workspace    => current_workspace ).as_null_object 
@@ -17,15 +17,14 @@ describe ScModelsController do
 
   describe "GET index" do
     it "ask for scmodels from std scmodels library and from workspace library" do
-      ScModel.should_receive(:standard)
+      ScModel.should_receive(:from_workspace)
       get :index
-      response.should render_template("scmodels/index")
+      response.should render_template("sc_models/index")
     end  
   end
                              
 
   describe "GET show" do
-    
     it "assigns the requested material as @sc_model if sc_model is a sc_model from current workspace." do
       get :show, :id => @workspace_sc_model.id
       assigns(:sc_models).should eq(@workspace_sc_model)
@@ -35,10 +34,10 @@ describe ScModelsController do
     context "When a forbidden (outside of current_workspace) or non existant material is asked" do 
       before(:each) do
         other_workspace                 = FactoryGirl.create(:workspace)
-        @material_from_other_workspace  = FactoryGirl.create(:sc_models, :workspace => other_workspace)
+        @sc_model_from_other_workspace  = FactoryGirl.create(:sc_model, :workspace => other_workspace)
 
         # Construction puis destruction d'un matériel pour avoir un id inexistant
-        tmp_material                    = FactoryGirl.create(:sc_models)
+        tmp_sc_model                    = FactoryGirl.create(:sc_model)
         @non_existing_sc_model_id       = tmp_sc_model.id
         tmp_sc_model.destroy
       end

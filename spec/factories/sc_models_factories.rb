@@ -1,11 +1,11 @@
 FactoryGirl.define do
   sequence :sc_model_name do |n|
-    "link_#{n}"
+    "sc_model_#{n}"
   end
 
-  factory :sc_models, :class => ScModels do 
-    name "demo scmodels" #{link_name}
-    
+  factory :sc_model, :class => ScModel do 
+    name "demo scmodel" #{link_name}    
+
   end
   
 end

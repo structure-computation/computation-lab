@@ -16,7 +16,8 @@ class ScModelsController < InheritedResources::Base
   end
 
   def index
-    @sc_models = current_workspace_member.sc_models
+    @workspace            = current_workspace_member.workspace
+    @workspace_sc_models  = ScModel.from_workspace @workspace.id
     @sc_models.each{ |sc_model|
       sc_model[:results]  = sc_model.calcul_results.find(:all, :conditions => {:log_type => "compute", :state => "finish"}).size }
     index!
@@ -46,8 +47,22 @@ class ScModelsController < InheritedResources::Base
     new!
   end
 
-  def show
-    show!
+  def show 
+    ws_sc_models  = ScModel.from_workspace(current_workspace_member.workspace.id).find_by_id(params[:id])
+    
+    @sc_model     = ws_sc_models  
+    @workspace    = current_workspace_member.workspace
+    if @sc_model 
+      # show!
+      render
+    else
+      respond_to do |format|
+        format.html {redirect_to workspace_sc_models_path(current_workspace_member.workspace.id), 
+                    :notice => "Ce modèle n'existe pas ou n'est pas accessible à partir de cet espace de travail."}
+        format.json {render :status => 404, :json => {}}
+      end
+    end
+     
   end
   
   def load_mesh
