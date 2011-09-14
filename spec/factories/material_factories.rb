@@ -3,7 +3,7 @@ FactoryGirl.define do
     "material_#{n}"
   end
   
-  factory :material, :class => Link do 
+  factory :material, :class => Material do 
     name "demo material" #{material_name}
     
     factory :standard_material do
