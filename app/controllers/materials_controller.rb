@@ -49,7 +49,7 @@ class MaterialsController < InheritedResources::Base
     @material   = Material.find(params[:id])
     @workspace  = Workspace.find(params[:workspace_id])
     # TODO: Idem commentaire sur les liens. Cette manière de faire est trop dépendante du modèle. (on cherche dans les colonnes... qui vont changer ici !)
-    if @material.workspace_id == -1 or @material.workspace_id == workspace
+    if @material.workspace_id == -1 or @material.workspace_id == current_workspace_member.workspace_id
       respond_to do |format|
         format.html { render :action => "show"}
         format.json { render :json => @material.to_json }
