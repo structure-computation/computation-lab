@@ -2,7 +2,7 @@ FactoryGirl.define do
   sequence :link_name do |n|
     "link_#{n}"
   end
-       
+
   factory :link, :class => Link do 
     name "demo link" #{link_name}
     
