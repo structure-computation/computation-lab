@@ -18,8 +18,10 @@ class ScModelsController < InheritedResources::Base
   def index
     @workspace            = current_workspace_member.workspace
     @workspace_sc_models  = ScModel.from_workspace @workspace.id
-    @sc_models.each{ |sc_model|
-      sc_model[:results]  = sc_model.calcul_results.find(:all, :conditions => {:log_type => "compute", :state => "finish"}).size }
+    
+    # @sc_model.each{ |sc_model| do
+    #   sc_model[:results]  = sc_model.calcul_results.find(:all, :conditions => {:log_type => "compute", :state => "finish"}).size }
+    # end 
     index!
   end
   
@@ -42,15 +44,15 @@ class ScModelsController < InheritedResources::Base
 
   # TODO: Uncomment for production
   def new
-    @sc_model = ScModel.new
-#    @sc_model.add_repository()
+    #@sc_model = ScModel.new
+    #@sc_model.add_repository()
     new!
   end
 
   def show 
     ws_sc_models  = ScModel.from_workspace(current_workspace_member.workspace.id).find_by_id(params[:id])
     
-    @sc_model     = ws_sc_models  
+    @sc_model     = ws_sc_models ?  ws_sc_models : ws_sc_models  
     @workspace    = current_workspace_member.workspace
     if @sc_model 
       # show!

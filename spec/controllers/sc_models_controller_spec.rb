@@ -27,7 +27,7 @@ describe ScModelsController do
   describe "GET show" do
     it "assigns the requested material as @sc_model if sc_model is a sc_model from current workspace." do
       get :show, :id => @workspace_sc_model.id
-      assigns(:sc_models).should eq(@workspace_sc_model)
+      assigns(:sc_models).should eq(@workspace_sc_models)
       response.should render_template("sc_models/show")
     end
     
@@ -43,7 +43,7 @@ describe ScModelsController do
       end
       
       it "in html, redirect to sc_models list if the requested sc_model belongs to an other workspace than current workspace." do
-        get :show, :id => @material_from_other_workspace.id
+        get :show, :id => @sc_model_from_other_workspace.id
         assigns(:sc_models).should be nil
         response.should redirect_to(workspace_sc_models_path(current_workspace))
         flash[:notice].should eq("Ce modèle n'existe pas ou n'est pas accessible à partir de cet espace de travail.")
