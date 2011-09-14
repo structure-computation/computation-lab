@@ -4,7 +4,7 @@ FactoryGirl.define do
   end
   
   factory :material, :class => Link do 
-    name "demo material" #{link_name}
+    name "demo material" #{material_name}
     
     factory :standard_material do
       workspace_id -1
