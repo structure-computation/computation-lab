@@ -19,28 +19,52 @@
 - content_for :left_list do 
 
   .materials
-    %h2.grey Liste des pièces
-    %table#pieces.data_table.grey
-      %thead
-        %tr
-          %th ID
-          %th Nom
-          %th Matériau
-      %tbody
+    #pieces
+      .filtre
+        %h2.grey Filtre
+        %label{:for => "hide_assigned_pieces"} Cacher les pièces déjà assignés
+        %input#hide_assigned_pieces{:type => "checkbox"}
+        %br/
+        %button.assign_all{:disabled => true} Tout assigner
+        %button.unassign_all{:disabled => true} Tout désassigner
+      %h2.grey Liste des pièces
+      %table.data_table.grey
+        %thead
+          %tr
+            %th ID
+            %th Nom
+            %th Matériau
+        %tbody
 
   .links
-    %h2.grey Liste des interfaces
-    %table#interfaces.data_table.grey
-      %thead
-        %tr
-          %th ID
-          %th Nom
-          %th Liaison
-      %tbody
+    #interfaces
+      .filtre
+        %h2.grey Filtre
+        %label{:for => "hide_assigned_interfaces"} Cacher les interfaces déjà assignés
+        %input#hide_assigned_interfaces{:type => "checkbox"}
+        %br/
+        %button.assign_all{:disabled => true} Tout assigner
+        %button.unassign_all{:disabled => true} Tout désassigner
+
+      %h2.grey Liste des interfaces
+      %table.data_table.grey
+        %thead
+          %tr
+            %th ID
+            %th Nom
+            %th Liaison
+        %tbody
 
   .boundary_conditions
-    %h2.grey Liste des bords
     #edges
+      .filtre
+        %h2.grey Filtre
+        %label{:for => "hide_assigned_edges"} Cacher les bords déjà assignés
+        %input#hide_assigned_edges{:type => "checkbox"}
+        %br/
+        %button.assign_all{:disabled => true} Tout assigner
+        %button.unassign_all{:disabled => true} Tout désassigner
+      %h2.grey Liste des bords
       %table.data_table.grey
         %thead
           %tr
@@ -97,11 +121,11 @@
   
 - content_for :wizard_buttons do 
   .previous_button
-    %a.yellow_button#wizard_previous_button Etape précédente
+    %a.yellow_button#wizard_previous_button               Etape précédente
   .save_div
-    %a.yellow_button#save_calcul{:disabled => "disabled"}            Sauvegarder
+    %a.yellow_button#save_calcul{:disabled => "disabled"} Sauvegarder
   .next_button
-    %a.yellow_button#wizard_next_button     Etape suivante
+    %a.yellow_button#wizard_next_button                   Etape suivante
   #saved_for
 
 

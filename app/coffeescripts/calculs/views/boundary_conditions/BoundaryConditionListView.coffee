@@ -36,12 +36,16 @@ SCViews.BoundaryConditionListView = Backbone.View.extend
 
   # Highlight the condition with the given "condition_id".
   # Also show unassign button because it is called when an edge is selected
-  highlightCondition: (condition_id)->
+  highlightCondition: (condition_id) ->
+    @selectedBoundaryCondition = null
     for conditionView in @boundaryConditionViews
       if conditionView.model.get('id_in_calcul') == condition_id
         @render()
         conditionView.showUnassignButton()
         break
+  unhighlightConditions: ->
+    _.each @boundaryConditionViews, (view) ->
+      $(view.el).removeClass('selected').removeClass('gray')
 
   # Update the calcul json
   updateCalcul: ->
@@ -59,10 +63,20 @@ SCViews.BoundaryConditionListView = Backbone.View.extend
   # setNewSelectedModel is executed when a child view indicate it has been selected.
   # It set the current selected model to "non selected" (which trigger an event that redraw its line).
   setNewSelectedModel: (boundaryConditionView) ->
-    @selectedBoundaryCondition = boundaryConditionView
-    @editBoundaryConditionView.setModel boundaryConditionView.model
-    SCVisu.edgeListView.boundaryConditionHasBeenSelected(boundaryConditionView.model)
-    $("#edit_edge_form").hide()
+    if @selectedBoundaryCondition == boundaryConditionView
+      @selectedBoundaryCondition = null
+      @unhighlightConditions()
+      SCVisu.edgeListView.boundaryConditionHasBeenDeselected()
+    else
+      @selectedBoundaryCondition = boundaryConditionView
+      @editBoundaryConditionView.setModel boundaryConditionView.model
+      SCVisu.edgeListView.boundaryConditionHasBeenSelected(boundaryConditionView.model)
+      $("#edit_edge_form").hide()
+      @render()
+  
+
+  edgeHasBeenDeselected: ->
+    @selectedBoundaryCondition = null
     @render()
 
   # Clears all elements previously loaded in the DOM. 

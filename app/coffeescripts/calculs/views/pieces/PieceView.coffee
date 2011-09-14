@@ -11,7 +11,7 @@ SCViews.PieceView = Backbone.View.extend
     'click'                 : 'select'
     'click button.assign'   : 'assignPieceToMaterial'
     'click button.unassign' : 'unassignPieceToMaterial'
-
+    
   # Assign the piece to a material
   assignPieceToMaterial: ->
     @parentElement.assignPieceToMaterial @model

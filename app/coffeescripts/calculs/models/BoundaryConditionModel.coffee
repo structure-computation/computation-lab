@@ -5,7 +5,9 @@
 SCModels.BoundaryCondition = Backbone.Model.extend
   defaults:
     name: "Condition"
-
+  getId: ->
+    @get("id_in_calcul")
+    
 # Collection of Boundary Condition
 SCModels.BoundaryConditionCollection = Backbone.Collection.extend
   model: SCModels.BoundaryCondition

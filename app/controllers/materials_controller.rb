@@ -46,17 +46,21 @@ class MaterialsController < InheritedResources::Base
   
   # Essayer de faire une ressources accessibles par /material
   def show
-    std_material  = Material.standard.find_by_id(params[:id])
+    std_material = Material.standard.find_by_id(params[:id])
     ws_material  = Material.from_workspace(current_workspace_member.workspace.id).find_by_id(params[:id])
     
     # We take the ws_material if not nil, the ws_material otherwise
-    @material     = std_material ? std_material : ws_material
+    @material    = std_material ? std_material : ws_material
     
     # If we have a material, it is rendered, otherwise we send an error (forbidden or missing, ).  
     if @material 
       # show!
       render
     else
+    # @material   = Material.find(params[:id])
+    # @workspace  = Workspace.find(params[:workspace_id])              
+    # TODO: Idem commentaire sur les liens. Cette manière de faire est trop dépendante du modèle. (on cherche dans les colonnes... qui vont changer ici !)
+    # if @material.workspace_id == -1 or @material.workspace_id == current_workspace_member.workspace_id
       respond_to do |format|
         format.html {redirect_to workspace_materials_path(current_workspace_member.workspace.id), 
                     :notice => "Ce matériel n'existe pas ou n'est pas accessible à partir de cet espace de travail."}

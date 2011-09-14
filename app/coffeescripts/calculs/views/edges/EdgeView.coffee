@@ -26,10 +26,6 @@ SCViews.EdgeView = Backbone.View.extend
   select: (event) ->
     if event.srcElement.tagName != "BUTTON"
       @parentElement.setNewSelectedModel(this)
-      if _.isUndefined @model.get('boundary_condition_id')
-        SCVisu.boundaryConditionListView.showAssignButtons()
-      else
-        SCVisu.boundaryConditionListView.highlightCondition(@model.get('boundary_condition_id'))
   
   # Show an assign button
   showAssignButton: ->

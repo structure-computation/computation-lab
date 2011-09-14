@@ -1,6 +1,6 @@
 ## PieceListView
 SCViews.PieceListView = Backbone.View.extend
-  el: 'table#pieces'
+  el: '#pieces'
   
   # You have to pass a PieceCollection at initialisation as follow:
   # new SCVisu.pieceListView({ collection : myPieceCollection })
@@ -27,29 +27,47 @@ SCViews.PieceListView = Backbone.View.extend
   # possibility to unassign it.
   # Else, he will be able to select a material for the selected piece.
   selectPiece: (pieceView) ->
-    @selectedPieceView = pieceView
-    @highlightPieceView pieceView
-    if pieceView.model.isAssigned()
-      SCVisu.materialListView.highlightMaterial(pieceView.model.get('material_id'))
+    $(@el).find("button.assign_all, button.unassign_all").attr('disabled','disabled')
+    if @selectedPieceView == pieceView
+      @unhighlightPieces()
+      @selectedPieceView = null
+      SCVisu.materialListView.render()
     else
-      SCVisu.materialListView.showAssignButtons()
+      @selectedPieceView = pieceView
+      @highlightPieceView pieceView
+      if pieceView.model.isAssigned()
+        SCVisu.materialListView.highlightMaterial(pieceView.model.get('material_id'))
+      else
+        SCVisu.materialListView.showAssignButtons()
+        
   highlightPieceView: (pieceView) ->
     _.each @pieceViews, (piece) ->
       $(piece.el).addClass('gray').removeClass('selected')
     $(pieceView.el).addClass('selected').removeClass('gray')
+
+  unhighlightPieces: ->
+    _.each @pieceViews, (piece) ->
+      $(piece.el).removeClass('gray').removeClass('selected')
+
 
   # Add an "Assign" button to each piece view in order that the user can 
   # assign it to a selected material. 
   # And an unassigned button to pieces whith which have the same material_id 
   # that the selected material.
   materialHasBeenSelected: (material) ->
+    @selectedPieceView = null
+    $(@el).find("button.assign_all, button.unassign_all").removeAttr('disabled')
     _.each @pieceViews, (pieceView) ->
       $(pieceView.el).addClass('selected').removeClass('gray')
       pieceView.materialHasBeenSelected material
-  
+
+  materialHasBeenDeselected: ->
+    $(@el).find("button.assign_all, button.unassign_all").attr('disabled', 'disabled')
+    @render()
+    
   # Assign the pieceModel to the selected Material.
   assignPieceToMaterial: (pieceModel) ->
-    pieceModel.set 'material_id' : SCVisu.materialListView.selectedMaterial.getId()
+    pieceModel.set 'material_id' : SCVisu.materialListView.selectedMaterialView.model.getId()
     SCVisu.current_calcul.set pieces: SCVisu.pieceListView.collection.models
     SCVisu.current_calcul.trigger 'change'
     
@@ -82,6 +100,34 @@ SCViews.PieceListView = Backbone.View.extend
       if piece.get('material_id') == material.getId()
         piece.unset 'material_id'
     @render()
+
+  events:
+    'change input#hide_assigned_pieces'   : 'toggleAssignedPieces'
+    'click button.assign_all'             : 'assignAllVisiblePieces'
+    'click button.unassign_all'           : 'unassignAllVisiblePieces'
+  
+  # If the checkbox is checked, hide all assigned pieces
+  toggleAssignedPieces: (event) ->
+    if event.srcElement.checked
+      _.each @pieceViews, (pieceView) ->
+        $(pieceView.el).hide() if pieceView.model.isAssigned()
+    else
+      _.each @pieceViews, (pieceView) ->
+        $(pieceView.el).show()
+
+  # Assign all visible pieces which are visible to the selected material
+  assignAllVisiblePieces: ->
+    _.each @pieceViews, (pieceView) ->
+      if $(pieceView.el).is(':visible')
+        pieceView.model.set "material_id" : SCVisu.materialListView.selectedMaterialView.model.getId()
+        pieceView.addUnassignButton()
+
+  # Assign all visible pieces which are visible to the selected material
+  unassignAllVisiblePieces: ->
+    _.each @pieceViews, (pieceView) ->
+      if $(pieceView.el).is(':visible')
+        pieceView.model.unset "material_id"
+        pieceView.addAssignButton()
 
   render : ->
     _.each @pieceViews, (piece) ->

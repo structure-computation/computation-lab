@@ -2,7 +2,7 @@
 SCViews.InterfaceView = Backbone.View.extend
   initialize: (params) ->
     @parentElement = params.parentElement
-    $(@parentElement.el).append(@el)    
+    $(@parentElement.el).find('tbody').append(@el)    
 
   tagName   : "tr"
   className : "interface_view"   

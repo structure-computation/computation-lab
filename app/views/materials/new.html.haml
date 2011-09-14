@@ -9,7 +9,7 @@
 -content_for :workspace_content do
   .grey
     - if @material.mtype.nil?
-      - @behaviors = ["Elastique", "Plastique", "Endomageable", "Visqueux"]
+      - @behaviors = ["Elastique", "Plastique", "Endomageable"]
       - @types      = ["Isotrope", "Orthotrope"]
   
       = form_for new_workspace_material_path, :html => {:method => :get} do 
