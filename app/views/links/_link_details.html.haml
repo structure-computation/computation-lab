@@ -1,0 +1,7 @@
+.tab_content.js_tab_content
+  #tab_1_content
+    = render :partial => "links/details/link_generic_information", :locals => { :link => @link, :disabled => false }
+  #tab_2_content
+    = render :partial => "links/details/link_complexe_information", :locals => { :link => @link, :disabled => false }
+
+  = coffeescript_include_tag "manage_tab"
