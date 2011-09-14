@@ -52,7 +52,7 @@ class LinksController < InheritedResources::Base
     
     # We take the std_link if not nil, the ws_link otherwise
     @link     = std_link ? std_link : ws_links
-    
+    @workspace        = current_workspace_member.workspace
     # If we have a link, it is rendered, otherwise we send an error (forbidden or missing, ).  
     if @link 
       # show!
@@ -68,6 +68,9 @@ class LinksController < InheritedResources::Base
   end
 
   def new
+    # Le paramètre next signifie que l'utilisateur vient du premier formulaire 
+    # dans lequel il doit spécifier si la liaison est parfaite, elastique, plastique etc.
+    # Je crée une liaison et lui affecte les paramètres pour que les bonne partie du formulaire soit visible dans l'étape d'après.
     if params[:next]
       @link = Link.new
       @link.comp_generique = ""
@@ -79,7 +82,7 @@ class LinksController < InheritedResources::Base
       @link.comp_complexe += "Pl " if params[:Plastique]
       @link.comp_complexe += "Ca " if params[:Cassable]
     end
-    if params[:next] and (@link.comp_complexe.empty? or @link.comp_complexe.empty?)
+    if params[:next] and (@link.comp_generique.empty? or @link.comp_complexe.empty?)
       flash[:notice] = "Vous avez mal rempli le formulaire."
       redirect_to new_workspace_link_path
     else

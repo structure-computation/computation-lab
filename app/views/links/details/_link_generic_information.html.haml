@@ -8,9 +8,18 @@
     %tr
       %th Name
       %td= text_field :link, :name, :disabled => disabled
+
+    %tr
+      %th= label :link, :reference
+      %td= text_field :link, :reference, :disabled => disabled
+
+    %tr
+      %th= label :link, :family
+      %td= text_field :link, :family, :disabled => disabled
+
     %tr
       %th Description
-      %td= text_area :link, :description, :disabled => disabled
+      %td= text_area :link, :description, :disabled => disabled, :rows => 5
     %tr
       %th Epaisseur (Ep)
       %td= custom_text_field(:link, :Ep, "Ep", disabled)

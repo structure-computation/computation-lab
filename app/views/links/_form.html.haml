@@ -1,38 +1,30 @@
+%h3 Comportement générique :
+
 %p
-  Comportement générique :
-  - if @link.comp_generique.downcase.include? "pa"
-    %span Parfait
-  - if @link.comp_generique.downcase.include? "el"
-    %span Elastique
-  - if @link.comp_generique.downcase.include? "co"
-    %span Contact
+  Parfait
+  = check_box_tag "link_comp_generic_pa", "pa", @link.comp_generique.downcase.include?("pa"), :disabled => true
+  Elastique
+  = check_box_tag "link_comp_generic_el", "el", @link.comp_generique.downcase.include?("el"), :disabled => true
+  Contact
+  = check_box_tag "link_comp_generic_co", "co", @link.comp_generique.downcase.include?("co"), :disabled => true
+
+%h3 Comportement complexe :
+
 %p
-  Comportement complexe :
-  - if @link.comp_complexe.downcase.include? "pl"
-    %span Plastique
-  - if @link.comp_complexe.downcase.include? "ca"
-    %span Cassable
+  Plastique
+  = check_box_tag "link_comp_complexe_pl", "pl", @link.comp_complexe.downcase.include?("pl"), :disabled => true
+  Cassable
+  = check_box_tag "link_comp_complexe_ca", "ca", @link.comp_complexe.downcase.include?("ca"), :disabled => true
 
 = form_for [@workspace, @link] do |f|
 
   = f.hidden_field :comp_generique
   = f.hidden_field :comp_complexe
-  %p
-    = f.label :name
-    = f.text_field :name
-  %p
-    = f.label :reference
-    = f.text_field :reference
-  %o
-    = f.label :family
-    = f.text_field :family
 
-
-  #material_generic_information
-    = render :partial => "links/details/link_generic_information", :locals => { :disabled => false }
+  .wrapper
+    #left_content= render "link_tab_details"
+    #right_content= render "link_details"
     
-  = render :partial => "links/details/link_complexe_information", :locals => { :disabled => false }
-
   - if action_name == "edit"
     = submit_tag "Editer", :class => 'yellow_button'
   - else 
