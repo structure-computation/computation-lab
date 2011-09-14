@@ -44,6 +44,8 @@ SCViews.VolumicForceListView = Backbone.View.extend
   addVolumicForce: ->  
     newVolForce = new SCModels.VolumicForce
     @collection.add newVolForce
-    
+    @saveCollection()
+
   saveCollection: ->
     SCVisu.current_calcul.set volumic_forces: @collection
+    SCVisu.current_calcul.trigger 'change'

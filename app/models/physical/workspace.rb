@@ -1,9 +1,9 @@
 class Workspace < ActiveRecord::Base
   
   # Un workspace peut posséder plusieurs workspaces grâce à la table :workspace_relationship 
-  has_many  :workspace_relationship
+  has_many  :workspace_relationships
   # TODO: Les appeller "sub-workspace" au moins ou tout autre nom reflétant la hiérarchie.
-  has_many  :workspace, :through => :workspace_relationship
+  has_many  :sub_workspaces, :through => :workspace_relationships
   
   
   #Un workspace possède un seul unique :account

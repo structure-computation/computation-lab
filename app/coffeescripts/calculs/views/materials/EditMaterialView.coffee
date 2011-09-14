@@ -2,12 +2,12 @@ SCViews.EditMaterialView = Backbone.View.extend
   el: "#edit_material"
   initialize: (params) ->
     @parentElement = params.parentElement
-    $(@el).append('<button class="close_edit_view">Fermer</button>')    
+    $(@el).find('h2:first').prepend('<button class="close">Fermer</button>')    
     @hide()
 
   events: 
-    'change'                         : 'updateModelAttributes'
-    'click button.close_edit_view'   : 'hide'
+    'change'              : 'updateModelAttributes'
+    'click button.close'  : 'hide'
 
   # Hide itself
   hide: ->
@@ -26,9 +26,18 @@ SCViews.EditMaterialView = Backbone.View.extend
       h[key] = value
       @model.set h
     SCVisu.current_calcul.set materials: SCVisu.materialListView.collection.models  
+    SCVisu.current_calcul.trigger 'change'
+    
+  # Select the first tab
+  selectFirstTab: ->
+    $(@el).find(".horizontal_tab_submenu a")      .removeClass('selected')
+    $(@el).find(".horizontal_tab_submenu a:first").addClass('selected')
+    $(@el).find(".horizontal_tab_content div")      .hide()
+    $(@el).find(".horizontal_tab_content div:first").show()
 
   # Update view with the given model
   updateModel: (model, readonly = false) ->
+    @selectFirstTab()    
     @model = model
     if readonly then @disableAllInputs() else @enableAllInputs()
     @render()

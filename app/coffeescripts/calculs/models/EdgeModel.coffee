@@ -1,5 +1,7 @@
 # Edge
-SCModels.Edge = Backbone.Model.extend()
+SCModels.Edge = Backbone.Model.extend
+  isAssigned: ->
+    !_.isUndefined(@get("boundary_condition_id"))
 
 # Collection of Step. Keep all steps up to date with each others.
 SCModels.EdgeCollection = Backbone.Collection.extend

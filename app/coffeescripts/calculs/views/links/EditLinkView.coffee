@@ -3,15 +3,24 @@ SCViews.EditLinkView = Backbone.View.extend
   el: "#edit_link"
   initialize: (params) ->
     @parentElement = params.parentElement
-    $(@el).append('<button class="close">Fermer</button>')
+    $(@el).find('h2:first').prepend('<button class="close">Fermer</button>')
     $(@el).hide()
 
   events: 
     'change'                         : 'updateModelAttributes'
     'click button.close'             : 'hide'
   
+
+  # Select the first tab
+  selectFirstTab: ->
+    $(@el).find(".horizontal_tab_submenu a")      .removeClass('selected')
+    $(@el).find(".horizontal_tab_submenu a:first").addClass('selected')
+    $(@el).find(".horizontal_tab_content div")      .hide()
+    $(@el).find(".horizontal_tab_content div:first").show()
+
   # Update edit view with the given model
   updateModel: (model, readonly = false) ->
+    @selectFirstTab()    
     @model = model
     if readonly then @disableAllInputs() else @enableAllInputs()
     @render()
@@ -38,7 +47,9 @@ SCViews.EditLinkView = Backbone.View.extend
       h      = new Object()
       h[key] = value
       @model.set h
-  
+    SCVisu.current_calcul.set links: SCVisu.linkListView.collection.models  
+    SCVisu.current_calcul.trigger 'change'
+    
   # Reset all fields of the edit view
   resetFields: ->
     for input in $(@el).find('input, textarea')

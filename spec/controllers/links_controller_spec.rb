@@ -1,47 +1,90 @@
 require 'spec_helper'
 
 describe LinksController do 
-  def mock_link(stubs={})
-    (@mock_link ||= mock_model(Link).as_null_object).tap do |link|
-      link.stub(stubs) unless stubs.empty?
-    end
-  end   
+  # Crée une variable membre @mock_link ou la reprend si elle existe puis la renvoie APRES 
+  # avoir ajouté (ou remplacé) tous les stubs passés en paramètres. Ex :
+  # mock_link(:id => 37) 
+  # ajoute la fonction id qui renverra 37 à l'objet @mock_link
+  # def mock_link(stubs={})
+  #   (@mock_link ||= mock_model(Link).as_null_object).tap do |link|
+  #     link.stub(stubs) unless stubs.empty?
+  #   end
+  # end
   
+  # NOTE: Il semble important d'adopter une convention de nommage : mock_ pour les objet mock, un nom non préfixé
+  # pour les objets issus des factories.
+  let :mock_link                do mock_model(Link).as_null_object                  end
+  let :current_workspace        do FactoryGirl.build(:workspace)                    end
+  let :mock_workspace_member    do 
+    mock_model(UserWorkspaceMembership, #:workspace_id => current_workspace.id 
+                                        :workspace    => current_workspace ).as_null_object 
+  end
+  
+  # NOTE: pour screencast : before != begin... et before(:all) ne marche pas pour cela : controller n'est pas 
+  # encore défini !
+  # NOTE: Attention, seul before each est placé dans une transaction pour la BDD. 
+  before(:each) do
+    controller.stub(:authenticate_user!       =>  true              ) # .and_return(true)
+    controller.stub(:current_workspace_member =>  mock_workspace_member )    
+    @standard_link   = FactoryGirl.create(:standard_link )
+    @workspace_link  = FactoryGirl.create(:link , :workspace =>  current_workspace )
+  end
 
-  describe "GET index" do  
-    before do
-      controller.stub!(:authenticated_user!).and_return(:true)    
+
+  describe "GET index" do
+    it "ask for links from std links slibrary and from workspace library" do
+      Link.should_receive(:standard)
+      Link.should_receive(:from_workspace)
+      get :index
     end
     
-    it "assigns all links as @links" do
-      Link.stub(:all) { [mock_link] }    
-      Link.stub!(:find).with(:all).and_return([mock_link])
-      
+    it "assigns all links for standard links library as @standard_links" do
+      # NOTE: Je n'ai pas réussi à faire un stub sur un objet.
+      # Link.stub(:standard_links) { [mock_link] }  
+      # NOTE: cela utilise la BDD, on peut aussi faire ce choix au final.  
       get :index
-      assigns(:links).should eq([mock_link])
+      assigns(:standard_links ).should eq( [@standard_link] )
+    end
+    
+    it "assigns all links for workspace links library as @standard_links" do
+      get :index
+      assigns(:workspace_links).should eq( [@workspace_link] )
     end
   end
 
   describe "GET show" do
-    it "assigns the requested link as @link" do
-      Link.stub(:find).with("37") { mock_link }
-      get :show, :id => "37"
-      assigns(:link).should be(mock_link)     
+    
+    it "assigns the requested link as @link if link is a standard link" do
+      get :show, :id => @standard_link.id 
+      assigns(:link).should eq(@standard_link)     
     end
+    
+    # it "assigns the requested link as @link if link is a a link from current workspace." do
+    #   get :show, :id => @workspace_link.id
+    #   assigns(:link).should eq(@workspace_link)
+    # end
+    # 
+    # #TODO: Ecrire plutôt "redirect to" une page d'erreur.
+    # it "send an error if the requested link belongs to an other workspace than current workspace." do
+    #   workspace2  = FactoryGirl.create(:workspace)      
+    #   get :show, :id => @workspace_link.id , :workspace_id => workspace2.id
+    #   assigns(:link).should be nil
+    # end    
+    # 
+    # it "send an error if no link is available with this id." do
+    #   pending ""
+    # end
+    
   end
   
-  #test de la création d'un objet Link vide et de l'affichage du formulaire de création
-  describe "GET new" do
-    it "create a new nil Link " do 
-      #Link.stub(:new) { mock_link }  
-      #get :new
-      Link.should_receive(new) 
-    end
-    it "show a form to create a link" do
-      response.should render_template("new")
-    end 
-  end          
-
+  # describe "GET new" do
+  #   it "assigns a new link as @link" do
+  #     Link.stub(:new) { mock_link }
+  #     get :new
+  #     assigns(:link).should be(mock_link)
+  #   end
+  # end
+  # 
   # describe "GET edit" do
   #   it "assigns the requested link as @link" do
   #     Link.stub(:find).with("37") { mock_link }
@@ -132,5 +175,6 @@ describe LinksController do
   #     response.should redirect_to(links_url)
   #   end
   # end         
+
 
 end

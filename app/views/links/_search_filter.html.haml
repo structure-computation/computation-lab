@@ -1,14 +1,12 @@
 .search_filter
-  %a.yellow_button.pressed_button#workspace_link   Ma bibliothèque
-  %a.yellow_button.pressed_button#standard_link  Bibliothèque standard
+  #links_library_filter
+    %label{:for => "links_library_workspace"}   Ma bibliothèque
+    = check_box_tag 'links_library_workspace', 'workspace', true
+    %label{:for => "links_library_standard"}    Bibliothèque standard
+    = check_box_tag 'links_library_standard', 'standard', true
   :coffeescript
-    $('a#workspace_link').click ->
-      $(this).toggleClass('pressed_button')
-      $('#links_table tbody tr.workspace').toggle()
-
-    $('a#standard_link').click ->
-      $(this).toggleClass('pressed_button')
-      $('#links_table tbody tr.standard').toggle()
+    $('#links_library_filter input[type=checkbox]').click (event) ->
+      $("#links_table tbody tr." + event.srcElement.value).toggle()
         
 
   %p

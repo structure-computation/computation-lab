@@ -3,6 +3,8 @@
     %li
       %a{:href => "#Initialization"}      Initialisation 
     %li                
+      %a{:href => "#Parameters"}          Paramètres 
+    %li                
       %a{:href => "#Materials"}           Matériaux 
     %li                
       %a{:href => "#Links"}               Liaisons 
@@ -10,8 +12,6 @@
       %a{:href => "#Volumic_forces"}      Efforts volumiques
     %li                
       %a{:href => "#Boundary_Conditions"} Conditions Limites
-    %li                
-      %a{:href => "#Parameters"}          Paramètres 
     %li                
       %a{:href => "#Forecast"}            Prévisions
 
@@ -25,7 +25,7 @@
         %tr
           %th ID
           %th Nom
-          %th ID Matériau
+          %th Matériau
       %tbody
 
   .links
@@ -35,7 +35,7 @@
         %tr
           %th ID
           %th Nom
-          %th ID Liaison
+          %th Liaison
       %tbody
 
   .boundary_conditions
@@ -46,7 +46,7 @@
           %tr
             %th ID
             %th Nom
-            %th ID CL
+            %th CL
         %tbody
       %button.new_edge Créer un bord
 
@@ -98,10 +98,12 @@
 - content_for :wizard_buttons do 
   .previous_button
     %a.yellow_button#wizard_previous_button Etape précédente
+  .save_div
+    %a.yellow_button#save_calcul{:disabled => "disabled"}            Sauvegarder
   .next_button
     %a.yellow_button#wizard_next_button     Etape suivante
-  %div
-    %a.yellow_button#return_to_model        Retour au modèle
+  #saved_for
+
 
 - # TODO: Ramener dans ce fichier quand cela sera terminé. On charge dans ce partial le code de visualisation.
 = render "calculs/partials/visualisation_interface"

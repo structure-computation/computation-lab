@@ -36,7 +36,8 @@ SCViews.OptionView = Backbone.View.extend
     @model.resetAllAttributes()
     @model.set mode: 'test'
     SCVisu.current_calcul.set options: @model
-        
+    SCVisu.current_calcul.trigger 'change'
+
   # Jquery returns an array, that's why you have to specify [0] to get the HTML Element
   normalModeSelected: (event) ->
     $(@el).find('input:not("#test_mode, #normal_mode")').removeAttr 'disabled'
@@ -55,7 +56,7 @@ SCViews.OptionView = Backbone.View.extend
                         zoom  : $(@el).find('input#zoom').val()
                         error : $(@el).find('input#error').val()
     SCVisu.current_calcul.set options: @model
-
+    SCVisu.current_calcul.trigger 'change'
   # Generic method usefull to set value of an input whose ID is passed as a parameter.
   setInputValue: (inputId, value) ->
     $(@el).find("input#{inputId}").val(value)

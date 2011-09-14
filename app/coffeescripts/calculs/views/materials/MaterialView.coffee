@@ -18,7 +18,8 @@ SCViews.MaterialView = Backbone.View.extend
   # Also removing the view
   removeMaterial: ->
     SCVisu.pieceListView.materialHasBeenRemoved(@model)
-    @parentElement.collection.remove @model, silent: true
+    @parentElement.collection.remove @model
+    SCVisu.current_calcul.trigger 'change'
     @remove()
 
   # Show details of a material
@@ -30,7 +31,6 @@ SCViews.MaterialView = Backbone.View.extend
   # this material will be also highlighted.
   select: (event) ->
     if event.srcElement == @el
-      @showMaterialDetails()
       @parentElement.render() # Clear all buttons from all material view
       @parentElement.selectMaterial @
 

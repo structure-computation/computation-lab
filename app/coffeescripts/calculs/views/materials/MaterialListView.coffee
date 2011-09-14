@@ -28,6 +28,8 @@ SCViews.MaterialListView = Backbone.View.extend
     #materialModel.set id_in_calcul : @getNewMaterialId()
     @collection.add materialModel
     @createMaterialView materialModel
+    SCVisu.current_calcul.set materials: @collection.models  
+    SCVisu.current_calcul.trigger 'change'
 
   createMaterialView: (material) ->
     m = new SCViews.MaterialView model: material, parentElement: this

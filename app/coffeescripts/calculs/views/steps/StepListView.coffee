@@ -77,6 +77,7 @@ SCViews.StepListView = Backbone.View.extend
     for stepView in @stepViews
       stepView.update()
       @collection.updateModels()
+    SCVisu.current_calcul.trigger 'change'  
     SCVisu.current_calcul.setTimeStepsCollection SCVisu.stepListView.collection.models
     
   selectChanged: (event) ->
