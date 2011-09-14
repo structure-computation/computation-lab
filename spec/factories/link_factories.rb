@@ -3,7 +3,6 @@ FactoryGirl.define do
     "link_#{n}"
   end
 
-  
   factory :link, :class => Link do 
     name "demo link" #{link_name}
     

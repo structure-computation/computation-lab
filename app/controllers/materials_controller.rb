@@ -3,9 +3,9 @@ class MaterialsController < InheritedResources::Base
   #session :cookie_only => false, :only => :upload
   before_filter :authenticate_user!
   before_filter :set_page_name
-  belongs_to    :workspace
-  respond_to    :json
+  belongs_to    :workspace 
   layout 'workspace'
+  respond_to    :html, :json
 
   def set_page_name
     @page = :bibliotheque
@@ -15,15 +15,8 @@ class MaterialsController < InheritedResources::Base
     @workspace           = current_workspace_member.workspace
     @standard_materials  = Material.standard
     @workspace_materials = Material.from_workspace @workspace.id
-    index!
-  end
-  
-  def create
-    if params[:material].nil?
-      @material = Material.create retrieve_column_fields(params)
-    end
-    create! { workspace_materials_path }
-  end
+    index!      
+  end         
   
   def update
     # Test pour savoir si les informations sont données en brut (en JSON, envoyées par le javascript)
@@ -32,6 +25,13 @@ class MaterialsController < InheritedResources::Base
       @material.update_attributes! retrieve_column_fields(params)
     end
     update! { workspace_materials_path }
+  end
+  
+  def create
+    if params[:material].nil?
+      @material = Material.create retrieve_column_fields(params)
+    end
+    create! { workspace_materials_path }
   end
   
   def edit
@@ -46,21 +46,44 @@ class MaterialsController < InheritedResources::Base
   
   # Essayer de faire une ressources accessibles par /material
   def show
-    @material   = Material.find(params[:id])
-    @workspace  = Workspace.find(params[:workspace_id])
-    # TODO: Idem commentaire sur les liens. Cette manière de faire est trop dépendante du modèle. (on cherche dans les colonnes... qui vont changer ici !)
-    if @material.workspace_id == -1 or @material.workspace_id == current_workspace_member.workspace_id
-      respond_to do |format|
-        format.html { render :action => "show"}
-        format.json { render :json => @material.to_json }
-      end
-    # elsif @material.workspace_id == current_workspace_member.workspace.id
-    #   render :action => "show"
+    std_material = Material.standard.find_by_id(params[:id])
+    ws_material  = Material.from_workspace(current_workspace_member.workspace.id).find_by_id(params[:id])
+    
+    # We take the ws_material if not nil, the ws_material otherwise
+    @material    = std_material ? std_material : ws_material
+    
+    # If we have a material, it is rendered, otherwise we send an error (forbidden or missing, ).  
+    if @material 
+      # show!
+      render
     else
-      flash[:notice] = "Vous n'avez pas accès à cette pièce !" # TODO: C'est un materiaux et non une pièce et c'est à mettre  dans les locales...
-      redirect_to workspace_materials_path
-    end
+    # @material   = Material.find(params[:id])
+    # @workspace  = Workspace.find(params[:workspace_id])              
+    # TODO: Idem commentaire sur les liens. Cette manière de faire est trop dépendante du modèle. (on cherche dans les colonnes... qui vont changer ici !)
+    # if @material.workspace_id == -1 or @material.workspace_id == current_workspace_member.workspace_id
+      respond_to do |format|
+        format.html {redirect_to workspace_materials_path(current_workspace_member.workspace.id), 
+                    :notice => "Ce matériel n'existe pas ou n'est pas accessible à partir de cet espace de travail."}
+        format.json {render :status => 404, :json => {}}
+      end
+    end 
+     
   end
+  #   @material   = Material.find(params[:id])
+  #   @workspace  = Workspace.find(params[:workspace_id])
+  #   # TODO: Idem commentaire sur les liens. Cette manière de faire est trop dépendante du modèle. (on cherche dans les colonnes... qui vont changer ici !)
+  #   if @material.workspace_id == -1 or @material.workspace_id == workspace
+  #     respond_to do |format|
+  #       format.html { render :action => "show"}
+  #       format.json { render :json => @material.to_json }
+  #     end
+  #   # elsif @material.workspace_id == current_workspace_member.workspace.id
+  #   #   render :action => "show"
+  #   else
+  #     flash[:notice] = "Vous n'avez pas accès à cette pièce !" # TODO: C'est un materiaux et non une pièce et c'est à mettre  dans les locales...
+  #     redirect_to workspace_materials_path
+  #   end    
+  # end  
 
   def new
     if params[:type]

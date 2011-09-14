@@ -188,7 +188,6 @@ describe LinksController do
   #       response.should render_template("edit")
   #     end
   #   end
-  # 
   # end
   # 
   # describe "DELETE destroy" do
@@ -203,6 +202,7 @@ describe LinksController do
   #     delete :destroy, :id => "51848956"
   #     response.should redirect_to(links_url)
   #   end
-  # end
+  # end         
+
 
 end
