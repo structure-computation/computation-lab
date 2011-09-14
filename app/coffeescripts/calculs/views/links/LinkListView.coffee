@@ -11,7 +11,7 @@ SCViews.LinkListView = Backbone.View.extend
     for link in @collection.models
       @createLinkView(link)
     $('#links_database button.close').click -> $('#links_database').hide()
-    @selectedLinkModel = null
+    @selectedLinkView = null
 
   events: 
     "click button.add_link" : "showDatabaseLinks"
@@ -67,9 +67,14 @@ SCViews.LinkListView = Backbone.View.extend
   # Is executed when a link view has been clicked.
   # Tell the interfaces view to show all interfaces who have this link
   selectLink: (linkView) ->
-    @highlightView linkView
-    @selectedLinkModel = linkView.model
-    SCVisu.interfaceListView.linkHasBeenSelected(linkView.model)
+    if @selectedLinkView == linkView
+      @unhighlightMaterials()
+      @selectedLinkView = null
+      SCVisu.interfaceListView.linkHasBeenDeselected()
+    else
+      @highlightView linkView
+      @selectedLinkView = linkView
+      SCVisu.interfaceListView.linkHasBeenSelected(linkView.model)
  
   # Add link to interface
   assignLinkToSelectedInterface: (linkView) ->
@@ -80,9 +85,14 @@ SCViews.LinkListView = Backbone.View.extend
     
   # Highlight the 'linkView' with adding css class
   highlightView: (linkView) ->
+    @selectedLinkView = null
     _.each @linkViews, (view) -> 
       $(view.el).addClass('gray').removeClass('selected')
     $(linkView.el).addClass('selected').removeClass('gray')
+
+  unhighlightMaterials: ->
+    _.each @linkViews, (view) ->
+      $(view.el).removeClass('selected').removeClass('gray')
   
   unassignLinkToSelectedInterface: ->
     SCVisu.interfaceListView.selectedInterfaceView.model.unset 'link_id'

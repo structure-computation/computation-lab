@@ -10,7 +10,7 @@ SCViews.MaterialListView = Backbone.View.extend
     @materialViews = []
     for material in @collection.models
       @createMaterialView(material)
-    @selectedMaterial = null
+    @selectedMaterialView = null
     $('#materials_database button.close').click -> $('#materials_database').hide()
     @render()
   
@@ -53,16 +53,27 @@ SCViews.MaterialListView = Backbone.View.extend
   # Is executed when a material view has been clicked.
   # Tell the pieces view to show all pieces who have this material
   selectMaterial: (materialView) ->
-    @highlightView materialView
-    @selectedMaterial = materialView.model
-    SCVisu.pieceListView.materialHasBeenSelected(materialView.model)
+    if @selectedMaterialView == materialView
+      @unhighlightMaterials()
+      @selectedMaterialView = null
+      SCVisu.pieceListView.materialHasBeenDeselected()
+    else
+      @highlightView materialView
+      @selectedMaterialView = materialView
+      SCVisu.pieceListView.materialHasBeenSelected(materialView.model)
 
+  # Is executed when a piece has been selected
   # Highlight the material which have material_id as id
   highlightMaterial: (material_id) ->
+    @selectedMaterialView = null
     _.each @materialViews, (view) ->
       if view.model.getId() == material_id
         $(view.el).addClass('selected').removeClass('gray')
         view.showUnassignButton()
+
+  unhighlightMaterials: ->
+    _.each @materialViews, (view) ->
+      $(view.el).removeClass('selected').removeClass('gray')
 
   # Show an assign button to each material view
   showAssignButtons: ->

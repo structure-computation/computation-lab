@@ -4,7 +4,7 @@
 
 SCModels.Piece = Backbone.Model.extend
   isAssigned: ->
-    if _.isUndefined(@get("material_id")) then false else true
+    !_.isUndefined(@get("material_id"))
 
 SCModels.PieceCollection = Backbone.Collection.extend
   model: SCModels.Piece

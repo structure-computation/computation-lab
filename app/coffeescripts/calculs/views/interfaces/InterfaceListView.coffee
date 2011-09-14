@@ -1,6 +1,6 @@
 ## InterfaceListView
 SCViews.InterfaceListView = Backbone.View.extend
-  el: 'table#interfaces'
+  el: '#interfaces'
   
   # You have to pass a InterfaceCollection at initialisation as follow:
   # new PieceListView({ collection : myInterfaceCollection })
@@ -27,14 +27,19 @@ SCViews.InterfaceListView = Backbone.View.extend
   # possibility to unassign it.
   # Else, he will be able to select a link for the selected interface.
   selectInterface: (interfaceView) ->
-    @selectedInterfaceView = interfaceView
-    _.each @interfaceViews, (interfaceView) ->
-      $(interfaceView.el).addClass('gray').removeClass('selected')
-    $(interfaceView.el).addClass('selected').removeClass('gray')
-    if interfaceView.model.isAssigned() 
-      SCVisu.linkListView.highlightLink(interfaceView.model.get('link_id'))
+    $(@el).find("button.assign_all, button.unassign_all").attr('disabled','disabled')
+    if @selectedInterfaceView == interfaceView
+      @selectedInterfaceView = null
+      SCVisu.interfaceListView.render()
     else
-      SCVisu.linkListView.showAssignButtons()
+      @selectedInterfaceView = interfaceView
+      _.each @interfaceViews, (interfaceView) ->
+        $(interfaceView.el).addClass('gray').removeClass('selected')
+      $(interfaceView.el).addClass('selected').removeClass('gray')
+      if interfaceView.model.isAssigned() 
+        SCVisu.linkListView.highlightLink(interfaceView.model.get('link_id'))
+      else
+        SCVisu.linkListView.showAssignButtons()
 
   renderAndHighlightCurrentInterface: ->
     @selectedInterfaceView.render()
@@ -45,13 +50,19 @@ SCViews.InterfaceListView = Backbone.View.extend
   # And an unassigned button to link whith which have the same link_id 
   # that the selected link.
   linkHasBeenSelected: (linkModel) ->
+    @selectedInterfaceView = null
+    $(@el).find("button.assign_all, button.unassign_all").removeAttr('disabled')
     _.each @interfaceViews, (interfaceView) ->
       $(interfaceView.el).addClass('selected').removeClass('gray')
       interfaceView.linkHasBeenSelected linkModel
 
+  linkHasBeenDeselected: ->
+    $(@el).find("button.assign_all, button.unassign_all").attr('disabled','disabled')
+    @render()
+
   # Assign the pieceModel to the selected Material.
   assignInterfaceToLink: (interfaceModel) ->
-    interfaceModel.set link_id : SCVisu.linkListView.selectedLinkModel.getId()
+    interfaceModel.set link_id : SCVisu.linkListView.selectedLinkView.model.getId()
     SCVisu.current_calcul.set interfaces: SCVisu.interfaceListView.collection.models
     SCVisu.current_calcul.trigger 'change'
 
@@ -68,6 +79,34 @@ SCViews.InterfaceListView = Backbone.View.extend
       if interface.get('link_id') == link.getId()
         interface.unset 'link_id'
     @render()
+    
+  events:
+    'change input#hide_assigned_interfaces' : 'toggleAssignedPieces'
+    'click button.assign_all'               : 'assignAllVisibleInterfaces'
+    'click button.unassign_all'             : 'unassignAllVisibleInterfaces'
+  
+  # If the checkbox is checked, hide all assigned interfaces
+  toggleAssignedPieces: (event) ->
+    if event.srcElement.checked
+      _.each @interfaceViews, (interfaceView) ->
+        $(interfaceView.el).hide() if interfaceView.model.isAssigned()
+    else
+      _.each @interfaceViews, (interfaceView) ->
+        $(interfaceView.el).show()
+
+  # Assign all visible interfaces which are visible to the selected link
+  assignAllVisibleInterfaces: ->
+    _.each @interfaceViews, (interfaceView) ->
+      if $(interfaceView.el).is(':visible')
+        interfaceView.model.set "link_id" : SCVisu.linkListView.selectedLinkView.model.getId()
+        interfaceView.addUnassignButton()
+
+  # Assign all visible pieces which are visible to the selected link
+  unassignAllVisibleInterfaces: ->
+    _.each @interfaceViews, (interfaceView) ->
+      if $(interfaceView.el).is(':visible')
+        interfaceView.model.unset "link_id"
+        interfaceView.addAssignButton()
     
   render : ->
     _.each @interfaceViews, (interface) ->

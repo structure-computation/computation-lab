@@ -54,4 +54,5 @@ SCViews.BoundaryConditionView = Backbone.View.extend
 
   render: ->
     $(@el).html(@model.get('id_in_calcul') + " - " + @model.get('name') + "<button class='remove''>X</button>").removeClass('selected')
+    $(@el).removeClass("selected")
     this
