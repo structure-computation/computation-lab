@@ -15,8 +15,8 @@ class MaterialsController < InheritedResources::Base
 
   def index 
     @workspace           = current_workspace_member.workspace
-    @standard_materials  = Material.standard
-    @workspace_materials = Material.from_workspace @workspace.id
+    @standard_materials  = Material.standard  
+    @workspace_materials = Material.from_workspace params[:workspace_id]
     index!      
   end         
   
