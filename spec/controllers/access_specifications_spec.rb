@@ -3,20 +3,20 @@ require 'spec_helper'
 describe "Access rights on RESTressources" do 
   
   describe WorkspacesController do 
-    let :mock_workspace         do mock_model(Workspace).as_null_object end
     let :current_workspace      do FactoryGirl.build(:workspace)        end
     let :mock_workspace_member  do mock_model(UserWorkspaceMembership, :workspace => current_workspace ).as_null_object end    
       
     before(:each) do
       controller.stub(:authenticate_user! => true )                 
       controller.stub(:current_workspace_member => mock_workspace_member ) 
-      controller.stub(:current_workspace => mock_workspace)
+      controller.stub(:current_workspace => current_workspace)    
+      current_workspace.save
     end  
     
-    describe "workspace can be acces only if current_workspace" do 
+    it "workspace can be acces only if current_workspace" do 
       #Workspace.should_receive(:?) 
-      get :show, :workspace_id => current_workspace.id
-      response.should render_template("workspace/show")
+      get :show, :id => current_workspace.id
+      response.should render_template("workspace/show , layouts/workspace" )
     end
     
     # describe " a manager can access to workspace" do 
