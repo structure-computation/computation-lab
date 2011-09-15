@@ -18,11 +18,6 @@ SCViews.EdgeListView = Backbone.View.extend
     @collection.bind 'add'   , @render, this
     @collection.bind 'change', @render, this
 
-  # Called from edit view when user wants to create a new edge.
-  # Create a view associated to the given model
-  events: 
-    "click button.new_edge"  : "showNewEdgeForm"
-
   addEdgeModel: (edgeModel) ->
     @editEdgeView.hide()
     @edgeViews.push new SCViews.EdgeView model: edgeModel, parentElement: @
@@ -99,11 +94,14 @@ SCViews.EdgeListView = Backbone.View.extend
     $('#boundary_condition_form').hide()
     @editEdgeView.showAndInitialize()
 
+  # Called from edit view when user wants to create a new edge.
+  # Create a view associated to the given model
   events:
     'change input#hide_assigned_edges' : 'toggleAssignedEdges'
     'click button.assign_all'          : 'assignAllVisibleEdges'
     'click button.unassign_all'        : 'unassignAllVisibleEdges'
-  
+    'click button.new_edge'            : 'showNewEdgeForm'
+
   
   # If the checkbox is checked, hide all assigned interfaces
   toggleAssignedEdges: (event) ->
