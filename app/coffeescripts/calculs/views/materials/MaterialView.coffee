@@ -2,7 +2,7 @@
 SCViews.MaterialView = Backbone.View.extend
   initialize: (params) ->
     @parentElement  = params.parentElement
-    @firstRendering = true
+    $(@parentElement.el).append(@el)
   tagName   : "li"
   className : "material_view"   
   
@@ -70,9 +70,6 @@ SCViews.MaterialView = Backbone.View.extend
     $(@el).html(@model.get('id_in_calcul') + " - " + @model.get('name'))
     $(@el).append("<button class='remove'>X</button>")
     $(@el).append("<button class='#{className}'>#{textButton}</button>")
-    if @firstRendering
-      $(@parentElement.el).append(@el)
-      @firstRendering = false
     return this
     
   render: ->

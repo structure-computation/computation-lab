@@ -3,7 +3,6 @@ SCViews.EditLinkView = Backbone.View.extend
   el: "#edit_link"
   initialize: (params) ->
     @parentElement = params.parentElement
-    $(@el).find('h2:first').prepend('<button class="close">Fermer</button>')
     $(@el).hide()
 
   events: 

@@ -3,8 +3,7 @@ SCViews.MaterialListView = Backbone.View.extend
   el: 'ul#materials'
 
   initialize: (options) ->
-    @collection.bind 'change', =>
-      @render()
+
     @clearView()
     @editView = new SCViews.EditMaterialView parentElement: this
     @materialViews = []
@@ -12,8 +11,10 @@ SCViews.MaterialListView = Backbone.View.extend
       @createMaterialView(material)
     @selectedMaterialView = null
     $('#materials_database button.close').click -> $('#materials_database').hide()
+    @collection.bind 'remove', @render, this
     @render()
 
+    @collection.bind 'change', @render, this
     # Triggered when a material is clicked
     @bind "selection_changed:materials", (selectedMaterialView) =>
       @render() # Reset all views

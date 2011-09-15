@@ -13,6 +13,44 @@ SCViews.LinkListView = Backbone.View.extend
     $('#links_database button.close').click -> $('#links_database').hide()
     @selectedLinkView = null
 
+    @collection.bind 'remove', @render, this
+
+    # Triggered when a link is clicked
+    @bind "selection_changed:links", (selectedLinkView) =>
+      @render() # Reset all views
+      if @selectedLinkView == selectedLinkView
+        @selectedLinkView.deselect()
+        @selectedLinkView = null
+        SCVisu.interfaceListView.trigger("selection_changed:links", null)
+      else
+        @selectedLinkView.deselect() if @selectedLinkView
+        @selectedLinkView = selectedLinkView
+        @selectedLinkView.select()
+        SCVisu.interfaceListView.trigger("selection_changed:links", @selectedLinkView)
+      
+    # Triggered when an interface is clicked
+    @bind "selection_changed:interfaces", (selectedInterfaceView) =>
+      @selectedLinkView.deselect() if @selectedLinkView
+      @selectedLinkView = null
+      @render() # Reset all views
+      
+      if selectedInterfaceView != null
+        # If the selected interface is not null, then there is two possibilities:
+        # The interface is already assigned to a link 
+        if !_.isUndefined(selectedInterfaceView.model.get('link_id'))
+          # Then we have to select this link and show an unassign button
+          for linkView in @linkViews
+            if linkView.model.getId() == selectedInterfaceView.model.get('link_id')
+              linkView.select()
+              linkView.showUnassignButton()
+              break
+        # The interface doesn't have a link assigned yet
+        else
+          # Then we have to show assign buttons
+          _.each @linkViews, (linkView) =>
+            linkView.showAssignButton()
+            
+
   events: 
     "click button.add_link" : "showDatabaseLinks"
   
@@ -51,58 +89,28 @@ SCViews.LinkListView = Backbone.View.extend
   showDetails: (model, readonly = false) ->
     @editView.updateModel model, readonly
 
-  # Highlight the link which have link_id as id and add an "Unassign" button
-  highlightLink: (link_id) ->
-    _.each @linkViews, (view) ->
-      if view.model.getId() == link_id
-        $(view.el).addClass('selected').removeClass('gray')
-        view.showUnassignButton()
-
   # Show an assign button to each link view
   showAssignButtons: ->
     _.each @linkViews, (view) ->
-      $(view.el).removeClass('selected').removeClass('gray')
+      $(view.el).removeClass('selected')
       view.showAssignButton()
 
-  # Is executed when a link view has been clicked.
-  # Tell the interfaces view to show all interfaces who have this link
-  selectLink: (linkView) ->
-    if @selectedLinkView == linkView
-      @unhighlightMaterials()
-      @selectedLinkView = null
-      SCVisu.interfaceListView.linkHasBeenDeselected()
-    else
-      @highlightView linkView
-      @selectedLinkView = linkView
-      SCVisu.interfaceListView.linkHasBeenSelected(linkView.model)
- 
   # Add link to interface
   assignLinkToSelectedInterface: (linkView) ->
     SCVisu.interfaceListView.selectedInterfaceView.model.set link_id : linkView.model.getId()
-    SCVisu.interfaceListView.renderAndHighlightCurrentInterface()
     SCVisu.current_calcul.set interfaces: SCVisu.interfaceListView.collection.models
     SCVisu.current_calcul.trigger 'change'
     
-  # Highlight the 'linkView' with adding css class
-  highlightView: (linkView) ->
-    @selectedLinkView = null
-    _.each @linkViews, (view) -> 
-      $(view.el).addClass('gray').removeClass('selected')
-    $(linkView.el).addClass('selected').removeClass('gray')
-
-  unhighlightMaterials: ->
-    _.each @linkViews, (view) ->
-      $(view.el).removeClass('selected').removeClass('gray')
   
   unassignLinkToSelectedInterface: ->
     SCVisu.interfaceListView.selectedInterfaceView.model.unset 'link_id'
-    SCVisu.interfaceListView.renderAndHighlightCurrentInterface()
     SCVisu.current_calcul.set interfaces: SCVisu.interfaceListView.collection.models
     SCVisu.current_calcul.trigger 'change'
     
   render : ->
-    for l in @linkViews
-      l.render()    
+    for linkView in @linkViews
+      linkView.render()    
+      linkView.deselect()
     $(@el).find(".add_link").remove() if $(@el).find(".add_link")
     $(@el).append('<button class="add_link">Ajouter une liaison</button>')
     return this
