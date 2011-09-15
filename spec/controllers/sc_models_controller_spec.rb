@@ -25,10 +25,10 @@ describe ScModelsController do
                              
 
   describe "GET show" do
-    it "assigns the requested material as @sc_model if sc_model is a sc_model from current workspace." do
+    it "assigns the requested scmodel as @sc_model if sc_model is a sc_model from current workspace." do
       get :show, :id => @workspace_sc_model.id
-      assigns(:sc_models).should eq(@workspace_sc_models)
-      response.should render_template("sc_models/show")
+      assigns(:sc_model).should eq(@workspace_sc_models)
+      response.should render_template("sc_models/show")       
     end
     
     context "When a forbidden (outside of current_workspace) or non existant material is asked" do 

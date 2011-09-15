@@ -96,17 +96,17 @@ describe MaterialsController do
     end
   end
   
-  describe "DELETE destroy" do         
-    # TODO: Ajouter une condition si User == MaterialOwner
-    before (:each) do
-      material_to_destroy  = FactoryGirl.create(:material) 
-      @material_destroyed  = material_to_destroy.id
-    end
-    it "destroys the requested material" do
-      get :destroy, :id => @material_destroyed   
-      #@material_destroyed.destroy
-    end
-  end
+  # describe "DELETE destroy" do         
+  #   # TODO: Ajouter une condition si User == MaterialOwner
+  #   before (:each) do
+  #     material_to_destroy  = FactoryGirl.create(:material) 
+  #     @material_destroyed  = material_to_destroy.id
+  #   end
+  #   it "destroys the requested material" do
+  #    # get :destroy, :workspace_id => current_workspace.id , :id => @material_destroyed.id   
+  #     #@material_destroyed.destroy
+  #   end
+  # end 
 end 
 
                    
