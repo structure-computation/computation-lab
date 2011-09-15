@@ -6,6 +6,7 @@ describe "Access rights on RESTressources" do
     # NOTE: controller_name :workspace ne fonctionne pas, controller_name n'est pas trouvé.
     
     let :current_workspace      do FactoryGirl.build(:workspace)        end
+    let :other_workspace        do FactoryGirl.build(:workspace)        end
     let :mock_workspace_member  do mock_model(UserWorkspaceMembership, :workspace => current_workspace ).as_null_object end    
       
     before(:each) do
@@ -13,16 +14,24 @@ describe "Access rights on RESTressources" do
       controller.stub(:current_workspace_member => mock_workspace_member  ) 
       controller.stub(:current_workspace        => current_workspace      )
       current_workspace.save
+      other_workspace.save
     end  
     
-    it "workspace can be acces only if current_workspace" do 
+    it "workspace can be acces if it is current_workspace" do 
       #Workspace.should_receive(:?) 
-      # debugger
       get :show, :id => current_workspace.id
-      response.should render_template(["layouts/workspace", "workspace/show"])
-      
       # NOTE: ne fonctionne pas response.should render_template("workspace/show").with(:layout =>'workspace')
+      response.should render_template(["layouts/workspace", "workspace/show"])      
     end
+    
+    it "workspace can not be acces if it is not current_workspace" do 
+      #Workspace.should_receive(:?) 
+      get :show, :id => other_workspace.id
+      # NOTE: ne fonctionne pas response.should render_template("workspace/show").with(:layout =>'workspace')
+      response.should redirect_to(workspace_path(current_workspace))
+      flash[:notice].should eq("Vous demandez l'affichage d'une page appartenant à un autre espace de travail.")
+    end
+    
     
     # describe " a manager can access to workspace" do 
     # end
