@@ -3,8 +3,8 @@ FactoryGirl.define do
     "material_#{n}"
   end
   
-  factory :material, :class => Link do 
-    name "demo material" #{material_name}
+  factory :material, :class => Material do 
+    name { FactoryGirl.generate(:material_name)}
     
     factory :standard_material do
       workspace_id -1

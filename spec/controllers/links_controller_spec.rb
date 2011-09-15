@@ -35,7 +35,7 @@ describe LinksController do
     it "ask for links from std links slibrary and from workspace library" do
       Link.should_receive(:standard)
       Link.should_receive(:from_workspace)
-      get :index
+      get :index, :workspace_id => current_workspace.id
       response.should render_template("links/index")
     end
     
@@ -43,12 +43,12 @@ describe LinksController do
       # NOTE: Je n'ai pas réussi à faire un stub sur un objet.
       # Link.stub(:standard_links) { [mock_link] }  
       # NOTE: cela utilise la BDD, on peut aussi faire ce choix au final.  
-      get :index
+      get :index, :workspace_id => current_workspace.id
       assigns(:standard_links ).should eq( [@standard_link] )
     end
     
     it "assigns all links for workspace links library as @standard_links" do
-      get :index
+      get :index, :workspace_id => current_workspace.id
       assigns(:workspace_links).should eq( [@workspace_link] )
     end
   end

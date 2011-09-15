@@ -3,6 +3,9 @@ class Bill < ActiveRecord::Base
   belongs_to :credit
   belongs_to :log_abonnement
   
+  scope :from_workspace , lambda { |workspace_id|
+     where(:workspace_id => workspace_id)
+   }
   
   # nouvelle facture associée à une ligne de crédit calcul
   def new_facture_calcul()

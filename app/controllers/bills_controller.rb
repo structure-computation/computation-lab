@@ -49,14 +49,20 @@ class BillsController < InheritedResources::Base
   #     @bills_forfaits << bill_forfait
   #   } 
   # end
-  
+
   def show
-    @workspace = Workspace.find(params[:workspace_id])
-    @manager = @workspace.users.find(:first, :conditions => {:role => "gestionnaire"})
-    if @manager
-      show!
+    ws_bills   = Bill.from_workspace(current_workspace_member.workspace.id).find_by_id(params[:id])  
+    @bill      = ws_bills ?  ws_bills : ws_bills  
+    @workspace = current_workspace_member.workspace
+    if @bill 
+      # show!
+      render
     else
-      redirect_to workspace_path
+      respond_to do |format|
+        format.html {redirect_to workspace_bills_path(current_workspace_member.workspace.id), 
+                    :notice => "Ce bill n'existe pas ou n'est pas accessible à partir de cet espace de travail."}
+        format.json {render :status => 404, :json => {}}
+      end
     end
   end
 

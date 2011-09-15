@@ -12,7 +12,11 @@ class ScModel < ActiveRecord::Base
   has_many    :workspace_member,                  :through => :model_ownerships
 
   has_many    :calcul_results
-  has_many    :forum_sc_models
+  has_many    :forum_sc_models  
+  
+  scope :from_workspace , lambda { |workspace_id|
+     where(:workspace_id => workspace_id)
+   }
   
   #state possibles : void, in_process, active, deleted, 
   

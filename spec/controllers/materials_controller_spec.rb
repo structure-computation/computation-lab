@@ -7,8 +7,7 @@ describe MaterialsController do
   let :mock_material            do mock_model(Material).as_null_object              end
   let :current_workspace        do FactoryGirl.build(:workspace)                    end
   let :mock_workspace_member    do 
-    mock_model(UserWorkspaceMembership, #:workspace_id => current_workspace.id 
-                                        :workspace    => current_workspace ).as_null_object 
+    mock_model(UserWorkspaceMembership, :workspace    => current_workspace ).as_null_object 
   end
   
   # NOTE: pour screencast : before != begin... et before(:all) ne marche pas pour cela : controller n'est pas 
@@ -95,4 +94,18 @@ describe MaterialsController do
       end
     end
   end
-end
+  
+  # describe "DELETE destroy" do         
+  #   # TODO: Ajouter une condition si User == MaterialOwner
+  #   before (:each) do
+  #     material_to_destroy  = FactoryGirl.create(:material) 
+  #     @material_destroyed  = material_to_destroy.id
+  #   end
+  #   it "destroys the requested material" do
+  #    # get :destroy, :workspace_id => current_workspace.id , :id => @material_destroyed.id   
+  #     #@material_destroyed.destroy
+  #   end
+  # end 
+end 
+
+                   

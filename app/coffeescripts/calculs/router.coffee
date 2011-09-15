@@ -31,7 +31,6 @@ SCVisu.Router = Backbone.Router.extend
        "Volumic_forces"     
        "Boundary_Conditions"   
        "Forecast"           
-
     ]
   
   # It is important to call this function AFTER currentPage has changed
