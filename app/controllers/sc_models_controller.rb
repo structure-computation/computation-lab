@@ -63,7 +63,6 @@ class ScModelsController < InheritedResources::Base
         format.json {render :status => 404, :json => {}}
       end
     end
-     
   end
   
   def load_mesh

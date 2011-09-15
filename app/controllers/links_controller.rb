@@ -12,9 +12,9 @@ class LinksController < InheritedResources::Base
   end
   
   def index 
-    # @workspace        = current_workspace_member.workspace
+    @workspace        = current_workspace_member.workspace
     @standard_links   = Link.standard
-    @workspace_links  = Link.from_workspace params[:workspace_id] # @workspace.id
+    @workspace_links  = Link.from_workspace @workspace.id
     index!
   end
   
