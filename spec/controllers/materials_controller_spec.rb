@@ -7,8 +7,7 @@ describe MaterialsController do
   let :mock_material            do mock_model(Material).as_null_object              end
   let :current_workspace        do FactoryGirl.build(:workspace)                    end
   let :mock_workspace_member    do 
-    mock_model(UserWorkspaceMembership, #:workspace_id => current_workspace.id 
-                                        :workspace    => current_workspace ).as_null_object 
+    mock_model(UserWorkspaceMembership, :workspace    => current_workspace ).as_null_object 
   end
   
   # NOTE: pour screencast : before != begin... et before(:all) ne marche pas pour cela : controller n'est pas 
