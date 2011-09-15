@@ -4,7 +4,7 @@ FactoryGirl.define do
   end
   
   factory :material, :class => Material do 
-    name "demo material" #{material_name}
+    name { FactoryGirl.generate(:material_name)}
     
     factory :standard_material do
       workspace_id -1
