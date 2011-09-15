@@ -12,51 +12,56 @@ SCViews.MaterialView = Backbone.View.extend
     "click button.assign"   : "assign"
     "click button.unassign" : "unassign"
     "click button.remove"   : "removeMaterial"
-    "click"                 : "select"
+    "click"                 : "selectionChanged"
+  
+  # Add class to the element to highlight it
+  select: ->
+    $(@el).addClass("selected")
+  # Remove class from the element
+  deselect: ->
+    $(@el).removeClass("selected")
+
+  # Inform the ListView that a material has been clicked
+  selectionChanged: (event) ->
+    if event.srcElement.tagName != "BUTTON"
+      @parentElement.trigger("selection_changed:materials", this)
+  
   
   # Removing model from collection passing silent prevent from destroying from database
   # Also removing the view
   removeMaterial: ->
-    SCVisu.pieceListView.materialHasBeenRemoved(@model)
+    SCVisu.pieceListView.trigger("action:removed_material", @model)
     @parentElement.collection.remove @model
     SCVisu.current_calcul.trigger 'change'
     @remove()
-
+  
   # Show details of a material
   showMaterialDetails: ->
     @parentElement.showDetails @model    
-
-  # Tell the parent that a material have been selected.
-  # The row will be highlighted and pieces wich contains 
-  # this material will be also highlighted.
-  select: (event) ->
-    if event.srcElement == @el
-      @parentElement.render() # Clear all buttons from all material view
-      @parentElement.selectMaterial @
-
+    
   # Clone the model of the clicked material view
   clone: ->
     @parentElement.clone @model
-
+  
   # Show button for unassigning a material
   showUnassignButton: ->
     @parentElement.render() # Remove all buttons from other material view because only one material can be assigned
     @renderWithButton 'unassign', 'Désassigner'
-    @parentElement.highlightView @
-
+    $(@el).addClass "selected"
+  
   # Unassign the material from the selected Piece
   unassign: ->
     @parentElement.unassignMaterial @model
-
+  
   # Show an "Assign" button to each View in order to be able to 
   # assign the material to the selected piece.
-  showAssignButtons: ->
+  showAssignButton: ->
     @renderWithButton 'assign', 'Assigner'
-
+  
   # Assign the clicked model to the selected piece
   assign: ->
     @parentElement.assignMaterialToSelectedPiece @model
-    $(@el).addClass('selected').removeClass('gray')
+    $(@el).addClass('selected')
     @showUnassignButton()
     
     
