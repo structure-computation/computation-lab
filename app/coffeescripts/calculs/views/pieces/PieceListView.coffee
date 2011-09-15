@@ -49,7 +49,7 @@ SCViews.PieceListView = Backbone.View.extend
     # If it is the case, then it removes the association
     @bind "action:removed_material", (materialView) =>
       _.each @collection.models, (piece) ->
-        if piece.get('material_id') == material.getId()
+        if piece.get('material_id') == materialView.model.getId()
           piece.unset 'material_id'
       @render()
  
