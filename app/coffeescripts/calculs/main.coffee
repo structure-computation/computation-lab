@@ -71,19 +71,23 @@ $ ->
   SCVisu.router.navigate "Initialization", true if Backbone.history.start()
   
   class Notifications
-    constructor: ->
+    constructor: (delay) ->
       @content = $('#notification')
+      @delay = delay ||= 3000
       
     setText: (text) ->
       @content.html("")
       @content.append("<p>" + text + "</p>")
       @content.addClass("show")
-      setTimeout(@close, 3000)
+      setTimeout(@close, @delay)
       
     setTextWithoutTimer: (text) ->
       @content.html("")
       @content.append("<p>" + text + "</p>")
       @content.addClass("show")
+      
+    setDelay: (time) ->
+      @delay = time
       
     close: => 
       @content.removeClass("show")

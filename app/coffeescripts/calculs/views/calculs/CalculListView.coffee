@@ -46,6 +46,7 @@ SCViews.CalculListView = Backbone.View.extend
     
 
   beforeClosePage: (event) ->
+    SCVisu.NOTIFICATIONS.setTextWithoutTimer('Sauvegarde en cours...')
     date = new Date()
     dateString = date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear() + " " + date.toTimeString()
     SCVisu.current_calcul.set last_saved: dateString

@@ -88,6 +88,9 @@ ul.data_list
   
 #saved_for
   display: block
+  text-align: center
+  margin-top: 0.5em
+  margin-bottom: 0.5em  
   
 #calcul_container
   h2.grey
@@ -110,7 +113,7 @@ ul.data_list
     
 #notification
   color: black
-  height: 2em
+  height: 2.2em
   border: 1px solid #CCC
   border-top: none
   +border-bottom-radius(0.5em)
@@ -120,10 +123,8 @@ ul.data_list
   margin-left: -20%
   background-color: white
   +transition(0.5s)
-  -webkit-transform: translateY(-2.1em)
-  -moz-transform: translateY(-2.1em)
-  -o-transform: translateY(-2.1em)
-  transform: translateY(-2.1em)
+  +translateY(-2.8em)
+  +single-box-shadow(rgba(0,0,0,0.7), 0px, 2px, 9px)
   p
     margin: 0.2em
     text-align: center
@@ -131,7 +132,4 @@ ul.data_list
     
 #notification.show
   +transition(0.5s)
-  -webkit-transform: translateY(0)
-  -moz-transform: translateY(0)
-  -o-transform: translateY(0)
-  transform: translateY(0)
+  +translateY(0)

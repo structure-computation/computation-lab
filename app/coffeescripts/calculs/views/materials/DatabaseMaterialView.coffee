@@ -16,6 +16,8 @@ SCViews.DatabaseMaterialView = Backbone.View.extend
     newModel.set    'id_from_database' : @model.get 'id'
     newModel.unset  'id'
     @materialListView.add newModel
+    name = @model.get 'name'
+    SCVisu.NOTIFICATIONS.setText('Le matériau «' + name + '» a été ajouté au calcul')
   
   # Show details of the selected model but disable all inputs
   showDatabaseMaterialDetails: (event) ->

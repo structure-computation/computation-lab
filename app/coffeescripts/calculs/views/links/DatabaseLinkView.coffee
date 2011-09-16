@@ -16,7 +16,9 @@ SCViews.DatabaseLinkView = Backbone.View.extend
     newModel.set    'id_from_database' : @model.get 'id'
     newModel.unset  'id'
     @linkListView.add newModel
-
+    name = @model.get 'name'
+    SCVisu.NOTIFICATIONS.setText('La liaison «' + name + '» a été ajouté au calcul')
+    
   # Show details of the selected model but disable all inputs
   showDatabaseLinksDetails: (event) ->
     if event.srcElement != $(@el).find('button.add')[0]
