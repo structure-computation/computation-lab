@@ -11,7 +11,7 @@ SCViews.PieceListView = Backbone.View.extend
       @pieceViews.push new SCViews.PieceView model: piece, parentElement: this
     @selectedPieceView = null
     @render()
-    $('#pieces').tablesorter()
+    $(@el).find('table').tablesorter()
 
      # Triggered when a piece is clicked
     @bind "selection_changed:pieces", (selectedPieceView) =>

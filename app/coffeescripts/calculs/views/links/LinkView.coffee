@@ -30,10 +30,11 @@ SCViews.LinkView = Backbone.View.extend
   # Removing model from collection passing silent prevent from destroying from database
   # Also removing the view
   removeLink: ->
-    SCVisu.interfaceListView.trigger("action:removed_link", this)
-    @parentElement.collection.remove @model
-    SCVisu.current_calcul.trigger 'change'
-    @remove()
+    if confirm "Êtes-vous sûr ?"
+      SCVisu.interfaceListView.trigger("action:removed_link", this)
+      @parentElement.collection.remove @model
+      SCVisu.current_calcul.trigger 'change'
+      @remove()
 
   # Assign the link to the selected interface
   # Add an "Unassign" Button and remove all other "Assign" buttons (Because an interface can only have one link)

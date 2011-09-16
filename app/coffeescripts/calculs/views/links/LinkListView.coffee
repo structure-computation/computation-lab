@@ -12,8 +12,8 @@ SCViews.LinkListView = Backbone.View.extend
       @createLinkView(link)
     $('#links_database').hide()
     $('#links_database button.close').click -> 
-      $('#links_database').slideUp()
-      $('#list_calcul > div') .slideDown()
+      $('#links_database')   .slideUp()
+      $('#list_calcul > div').slideDown()
 
     @selectedLinkView = null
 
@@ -68,8 +68,8 @@ SCViews.LinkListView = Backbone.View.extend
   
   # Show links which are from database and hide edit view
   showDatabaseLinks: ->
-    $('#list_calcul > div') .slideUp()
-    $('#links_database').slideDown()
+    $('#list_calcul > div').slideUp()
+    $('#links_database')   .slideDown()
 
   # getNewLinkId: ->
   #   @collection.last().get('id_in_calcul') + 1    

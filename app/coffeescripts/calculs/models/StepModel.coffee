@@ -18,14 +18,26 @@ SCModels.Step = Backbone.Model.extend
     newFinalTime = @get('initial_time') + (@get('nb_time_steps') * @get('time_step'))
     @set({ final_time: newFinalTime})
 
-
+  getId: ->
+    @get('id_in_calcul')
+    
 # Collection of Step. Keep all steps up to date with each others.
 SCModels.StepCollection = Backbone.Collection.extend
   model: SCModels.Step
   initialize: ->
     @._meta = {}
-    @bind 'add', (step) ->
+
+    @bind 'add', (step) =>
       @updateModels()
+      step.set 'id_in_calcul' : @getNewId()
+
+  # Return a new ID
+  # Get the highest ID of the collection and add 1
+  getNewId: ->
+    newId = 1
+    @each (step) ->
+      newId = step.getId() if step.getId() > newId
+    ++newId
 
   meta: (property, value) ->
     if value == undefined

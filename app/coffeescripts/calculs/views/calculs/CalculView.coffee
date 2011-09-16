@@ -12,13 +12,14 @@ SCViews.CalculView = Backbone.View.extend
   
   # Delete the calcul from the database
   deleteCalcul: (event) ->
-    that = this
-    @model.destroy(
-      error: ->
-        alert "An error occured during suppression..."
-      success: ->
-        that.remove()
-    )
+    if confirm "Êtes-vous sûr ?"
+      that = this
+      @model.destroy(
+        error: ->
+          alert "An error occured during suppression..."
+        success: ->
+          that.remove()
+      )
     
   # Calls the parent's method to select a calcul 
   selectCalcul: ->

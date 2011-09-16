@@ -42,10 +42,11 @@ SCViews.BoundaryConditionView = Backbone.View.extend
 
   # Remove condition (model and view)
   removeCondition: ->
-    SCVisu.edgeListView.trigger("action:removed_boundary_condition", this)
-    @parentElement.collection.remove @model
-    @parentElement.updateCalcul()
-    @remove()
+    if confirm "Êtes-vous sûr ?"
+      SCVisu.edgeListView.trigger("action:removed_boundary_condition", this)
+      @parentElement.collection.remove @model
+      @parentElement.updateCalcul()
+      @remove()
 
   # Show the edit part
   editCondition: ->

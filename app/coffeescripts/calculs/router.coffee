@@ -19,8 +19,8 @@ SCVisu.Router = Backbone.Router.extend
         @nextPage()
     # Take care that when the user change 'step' in the wizard, the two lists
     $('#wizard_previous_button, #wizard_next_button, #breadcrumb a').click =>
-      $('#list_calcul > div') .slideDown()
-      $('#visu_calcul').show() if @currentPage > 0
+      $('#visu_calcul')      .show() if @currentPage > 0
+      $('#list_calcul > div').show() 
       
     $("#save_calcul").click =>
       if SCVisu.current_calcul
