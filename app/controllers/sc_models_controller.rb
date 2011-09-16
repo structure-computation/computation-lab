@@ -51,7 +51,6 @@ class ScModelsController < InheritedResources::Base
 
   def show 
     ws_sc_models  = ScModel.from_workspace(current_workspace_member.workspace.id).find_by_id(params[:id])
-    
     @sc_model     = ws_sc_models ?  ws_sc_models : ws_sc_models  
     @workspace    = current_workspace_member.workspace
     if @sc_model 
@@ -64,7 +63,6 @@ class ScModelsController < InheritedResources::Base
         format.json {render :status => 404, :json => {}}
       end
     end
-     
   end
   
   def load_mesh

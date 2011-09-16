@@ -32,12 +32,12 @@ describe MaterialsController do
       # NOTE: Je n'ai pas réussi à faire un stub sur un objet.
       # Material.stub(:standard_materials) { [mock_material] }  
       # NOTE: cela utilise la BDD, on peut aussi faire ce choix au final.  
-      get :index
+      get :index, :workspace_id => current_workspace.id
       assigns(:standard_materials).should eq( [@standard_material] )
     end
     
     it "assigns all materials for workspace materials library as @standard_materials" do
-      get :index
+      get :index, :workspace_id => current_workspace.id
       assigns(:workspace_materials).should eq( [@workspace_material] )
     end
   end
@@ -95,17 +95,17 @@ describe MaterialsController do
     end
   end
   
-  # describe "DELETE destroy" do         
-  #   # TODO: Ajouter une condition si User == MaterialOwner
-  #   before (:each) do
-  #     material_to_destroy  = FactoryGirl.create(:material) 
-  #     @material_destroyed  = material_to_destroy.id
-  #   end
-  #   it "destroys the requested material" do
-  #    # get :destroy, :workspace_id => current_workspace.id , :id => @material_destroyed.id   
-  #     #@material_destroyed.destroy
-  #   end
-  # end 
+  describe "DELETE destroy" do         
+    # TODO: Ajouter une condition si User == MaterialOwner
+    before (:each) do
+      @material_to_destroy  = FactoryGirl.create(:material, :workspace => current_workspace) 
+    end
+    it "destroys the requested material" do
+      pending "Il faut préciser que cette action de controlleur n'a pas besoin d'une vue."
+      # get :destroy, :workspace_id => current_workspace.id, :id => @material_to_destroy.id      
+      # response.should redirect_to(workspace_materials_path(current_workspace))
+    end
+  end      
 end 
 
                    

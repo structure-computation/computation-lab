@@ -12,7 +12,7 @@ describe ScModelsController do
   before(:each) do
     controller.stub(:authenticate_user!       =>  true              ) # .and_return(true)
     controller.stub(:current_workspace_member =>  mock_workspace_member )    
-    @workspace_sc_model  = FactoryGirl.create(:material , :workspace =>  current_workspace )
+    @workspace_sc_model  = FactoryGirl.create(:sc_model , :workspace =>  current_workspace )     
   end
 
   describe "GET index" do
@@ -27,7 +27,7 @@ describe ScModelsController do
   describe "GET show" do
     it "assigns the requested scmodel as @sc_model if sc_model is a sc_model from current workspace." do
       get :show, :id => @workspace_sc_model.id
-      assigns(:sc_model).should eq(@workspace_sc_models)
+      assigns(:sc_model).should eq(@workspace_sc_model)
       response.should render_template("sc_models/show")       
     end
     

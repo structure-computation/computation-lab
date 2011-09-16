@@ -18,6 +18,20 @@ class WorkspacesController < InheritedResources::Base
   
   layout 'workspace'  
   
+  def show
+    @workspace    = current_workspace_member.workspace
+    if @workspace 
+      # show!
+      render
+    else
+      respond_to do |format|
+        format.html {redirect_to workspace_path(current_workspace_member), 
+                    :notice => "Vous demandez l'affichage d'une page appartenant à un autre espace de travail."}
+        format.json {render :status => 404, :json => {}}
+      end
+    end
+  end
+  
   def create     
     kind = params[:workspace][:kind]
     case kind
