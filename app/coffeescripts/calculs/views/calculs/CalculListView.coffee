@@ -32,6 +32,7 @@ SCViews.CalculListView = Backbone.View.extend
   saveCalcul: ->
     previousSaveDate = SCVisu.current_calcul.get 'last_saved'
     date = new Date()
+    alert date
     dateString = date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear() + " " + date.toTimeString()
     SCVisu.current_calcul.set last_saved: dateString
     Backbone.sync "update", SCVisu.current_calcul

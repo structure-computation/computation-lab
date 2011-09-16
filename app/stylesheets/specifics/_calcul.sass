@@ -60,7 +60,7 @@ ul.data_list
     tr:hover
       background-color: $hover-color
 
-#steps, #calculus_option
+.toggler
   +transition-out(1s)
   max-height: 0px
   overflow: hidden
@@ -69,7 +69,7 @@ ul.data_list
   padding: 1%
   visibility: hidden
   
-#steps.maximize, #calculus_option.maximize
+.toggler.maximize
   +transition-in(1s)
   max-height: 100em
   visibility: visible
@@ -78,6 +78,7 @@ ul.data_list
   float : left
   a
     +border-left-radius(1em)
+    
 .next_button
   float : right
   a
@@ -106,3 +107,31 @@ ul.data_list
     background-color: white
     border: 1px solid #CCC
     padding: 1%
+    
+#notification
+  color: black
+  height: 2em
+  border: 1px solid #CCC
+  border-top: none
+  +border-bottom-radius(0.5em)
+  position: absolute
+  left: 50%
+  width: 40%
+  margin-left: -20%
+  background-color: white
+  +transition(0.5s)
+  -webkit-transform: translateY(-2.1em)
+  -moz-transform: translateY(-2.1em)
+  -o-transform: translateY(-2.1em)
+  transform: translateY(-2.1em)
+  p
+    margin: 0.2em
+    text-align: center
+    line-height: 2em
+    
+#notification.show
+  +transition(0.5s)
+  -webkit-transform: translateY(0)
+  -moz-transform: translateY(0)
+  -o-transform: translateY(0)
+  transform: translateY(0)
