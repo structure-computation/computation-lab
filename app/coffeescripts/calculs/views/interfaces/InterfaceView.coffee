@@ -8,27 +8,32 @@ SCViews.InterfaceView = Backbone.View.extend
   className : "interface_view"   
 
   events: 
-    "click"                 : "select"
+    "click"                 : "selectionChanged"
     'click button.assign'   : 'assignInterfaceToLink'
     'click button.unassign' : 'unassignInterfaceToLink'
+
+  # Add class to the element to highlight it
+  select: ->
+    $(@el).addClass("selected")
+  # Remove class from the element
+  deselect: ->
+    $(@el).removeClass("selected")
+
+  # Inform the ListView that a piece has been clicked
+  selectionChanged: (event) ->
+    if event.srcElement.tagName != "BUTTON"
+      @parentElement.trigger("selection_changed:interfaces", this)
+  
 
   # Assign the piece to a material
   assignInterfaceToLink: ->
     @parentElement.assignInterfaceToLink @model
-    @addUnassignButton()
+    @showUnassignButton()
 
   # Unassign the piece from his material
   unassignInterfaceToLink: ->
     @parentElement.unassignInterfaceToLink @model
-    @addAssignButton()
-
-    
-  # Highlight the selected Interface and tell the Link list to 
-  # show the link of this interface. If it has no link associated, user can assign one to it.
-  select: (event) ->
-    if event.srcElement.tagName != "BUTTON"
-      @parentElement.render() # Clear all buttons from all piece view
-      @parentElement.selectInterface @
+    @showAssignButton()
 
 
   # If the interface has no link, it can be assigned to it.
@@ -36,22 +41,22 @@ SCViews.InterfaceView = Backbone.View.extend
   # else, no button is rendered.
   linkHasBeenSelected: (linkModel) ->
     if @model.get('link_id') == linkModel.getId()
-      @addUnassignButton()
+      @showUnassignButton()
     else if !@model.isAssigned()
-      @addAssignButton()
+      @showAssignButton()
     else
       @render()
-      $(@el).removeClass('selected').addClass('gray')
+      $(@el).removeClass('selected')
 
   # Add a button for unassigning the interface from the selected link.
-  addUnassignButton: ->
+  showUnassignButton: ->
     @renderWithButton 'unassign', 'Désassigner'
-    $(@el).addClass('selected').removeClass('gray')
+    $(@el).addClass('selected')
 
   # Add a button for assigning the interface from the selected link.
-  addAssignButton: ->
+  showAssignButton: ->
     @renderWithButton 'assign', 'Assigner'
-    $(@el).removeClass('selected').removeClass('gray')
+    $(@el).removeClass('selected')
 
   # Render with an action button
   renderWithButton: (className, textButton) ->
@@ -69,6 +74,6 @@ SCViews.InterfaceView = Backbone.View.extend
       $(@el).append("<td class='is_assigned'>#{@model.get('link_id')}</td>")
     else
       $(@el).append('<td>Parfaite</td>')
-    $(@el).removeClass('selected').removeClass('gray')
+    $(@el).removeClass('selected')
     return this
 

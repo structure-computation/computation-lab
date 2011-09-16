@@ -8,9 +8,21 @@ SCViews.EdgeView = Backbone.View.extend
     $(@parentElement.el).find('table tbody').append @el
 
   events:
-    "click"                 : "select"
+    'click'                 : 'selectionChanged'
     "click button.assign"   : "asssignCondition"
     "click button.unassign" : "unassignCondition"
+
+  # Add class to the element to highlight it
+  select: ->
+    $(@el).addClass("selected")
+  # Remove class from the element
+  deselect: ->
+    $(@el).removeClass("selected")
+
+  # Inform the ListView that a piece has been clicked
+  selectionChanged: (event) ->
+    if event.srcElement.tagName != "BUTTON"
+      @parentElement.trigger("selection_changed:edges", this)
 
   # Assign the selected condition to the current model
   asssignCondition: ->
@@ -21,11 +33,6 @@ SCViews.EdgeView = Backbone.View.extend
   unassignCondition: ->
     @parentElement.unasssignCondition(this)
     @showAssignButton()
-
-  # Highlight correct boundary condition regarding the selected edge
-  select: (event) ->
-    if event.srcElement.tagName != "BUTTON"
-      @parentElement.setNewSelectedModel(this)
   
   # Show an assign button
   showAssignButton: ->
@@ -34,14 +41,10 @@ SCViews.EdgeView = Backbone.View.extend
   # Show an unassign button  
   showUnassignButton: ->
     $(@el).find('td:last').html("<button class='unassign'>Désassigner</button>")
-  
-  # Highlight the current view
-  highlight: ->
-    $(@el).addClass('selected')
-    
+      
   render: ->
     template = """
-      <td>#{@model.get('id')}</td>
+      <td>#{@model.getId()}</td>
       <td>#{@model.get('name')}</td>
     """
     $(@el).html(template).removeClass('selected')

@@ -6,9 +6,9 @@ SCViews.DatabaseMaterialView = Backbone.View.extend
     @materialListView  = params.materialListView
 
   events:
-    "click button.add" : "addToCalculus"
-    "click"            : "showDatabaseMaterialDetails"
-
+    "click button.add"  : "addToCalculus"
+    "click"             : "showDatabaseMaterialDetails"
+    
   # Add the selected material to the list of calcul's materials
   # Clone the model before and unset its ID to not prevent for confusion and have two clear seperate references
   addToCalculus: ->

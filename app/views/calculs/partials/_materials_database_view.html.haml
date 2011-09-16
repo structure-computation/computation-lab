@@ -1,4 +1,7 @@
 #materials_database
+  %h2.grey
+    %button.close Fermer
+    Liste des matériaux
   = render :partial => "materials/search_filter"
   %table.grey#materials_table
     %thead
@@ -32,4 +35,3 @@
           %td.family=         material.family
           %td.type=           material.mtype
           %td.comp=           material.comp
-  %button.close Fermer

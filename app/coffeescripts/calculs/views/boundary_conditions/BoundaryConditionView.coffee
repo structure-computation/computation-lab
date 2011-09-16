@@ -8,16 +8,28 @@ SCViews.BoundaryConditionView = Backbone.View.extend
   className : "boundary_condition_view"
 
   events: 
-    "click"           : "select"
-    "click .remove"   : "removeCondition"
-    "click .assign"   : "assignCondition"
-    "click .unassign" : "unassignCondition"
+    "click"                 : "selectionChanged"
+    "click button.edit"     : "editCondition"
+    "click button.remove"   : "removeCondition"
+    "click button.assign"   : "assignCondition"
+    "click button.unassign" : "unassignCondition"
   
+  # Add class to the element to highlight it
+  select: ->
+    $(@el).addClass("selected")
+  # Remove class from the element
+  deselect: ->
+    $(@el).removeClass("selected")
+
+  # Inform the ListView that a boundary condition has been clicked
+  selectionChanged: (event) ->
+    if event.srcElement.tagName != "BUTTON"
+      @parentElement.trigger("selection_changed:boundary_conditions", this)
+
   # Assign the current condition to the selected edge
   assignCondition: ->
     SCVisu.edgeListView.selectedEdgeView.model.set 'boundary_condition_id' : @model.get('id_in_calcul')
     SCVisu.edgeListView.selectedEdgeView.render()
-    SCVisu.edgeListView.selectedEdgeView.highlight()
     SCVisu.edgeListView.updateCalcul()
     @showUnassignButton()
 
@@ -25,34 +37,36 @@ SCViews.BoundaryConditionView = Backbone.View.extend
   unassignCondition: ->
     SCVisu.edgeListView.selectedEdgeView.model.unset 'boundary_condition_id'
     SCVisu.edgeListView.selectedEdgeView.render()
-    SCVisu.edgeListView.selectedEdgeView.highlight()
     SCVisu.edgeListView.updateCalcul()
     @parentElement.showAssignButtons()
 
   # Remove condition (model and view)
   removeCondition: ->
-    SCVisu.edgeListView.conditionHasBeenRemoved(@model)
+    SCVisu.edgeListView.trigger("action:removed_boundary_condition", this)
     @parentElement.collection.remove @model
     @parentElement.updateCalcul()
     @remove()
 
+  # Show the edit part
+  editCondition: ->
+    @parentElement.showDetails(@model)
+
   # Show an assign button on the condition element
   showAssignButton: ->
-    @render()
-    $(@el).find('button.remove').after('<button class="assign">Assigner</button>')
-
+    @renderWithButton 'assign', 'Assigner'
+      
   # Show an unassign button on the condition element
   showUnassignButton: ->
-    @parentElement.selectedBoundaryCondition = this
-    @parentElement.render()
-    $(@el).find('button.remove').after('<button class="unassign">Désassigner</button>')
+    @parentElement.render() # To remove button from other link views
+    @renderWithButton 'unassign', 'Désassigner'
+    $(@el).addClass("selected")
 
-  # Set the current condition to be the selectedEdge and show the edit view
-  select: (event) ->
-    if event.srcElement.tagName != "BUTTON"
-      @parentElement.setNewSelectedModel(this)
+    
+  renderWithButton: (className, textButton) ->
+    $(@el).html("#{@model.get('id_in_calcul')} - #{@model.get('name')}")
+    $(@el).append("<button class='remove'>X</button>")
+    $(@el).append("<button class='#{className}'>#{textButton}</button>")
+    return this
 
   render: ->
-    $(@el).html(@model.get('id_in_calcul') + " - " + @model.get('name') + "<button class='remove''>X</button>").removeClass('selected')
-    $(@el).removeClass("selected")
-    this
+    @renderWithButton 'edit', 'Editer'

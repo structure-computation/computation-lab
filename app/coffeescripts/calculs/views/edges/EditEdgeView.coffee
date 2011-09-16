@@ -16,20 +16,23 @@ SCViews.EditEdgeView = Backbone.View.extend
     @hideEverythingExceptCriteriaPart()
     @currentEdge = null
     $(@el).find('input:radio').removeAttr('disabled')
-    $(@el).show()
-    @emptyInputs()
+    @show()
     
   hide: ->
     $(@el).hide()
+    $('#visu_calcul').show()
     
   show: ->
     @emptyInputs()
     $(@el).show()
+    $('#visu_calcul').hide()
+
   events: 
     "click  input[name=edge_criteria]"          : "showSelectGeometry"
     "click  input[name=edge_surface_geometry], 
             input[name=edge_volume_geometry]"   : "showCorrectGeometry"
     "click  button.save"                        : "save"
+    "click  button.close"                       : "hide"
     "change"                                    : "updateSelectedModelAttributes"
       
   setModel: (edge) ->
@@ -96,7 +99,7 @@ SCViews.EditEdgeView = Backbone.View.extend
     @show()
     @hideEverythingExceptCriteriaPart()
     $(@el).find('#edge_criteria').show()
-    $(@el).find('button').hide()
+    $(@el).find('button.save').hide()
   
   emptyInputs: ->
     $(@el).find('input:not([type=radio]), textarea').val('')

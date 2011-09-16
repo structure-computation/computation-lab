@@ -6,7 +6,8 @@ SCViews.EditBoundaryConditionView = Backbone.View.extend
     @model = null
     
   events:
-    "change" : "updateModelAttributes"
+    "change"             : "updateModelAttributes"
+    "click button.close" : "hide"
 
   updateModelAttributes: ->
     @model.set
@@ -33,5 +34,8 @@ SCViews.EditBoundaryConditionView = Backbone.View.extend
 
   hide: ->
     $(@el).hide()
+    $('#visu_calcul').show()
+
   show: ->
     $(@el).show()
+    $('#visu_calcul').hide()
