@@ -2,26 +2,34 @@
 SCViews.LinkListView = Backbone.View.extend
   el: 'ul#links'
     
-  initialize: (options) ->
-    @collection.bind 'change', =>
-      @render()
+  initialize: (options) ->    
     @clearView()
     @editView = new SCViews.EditLinkView parentElement: this
+    @selectedLinkView = null
+
+    @collection.bind 'change', (model) =>
+      @render()
+      @selectedLinkView.select() if @selectedLinkView != null and model == @selectedLinkView.model
+
+    @collection.bind 'remove', (linkModel) =>
+      if linkModel == @selectedLinkView.model
+        @render()
+        @editView.hide()
+
     @linkViews = []
     for link in @collection.models
       @createLinkView(link)
     $('#links_database').hide()
-    $('#links_database button.close').click -> 
+    $('#links_database button.close').click => 
       $('#links_database')   .slideUp()
       $('#list_calcul > div').slideDown()
-
-    @selectedLinkView = null
-
-    @collection.bind 'remove', @render, this
+      @editView.hide()
 
     # Triggered when a link is clicked
     @bind "selection_changed:links", (selectedLinkView) =>
       @render() # Reset all views
+      # Hide edit view if the model selected is not the same as the one in the edit view
+      @editView.hide() if @editView.model != selectedLinkView.model
       if @selectedLinkView == selectedLinkView
         @selectedLinkView.deselect()
         @selectedLinkView = null
@@ -36,6 +44,7 @@ SCViews.LinkListView = Backbone.View.extend
     @bind "selection_changed:interfaces", (selectedInterfaceView) =>
       @selectedLinkView.deselect() if @selectedLinkView
       @selectedLinkView = null
+      @editView.hide()
       @render() # Reset all views
       
       if selectedInterfaceView != null
@@ -85,7 +94,6 @@ SCViews.LinkListView = Backbone.View.extend
   # Create a view giving it a model
   createLinkView: (link) ->
     l = new SCViews.LinkView model: link, parentElement: this
-    l.bind 'show_details', @showDetails, this
     @linkViews.push l
     @render()
 

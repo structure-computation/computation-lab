@@ -38,8 +38,11 @@ SCViews.MaterialView = Backbone.View.extend
   
   # Show details of a material
   showMaterialDetails: ->
-    @parentElement.showDetails @model    
-    
+    @parentElement.showDetails @model
+    # Trigger selection change only when the material selected change because it
+    # makes lose the focus
+    @parentElement.trigger("selection_changed:materials", this) if @parentElement.selectedMaterialView != this
+
   # Clone the model of the clicked material view
   clone: ->
     @parentElement.clone @model
