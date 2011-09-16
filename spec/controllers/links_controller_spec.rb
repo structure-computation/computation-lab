@@ -16,18 +16,35 @@ describe LinksController do
   let :mock_link                do mock_model(Link).as_null_object                  end
   let :current_workspace        do FactoryGirl.build(:workspace)                    end
   let :mock_workspace_member    do 
-    mock_model(UserWorkspaceMembership, #:workspace_id => current_workspace.id 
-                                        :workspace    => current_workspace ).as_null_object 
+    mock_model(UserWorkspaceMembership, :workspace    => current_workspace ).as_null_object 
   end
   
   # NOTE: pour screencast : before != begin... et before(:all) ne marche pas pour cela : controller n'est pas 
   # encore défini !
   # NOTE: Attention, seul before each est placé dans une transaction pour la BDD. 
   before(:each) do
-    controller.stub(:authenticate_user!       =>  true              ) # .and_return(true)
+    controller.stub(:authenticate_user!       =>  true                  ) # .and_return(true)
     controller.stub(:current_workspace_member =>  mock_workspace_member )    
-    @standard_link   = FactoryGirl.create(:standard_link )
-    @workspace_link  = FactoryGirl.create(:link , :workspace =>  current_workspace )
+    @standard_link  = FactoryGirl.create(:standard_link )
+    @workspace_link = FactoryGirl.create(:link , :workspace =>  current_workspace )
+  end
+
+  describe "Access for engineers roles" do
+    before(:each) do mock_workspace_member.stub(:engineer => true) end
+    context "When accessing standard links" do
+      it "can access index" do get    :index  , :workspace_id => current_workspace.id; should respond_with(:success) end
+      it "can access show"  do get    :show   , :workspace_id => current_workspace.id, :id => @workspace_link.id ; should respond_with(:success)   end
+      it "can NOT edit"     do get    :edit   , :workspace_id => current_workspace.id, :id => @workspace_link.id ; should respond_with(:forbidden) end
+      it "can NOT update"   do put    :update , :workspace_id => current_workspace.id, :id => @workspace_link.id ; should respond_with(:forbidden) end
+      it "can NOT destroy"  do delete :destroy, :workspace_id => current_workspace.id, :id => @workspace_link.id ; should respond_with(:forbidden) end  
+      # new et create non pertinents sur un standard links
+    end
+
+
+    # it "has access to all opération on workspaces links" do
+    # 
+    # end
+
   end
 
 
