@@ -51,6 +51,10 @@ SCViews.BoundaryConditionView = Backbone.View.extend
   # Show the edit part
   editCondition: ->
     @parentElement.showDetails(@model)
+    # Trigger selection change only when the material selected change because it
+    # makes lose the focus
+    @parentElement.trigger("selection_changed:boundary_conditions", this) if @parentElement.selectedBoundaryConditionView != this
+    $('#visu_calcul').hide()
 
   # Show an assign button on the condition element
   showAssignButton: ->

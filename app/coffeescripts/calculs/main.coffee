@@ -69,3 +69,27 @@ $ ->
   # Force the redirection to first part of the wizard
   # Backbone.history.start() returns true when the url contains an anchor
   SCVisu.router.navigate "Initialization", true if Backbone.history.start()
+  
+  class Notifications
+    constructor: (delay) ->
+      @content = $('#notification')
+      @delay = delay ||= 3000
+      
+    setText: (text) ->
+      @content.html("")
+      @content.append("<p>" + text + "</p>")
+      @content.addClass("show")
+      setTimeout(@close, @delay)
+      
+    setTextWithoutTimer: (text) ->
+      @content.html("")
+      @content.append("<p>" + text + "</p>")
+      @content.addClass("show")
+      
+    setDelay: (time) ->
+      @delay = time
+      
+    close: => 
+      @content.removeClass("show")
+      
+  SCVisu.NOTIFICATIONS = new Notifications()

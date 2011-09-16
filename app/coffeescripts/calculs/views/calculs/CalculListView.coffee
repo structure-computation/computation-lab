@@ -34,13 +34,19 @@ SCViews.CalculListView = Backbone.View.extend
     date = new Date()
     dateString = date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear() + " " + date.toTimeString()
     SCVisu.current_calcul.set last_saved: dateString
-    Backbone.sync "update", SCVisu.current_calcul
+    SCVisu.NOTIFICATIONS.setTextWithoutTimer('Sauvegarde en cours...')
+    Backbone.sync "update", SCVisu.current_calcul, 
+      success: (response) ->
+        SCVisu.NOTIFICATIONS.close()
+      error: ->
+        SCVisu.NOTIFICATIONS.setText('La sauvegarde a échouée')
     $('#saved_for').html('')
     $('#saved_for').append "Dernière sauvegarde : " + dateString
     $('#save_calcul').attr("disabled", "disabled")
     
 
   beforeClosePage: (event) ->
+    SCVisu.NOTIFICATIONS.setTextWithoutTimer('Sauvegarde en cours...')
     date = new Date()
     dateString = date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear() + " " + date.toTimeString()
     SCVisu.current_calcul.set last_saved: dateString

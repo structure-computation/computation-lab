@@ -8,16 +8,19 @@ SCViews.BoundaryConditionListView = Backbone.View.extend
     @clearView()
     @boundaryConditionViews = []
     @selectedBoundaryConditionView = null
-    @editBoundaryConditionView = new SCViews.EditBoundaryConditionView()
+    @editView = new SCViews.EditBoundaryConditionView()
     
     for boundaryCondition in @collection.models
       @boundaryConditionViews.push new SCViews.BoundaryConditionView model: boundaryCondition, parentElement: this
     
     @render()
-    @collection.bind 'change', @render, this
-    @collection.bind 'remove', =>
-      @editBoundaryConditionView.hide()
-      @render
+    @collection.bind 'change', (model) =>
+      @render()
+      @selectedBoundaryConditionView.select() if @selectedBoundaryConditionView != null and model == @selectedBoundaryConditionView.model
+    @collection.bind 'remove', (boundaryConditionModel) =>
+      if boundaryConditionModel == @selectedBoundaryConditionView.model
+        @editView.hide()
+        @render()
     @collection.bind 'add'   , (boundaryCondition) =>
       boundaryConditionView       = new SCViews.BoundaryConditionView model: boundaryCondition, parentElement: this
       @boundaryConditionViews.push  boundaryConditionView
@@ -27,6 +30,9 @@ SCViews.BoundaryConditionListView = Backbone.View.extend
     # Triggered when a boundaryCondition is clicked
     @bind "selection_changed:boundary_conditions", (selectedBoundaryConditionView) =>
       @render() # Reset all views
+      # Hide edit view if the model selected is not the same as the one in the edit view
+      @editView.hide() if @editView.model != selectedBoundaryConditionView.model
+
       if @selectedBoundaryConditionView == selectedBoundaryConditionView
         @selectedBoundaryConditionView.deselect()
         @selectedBoundaryConditionView = null
@@ -41,6 +47,7 @@ SCViews.BoundaryConditionListView = Backbone.View.extend
     @bind "selection_changed:edges", (selectedEdgeView) =>
       @selectedBoundaryConditionView.deselect() if @selectedBoundaryConditionView
       @selectedBoundaryConditionView = null
+      @editView.hide()
       @render() # Reset all views
       
       if selectedEdgeView != null
@@ -59,6 +66,10 @@ SCViews.BoundaryConditionListView = Backbone.View.extend
           _.each @boundaryConditionViews, (boundaryConditionView) =>
             boundaryConditionView.showAssignButton()
 
+    # Triggered when a edge is remove
+    @bind "action:removed_edge", (edgeView) =>
+      @render()
+
   events:
     "click .add" : "addCondition"
 
@@ -74,10 +85,10 @@ SCViews.BoundaryConditionListView = Backbone.View.extend
 
   # Add a new boundary condition (model and view)
   addCondition: ->
-    $("#edit_edge_form").hide()
+    $("#edge_form").hide()
     boundaryCondition                 = new SCModels.BoundaryCondition()
     @collection.add                     boundaryCondition
-    @editBoundaryConditionView.setModel boundaryCondition
+    @editView.setModel boundaryCondition
     SCVisu.current_calcul.trigger       'change'
 
   # Clears all elements previously loaded in the DOM. 
@@ -90,8 +101,7 @@ SCViews.BoundaryConditionListView = Backbone.View.extend
     
   # Show edit view of the given model.
   showDetails: (model) ->
-    @editBoundaryConditionView.setModel model
-
+    @editView.setModel model
   
   render: ->
     SCVisu.current_calcul.set boundary_condition: @collection

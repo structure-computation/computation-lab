@@ -5,8 +5,8 @@ SCViews.EdgeListView = Backbone.View.extend
   initialize: (options) ->
     @clearView()
     @edgeViews = []
-    @editEdgeView = new SCViews.EditEdgeView()
-    @editEdgeView.hide()
+    @editView = new SCViews.EditEdgeView()
+    @editView.hide()
     for edge in @collection.models
       @edgeViews.push new SCViews.EdgeView model: edge, parentElement: @
     @selectedEdgeView = null
@@ -14,11 +14,21 @@ SCViews.EdgeListView = Backbone.View.extend
     @render()
     $(@el).find('table').tablesorter()
 
+    @collection.bind 'change', (model) =>
+      @render()
+      @selectedEdgeView.select() if  @selectedEdgeView != null and model == @selectedEdgeView.model
     @collection.bind 'add'   , @render, this
+    @collection.bind 'remove', (edgeModel) => 
+      if edgeModel == @selectedEdgeView.model
+        @editView.hide()
+        @render()
 
     # Triggered when a edge is clicked
     @bind "selection_changed:edges", (selectedEdgeView) =>
       @render() # Reset all views
+      # Hide edit view if the model selected is not the same as the one in the edit view
+      @editView.hide() if @editView.model != selectedEdgeView.model
+
       if @selectedEdgeView == selectedEdgeView
         @selectedEdgeView.deselect()
         @selectedEdgeView = null
@@ -27,7 +37,6 @@ SCViews.EdgeListView = Backbone.View.extend
         @selectedEdgeView.deselect() if @selectedEdgeView
         @selectedEdgeView = selectedEdgeView
         @selectedEdgeView.select()
-        @editEdgeView.setModel @selectedEdgeView.model
         SCVisu.boundaryConditionListView.trigger("selection_changed:edges", @selectedEdgeView)
 
 
@@ -35,6 +44,7 @@ SCViews.EdgeListView = Backbone.View.extend
     @bind "selection_changed:boundary_conditions", (selectedBoundaryConditionsView) =>
       @selectedEdgeView.deselect() if @selectedEdgeView
       @selectedEdgeView = null
+      @editView.hide()
       @render() # Reset all views
       if selectedBoundaryConditionsView != null
         $("button.assign_all, button.unassign_all").removeAttr('disabled')
@@ -58,7 +68,7 @@ SCViews.EdgeListView = Backbone.View.extend
       @render()      
 
   addEdgeModel: (edgeModel) ->
-    @editEdgeView.hide()
+    @editView.hide()
     @edgeViews.push new SCViews.EdgeView model: edgeModel, parentElement: @
     @collection.add edgeModel
     @render()
@@ -90,7 +100,7 @@ SCViews.EdgeListView = Backbone.View.extend
   showNewEdgeForm: ->
     $('#boundary_condition_form').hide()
     @render()
-    @editEdgeView.showAndInitialize()
+    @editView.showAndInitialize()
 
   # Called from edit view when user wants to create a new edge.
   # Create a view associated to the given model

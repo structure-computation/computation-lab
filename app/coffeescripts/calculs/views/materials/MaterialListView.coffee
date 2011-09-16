@@ -11,17 +11,26 @@ SCViews.MaterialListView = Backbone.View.extend
       @createMaterialView(material)
     @selectedMaterialView = null
     $('#materials_database').hide()
-    $('#materials_database button.close').click -> 
+    $('#materials_database button.close').click => 
       $('#materials_database').slideUp()
       $('#list_calcul > div') .slideDown()
-      
-    @collection.bind 'remove', @render, this
-    @render()
+      @editView.hide()
 
-    @collection.bind 'change', @render, this
+    @collection.bind 'change', (model) =>
+      @render()
+      @selectedMaterialView.select() if @selectedMaterialView != null and model == @selectedMaterialView.model
+    @collection.bind 'remove', (materialModel) =>
+      if @selectedMaterialView != null and materialModel == @selectedMaterialView.model
+        @editView.hide()
+        @render()
+
+    @render()
+      
     # Triggered when a material is clicked
     @bind "selection_changed:materials", (selectedMaterialView) =>
       @render() # Reset all views
+      # Hide edit view if the model selected is not the same as the one in the edit view
+      @editView.hide() if @editView.model != selectedMaterialView.model
       if @selectedMaterialView == selectedMaterialView
         @selectedMaterialView.deselect()
         @selectedMaterialView = null
@@ -36,6 +45,7 @@ SCViews.MaterialListView = Backbone.View.extend
     @bind "selection_changed:pieces", (selectedPieceView) =>
       @selectedMaterialView.deselect() if @selectedMaterialView
       @selectedMaterialView = null
+      @editView.hide()
       @render() # Reset all views
       
       if selectedPieceView != null

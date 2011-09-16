@@ -39,6 +39,7 @@ SCViews.EditBoundaryConditionView = Backbone.View.extend
 
   # Set the inputs reguarding the model passed
   setModel: (model) ->
+    $("#edge_form, #visu_calcul").hide()
     $(@el).find('select.steps, .functionPart').html('')
     SCVisu.stepListView.collection.each (step) =>
       $(@el).find('select.steps').append("<option value='step_#{step.getId()}'>#{step.get('name')}</option>")
