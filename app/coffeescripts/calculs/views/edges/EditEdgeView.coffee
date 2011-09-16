@@ -6,8 +6,9 @@ SCViews.EditEdgeView = Backbone.View.extend
   el: "#edit_edge_form"
   initialize: (params) ->
     $(@el).find('> div:not("#edge_criteria, #edge_information_box")').hide()
-    # Hide save button
-    $(@el).find('button.save').hide()
+
+    $(@el).find('button.save').attr('disabled','disabled')
+
     @currentCriteria = null
     @currentGeometry = null
     @currentEdge     = null
@@ -16,6 +17,7 @@ SCViews.EditEdgeView = Backbone.View.extend
     @hideEverythingExceptCriteriaPart()
     @currentEdge = null
     $(@el).find('input:radio').removeAttr('disabled')
+    $(@el).find('button.save').show() 
     @show()
     
   hide: ->
@@ -37,6 +39,7 @@ SCViews.EditEdgeView = Backbone.View.extend
       
   setModel: (edge) ->
     @currentEdge = edge
+    $(@el).find('button.save').hide()
     @showCriteriaPartAndDisableButtons()
     $(@el).find('#edge_name')       .val(edge.get('name')) 
     $(@el).find('#edge_description').val(edge.get('description'))     
@@ -80,16 +83,17 @@ SCViews.EditEdgeView = Backbone.View.extend
   showGeometry: ->
     @hideEverythingExceptCriteriaAndGeometryPart()
     @updateInputs() if @currentEdge    
-    $(@el).find('button.save').show() if @currentEdge == null
-
+    
+    $(@el).find('button.save').removeAttr('disabled')
+    
     $(@el).find("#{@currentCriteria}_geometry").show()    
     $(@el).find("#edge_#{@currentCriteria}_#{@currentGeometry}").show()
 
   # Hide all divs except criteria div
   hideEverythingExceptCriteriaPart: ->
     $(@el).find('> div:not("#edge_criteria, #edge_information_box")').hide()
-    $(@el).find('button.save').hide()
-
+    #$(@el).find('button.save').hide()
+    $(@el).find('button.save').attr('disabled','disabled')
   hideEverythingExceptCriteriaAndGeometryPart: ->
     @hideEverythingExceptCriteriaPart()
     $("##{@currentCriteria}_geometry").show()
@@ -99,7 +103,9 @@ SCViews.EditEdgeView = Backbone.View.extend
     @show()
     @hideEverythingExceptCriteriaPart()
     $(@el).find('#edge_criteria').show()
-    $(@el).find('button.save').hide()
+    # $(@el).find('button.save').hide()
+    $(@el).find('button.save').attr('disabled','disabled')
+
   
   emptyInputs: ->
     $(@el).find('input:not([type=radio]), textarea').val('')
