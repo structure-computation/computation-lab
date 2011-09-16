@@ -15,32 +15,58 @@ describe "Access rights on RESTressources" do
     #                                                                         :role => manager ).as_null_object 
     #                                  end                              
                                  
-    before(:each) do
-      controller.stub(:authenticate_user!         => true                                       )                 
-      #controller.stub(:current_engineer_manager    => mock_engineer_member  )
-      #controller.stub(:current_manager_manager     => mock_manager_member   ) 
-      controller.stub(:current_member             => mock_current_member                        )   
-      @engineer_member  = FactoryGirl.create(:engineer_member, :workspace =>  current_workspace )
-      @manager_member   = FactoryGirl.create(:manager_member , :workspace =>  current_workspace )
-    end  
+    # before(:each) do
+    #   controller.stub(:authenticate_user!         => true                                       )                 
+    #   #controller.stub(:current_engineer_manager    => mock_engineer_member  )
+    #   #controller.stub(:current_manager_manager     => mock_manager_member   ) 
+    #   controller.stub(:current_member             => mock_current_member                        )   
+    #   @engineer_member  = FactoryGirl.create(:engineer_member, :workspace =>  current_workspace )
+    #   @manager_member   = FactoryGirl.create(:manager_member , :workspace =>  current_workspace )
+    # end  
     
     describe "GET show" do                    
-        
-      it "redirect to workspace/sc_models when user is an engineer" do 
-        get :show, :id => current_workspace.id    
-        assigns(:member ).should eq( [@engineer_member] )
-        response.should render_template("scmodels/index")
-        #response.should redirect_to(sc_models_path)   
-      end
-    
-      it "redirect to workspace/bills when user is an manager" do 
-        get :show, :id => current_workspace.id           
-        assigns(:member ).should eq( [@manager_member] )
-        response.should render_template("bills/index")  
-        #response.should redirect_to(bills_path)   
-      end     
-    
-      context "When a forbidden (not member of) or non existant workspace is asked" do 
+      
+      context "UserWorkspaceMember is an Engineer" do
+        before (:each) do       
+          controller.stub(:authenticate_user! => true                                               ) 
+          controller.stub(:current_member     => mock_current_member                                )   
+          @engineer_member  = FactoryGirl.create(:engineer_member, :workspace =>  current_workspace )
+        end
+        it "redirect to workspace/sc_models" do 
+          get :show, :id => current_workspace.id    
+          assigns(:workspace ).should eq( [@current_workspace] )
+          response.should render_template("scmodels/index")
+          #response.should redirect_to(sc_models_path)   
+        end
+        it "should not redirect to workspace/bills" do 
+          get :show, :id => current_workspace.id           
+          assigns(:workspace ).should eq( [@current_workspace] )
+          response.should render_template("bills/index")  
+          #response.should redirect_to(bills_path)   
+        end    
+      end 
+      
+      context "UserWorkspaceMember is an Engineer" do
+        before (:each) do       
+          controller.stub(:authenticate_user! => true                                               ) 
+          controller.stub(:current_member     => mock_current_member                                )   
+          @manager_member   = FactoryGirl.create(:manager_member , :workspace =>  current_workspace )
+        end
+        it "redirect to workspace/sc_models" do 
+          get :show, :id => current_workspace.id    
+          assigns(:workspace ).should eq( [@current_workspace] )
+          #response.should render_template("scmodels/index")
+          response.should redirect_to(workspace_sc_models_path(current_workspace))
+        end
+        it "should not redirect to workspace/bills" do 
+          get :show, :id => current_workspace.id           
+          assigns(:workspace ).should eq( [@current_workspace] )
+          #response.should render_template("bills/index")  
+          response.should redirect_to(workspace_bills_path(current_workspace))
+        end  
+      end               
+      
+      context "When an Member try to acces to a forbidden workspace or non existant workspace" do 
         before(:each) do
           #not_member_workspace        = FactoryGirl.create(:member)  
           forbidden_workspace         = FactoryGirl.create(:workspace)
@@ -50,14 +76,15 @@ describe "Access rights on RESTressources" do
           tmp_workspace               = FactoryGirl.create(:workspace)
           @non_existing_workspace_id  = tmp_workspace.id
           tmp_workspace.destroy
-        end
-      
+        end 
+    
         it "in html, redirect to homepage if the user is not a member of the requested workspace." do
           get :show, :id => @workspace_not_member.id
-          response.should redirect_to("/root")
-          flash[:notice].should eq("Vous n'avez pas accès à cet espace de travail.")
-        end    
-      end             
+          assigns(:workspace).should be nil
+          response.should redirect_to("/users/sign_in")
+          flash[:notice].should eq("Vous demandez l'affichage d'une page appartenant à un autre espace de travail.")
+        end 
+      end            
     end
  
     
