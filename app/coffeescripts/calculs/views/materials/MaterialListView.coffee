@@ -10,7 +10,11 @@ SCViews.MaterialListView = Backbone.View.extend
     for material in @collection.models
       @createMaterialView(material)
     @selectedMaterialView = null
-    $('#materials_database button.close').click -> $('#materials_database').hide()
+    $('#materials_database').hide()
+    $('#materials_database button.close').click -> 
+      $('#materials_database').slideUp()
+      $('#list_calcul > div') .slideDown()
+      
     @collection.bind 'remove', @render, this
     @render()
 
@@ -54,7 +58,8 @@ SCViews.MaterialListView = Backbone.View.extend
     "click button.add_material" : "showDatabaseMaterials"
     
   showDatabaseMaterials: ->
-    $('#materials_database').show()
+    $('#list_calcul > div') .slideUp()
+    $('#materials_database').slideDown()
     
   # Add a material to the collection and create an associated view
   add: (materialModel) ->
