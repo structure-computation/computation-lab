@@ -70,6 +70,7 @@ SCViews.StepView = Backbone.View.extend
     'click button.delete' : 'delete'
 
   delete: ->
-    @model.destroy()
-    SCVisu.current_calcul.trigger 'change'
-    @remove()
+    if confirm "Êtes-vous sûr ?"
+      @model.destroy()
+      SCVisu.current_calcul.trigger 'change'
+      @remove()
