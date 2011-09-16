@@ -8,26 +8,32 @@ SCViews.PieceView = Backbone.View.extend
   className : "piece_view"   
 
   events: 
-    'click'                 : 'select'
+    'click'                 : 'selectionChanged'
     'click button.assign'   : 'assignPieceToMaterial'
     'click button.unassign' : 'unassignPieceToMaterial'
-    
+
+  # Add class to the element to highlight it
+  select: ->
+    $(@el).addClass("selected")
+  # Remove class from the element
+  deselect: ->
+    $(@el).removeClass("selected")
+
+  # Inform the ListView that a piece has been clicked
+  selectionChanged: (event) ->
+    if event.srcElement.tagName != "BUTTON"
+      @parentElement.trigger("selection_changed:pieces", this)
+  
+
   # Assign the piece to a material
   assignPieceToMaterial: ->
     @parentElement.assignPieceToMaterial @model
-    @addUnassignButton()
+    @showUnassignButton()
 
   # Unassign the piece from his material
   unassignPieceToMaterial: ->
     @parentElement.unassignPieceToMaterial @model
-    @addAssignButton()
-    
-  # Highlight the selected piece and tell the material list to 
-  # show the material of this piece. If it has no material, a material can be assigned to it.
-  select: (event) ->
-    if event.srcElement.tagName != "BUTTON"
-      @parentElement.render() # Clear all buttons from all piece view
-      @parentElement.selectPiece @
+    @showAssignButton()
 
   # Tells the view that a material has been selected.
   # If the piece has no material, it can be assigned to it.
@@ -35,21 +41,21 @@ SCViews.PieceView = Backbone.View.extend
   # else, nothing is rendered.
   materialHasBeenSelected: (material) ->
     if @model.get('material_id') == material.getId()
-      @addUnassignButton()
+      @showUnassignButton()
     else if _.isUndefined @model.get('material_id')
-      @addAssignButton()
+      @showAssignButton()
     else
       @render()
 
   # Add a button for unassigning the piece from the selected material.
-  addUnassignButton: ->
+  showUnassignButton: ->
     @renderWithButton 'unassign', 'Désassigner'
-    $(@el).addClass('selected').removeClass('gray')
+    $(@el).addClass('selected')
 
   # Add a button for assigning the piece from the selected material.
-  addAssignButton: ->
+  showAssignButton: ->
     @renderWithButton 'assign', 'Assigner'
-    $(@el).removeClass('selected').removeClass('gray')
+    $(@el).removeClass('selected')
 
   # Render with an action button
   renderWithButton: (className, textButton)->
@@ -67,6 +73,6 @@ SCViews.PieceView = Backbone.View.extend
       $(@el).append "<td class='is_assigned'>#{@model.get('material_id')}</td>"
     else
       $(@el).append "<td>-</td>"
-    $(@el).removeClass('selected').removeClass('gray')
+    $(@el).removeClass('selected')
     return this
 

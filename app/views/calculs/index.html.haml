@@ -100,10 +100,6 @@
     
   .volumic_forces
     = render "calculs/partials/volumic_force_details"
-    
-  .boundary_conditions
-    = render "calculs/partials/edge_form"
-    = render "calculs/partials/boundary_condition_form"
 
   .options
     = render "calculs/partials/step_details"
@@ -118,6 +114,9 @@
 
   .links#edit_link
     = render "calculs/partials/link_details_part"
+
+  = render "calculs/partials/edge_form"
+  = render "calculs/partials/boundary_condition_form"
   
 - content_for :wizard_buttons do 
   .previous_button

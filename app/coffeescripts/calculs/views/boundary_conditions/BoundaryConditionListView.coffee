@@ -2,12 +2,12 @@
 SCViews.BoundaryConditionListView = Backbone.View.extend
   el: 'ul#boundary_conditions'
   
-  # You have to pass a PieceCollection at initialisation as follow:
-  # new SCVisu.pieceListView({ collection : myPieceCollection })
+  # You have to pass a EdgeCollection at initialisation as follow:
+  # new SCVisu.edgeListView({ collection : myEdgeCollection })
   initialize: ->
     @clearView()
     @boundaryConditionViews = []
-    @selectedBoundaryCondition = null
+    @selectedBoundaryConditionView = null
     @editBoundaryConditionView = new SCViews.EditBoundaryConditionView()
     
     for boundaryCondition in @collection.models
@@ -15,37 +15,57 @@ SCViews.BoundaryConditionListView = Backbone.View.extend
     
     @render()
     @collection.bind 'change', @render, this
+    @collection.bind 'remove', =>
+      @editBoundaryConditionView.hide()
+      @render
     @collection.bind 'add'   , (boundaryCondition) =>
       boundaryConditionView       = new SCViews.BoundaryConditionView model: boundaryCondition, parentElement: this
       @boundaryConditionViews.push  boundaryConditionView
-      @setNewSelectedModel          boundaryConditionView
       @render()
+      $(boundaryConditionView.el).addClass("selected")
 
+    # Triggered when a boundaryCondition is clicked
+    @bind "selection_changed:boundary_conditions", (selectedBoundaryConditionView) =>
+      @render() # Reset all views
+      if @selectedBoundaryConditionView == selectedBoundaryConditionView
+        @selectedBoundaryConditionView.deselect()
+        @selectedBoundaryConditionView = null
+        SCVisu.edgeListView.trigger("selection_changed:boundary_conditions", null)
+      else
+        @selectedBoundaryConditionView.deselect() if @selectedBoundaryConditionView
+        @selectedBoundaryConditionView = selectedBoundaryConditionView
+        @selectedBoundaryConditionView.select()
+        SCVisu.edgeListView.trigger("selection_changed:boundary_conditions", @selectedBoundaryConditionView)
+      
+    # Triggered when a edge is clicked
+    @bind "selection_changed:edges", (selectedEdgeView) =>
+      @selectedBoundaryConditionView.deselect() if @selectedBoundaryConditionView
+      @selectedBoundaryConditionView = null
+      @render() # Reset all views
+      
+      if selectedEdgeView != null
+        # If the selected edge is not null, then there is two possibilities:
+        # The edge is already assigned to a boundaryCondition 
+        if !_.isUndefined(selectedEdgeView.model.get('boundary_condition_id'))
+          # Then we have to select this boundaryCondition and show an unassign button
+          for boundaryConditionView in @boundaryConditionViews
+            if boundaryConditionView.model.getId() == selectedEdgeView.model.get('boundary_condition_id')
+              boundaryConditionView.select()
+              boundaryConditionView.showUnassignButton()
+              break
+        # The edge doesn't have a boundaryCondition assigned yet
+        else
+          # Then we have to show assign buttons
+          _.each @boundaryConditionViews, (boundaryConditionView) =>
+            boundaryConditionView.showAssignButton()
 
   events:
     "click .add" : "addCondition"
-
-  # Show itself
-  show: ->
-    $(@el).show()
 
   # Show an assign button to each condition view
   showAssignButtons: ->
     _.each @boundaryConditionViews, (view) ->
       view.showAssignButton()
-
-  # Highlight the condition with the given "condition_id".
-  # Also show unassign button because it is called when an edge is selected
-  highlightCondition: (condition_id) ->
-    @selectedBoundaryCondition = null
-    for conditionView in @boundaryConditionViews
-      if conditionView.model.get('id_in_calcul') == condition_id
-        @render()
-        conditionView.showUnassignButton()
-        break
-  unhighlightConditions: ->
-    _.each @boundaryConditionViews, (view) ->
-      $(view.el).removeClass('selected').removeClass('gray')
 
   # Update the calcul json
   updateCalcul: ->
@@ -55,29 +75,10 @@ SCViews.BoundaryConditionListView = Backbone.View.extend
   # Add a new boundary condition (model and view)
   addCondition: ->
     $("#edit_edge_form").hide()
-    @show()
     boundaryCondition                 = new SCModels.BoundaryCondition()
     @collection.add                     boundaryCondition
+    @editBoundaryConditionView.setModel boundaryCondition
     SCVisu.current_calcul.trigger       'change'
-    
-  # setNewSelectedModel is executed when a child view indicate it has been selected.
-  # It set the current selected model to "non selected" (which trigger an event that redraw its line).
-  setNewSelectedModel: (boundaryConditionView) ->
-    if @selectedBoundaryCondition == boundaryConditionView
-      @selectedBoundaryCondition = null
-      @unhighlightConditions()
-      SCVisu.edgeListView.boundaryConditionHasBeenDeselected()
-    else
-      @selectedBoundaryCondition = boundaryConditionView
-      @editBoundaryConditionView.setModel boundaryConditionView.model
-      SCVisu.edgeListView.boundaryConditionHasBeenSelected(boundaryConditionView.model)
-      $("#edit_edge_form").hide()
-      @render()
-  
-
-  edgeHasBeenDeselected: ->
-    @selectedBoundaryCondition = null
-    @render()
 
   # Clears all elements previously loaded in the DOM. 
   # Indeed, the 'ul#boundary_conditions' element already exists in the DOM and every time we create a BoundaryConditionListView, 
@@ -87,11 +88,16 @@ SCViews.BoundaryConditionListView = Backbone.View.extend
   clearView: ->
     $(@el).html('')
     
+  # Show edit view of the given model.
+  showDetails: (model) ->
+    @editBoundaryConditionView.setModel model
+
+  
   render: ->
     SCVisu.current_calcul.set boundary_condition: @collection
     _.each @boundaryConditionViews, (boundaryCondition) ->
       boundaryCondition.render()
-    $(@selectedBoundaryCondition.el).addClass 'selected' if @selectedBoundaryCondition
+      boundaryCondition.deselect()
     $(@el).find('button.add').remove()
     $(@el).append "<button class='add'>Ajouter une condition limite</button>"
     return this

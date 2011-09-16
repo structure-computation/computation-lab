@@ -12,6 +12,46 @@ SCViews.PieceListView = Backbone.View.extend
     @selectedPieceView = null
     @render()
     $('#pieces').tablesorter()
+
+     # Triggered when a piece is clicked
+    @bind "selection_changed:pieces", (selectedPieceView) =>
+      @render() # Reset all views
+      if @selectedPieceView == selectedPieceView
+        @selectedPieceView.deselect()
+        @selectedPieceView = null
+        SCVisu.materialListView.trigger("selection_changed:pieces", null)
+      else
+        @selectedPieceView.deselect() if @selectedPieceView
+        @selectedPieceView = selectedPieceView
+        @selectedPieceView.select()
+        SCVisu.materialListView.trigger("selection_changed:pieces", @selectedPieceView)
+
+
+     # Triggered when a material is clicked
+    @bind "selection_changed:materials", (selectedMaterialsView) =>
+      @selectedPieceView.deselect() if @selectedPieceView
+      @selectedPieceView = null
+      @render() # Reset all views
+      if selectedMaterialsView != null
+        $("button.assign_all, button.unassign_all").removeAttr('disabled')
+        # On each piece, 
+        # - If it is not assigned yet                                       -> we show an assign button
+        # - If it is assigned and have the same id of the selected material -> We show Unassigned button
+        # - Else, we do nothing
+        _.each @pieceViews, (pieceView) =>
+          if _.isUndefined(pieceView.model.get('material_id'))
+            pieceView.showAssignButton()
+          else if pieceView.model.get('material_id') == selectedMaterialsView.model.getId()
+            pieceView.select()
+            pieceView.showUnassignButton()
+
+    # Check if a piece had the material associated to it before. 
+    # If it is the case, then it removes the association
+    @bind "action:removed_material", (materialView) =>
+      _.each @collection.models, (piece) ->
+        if piece.get('material_id') == materialView.model.getId()
+          piece.unset 'material_id'
+      @render()
  
   # Clears all elements previously loaded in the DOM. 
   # Indeed, the 'ul#pieces' element already exists in the DOM and every time we create a PiecesListView, 
@@ -20,50 +60,6 @@ SCViews.PieceListView = Backbone.View.extend
   # So we have to clear the content each time we create a new PiecesListView 
   clearView: ->
    $(@el).find('tbody').html('')
-
-  # Is executed when user click on a piece.
-  # Highlight the selected piece and put others in gray.
-  # If the selected piece has already a material, it will be highlighted and the user will have the 
-  # possibility to unassign it.
-  # Else, he will be able to select a material for the selected piece.
-  selectPiece: (pieceView) ->
-    $(@el).find("button.assign_all, button.unassign_all").attr('disabled','disabled')
-    if @selectedPieceView == pieceView
-      @unhighlightPieces()
-      @selectedPieceView = null
-      SCVisu.materialListView.render()
-    else
-      @selectedPieceView = pieceView
-      @highlightPieceView pieceView
-      if pieceView.model.isAssigned()
-        SCVisu.materialListView.highlightMaterial(pieceView.model.get('material_id'))
-      else
-        SCVisu.materialListView.showAssignButtons()
-        
-  highlightPieceView: (pieceView) ->
-    _.each @pieceViews, (piece) ->
-      $(piece.el).addClass('gray').removeClass('selected')
-    $(pieceView.el).addClass('selected').removeClass('gray')
-
-  unhighlightPieces: ->
-    _.each @pieceViews, (piece) ->
-      $(piece.el).removeClass('gray').removeClass('selected')
-
-
-  # Add an "Assign" button to each piece view in order that the user can 
-  # assign it to a selected material. 
-  # And an unassigned button to pieces whith which have the same material_id 
-  # that the selected material.
-  materialHasBeenSelected: (material) ->
-    @selectedPieceView = null
-    $(@el).find("button.assign_all, button.unassign_all").removeAttr('disabled')
-    _.each @pieceViews, (pieceView) ->
-      $(pieceView.el).addClass('selected').removeClass('gray')
-      pieceView.materialHasBeenSelected material
-
-  materialHasBeenDeselected: ->
-    $(@el).find("button.assign_all, button.unassign_all").attr('disabled', 'disabled')
-    @render()
     
   # Assign the pieceModel to the selected Material.
   assignPieceToMaterial: (pieceModel) ->
@@ -83,7 +79,7 @@ SCViews.PieceListView = Backbone.View.extend
     SCVisu.current_calcul.set pieces: SCVisu.pieceListView.collection.models
     SCVisu.current_calcul.trigger 'change'
     @render()
-    @highlightPieceView @selectedPieceView
+    $(@selectedPieceView.el).addClass("selected")
     
   # Unassign the selected material from the currently selected piece.
   unassignMaterialToSelectedPiece: ->
@@ -91,15 +87,7 @@ SCViews.PieceListView = Backbone.View.extend
     SCVisu.current_calcul.set pieces: SCVisu.pieceListView.collection.models
     SCVisu.current_calcul.trigger 'change'
     @render()
-    @highlightPieceView @selectedPieceView
-
-  # Check if a piece had the material associated to it before. 
-  # If it is the case, then it removes the association
-  materialHasBeenRemoved: (material) ->
-    _.each @collection.models, (piece) ->
-      if piece.get('material_id') == material.getId()
-        piece.unset 'material_id'
-    @render()
+    $(@selectedPieceView.el).removeClass("selected")
 
   events:
     'change input#hide_assigned_pieces'   : 'toggleAssignedPieces'
@@ -120,16 +108,18 @@ SCViews.PieceListView = Backbone.View.extend
     _.each @pieceViews, (pieceView) ->
       if $(pieceView.el).is(':visible')
         pieceView.model.set "material_id" : SCVisu.materialListView.selectedMaterialView.model.getId()
-        pieceView.addUnassignButton()
+        pieceView.showUnassignButton()
 
   # Assign all visible pieces which are visible to the selected material
   unassignAllVisiblePieces: ->
     _.each @pieceViews, (pieceView) ->
       if $(pieceView.el).is(':visible')
         pieceView.model.unset "material_id"
-        pieceView.addAssignButton()
+        pieceView.showAssignButton()
 
   render : ->
-    _.each @pieceViews, (piece) ->
-      piece.render()
+    $("button.assign_all, button.unassign_all").attr('disabled', 'disabled')
+    _.each @pieceViews, (pieceView) ->
+      pieceView.render()
+      pieceView.deselect()
     return this

@@ -2,7 +2,7 @@
 SCViews.LinkView = Backbone.View.extend
   initialize: (params) ->
     @parentElement = params.parentElement
-    @firstRendering = true
+    $(@parentElement.el).append(@el)
 
   tagName   : "li"
   className : "link_view"
@@ -12,12 +12,25 @@ SCViews.LinkView = Backbone.View.extend
     "click button.assign"   : "assign"
     "click button.unassign" : "unassign"
     "click button.remove"   : "removeLink"
-    "click"                 : "select"
-    
+    "click"                 : "selectionChanged"
+
+  # Add class to the element to highlight it
+  select: ->
+    $(@el).addClass("selected")
+  # Remove class from the element
+  deselect: ->
+    $(@el).removeClass("selected")
+
+  # Inform the ListView that a material has been clicked
+  selectionChanged: (event) ->
+    if event.srcElement.tagName != "BUTTON"
+      @parentElement.trigger("selection_changed:links", this)
+  
+  
   # Removing model from collection passing silent prevent from destroying from database
   # Also removing the view
   removeLink: ->
-    SCVisu.interfaceListView.linkHasBeenRemoved @model
+    SCVisu.interfaceListView.trigger("action:removed_link", this)
     @parentElement.collection.remove @model
     SCVisu.current_calcul.trigger 'change'
     @remove()
@@ -33,15 +46,6 @@ SCViews.LinkView = Backbone.View.extend
   unassign: ->
     @parentElement.unassignLinkToSelectedInterface()
     @parentElement.showAssignButtons()
-
-  # Tell the parent that a link have been selected.
-  # The row will be highlighted and interfaces wich contains 
-  # this link will also be highlighted.
-  select: (event) ->
-    if event.srcElement == @el
-      @parentElement.render() # Clear all buttons from all link view
-      @parentElement.selectLink @
-
   
   show_details: ->
     @trigger 'show_details', @model
@@ -52,18 +56,15 @@ SCViews.LinkView = Backbone.View.extend
   showUnassignButton: ->
     @parentElement.render() # To remove button from other link views
     @renderWithButton 'unassign', 'Désassigner'
-    @parentElement.highlightView(@)
+    $(@el).addClass("selected")
 
   showAssignButton: ->
     @renderWithButton 'assign', 'Assigner'
     
   renderWithButton: (className, textButton) ->
-    $(@el).html(@model.get('id_in_calcul') + " - " + @model.get('name'))
+    $(@el).html("#{@model.get('id_in_calcul')} - #{@model.get('name')}")
     $(@el).append("<button class='remove'>X</button>")
     $(@el).append("<button class='#{className}'>#{textButton}</button>")
-    if @firstRendering
-      $(@parentElement.el).append(@el)
-      @firstRendering = false
     return this
 
 

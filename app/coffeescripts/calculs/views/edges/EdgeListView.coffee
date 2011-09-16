@@ -10,45 +10,64 @@ SCViews.EdgeListView = Backbone.View.extend
     for edge in @collection.models
       @edgeViews.push new SCViews.EdgeView model: edge, parentElement: @
     @selectedEdgeView = null
-    for edge in @collection.models
-      if !_.isUndefined(edge.getId())
-        return @selectedEdgeView = edge
+
     @render()
     $(@el).find('table').tablesorter()
+
     @collection.bind 'add'   , @render, this
-    @collection.bind 'change', @render, this
+
+    # Triggered when a edge is clicked
+    @bind "selection_changed:edges", (selectedEdgeView) =>
+      @render() # Reset all views
+      if @selectedEdgeView == selectedEdgeView
+        @selectedEdgeView.deselect()
+        @selectedEdgeView = null
+        SCVisu.boundaryConditionListView.trigger("selection_changed:edges", null)
+      else
+        @selectedEdgeView.deselect() if @selectedEdgeView
+        @selectedEdgeView = selectedEdgeView
+        @selectedEdgeView.select()
+        @editEdgeView.setModel @selectedEdgeView.model
+        SCVisu.boundaryConditionListView.trigger("selection_changed:edges", @selectedEdgeView)
+
+
+    # Triggered when a boundaryCondition is clicked
+    @bind "selection_changed:boundary_conditions", (selectedBoundaryConditionsView) =>
+      @selectedEdgeView.deselect() if @selectedEdgeView
+      @selectedEdgeView = null
+      @render() # Reset all views
+      if selectedBoundaryConditionsView != null
+        $("button.assign_all, button.unassign_all").removeAttr('disabled')
+        # On each edge, 
+        # - If it is not assigned yet                                       -> we show an assign button
+        # - If it is assigned and have the same id of the selected boundaryCondition -> We show Unassigned button
+        # - Else, we do nothing
+        _.each @edgeViews, (edgeView) =>
+          if _.isUndefined(edgeView.model.get('boundary_condition_id'))
+            edgeView.showAssignButton()
+          else if edgeView.model.get('boundary_condition_id') == selectedBoundaryConditionsView.model.getId()
+            edgeView.select()
+            edgeView.showUnassignButton()
+
+    # Check if a edge had the boundaryCondition associated to it before. 
+    # If it is the case, then it removes the association
+    @bind "action:removed_boundary_condition", (boundaryConditionView) =>
+      _.each @collection.models, (edge) ->
+        if edge.get('boundary_condition_id') == boundaryConditionView.model.getId()
+          edge.unset 'boundary_condition_id'
+      @render()      
 
   addEdgeModel: (edgeModel) ->
     @editEdgeView.hide()
     @edgeViews.push new SCViews.EdgeView model: edgeModel, parentElement: @
     @collection.add edgeModel
-    
-  # setNewSelectedModel is executed when a child view indicate it has been selected.
-  # It set the current selected model to "non selected" (which trigger an event that redraw its line).
-  setNewSelectedModel: (edgeView) ->
-    if @selectedEdgeView == edgeView
-      @selectedEdgeView = null
-      @unhighlightEdges()
-      SCVisu.boundaryConditionListView.edgeHasBeenDeselected()
-    else
-      $('#boundary_condition_form').hide()
-      @selectedEdgeView = edgeView
-      @editEdgeView.setModel edgeView.model
-      if _.isUndefined edgeView.model.get('boundary_condition_id')
-        SCVisu.boundaryConditionListView.showAssignButtons()
-      else
-        SCVisu.boundaryConditionListView.highlightCondition(edgeView.model.get('boundary_condition_id'))
-      @render()
-
-  unhighlightEdges: ->
-    _.each @edgeViews, (edgeView) ->
-      $(edgeView.el).removeClass('gray').removeClass('selected')
+    @render()
 
   # Clears all elements previously loaded in the DOM. 
-  # Indeed, the 'ul#materials' element already exists in the DOM and every time we create a MaterialListView, 
+  # Indeed, the 'ul#boundaryConditions' element already exists in the DOM and every time we create a BoundaryConditionListView, 
   # we render the view and we add some element inside. And even if we have many different view, 
   # each time we render we add elements to the same view. 
-  # So we have to clear the content each time we create a new MaterialListView 
+  # So we have to clear the content each time we create a new BoundaryConditionListView 
   clearView: ->
     $(@el).find('table tbody').html('')  
   
@@ -59,39 +78,18 @@ SCViews.EdgeListView = Backbone.View.extend
 
   # Assign the selected condition to the selected edge
   asssignCondition: (toThisEdge)->
-    toThisEdge.model.set 'boundary_condition_id': SCVisu.boundaryConditionListView.selectedBoundaryCondition.model.getId(), {silent: true}
+    toThisEdge.model.set 'boundary_condition_id': SCVisu.boundaryConditionListView.selectedBoundaryConditionView.model.getId()
     @updateCalcul()
 
   # Assign the condition from the selected edge
   unasssignCondition: (toThisEdge)->
-    toThisEdge.model.unset 'boundary_condition_id', {silent: true}
+    toThisEdge.model.unset 'boundary_condition_id'
     @updateCalcul()
-    
-  # Update all edges regarding the condition which has been removed by unseting all boundary_condition_id
-  conditionHasBeenRemoved: (boundaryConditionRemoved)->
-    @collection.each (edge) ->
-      edge.unset('boundary_condition_id') if edge.get('boundary_condition_id') == boundaryConditionRemoved.getId()
-    @updateCalcul()
-    @render()
   
-  # Highlight all edges that has the same ID as the selected boundary condition
-  boundaryConditionHasBeenSelected: (selectedBoundaryConditionModel)->
-    $(@el).find("button.assign_all, button.unassign_all").removeAttr('disabled')
-    _.each @edgeViews, (edgeView) ->
-      if _.isUndefined(edgeView.model.get('boundary_condition_id'))
-        edgeView.showAssignButton()
-      else if edgeView.model.get('boundary_condition_id') == selectedBoundaryConditionModel.getId()
-        edgeView.showUnassignButton()
-      else 
-        edgeView.render()
-
-  boundaryConditionHasBeenDeselected: (selectedBoundaryConditionModel)->
-    $(@el).find("button.assign_all, button.unassign_all").attr('disabled','disabled')
-    @render()
-
   # Shows the new edge form
   showNewEdgeForm: ->
     $('#boundary_condition_form').hide()
+    @render()
     @editEdgeView.showAndInitialize()
 
   # Called from edit view when user wants to create a new edge.
@@ -116,18 +114,18 @@ SCViews.EdgeListView = Backbone.View.extend
   assignAllVisibleEdges: ->
     _.each @edgeViews, (edgeView) ->
       if $(edgeView.el).is(':visible')
-        edgeView.model.set "boundary_condition_id" : SCVisu.boundaryConditionListView.selectedBoundaryCondition.model.getId(), {silent: true}
+        edgeView.model.set "boundary_condition_id" : SCVisu.boundaryConditionListView.selectedBoundaryConditionView.model.getId()
         edgeView.showUnassignButton()
 
   # Assign all visible edges which are visible to the selected boundary condition
   unassignAllVisibleEdges: ->
     _.each @edgeViews, (edgeView) ->
       if $(edgeView.el).is(':visible')
-        edgeView.model.unset "boundary_condition_id", {silent: true}
+        edgeView.model.unset "boundary_condition_id"
         edgeView.showAssignButton()
     
   render: ->
     for edgeView in @edgeViews
       edgeView.render()
-    $(@selectedEdgeView.el).addClass("selected") if @selectedEdgeView
+      edgeView.deselect()
     return this

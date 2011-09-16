@@ -1,4 +1,8 @@
 #links_database
+  %h2.grey
+    %button.close Fermer
+    Liste des liaisons
+
   = render :partial => "links/search_filter"
   %table.grey#links_table
     %thead
@@ -33,4 +37,3 @@
           -#%td.family=         link.family
           -#%td.comp_generic=   link.comp_generique
           -#%td.comp_complex=   link.comp_complexe
-  %button.close Fermer

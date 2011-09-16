@@ -1,7 +1,6 @@
 SCViews.CalculView = Backbone.View.extend
   initialize: (params) ->
     @parentElement = params.parentElement
-    
     $(@parentElement.el).find('tbody').append(@el)
     
   tagName   : "tr"
@@ -23,6 +22,7 @@ SCViews.CalculView = Backbone.View.extend
     
   # Calls the parent's method to select a calcul 
   selectCalcul: ->
+    $('#visu_calcul').hide()
     @parentElement.selectCalcul this
     @parentElement.calculInformationView.setModel @model
     
