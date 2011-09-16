@@ -78,9 +78,14 @@ $ ->
       @content.html("")
       @content.append("<p>" + text + "</p>")
       @content.addClass("show")
-      setTimeout(@removeClassShow, 3000)
+      setTimeout(@close, 3000)
       
-    removeClassShow: =>
+    setTextWithoutTimer: (text) ->
+      @content.html("")
+      @content.append("<p>" + text + "</p>")
+      @content.addClass("show")
+      
+    close: => 
       @content.removeClass("show")
       
   SCVisu.NOTIFICATIONS = new Notifications()
