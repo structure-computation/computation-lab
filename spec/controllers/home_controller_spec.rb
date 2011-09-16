@@ -12,7 +12,6 @@ describe "Where will it redirect you when you log in" do
         controller.stub(:authenticate_user! => true                                      ) 
         controller.stub(:current_member     => mock_current_member                       )   
         #@engineer_member  = FactoryGirl.create(:member, :workspace =>  current_workspace )   
-        
       end                       
       
       it "redirect to workspace/X/sc_models" do
@@ -23,7 +22,7 @@ describe "Where will it redirect you when you log in" do
       end   
                           
       # Engineer n'a pas accès aux parties financières
-      context "An Engineer want to acces to financiel part" do
+      context "An Engineer want to access to financial part" do
         before (:each) do
         # 
         end
