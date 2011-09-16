@@ -9,8 +9,10 @@ SCViews.EdgeView = Backbone.View.extend
 
   events:
     'click'                 : 'selectionChanged'
+    "click button.edit"     : "editEdge"
     "click button.assign"   : "asssignCondition"
     "click button.unassign" : "unassignCondition"
+    "click button.remove"   : "removeEdge"
 
   # Add class to the element to highlight it
   select: ->
@@ -24,6 +26,21 @@ SCViews.EdgeView = Backbone.View.extend
     if event.srcElement.tagName != "BUTTON"
       @parentElement.trigger("selection_changed:edges", this)
 
+  editEdge: ->
+    @parentElement.editView.setModel @model
+    # Trigger selection change only when the material selected change because it
+    # makes lose the focus
+    @parentElement.trigger("selection_changed:edges", this) if @parentElement.selectedEdgeView != this
+    $('#visu_calcul').hide()
+
+    
+  removeEdge: ->
+    if confirm "Êtes-vous sûr ?"
+      SCVisu.boundaryConditionListView.trigger("action:removed_edge", this)
+      @parentElement.collection.remove @model
+      @parentElement.updateCalcul()
+      @remove()
+
   # Assign the selected condition to the current model
   asssignCondition: ->
     @parentElement.asssignCondition(this)
@@ -36,11 +53,11 @@ SCViews.EdgeView = Backbone.View.extend
   
   # Show an assign button
   showAssignButton: ->
-    $(@el).find('td:last').html("<button class='assign'>Assigner</button>")
+    $(@el).find('td.cl_id').html("<button class='assign'>Assigner</button>")
 
   # Show an unassign button  
   showUnassignButton: ->
-    $(@el).find('td:last').html("<button class='unassign'>Désassigner</button>")
+    $(@el).find('td.cl_id').html("<button class='unassign'>Désassigner</button>")
       
   render: ->
     template = """
@@ -49,8 +66,11 @@ SCViews.EdgeView = Backbone.View.extend
     """
     $(@el).html(template).removeClass('selected')
     if @model.isAssigned()
-      $(@el).append("<td class='is_assigned'>#{@model.get('boundary_condition_id')}</td>")
+      $(@el).append("<td class='cl_id'>#{@model.get('boundary_condition_id')}</td>")
     else
-      $(@el).append('<td>-</td>')
-
+      $(@el).append('<td class="cl_id">-</td>')
+    $(@el).append("<td>
+          <button class='edit'>Editer</button>
+          <button class='remove'>X</button>
+        </td>")
     return this

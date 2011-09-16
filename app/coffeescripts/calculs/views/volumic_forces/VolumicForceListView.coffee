@@ -7,7 +7,7 @@ SCViews.VolumicForceListView = Backbone.View.extend
   ## -- Events
   events:
     'click button#add_volumic_force'   : 'addVolumicForce'
-  
+
   # A VolumicForceListView is use to render and populate a table of "VolumicForces" (weight, centrifugal accelleration, accelleration...).
   # Each model of this collection is declared "not selected" when initialized. 
   initialize: ->
