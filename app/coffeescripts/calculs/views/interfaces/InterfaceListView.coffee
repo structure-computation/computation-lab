@@ -11,7 +11,7 @@ SCViews.InterfaceListView = Backbone.View.extend
       @interfaceViews.push new SCViews.InterfaceView model: interface, parentElement: this
     @selectedInterfaceView = null
     @render()
-    $(@el).tablesorter()
+    $(@el).find('table').tablesorter()
     
      # Triggered when a interface is clicked
     @bind "selection_changed:interfaces", (selectedInterfaceView) =>
