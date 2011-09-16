@@ -61,7 +61,7 @@ module ControllerSpecHelper
   def ws_member_for_theses_actions_and_get_param(ws_member, action)
     action.each do |action, params|
       get action, params
-      yield (response)
+      yield(response)
     end
   end
   
@@ -70,7 +70,8 @@ module ControllerSpecHelper
   # Take an array of action name, a workspace member and for each a
   def controller_actions_alowed_for_workspace_member(ws_member, actions)
     ws_member_for_theses_actions_and_get_param ws_member, actions do |response|
-      response.should be success
+      response.code.should eq("200")
+      # response.should be :success
     end
   end
 

@@ -3,6 +3,7 @@ class LinksController < InheritedResources::Base
   #session :cookie_only => false, :only => :upload
   before_filter :authenticate_user!
   before_filter :set_page_name
+  before_filter :must_be_engineer
   belongs_to    :workspace
   layout 'workspace'
   respond_to :html, :json

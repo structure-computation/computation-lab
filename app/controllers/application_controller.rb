@@ -16,5 +16,11 @@ class ApplicationController < ActionController::Base
     current_user.user_workspace_memberships.first
   end    
 
+  # Access control. Use as before_filter on actions that require the workspace member to be an engineer 
+  def must_be_engineer
+    if ! current_workspace_member.engineer?
+      render  "static/forbidden", :status => :forbidden 
+    end
+  end
   
 end

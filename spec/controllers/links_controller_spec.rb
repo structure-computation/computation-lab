@@ -30,13 +30,30 @@ describe LinksController do
   end
 
   describe "Access for engineers roles" do
-    before(:each) do mock_workspace_member.stub(:engineer => true) end
+    before(:each) do mock_workspace_member.stub(:engineer? => true) end
     context "When accessing standard links" do
-      it "can access index" do get    :index  , :workspace_id => current_workspace.id; should respond_with(:success) end
-      it "can access show"  do get    :show   , :workspace_id => current_workspace.id, :id => @workspace_link.id ; should respond_with(:success)   end
-      it "can NOT edit"     do get    :edit   , :workspace_id => current_workspace.id, :id => @workspace_link.id ; should respond_with(:forbidden) end
-      it "can NOT update"   do put    :update , :workspace_id => current_workspace.id, :id => @workspace_link.id ; should respond_with(:forbidden) end
-      it "can NOT destroy"  do delete :destroy, :workspace_id => current_workspace.id, :id => @workspace_link.id ; should respond_with(:forbidden) end  
+      it "can access index" do get    :index  , :workspace_id => current_workspace.id;                              should respond_with(:success)   end
+      it "can access show"  do get    :show   , :workspace_id => current_workspace.id, :id => @standard_link.id ;   should respond_with(:success)   end
+      it "can NOT edit"     do get    :edit   , :workspace_id => current_workspace.id, :id => @standard_link.id ;   should respond_with(:forbidden) end
+      it "can NOT update"   do put    :update , :workspace_id => current_workspace.id, :id => @standard_link.id ;   should respond_with(:forbidden) end
+      it "can NOT destroy"  do delete :destroy, :workspace_id => current_workspace.id, :id => @standard_link.id ;   should respond_with(:forbidden) end  
+      # new et create non pertinents sur un standard links
+    end
+
+
+    # it "has access to all opération on workspaces links" do
+    # 
+    # end
+
+  end
+  describe "Access for non engineers roles" do
+    before(:each) do mock_workspace_member.stub(:engineer? => false) end
+    context "When accessing standard links" do
+      it "can access index" do get    :index  , :workspace_id => current_workspace.id;                              should respond_with(:forbidden) end
+      it "can access show"  do get    :show   , :workspace_id => current_workspace.id, :id => @workspace_link.id ;  should respond_with(:forbidden) end
+      it "can NOT edit"     do get    :edit   , :workspace_id => current_workspace.id, :id => @workspace_link.id ;  should respond_with(:forbidden) end
+      it "can NOT update"   do put    :update , :workspace_id => current_workspace.id, :id => @workspace_link.id ;  should respond_with(:forbidden) end
+      it "can NOT destroy"  do delete :destroy, :workspace_id => current_workspace.id, :id => @workspace_link.id ;  should respond_with(:forbidden) end  
       # new et create non pertinents sur un standard links
     end
 
