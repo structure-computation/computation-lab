@@ -85,7 +85,6 @@ SCViews.EditMaterialView = Backbone.View.extend
     # Hide the visu when show itself
     $('#visu_calcul').hide()
     $(@el).show()
-    @parentElement.render()
     if resetFields
       @resetFields()
     else

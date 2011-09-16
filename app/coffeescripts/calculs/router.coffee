@@ -174,6 +174,7 @@ SCVisu.Router = Backbone.Router.extend
     $('#ajax-loader').hide()
     # Put the correct anchor in the URL
     @navigate('Parameters', true)
+    SCVisu.NOTIFICATIONS.setText('Le calcul a correctement été chargé')
 
   # Is executed when the calcul couldn't be loaded
   calculLoadError: ->

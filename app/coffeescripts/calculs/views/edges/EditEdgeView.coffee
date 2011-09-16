@@ -3,25 +3,26 @@
 #     From this choice another select box another one pops up : #volume_geometry or #surface_geometry
 #     From this new choice the correct div will be displayed
 SCViews.EditEdgeView = Backbone.View.extend
-  el: "#edit_edge_form"
+  el: "#edge_form"
   initialize: (params) ->
     $(@el).find('> div:not("#edge_criteria, #edge_information_box")').hide()
-    # Hide save button
-    $(@el).find('button.save').hide()
+
+    $(@el).find('button.save').attr('disabled','disabled')
+
     @currentCriteria = null
     @currentGeometry = null
-    @currentEdge     = null
+    @model     = null
 
   showAndInitialize: ->
     @hideEverythingExceptCriteriaPart()
-    @currentEdge = null
+    @model = null
     $(@el).find('input:radio').removeAttr('disabled')
+    $(@el).find('button.save').show() 
     @show()
     
   hide: ->
     $(@el).hide()
     $('#visu_calcul').show()
-    
   show: ->
     @emptyInputs()
     $(@el).show()
@@ -36,7 +37,10 @@ SCViews.EditEdgeView = Backbone.View.extend
     "change"                                    : "updateSelectedModelAttributes"
       
   setModel: (edge) ->
-    @currentEdge = edge
+    $('#boundary_condition_form, #visu_calcul').hide()
+    @show()
+    @model = edge
+    $(@el).find('button.save').hide()
     @showCriteriaPartAndDisableButtons()
     $(@el).find('#edge_name')       .val(edge.get('name')) 
     $(@el).find('#edge_description').val(edge.get('description'))     
@@ -70,26 +74,27 @@ SCViews.EditEdgeView = Backbone.View.extend
 
   # Updates all inputs relative to the current Edge depending on the criteria and the geometry of the edge
   updateInputs: ->
-    for key of @currentEdge.attributes
+    for key of @model.attributes
       if key != 'criteria' or key != 'geometry'
-        $(@el).find("##{@currentCriteria}_#{@currentGeometry}_#{key}").val(@currentEdge.get(key))
+        $(@el).find("##{@currentCriteria}_#{@currentGeometry}_#{key}").val(@model.get(key))
     
   # Hide everything except the criteria select box
   # Let the good geometry select box shown
   # Show the good form regarding the criteria and the geometry choosed
   showGeometry: ->
     @hideEverythingExceptCriteriaAndGeometryPart()
-    @updateInputs() if @currentEdge    
-    $(@el).find('button.save').show() if @currentEdge == null
-
+    @updateInputs() if @model    
+    
+    $(@el).find('button.save').removeAttr('disabled')
+    
     $(@el).find("#{@currentCriteria}_geometry").show()    
     $(@el).find("#edge_#{@currentCriteria}_#{@currentGeometry}").show()
 
   # Hide all divs except criteria div
   hideEverythingExceptCriteriaPart: ->
     $(@el).find('> div:not("#edge_criteria, #edge_information_box")').hide()
-    $(@el).find('button.save').hide()
-
+    #$(@el).find('button.save').hide()
+    $(@el).find('button.save').attr('disabled','disabled')
   hideEverythingExceptCriteriaAndGeometryPart: ->
     @hideEverythingExceptCriteriaPart()
     $("##{@currentCriteria}_geometry").show()
@@ -99,7 +104,8 @@ SCViews.EditEdgeView = Backbone.View.extend
     @show()
     @hideEverythingExceptCriteriaPart()
     $(@el).find('#edge_criteria').show()
-    $(@el).find('button.save').hide()
+    $(@el).find('button.save').attr('disabled','disabled')
+
   
   emptyInputs: ->
     $(@el).find('input:not([type=radio]), textarea').val('')
@@ -110,7 +116,7 @@ SCViews.EditEdgeView = Backbone.View.extend
     SCVisu.edgeListView.addEdgeModel new SCModels.Edge(@retrieveModelAttributesFromInput())
 
   updateSelectedModelAttributes: ->
-    @currentEdge.set @retrieveModelAttributesFromInput() if @currentEdge
+    @model.set @retrieveModelAttributesFromInput() if @model
 
   # Regarding the currentCriteria and the currentGeometry, retrieve and returns 
   # all good data from inputs

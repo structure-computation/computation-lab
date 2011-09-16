@@ -7,7 +7,7 @@ SCViews.LinkView = Backbone.View.extend
   tagName   : "li"
   className : "link_view"
   events: 
-    "click button.edit"     : "show_details"
+    "click button.edit"     : "showDetails"
     "click button.clone"    : "clone"
     "click button.assign"   : "assign"
     "click button.unassign" : "unassign"
@@ -48,8 +48,12 @@ SCViews.LinkView = Backbone.View.extend
     @parentElement.unassignLinkToSelectedInterface()
     @parentElement.showAssignButtons()
   
-  show_details: ->
-    @trigger 'show_details', @model
+  showDetails: ->
+    @parentElement.showDetails @model
+    # Trigger selection change only when the material selected change because it
+    # makes lose the focus
+    @parentElement.trigger("selection_changed:links", this) if @parentElement.selectedLinkView != this
+
 
   clone: ->
     @parentElement.clone @model

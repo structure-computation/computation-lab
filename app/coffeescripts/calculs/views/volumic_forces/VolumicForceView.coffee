@@ -13,7 +13,13 @@ SCViews.VolumicForceView = Backbone.View.extend
     'click button.destroy'  : 'destroyVolumicForce'
     'keyup'                 : 'updateFields'
     'change'                : 'updateFields'
+    'click button.remove'   : 'removeVolumicForce'
     
+  removeVolumicForce: ->
+    if confirm "Êtes-vous sûr ?"
+      @parentElement.collection.remove @model
+      @remove()
+
   # Ask the parent table to supress the "selected" status on the currently selected model
   # (which trigger a change:selected event that supress highlight on this line) and set 
   # the "selected" attribute on current model, which trigger again a change:selected event
@@ -44,6 +50,7 @@ SCViews.VolumicForceView = Backbone.View.extend
               <td class="dx"   > <input type='number' value='#{@model.get("dx")}'    > </td> 
               <td class="dy"   > <input type='number' value='#{@model.get("dy")}'    > </td> 
               <td class="dz"   > <input type='number' value='#{@model.get("dz")}'    > </td> 
+              <td              > <button class="remove">X</button>                     </td> 
           """ 
     $(@el).html(template) 
     @showSelectedState()  

@@ -18,3 +18,10 @@
   -ms-transition     : all $time ease-in
   -o-transition      : all $time ease-in
   transition         : all $time ease-in
+  
+@mixin translateY($height)
+  -webkit-transform : translateY($height)
+  -moz-transform    : translateY($height)
+  -ms-transform     : translateY($height)
+  -o-transform      : translateY($height)
+  transform         : translateY($height)
