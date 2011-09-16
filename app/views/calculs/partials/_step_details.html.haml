@@ -1,5 +1,5 @@
 %h2#time_parameters Paramètres temporels 
-#steps.toggler
+#steps.toggler.maximize
   %select#step_type
     %option{:value => "static"} Static
     %option{:value => "quasistatic"} Quasistatic
@@ -25,5 +25,3 @@
       $('#time_parameters').click( () ->
         SCVisu.stepHideOrShow()
       )
-      
-      $('#time_parameters')[0].onGesture('tap', SCVisu.stepHideOrShow())
