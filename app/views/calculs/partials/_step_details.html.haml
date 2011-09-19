@@ -4,7 +4,7 @@
     %option{:value => "static"} Static
     %option{:value => "quasistatic"} Quasistatic
     %option{:value => "dynamic"} Dynamic
-  %button#add_step Ajouter un Step
+  %button.add Ajouter un Step
   %table#steps_table.grey
     %thead
       %tr.no_sorter
@@ -16,12 +16,7 @@
         %th
     %tbody
   :coffeescript
-    SCVisu.stepHideOrShow = () ->
-      if $('#steps').hasClass 'maximize'
-        $('#steps').removeClass 'maximize'
-      else
-        $('#steps').addClass 'maximize'
     $ ->      
       $('#time_parameters').click( () ->
-        SCVisu.stepHideOrShow()
+        $('#steps').toggleClass 'maximize'
       )

@@ -1,4 +1,4 @@
-%h2#multiresolution_parameters Paramètres du calcul
+%h2#calculus_option_header Paramètres du calcul
 #calculus_option.toggler.maximize
   %p
     %label{:for => "test_mode"} Mode Test
@@ -33,13 +33,9 @@
   %p
     %label{:for => "error"}               Niveau Erreur de modèle (%) 
     %input#error{:type => "text"} 
+
   :coffeescript
-    SCVisu.optionsHideOrShow = () ->
-      if $('#calculus_option').hasClass 'maximize'
-        $('#calculus_option').removeClass 'maximize'
-      else
-        $('#calculus_option').addClass 'maximize'
     $ ->      
-      $('#multiresolution_parameters').click( () ->
-        SCVisu.optionsHideOrShow()
+      $('#calculus_option_header').click( () ->
+        $("#calculus_option").toggleClass("maximize")
       )

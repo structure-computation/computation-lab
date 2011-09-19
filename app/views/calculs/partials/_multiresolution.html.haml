@@ -1,0 +1,23 @@
+%h2#multiresolution_parameters_header Paramètres de multi résolution 
+#multiresolution_parameters.toggler.maximize
+  %select#multiresolution_type
+    %option{:value => "fatigue"}     Fatigue
+    %option{:value => "expert_plan"} Plan d'expertise
+
+  %button.add Ajouter un paramètre
+  %table.grey
+    %thead
+      %tr.no_sorter
+        %th Nom
+        %th Valeur nominale
+        %th Valeur minimale
+        %th Valeur maximale
+        %th Nombre de valeures
+        %th
+    %tbody
+
+  :coffeescript
+    $ ->      
+      $('#multiresolution_parameters_header').click( () ->
+        $("#multiresolution_parameters").toggleClass("maximize")
+      )
