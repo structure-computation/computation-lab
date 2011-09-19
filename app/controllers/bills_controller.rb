@@ -1,5 +1,6 @@
 class BillsController < InheritedResources::Base
   before_filter :authenticate_user!
+  before_filter :must_be_manager
   before_filter :set_page_name
   respond_to :html, :json
   belongs_to :workspace
@@ -8,6 +9,27 @@ class BillsController < InheritedResources::Base
   
   def set_page_name
     @page = :manage
+  end              
+  
+  def index 
+    @workspace        = current_workspace_member.workspace
+    @workspace_bills  = Bill.from_workspace @workspace.id
+    index!
+  end        
+  
+  def show 
+    @bill   = Bill.from_workspace(current_workspace_member.workspace.id).find_by_id(params[:id])
+    @workspace = current_workspace_member.workspace
+    if @bill 
+      # show!
+      render
+    else
+      respond_to do |format|
+        format.html {redirect_to workspace_bills_path(current_workspace_member.workspace.id), 
+                    :notice => "Cette facture n'existe pas ou n'est pas accessible à partir de cet espace de travail."}
+        format.json {render :status => 404, :json => {}}
+      end
+    end
   end
   #TODO remplacer chargement JSON par chargement normal (sans requête ajax)
   # def index
@@ -50,21 +72,6 @@ class BillsController < InheritedResources::Base
   #   } 
   # end
 
-  def show
-    ws_bills   = Bill.from_workspace(current_workspace_member.workspace.id).find_by_id(params[:id])  
-    @bill      = ws_bills ?  ws_bills : ws_bills  
-    @workspace = current_workspace_member.workspace
-    if @bill 
-      # show!
-      render
-    else
-      respond_to do |format|
-        format.html {redirect_to workspace_bills_path(current_workspace_member.workspace.id), 
-                    :notice => "Ce bill n'existe pas ou n'est pas accessible à partir de cet espace de travail."}
-        format.json {render :status => 404, :json => {}}
-      end
-    end
-  end
 
   def download_bill
     @current_workspace = current_workspace_member.workspace

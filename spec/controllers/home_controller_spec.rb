@@ -47,8 +47,8 @@ describe "Where will it redirect you when you log in" do
           mock_workspace_member.stub(:manager? => true               )
            
         end                            
-        it "redirect to /workspaces/X#Factures" do
-          response.should redirect_to(workspace__path(current_workspace))  
+        it "redirect to /workspaces/id/Factures" do
+          response.should redirect_to(workspace_path(current_workspace))  
         end  
       #end of context log in as a manager   
       end
