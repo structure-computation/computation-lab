@@ -3,14 +3,14 @@ require 'spec_helper'
 describe "Where will it redirect you when you log in" do 
   let :current_workspace        do FactoryGirl.build(:workspace)                                         end
   let :other_workspace          do FactoryGirl.build(:workspace)                                         end                                     
-  let :mock_workspace_member      do mock_model(UserWorkspaceMembership, :workspace => current_workspace)  end
+  let :mock_workspace_member    do mock_model(UserWorkspaceMembership, :workspace => current_workspace)  end
     
   describe HomeController do
     describe "Access to Laboratory" do  
       context "Log in as an Engineer" do  
         before(:each) do           
           controller.stub(:authenticate_user! => true                ) 
-          controller.stub(:current_member     => mock_current_member )  
+          controller.stub(:current_workspace     => mock_workspace_member )  
           mock_workspace_member.stub(:engineer? => true)
           #engineer_member  = FactoryGirl.create(:engineer_member ) 
           #UserWorkspaceMembership.stub!(:engineer).and_return(1)     
@@ -26,7 +26,7 @@ describe "Where will it redirect you when you log in" do
       context "Not an Engineer" do
         before (:each) do  
           controller.stub(:authenticate_user! => true                 ) 
-          controller.stub(:current_member     => mock_current_member  ) 
+          controller.stub(:current_workspace     => mock_workspace_member )  
           mock_workspace_member.stub(:engineer? => false              )  
         end
         it "should not redirect to /workspaces/X#Factures" do     
@@ -43,13 +43,11 @@ describe "Where will it redirect you when you log in" do
       context "Log in as a Manager" do
         before(:each) do  
           controller.stub(:authenticate_user! => true                ) 
-          controller.stub(:current_member     => mock_current_member )
+          controller.stub(:current_workspace     => mock_workspace_member )  
           mock_workspace_member.stub(:manager? => true               )
            
         end                            
         it "redirect to /workspaces/X#Factures" do
-          get :index, :id => current_workspace.id    
-          assigns(:workspace ).should eq( [@current_workspace] )
           response.should redirect_to(workspace__path(current_workspace))  
         end  
       #end of context log in as a manager   
@@ -58,11 +56,11 @@ describe "Where will it redirect you when you log in" do
       context "Not a Manager" do
         before (:each) do    
           controller.stub(:authenticate_user! => true                ) 
-          controller.stub(:current_member     => mock_current_member ) 
+          controller.stub(:current_workspace     => mock_workspace_member )  
           mock_workspace_member.stub(:manager? => false              )
-        end                          
-        it"should not redirect to workspace/X/sc_models"do
-          get :index, :id => current_workspace.id 
+        end         
+                         
+        it"should not redirect to workspace/X/sc_models"do 
           response.should redirect_to(workspace_bills_path(current_workspace))
           flash[:notice].should eq("Vous n'avez pas accès à cette partie de l'espace de travail.")
         end  

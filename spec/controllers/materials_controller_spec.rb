@@ -26,19 +26,31 @@ describe MaterialsController do
       Material.should_receive(:from_workspace)
       get :index
       response.should render_template("materials/index")
-    end
+    end 
     
-    it "assigns all materials for standard materials library as @standard_materials" do
-      # NOTE: Je n'ai pas réussi à faire un stub sur un objet.
-      # Material.stub(:standard_materials) { [mock_material] }  
-      # NOTE: cela utilise la BDD, on peut aussi faire ce choix au final.  
-      get :index, :workspace_id => current_workspace.id
-      assigns(:standard_materials).should eq( [@standard_material] )
-    end
+    describe "Access for non engineers roles" do
+      before(:each) do mock_workspace_member.stub(:engineer? => false) end
+      context "When accessing standard links" do
+        it "can access index" do get    :index  , :workspace_id => current_workspace.id;                                  should respond_with(:forbidden) end
+        it "can access show"  do get    :show   , :workspace_id => current_workspace.id, :id => @workspace_material.id ;  should respond_with(:forbidden) end
+        it "can NOT edit"     do get    :edit   , :workspace_id => current_workspace.id, :id => @workspace_material.id ;  should respond_with(:forbidden) end
+        it "can NOT update"   do put    :update , :workspace_id => current_workspace.id, :id => @workspace_material.id ;  should respond_with(:forbidden) end
+        it "can NOT destroy"  do delete :destroy, :workspace_id => current_workspace.id, :id => @workspace_material.id ;  should respond_with(:forbidden) end  
+        # new et create non pertinents sur un standard links
+      end                                                                               
+          
+      it "assigns all materials for standard materials library as @standard_materials" do
+        # NOTE: Je n'ai pas réussi à faire un stub sur un objet.
+        # Material.stub(:standard_materials) { [mock_material] }  
+        # NOTE: cela utilise la BDD, on peut aussi faire ce choix au final.  
+        get :index, :workspace_id => current_workspace.id
+        assigns(:standard_materials).should eq( [@standard_material] )
+      end
     
-    it "assigns all materials for workspace materials library as @standard_materials" do
-      get :index, :workspace_id => current_workspace.id
-      assigns(:workspace_materials).should eq( [@workspace_material] )
+      it "assigns all materials for workspace materials library as @standard_materials" do
+        get :index, :workspace_id => current_workspace.id
+        assigns(:workspace_materials).should eq( [@workspace_material] )
+      end 
     end
   end
                              
@@ -94,18 +106,19 @@ describe MaterialsController do
       end
     end
   end
-  
-  describe "DELETE destroy" do         
-    # TODO: Ajouter une condition si User == MaterialOwner
-    before (:each) do
-      @material_to_destroy  = FactoryGirl.create(:material, :workspace => current_workspace) 
-    end
-    it "destroys the requested material" do
-      pending "Il faut préciser que cette action de controlleur n'a pas besoin d'une vue."
-      # get :destroy, :workspace_id => current_workspace.id, :id => @material_to_destroy.id      
-      # response.should redirect_to(workspace_materials_path(current_workspace))
-    end
-  end      
-end 
-
-                   
+  # 
+  #   describe "DELETE destroy" do         
+  #     # TODO: Ajouter une condition si User == MaterialOwner
+  #     before (:each) do
+  #       @material_to_destroy  = FactoryGirl.create(:material, :workspace => current_workspace) 
+  #     end
+  #     it "destroys the requested material" do
+  #       pending "Il faut préciser que cette action de controlleur n'a pas besoin d'une vue."
+  #       # get :destroy, :workspace_id => current_workspace.id, :id => @material_to_destroy.id      
+  #       # response.should redirect_to(workspace_materials_path(current_workspace))
+  #     end
+  #   end      
+  # end 
+  # 
+  #                    
+end                                                      

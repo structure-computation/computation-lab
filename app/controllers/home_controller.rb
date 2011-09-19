@@ -9,15 +9,14 @@ class HomeController < ApplicationController
   end
   
   def index     
-    # Si UserWorkspaceMembership est un Engineer
-    # alors sa homepage est une redirection sur la partie Laboratoire du current workspace 
-    # Si UserWorkspaceMembership est un Manager
-    # alors sa homepage est une redirection sur la partie financière du current workspace  
-
-    if current_workspace_member.engineer?  
-      redirect_to workspace_sc_models_path(current_workspace)
-    elsif current_workspace_member.manager? 
-      redirect_to workspace_path(current_workspace)     
+    case 
+    when current_workspace_member.engineer?   
+      redirect_to workspace_sc_models_path(current_workspace_member.workspace)
+    when current_workspace_member.manager? 
+      redirect_to workspace_path(current_workspace_member.workspace)    
+    when !current_workspace_member.engineer? && !current_workspace_member.manager?  
+      render :index
+      flash[:notice] = "Vous n'avez pas de statut (ingénieur ou gestionnaire) attribué. Veuillez contacter le service client." 
     end                                                                                 
   #end of index  
   end
