@@ -31,7 +31,7 @@ SCViews.CalculInformation = Backbone.View.extend
     if @isEditingDescription
       $(@el).find('.edit_description').html('Sauver')
       $(@el).find('.description').html """
-        <textarea rows="5" cols="50">#{@currentCalcul.get('description')}</textarea>
+        <textarea rows="5" cols="10">#{@currentCalcul.get('description')}</textarea>
       """
     else
       $(@el).find('.edit_description').html('Editer')

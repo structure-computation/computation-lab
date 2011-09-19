@@ -16,7 +16,8 @@
                   :placeholder =>  (local_assigns.has_key?(:placeholders) ? placeholders[i] : ""), 
                   :size => 10, 
                   :name => (local_assigns.has_key?(:names) ? names[i] : ""),
-                  :data => {:type => local_assigns.has_key?(:data_type) ? data_type : ""}}
+                  :data => {:type => local_assigns.has_key?(:data_type) ? data_type : ""},
+                  :cols => "10"}
       - else
         %input{   :type => "text", 
                   :id => input_id, 
