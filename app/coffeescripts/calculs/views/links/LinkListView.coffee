@@ -28,8 +28,10 @@ SCViews.LinkListView = Backbone.View.extend
     # Triggered when a link is clicked
     @bind "selection_changed:links", (selectedLinkView) =>
       @render() # Reset all views
+
       # Hide edit view if the model selected is not the same as the one in the edit view
-      @editView.hide() if @editView.model != selectedLinkView.model
+      @editView.hide() if @selectedLinkView == selectedLinkView or @editView.model != selectedLinkView.model
+
       if @selectedLinkView == selectedLinkView
         @selectedLinkView.deselect()
         @selectedLinkView = null
@@ -39,7 +41,7 @@ SCViews.LinkListView = Backbone.View.extend
         @selectedLinkView = selectedLinkView
         @selectedLinkView.select()
         SCVisu.interfaceListView.trigger("selection_changed:links", @selectedLinkView)
-      
+
     # Triggered when an interface is clicked
     @bind "selection_changed:interfaces", (selectedInterfaceView) =>
       @selectedLinkView.deselect() if @selectedLinkView

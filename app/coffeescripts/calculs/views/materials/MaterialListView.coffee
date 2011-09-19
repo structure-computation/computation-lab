@@ -30,7 +30,8 @@ SCViews.MaterialListView = Backbone.View.extend
     @bind "selection_changed:materials", (selectedMaterialView) =>
       @render() # Reset all views
       # Hide edit view if the model selected is not the same as the one in the edit view
-      @editView.hide() if @editView.model != selectedMaterialView.model
+      @editView.hide() if @selectedMaterialView == selectedMaterialView or @editView.model != selectedMaterialView.model
+
       if @selectedMaterialView == selectedMaterialView
         @selectedMaterialView.deselect()
         @selectedMaterialView = null
@@ -40,6 +41,7 @@ SCViews.MaterialListView = Backbone.View.extend
         @selectedMaterialView = selectedMaterialView
         @selectedMaterialView.select()
         SCVisu.pieceListView.trigger("selection_changed:materials", @selectedMaterialView)
+
       
     # Triggered when a piece is clicked
     @bind "selection_changed:pieces", (selectedPieceView) =>

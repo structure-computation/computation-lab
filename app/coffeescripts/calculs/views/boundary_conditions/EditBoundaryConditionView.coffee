@@ -11,7 +11,26 @@ SCViews.EditBoundaryConditionView = Backbone.View.extend
     "change"             : "updateModelAttributes"
     "click button.close" : "hide"
     "change select.steps": "showFunctionPart"
+    "change select.boundary_condition_type" : "typeChanged"
   
+  typeChanged: (event) ->    
+    @boundaryConditionType = event.srcElement.value
+    # Unset certain attributes regarding the condition type. 
+    # I do this to prevent to have useless and unappropriate attributes
+    switch @boundaryConditionType
+      when "pressure", "normal_movement"   
+        for stepFunction in @model.get('stepFunctions')
+          stepFunction.spatial_function_x = undefined
+          stepFunction.spatial_function_y = undefined
+          stepFunction.spatial_function_z = undefined
+      when "symetry"
+        @model.unset('stepFunctions')
+      else
+        for stepFunction in @model.get('stepFunctions')
+          stepFunction.normal_function = undefined
+    @render()
+    @fillInputsFromModel()
+    
   # Show the good function form. Relative to the step selected
   showFunctionPart: (event) ->
     $(@el).find('.functionPart > div').hide()
@@ -41,25 +60,47 @@ SCViews.EditBoundaryConditionView = Backbone.View.extend
   setModel: (model) ->
     $("#edge_form, #visu_calcul").hide()
     $(@el).find('select.steps, .functionPart').html('')
-    SCVisu.stepListView.collection.each (step) =>
-      $(@el).find('select.steps').append("<option value='step_#{step.getId()}'>#{step.get('name')}</option>")
-      $(@el).find('.functionPart').append(@functionPartTemplate(step))
-    $(@el).find('.functionPart > div:not(:first)').hide()
-
     @show()
     @model = model
-    $(@el).find('select.boundary_condition_type') .val(@model.get('condition_type'))
+    @boundaryConditionType = @model.get('condition_type')
+    $(@el).find('select.boundary_condition_type') .val(@boundaryConditionType)
     $(@el).find('input.name')                     .val(@model.get('name'))
     $(@el).find('textarea.description')           .val(@model.get('description'))
+    @render()
 
-    if !_.isUndefined(@model.get('stepFunctions'))
-      for stepFunction in @model.get('stepFunctions')
-        stepFunctionElement = $($(@el).find(".step_#{stepFunction['step_id']}"))
-        stepFunctionElement.find('input.x') .val(stepFunction['spatial_function_x'])
-        stepFunctionElement.find('input.y') .val(stepFunction['spatial_function_y'])
-        stepFunctionElement.find('input.z') .val(stepFunction['spatial_function_z'])
-        stepFunctionElement.find('input.ft').val(stepFunction['temporal_function_t'])
-          
+    @fillInputsFromModel()
+  fillInputsFromModel: ->
+    # If the type is symetry, then it doesn't ave step functions
+    if @boundaryConditionType!= "symetry" and !_.isUndefined(@model.get('stepFunctions'))
+      if @boundaryConditionType == "pressure" or @boundaryConditionType == "normal_movement"
+        for stepFunction in @model.get('stepFunctions')
+          stepFunctionElement               = $($(@el).find(".step_#{stepFunction['step_id']}"))
+          stepFunctionElement.find('input.normal_function') .val(stepFunction['normal_function'])
+          stepFunctionElement.find('input.ft').val(stepFunction['temporal_function_t'])
+      else
+        for stepFunction in @model.get('stepFunctions')
+          stepFunctionElement               = $($(@el).find(".step_#{stepFunction['step_id']}"))
+          stepFunctionElement.find('input.x') .val(stepFunction['spatial_function_x'])
+          stepFunctionElement.find('input.y') .val(stepFunction['spatial_function_y'])
+          stepFunctionElement.find('input.z') .val(stepFunction['spatial_function_z'])
+          stepFunctionElement.find('input.ft').val(stepFunction['temporal_function_t'])
+
+  render: ->
+    $(@el).find('.functionPart').html('')
+    $(@el).find('select.steps').html('')
+    $(@el).find('.functionPartHeader').show()
+    SCVisu.stepListView.collection.each (step) =>
+      $(@el).find('select.steps').append("<option value='step_#{step.getId()}'>#{step.get('name')}</option>")
+      switch @boundaryConditionType
+        when "pressure", "normal_movement"   
+          $(@el).find('.functionPart').append(@functionNormalPartTemplate(step))
+        when "symetry"
+          $(@el).find('.functionPartHeader').hide()
+        else
+          $(@el).find('.functionPart').append(@functionPartTemplate(step))
+      
+    $(@el).find('.functionPart > div:not(:first)').hide()
+
   # Hide itself and show the visu
   hide: ->
     $(@el).hide()
@@ -69,6 +110,7 @@ SCViews.EditBoundaryConditionView = Backbone.View.extend
   show: ->
     $(@el).show()
     $('#visu_calcul').hide()
+
   # Template for inputs for step function part
   functionPartTemplate: (step) ->
     """
@@ -87,6 +129,36 @@ SCViews.EditBoundaryConditionView = Backbone.View.extend
             </td>
             <td>
               <input class="z" data-type="number" class="spatial_function_z" name="" placeholder="z" size="10" type="text">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="grey">
+        <tbody>
+          <tr>
+            <th>
+              Fonction temporelle (ft) = 0 = 
+            </th>
+            <td>
+              <input class="ft" data-type="number" class="time_function" name="" placeholder="" size="10" type="text">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  """  
+  # Template for inputs for step function part when type is normal
+  functionNormalPartTemplate: (step) ->
+    """
+    <div class="step_#{step.getId()}" data-step_id="#{step.getId()}">
+      <table class="grey">
+        <tbody>
+          <tr>
+            <th>
+              Fonction normal 
+            </th>
+            <td>
+              <input class="normal_function" data-type="number" name="normal_function" size="10" type="text">
             </td>
           </tr>
         </tbody>

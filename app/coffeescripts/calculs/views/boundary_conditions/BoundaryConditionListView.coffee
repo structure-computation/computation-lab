@@ -30,8 +30,9 @@ SCViews.BoundaryConditionListView = Backbone.View.extend
     # Triggered when a boundaryCondition is clicked
     @bind "selection_changed:boundary_conditions", (selectedBoundaryConditionView) =>
       @render() # Reset all views
+
       # Hide edit view if the model selected is not the same as the one in the edit view
-      @editView.hide() if @editView.model != selectedBoundaryConditionView.model
+      @editView.hide() if @selectedBoundaryConditionView == selectedBoundaryConditionView or @editView.model != selectedBoundaryConditionView.model
 
       if @selectedBoundaryConditionView == selectedBoundaryConditionView
         @selectedBoundaryConditionView.deselect()
@@ -42,7 +43,7 @@ SCViews.BoundaryConditionListView = Backbone.View.extend
         @selectedBoundaryConditionView = selectedBoundaryConditionView
         @selectedBoundaryConditionView.select()
         SCVisu.edgeListView.trigger("selection_changed:boundary_conditions", @selectedBoundaryConditionView)
-      
+
     # Triggered when a edge is clicked
     @bind "selection_changed:edges", (selectedEdgeView) =>
       @selectedBoundaryConditionView.deselect() if @selectedBoundaryConditionView

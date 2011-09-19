@@ -10,9 +10,9 @@
         %option{:value => "effort"}       Densité d'effort
         %option{:value => "pressure"}     Pression
       %optgroup{:label => "Conditions limites en déplacement"}
-        %option{:value => "imposed"}      Déplacement imposé
-        %option{:value => "normal"}       Déplacement normal
-        %option{:value => "symetry"}      Symétrie
+        %option{:value => "imposed_movement"} Déplacement imposé
+        %option{:value => "normal_movement"}  Déplacement normal
+        %option{:value => "symetry"}          Symétrie
 
   %table.grey
     %tbody
@@ -25,7 +25,7 @@
                                                                           :classes => ["description"],
                                                                           :input_type => "textarea"}
 
-  %h3 
+  %h3.functionPartHeader
     Fonction associé au pas de temps : 
     %select.steps
   .functionPart

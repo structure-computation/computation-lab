@@ -26,8 +26,9 @@ SCViews.EdgeListView = Backbone.View.extend
     # Triggered when a edge is clicked
     @bind "selection_changed:edges", (selectedEdgeView) =>
       @render() # Reset all views
+
       # Hide edit view if the model selected is not the same as the one in the edit view
-      @editView.hide() if @editView.model != selectedEdgeView.model
+      @editView.hide() if selectedEdgeView == @selectedEdgeView or @editView.model != selectedEdgeView.model
 
       if @selectedEdgeView == selectedEdgeView
         @selectedEdgeView.deselect()
