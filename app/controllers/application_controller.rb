@@ -21,6 +21,13 @@ class ApplicationController < ActionController::Base
     if ! current_workspace_member.engineer?
       render  "static/forbidden", :status => :forbidden 
     end
-  end
+  end    
   
+  # Access control. Use as before_filter on actions that require the workspace member to be an manager 
+  def must_be_manager
+    if ! current_workspace_member.manager?
+      render  "static/forbidden", :status => :forbidden 
+    end
+  end
+
 end

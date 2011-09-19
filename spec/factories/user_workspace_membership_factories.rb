@@ -10,7 +10,13 @@ FactoryGirl.define do
     end 
     factory :manager_member do
       manager 1
-    end                    
+    end  
+    factory :not_engineer_member do
+      engineer 0
+    end
+    factory :not_manager_member do
+      manager 0
+    end                  
   end
   
 end
