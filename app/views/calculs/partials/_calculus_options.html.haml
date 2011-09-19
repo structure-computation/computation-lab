@@ -9,14 +9,6 @@
   %p
     %label{:for => "normal_mode"} Mode Normal
     %input#normal_mode{:type => "radio", :name => "mode", :checked => "checked"}
-  %ul
-    %li
-      %label{:for => "latin_method"} Convergence méthode LATIN
-      %input#latin_method{:type => "checkbox"}
-    %li
-      %label{:for => "calculus_precision"} Précision du calcul
-      %input#calculus_precision{:type => "checkbox"}
-
 
   %h4 Convergence de la méthode LATIN
   %p
@@ -28,8 +20,8 @@
 
   %p
     %label{:for => "max_iteration"}       Nombre d'itération maximum
-    %input#max_iteration{:type => "text"} 
-
+    %input#max_iteration{:type => "text"}
+    > 50
   %p
     %label{:for => "convergence_rate"}    Taux de convergence de la méthode 
     %input#convergence_rate{:type => "text"} 
