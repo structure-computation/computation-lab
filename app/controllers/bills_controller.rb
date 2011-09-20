@@ -30,7 +30,9 @@ class BillsController < InheritedResources::Base
         format.json {render :status => 404, :json => {}}
       end
     end
-  end
+  end   
+  
+  
   #TODO remplacer chargement JSON par chargement normal (sans requête ajax)
   # def index
   #   @id_workspace = @current_workspace.id

@@ -1,6 +1,7 @@
 class ScAdminDetailWorkspaceController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :valid_admin_user
+  before_filter :valid_admin_user    
+  before_filter :must_be_manager
   
   def index
     @page = 'SCadmin'
