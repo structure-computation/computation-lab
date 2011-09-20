@@ -10,8 +10,10 @@ describe "Where will it redirect you when you log in" do
       context "Log in as an Engineer" do  
         before(:each) do           
           controller.stub(:authenticate_user! => true                ) 
-          controller.stub(:current_workspace     => mock_workspace_member )  
-          mock_workspace_member.stub(:engineer? => true)
+          controller.stub(:current_workspace_member     => mock_workspace_member )  
+          mock_workspace_member.stub(:engineer? => true)                
+          @workspace  = FactoryGirl.create(:workspace ) 
+          @workspace.save
           #engineer_member  = FactoryGirl.create(:engineer_member ) 
           #UserWorkspaceMembership.stub!(:engineer).and_return(1)     
         end                              
@@ -26,8 +28,10 @@ describe "Where will it redirect you when you log in" do
       context "Not an Engineer" do
         before (:each) do  
           controller.stub(:authenticate_user! => true                 ) 
-          controller.stub(:current_workspace     => mock_workspace_member )  
-          mock_workspace_member.stub(:engineer? => false              )  
+          controller.stub(:current_workspace_member     => mock_workspace_member )  
+          mock_workspace_member.stub(:engineer? => false              )    
+          @workspace  = FactoryGirl.create(:workspace )
+          
         end
         it "should not redirect to /workspaces/X#Factures" do     
           get :index, :id => current_workspace.id              
