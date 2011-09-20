@@ -8,13 +8,15 @@ SCViews.PieceView = Backbone.View.extend
   className : "piece_view"   
 
   events: 
-    'click'                 : 'selectionChanged'
-    'click button.assign'   : 'assignPieceToMaterial'
-    'click button.unassign' : 'unassignPieceToMaterial'
+    'click'                          : 'selectionChanged'
+    'click button.assign'            : 'assignPieceToMaterial'
+    'click button.unassign'          : 'unassignPieceToMaterial'
+    'click button.unassign_material' : 'unassignMaterial'
 
   # Add class to the element to highlight it
   select: ->
     $(@el).addClass("selected")
+    
   # Remove class from the element
   deselect: ->
     $(@el).removeClass("selected")
@@ -23,17 +25,22 @@ SCViews.PieceView = Backbone.View.extend
   selectionChanged: (event) ->
     if event.srcElement.tagName != "BUTTON"
       @parentElement.trigger("selection_changed:pieces", this)
-  
 
   # Assign the piece to a material
   assignPieceToMaterial: ->
-    @parentElement.assignPieceToMaterial @model
-    @showUnassignButton()
+    @parentElement.trigger "action:assign:piece", this
 
   # Unassign the piece from his material
   unassignPieceToMaterial: ->
-    @parentElement.unassignPieceToMaterial @model
-    @showAssignButton()
+    @parentElement.trigger "action:unassign:piece", this
+
+  # Unassign the material from the piece
+  unassignMaterial: ->
+    @model.unset('material_id')
+    # To keep buttons up to date regarding the piece selected
+    SCVisu.materialListView.trigger("selection_changed:pieces", this)
+    @render()
+    @select()
 
   # Tells the view that a material has been selected.
   # If the piece has no material, it can be assigned to it.
@@ -51,6 +58,12 @@ SCViews.PieceView = Backbone.View.extend
   showUnassignButton: ->
     @renderWithButton 'unassign', 'Désassigner'
     $(@el).addClass('selected')
+
+  # Show an unassign button to unassign material from selected piece
+  showUnassignMaterialButton: ->
+    @renderWithButton 'unassign_material', 'Désssigner'
+    $(@el).addClass('selected')
+    
 
   # Add a button for assigning the piece from the selected material.
   showAssignButton: ->

@@ -65,6 +65,14 @@ SCViews.LinkListView = Backbone.View.extend
           _.each @linkViews, (linkView) =>
             linkView.showAssignButton()
             
+    @bind "action:unassign:link", (linkView) =>
+      linkView.deselect()
+      _.each @linkViews,  (view) =>
+        view.showAssignButton()
+      
+    @bind "action:assign:link", (linkView) =>
+      @render()
+      linkView.showUnassignButton()
 
   events: 
     "click button.add_link" : "showDatabaseLinks"
@@ -113,12 +121,14 @@ SCViews.LinkListView = Backbone.View.extend
   # Add link to interface
   assignLinkToSelectedInterface: (linkView) ->
     SCVisu.interfaceListView.selectedInterfaceView.model.set link_id : linkView.model.getId()
+    SCVisu.interfaceListView.selectedInterfaceView.select()
     SCVisu.current_calcul.set interfaces: SCVisu.interfaceListView.collection.models
     SCVisu.current_calcul.trigger 'change'
     
   
   unassignLinkToSelectedInterface: ->
     SCVisu.interfaceListView.selectedInterfaceView.model.unset 'link_id'
+    SCVisu.interfaceListView.selectedInterfaceView.select()
     SCVisu.current_calcul.set interfaces: SCVisu.interfaceListView.collection.models
     SCVisu.current_calcul.trigger 'change'
     

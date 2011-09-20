@@ -37,23 +37,20 @@ SCViews.LinkView = Backbone.View.extend
       @remove()
 
   # Assign the link to the selected interface
-  # Add an "Unassign" Button and remove all other "Assign" buttons (Because an interface can only have one link)
-  # Highlight the current link and put others in gray
   assign: ->
-    @parentElement.assignLinkToSelectedInterface @
-    @showUnassignButton()
+    @parentElement.trigger "action:assign:link", this
+    SCVisu.interfaceListView.trigger "action:assign:link", this    
 
   # Unassign the link from the selected interface
   unassign: ->
-    @parentElement.unassignLinkToSelectedInterface()
-    @parentElement.showAssignButtons()
+    @parentElement.trigger "action:unassign:link", this
+    SCVisu.interfaceListView.trigger "action:unassign:link", this    
   
   showDetails: ->
     @parentElement.showDetails @model
     # Trigger selection change only when the material selected change because it
     # makes lose the focus
     @parentElement.trigger("selection_changed:links", this) if @parentElement.selectedLinkView != this
-
 
   clone: ->
     @parentElement.clone @model

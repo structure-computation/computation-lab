@@ -28,17 +28,13 @@ SCViews.BoundaryConditionView = Backbone.View.extend
 
   # Assign the current condition to the selected edge
   assignCondition: ->
-    SCVisu.edgeListView.selectedEdgeView.model.set 'boundary_condition_id' : @model.get('id_in_calcul')
-    SCVisu.edgeListView.selectedEdgeView.render()
-    SCVisu.edgeListView.updateCalcul()
-    @showUnassignButton()
+    @parentElement.trigger "action:assign:boundary_condition", this
+    SCVisu.edgeListView.trigger "action:assign:boundary_condition", this    
 
   # Unassign the model from the selected edge
   unassignCondition: ->
-    SCVisu.edgeListView.selectedEdgeView.model.unset 'boundary_condition_id'
-    SCVisu.edgeListView.selectedEdgeView.render()
-    SCVisu.edgeListView.updateCalcul()
-    @parentElement.showAssignButtons()
+    @parentElement.trigger "action:unassign:boundary_condition", this
+    SCVisu.edgeListView.trigger "action:unassign:boundary_condition", this    
 
   # Remove condition (model and view)
   removeCondition: ->

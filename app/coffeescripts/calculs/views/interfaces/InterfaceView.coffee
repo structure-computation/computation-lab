@@ -3,18 +3,21 @@ SCViews.InterfaceView = Backbone.View.extend
   initialize: (params) ->
     @parentElement = params.parentElement
     $(@parentElement.el).find('tbody').append(@el)    
+    @model.bind "change", @render, this
 
   tagName   : "tr"
   className : "interface_view"   
 
   events: 
-    "click"                 : "selectionChanged"
-    'click button.assign'   : 'assignInterfaceToLink'
-    'click button.unassign' : 'unassignInterfaceToLink'
+    "click"                      : "selectionChanged"
+    'click button.assign'        : 'assignInterfaceToLink'
+    'click button.unassign'      : 'unassignInterfaceToLink'
+    'click button.unassign_link' : 'unassignLink'
 
   # Add class to the element to highlight it
   select: ->
     $(@el).addClass("selected")
+    
   # Remove class from the element
   deselect: ->
     $(@el).removeClass("selected")
@@ -27,15 +30,25 @@ SCViews.InterfaceView = Backbone.View.extend
 
   # Assign the piece to a material
   assignInterfaceToLink: ->
-    @parentElement.assignInterfaceToLink @model
-    @showUnassignButton()
+    @parentElement.trigger "action:assign:interface", this
 
   # Unassign the piece from his material
   unassignInterfaceToLink: ->
-    @parentElement.unassignInterfaceToLink @model
-    @showAssignButton()
+    @parentElement.trigger "action:unassign:interface", this
 
+  # Unassign the link from the interface
+  unassignLink: ->
+    @model.unset('link_id')
+    # To keep buttons up to date regarding the interface selected
+    SCVisu.linkListView.trigger("selection_changed:interfaces", this)
+    @render()
+    @select()
 
+  # Show an unassign button to unassign link from selected interface
+  showUnassignLinkButton: ->
+    @renderWithButton 'unassign_link', 'Désssigner'
+    $(@el).addClass('selected')
+ 
   # If the interface has no link, it can be assigned to it.
   # If it already has a link, it can be unassigned to it
   # else, no button is rendered.

@@ -12,6 +12,7 @@ SCViews.InterfaceListView = Backbone.View.extend
     @selectedInterfaceView = null
     @render()
     $(@el).find('table').tablesorter()
+    @filterValue = $(@el).find('select.between_two').val()
     
      # Triggered when a interface is clicked
     @bind "selection_changed:interfaces", (selectedInterfaceView) =>
@@ -24,6 +25,7 @@ SCViews.InterfaceListView = Backbone.View.extend
         @selectedInterfaceView.deselect() if @selectedInterfaceView
         @selectedInterfaceView = selectedInterfaceView
         @selectedInterfaceView.select()
+        @selectedInterfaceView.showUnassignLinkButton() if @selectedInterfaceView.model.isAssigned()
         SCVisu.linkListView.trigger("selection_changed:interfaces", @selectedInterfaceView)
 
 
@@ -52,7 +54,37 @@ SCViews.InterfaceListView = Backbone.View.extend
         if interface.get('link_id') == linkView.model.getId()
           interface.unset 'link_id'
       @render()
- 
+
+    # Triggered when the unassigned button of a link is clicked.
+    # Unassign the link from the current interface
+    @bind "action:unassign:link", (linkView) =>
+      @selectedInterfaceView.model.unset "link_id"
+      @selectedInterfaceView.render()
+      @selectedInterfaceView.select()
+
+    # Triggered when the assigned button of a link is clicked.
+    # Assign the current interface to the given link view
+    @bind "action:assign:link", (linkView) =>
+      @selectedInterfaceView.model.set link_id: linkView.model.getId()
+      @selectedInterfaceView.render()
+      @selectedInterfaceView.showUnassignLinkButton()
+      @selectedInterfaceView.select()
+
+    # Triggered when the assigned button of a interface is clicked.
+    # Assign the current interface to the currently selected link
+    @bind "action:assign:interface", (interfaceView) =>
+      interfaceView.model.set link_id: SCVisu.linkListView.selectedLinkView.model.getId()
+      interfaceView.showUnassignButton()
+      interfaceView.select()
+      @saveCalcul()
+      
+    # Triggered when the unassigned button of a interface is clicked.
+    # Unassign the link from the current interface
+    @bind "action:unassign:interface", (interfaceView) =>
+      interfaceView.model.unset "link_id"
+      interfaceView.showAssignButton()
+      @saveCalcul()
+
 
   # Clears all elements previously loaded in the DOM. 
   # Indeed, the 'ul#interfaces' element already exists in the DOM and every time we create a InterfacesListView, 
@@ -62,23 +94,54 @@ SCViews.InterfaceListView = Backbone.View.extend
   clearView: ->
     $(@el).find('tbody').html('')
 
-  # Assign the interfaceModel to the selected link.
-  assignInterfaceToLink: (interfaceModel) ->
-    interfaceModel.set link_id : SCVisu.linkListView.selectedLinkView.model.getId()
-    SCVisu.current_calcul.set interfaces: SCVisu.interfaceListView.collection.models
-    SCVisu.current_calcul.trigger 'change'
-
-  # Assign the interfaceModel to the selected link.
-  unassignInterfaceToLink: (interfaceModel) ->
-    interfaceModel.unset "link_id"
+  saveCalcul: ->
     SCVisu.current_calcul.set interfaces: SCVisu.interfaceListView.collection.models
     SCVisu.current_calcul.trigger 'change'
 
   events:
     'change input#hide_assigned_interfaces' : 'toggleAssignedinterfaces'
+    'change select.between_two'             : 'setBetweenFilter'
     'click button.assign_all'               : 'assignAllVisibleInterfaces'
     'click button.unassign_all'             : 'unassignAllVisibleInterfaces'
+    'click button.filter'                   : 'executeFilter'
+    
+  # Set if the filter is between two "pieces" or two "materials"
+  setBetweenFilter: (event) ->
+    @filterValue = event.srcElement.value
   
+  executeFilter: ->
+    # Unhide every interface before filtering
+    _.each @interfaceViews, (view) ->
+      $(view.el).show()
+      
+    firstID  = parseInt($(@el).find('input#first_input' ).val(), 10)
+    secondID = parseInt($(@el).find('input#second_input').val(), 10)
+
+    if      @filterValue == "materials"
+      @filterBetweenMaterials(firstID, secondID)
+    else if @filterValue == "pieces"
+      @filterBetweenPieces(firstID, secondID)
+
+  # Go through all the interfaces
+  # Check get the two pieces it is attached to
+  # Check if the material of those pieces correspond to the filter
+  filterBetweenMaterials: (firstID, secondID) ->
+    for interfaceView in @interfaceViews
+      ids = interfaceView.model.get('adj_num_group').split(' ')
+      piece1 = SCVisu.pieceListView.getPiece(ids[0])
+      piece2 = SCVisu.pieceListView.getPiece(ids[1])
+      materialIDs = [piece1.get('material_id'), piece2.get('material_id')]
+      $(interfaceView.el).hide() if materialIDs.indexOf(firstID) == -1 or materialIDs.indexOf(secondID) == -1
+
+  # Go throug all interfaces and check if the id of the pieces 
+  # attached two correspond to the filter
+  filterBetweenPieces: (firstID, secondID) ->
+    for interfaceView in @interfaceViews
+      # We have to make sure to get an array with numbers and not strings
+      ids = [parseInt(interfaceView.model.get('adj_num_group').split(' ')[0], 10), parseInt(interfaceView.model.get('adj_num_group').split(' ')[1], 10)]
+      # If one of two ids doesn't correspond, hide
+      $(interfaceView.el).hide() if ids.indexOf(firstID) == -1 or ids.indexOf(secondID) == -1
+    
   # If the checkbox is checked, hide all assigned interfaces
   toggleAssignedinterfaces: (event) ->
     if event.srcElement.checked
