@@ -8,27 +8,29 @@ describe BillsController do
   end
    
   before(:each) do
-    controller.stub(:authenticate_user!       =>  true                  ) # .and_return(true)
-    controller.stub(:current_workspace_member =>  mock_workspace_member )    
-    @workspace_bill  = FactoryGirl.create(:bill , :workspace =>  current_workspace )     
+    controller.stub(:authenticate_user!       =>  true                   ) 
+    controller.stub(:current_workspace_member =>  mock_workspace_member  )    
+    @bill  = FactoryGirl.create(:bill , :workspace =>  current_workspace )
+    @bill.save 
+        
   end
 
   describe "Access for managers roles" do
     before(:each) do mock_workspace_member.stub(:manager? => true) end
-    context "When accessing bills" do
-      it "can access index" do get :index  , :workspace_id => current_workspace.id;                              should respond_with(:success)   end
-      #it "can access index" do get workspace_bills_path(current_workspace, :anchor => "Factures"), :workspace_id => current_workspace.id; should respond_with(:success)    end 
-      it "can access show"  do get :show   , :workspace_id => current_workspace.id, :id => @workspace_bill.id ;            should respond_with(:success)    end
+    context "When accessing bills" do     
+      it "can access index" do get :index  , :workspace_id => current_workspace.id;                    should respond_with(:success)   end
+      it "can access show"  do get :show   , :workspace_id => current_workspace.id, :id => @bill.id ;  should respond_with(:success)    end
     end   
   end     
   
   describe "Acces for non-managers roles" do
     before(:each) do mock_workspace_member.stub(:manager? => false) end
     context "When accessing to bills" do
-      it "can NOT access index" do get :index , :workspace_id => current_workspace.id;                              should respond_with(:forbidden) end 
-      it "can NOT access show"  do get :show  , :workspace_id => current_workspace.id, :id => @workspace_bill.id ;  should respond_with(:forbidden) end   
+      it "can NOT access index" do get :index , :workspace_id => current_workspace.id;                    should respond_with(:forbidden) end 
+      it "can NOT access show"  do get :show  , :workspace_id => current_workspace.id, :id => @bill.id ;  should respond_with(:forbidden) end   
     end    
   end  
+  
 end
 
 
