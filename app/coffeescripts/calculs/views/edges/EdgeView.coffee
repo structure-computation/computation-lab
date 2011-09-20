@@ -53,11 +53,13 @@ SCViews.EdgeView = Backbone.View.extend
   
   # Show an assign button
   showAssignButton: ->
-    $(@el).find('td.cl_id').html("<button class='assign'>Assigner</button>")
+    @render()
+    $(@el).find('td.cl_id').append("<button class='assign'>Assigner</button>")
 
   # Show an unassign button  
   showUnassignButton: ->
-    $(@el).find('td.cl_id').html("<button class='unassign'>Désassigner</button>")
+    @render()
+    $(@el).find('td.cl_id').append("<button class='unassign'>Désassigner</button>")
       
   render: ->
     template = """

@@ -15,8 +15,7 @@ SCViews.EdgeListView = Backbone.View.extend
     $(@el).find('table').tablesorter()
 
     @collection.bind 'change', (model) =>
-      @render()
-      @selectedEdgeView.select() if  @selectedEdgeView != null and model == @selectedEdgeView.model
+      @selectedEdgeView.render() if  @selectedEdgeView != null and model == @selectedEdgeView.model
     @collection.bind 'add'   , @render, this
     @collection.bind 'remove', (edgeModel) => 
       if edgeModel == @selectedEdgeView.model

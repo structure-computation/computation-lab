@@ -61,7 +61,7 @@ SCViews.InterfaceView = Backbone.View.extend
   # Render with an action button
   renderWithButton: (className, textButton) ->
     @render()
-    $(@el).find('td:last').html("<button class='#{className}'>#{textButton}</button>")
+    $(@el).find('td:last').append("<button class='#{className}'>#{textButton}</button>")
     return this
 
   render: ->
