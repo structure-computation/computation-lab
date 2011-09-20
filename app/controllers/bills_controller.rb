@@ -12,24 +12,24 @@ class BillsController < InheritedResources::Base
   end              
   
   def index 
-    @workspace        = current_workspace_member.workspace
-    @workspace_bills  = Bill.from_workspace @workspace.id
+    @workspace  = current_workspace_member.workspace
+    @bills      = Bill.from_workspace @workspace.id
     index!
   end        
-  
+                                                      
   def show 
-    @bill   = Bill.from_workspace(current_workspace_member.workspace.id).find_by_id(params[:id])
+    @bill      = Bill.from_workspace(current_workspace_member.workspace.id).find_by_id(params[:id])
     @workspace = current_workspace_member.workspace
     if @bill 
-      # show!
+      #show!
       render
     else
-      respond_to do |format|
-        format.html {redirect_to workspace_bills_path(current_workspace_member.workspace.id), 
+      respond_to do |format|         
+        format.html {redirect_to workspace_bills_path(current_workspace_member.workspace.bills), 
                     :notice => "Cette facture n'existe pas ou n'est pas accessible à partir de cet espace de travail."}
         format.json {render :status => 404, :json => {}}
       end
-    end
+    end                                  
   end   
   
   
