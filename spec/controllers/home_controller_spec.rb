@@ -2,23 +2,20 @@ require 'spec_helper'
 
 describe "Where will it redirect you when you log in" do 
   let :current_workspace        do FactoryGirl.build(:workspace)                                         end
-  let :other_workspace          do FactoryGirl.build(:workspace)                                         end                                     
   let :mock_workspace_member    do mock_model(UserWorkspaceMembership, :workspace => current_workspace)  end
     
   describe HomeController do
     describe "Access to Laboratory" do  
       context "Log in as an Engineer" do  
         before(:each) do           
-          controller.stub(:authenticate_user! => true                ) 
+          controller.stub(:authenticate_user! => true                            ) 
           controller.stub(:current_workspace_member     => mock_workspace_member )  
-          mock_workspace_member.stub(:engineer? => true)                
-          @workspace  = FactoryGirl.create(:workspace ) 
-          @workspace.save
-          #engineer_member  = FactoryGirl.create(:engineer_member ) 
-          #UserWorkspaceMembership.stub!(:engineer).and_return(1)     
+          mock_workspace_member.stub(:engineer? => true                          )    
+          mock_workspace_member.save!
+          current_work.save!               
         end                              
         it "redirect to workspace/X/sc_models" do
-          get :index, :id => current_workspace.id    
+          get :index, :workspace_id => current_workspace.id    
           assigns(:workspace ).should eq( [@current_workspace] )
           response.should redirect_to(workspace_sc_models_path(current_workspace)) 
         end   
@@ -27,14 +24,14 @@ describe "Where will it redirect you when you log in" do
                     
       context "Not an Engineer" do
         before (:each) do  
-          controller.stub(:authenticate_user! => true                 ) 
+          controller.stub(:authenticate_user! => true                            ) 
           controller.stub(:current_workspace_member     => mock_workspace_member )  
-          mock_workspace_member.stub(:engineer? => false              )    
-          @workspace  = FactoryGirl.create(:workspace )
-          
+          mock_workspace_member.stub(:engineer? => false                         ) 
+          mock_workspace_member.save!
+          current_work.save!   
         end
         it "should not redirect to /workspaces/X#Factures" do     
-          get :index, :id => current_workspace.id              
+          get :index, :id => current_workspace              
           response.should redirect_to(workspace_sc_models_path(current_workspace))  
           flash[:notice].should eq("Vous n'avez pas accès à cette partie de l'espace de travail.")
         end
