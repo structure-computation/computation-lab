@@ -3,7 +3,8 @@ class ScModelsController < InheritedResources::Base
   #session :cookie_only => false, :only => :upload
   require 'socket'
   include Socket::Constants
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!  
+  before_filter :must_be_engineer
   before_filter :set_page_name
   belongs_to :workspace
   respond_to :html, :json
@@ -16,12 +17,8 @@ class ScModelsController < InheritedResources::Base
   end
 
   def index
-    @workspace            = current_workspace_member.workspace
-    @workspace_sc_models  = ScModel.from_workspace @workspace.id
-    
-    # @sc_model.each{ |sc_model| do
-    #   sc_model[:results]  = sc_model.calcul_results.find(:all, :conditions => {:log_type => "compute", :state => "finish"}).size }
-    # end 
+    @workspace  = current_workspace_member.workspace
+    @sc_models  = ScModel.from_workspace @workspace.id
     index!
   end
   
@@ -50,8 +47,7 @@ class ScModelsController < InheritedResources::Base
   end
 
   def show 
-    ws_sc_models  = ScModel.from_workspace(current_workspace_member.workspace.id).find_by_id(params[:id])
-    @sc_model     = ws_sc_models ?  ws_sc_models : ws_sc_models  
+    @sc_model  = ScModel.from_workspace(current_workspace_member.workspace.id).find_by_id(params[:id])
     @workspace    = current_workspace_member.workspace
     if @sc_model 
       # show!
