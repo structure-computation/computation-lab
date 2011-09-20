@@ -45,16 +45,14 @@ SCViews.OptionView = Backbone.View.extend
       @model.set mode : 'test'
     else if $(@el).find('input#normal_mode')[0].checked
       @model.set mode : 'normal'
-      if $(@el).find('input#latin_method')[0].checked      
-        @model.set convergence_method_LATIN :
-                        multiscale       : $(@el).find('input#multiscale_on').val() # on / off
-                        max_iteration    : $(@el).find('input#max_iteration').val()
-                        convergence_rate : $(@el).find('input#convergence_rate').val()
+      @model.set convergence_method_LATIN :
+                      multiscale       : $(@el).find('input#multiscale_on').val() # on / off
+                      max_iteration    : $(@el).find('input#max_iteration').val()
+                      convergence_rate : $(@el).find('input#convergence_rate').val()
 
-      if $(@el).find('input#calculus_precision')[0].checked      
-        @model.set precision_calcul :
-                        zoom  : $(@el).find('input#zoom').val()
-                        error : $(@el).find('input#error').val()
+      @model.set precision_calcul :
+                      zoom  : $(@el).find('input#zoom').val()
+                      error : $(@el).find('input#error').val()
     SCVisu.current_calcul.set options: @model
     SCVisu.current_calcul.trigger 'change'
   # Generic method usefull to set value of an input whose ID is passed as a parameter.

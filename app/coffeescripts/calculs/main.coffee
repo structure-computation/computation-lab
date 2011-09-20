@@ -7,7 +7,8 @@ $ ->
   # Initialize the step view before the calcul load to prevent the following error:
   #   When two calculs was loaded and users clicked on 'add step', two steps were added...
   #   In fact, two references of StepListViews were created but I couldn't tell why.
-  SCVisu.stepListView             = new SCViews.StepListView()
+  SCVisu.stepListView                       = new SCViews.StepListView()
+  SCVisu.multiresolutionParametersListView  = new SCViews.MultiresolutionParameterListView()
 
   # Initialize all variables and views with data retrieved from the JSON sent by the "Visualisateur"
   # /!\ Variable's name must not be changed! They are used in multiple place in the code. /!\
@@ -42,6 +43,9 @@ $ ->
     steps                         = new SCModels.StepCollection SCVisu.current_calcul.get('time_steps').collection
     # Initialize the step list view passing it a step collection
     SCVisu.stepListView.init(steps)
+    
+    multiresolutionParameters     = new SCModels.MultiresolutionParameterCollection SCVisu.current_calcul.get('multiresolution_parameters').collection
+    SCVisu.multiresolutionParametersListView.init multiresolutionParameters
     
     # Initialization of the InterfaceListView
     interfaceCollection           = new SCModels.Interfaces SCVisu.current_calcul.get('interfaces')

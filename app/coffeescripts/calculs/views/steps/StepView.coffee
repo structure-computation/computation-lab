@@ -28,7 +28,7 @@ SCViews.StepView = Backbone.View.extend
                 <input type='text' value='<%= final_time %>' disabled> 
               </td> 
               <td>
-                <button class='delete'>x</button>
+                <button class='delete'>X</button>
               </td> 
           """
 
@@ -61,16 +61,17 @@ SCViews.StepView = Backbone.View.extend
     $(@el).find('.time_step input')     .val(@model.get('time_step'))
     $(@el).find('.nb_time_steps input') .val(@model.get('nb_time_steps'))
     $(@el).find('.final_time input')    .val(@model.get('final_time'))
-  
-  removeDeleteButton: ->
-    $(@el).find("button").remove()
-  
+    
   ## -- Events
   events: 
     'click button.delete' : 'delete'
 
-  delete: ->
-    if confirm "Êtes-vous sûr ?"
+  delete: (withoutPrompting = false)->
+    if withoutPrompting
+      @model.destroy()
+      SCVisu.current_calcul.trigger 'change'
+      @remove()
+    else if confirm "Êtes-vous sûr ?"
       @model.destroy()
       SCVisu.current_calcul.trigger 'change'
       @remove()

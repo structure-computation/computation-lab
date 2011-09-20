@@ -6,8 +6,9 @@
     Type :
     %select.boundary_condition_type
       %option                             -
-      %optgroup{:label => "Condition Limites en effort"}
+      %optgroup{:label => "Condition limites en effort"}
         %option{:value => "effort"}       Densité d'effort
+        %option{:value => "pressure"}     Pression
       %optgroup{:label => "Conditions limites en déplacement"}
         %option{:value => "imposed"}      Déplacement imposé
         %option{:value => "normal"}       Déplacement normal

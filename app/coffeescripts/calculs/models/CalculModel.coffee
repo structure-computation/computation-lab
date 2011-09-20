@@ -13,9 +13,12 @@ SCModels.Calcul = Backbone.Model.extend
     @set links                 : []
     @set interfaces            : []
     @set volumic_forces        : []
-    @set edges        : []
+    @set edges                 : []
     @set time_steps            :
       time_scheme : "static"
+      collection  : []
+    @set multiresolution_parameters :
+      multiresolution_type : "fatigue"
       collection  : []
     @set options               : {}
       
@@ -36,6 +39,8 @@ SCModels.Calcul = Backbone.Model.extend
   setElements: (params) ->
     @setTimeStepsCollection params.time_steps.collection
     @setTimeScheme params.time_steps.time_scheme
+    @setMultiresolutionParameterCollection params.multiresolution_parameters.collection
+    @setMultiresolutionParameterType params.multiresolution_parameters.multiresolution_type
     @set materials          : params.materials
     @set pieces             : params.pieces  
     @set links              : params.links  
@@ -51,7 +56,13 @@ SCModels.Calcul = Backbone.Model.extend
 
   setTimeScheme: (time_scheme) ->
     @get('time_steps').time_scheme = time_scheme
-       
+
+  setMultiresolutionParameterCollection: (multiresolution_parameters) ->
+    @get('multiresolution_parameters').collection = multiresolution_parameters
+
+  setMultiresolutionParameterType:   (multiresolution_type) ->
+    @get('multiresolution_parameters').multiresolution_type = multiresolution_type
+    
 # Collection of Calcul
 SCModels.Calculs = Backbone.Collection.extend
   model: SCModels.Calcul
