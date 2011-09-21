@@ -69,6 +69,5 @@ SCViews.LinkView = Backbone.View.extend
     $(@el).append("<button class='#{className}'>#{textButton}</button>")
     return this
 
-
   render: ->
     @renderWithButton 'edit', 'Editer'

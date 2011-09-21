@@ -10,6 +10,9 @@ SCViews.MaterialListView = Backbone.View.extend
     for material in @collection.models
       @createMaterialView(material)
     @selectedMaterialView = null
+
+    @collection.bind 'add'   , @saveCalcul, this
+
     $('#materials_database').hide()
     $('#materials_database button.close').click => 
       $('#materials_database').slideUp()
@@ -19,11 +22,13 @@ SCViews.MaterialListView = Backbone.View.extend
     @collection.bind 'change', (model) =>
       @render()
       @selectedMaterialView.select() if @selectedMaterialView != null and model == @selectedMaterialView.model
+      @saveCalcul()
     @collection.bind 'remove', (materialModel) =>
       if @selectedMaterialView != null and materialModel == @selectedMaterialView.model
         @editView.hide()
         @render()
-
+      @saveCalcul()
+      
     @render()
       
     # Triggered when a material is clicked
@@ -70,10 +75,11 @@ SCViews.MaterialListView = Backbone.View.extend
       materialView.deselect()
       _.each @materialViews,  (view) =>
         view.showAssignButton()
-      
+            
     @bind "action:assign:material", (materialView) =>
       @render()
       materialView.showUnassignButton()
+
 
   events:
     "click button.add_material" : "showDatabaseMaterials"
@@ -87,8 +93,8 @@ SCViews.MaterialListView = Backbone.View.extend
     #materialModel.set id_in_calcul : @getNewMaterialId()
     @collection.add materialModel
     @createMaterialView materialModel
-    SCVisu.current_calcul.set materials: @collection.models  
-    SCVisu.current_calcul.trigger 'change'
+  
+
 
   createMaterialView: (material) ->
     m = new SCViews.MaterialView model: material, parentElement: this
@@ -113,6 +119,11 @@ SCViews.MaterialListView = Backbone.View.extend
     _.each @materialViews, (view) ->
       $(view.el).removeClass('selected')
       view.showAssignButton()
+
+  saveCalcul: ->
+    SCVisu.current_calcul.set materials: @collection.models  
+    SCVisu.current_calcul.set pieces: SCVisu.pieceListView.collection.models  
+    SCVisu.current_calcul.trigger 'change'
 
   render : ->
     for materialView in @materialViews

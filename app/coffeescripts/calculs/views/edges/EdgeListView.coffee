@@ -16,12 +16,16 @@ SCViews.EdgeListView = Backbone.View.extend
 
     @collection.bind 'change', (model) =>
       @selectedEdgeView.render() if  @selectedEdgeView != null and model == @selectedEdgeView.model
-    @collection.bind 'add'   , @render, this
+      @saveCalcul()
+    @collection.bind 'add'   , =>
+      @render()
+      @saveCalcul()
     @collection.bind 'remove', (edgeModel) => 
       if edgeModel == @selectedEdgeView.model
         @editView.hide()
         @render()
-
+      @saveCalcul()
+      
     # Triggered when a edge is clicked
     @bind "selection_changed:edges", (selectedEdgeView) =>
       @render() # Reset all views
@@ -89,14 +93,12 @@ SCViews.EdgeListView = Backbone.View.extend
       edgeView.model.set boundary_condition_id: SCVisu.boundaryConditionListView.selectedBoundaryConditionView.model.getId()
       edgeView.showUnassignButton()
       edgeView.select()
-      @saveCalcul()
       
     # Triggered when the unassigned button of a edge is clicked.
     # Unassign the boundary_condition from the current edge
     @bind "action:unassign:edge", (edgeView) =>
       edgeView.model.unset "boundary_condition_id"
       edgeView.showAssignButton()
-      @saveCalcul()
 
   addEdgeModel: (edgeModel) ->
     @editView.hide()
@@ -111,12 +113,7 @@ SCViews.EdgeListView = Backbone.View.extend
   # So we have to clear the content each time we create a new BoundaryConditionListView 
   clearView: ->
     $(@el).find('table tbody').html('')  
-  
-  # Update the calcul JSON
-  saveCalcul: ->
-    SCVisu.current_calcul.set edges: @collection.models
-    SCVisu.current_calcul.trigger 'change'
-  
+    
   # Shows the new edge form
   showNewEdgeForm: ->
     $('#boundary_condition_form').hide()
@@ -154,7 +151,13 @@ SCViews.EdgeListView = Backbone.View.extend
       if $(edgeView.el).is(':visible')
         edgeView.model.unset "boundary_condition_id"
         edgeView.showAssignButton()
-    
+
+  # Update the calcul JSON
+  saveCalcul: ->
+    SCVisu.current_calcul.set edges: @collection.models
+    SCVisu.current_calcul.set boundary_conditions: SCVisu.boundaryConditionListView.collection.models
+    SCVisu.current_calcul.trigger 'change'
+
   render: ->
     for edgeView in @edgeViews
       edgeView.render()

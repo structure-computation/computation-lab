@@ -6,19 +6,21 @@ SCViews.LinkListView = Backbone.View.extend
     @clearView()
     @editView = new SCViews.EditLinkView parentElement: this
     @selectedLinkView = null
-
+    @collection.bind 'add', @saveCalcul, this
     @collection.bind 'change', (model) =>
       @render()
       @selectedLinkView.select() if @selectedLinkView != null and model == @selectedLinkView.model
-
+      @saveCalcul()
+      
     @collection.bind 'remove', (linkModel) =>
       if linkModel == @selectedLinkView.model
         @render()
         @editView.hide()
-
+      @saveCalcul()
     @linkViews = []
     for link in @collection.models
       @createLinkView(link)
+    @render()
     $('#links_database').hide()
     $('#links_database button.close').click => 
       $('#links_database')   .slideUp()
@@ -69,7 +71,7 @@ SCViews.LinkListView = Backbone.View.extend
       linkView.deselect()
       _.each @linkViews,  (view) =>
         view.showAssignButton()
-      
+
     @bind "action:assign:link", (linkView) =>
       @render()
       linkView.showUnassignButton()
@@ -90,16 +92,10 @@ SCViews.LinkListView = Backbone.View.extend
     $('#list_calcul > div').slideUp()
     $('#links_database')   .slideDown()
 
-  # getNewLinkId: ->
-  #   @collection.last().get('id_in_calcul') + 1    
-
   # Add a model to the collection and creates an associated view
   add: (linkModel) ->
-#    linkModel.set id_in_calcul: @getNewLinkId()
     @collection.add linkModel
     @createLinkView linkModel
-    SCVisu.current_calcul.set links: @collection.models  
-    SCVisu.current_calcul.trigger 'change'
     
   # Create a view giving it a model
   createLinkView: (link) ->
@@ -122,16 +118,16 @@ SCViews.LinkListView = Backbone.View.extend
   assignLinkToSelectedInterface: (linkView) ->
     SCVisu.interfaceListView.selectedInterfaceView.model.set link_id : linkView.model.getId()
     SCVisu.interfaceListView.selectedInterfaceView.select()
-    SCVisu.current_calcul.set interfaces: SCVisu.interfaceListView.collection.models
-    SCVisu.current_calcul.trigger 'change'
-    
   
   unassignLinkToSelectedInterface: ->
     SCVisu.interfaceListView.selectedInterfaceView.model.unset 'link_id'
     SCVisu.interfaceListView.selectedInterfaceView.select()
-    SCVisu.current_calcul.set interfaces: SCVisu.interfaceListView.collection.models
+
+  saveCalcul: ->
+    SCVisu.current_calcul.set links: @collection.models  
+    SCVisu.current_calcul.set interfaces: SCVisu.interfaceListView.collection.models  
     SCVisu.current_calcul.trigger 'change'
-    
+
   render : ->
     for linkView in @linkViews
       linkView.render()    

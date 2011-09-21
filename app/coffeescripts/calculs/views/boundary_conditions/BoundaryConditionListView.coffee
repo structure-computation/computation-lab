@@ -12,20 +12,23 @@ SCViews.BoundaryConditionListView = Backbone.View.extend
     
     for boundaryCondition in @collection.models
       @boundaryConditionViews.push new SCViews.BoundaryConditionView model: boundaryCondition, parentElement: this
-    
     @render()
+    
     @collection.bind 'change', (model) =>
       @render()
       @selectedBoundaryConditionView.select() if @selectedBoundaryConditionView != null and model == @selectedBoundaryConditionView.model
+      @saveCalcul()
     @collection.bind 'remove', (boundaryConditionModel) =>
       if boundaryConditionModel == @selectedBoundaryConditionView.model
         @editView.hide()
         @render()
+      @saveCalcul()
     @collection.bind 'add'   , (boundaryCondition) =>
       boundaryConditionView       = new SCViews.BoundaryConditionView model: boundaryCondition, parentElement: this
       @boundaryConditionViews.push  boundaryConditionView
       @render()
       $(boundaryConditionView.el).addClass("selected")
+      @saveCalcul()
 
     # Triggered when a boundaryCondition is clicked
     @bind "selection_changed:boundary_conditions", (selectedBoundaryConditionView) =>
@@ -112,7 +115,13 @@ SCViews.BoundaryConditionListView = Backbone.View.extend
   # Show edit view of the given model.
   showDetails: (model) ->
     @editView.setModel model
-  
+
+  # Update the calcul JSON
+  saveCalcul: ->
+    SCVisu.current_calcul.set boundary_conditions: @collection.models
+    SCVisu.current_calcul.set edges: SCVisu.edgeListView.collection.models
+    SCVisu.current_calcul.trigger 'change'
+
   render: ->
     SCVisu.current_calcul.set boundary_condition: @collection
     _.each @boundaryConditionViews, (boundaryCondition) ->

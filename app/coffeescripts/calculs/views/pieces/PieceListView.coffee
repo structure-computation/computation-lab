@@ -13,6 +13,10 @@ SCViews.PieceListView = Backbone.View.extend
     @render()
     $(@el).find('table').tablesorter()
 
+    @collection.bind 'add'   , @saveCalcul, this
+    @collection.bind 'change', @saveCalcul, this
+    @collection.bind 'remove', @saveCalcul, this
+
      # Triggered when a piece is clicked
     @bind "selection_changed:pieces", (selectedPieceView) =>
       @render() # Reset all views
@@ -75,14 +79,12 @@ SCViews.PieceListView = Backbone.View.extend
       pieceView.model.set material_id: SCVisu.materialListView.selectedMaterialView.model.getId()
       pieceView.showUnassignButton()
       pieceView.select()
-      @saveCalcul()
       
     # Triggered when the unassigned button of a piece is clicked.
     # Unassign the material from the current piece
     @bind "action:unassign:piece", (pieceView) =>
       pieceView.model.unset "material_id"
       pieceView.showAssignButton()
-      @saveCalcul()
 
   # Clears all elements previously loaded in the DOM. 
   # Indeed, the 'ul#pieces' element already exists in the DOM and every time we create a PiecesListView, 
@@ -92,10 +94,6 @@ SCViews.PieceListView = Backbone.View.extend
   clearView: ->
    $(@el).find('tbody').html('')
     
-  saveCalcul: ->
-    SCVisu.current_calcul.set pieces: SCVisu.pieceListView.collection.models
-    SCVisu.current_calcul.trigger 'change'
-
   events:
     'change input#hide_assigned_pieces'   : 'toggleAssignedPieces'
     'click button.assign_all'             : 'assignAllVisiblePieces'
@@ -123,6 +121,11 @@ SCViews.PieceListView = Backbone.View.extend
       if $(pieceView.el).is(':visible')
         pieceView.model.unset "material_id"
         pieceView.showAssignButton()
+
+  saveCalcul: ->
+    SCVisu.current_calcul.set pieces: @collection.models
+    SCVisu.current_calcul.set materials: SCVisu.materialListView.collection.models
+    SCVisu.current_calcul.trigger 'change'
 
   render : ->
     $("button.assign_all, button.unassign_all").attr('disabled', 'disabled')
