@@ -65,7 +65,16 @@ SCViews.MaterialListView = Backbone.View.extend
           # Then we have to show assign buttons
           _.each @materialViews, (materialView) =>
             materialView.showAssignButton()
-            
+
+    @bind "action:unassign:material", (materialView) =>
+      materialView.deselect()
+      _.each @materialViews,  (view) =>
+        view.showAssignButton()
+      
+    @bind "action:assign:material", (materialView) =>
+      @render()
+      materialView.showUnassignButton()
+
   events:
     "click button.add_material" : "showDatabaseMaterials"
     
@@ -104,15 +113,6 @@ SCViews.MaterialListView = Backbone.View.extend
     _.each @materialViews, (view) ->
       $(view.el).removeClass('selected')
       view.showAssignButton()
-
-  # Assign the selected material to currently selected piece
-  assignMaterialToSelectedPiece: (material) ->
-    SCVisu.pieceListView.assignMaterialToSelectedPiece material
-
-  # Unassign selected material to currently selected piece
-  unassignMaterial: (material) ->
-    SCVisu.pieceListView.unassignMaterialToSelectedPiece material
-    @showAssignButtons()
 
   render : ->
     for materialView in @materialViews

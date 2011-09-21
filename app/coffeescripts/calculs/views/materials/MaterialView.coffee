@@ -53,22 +53,21 @@ SCViews.MaterialView = Backbone.View.extend
     @renderWithButton 'unassign', 'Désassigner'
     $(@el).addClass "selected"
   
+  # Assign the clicked model to the selected piece
+  assign: ->
+    @parentElement.trigger "action:assign:material", this
+    SCVisu.pieceListView.trigger "action:assign:material", this    
+
   # Unassign the material from the selected Piece
   unassign: ->
-    @parentElement.unassignMaterial @model
+    @parentElement.trigger "action:unassign:material", this
+    SCVisu.pieceListView.trigger "action:unassign:material", this
   
   # Show an "Assign" button to each View in order to be able to 
   # assign the material to the selected piece.
   showAssignButton: ->
     @renderWithButton 'assign', 'Assigner'
-  
-  # Assign the clicked model to the selected piece
-  assign: ->
-    @parentElement.assignMaterialToSelectedPiece @model
-    $(@el).addClass('selected')
-    @showUnassignButton()
-    
-    
+      
   # Render the list view with an extra button for assigning or unassigning material.
   renderWithButton: (className, textButton) ->
     $(@el).html(@model.get('id_in_calcul') + " - " + @model.get('name'))

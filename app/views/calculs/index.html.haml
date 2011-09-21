@@ -37,24 +37,7 @@
         %tbody
 
   .links
-    #interfaces
-      .filtre
-        %h2.grey Filtre
-        %label{:for => "hide_assigned_interfaces"} Cacher les interfaces déjà assignés
-        %input#hide_assigned_interfaces{:type => "checkbox"}
-        %br/
-        %button.assign_all{:disabled => true} Tout assigner
-        %button.unassign_all{:disabled => true} Tout désassigner
-
-      %h2.grey Liste des interfaces
-      %table.data_table.grey
-        %thead
-          %tr
-            %th ID
-            %th Nom
-            %th Liaison
-        %tbody
-
+    = render "calculs/partials/interfaces"
   .boundary_conditions
     #edges
       .filtre

@@ -37,6 +37,7 @@ SCViews.EdgeListView = Backbone.View.extend
         @selectedEdgeView.deselect() if @selectedEdgeView
         @selectedEdgeView = selectedEdgeView
         @selectedEdgeView.select()
+        @selectedEdgeView.showUnassignBoundaryConditionButton() if @selectedEdgeView.model.isAssigned()
         SCVisu.boundaryConditionListView.trigger("selection_changed:edges", @selectedEdgeView)
 
 
@@ -67,6 +68,36 @@ SCViews.EdgeListView = Backbone.View.extend
           edge.unset 'boundary_condition_id'
       @render()      
 
+    # Triggered when the unassigned button of a boundary condition is clicked.
+    # Unassign the boundary condition from the current edge
+    @bind "action:unassign:boundary_condition", (boundaryConditionView) =>
+      @selectedEdgeView.model.unset "boundary_condition_id"
+      @selectedEdgeView.render()
+      @selectedEdgeView.select()
+
+    # Triggered when the assigned button of a boundary_condition is clicked.
+    # Assign the current edge to the given boundary_condition view
+    @bind "action:assign:boundary_condition", (boundaryConditionView) =>
+      @selectedEdgeView.model.set boundary_condition_id: boundaryConditionView.model.getId()
+      @selectedEdgeView.render()
+      @selectedEdgeView.showUnassignBoundaryConditionButton()
+      @selectedEdgeView.select()
+
+    # Triggered when the assigned button of a edge is clicked.
+    # Assign the current edge to the currently selected boundary_condition
+    @bind "action:assign:edge", (edgeView) =>
+      edgeView.model.set boundary_condition_id: SCVisu.boundaryConditionListView.selectedBoundaryConditionView.model.getId()
+      edgeView.showUnassignButton()
+      edgeView.select()
+      @saveCalcul()
+      
+    # Triggered when the unassigned button of a edge is clicked.
+    # Unassign the boundary_condition from the current edge
+    @bind "action:unassign:edge", (edgeView) =>
+      edgeView.model.unset "boundary_condition_id"
+      edgeView.showAssignButton()
+      @saveCalcul()
+
   addEdgeModel: (edgeModel) ->
     @editView.hide()
     @edgeViews.push new SCViews.EdgeView model: edgeModel, parentElement: @
@@ -82,19 +113,9 @@ SCViews.EdgeListView = Backbone.View.extend
     $(@el).find('table tbody').html('')  
   
   # Update the calcul JSON
-  updateCalcul: ->
+  saveCalcul: ->
     SCVisu.current_calcul.set edges: @collection.models
     SCVisu.current_calcul.trigger 'change'
-
-  # Assign the selected condition to the selected edge
-  asssignCondition: (toThisEdge)->
-    toThisEdge.model.set 'boundary_condition_id': SCVisu.boundaryConditionListView.selectedBoundaryConditionView.model.getId()
-    @updateCalcul()
-
-  # Assign the condition from the selected edge
-  unasssignCondition: (toThisEdge)->
-    toThisEdge.model.unset 'boundary_condition_id'
-    @updateCalcul()
   
   # Shows the new edge form
   showNewEdgeForm: ->

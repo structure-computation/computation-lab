@@ -24,6 +24,7 @@ SCViews.PieceListView = Backbone.View.extend
         @selectedPieceView.deselect() if @selectedPieceView
         @selectedPieceView = selectedPieceView
         @selectedPieceView.select()
+        @selectedPieceView.showUnassignMaterialButton() if @selectedPieceView.model.isAssigned()
         SCVisu.materialListView.trigger("selection_changed:pieces", @selectedPieceView)
 
 
@@ -52,7 +53,37 @@ SCViews.PieceListView = Backbone.View.extend
         if piece.get('material_id') == materialView.model.getId()
           piece.unset 'material_id'
       @render()
- 
+
+    # Triggered when the unassigned button of a material is clicked.
+    # Unassign the material from the current piece
+    @bind "action:unassign:material", (materialView) =>
+      @selectedPieceView.model.unset "material_id"
+      @selectedPieceView.render()
+      @selectedPieceView.select()
+
+    # Triggered when the assigned button of a material is clicked.
+    # Assign the current piece to the given material view
+    @bind "action:assign:material", (materialView) =>
+      @selectedPieceView.model.set material_id: materialView.model.getId()
+      @selectedPieceView.render()
+      @selectedPieceView.showUnassignMaterialButton()
+      @selectedPieceView.select()
+
+    # Triggered when the assigned button of a piece is clicked.
+    # Assign the current piece to the currently selected material
+    @bind "action:assign:piece", (pieceView) =>
+      pieceView.model.set material_id: SCVisu.materialListView.selectedMaterialView.model.getId()
+      pieceView.showUnassignButton()
+      pieceView.select()
+      @saveCalcul()
+      
+    # Triggered when the unassigned button of a piece is clicked.
+    # Unassign the material from the current piece
+    @bind "action:unassign:piece", (pieceView) =>
+      pieceView.model.unset "material_id"
+      pieceView.showAssignButton()
+      @saveCalcul()
+
   # Clears all elements previously loaded in the DOM. 
   # Indeed, the 'ul#pieces' element already exists in the DOM and every time we create a PiecesListView, 
   # we render the view and we add some element inside. And even if we have many different view, 
@@ -61,33 +92,9 @@ SCViews.PieceListView = Backbone.View.extend
   clearView: ->
    $(@el).find('tbody').html('')
     
-  # Assign the pieceModel to the selected Material.
-  assignPieceToMaterial: (pieceModel) ->
-    pieceModel.set 'material_id' : SCVisu.materialListView.selectedMaterialView.model.getId()
+  saveCalcul: ->
     SCVisu.current_calcul.set pieces: SCVisu.pieceListView.collection.models
     SCVisu.current_calcul.trigger 'change'
-    
-  # Assign the pieceModel to the selected Material.
-  unassignPieceToMaterial: (pieceModel) ->
-    pieceModel.unset 'material_id'
-    SCVisu.current_calcul.set pieces: SCVisu.pieceListView.collection.models
-    SCVisu.current_calcul.trigger 'change'
-    
-  # Assign the selected material to the currently selected piece.
-  assignMaterialToSelectedPiece: (material) ->
-    @selectedPieceView.model.set material_id: material.getId()
-    SCVisu.current_calcul.set pieces: SCVisu.pieceListView.collection.models
-    SCVisu.current_calcul.trigger 'change'
-    @render()
-    $(@selectedPieceView.el).addClass("selected")
-    
-  # Unassign the selected material from the currently selected piece.
-  unassignMaterialToSelectedPiece: ->
-    @selectedPieceView.model.unset 'material_id'
-    SCVisu.current_calcul.set pieces: SCVisu.pieceListView.collection.models
-    SCVisu.current_calcul.trigger 'change'
-    @render()
-    $(@selectedPieceView.el).removeClass("selected")
 
   events:
     'change input#hide_assigned_pieces'   : 'toggleAssignedPieces'
@@ -123,3 +130,12 @@ SCViews.PieceListView = Backbone.View.extend
       pieceView.render()
       pieceView.deselect()
     return this
+
+  getPiece: (pieceID) ->
+    # I don't go through @collection.each because it would go through all 
+    # elements and would not stop on return statement
+    for piece in @collection.models
+      if parseInt(piece.get('id'),10) == parseInt(pieceID,10)
+        return piece
+
+  

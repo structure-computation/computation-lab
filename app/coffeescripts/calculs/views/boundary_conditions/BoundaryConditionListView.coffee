@@ -71,6 +71,15 @@ SCViews.BoundaryConditionListView = Backbone.View.extend
     @bind "action:removed_edge", (edgeView) =>
       @render()
 
+    @bind "action:unassign:boundary_condition", (boundaryConditionView) =>
+      boundaryConditionView.deselect()
+      _.each @boundaryConditionViews,  (view) =>
+        view.showAssignButton()
+      
+    @bind "action:assign:boundary_condition", (boundaryConditionView) =>
+      @render()
+      boundaryConditionView.showUnassignButton()
+
   events:
     "click .add" : "addCondition"
 

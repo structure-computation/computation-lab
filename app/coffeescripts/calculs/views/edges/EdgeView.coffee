@@ -8,11 +8,12 @@ SCViews.EdgeView = Backbone.View.extend
     $(@parentElement.el).find('table tbody').append @el
 
   events:
-    'click'                 : 'selectionChanged'
-    "click button.edit"     : "editEdge"
-    "click button.assign"   : "asssignCondition"
-    "click button.unassign" : "unassignCondition"
-    "click button.remove"   : "removeEdge"
+    'click'                                    : 'selectionChanged'
+    "click button.edit"                        : "editEdge"
+    "click button.assign"                      : "asssignConditionFromEdge"
+    "click button.unassign"                    : "unassignConditionFromEdge"
+    "click button.unassign_boundary_condition" : "unassignBoundaryCondition"
+    "click button.remove"                      : "removeEdge"
 
   # Add class to the element to highlight it
   select: ->
@@ -42,15 +43,20 @@ SCViews.EdgeView = Backbone.View.extend
       @remove()
 
   # Assign the selected condition to the current model
-  asssignCondition: ->
-    @parentElement.asssignCondition(this)
-    @showUnassignButton()
+  asssignConditionFromEdge: ->
+    @parentElement.trigger "action:assign:edge", this
 
   # Unassign the condition from the current model    
-  unassignCondition: ->
-    @parentElement.unasssignCondition(this)
-    @showAssignButton()
-  
+  unassignConditionFromEdge: ->
+    @parentElement.trigger "action:unassign:edge", this
+
+  unassignBoundaryCondition: ->
+    @model.unset "boundary_condition_id"
+    # To keep buttons up to date regarding the edge selected
+    SCVisu.boundaryConditionListView.trigger("selection_changed:edges", this) 
+    @render()
+    @select()
+    
   # Show an assign button
   showAssignButton: ->
     @render()
@@ -60,7 +66,11 @@ SCViews.EdgeView = Backbone.View.extend
   showUnassignButton: ->
     @render()
     $(@el).find('td.cl_id').append("<button class='unassign'>Désassigner</button>")
-      
+
+  showUnassignBoundaryConditionButton: ->
+    @render()
+    $(@el).find('td.cl_id').append("<button class='unassign_boundary_condition'>Désassigner</button>")
+    
   render: ->
     template = """
       <td>#{@model.getId()}</td>
