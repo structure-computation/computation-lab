@@ -26,9 +26,16 @@ class ScModelsController < InheritedResources::Base
     num_model = 1
     # File.open("#{RAILS_ROOT}/public/test/test_post_create_#{num_model}", 'w+') do |f|
     #     f.write(params[:json])
-    # end
-    @sc_model = ScModel.new(params[:sc_model])
-    @workspace_member_to_model_ownership = WorkspaceMemberToModelOwnership.create(:sc_model => @sc_model , :workspace_member => current_workspace_member, :rights => "all") 
+    # end                          
+    
+    #Assign as user model owner when current user create a new sc_model
+    @sc_model = ScModel.new(params[:sc_model]) 
+    @sc_model_ownership = UserModelOwnership.create(sc_model, current_user)
+    @sc_model_ownership.user_id = current_user
+    @sc_model_ownership.sc_model_id = @sc_model.id
+    @sc_model_ownership.save    
+
+    #@workspace_member_to_model_ownership = WorkspaceMemberToModelOwnership.create(:sc_model => @sc_model , :workspace_member => current_workspace_member, :rights => "all") 
 
     respond_to do |format|
       if @sc_model.save
