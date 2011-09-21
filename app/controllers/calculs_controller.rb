@@ -2,7 +2,8 @@ class CalculsController < ApplicationController
   require 'json'
   require 'socket'
   include Socket::Constants
-  before_filter :authenticate_user! , :except => :calcul_valid
+  before_filter :authenticate_user! , :except => :calcul_valid     
+  before_filter :must_be_engineer   
   layout 'calcul'
   
   def index
