@@ -2,7 +2,8 @@ class CalculsController < ApplicationController
   require 'json'
   require 'socket'
   include Socket::Constants
-  before_filter :authenticate_user! , :except => :calcul_valid
+  before_filter :authenticate_user! , :except => :calcul_valid     
+  before_filter :must_be_engineer   
   layout 'calcul'
   
   def index
@@ -46,7 +47,7 @@ class CalculsController < ApplicationController
     @current_calcul.user_id     = current_workspace_member.user_id
     @current_calcul.state       = "temp"
     @current_calcul.save!
-    results = @current_calcul.save_brouillon(params)
+    results = @current_calcul.save_new_brouillon(params)
     render :json => @current_calcul.to_json
   end
   

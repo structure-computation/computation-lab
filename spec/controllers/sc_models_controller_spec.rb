@@ -1,8 +1,10 @@
 require 'spec_helper'
 
 describe ScModelsController do
-  let :mock_sc_model            do mock_model(ScModel).as_null_object                   end
-  let :current_workspace        do FactoryGirl.build(:workspace)                        end
+  let :mock_sc_model            do mock_model(ScModel).as_null_object                                         end
+  let :mock_sc_model_owner      do mock_model(WorkspaceMemberToModelOwnership, :sc_model => current_sc_model) end
+  let :current_sc_model         do FactoryGirl.build(:sc_model)                                               end
+  let :current_workspace        do FactoryGirl.build(:workspace)                                              end   
   let :mock_workspace_member    do 
     mock_model(UserWorkspaceMembership, :workspace    => current_workspace ).as_null_object 
   end
@@ -29,7 +31,28 @@ describe ScModelsController do
       it "can NOT access index" do get :index , :workspace_id => current_workspace.id;                        should respond_with(:forbidden) end 
       it "can NOT access show"  do get :show  , :workspace_id => current_workspace.id, :id => @sc_model.id ;  should respond_with(:forbidden) end   
     end    
-  end
+  end   
+  
+  describe "Assign current_workspace member as workspace_member_to_model_ownership" do
+    before(:each) do 
+      mock_workspace_member.stub(:engineer? => true) 
+    end  
+    it "should assign current_workspace_member as the owner of the new sc_model"    do
+    end     
+    
+  describe "Only sc model's owner can destroy its sc models" do   
+    
+    before(:each) do 
+      mock_workspace_member.stub(:engineer? => true) 
+      controller.stub(:current_workspace_member =>  mock_sc_model_owner )    
+    end                                             
+    
+    it "should destroy the required model if current_user == sc_model_owner"    do
+      get :destroy, :workspace_id => current_workspace.id, :id => sc_model.id
+      response.should redirect_to(workspace_sc_models_path(current_worspace))  
+      flash[:notice].should eq("Le modèle a bien été détruit")    
+    end 
+    
 end
 
 
@@ -106,4 +129,3 @@ end
 #       end
 #     end
 #   end
-# end

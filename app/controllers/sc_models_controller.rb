@@ -26,8 +26,16 @@ class ScModelsController < InheritedResources::Base
     num_model = 1
     # File.open("#{RAILS_ROOT}/public/test/test_post_create_#{num_model}", 'w+') do |f|
     #     f.write(params[:json])
-    # end
-    @sc_model = ScModel.new(params[:sc_model])
+    # end                          
+    
+    #Assign as user model owner when current user create a new sc_model
+    # @sc_model = ScModel.new(params[:sc_model]) 
+    # @sc_model_ownership = WorkspaceMemberToModelOwnership.create
+    # @sc_model_ownership.user_id = current_user
+    # @sc_model_ownership.sc_model_id = @sc_model.id
+    # @sc_model_ownership.save   
+     
+    #Assign as user model owner when current user create a new sc_model                         
     @workspace_member_to_model_ownership = WorkspaceMemberToModelOwnership.create(:sc_model => @sc_model , :workspace_member => current_workspace_member, :rights => "all") 
 
     respond_to do |format|
@@ -69,6 +77,10 @@ class ScModelsController < InheritedResources::Base
       @sc_model.send_mesh(params[:model][:file], current_workspace_member) unless params[:model][:file].nil?
     end
     redirect_to workspace_model_path(@sc_model)
+  end            
+  
+  def destroy
+
   end
 
 end
