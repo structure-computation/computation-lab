@@ -20,15 +20,11 @@
   %body#login_page
     #headerLarge 
       #conteneur
-        .contentTransparent
-          #header
-            #bl_1.black.off
-            #header_top_logo
-            #header_top_cadena
-
+        #header_top_logo
         
-      / Debut affichage du code de la vue
-      / wizard en premier plan
+        
+        
+    / Debut affichage du code de la vue
     #conteneur
       .content
         .contentheightmin
@@ -56,22 +52,17 @@
                       = f.check_box :remember_me 
                       = f.label     :remember_me
 
-                  -# %p= label_tag 'remember_me', 'Remember me'
-                  -# = check_box_tag 'remember_me', '1', @remember_me
-
                   -# %p= submit_tag 'Log in' 
 
                   / TODO: Replacer cela dans la page.
                   / = render :partial => "devise/shared/links"
 
             #New_wiz_layer_bas
-              /%a{ :href => "#", :onclick => "" } 
-              /  .New_create_bouton_jaune
-              /    Annuler
-              //%a{ :href => "/sessions/create", :onclick => "" }
-              %a{ :href => "#", :onclick => '$("#user_new").submit();'}
-                #login_button.New_footer_bouton_suivant.New_footer_top_bouton
-                  Se connecter
+              %button{ :type => "submit", :class => "New_footer_bouton_suivant New_footer_top_bouton"}
+                Se connecter
+              -# %a{ :href => "#", :onclick => '$("#user_new").submit();'}
+              -#  #login_button.New_footer_bouton_suivant.New_footer_top_bouton
+              -#    Se connecter
               
               - #= submit_tag 'Log in', :class => "New_footer_bouton_suivant New_footer_top_bouton", :style => "border: none; margin-right: 5px"
               -#  Log in
@@ -80,7 +71,7 @@
       #conteneur
         .contentTransparent
           .black.on
-          #footerLargeCarre
+          -#footerLargeCarre
       
       
     :javascript
