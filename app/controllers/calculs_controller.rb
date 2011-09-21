@@ -47,7 +47,7 @@ class CalculsController < ApplicationController
     @current_calcul.user_id     = current_workspace_member.user_id
     @current_calcul.state       = "temp"
     @current_calcul.save!
-    results = @current_calcul.save_brouillon(params)
+    results = @current_calcul.save_new_brouillon(params)
     render :json => @current_calcul.to_json
   end
   
