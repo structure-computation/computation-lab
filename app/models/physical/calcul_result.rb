@@ -50,6 +50,16 @@ class CalculResult < ActiveRecord::Base
     results = "Demande de calcul envoyée"
     return results
   end
+  
+  def save_new_brouillon(params)
+    path_to_file = "#{SC_MODEL_ROOT}/model_#{self.sc_model.id}/MESH/mesh.txt"
+    results      = File.read(path_to_file)
+    jsonobject   = JSON.parse(results)
+    jsonobject["sc_model_id"]                = params["sc_model_id"]
+    jsonobject["time_steps"]                 = params["time_steps"]
+    jsonobject["multiresolution_parameters"] = params["multiresolution_parameters"]
+    save_brouillon(jsonobject)
+  end
 
   def save_brouillon(params) #enregistrement du fichier brouillon
     file = params.to_json
@@ -213,7 +223,6 @@ class CalculResult < ActiveRecord::Base
     else
       self.change_state('echec')
     end
-    #debugger
     
     #mise à jour du compte de calcul
     self.sc_model.workspace.calcul_account.log_calcul(self.id, calcul_state)
