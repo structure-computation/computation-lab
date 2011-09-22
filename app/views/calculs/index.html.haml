@@ -40,14 +40,10 @@
     = render "calculs/partials/interfaces"
   .boundary_conditions
     #edges
-      .filtre
-        %h2.grey Filtre
+      %h2.grey Liste des bords
+      %div
         %label{:for => "hide_assigned_edges"} Cacher les bords déjà assignés
         %input#hide_assigned_edges{:type => "checkbox"}
-        %br/
-        %button.assign_all{:disabled => true} Tout assigner
-        %button.unassign_all{:disabled => true} Tout désassigner
-      %h2.grey Liste des bords
       %table.data_table.grey
         %thead
           %tr
@@ -119,22 +115,21 @@
 - content_for :coffee do 
   :coffeescript
     # Initialization of data coming from database
-    $ ->
-      SCVisu.current_model_id = #{@model_id}
-      SCVisu.current_workspace  = #{current_workspace_member.workspace_id}
-      
-      SCVisu.standardLibraryMaterial  = new SCModels.MaterialCollection
-      SCVisu.workspaceLibraryMaterial   = new SCModels.MaterialCollection
-      SCVisu.standardLibraryLink      = new SCModels.LinkCollection
-      SCVisu.workspaceLibraryLink       = new SCModels.LinkCollection
+    SCVisu.current_model_id = #{@model_id}
+    SCVisu.current_workspace  = #{current_workspace_member.workspace_id}
+    
+    SCVisu.standardLibraryMaterial  = new SCModels.MaterialCollection()
+    SCVisu.workspaceLibraryMaterial = new SCModels.MaterialCollection()
+    SCVisu.standardLibraryLink      = new SCModels.LinkCollection()
+    SCVisu.workspaceLibraryLink     = new SCModels.LinkCollection()
 
-      SCVisu.standardLibraryMaterial.reset #{@standard_materials.to_json.html_safe}
-      SCVisu.workspaceLibraryMaterial.reset #{@workspace_materials.to_json.html_safe}
+    SCVisu.standardLibraryMaterial.reset #{@standard_materials.to_json.html_safe}
+    SCVisu.workspaceLibraryMaterial.reset #{@workspace_materials.to_json.html_safe}
 
-      SCVisu.standardLibraryLink.reset #{@standard_links.to_json.html_safe}
-      SCVisu.workspaceLibraryLink.reset #{@workspace_links.to_json.html_safe}
-      
-      SCVisu.calculCollection = new SCModels.Calculs
-      SCVisu.calculCollection.reset #{@calculs.to_json.html_safe}
+    SCVisu.standardLibraryLink.reset #{@standard_links.to_json.html_safe}
+    SCVisu.workspaceLibraryLink.reset #{@workspace_links.to_json.html_safe}
+    
+    SCVisu.calculCollection = new SCModels.Calculs()
+    SCVisu.calculCollection.reset #{@calculs.to_json.html_safe}
 
-      SCVisu.calculViews = new SCViews.CalculListView {collection: SCVisu.calculCollection}
+    SCVisu.calculViews = new SCViews.CalculListView {collection: SCVisu.calculCollection}

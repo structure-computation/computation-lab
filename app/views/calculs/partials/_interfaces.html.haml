@@ -2,9 +2,6 @@
   .filter
     %h2.grey Filtre
     %div
-      %label{:for => "hide_assigned_interfaces"} Cacher les interfaces déjà assignés
-      %input#hide_assigned_interfaces{:type => "checkbox"}
-    %div
       Filtrer les pièces :
       %label{:for => "unassigned_interface"} Non assigné
       %input#unassigned_interface{:type => "radio", :name => "interface_assigned", :value => "unassigned", :checked => "checked"}
@@ -26,6 +23,10 @@
       %button.cancel_filter{:disabled => true} Annuler le filtre
 
   %h2.grey Liste des interfaces
+  %div
+    %label{:for => "hide_assigned_interfaces"} Cacher les interfaces déjà assignés
+    %input#hide_assigned_interfaces{:type => "checkbox"}
+
   %table.data_table.grey
     %thead
       %tr

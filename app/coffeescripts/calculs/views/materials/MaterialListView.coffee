@@ -3,7 +3,6 @@ SCViews.MaterialListView = Backbone.View.extend
   el: 'ul#materials'
 
   initialize: (options) ->
-
     @clearView()
     @editView = new SCViews.EditMaterialView parentElement: this
     @materialViews = []
@@ -80,7 +79,6 @@ SCViews.MaterialListView = Backbone.View.extend
       @render()
       materialView.showUnassignButton()
 
-
   events:
     "click button.add_material" : "showDatabaseMaterials"
     
@@ -93,8 +91,6 @@ SCViews.MaterialListView = Backbone.View.extend
     #materialModel.set id_in_calcul : @getNewMaterialId()
     @collection.add materialModel
     @createMaterialView materialModel
-  
-
 
   createMaterialView: (material) ->
     m = new SCViews.MaterialView model: material, parentElement: this
@@ -132,3 +128,10 @@ SCViews.MaterialListView = Backbone.View.extend
     $(@el).find(".add_material").remove() if $(@el).find(".add_material")
     $(@el).append('<button class="add_material">Ajouter un matériau</button>')
     return this
+
+  cleanAttributes: ->
+    _.each @materialViews, (view) ->
+      view.remove()
+    @materialViews.splice(0, @materialViews.length)
+    @collection.each (model) ->
+      model.destroy()
