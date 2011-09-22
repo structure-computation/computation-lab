@@ -22,7 +22,7 @@ SCViews.CalculListView = Backbone.View.extend
         SCVisu.current_calcul.setElements response
         SCVisu.initializeFromJSON()
         SCVisu.router.calculHasBeenLoad()
-        $('#saved_for').append "Dernière sauvegarde : " + SCVisu.current_calcul.get('last_saved') if !_.isUndefined(SCVisu.current_calcul.get 'last_saved')
+        $('#saved_for').html "Dernière sauvegarde : " + SCVisu.current_calcul.get('last_saved') if !_.isUndefined(SCVisu.current_calcul.get 'last_saved')
         $('#save_calcul').attr("disabled", "disabled")
       error: ->
         SCVisu.router.calculLoadError()
