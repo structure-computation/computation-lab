@@ -81,7 +81,7 @@ class ScModelsController < InheritedResources::Base
     @workspace = current_workspace_member.workspace 
     @owner     = WorkspaceMemberToModelOwnership.find_by_id(params[:id])
     if @sc_model && @owner
-      @sc_model.destroy!
+      @sc_model.destroy
        respond_to do |format| 
        format.html {redirect_to workspace_sc_models_path(current_workspace_member.workspace.id), 
                   :notice => "Le modèle a bien été détruit."}  
