@@ -123,9 +123,9 @@ SCViews.PieceListView = Backbone.View.extend
         pieceView.showAssignButton()
 
   saveCalcul: ->
-    SCVisu.current_calcul.set pieces: @collection.models
-    SCVisu.current_calcul.set materials: SCVisu.materialListView.collection.models
-    SCVisu.current_calcul.trigger 'change'
+    # SCVisu.current_calcul.set pieces: @collection.models
+    # SCVisu.current_calcul.set materials: SCVisu.materialListView.collection.models
+    # SCVisu.current_calcul.trigger 'change'
 
   render : ->
     $("button.assign_all, button.unassign_all").attr('disabled', 'disabled')

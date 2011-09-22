@@ -7,6 +7,7 @@ SCViews.EdgeListView = Backbone.View.extend
     @edgeViews = []
     @editView = new SCViews.EditEdgeView()
     @editView.hide()
+    @filteredEdges = []
     for edge in @collection.models
       @edgeViews.push new SCViews.EdgeView model: edge, parentElement: @
     @selectedEdgeView = null
@@ -29,7 +30,6 @@ SCViews.EdgeListView = Backbone.View.extend
     # Triggered when a edge is clicked
     @bind "selection_changed:edges", (selectedEdgeView) =>
       @render() # Reset all views
-
       # Hide edit view if the model selected is not the same as the one in the edit view
       @editView.hide() if selectedEdgeView == @selectedEdgeView or @editView.model != selectedEdgeView.model
 
@@ -52,7 +52,6 @@ SCViews.EdgeListView = Backbone.View.extend
       @editView.hide()
       @render() # Reset all views
       if selectedBoundaryConditionsView != null
-        $("button.assign_all, button.unassign_all").removeAttr('disabled')
         # On each edge, 
         # - If it is not assigned yet                                       -> we show an assign button
         # - If it is assigned and have the same id of the selected boundaryCondition -> We show Unassigned button
@@ -124,33 +123,17 @@ SCViews.EdgeListView = Backbone.View.extend
   # Create a view associated to the given model
   events:
     'change input#hide_assigned_edges' : 'toggleAssignedEdges'
-    'click button.assign_all'          : 'assignAllVisibleEdges'
-    'click button.unassign_all'        : 'unassignAllVisibleEdges'
     'click button.new_edge'            : 'showNewEdgeForm'
 
-  
   # If the checkbox is checked, hide all assigned interfaces
   toggleAssignedEdges: (event) ->
+    @filteredEdges = []
     if event.srcElement.checked
-      _.each @edgeViews, (edgeView) ->
-        $(edgeView.el).hide() if edgeView.model.isAssigned()
+      _.each @edgeViews, (edgeView) =>
+        if edgeView.model.isAssigned() then $(edgeView.el).hide() else @filteredEdges.push edgeView
     else
       _.each @edgeViews, (edgeView) ->
         $(edgeView.el).show()
-
-  # Assign all visible edges which are visible to the selected boundary condition
-  assignAllVisibleEdges: ->
-    _.each @edgeViews, (edgeView) ->
-      if $(edgeView.el).is(':visible')
-        edgeView.model.set "boundary_condition_id" : SCVisu.boundaryConditionListView.selectedBoundaryConditionView.model.getId()
-        edgeView.showUnassignButton()
-
-  # Assign all visible edges which are visible to the selected boundary condition
-  unassignAllVisibleEdges: ->
-    _.each @edgeViews, (edgeView) ->
-      if $(edgeView.el).is(':visible')
-        edgeView.model.unset "boundary_condition_id"
-        edgeView.showAssignButton()
 
   # Update the calcul JSON
   saveCalcul: ->

@@ -1,14 +1,23 @@
 # SCVisu is initialized in the header in order that it is initialize at first
 # window.SCVisu = {} 
-$ ->
-  interfaceCollection             = new SCModels.Interfaces()
-  SCViews.interfaceListView       = new SCViews.InterfaceListView collection : interfaceCollection
-  
+$ ->  
   # Initialize the step view before the calcul load to prevent the following error:
   #   When two calculs was loaded and users clicked on 'add step', two steps were added...
   #   In fact, two references of StepListViews were created but I couldn't tell why.
   SCVisu.stepListView                       = new SCViews.StepListView()
   SCVisu.multiresolutionParametersListView  = new SCViews.MultiresolutionParameterListView()
+
+  # Initialize views for database materials
+  SCVisu.databaseMaterialListView = []
+  for material in SCVisu.standardLibraryMaterial.models.concat SCVisu.workspaceLibraryMaterial.models
+    el = $('#materials_table tbody tr#material_' + material.get("id"))
+    SCVisu.databaseMaterialListView.push new SCViews.DatabaseMaterialView el: el, model: material
+
+  # Initialize views for database links
+  SCVisu.databaseLinkListView = []
+  for link in SCVisu.standardLibraryLink.models.concat SCVisu.workspaceLibraryLink.models
+    el = $('#links_table tbody tr#link_' + link.get("id"))
+    SCVisu.databaseLinkListView.push new SCViews.DatabaseLinkView el: el, model: link
 
   # Initialize all variables and views with data retrieved from the JSON sent by the "Visualisateur"
   # /!\ Variable's name must not be changed! They are used in multiple place in the code. /!\
@@ -21,19 +30,15 @@ $ ->
     # Initialization of the MaterialListView
     window.materialCollection       = new SCModels.MaterialCollection SCVisu.current_calcul.get('materials')     
     SCVisu.materialListView         = new SCViews.MaterialListView collection: materialCollection
+    # We have to use 'setListView' method in order to not duplicate the view
+    for dbMaterial in SCVisu.databaseMaterialListView
+      dbMaterial.setListView SCVisu.materialListView
     
-    # Initialize views for database materials
-    for material in SCVisu.standardLibraryMaterial.models.concat SCVisu.workspaceLibraryMaterial.models
-      el = $('#materials_table tbody tr#material_' + material.get("id"))
-      new SCViews.DatabaseMaterialView el: el, model: material, materialListView: SCVisu.materialListView
-
     # Initialization of the LinkListView
     linkCollection                = new SCModels.LinkCollection SCVisu.current_calcul.get('links') 
     SCVisu.linkListView           = new SCViews.LinkListView collection: linkCollection
-    # Initialize views for database links
-    for link in SCVisu.standardLibraryLink.models.concat SCVisu.workspaceLibraryLink.models
-      el = $('#links_table tbody tr#link_' + link.get("id"))
-      new SCViews.DatabaseLinkView el: el, model: link, linkListView: SCVisu.linkListView
+    for dbLink in SCVisu.databaseLinkListView
+      dbLink.setListView SCVisu.linkListView
 
     # for link in SCVisu.workspaceLibraryLink.models
     #   el = $('#links_table tbody tr#link_' + link.get("id"))

@@ -45,7 +45,7 @@ group :development, :test do
   gem 'ruby-debug'          , :require => 'ruby-debug'
   
   gem 'factory_girl_rails'  , '~>1.2'    
-  gem 'capybara'            , '=0.3.9'
+  gem 'capybara'            #, '=0.3.9'
   gem 'rspec'
   gem 'rspec-rails'         , '~>2.2.1'
   gem 'cucumber'            , '~>0.9.4'

@@ -2,8 +2,9 @@
 # View of all material which are in the database
 # 'el' is passed at creation
 SCViews.DatabaseMaterialView = Backbone.View.extend
-  initialize: (params) ->
-    @materialListView  = params.materialListView
+  # We have to use 'setListView' method in order to not duplicate the view
+  setListView: (listView) ->
+    @materialListView  = listView
 
   events:
     "click button.add"  : "addToCalculus"

@@ -2,8 +2,9 @@
 # View of all links which are in the database
 # 'el' is passed at creation
 SCViews.DatabaseLinkView = Backbone.View.extend
-  initialize: (params) ->
-    @linkListView  = params.linkListView
+  # We have to use 'setListView' method in order to not duplicate the view
+  setListView: (listView) ->
+    @linkListView  = listView
 
   events:
     "click button.add" : "addToCalculus"
