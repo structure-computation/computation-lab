@@ -29,7 +29,6 @@ class ScModelsController < InheritedResources::Base
     # end                          
 
     #Assign as user model owner when current user create a new sc_model                         
-    @workspace_member_to_model_ownership = WorkspaceMemberToModelOwnership.create(:sc_model => @sc_model , :workspace_member => current_workspace_member, :rights => "all") 
     # respond_to do |format|
     #   if @sc_model.save
     #     format.html { redirect_to(:action => :index) }
@@ -38,9 +37,13 @@ class ScModelsController < InheritedResources::Base
     #   end
     # end 
     #             
-    if params[:sc_model].nil?
-      @sc_model = ScModel.create retrieve_column_fields(params)
-    end
+    @sc_model = ScModel.new(params[:sc_model]) #retrieve_column_fields(params)  
+    @sc_model.save                   
+    ownership = WorkspaceMemberToModelOwnership.new
+    ownership.sc_model_id = @sc_model.id
+    ownership.workspace_member = current_workspace_member
+    ownership.save    
+    
     create! { workspace_sc_models_path }
   end
 
@@ -79,8 +82,8 @@ class ScModelsController < InheritedResources::Base
   def destroy 
     @sc_model  = ScModel.from_workspace(current_workspace_member.workspace.id).find_by_id(params[:id])
     @workspace = current_workspace_member.workspace 
-    @owner     = WorkspaceMemberToModelOwnership.find_by_id(params[:id])
-    if @sc_model && @owner
+    @owner     = WorkspaceMemberToModelOwnership.find_by_workspace_member_id(current_workspace_member[:id])
+    if current_workspace_member == WorkspaceMemberToModelOwnership.workspace_member_id
       @sc_model.destroy
        respond_to do |format| 
        format.html {redirect_to workspace_sc_models_path(current_workspace_member.workspace.id), 
