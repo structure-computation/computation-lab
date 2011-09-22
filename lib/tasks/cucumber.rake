@@ -11,14 +11,7 @@ vendored_cucumber_bin = Dir["#{Rails.root}/vendor/{gems,plugins}/cucumber*/bin/c
 $LOAD_PATH.unshift(File.dirname(vendored_cucumber_bin) + '/../lib') unless vendored_cucumber_bin.nil?
 
 begin
-  require 'cucumber/rake/task'   
-  
-  begin
-    # Support Rake > 0.8.7
-    require 'rake/dsl_definition'
-    include Rake::DSL
-  rescue LoadError
-  end
+  require 'cucumber/rake/task'
 
   namespace :cucumber do
     Cucumber::Rake::Task.new({:ok => 'db:test:prepare'}, 'Run features that should pass') do |t|
