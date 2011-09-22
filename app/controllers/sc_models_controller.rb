@@ -27,29 +27,26 @@ class ScModelsController < InheritedResources::Base
     # File.open("#{RAILS_ROOT}/public/test/test_post_create_#{num_model}", 'w+') do |f|
     #     f.write(params[:json])
     # end                          
-    
-    #Assign as user model owner when current user create a new sc_model
-    # @sc_model = ScModel.new(params[:sc_model]) 
-    # @sc_model_ownership = WorkspaceMemberToModelOwnership.create
-    # @sc_model_ownership.user_id = current_user
-    # @sc_model_ownership.sc_model_id = @sc_model.id
-    # @sc_model_ownership.save   
-     
+
     #Assign as user model owner when current user create a new sc_model                         
     @workspace_member_to_model_ownership = WorkspaceMemberToModelOwnership.create(:sc_model => @sc_model , :workspace_member => current_workspace_member, :rights => "all") 
-
-    respond_to do |format|
-      if @sc_model.save
-    	  format.html { redirect_to(:action => :index) }
-      else
-   	    format.html { render :action => "new" }
-      end
+    # respond_to do |format|
+    #   if @sc_model.save
+    #     format.html { redirect_to(:action => :index) }
+    #   else
+    #         format.html { render :action => "new" }
+    #   end
+    # end 
+    #             
+    if params[:sc_model].nil?
+      @sc_model = ScModel.create retrieve_column_fields(params)
     end
+    create! { workspace_sc_models_path }
   end
 
   # TODO: Uncomment for production
   def new
-    #@sc_model = ScModel.new
+    @sc_model = ScModel.new
     #@sc_model.add_repository()
     new!
   end
@@ -79,7 +76,23 @@ class ScModelsController < InheritedResources::Base
     redirect_to workspace_model_path(@sc_model)
   end            
   
-  def destroy
+  def destroy 
+    @sc_model  = ScModel.from_workspace(current_workspace_member.workspace.id).find_by_id(params[:id])
+    @workspace = current_workspace_member.workspace 
+    @owner     = WorkspaceMemberToModelOwnership.find_by_id(params[:id])
+    if @sc_model && @owner
+      @sc_model.destroy!
+       respond_to do |format| 
+       format.html {redirect_to workspace_sc_models_path(current_workspace_member.workspace.id), 
+                  :notice => "Le modèle a bien été détruit."}  
+       end  
+    else
+      respond_to do |format|
+        format.html {redirect_to workspace_sc_models_path(current_workspace_member.workspace.id), 
+                    :notice => "Vous ne pouvez pas détruire ce modèle."}
+        format.json {render :status => 404, :json => {}}
+      end
+    end
 
   end
 
