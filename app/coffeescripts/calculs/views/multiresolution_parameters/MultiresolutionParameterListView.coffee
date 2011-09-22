@@ -16,14 +16,12 @@ SCViews.MultiresolutionParameterListView = Backbone.View.extend
     else
       $(@el).find('button.add').removeAttr('disabled')
     $(@el).find('select#multiresolution_type').val(multiresolution_type)
+
     @collection.bind "add", (model) =>
       @parameterViews.push new SCViews.MultiresolutionParameterView model: model, parentElement: this
 
     if @collection.size() == 0
       @collection.add new SCModels.MultiresolutionParameter()
-
-    for model in @collection.models
-      @parameterViews.push new SCViews.MultiresolutionParameterView model: model, parentElement: this
       
     @render()
     
@@ -65,4 +63,4 @@ SCViews.MultiresolutionParameterListView = Backbone.View.extend
   render: ->
     for view in @parameterViews
       view.render()
-    $(@parameterViews[0].el).find('button.delete').remove()
+    $(@parameterViews[0].el).find('button.delete').remove() if @parameterViews[0]
