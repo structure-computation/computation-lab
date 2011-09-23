@@ -6,7 +6,7 @@ class WorkspaceMemberToModelOwnership < ActiveRecord::Base
        @workspace_members = UserWorkspaceMembership.find(current_workspace_member)
        @sc_model = ScModel.find(params[:id])
        @sc_model.workspace_members << @workspace_member
-       flash[:notice] = 'Sc_model was saved.'
+       flash[:notice] = 'Sc_model was shared.'
    end   
             
 end
