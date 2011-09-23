@@ -3,7 +3,7 @@ class WorkspaceMemberToModelOwnership < ActiveRecord::Base
   belongs_to  :sc_model # TODO: spécifier un chargement automatique (:includes => true ?)   
   
   def addWorkspaceMemberToModelOwnership
-       @workspace_members = UserWorkspaceMembership.find(current_workspace_member))
+       @workspace_members = UserWorkspaceMembership.find(current_workspace_member)
        @sc_model = ScModel.find(params[:id])
        @sc_model.workspace_members << @workspace_member
        flash[:notice] = 'Sc_model was saved.'
