@@ -4,7 +4,14 @@ FactoryGirl.define do
   end
 
   factory :user, :class => User do 
-    name {FactoryGirl.generate(:user_name)}
+    firstname {FactoryGirl.generate(:user_name)}
+    lastname  "test"
+    
+    factory :test_user, :class => User do 
+      password              "password"
+      password_confirmation "password"
+    end
+    
   end
   
 end                   
