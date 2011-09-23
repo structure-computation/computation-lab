@@ -1,10 +1,9 @@
 require 'spec_helper'
 
 describe ScModelsController do
-  let :mock_sc_model            do mock_model(ScModel, :destroy => true).as_null_object                      end
-  #let :mock_sc_model_owner      do mock_model(WorkspaceMemberToModelOwnership, :sc_model => current_sc_model) end
-  let :current_sc_model         do FactoryGirl.build(:sc_model)                                               end
-  let :current_workspace        do FactoryGirl.build(:workspace)                                              end   
+  let :mock_sc_model            do mock_model(ScModel, :destroy => true).as_null_object end
+  let :current_sc_model         do FactoryGirl.build(:sc_model)                         end
+  let :current_workspace        do FactoryGirl.build(:workspace)                        end   
   let :mock_workspace_member    do 
     mock_model(UserWorkspaceMembership, :workspace    => current_workspace ).as_null_object 
   end
@@ -40,18 +39,44 @@ describe ScModelsController do
     end     
   end
     
-  describe "Only sc model's owner can destroy its sc models" do 
-    let :mock_sc_model_owner do mock_model(WorkspaceMemberToModelOwnership, :sc_model => current_sc_model) end
-    before(:each) do mock_workspace_member.stub(:engineer? => true) end                                             
+  describe "Only sc model's owner can destroy its sc models" do         
     
-    it "should destroy the required model if current_user == sc_model_owner"    do   
-      #assigns[:current_sc_model].should_receive("destroy")
+    let :mock_sc_model_owner do mock_model(WorkspaceMemberToModelOwnership, 
+                                          :sc_model => current_sc_model, 
+                                          :current_workspace_member =>  mock_workspace_member ) 
+    end
+       
+    before(:each) do 
+      mock_workspace_member.stub(:engineer? => true)  
+      mock_workspace_member.stub(:right => "all"   )
+    end                                             
+    
+    it "should destroy the required model if current_user == sc_model_owner" do   
       post :destroy, :workspace_id => current_workspace.id, :id => current_sc_model.id
       response.should redirect_to(workspace_sc_models_path(current_workspace))  
       flash[:notice].should eq("Le modèle a bien été détruit")    
     end
-     
   end 
+  
+  describe "You can NOT destroy a scmodel that you are not the owner"        do  
+     
+    let :other_sc_model          do FactoryGirl.build(:sc_model)             end   
+    let :mock_not_sc_model_owner do 
+      mock_model(WorkspaceMemberToModelOwnership, 
+                 :sc_model => other_sc_model, 
+                 :current_workspace_member =>  mock_workspace_member) 
+    end
+   
+    before(:each) do 
+      mock_workspace_member.stub(:engineer? => true  )
+      mock_workspace_member.stub(:right => "readonly")          
+    end                                             
+    
+    it "should destroy the required model if current_user == sc_model_owner" do
+      response.should redirect_to(workspace_sc_models_path(current_workspace))  
+      flash[:notice].should eq("Vous ne pouvez pas détruire ce modèle")    
+    end
+  end
   
 end
 
