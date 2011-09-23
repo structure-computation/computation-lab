@@ -9,7 +9,8 @@ class WorkspacesController < InheritedResources::Base
   # has_many :inverse_workspace_relationships, :class_name => "WorkspaceRelationship", :foreign_key => "related_workspaces_id"  
   # has_many :inverse_workspace_relationships, :through => :inverse_workspace_relationships, :source => :workspace  
   
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!  
+  before_filter :must_be_manager
   before_filter :set_page_name 
   before_filter :create_solde, :only =>[:index, :show]
   
