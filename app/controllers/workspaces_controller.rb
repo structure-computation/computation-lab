@@ -57,8 +57,11 @@ class WorkspacesController < InheritedResources::Base
   end
   
   
-  def index
-    redirect_to workspace_path(current_workspace_member.workspace)
+  def index                                                      
+    if !current_worksapce.member.manager?  
+      redirect_to workspace_sc_models_path(current_workspace_member.workspace) 
+      flash[:notice] = "Vous n'avez pas à cette partie de l'espace de travail."
+    end
     # @page = 'SCmanage' 
     # respond_to do |format|
     #   format.html {render :layout => true }
@@ -66,7 +69,7 @@ class WorkspacesController < InheritedResources::Base
     # end
   end
     
-  protected
+  #protected
     # def begin_of_association_chain
     #   Workspace.accessible_by_user(current_user)
     # end      
@@ -77,5 +80,4 @@ class WorkspacesController < InheritedResources::Base
    #consumed_tokens = 
    #score = consumed_tokens.percent_of(left_tokens)
   end
-
 end
