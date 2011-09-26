@@ -14,7 +14,16 @@ class ApplicationController < ActionController::Base
   # Trouver la "bonne methode".
   def current_workspace_member
     current_user.user_workspace_memberships.first
-  end    
+  end 
+  
+  #Access control. Check if current_worksapce_member is current_sc_model_owner
+  def current_sc_model_owner         
+    # where(:sc_model_id => sc_model.id  , :workspace_member_id => current_workspace_member.user)  
+    # current_workspace_member.
+    # @current_sc_model = ScModel.find_by_id(params[:id]) 
+    # @workspace_member_to_model_ownership = WorkspaceMemberToModelOwnership.first(params[:sc_model_id => @current_sc_model , :workspace_member_id => current_workspace_member]) 
+    # current_workspace_member == @workspace_member_to_model_ownership.workspace_member                                                                                        
+  end        
 
   # Access control. Use as before_filter on actions that require the workspace member to be an engineer 
   def must_be_engineer

@@ -27,29 +27,29 @@ class ScModelsController < InheritedResources::Base
     # File.open("#{RAILS_ROOT}/public/test/test_post_create_#{num_model}", 'w+') do |f|
     #     f.write(params[:json])
     # end                          
-    
-    #Assign as user model owner when current user create a new sc_model
-    # @sc_model = ScModel.new(params[:sc_model]) 
-    # @sc_model_ownership = WorkspaceMemberToModelOwnership.create
-    # @sc_model_ownership.user_id = current_user
-    # @sc_model_ownership.sc_model_id = @sc_model.id
-    # @sc_model_ownership.save   
-     
-    #Assign as user model owner when current user create a new sc_model                         
-    @workspace_member_to_model_ownership = WorkspaceMemberToModelOwnership.create(:sc_model => @sc_model , :workspace_member => current_workspace_member, :rights => "all") 
 
-    respond_to do |format|
-      if @sc_model.save
-    	  format.html { redirect_to(:action => :index) }
-      else
-   	    format.html { render :action => "new" }
-      end
-    end
+    #Assign as user model owner when current user create a new sc_model                         
+    # respond_to do |format|
+    #   if @sc_model.save
+    #     format.html { redirect_to(:action => :index) }
+    #   else
+    #         format.html { render :action => "new" }
+    #   end
+    # end 
+    #             
+    @sc_model = ScModel.new(params[:sc_model]) #retrieve_column_fields(params)  
+    @sc_model.save                   
+    @ownership = WorkspaceMemberToModelOwnership.new
+    @ownership.sc_model_id = @sc_model.id
+    @ownership.workspace_member = current_workspace_member
+    @ownership.save    
+    
+    create! { workspace_sc_models_path }
   end
 
   # TODO: Uncomment for production
   def new
-    #@sc_model = ScModel.new
+    @sc_model = ScModel.new
     #@sc_model.add_repository()
     new!
   end
@@ -79,7 +79,24 @@ class ScModelsController < InheritedResources::Base
     redirect_to workspace_model_path(@sc_model)
   end            
   
-  def destroy
+  def destroy  
+    @sc_model = ScModel.find(params[:id])    
+    @ownership = WorkspaceMemberToModelOwnership.find(:all, :conditions => ["sc_model_id = ? AND workspace_member_id = ?" , @sc_model.id, current_workspace_member])
+    #@ownership.find_by_workspace_member(current_workspace_member)    
+
+    if !@ownership.empty?
+      @sc_model.destroy
+      respond_to do |format| 
+        format.html {redirect_to workspace_sc_models_path(current_workspace_member.workspace.id), 
+                  :notice => "Le modèle a bien été détruit."}  
+      end  
+    else
+      respond_to do |format|
+        format.html {redirect_to workspace_sc_models_path(current_workspace_member.workspace.id), 
+                    :notice => "Vous ne pouvez pas détruire ce modèle."}
+        format.json {render :status => 404, :json => {}}
+      end
+    end
 
   end
 
