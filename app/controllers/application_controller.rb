@@ -17,6 +17,7 @@ class ApplicationController < ActionController::Base
   end 
   
   #Access control. Check if current_worksapce_member is current_sc_model_owner
+  # TODO: Supprimer si inutile.
   def current_sc_model_owner         
     # where(:sc_model_id => sc_model.id  , :workspace_member_id => current_workspace_member.user)  
     # current_workspace_member.

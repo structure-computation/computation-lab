@@ -9,7 +9,7 @@ class ScModel < ActiveRecord::Base
   has_many    :files_sc_models 
 
   has_many    :model_ownerships, :class_name => "WorkspaceMemberToModelOwnership"
-  has_many    :workspace_member,                  :through => :model_ownerships
+  has_many    :workspace_members,                  :through => :model_ownerships
 
   has_many    :calcul_results
   has_many    :forum_sc_models  
