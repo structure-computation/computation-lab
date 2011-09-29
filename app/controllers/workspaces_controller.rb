@@ -57,11 +57,12 @@ class WorkspacesController < InheritedResources::Base
   end
   
   
-  def index                                                      
-    if !current_worksapce.member.manager?  
-      redirect_to workspace_sc_models_path(current_workspace_member.workspace) 
-      flash[:notice] = "Vous n'avez pas à cette partie de l'espace de travail."
-    end
+  def index   
+    redirect_to workspace_path(current_workspace_member.workspace)                                                   
+    # if !current_worksapce.member.manager?  
+    #   redirect_to workspace_sc_models_path(current_workspace_member.workspace) 
+    #   flash[:notice] = "Vous n'avez pas accès à cette partie de l'espace de travail."
+    # end
     # @page = 'SCmanage' 
     # respond_to do |format|
     #   format.html {render :layout => true }
