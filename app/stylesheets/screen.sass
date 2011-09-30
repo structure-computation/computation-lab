@@ -93,7 +93,7 @@ $padding-right-button     : $padding-left-button
 
 /* -- Variables pour la partie global -- */
 
-$largeur-min : 960px
+$largeur-min : 1024px
 $largeur-max : 90%
 
 $background-color-content       : #F0F0F0
@@ -121,6 +121,8 @@ body
 .container
   +container
   +susy-grid-background
+  min-width: $largeur-min
+  max-width: $largeur-max
   
 #content
   +full
@@ -145,17 +147,17 @@ fieldset
   
 #content
   +full
-    
+
 @media screen and (orientation:landscape)
   body
     min-width: 1024px !important
   .container
     min-width: 1024px !important
-    max-width: 100%
+    max-width: 90%
     
 @media screen and (orientation:portrait)
   body
-    min-width: 800px !important
+    min-width: 768px !important
   .container
-    min-width: 800px !important
-    max-width: 100%
+    min-width: 768px !important
+    max-width: 90%
