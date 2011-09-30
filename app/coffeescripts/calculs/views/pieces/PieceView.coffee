@@ -61,7 +61,7 @@ SCViews.PieceView = Backbone.View.extend
 
   # Show an unassign button to unassign material from selected piece
   showUnassignMaterialButton: ->
-    @renderWithButton 'unassign_material', 'Désssigner'
+    @renderWithButton 'unassign_material', 'Désassigner'
     $(@el).addClass('selected')
     
 

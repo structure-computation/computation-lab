@@ -46,7 +46,7 @@ SCViews.InterfaceView = Backbone.View.extend
 
   # Show an unassign button to unassign link from selected interface
   showUnassignLinkButton: ->
-    @renderWithButton 'unassign_link', 'Désssigner'
+    @renderWithButton 'unassign_link', 'Désassigner'
     $(@el).addClass('selected')
  
   # If the interface has no link, it can be assigned to it.
