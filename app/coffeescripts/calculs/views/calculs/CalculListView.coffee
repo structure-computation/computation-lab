@@ -58,6 +58,7 @@ SCViews.CalculListView = Backbone.View.extend
     $('#new_calcul').attr("disabled", "disabled")
     SCVisu.current_calcul = new SCModels.Calcul
     SCVisu.router.calculIsCreating()
+    that = this
     Backbone.sync("create", SCVisu.current_calcul,
       success: (response) ->
         SCVisu.current_calcul.set 'name' : response.name, 'id' : response.id, 'state' : response.state, 'description' : 'null'
@@ -65,13 +66,14 @@ SCViews.CalculListView = Backbone.View.extend
         calculView = SCVisu.calculListView.createCalculView SCVisu.current_calcul
         SCVisu.calculListView.renderChildViews()
         SCVisu.router.calculHasBeenCreated()
-        SCVisu.calculViews.selectCalcul calculView
         $('#new_calcul').removeAttr("disabled")
+        that.disableSaveButton()
         
       error: (response) ->
         SCVisu.router.calculLoadError()
         console.log "erreur lors de la sauvegarde"
         $('#new_calcul').removeAttr("disabled")
+        that.disableSaveButton()
     )
 
   
