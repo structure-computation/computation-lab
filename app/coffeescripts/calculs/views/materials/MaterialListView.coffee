@@ -35,7 +35,7 @@ SCViews.MaterialListView = Backbone.View.extend
       @render() # Reset all views
       # Hide edit view if the model selected is not the same as the one in the edit view
       @editView.hide() if @selectedMaterialView == selectedMaterialView or @editView.model != selectedMaterialView.model
-
+      
       if @selectedMaterialView == selectedMaterialView
         @selectedMaterialView.deselect()
         @selectedMaterialView = null

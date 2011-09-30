@@ -98,7 +98,30 @@ SCViews.PieceListView = Backbone.View.extend
     'change input#hide_assigned_pieces'   : 'toggleAssignedPieces'
     'click button.assign_all'             : 'assignAllVisiblePieces'
     'click button.unassign_all'           : 'unassignAllVisiblePieces'
+    'click button.filter'                 : 'filterPieces'
+    'click button.cancel_filter'          : 'cancelFilter'
+
+  cancelFilter: ->
+    $(@el).find('button.cancel_filter').attr('disabled','disabled')
+    # Show everything
+    _.each @pieceViews, (pieceView) ->
+      $(pieceView.el).show()
   
+  filterPieces: ->
+    filter = $(@el).find('input').val()
+    @filteredPieces = []
+    $(@el).find('button.cancel_filter').removeAttr('disabled')
+    # Hide everything
+    range = [filter]
+    _.each @pieceViews, (pieceView) ->
+      if pieceView.model.get('id') in range
+        $(pieceView.el).show()
+      else 
+        $(pieceView.el).hide()
+
+
+      
+      
   # If the checkbox is checked, hide all assigned pieces
   toggleAssignedPieces: (event) ->
     if event.srcElement.checked
@@ -123,9 +146,9 @@ SCViews.PieceListView = Backbone.View.extend
         pieceView.showAssignButton()
 
   saveCalcul: ->
-    # SCVisu.current_calcul.set pieces: @collection.models
-    # SCVisu.current_calcul.set materials: SCVisu.materialListView.collection.models
-    # SCVisu.current_calcul.trigger 'change'
+    SCVisu.current_calcul.set pieces: @collection.models
+    SCVisu.current_calcul.set materials: SCVisu.materialListView.collection.models
+    SCVisu.current_calcul.trigger 'change'
 
   render : ->
     $("button.assign_all, button.unassign_all").attr('disabled', 'disabled')

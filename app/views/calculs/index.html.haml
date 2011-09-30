@@ -19,23 +19,7 @@
 - content_for :left_list do 
 
   .materials
-    #pieces
-      .filtre
-        %h2.grey Filtre
-        %label{:for => "hide_assigned_pieces"} Cacher les pièces déjà assignés
-        %input#hide_assigned_pieces{:type => "checkbox"}
-        %br/
-        %button.assign_all{:disabled => true} Tout assigner
-        %button.unassign_all{:disabled => true} Tout désassigner
-      %h2.grey Liste des pièces
-      %table.data_table.grey
-        %thead
-          %tr
-            %th ID
-            %th Nom
-            %th Matériau
-        %tbody
-
+    = render "calculs/partials/pieces"
   .links
     = render "calculs/partials/interfaces"
   .boundary_conditions
