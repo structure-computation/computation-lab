@@ -20,8 +20,10 @@ SCViews.CalculInformation = Backbone.View.extend
       $(@el).find('.name input').focus()
     else
       $(@el).find('.edit_name').html('Renommer')
-      @currentCalcul.set name: $(@el).find('.name input').val()
-      @currentCalcul.save("update_db_info" : "true")
+      # Silent because the name is saved in the database and if the calcul is not loaded
+      @currentCalcul.set {name: $(@el).find('.name input').val()}, {silent: true}
+      @currentCalcul.save({"update_db_info" : "true"}, {silent: true}) # Saves in databbase
+      @calculView.render()
       @render()
       
   # Replaces the description by a text area to let the user modify the model description
@@ -40,8 +42,9 @@ SCViews.CalculInformation = Backbone.View.extend
       @render()
   
   # Set the current model
-  setModel: (calculModel) ->
-    @currentCalcul = calculModel
+  setCalculView: (calculView) ->
+    @calculView = calculView
+    @currentCalcul = calculView.model
     @render()
   
   # Render the calcul details

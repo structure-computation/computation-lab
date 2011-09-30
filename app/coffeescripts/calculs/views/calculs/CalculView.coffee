@@ -25,7 +25,7 @@ SCViews.CalculView = Backbone.View.extend
   selectCalcul: ->
     $('#visu_calcul').hide()
     @parentElement.selectCalcul this
-    @parentElement.calculInformationView.setModel @model
+    @parentElement.calculInformationView.setCalculView this
     
   render: ->
     template = """

@@ -14,7 +14,7 @@ SCVisu.Router = Backbone.Router.extend
     # If user is on the first page, then the selected calculus is loaded, else it loads next page.
     $("#wizard_next_button").click =>
       if @currentPage == 0
-        SCVisu.calculViews.loadCalcul()
+        SCVisu.calculListView.loadCalcul()
       else
         @nextPage()
     # Take care that when the user change 'step' in the wizard, the two lists
@@ -24,7 +24,7 @@ SCVisu.Router = Backbone.Router.extend
       
     $("#save_calcul").click =>
       if SCVisu.current_calcul
-        SCVisu.calculViews.saveCalcul()
+        SCVisu.calculListView.saveCalcul()
         
     # Names of breadcrumb's anchors. 
     # Used in Next And Previous functions
@@ -187,7 +187,7 @@ SCVisu.Router = Backbone.Router.extend
       
   # Show next page if not on the last page and only if a calculus has been loaded
   nextPage: ->
-    SCVisu.calculViews.saveCalcul()
+    SCVisu.calculListView.saveCalcul()
     if @currentPage < @routesPageNumber.length
       @navigate @routesPageNumber[@currentPage + 1], true
 
