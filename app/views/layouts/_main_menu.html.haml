@@ -7,23 +7,34 @@
   %li{:class => ( @page == :manage ? "selected" : "")}
     = link_to 'Gestion', workspaces_path(:anchor => 'Factures')
   %li{:class => ( @page == :lab ? "selected" : "")}
-    %a
+    %a#laboratory_menu
       Laboratoire
-    %ul#drop_down_menu               
+    %ul#laboratory_drop_down_menu               
       %li
         = link_to 'Mes modèles', workspace_sc_models_path(current_workspace_member.workspace)
       %li
         %a Mes Projets
         -#= link_to 'Modèles', workspace_sc_models_path(current_workspace_member.workspace)
   %li{:class => ( @page == :bibliotheque ? "selected" : "")}
-    %a
+    %a#library_menu
       Bibliothèque
-    %ul#drop_down_menu      
+    %ul#library_drop_down_menu
       %li
         = link_to 'Matériaux', workspace_materials_path(current_workspace_member.workspace)
       %li
         = link_to 'Liaisons', workspace_links_path(current_workspace_member.workspace)
+  - if is_mobile?
 
+    :coffeescript
+      # Gestion du touch pour le drop_down_menu.
+      # On est obligé de 'hide' les éléments pour pouvoir les 'toggle' après.
+      $("#laboratory_drop_down_menu, #library_drop_down_menu").hide()
+      $("#laboratory_menu").onGesture 'tap', ->
+        $("#laboratory_drop_down_menu").toggle()
+        $("#library_drop_down_menu").hide()
+      $("#library_menu").onGesture 'tap', ->
+        $("#library_drop_down_menu").toggle()
+        $("#laboratory_drop_down_menu").hide()
 -# TODO: Utiliser un helper pour le style "selected"
 -#   %li{:id => "menu_accueil"     , :class => "main_menu_item " + menu_item_selected_class( @page, :accueil   ) }
 

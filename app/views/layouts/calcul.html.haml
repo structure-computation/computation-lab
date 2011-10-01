@@ -24,6 +24,9 @@
     .container
       #notification
       #header_logo
+  - # Inclusion des JS pour l'interface calcul.
+  = render :partial => "layouts/partials/calcul_backbonejs_headers"
+
 -content_for :content do
   #calcul_container
     #breadcrumb
