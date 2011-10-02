@@ -89,7 +89,7 @@
                       %li
                         = link_to "Télécharger"
                       %li
-                        = link_to "Supprimer", :controller => "calcul_results", :action => "destroy"
+                        = button_to "Supprimer", sc_model_calcul_path(@sc_model, result), :method => :delete, :confirm => "Êtes-vous sûr ?"
         #tab_3_content.hide
           %h3 Liste des utilisateurs ayant accès à ce modèle
           .search_filter
