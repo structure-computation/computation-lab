@@ -3,7 +3,7 @@
 SCVisu.Router = Backbone.Router.extend
   initialize: ->
     @initialisation()
-    @disaleTabs()
+    @disableTabs()
     @currentPage = 0 # First page is 0. 
     # Bind click event on previous and next button
     # Load next page
@@ -139,7 +139,7 @@ SCVisu.Router = Backbone.Router.extend
 
   # Add a class disable and remove href attributes to all links of the breadcrumb in order 
   # to prevent the user to go on next step when a calculus has not been load yet
-  disaleTabs: ->
+  disableTabs: ->
     $('.js_tab_breadcrumb li').addClass('disable')
     _.each $('.js_tab_breadcrumb li a'), (element, index) ->
       $(element).removeAttr('href') if index > 0
@@ -157,7 +157,7 @@ SCVisu.Router = Backbone.Router.extend
   # Is executed when the calcul is loading
   calculIsLoading: ->
     $('#ajax-loader').show()
-    @disaleTabs()
+    @disableTabs()
 
   # Is executed when the calcul is loading
   calculIsCreating: ->
