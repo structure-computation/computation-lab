@@ -2,12 +2,15 @@
 // Création de la variable globale utilisée partout pour acceder aux sources compilées par CS :
 window.SCModels = {};
 
-sequence_compile = SCModels.sequence_compile;
+sequence_compile = SCModels.sequence_compile
+
+
+
 
 // Une séquence est une chaine de caractère qui nous fourni une suite d'index en sortie. 
 // Elle suit (à vérifier) une syntaxte déjà vue dans matlab. Exemple : simple : "1-5", deux simples : "1-5,7-12"
 // avec step "1-10:3", renvoie "1,4,7,10", des séquences avec "modulo" qu'il reste à définir correctement.
-
+// 
 // describe("Sequences parser", function() {  
 //   it("Handle simple correct sequences", function() {  
 //     expect(sequence_parse("4-5")).toEqual([4, 5]);
@@ -25,20 +28,21 @@ sequence_compile = SCModels.sequence_compile;
 //   });  
 // });
 
-describe("Sequences parser, compilation step", function() {  
+describe("Sequences parser, compilation step", function() { 
   var sequence_build_result = function (start, stop, step, modulo){
-    return {"start"  = start ,
-            "end"    = end   ,
-            "step"   = step  ,
-            "modulo" = modulo
+    return {"start"  : start ,
+            "end"    : end   ,
+            "step"   : step  ,
+            "modulo" : modulo
           }
-  }
+  }; 
+
   it("Handle simple sequences", function() {  
     expect(sequence_parse("4-5"))   .toEqual( sequence_build_result(4, 5) );
     expect(sequence_parse("1-1"))   .toEqual( sequence_build_result(1, 1) );
     expect(sequence_parse("12-21")) .toEqual( sequence_build_result(1, 1) );
   });  
-
+  
   it("Handle sequences with steps only", function() {  
     expect(sequence_parse("4-5:6"))   .toEqual( sequence_build_result(4,  5,    6   ) );
   });  
