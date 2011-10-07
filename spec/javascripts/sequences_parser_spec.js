@@ -1,6 +1,4 @@
 
-// Création de la variable globale utilisée partout pour acceder aux sources compilées par CS :
-window.SCModels = {};
 
 sequence_compile = SCModels.sequence_compile
 
@@ -13,18 +11,18 @@ sequence_compile = SCModels.sequence_compile
 // 
 // describe("Sequences parser", function() {  
 //   it("Handle simple correct sequences", function() {  
-//     expect(sequence_parse("4-5")).toEqual([4, 5]);
-//     expect(sequence_parse("1-1")).toEqual([1]);
-//     expect(sequence_parse("12-21")).toEqual([12,13,14,15,16,17,18,19,20,21]);
+//     expect(sequence_compile("4-5")).toEqual([4, 5]);
+//     expect(sequence_compile("1-1")).toEqual([1]);
+//     expect(sequence_compile("12-21")).toEqual([12,13,14,15,16,17,18,19,20,21]);
 //   });  
 // 
 //   it("Handle simple sequences with steps", function() {  
-//     expect( sequence_parse("1-1:1")  ).toEqual([1]);
-//     expect( sequence_parse("1-1:2")  ).toEqual([1]);
-//     expect( sequence_parse("1-1:5")  ).toEqual([1]);
-//     expect( sequence_parse("1-2:2")  ).toEqual([1]);
-//     expect( sequence_parse("1-3:2")  ).toEqual([1,3]);    
-//     expect( sequence_parse("12-21:3")).toEqual([12,15,18,21]);
+//     expect( sequence_compile("1-1:1")  ).toEqual([1]);
+//     expect( sequence_compile("1-1:2")  ).toEqual([1]);
+//     expect( sequence_compile("1-1:5")  ).toEqual([1]);
+//     expect( sequence_compile("1-2:2")  ).toEqual([1]);
+//     expect( sequence_compile("1-3:2")  ).toEqual([1,3]);    
+//     expect( sequence_compile("12-21:3")).toEqual([12,15,18,21]);
 //   });  
 // });
 
@@ -38,19 +36,19 @@ describe("Sequences parser, compilation step", function() {
   }; 
 
   it("Handle simple sequences", function() {  
-    expect(sequence_parse("4-5"))   .toEqual( sequence_build_result(4, 5) );
-    expect(sequence_parse("1-1"))   .toEqual( sequence_build_result(1, 1) );
-    expect(sequence_parse("12-21")) .toEqual( sequence_build_result(1, 1) );
+    expect(sequence_compile("4-5"))   .toEqual( sequence_build_result(4, 5) );
+    expect(sequence_compile("1-1"))   .toEqual( sequence_build_result(1, 1) );
+    expect(sequence_compile("12-21")) .toEqual( sequence_build_result(1, 1) );
   });  
   
   it("Handle sequences with steps only", function() {  
-    expect(sequence_parse("4-5:6"))   .toEqual( sequence_build_result(4,  5,    6   ) );
+    expect(sequence_compile("4-5:6"))   .toEqual( sequence_build_result(4,  5,    6   ) );
   });  
   it("Handle sequences with modulo only", function() {  
-    expect(sequence_parse("4-5%6"))   .toEqual( sequence_build_result(4,  5, null, 6) );
+    expect(sequence_compile("4-5%6"))   .toEqual( sequence_build_result(4,  5, null, 6) );
   });
   it("Handle sequences with step and modulo", function() {  
-    expect(sequence_parse("1-20:2%6")).toEqual( sequence_build_result(4, 20,    2, 6) );
+    expect(sequence_compile("1-20:2%6")).toEqual( sequence_build_result(4, 20,    2, 6) );
   });  
 
 });

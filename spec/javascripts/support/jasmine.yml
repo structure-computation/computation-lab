@@ -11,12 +11,21 @@
 #   - dist/**/*.js
 #
 src_files:
-  - public/javascripts/prototype.js
-  - public/javascripts/effects.js
-  - public/javascripts/controls.js
-  - public/javascripts/dragdrop.js
+  # Chargement des libs :
+  # - public/javascripts/libs/CoffeeTouch.js
+  - public/javascripts/libs/jquery.min.js
+  - public/javascripts/libs/underscore-min.js
+  - public/javascripts/libs/backbone-min.js
+  - public/javascripts/libs/jquery-ui.min.js
+  - public/javascripts/libs/jquery.metadata.js
+  - public/javascripts/libs/jquery.tablesorter.min.js
+  - public/javascripts/libs/jquery.tablesorter.pager.js
+  - public/javascripts/libs/jquery_ujs.js
+  # Mes fichiers.
+  - public/javascripts/initialise_jasmine_specs.js
   - public/javascripts/application.js
-  - public/javascripts/**/*.js
+  - public/javascripts/sequence_parser.js
+  # - public/javascripts/**/*.js
 
 # stylesheets
 #
