@@ -58,6 +58,7 @@ group :development, :test do
   gem 'shoulda'             #, '~>2.11.3'
   gem 'email_spec'          #, '~>1.0.0'
   gem 'rcov'                #, '~>0.9.9'
+  gem 'jasmine'
                             #
   gem 'autotest-rails'      #, '~>4.1.0'
   gem 'autotest'            #, '~>4.4.1'
