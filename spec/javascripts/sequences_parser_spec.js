@@ -26,8 +26,10 @@ sequence_compile = SCModels.sequence_compile
 //   });  
 // });
 
+// TODO: tester step et modulos a 0.
+
 describe("Sequences parser, compilation step", function() { 
-  var sequence_build_result = function (start, stop, step, modulo){
+  var sequence_build_result = function (start, end, step, modulo){
     return {"start"  : start ,
             "end"    : end   ,
             "step"   : step  ,
@@ -38,7 +40,7 @@ describe("Sequences parser, compilation step", function() {
   it("Handle simple sequences", function() {  
     expect(sequence_compile("4-5"))   .toEqual( sequence_build_result(4, 5) );
     expect(sequence_compile("1-1"))   .toEqual( sequence_build_result(1, 1) );
-    expect(sequence_compile("12-21")) .toEqual( sequence_build_result(1, 1) );
+    expect(sequence_compile("12-21")) .toEqual( sequence_build_result(12, 21) );
   });  
   
   it("Handle sequences with steps only", function() {  
