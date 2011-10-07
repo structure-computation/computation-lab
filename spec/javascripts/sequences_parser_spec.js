@@ -47,10 +47,10 @@ describe("Sequences parser, compilation step", function() {
     expect(sequence_compile("4-5:6"))   .toEqual( sequence_build_result(4,  5,    6   ) );
   });  
   it("Handle sequences with modulo only", function() {  
-    expect(sequence_compile("4-5%6"))   .toEqual( sequence_build_result(4,  5, null, 6) );
+    expect(sequence_compile("4-5%6"))   .toEqual( sequence_build_result(4,  5, undefined, 6) );
   });
   it("Handle sequences with step and modulo", function() {  
-    expect(sequence_compile("1-20:2%6")).toEqual( sequence_build_result(4, 20,    2, 6) );
+    expect(sequence_compile("1-20:2%6")).toEqual( sequence_build_result(1, 20,    2, 6) );
   });  
 
 });

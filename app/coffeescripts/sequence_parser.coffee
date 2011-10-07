@@ -8,25 +8,16 @@ class SequenceParser
   # Renvoie un hash définissant la séquence
   compile : (sequence_as_a_string) -> 
     matchs = sequence_definition_regexp.exec(sequence_as_a_string)
-    # [sequence, start, end, ignore1, step, ignore2, modulo] = matchs
+    [sequence, start, end, ignore1, step, ignore2, modulo] = matchs
     result = 
-      # start   : parseInt(start)   
-      # end     : parseInt(end)   
-      # step    : parseInt(step)   
-      # modulo  : parseInt(modulo) 
-      start   : parseInt(matchs[1])   
-      end     : parseInt(matchs[2])   
-      step    : parseInt(matchs[4])   
-      modulo  : parseInt(matchs[6])  
-    # if step  
-    #   result["step"]   = parseInt(step)  
-    # if modulo
-    #   result["modulo"] = parseInt(modulo)
-    # fin des ifs
+      start   : parseInt(start)   
+      end     : parseInt(end)   
+      step    : parseInt(step)   if step?
+      modulo  : parseInt(modulo) if modulo?
     result
     
   
 
 window.SCModels.sequence_compile = (sequence_as_a_string) ->
   parser                = new SequenceParser()
-  sequence_definition   = parser.compile(sequence_as_a_string)
+  @sequence_definition  = parser.compile(sequence_as_a_string)
