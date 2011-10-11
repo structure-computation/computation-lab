@@ -1,20 +1,13 @@
 / Menu principal de l'application.
 
 %ul#main_menu
-  %li{:class => ( @page == :accueil ? "selected" : "")}
-    =link_to 'Accueil', root_path
+  -# %li{:class => ( @page == :accueil ? "selected" : "")}
+  -#   =link_to 'Accueil', root_path
   
   %li{:class => ( @page == :manage ? "selected" : "")}
-    = link_to 'Gestion', workspaces_path(:anchor => 'Factures')
+    = link_to 'Gestion'    , workspaces_path(:anchor => 'Factures')
   %li{:class => ( @page == :lab ? "selected" : "")}
-    %a#laboratory_menu
-      Laboratoire
-    %ul#laboratory_drop_down_menu               
-      %li
-        = link_to 'Mes modèles', workspace_sc_models_path(current_workspace_member.workspace)
-      %li
-        %a Mes Projets
-        -#= link_to 'Modèles', workspace_sc_models_path(current_workspace_member.workspace)
+    = link_to 'Modèles', workspace_sc_models_path(current_workspace_member.workspace)
   %li{:class => ( @page == :bibliotheque ? "selected" : "")}
     %a#library_menu
       Bibliothèque
@@ -28,13 +21,10 @@
     :coffeescript
       # Gestion du touch pour le drop_down_menu.
       # On est obligé de 'hide' les éléments pour pouvoir les 'toggle' après.
-      $("#laboratory_drop_down_menu, #library_drop_down_menu").hide()
-      $("#laboratory_menu").onGesture 'tap', ->
-        $("#laboratory_drop_down_menu").toggle()
-        $("#library_drop_down_menu").hide()
+      $("#library_drop_down_menu").hide()
       $("#library_menu").onGesture 'tap', ->
         $("#library_drop_down_menu").toggle()
-        $("#laboratory_drop_down_menu").hide()
+      
 -# TODO: Utiliser un helper pour le style "selected"
 -#   %li{:id => "menu_accueil"     , :class => "main_menu_item " + menu_item_selected_class( @page, :accueil   ) }
 
