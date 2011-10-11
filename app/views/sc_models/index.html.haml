@@ -19,7 +19,7 @@
         %th.no_sorter
         %th Nom
         %th ID
-        %th Projet
+        -# Suppression de la colonne "Projet" %th Projet
         %th Résultat
         %th.no_sorter Actions
     %tbody
@@ -28,7 +28,7 @@
           %td.escape_search.details_link= link_to 'Détails', workspace_sc_model_path(@workspace, sc_model)
           %td.name=           sc_model.name ? sc_model.name : 'Undefined'
           %td.id=             sc_model.id
-          %td
+          -# Suppression de la colonne "Projet" %td
           %td
           -#%td.result=         sc_model.results
           %td.action_on_table.escape_search
