@@ -62,8 +62,8 @@
               = f.input :file, :as => :file
             = f.buttons
           %ul
-            %li= link_to "Calcul des structures", sc_model_calculs_path(@sc_model), :target => "_blank" #:controller => "calculs", :action => "index", :model_id => @sc_model.id
-            %li= link_to "Visualisation"        , :controller => "visualisations", :action => "index", :model_id => @sc_model.id
+            %li= link_to "Calcul de structures", sc_model_calculs_path(@sc_model), :target => "_blank" #:controller => "calculs", :action => "index", :model_id => @sc_model.id
+            %li= link_to "Visualisation"        , :controller => "ext_app_visu", :action => "index", :model_id => @sc_model.id
             %li= link_to "Partager un fichier"
         #tab_2_content.hide
           %h3 Liste des résultats
