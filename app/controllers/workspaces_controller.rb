@@ -9,7 +9,8 @@ class WorkspacesController < InheritedResources::Base
   # has_many :inverse_workspace_relationships, :class_name => "WorkspaceRelationship", :foreign_key => "related_workspaces_id"  
   # has_many :inverse_workspace_relationships, :through => :inverse_workspace_relationships, :source => :workspace  
   
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!  
+  before_filter :must_be_manager
   before_filter :set_page_name 
   before_filter :create_solde, :only =>[:index, :show]
   
@@ -56,8 +57,12 @@ class WorkspacesController < InheritedResources::Base
   end
   
   
-  def index
-    redirect_to workspace_path(current_workspace_member.workspace)
+  def index   
+    redirect_to workspace_path(current_workspace_member.workspace)                                                   
+    # if !current_worksapce.member.manager?  
+    #   redirect_to workspace_sc_models_path(current_workspace_member.workspace) 
+    #   flash[:notice] = "Vous n'avez pas accès à cette partie de l'espace de travail."
+    # end
     # @page = 'SCmanage' 
     # respond_to do |format|
     #   format.html {render :layout => true }
@@ -65,7 +70,7 @@ class WorkspacesController < InheritedResources::Base
     # end
   end
     
-  protected
+  #protected
     # def begin_of_association_chain
     #   Workspace.accessible_by_user(current_user)
     # end      
@@ -76,5 +81,4 @@ class WorkspacesController < InheritedResources::Base
    #consumed_tokens = 
    #score = consumed_tokens.percent_of(left_tokens)
   end
-
 end

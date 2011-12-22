@@ -11,23 +11,23 @@ SCViews.CalculListView = Backbone.View.extend
     $(window).unload @beforeClosePage
     
   events:
-    "click .new_calcul"  : "newCalcul"
+    "click #new_calcul"  : "newCalcul"
     
   # Get a JSON from the server containing calcul information and create current_calcul which will be used all along the calcul's setup.
   loadCalcul: ->
     SCVisu.current_calcul = new SCModels.Calcul @selected_calcul
     SCVisu.router.calculIsLoading()
     Backbone.sync("read", SCVisu.current_calcul,
-      success: (response) ->
+      success: (response) =>
         SCVisu.current_calcul.setElements response
         SCVisu.initializeFromJSON()
         SCVisu.router.calculHasBeenLoad()
-        $('#saved_for').append "Dernière sauvegarde : " + SCVisu.current_calcul.get 'last_saved'
-        $('#save_calcul').attr("disabled", "disabled")
+        $('#saved_for').html "Dernière sauvegarde : " + SCVisu.current_calcul.get('last_saved') if !_.isUndefined(SCVisu.current_calcul.get 'last_saved')
+        @disableSaveButton()
       error: ->
         SCVisu.router.calculLoadError()
     )
-        
+
   # Saves the current_calcul to the server side
   saveCalcul: ->
     previousSaveDate = SCVisu.current_calcul.get 'last_saved'
@@ -42,8 +42,10 @@ SCViews.CalculListView = Backbone.View.extend
         SCVisu.NOTIFICATIONS.setText('La sauvegarde a échouée')
     $('#saved_for').html('')
     $('#saved_for').append "Dernière sauvegarde : " + dateString
-    $('#save_calcul').attr("disabled", "disabled")
+    @disableSaveButton()
     
+  disableSaveButton: ->
+    $('#save_calcul').attr("disabled", "disabled")
 
   beforeClosePage: (event) ->
     SCVisu.NOTIFICATIONS.setTextWithoutTimer('Sauvegarde en cours...')
@@ -53,20 +55,25 @@ SCViews.CalculListView = Backbone.View.extend
     Backbone.sync "update", SCVisu.current_calcul, async: false
     
   newCalcul: ->
+    $('#new_calcul').attr("disabled", "disabled")
     SCVisu.current_calcul = new SCModels.Calcul
     SCVisu.router.calculIsCreating()
+    that = this
     Backbone.sync("create", SCVisu.current_calcul,
       success: (response) ->
         SCVisu.current_calcul.set 'name' : response.name, 'id' : response.id, 'state' : response.state, 'description' : 'null'
         SCVisu.current_calcul.resetUrl()
-        calculView = SCVisu.calculViews.createCalculView SCVisu.current_calcul
-        SCVisu.calculViews.renderChildViews()
+        calculView = SCVisu.calculListView.createCalculView SCVisu.current_calcul
+        SCVisu.calculListView.renderChildViews()
         SCVisu.router.calculHasBeenCreated()
-        SCVisu.calculViews.selectCalcul calculView
+        $('#new_calcul').removeAttr("disabled")
+        that.disableSaveButton()
         
       error: (response) ->
         SCVisu.router.calculLoadError()
         console.log "erreur lors de la sauvegarde"
+        $('#new_calcul').removeAttr("disabled")
+        that.disableSaveButton()
     )
 
   
@@ -86,7 +93,7 @@ SCViews.CalculListView = Backbone.View.extend
     tableFooter = """
         <tr>
           <td colspan='4'>
-            <button class=\"new_calcul\">Nouveau brouillon</button>
+            <button id=\"new_calcul\">Nouveau brouillon</button>
           </td>
         </tr>
     """

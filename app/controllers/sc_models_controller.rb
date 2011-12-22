@@ -39,10 +39,10 @@ class ScModelsController < InheritedResources::Base
     #             
     @sc_model = ScModel.new(params[:sc_model]) #retrieve_column_fields(params)  
     @sc_model.save                   
-    ownership = WorkspaceMemberToModelOwnership.new
-    ownership.sc_model_id = @sc_model.id
-    ownership.workspace_member = current_workspace_member
-    ownership.save    
+    @ownership = WorkspaceMemberToModelOwnership.new
+    @ownership.sc_model_id = @sc_model.id
+    @ownership.workspace_member = current_workspace_member
+    @ownership.save    
     
     create! { workspace_sc_models_path }
   end
@@ -79,16 +79,17 @@ class ScModelsController < InheritedResources::Base
     redirect_to workspace_model_path(@sc_model)
   end            
   
-  def destroy 
-    @sc_model  = ScModel.from_workspace(current_workspace_member.workspace.id).find_by_id(params[:id])
-    @workspace = current_workspace_member.workspace 
-    @owner     = WorkspaceMemberToModelOwnership.find_by_workspace_member_id(current_workspace_member[:id])
-    if current_workspace_member == WorkspaceMemberToModelOwnership.workspace_member_id
+  def destroy  
+    @sc_model = ScModel.find(params[:id])    
+    @ownership = WorkspaceMemberToModelOwnership.find(:all, :conditions => ["sc_model_id = ? AND workspace_member_id = ?" , @sc_model.id, current_workspace_member])
+    #@ownership.find_by_workspace_member(current_workspace_member)    
+
+    if !@ownership.empty?
       @sc_model.destroy
-       respond_to do |format| 
-       format.html {redirect_to workspace_sc_models_path(current_workspace_member.workspace.id), 
+      respond_to do |format| 
+        format.html {redirect_to workspace_sc_models_path(current_workspace_member.workspace.id), 
                   :notice => "Le modèle a bien été détruit."}  
-       end  
+      end  
     else
       respond_to do |format|
         format.html {redirect_to workspace_sc_models_path(current_workspace_member.workspace.id), 

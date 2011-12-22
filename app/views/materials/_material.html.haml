@@ -16,4 +16,4 @@
         %li
           = link_to "Editer"   , edit_workspace_material_path(material.workspace, material)
         %li
-          = link_to "Supprimer", {:action=>"destroy", :controller=>"materials", :id => material.id}, :method => :delete    
+          = button_to "Supprimer", {:action=>"destroy", :controller=>"materials", :id => material.id}, :method => :delete, :confirm => "Êtes-vous sûr ?"

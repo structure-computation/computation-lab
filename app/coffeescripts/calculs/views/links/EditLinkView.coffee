@@ -58,7 +58,6 @@ SCViews.EditLinkView = Backbone.View.extend
   render: (resetFields = false) ->
     $('#visu_calcul').hide()
     $(@el).show()
-    @parentElement.render()
     for input in $(@el).find('input, textarea')
       $(input).val(@model.get($(input).attr('id').split("link_")[1]))
   

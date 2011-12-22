@@ -22,7 +22,8 @@ class CalculsController < ApplicationController
     @current_model = current_workspace_member.sc_models.find(params[:sc_model_id])
     @current_calcul = @current_model.calcul_results.find(params[:id])
     send_data = @current_calcul.get_brouillon(params,current_workspace_member)
-    render :json => send_data.to_json
+    pretty_json = JSON.pretty_generate(send_data)
+    render :json => pretty_json
   end
  
   # Enregistre les informations du calcul dans un fichier brouillon

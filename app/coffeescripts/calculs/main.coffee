@@ -22,6 +22,9 @@ $ ->
   # Initialize all variables and views with data retrieved from the JSON sent by the "Visualisateur"
   # /!\ Variable's name must not be changed! They are used in multiple place in the code. /!\
   SCVisu.initializeFromJSON = () ->
+    # Put the correct URL to download JSON.
+    # As we already are at an sc_models/:id, we do not have to specify again the model ID
+    $("a#downlaod_json").attr('href', "calculs/#{SCVisu.current_calcul.get('id')}") 
     $('#visu_calcul').show()
     # Initialization of the PieceListView
     pieceCollection               = new SCModels.PieceCollection SCVisu.current_calcul.get('pieces')

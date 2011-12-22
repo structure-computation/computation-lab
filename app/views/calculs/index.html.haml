@@ -19,23 +19,7 @@
 - content_for :left_list do 
 
   .materials
-    #pieces
-      .filtre
-        %h2.grey Filtre
-        %label{:for => "hide_assigned_pieces"} Cacher les pièces déjà assignés
-        %input#hide_assigned_pieces{:type => "checkbox"}
-        %br/
-        %button.assign_all{:disabled => true} Tout assigner
-        %button.unassign_all{:disabled => true} Tout désassigner
-      %h2.grey Liste des pièces
-      %table.data_table.grey
-        %thead
-          %tr
-            %th ID
-            %th Nom
-            %th Matériau
-        %tbody
-
+    = render "calculs/partials/pieces"
   .links
     = render "calculs/partials/interfaces"
   .boundary_conditions
@@ -85,6 +69,11 @@
     = render "calculs/partials/step_details"
     = render "calculs/partials/multiresolution"
     = render "calculs/partials/calculus_options"
+  
+  .forecast
+    Télécharger le fichier de calcul au format JSON :
+    %a#downlaod_json{:target => "_blank", :href => ""} Télécharger
+    
 
 - content_for :details_calcul do 
 
@@ -132,4 +121,4 @@
     SCVisu.calculCollection = new SCModels.Calculs()
     SCVisu.calculCollection.reset #{@calculs.to_json.html_safe}
 
-    SCVisu.calculViews = new SCViews.CalculListView {collection: SCVisu.calculCollection}
+    SCVisu.calculListView = new SCViews.CalculListView {collection: SCVisu.calculCollection}

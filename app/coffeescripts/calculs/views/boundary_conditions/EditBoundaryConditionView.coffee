@@ -155,7 +155,7 @@ SCViews.EditBoundaryConditionView = Backbone.View.extend
         <tbody>
           <tr>
             <th>
-              Fonction normal 
+              Fonction normale 
             </th>
             <td>
               <input class="normal_function" data-type="number" name="normal_function" size="10" type="text">

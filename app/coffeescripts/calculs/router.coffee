@@ -3,7 +3,7 @@
 SCVisu.Router = Backbone.Router.extend
   initialize: ->
     @initialisation()
-    @disaleTabs()
+    @disableTabs()
     @currentPage = 0 # First page is 0. 
     # Bind click event on previous and next button
     # Load next page
@@ -14,7 +14,7 @@ SCVisu.Router = Backbone.Router.extend
     # If user is on the first page, then the selected calculus is loaded, else it loads next page.
     $("#wizard_next_button").click =>
       if @currentPage == 0
-        SCVisu.calculViews.loadCalcul()
+        SCVisu.calculListView.loadCalcul()
       else
         @nextPage()
     # Take care that when the user change 'step' in the wizard, the two lists
@@ -24,7 +24,7 @@ SCVisu.Router = Backbone.Router.extend
       
     $("#save_calcul").click =>
       if SCVisu.current_calcul
-        SCVisu.calculViews.saveCalcul()
+        SCVisu.calculListView.saveCalcul()
         
     # Names of breadcrumb's anchors. 
     # Used in Next And Previous functions
@@ -139,7 +139,7 @@ SCVisu.Router = Backbone.Router.extend
 
   # Add a class disable and remove href attributes to all links of the breadcrumb in order 
   # to prevent the user to go on next step when a calculus has not been load yet
-  disaleTabs: ->
+  disableTabs: ->
     $('.js_tab_breadcrumb li').addClass('disable')
     _.each $('.js_tab_breadcrumb li a'), (element, index) ->
       $(element).removeAttr('href') if index > 0
@@ -157,7 +157,7 @@ SCVisu.Router = Backbone.Router.extend
   # Is executed when the calcul is loading
   calculIsLoading: ->
     $('#ajax-loader').show()
-    @disaleTabs()
+    @disableTabs()
 
   # Is executed when the calcul is loading
   calculIsCreating: ->
@@ -187,7 +187,7 @@ SCVisu.Router = Backbone.Router.extend
       
   # Show next page if not on the last page and only if a calculus has been loaded
   nextPage: ->
-    SCVisu.calculViews.saveCalcul()
+    SCVisu.calculListView.saveCalcul()
     if @currentPage < @routesPageNumber.length
       @navigate @routesPageNumber[@currentPage + 1], true
 

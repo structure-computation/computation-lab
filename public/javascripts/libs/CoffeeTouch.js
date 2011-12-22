@@ -19,7 +19,7 @@
     return this;
   };
   Element.prototype.unbindGesture = function(ev, callback) {
-    var calls, i, list, _i, _len;
+    var callbackfunction, calls, i, list, _len;
     if (!ev) {
       this._callbacks = {};
     } else if (calls = this._callbacks) {
@@ -30,9 +30,9 @@
         if (!list) {
           return this;
         }
-        for (_i = 0, _len = list.length; _i < _len; _i++) {
-          i = list[_i];
-          if (callback === list[i]) {
+        for (i = 0, _len = list.length; i < _len; i++) {
+          callbackfunction = list[i];
+          if (callback === callbackfunction) {
             list.splice(i, 1);
             break;
           }
@@ -41,21 +41,21 @@
     }
     return this;
   };
-  Element.prototype.trigger = function(ev) {
-    var calls, i, list, _i, _j, _len, _len2;
+  Element.prototype.makeGesture = function(ev) {
+    var callbacFunction, calls, list, _i, _j, _len, _len2;
     if (!(calls = this._callbacks)) {
       return this;
     }
     if (list = calls[ev]) {
       for (_i = 0, _len = list.length; _i < _len; _i++) {
-        i = list[_i];
-        i.apply(this, Array.prototype.slice.call(arguments, 1));
+        callbacFunction = list[_i];
+        callbacFunction.apply(this, Array.prototype.slice.call(arguments, 1));
       }
     }
     if (list = calls['all']) {
       for (_j = 0, _len2 = list.length; _j < _len2; _j++) {
-        i = list[_j];
-        i.apply(this, arguments);
+        callbacFunction = list[_j];
+        callbacFunction.apply(this, arguments);
       }
     }
     return this;
@@ -82,6 +82,25 @@
     }
     return destination;
   };
+  if (typeof jQuery !== "undefined" && jQuery !== null) {
+    (function($) {
+      $.fn.onGesture = function(eventName, callback) {
+        return this.each(function(i, element) {
+          return element.onGesture(eventName, callback);
+        });
+      };
+      $.fn.unbindGesture = function(eventName, callback) {
+        return this.each(function(i, element) {
+          return element.unbindGesture(eventName, callback);
+        });
+      };
+      return $.fn.makeGesture = function(eventName) {
+        return this.each(function(i, element) {
+          return element.makeGesture(eventName);
+        });
+      };
+    })(jQuery);
+  }
   StateMachine = (function() {
     function StateMachine(identifier, router) {
       this.identifier = identifier;
@@ -469,8 +488,7 @@
         finger = _ref[_i];
         this.gestureName.push(finger.gestureName);
       }
-      this.targetElement.trigger(this.gestureName, this.informations);
-      this.generateGrouppedFingerName();
+      this.targetElement.makeGesture(this.gestureName, this.informations);
       this.triggerDrag();
       this.triggerFixed();
       this.triggerFlick();
@@ -510,18 +528,18 @@
         gestureName.push(finger.params.dragDirection);
       }
       if (!gestureName.contains("unknown")) {
-        return this.targetElement.trigger(gestureName, this.informations);
+        return this.targetElement.makeGesture(gestureName, this.informations);
       }
     };
     Analyser.prototype.triggerPinchOrSpread = function() {
       var sameDirection;
       sameDirection = false;
       if (this.informations.scale < 1.1 && !sameDirection) {
-        this.targetElement.trigger("" + (digit_name(this.fingers.length)) + ":pinch", this.informations);
-        return this.targetElement.trigger("pinch", this.informations);
+        this.targetElement.makeGesture("" + (digit_name(this.fingers.length)) + ":pinch", this.informations);
+        return this.targetElement.makeGesture("pinch", this.informations);
       } else if (this.informations.scale > 1.1 && !sameDirection) {
-        this.targetElement.trigger("" + (digit_name(this.fingers.length)) + ":spread", this.informations);
-        return this.targetElement.trigger("spread", this.informations);
+        this.targetElement.makeGesture("" + (digit_name(this.fingers.length)) + ":spread", this.informations);
+        return this.targetElement.makeGesture("spread", this.informations);
       }
     };
     Analyser.prototype.triggerFixed = function() {
@@ -543,7 +561,7 @@
           }
         }
         if (!dontTrigger) {
-          return this.targetElement.trigger(gestureName, this.informations);
+          return this.targetElement.makeGesture(gestureName, this.informations);
         }
       }
     };
@@ -568,8 +586,8 @@
           }
         }
         if (!dontTrigger) {
-          this.targetElement.trigger(gestureName1, this.informations);
-          return this.targetElement.trigger(gestureName2, this.informations);
+          this.targetElement.makeGesture(gestureName1, this.informations);
+          return this.targetElement.makeGesture(gestureName2, this.informations);
         }
       }
     };
@@ -584,103 +602,10 @@
       } else {
         rotationDirection = "rotate:ccw";
       }
-      this.targetElement.trigger(rotationDirection, this.informations);
-      this.targetElement.trigger("rotate", this.informations);
-      this.targetElement.trigger("" + (digit_name(this.fingers.length)) + ":" + rotationDirection, this.informations);
-      return this.targetElement.trigger("" + (digit_name(this.fingers.length)) + ":rotate", this.informations);
-    };
-    Analyser.prototype.generateGrouppedFingerName = function() {
-      var finger, gesture, gestureDirection, gestureName, gestureNameDrag, gestures, triggerDrag, _i, _j, _len, _len2, _ref, _ref2;
-      gestureName = [];
-      gestureNameDrag = [];
-      triggerDrag = false;
-      gestures = {
-        tap: 0,
-        doubletap: 0,
-        fixed: 0,
-        fixedend: 0,
-        drag: 0,
-        dragend: {
-          n: 0,
-          fingers: []
-        },
-        dragDirection: {
-          up: 0,
-          down: 0,
-          left: 0,
-          right: 0,
-          drag: 0
-        }
-      };
-      _ref = this.fingers;
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        finger = _ref[_i];
-        switch (finger.gestureName) {
-          case "tap":
-            gestures.tap++;
-            break;
-          case "doubletap":
-            gestures.doubletap++;
-            break;
-          case "fixed":
-            gestures.fixed++;
-            break;
-          case "fixedend":
-            gestures.fixedend++;
-            break;
-          case "dragend":
-            gestures.dragend.n++;
-            gestures.dragend.fingers.push(finger);
-            break;
-          case "drag":
-            gestures.drag++;
-            switch (finger.params.dragDirection) {
-              case "up":
-                gestures.dragDirection.up++;
-                break;
-              case "down":
-                gestures.dragDirection.down++;
-                break;
-              case "right":
-                gestures.dragDirection.right++;
-                break;
-              case "left":
-                gestures.dragDirection.left++;
-            }
-        }
-      }
-      for (gesture in gestures) {
-        if (gesture === "dragend" && gestures[gesture].n > 0) {
-          _ref2 = gestures[gesture].fingers;
-          for (_j = 0, _len2 = _ref2.length; _j < _len2; _j++) {
-            finger = _ref2[_j];
-            if (finger.isFlick) {
-              gestureName.push("" + (digit_name(gestures[gesture].n)) + ":flick");
-              gestureNameDrag.push("" + (digit_name(gestures[gesture].n)) + ":flick:" + finger.params.dragDirection);
-              triggerDrag = true;
-              break;
-            }
-          }
-        } else if (gesture === "dragDirection") {
-          for (gestureDirection in gestures[gesture]) {
-            if (gestures[gesture][gestureDirection] > 0) {
-              gestureNameDrag.push("" + (digit_name(gestures[gesture][gestureDirection])) + ":" + gestureDirection);
-              triggerDrag = true;
-            }
-          }
-        } else if (gestures[gesture] > 0) {
-          gestureName.push("" + (digit_name(gestures[gesture])) + ":" + gesture);
-          if (gesture !== "drag") {
-            gestureNameDrag.push("" + (digit_name(gestures[gesture])) + ":" + gesture);
-          }
-        }
-      }
-      if (gestureName.length > 0) {
-        this.targetElement.trigger(gestureName, this.informations);
-      }
-      if (triggerDrag) {
-        return this.targetElement.trigger(gestureNameDrag, this.informations);
-      }
+      this.targetElement.makeGesture(rotationDirection, this.informations);
+      this.targetElement.makeGesture("rotate", this.informations);
+      this.targetElement.makeGesture("" + (digit_name(this.fingers.length)) + ":" + rotationDirection, this.informations);
+      return this.targetElement.makeGesture("" + (digit_name(this.fingers.length)) + ":rotate", this.informations);
     };
     return Analyser;
   })();
