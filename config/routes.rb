@@ -4,6 +4,11 @@ SCInterface::Application.routes.draw do
 
   resources :customers
 
+  resources :sc_admin_workspace
+  resources :sc_admin_company
+  
+  resources :company
+  
   devise_for  :users,   :controllers => { :sessions => "users/sessions", :registrations => "users/registrations" }
 
   match 'workspaces/get_gestionnaire'   => "workspaces#get_gestionnaire"  

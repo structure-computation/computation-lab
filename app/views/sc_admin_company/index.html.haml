@@ -4,11 +4,11 @@
       Menu
     %ul
       %li.LM_pic_new_model
-        = link_to "Nouveau workspace", new_workspace_path  
+        = link_to "Nouvelle société", new_company_path  
 
 -content_for :right_top do
   %h2.grey
-    Liste des workspace 
+    Liste des sociétés 
   %div
     = render :partial => "search_filter"
 
@@ -21,11 +21,11 @@
         %th ID
         %th.no_sorter Actions
     %tbody
-      - @workspaces.each do |workspace|
+      - @companies.each do |company|
         %tr
-          %td.escape_search.details_link= link_to 'Détails' , sc_admin_workspace_path(workspace.id)
-          %td.name=           workspace.name ? workspace.name : 'Undefined'
-          %td.id=             workspace.id
+          %td.escape_search.details_link= link_to 'Détails' , sc_admin_company_path(company.id)
+          %td.name=           company.name ? company.name : 'Undefined'
+          %td.id=             company.id
           %td.action_on_table.escape_search
             %ul
               %li
@@ -33,4 +33,4 @@
               %li
                 %a Calcul
               %li
-                = button_to 'Supprimer', sc_admin_workspace_path(workspace.id), :method => :delete, :confirm => "Êtes-vous sûr ?"
+                = button_to 'Supprimer', sc_admin_company_path(company.id), :method => :delete, :confirm => "Êtes-vous sûr ?"
