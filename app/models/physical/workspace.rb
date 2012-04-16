@@ -12,6 +12,9 @@ class Workspace < ActiveRecord::Base
   has_many  :user_workspace_memberships
   has_many  :users, :through => :user_workspace_memberships
   # has_many  :managers , :conditions => {:role => "gestionnaire"} # TODO: Appliquer un filtre.
+  has_many  :company_workspace_memberships
+  has_many  :companies, :through => :company_workspace_memberships
+  
   
   has_one   :calcul_account	, :readonly => false
   has_one   :memory_account	, :readonly => false

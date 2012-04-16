@@ -2,10 +2,10 @@ class ScAdminWorkspaceController < InheritedResources::Base
   before_filter :authenticate_user!
   before_filter :valid_admin_user
   
-  layout 'workspace'
+  layout 'sc_admin'
   
   def index 
-    @page = 'SCadmin'
+    @page = :sc_admin_workspace
     @workspaces = Workspace.all
   end
   
@@ -16,6 +16,7 @@ class ScAdminWorkspaceController < InheritedResources::Base
   end
   
   def show
+    @page = :sc_admin_workspace
     @workspace    = Workspace.find_by_id(params[:id])
     if @workspace 
       # show!

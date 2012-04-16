@@ -1,0 +1,28 @@
+.search_filter
+  %p
+    %label{:for => "search_filter"} Recherche
+    %input#search_filter{:type => "text"}
+    %button#more_details.close.yellow_button Recherche avancée
+
+  #workspaces_advanced_search.advanced_search
+    %p
+      %label{:for => "email_search_filter"} email
+      %input#email_search_filter{:type => "text"}
+    %p      
+      %label{:for => "id_search_filter"} ID
+      %input#id_search_filter{:type => "text"}    
+
+
+:coffeescript
+  $( ->
+    $('#workspaces_table').tablesorter()
+
+    $('#more_details').click( () ->
+      $('#workspaces_advanced_search').toggleClass('maximize')
+    )
+
+    advancedSearchFilter("workspaces_table",
+                         ["firstname_search_filter","lastname_search_filter","email_search_filter","id_search_filter"],
+                         ["firstname"              ,"lastname"              ,"email"              ,"id"])
+    searchFilter("workspaces_table", "search_filter")
+  )

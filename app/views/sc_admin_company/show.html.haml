@@ -7,9 +7,7 @@
         %a
           Nouveau forfait
       %li.manage_pic_nouveau_membre
-        = link_to 'Ajouter un membre', new_workspace_member_path(@company)
-      %li.manage_pic_compte_abonnement
-        = link_to 'retour à la liste des société', sc_admin_company_path()
+        = link_to 'Ajouter un membre', new_company_member_path(@company)
 
 -content_for :right_top do
   %h2.grey
@@ -27,15 +25,19 @@
         %li                    
           %a#tab_1{:href => "#Membres"} Membres
         %li                    
-          %a#tab_2{:href => "#Description"} Description
+          %a#tab_2{:href => "#Workspaces"} Workspaces
+        %li                    
+          %a#tab_3{:href => "#Description"} Description
             
     #right_content
       .tab_content.js_tab_content
         #tab_1_content
           = render :partial => "members/search_filter"
-          = render :partial => "members/members_list", :object => @company.members
-          
-        #tab_1_content
+          = render :partial => "sc_admin_user/members_list", :object => @company.members
+        #tab_2_content
+          = render :partial => "workspaces/search_filter"
+          = render :partial => "sc_admin_workspace/workspaces_list", :object => @company.workspaces  
+        #tab_3_content
           %table.grey#workspace_information_table
             %tr
               %th Division

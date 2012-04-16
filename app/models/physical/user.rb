@@ -16,6 +16,9 @@ class User < ActiveRecord::Base
   has_many    :user_workspace_memberships
   has_many    :workspaces, :through => :user_workspace_memberships
   
+  has_many    :company_user_memberships
+  has_many    :companies, :through => :company_user_memberships
+  
   # Relations sur les modèles.
   has_many    :model_ownerships,     :through => :user_workspace_memberships, :class_name => "WorkspaceMemberToModelOwnership", :foreign_key => "workspace_member_id"
   

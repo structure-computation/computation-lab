@@ -12,7 +12,7 @@ class CompanyController < InheritedResources::Base
   
   before_filter :authenticate_user!  
   before_filter :must_be_manager
-  before_filter :set_page_name 
+  #before_filter :set_page_name 
   
   # Actions inherited ressource. 
   actions :all, :except => [ :index, :edit, :update, :destroy ]
@@ -28,6 +28,29 @@ class CompanyController < InheritedResources::Base
       respond_to do |format|
         format.html {redirect_to workspace_path(current_workspace_member), 
                     :notice => "Vous n'avez pas acces à cette page."}
+        format.json {render :status => 404, :json => {}}
+      end
+    end
+  end
+  
+  def new
+    @new_company = Company.new
+  end
+  
+  def create
+    @page = :sc_admin_company
+    @new_company = Company.create(params[:company])
+    render :json => { :result => 'success' }
+    if @new_company 
+      respond_to do |format|
+        format.html {redirect_to sc_admin_company_path(), 
+                    :notice => "Nouvelle société créée."}
+        format.json {render :status => 404, :json => {}}
+      end
+    else
+      respond_to do |format|
+        format.html {redirect_to sc_admin_company_path(), 
+                    :notice => "La société n'a pas été créée."}
         format.json {render :status => 404, :json => {}}
       end
     end

@@ -5,9 +5,20 @@ SCInterface::Application.routes.draw do
   resources :customers
 
   resources :sc_admin_workspace
-  resources :sc_admin_company
+  resources :sc_admin_company do
+    resources :company
+  end
+  resources :sc_admin_user
   
-  resources :company
+  resources :members do
+    resources :company
+    resources :workspaces
+  end
+  
+  resources :company do
+    resources :members
+    resources :workspaces
+  end
   
   devise_for  :users,   :controllers => { :sessions => "users/sessions", :registrations => "users/registrations" }
 
@@ -23,6 +34,7 @@ SCInterface::Application.routes.draw do
       get 'download_bill', :on => :member
     end
     resources :members
+    resources :company
   end
   resources :sc_models do 
     resources :calculs

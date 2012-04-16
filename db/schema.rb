@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110916160659) do
+ActiveRecord::Schema.define(:version => 20120416095719) do
 
   create_table "abonnements", :force => true do |t|
     t.string   "name"
@@ -109,6 +109,26 @@ ActiveRecord::Schema.define(:version => 20110916160659) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "kind"
+  end
+
+  create_table "company_user_memberships", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "company_id"
+    t.string   "rights"
+    t.string   "status"
+    t.string   "role"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "company_workspace_memberships", :force => true do |t|
+    t.integer  "workspace_id"
+    t.integer  "company_id"
+    t.string   "rights"
+    t.string   "status"
+    t.string   "role"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "credits", :force => true do |t|
@@ -343,6 +363,7 @@ ActiveRecord::Schema.define(:version => 20110916160659) do
     t.boolean  "engineer"
     t.boolean  "manager"
     t.string   "preference"
+    t.string   "role"
   end
 
   create_table "users", :force => true do |t|
@@ -400,17 +421,12 @@ ActiveRecord::Schema.define(:version => 20110916160659) do
 
   create_table "workspaces", :force => true do |t|
     t.string   "name"
-    t.string   "address"
-    t.string   "city"
-    t.string   "zipcode"
-    t.string   "country"
-    t.string   "division"
-    t.string   "TVA"
-    t.integer  "siren"
-    t.integer  "user_sc_admin_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "kind"
+    t.string   "public_description"
+    t.string   "private_description"
+    t.string   "state"
   end
 
 end

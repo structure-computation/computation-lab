@@ -87,25 +87,13 @@
         #tab_5_content
           %table.grey#workspace_information_table
             %tr
-              %th Division
-              %td= @workspace.division
+              %th Name
+              %td= @workspace.name
             %tr
-              %th Adresse
-              %td= @workspace.address
+              %th Public_description
+              %td= @workspace.public_description
             %tr
-              %th Ville
-              %td= @workspace.city   
-            %tr
-              %th Code Postal
-              %td= @workspace.zipcode
-            %tr
-              %th Pays
-              %td= @workspace.country
-            %tr
-              %th TVA intracommunautaire
-              %td= @workspace.TVA
-            %tr
-              %th SIREN
-              %td= @workspace.siren
+              %th Private_description
+              %td= @workspace.private_description   
 
       = coffeescript_include_tag "manage_tab"

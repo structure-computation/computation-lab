@@ -2,14 +2,22 @@ class ScAdminCompanyController < InheritedResources::Base
   before_filter :authenticate_user!
   before_filter :valid_admin_user
   
-  layout 'workspace'
+  layout 'sc_admin'
+  
   
   def index 
-    @page = 'SCadmin'
+    @page = :sc_admin_company
     @companies = Company.all
   end
   
+  def new
+    @page = :sc_admin_company
+    @company = Company.new
+    logger.debug @company
+  end
+  
   def create
+    @page = :sc_admin_company
     @new_company = Company.create(params[:company])
     render :json => { :result => 'success' }
     if @new_company 
@@ -28,6 +36,7 @@ class ScAdminCompanyController < InheritedResources::Base
   end
   
   def show
+    @page = :sc_admin_company
     @company    = Company.find_by_id(params[:id])
     if @company 
       # show!

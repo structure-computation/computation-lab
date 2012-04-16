@@ -10,7 +10,7 @@
   %tbody
     - members_list.each do |member|
       %tr
-        %td.escape_search.details_link= link_to "Détails", workspace_member_path( current_workspace_member.workspace, member)
+        %td.escape_search.details_link= link_to "Détails", sc_admin_user_path(member)
         %td= member.email
         %td= member.firstname
         %td= member.role
@@ -18,9 +18,9 @@
         %td.action_on_table.escape_search
           %ul
             %li
-              = button_to "Supprimer", workspace_member_path(current_workspace_member.workspace, member), :confirm => "Êtes vous sûr ?", :method => :delete, :confirm => "Êtes-vous sûr ?"
+              = button_to "Supprimer", sc_admin_user_path(member), :confirm => "Êtes vous sûr ?", :method => :delete, :confirm => "Êtes-vous sûr ?"
             %li 
-              = link_to "Editer", edit_workspace_member_path(current_workspace_member.workspace, member)
+              = link_to "Editer", edit_sc_admin_user_path(member)
 
 /= link_to 'Ajouter un membre', new_workspace_member_path(@workspace), :class => 'yellow_button'
 
