@@ -8,13 +8,15 @@
           Nouveau forfait
       %li.manage_pic_nouveau_membre
         = link_to 'Ajouter un membre', new_company_member_path(@company)
+      %li.manage_pic_nouveau_membre
+        = link_to 'Editer', edit_sc_admin_company_path(@company.id)
 
 -content_for :right_top do
   %h2.grey
     = @company.name
   .grey
-    %p Abonnement
-    %p Forfait
+    %p
+    
     
 -content_for :workspace_content do
   %h2.grey
@@ -60,5 +62,4 @@
             %tr
               %th SIREN
               %td= @company.siren
-
       = coffeescript_include_tag "manage_tab"

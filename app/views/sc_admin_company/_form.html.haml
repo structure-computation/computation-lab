@@ -1,11 +1,29 @@
-= semantic_form_for @company, :url => sc_admin_company_path  do |f|
-  - f.inputs do
-    = form.input :name, :input_html => { :disabled => true }
-    = form.input :division, :input_html => { :disabled => true }
-    = form.input :address, :input_html => { :disabled => true }
-    = form.input :city, :input_html => { :disabled => true }
-    = form.input :zipcode, :input_html => { :disabled => true }
-    = form.input :country, :as => :string, :input_html => { :disabled => true }
-    = form.input :TVA, :input_html => { :disabled => true }
-    = form.input :siren, :input_html => { :disabled => true }            
+%p
+= semantic_form_for @company, :url => {:controller => "sc_admin_company", :action => "create"}  do |form|
+  %table.grey#workspace_information_table
+    %tr
+      %th= form.label :name
+      %td= form.text_field :name
+    %tr
+      %th= form.label :division
+      %td= form.text_field :division
+    %tr
+      %th= form.label :address
+      %td= form.text_area :address
+    %tr
+      %th= form.label :city
+      %td= form.text_field :city
+    %tr
+      %th= form.label :zipcode
+      %td= form.text_field :zipcode
+    %tr
+      %th= form.label :country
+      %td= form.text_field :country
+    %tr
+      %th= form.label :TVA
+      %td= form.text_field :TVA
+    %tr
+      %th= form.label :siren
+      %td= form.text_field :siren
+         
   = form.buttons

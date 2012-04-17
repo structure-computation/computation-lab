@@ -5,9 +5,7 @@ SCInterface::Application.routes.draw do
   resources :customers
 
   resources :sc_admin_workspace
-  resources :sc_admin_company do
-    resources :company
-  end
+  resources :sc_admin_company
   resources :sc_admin_user
   
   resources :members do

@@ -8,6 +8,8 @@
           Nouveau forfait
       %li.manage_pic_nouveau_membre
         = link_to 'Ajouter un membre', new_workspace_member_path(@workspace)
+      %li.manage_pic_nouveau_membre
+        = link_to 'Editer', edit_sc_admin_workspace_path(@workspace)
 
 -content_for :right_top do
   %h2.grey

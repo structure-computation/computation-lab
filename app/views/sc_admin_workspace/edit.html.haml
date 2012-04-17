@@ -1,0 +1,10 @@
+-content_for :left_top do
+  .left_submenu
+    %h2.grey
+      Menu
+    %ul
+      %li.LM_pic_model
+        = link_to "Retour à la liste des workspaces", :controller => "sc_admin_workspace" 
+-content_for :workspace_content do
+  .grey
+    = render "form"

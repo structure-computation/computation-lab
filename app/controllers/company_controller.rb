@@ -37,23 +37,5 @@ class CompanyController < InheritedResources::Base
     @new_company = Company.new
   end
   
-  def create
-    @page = :sc_admin_company
-    @new_company = Company.create(params[:company])
-    render :json => { :result => 'success' }
-    if @new_company 
-      respond_to do |format|
-        format.html {redirect_to sc_admin_company_path(), 
-                    :notice => "Nouvelle société créée."}
-        format.json {render :status => 404, :json => {}}
-      end
-    else
-      respond_to do |format|
-        format.html {redirect_to sc_admin_company_path(), 
-                    :notice => "La société n'a pas été créée."}
-        format.json {render :status => 404, :json => {}}
-      end
-    end
-  end
   
 end

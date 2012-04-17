@@ -1,0 +1,17 @@
+%p
+= semantic_form_for @user, :url => {:controller => "sc_admin_user", :action => "create"}  do |form|
+  %table.grey#workspace_information_table
+    %tr
+      %th= form.label :email
+      %td= form.text_field :email
+    %tr
+      %th= form.label :password
+      %td= form.password_field :password, :as => :password
+    %tr
+      %th= form.label :firstname
+      %td= form.text_field :firstname
+    %tr
+      %th= form.label :lastname
+      %td= form.text_field :lastname
+   
+  = form.buttons

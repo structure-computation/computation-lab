@@ -8,20 +8,27 @@ class ScAdminUserController < InheritedResources::Base
   def index 
     @page = :sc_admin_user
     @users = User.all
+    if params[:notice] 
+      flash[:notice] = params[:notice]
+    end
+  end
+  
+  def new
+    @page = :sc_admin_user
+    @user = User.new
   end
   
   def create
     @new_user = User.create(params[:user])
-    render :json => { :result => 'success' }
     if @new_user 
       respond_to do |format|
-        format.html {redirect_to sc_admin_user_path(), 
+        format.html {redirect_to :action => :index, 
                     :notice => "Nouvel utilsateur créé."}
         format.json {render :status => 404, :json => {}}
       end
     else
       respond_to do |format|
-        format.html {redirect_to sc_admin_company_path(), 
+        format.html {redirect_to :action => :index, 
                     :notice => "L'utilsateur n'a pas été créé."}
         format.json {render :status => 404, :json => {}}
       end
@@ -31,15 +38,24 @@ class ScAdminUserController < InheritedResources::Base
   def show
     @page = :sc_admin_user
     @user    = User.find_by_id(params[:id])
+    if params[:notice] 
+      flash[:notice] = params[:notice]
+    end
     if @user 
       # show!
       render
     else
       respond_to do |format|
-        format.html {redirect_to sc_admin_user_path(), 
+        format.html {redirect_to :action => :index, 
                     :notice => "Cet utilisateur n'existe pas ou n'est pas accessible à partir de cette page."}
         format.json {render :status => 404, :json => {}}
       end
     end
   end
+  
+  def edit
+    @page = :sc_admin_user
+    @user = User.find_by_id(params[:id])
+  end
+  
 end

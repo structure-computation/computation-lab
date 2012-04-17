@@ -8,6 +8,8 @@
           Nouveau forfait
       %li.manage_pic_nouveau_membre
         = link_to 'Ajouter un membre', new_company_member_path(@user)
+      %li.manage_pic_nouveau_membre
+        = link_to 'Editer', edit_sc_admin_user_path(@user)
 
 -content_for :right_top do
   %h2.grey
