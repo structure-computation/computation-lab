@@ -19,7 +19,7 @@ class ScAdminWorkspaceController < InheritedResources::Base
   
   def create
     @page = :sc_admin_workspace
-    @new_workspace = Workspace.create(params[:company])
+    @new_workspace = Workspace.create(params[:workspace])
     @new_workspace.init_account
     if @new_workspace 
       respond_to do |format|

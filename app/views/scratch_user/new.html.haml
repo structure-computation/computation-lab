@@ -1,0 +1,10 @@
+-content_for :left_top do
+  .left_submenu
+    %h2.grey
+      Menu
+    %ul
+      %li.LM_pic_materiau
+        =link_to 'Retour à la page de login', destroy_user_session_path
+
+-content_for :workspace_content do        
+  = render "form"

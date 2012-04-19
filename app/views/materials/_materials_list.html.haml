@@ -1,0 +1,15 @@
+%table.grey#materials_table
+  %thead
+    %tr
+      %th.no_sorter 
+      %th Nom
+      %th ID
+      %th Référence
+      %th Famille
+      %th Type
+      %th Comportement
+      %th.no_sorter Actions
+  %tbody
+    /= render :partial => "materials/material", :collection => @standard_materials, :locals => {:type => "standard"}
+    /= render :partial => "materials/material", :collection => @workspace_materials,  :locals => {:type => "workspace"}
+

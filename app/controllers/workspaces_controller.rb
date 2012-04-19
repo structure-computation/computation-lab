@@ -33,17 +33,38 @@ class WorkspacesController < InheritedResources::Base
     end
   end
   
+  def new
+    @page = :mon_compte
+    @workspace = Workspace.new
+  end
+  
   def create     
-    kind = params[:workspace][:kind]
-    case kind
-    when "Project"
-      @workspace = Project.new(params[:workspace])
-    when "Fillial"
-      @workspace = Fillial.new(params[:workspace])  
-    when "Company"
-      @workspace = Company.new(params[:workspace])  
+    @new_workspace = current_user.workspaces.build(params[:workspace])
+    @new_workspace.init_account
+    if @new_workspace 
+      @new_workspace.save
+      @new_workspace.members << current_user
+      respond_to do |format|
+        format.html {redirect_to scratch_user_path(current_user), 
+                    :notice => "Nouveau workspace créée."}
+        format.json {render :status => 404, :json => {}}
+      end
+    else
+      respond_to do |format|
+        format.html {redirect_to scratch_user_path(current_user), 
+                    :notice => "Le workspace n'a pas été créé."}
+        format.json {render :status => 404, :json => {}}
+      end
     end
-    create! 
+    #kind = params[:workspace][:kind]
+    #     case kind
+    #     when "Project"
+    #       @workspace = Project.new(params[:workspace])
+    #     when "Fillial"
+    #       @workspace = Fillial.new(params[:workspace])  
+    #     when "Company"
+    #       @workspace = Company.new(params[:workspace])  
+    #     end
   end
     
   def set_page_name

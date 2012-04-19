@@ -4,6 +4,8 @@ SCInterface::Application.routes.draw do
 
   resources :customers
 
+  resources :scratch_user
+  
   resources :sc_admin_workspace
   resources :sc_admin_company
   resources :sc_admin_user
@@ -34,6 +36,8 @@ SCInterface::Application.routes.draw do
     resources :members
     resources :company
   end
+  resources :laboratory
+  match 'laboratory/'   => "laboratory#index"
   resources :sc_models do 
     resources :calculs
   end

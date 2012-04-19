@@ -121,7 +121,8 @@ body
 .container
   +container
   +susy-grid-background
-  border   : $border-width-content-and-title solid $border-color-content-and-title
+  border-left   : $border-width-content-and-title solid $border-color-content-and-title
+  border-right   : $border-width-content-and-title solid $border-color-content-and-title
   padding-left     : $padding-left-and-right-content
   padding-right    : $padding-left-and-right-content
   min-width: $largeur-min
@@ -147,7 +148,15 @@ div.grey
 
 fieldset
   border: none
-  
+
+.right
+  border: none
+  text-align     : right
+  float          : right
+  color: $color-font-header
+  a
+    color: $color-font-header
+
 #content
   +full
 

@@ -1,0 +1,14 @@
+%table.grey#links_table
+  %thead
+    %tr
+      %th.no_sorter
+      %th Nom
+      %th ID
+      %th Référence
+      %th Famille
+      %th Générique
+      %th Complexe
+      %th.no_sorter Actions
+  %tbody
+    /= render :partial => "links/link", :collection => @standard_links, :locals => {:type => "standard"}
+    /= render :partial => "links/link", :collection => @workspace_links,  :locals => {:type => "workspace"} 

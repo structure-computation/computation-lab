@@ -87,11 +87,15 @@ header
           margin-top   : 0
           padding-top  : $gap-top-page-header + 1 // On rajoute un pour un alignement des textes plus précis
           padding-left : $gap-user-infos-separator
+          
 
           #user_name
             background    : transparent url('/images/' + $lock-image) no-repeat center right
             padding-right : image-width($lock-image) + $gap-cadena-user-infos
             margin-top    : 0
+            color         : $color-font-header
+            a
+              color         : $color-font-header
 
           #disconnect_link
             color: $color-font-header

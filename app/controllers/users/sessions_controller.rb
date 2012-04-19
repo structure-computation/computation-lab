@@ -5,7 +5,7 @@ class Users::SessionsController < Devise::SessionsController
   # render new.rhtml
   def new
     clean_up_passwords(build_resource)
-    render '/devise/sessions/new', :layout => false 
+    render '/devise/sessions/new', :layout => 'login'
   end
 
   # def create

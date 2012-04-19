@@ -57,5 +57,6 @@ class ScAdminUserController < InheritedResources::Base
     @page = :sc_admin_user
     @user = User.find_by_id(params[:id])
   end
+
   
 end

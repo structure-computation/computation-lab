@@ -11,7 +11,7 @@ class MaterialsController < InheritedResources::Base
   respond_to    :html, :json
 
   def set_page_name
-    @page = :bibliotheque
+    @page = :lab
   end
 
   def index 
