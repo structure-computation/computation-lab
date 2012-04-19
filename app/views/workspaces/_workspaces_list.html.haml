@@ -9,7 +9,7 @@
   %tbody
     - workspaces_list.each do |workspace|
       %tr
-        %td.escape_search.details_link= link_to "Détails", workspace_path(workspace)
+        %td.escape_search.details_link= link_to "sélectionner", :controller => :scratch_user, :action => :select_workspace, :workspace_id => workspace.id
         %td= workspace.id
         %td= workspace.name
         %td= workspace.public_description

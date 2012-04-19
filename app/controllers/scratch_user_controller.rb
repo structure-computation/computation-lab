@@ -35,4 +35,22 @@ class ScratchUserController < InheritedResources::Base
     render :edit, :layout => 'workspace'
   end
   
+  def select_workspace
+    @user = current_user
+    if !params[:workspace_id]
+      flash[:notice] = "Aucun espace de travail séléctionné" # TODO: traduire.
+      render :show
+    else      
+      workspace = @user.workspaces.find(params[:workspace_id])
+      if workspace.nil?
+        flash[:notice] = "Cet espace de travail est inexistant ou ne vous est pas accessible." # TODO: traduire.
+        render :show
+      else
+        flash[:notice] = "Espace de travail modifié." # TODO: traduire.
+        #set_current_worskspace(workspace)
+        render :show
+      end
+    end
+  end
+  
 end
