@@ -10,20 +10,7 @@ class ApplicationController < ActionController::Base
     end
   end
   
-  # TODO: fait doublon avec la même procédure dans ApplicationHelper. 
-  # Trouver la "bonne methode".
-  def current_workspace_member
-    if params[:workspace_id]
-      return current_user.user_workspace_memberships.where(:workspace_id => params[:workspace_id] )
-      session[:workspace_id] = params[:workspace_id]
-    else
-      return current_user.user_workspace_memberships.where(:workspace_id => session[:workspace_id] )
-    end
-  end 
-  
-  def set_current_worskspace
-    session[:workspace_id] = params[:workspace_id]
-  end 
+
   
   #Access control. Check if current_worksapce_member is current_sc_model_owner
   # TODO: Supprimer si inutile.
@@ -35,18 +22,6 @@ class ApplicationController < ActionController::Base
     # current_workspace_member == @workspace_member_to_model_ownership.workspace_member                                                                                        
   end        
 
-  # Access control. Use as before_filter on actions that require the workspace member to be an engineer 
-  def must_be_engineer
-    if ! current_workspace_member.engineer?
-      render  "static/forbidden", :status => :forbidden 
-    end
-  end    
-  
-  # Access control. Use as before_filter on actions that require the workspace member to be an manager 
-  def must_be_manager
-    if ! current_workspace_member.manager?
-      render  "static/forbidden", :status => :forbidden 
-    end
-  end
+
 
 end
