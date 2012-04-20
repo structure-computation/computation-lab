@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  
+  include SCAuthenticationHelpers
 #   protect_from_forgery
 
   # TODO: Refaire.
