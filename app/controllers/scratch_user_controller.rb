@@ -24,7 +24,9 @@ class ScratchUserController < InheritedResources::Base
   end
   
   def show  
-    @user           = current_user
+    @user       =  current_user
+    @workspace  =  current_workspace_member
+    logger.debug current_workspace_member
     if params[:notice] 
       flash[:notice] = params[:notice]
     end
@@ -49,7 +51,7 @@ class ScratchUserController < InheritedResources::Base
                     :notice => "Cet espace de travail est inexistant ou ne vous est pas accessible."}
         #render :show
       else
-        current_workspace_member(params[:workspace_id])
+        set_current_worskspace(params[:workspace_id])
         format.html {redirect_to destroy_user_session_path, 
                     :notice => "Espace de travail modifié."}
         #flash[:notice] = "Espace de travail modifié." # TODO: traduire.

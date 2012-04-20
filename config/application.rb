@@ -14,6 +14,9 @@ module SCInterface
 
     # Custom directories with classes and modules you want to be autoloadable.
     config.autoload_paths += %W(#{config.root}/app/models/physical #{config.root}/app/models/service )
+    
+    # Chargement des libs.
+    config.autoload_once_paths += %W(#{config.root}/lib)
 
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.

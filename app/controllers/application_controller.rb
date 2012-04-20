@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
     end
   end
   
+
   #Access control. Check if current_worksapce_member is current_sc_model_owner
   # TODO: Supprimer si inutile.
   def current_sc_model_owner         
@@ -20,18 +21,6 @@ class ApplicationController < ActionController::Base
     # current_workspace_member == @workspace_member_to_model_ownership.workspace_member                                                                                        
   end        
 
-  # Access control. Use as before_filter on actions that require the workspace member to be an engineer 
-  def must_be_engineer
-    if ! current_workspace_member.engineer?
-      render  "static/forbidden", :status => :forbidden 
-    end
-  end    
-  
-  # Access control. Use as before_filter on actions that require the workspace member to be an manager 
-  def must_be_manager
-    if ! current_workspace_member.manager?
-      render  "static/forbidden", :status => :forbidden 
-    end
-  end
+
 
 end
