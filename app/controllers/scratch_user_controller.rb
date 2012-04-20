@@ -1,4 +1,5 @@
 class ScratchUserController < InheritedResources::Base  
+  before_filter :authenticate_user!  
   layout 'login'
   
   def new
@@ -43,12 +44,16 @@ class ScratchUserController < InheritedResources::Base
     else      
       workspace = @user.workspaces.find(params[:workspace_id])
       if workspace.nil?
-        flash[:notice] = "Cet espace de travail est inexistant ou ne vous est pas accessible." # TODO: traduire.
-        render :show
+        #flash[:notice] = "Cet espace de travail est inexistant ou ne vous est pas accessible." # TODO: traduire.
+        format.html {redirect_to destroy_user_session_path, 
+                    :notice => "Cet espace de travail est inexistant ou ne vous est pas accessible."}
+        #render :show
       else
-        flash[:notice] = "Espace de travail modifié." # TODO: traduire.
-        #set_current_worskspace(workspace)
-        render :show
+        current_workspace_member(params[:workspace_id])
+        format.html {redirect_to destroy_user_session_path, 
+                    :notice => "Espace de travail modifié."}
+        #flash[:notice] = "Espace de travail modifié." # TODO: traduire.
+        #render :show
       end
     end
   end

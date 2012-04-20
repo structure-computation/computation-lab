@@ -10,6 +10,8 @@ class HomeController < ApplicationController
   
   def index     
     case 
+    when !current_workspace_member.workspace
+      redirect_to scratch_user_path(current_user) 
     when  current_workspace_member.engineer? && !current_workspace_member.manager?   
       redirect_to workspace_sc_models_path(current_workspace_member.workspace)        
       

@@ -10,7 +10,7 @@ class WorkspacesController < InheritedResources::Base
   # has_many :inverse_workspace_relationships, :through => :inverse_workspace_relationships, :source => :workspace  
   
   before_filter :authenticate_user!  
-  before_filter :must_be_manager
+  before_filter :must_be_manager, :except => [ :new, :create ]
   before_filter :set_page_name 
   before_filter :create_solde, :only =>[:index, :show]
   
@@ -39,11 +39,16 @@ class WorkspacesController < InheritedResources::Base
   end
   
   def create     
-    @new_workspace = current_user.workspaces.build(params[:workspace])
+    @new_workspace = current_user.workspaces.build(params[:workspace]) 
     @new_workspace.init_account
     if @new_workspace 
       @new_workspace.save
       @new_workspace.members << current_user
+      @new_workspace.save
+      @current_workspace_member = current_user.user_workspace_memberships.where(:workspace_id =>  @new_workspace.id )
+      @current_workspace_member.manager = true
+      @current_workspace_member.engineer = true
+      @current_workspace_member.save
       respond_to do |format|
         format.html {redirect_to scratch_user_path(current_user), 
                     :notice => "Nouveau workspace créée."}

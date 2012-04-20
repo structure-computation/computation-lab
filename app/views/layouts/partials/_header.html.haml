@@ -15,7 +15,7 @@
           
             -#header_top_cadena
         %p#header_workspace_name
-          - if user_signed_in? && current_workspace_member
+          - if user_signed_in? && !current_workspace_member.nil?
             = current_workspace_member.workspace.name
           - else
             selectionner un workspace   

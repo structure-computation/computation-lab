@@ -6,9 +6,19 @@ module ApplicationHelper
   
   # TODO: fait doublon avec la même procédure dans ApplicationController. 
   # Trouver la "bonne methode".
+
   def current_workspace_member
-    current_user.user_workspace_memberships.first
-  end
+    if params[:workspace_id]
+      return current_user.user_workspace_memberships.find(:first,  :conditions => {:workspace_id => params[:workspace_id]} )
+      session[:workspace_id] = params[:workspace_id]
+    else
+      return current_user.user_workspace_memberships.find(:first,  :conditions => {:workspace_id => session[:workspace_id]} )
+    end
+  end 
+  
+  def set_current_worskspace
+    session[:workspace_id] = params[:workspace_id]
+  end 
   
   def is_mobile?
 		return /(\b(iphone|ipod|ipad|android)\b)|(W3C-mobile)/i.match(request.env["HTTP_USER_AGENT"])
