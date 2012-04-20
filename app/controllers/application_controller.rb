@@ -10,21 +10,6 @@ class ApplicationController < ActionController::Base
     end
   end
   
-  # TODO: fait doublon avec la même procédure dans ApplicationHelper. 
-  # Trouver la "bonne methode".
-  def current_workspace_member
-    if params[:workspace_id]
-      return current_user.user_workspace_memberships.where(:workspace_id => params[:workspace_id] )
-      session[:workspace_id] = params[:workspace_id]
-    else
-      return current_user.user_workspace_memberships.where(:workspace_id => session[:workspace_id] )
-    end
-  end 
-  
-  def set_current_worskspace
-    session[:workspace_id] = params[:workspace_id]
-  end 
-  
   #Access control. Check if current_worksapce_member is current_sc_model_owner
   # TODO: Supprimer si inutile.
   def current_sc_model_owner         
