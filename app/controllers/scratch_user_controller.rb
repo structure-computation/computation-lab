@@ -2,6 +2,22 @@ class ScratchUserController < InheritedResources::Base
   before_filter :authenticate_user!  
   layout 'login'
   
+  def index
+    @change_current_workspace_member=current_user.user_workspace_memberships.find(:first, :conditions => {:workspace_id => params[:workspace_id]})
+    #current_workspace_member =  @change_current_workspace_member
+    session[:current_workspace_member_id] = @change_current_workspace_member.id
+    
+    logger.debug "current_user_id: " + current_user.id.to_s
+    logger.debug "workspace_id: " + params[:workspace_id].to_s
+    logger.debug "session[:current_workspace_member_id]: " + session[:current_workspace_member_id].to_s
+    
+    if params[:workspace_id]
+      redirect_to scratch_user_path(current_user.id), :notice => "Espace de travail modifié." # TODO: traduire.
+    else
+      redirect_to scratch_user_path(current_user.id), :notice => "Aucun espace de travail séléctionné." # TODO: traduire. 
+    end
+  end
+  
   def new
     @user = User.new
   end
@@ -25,8 +41,13 @@ class ScratchUserController < InheritedResources::Base
   
   def show  
     @user       =  current_user
-    @workspace  =  current_workspace_member
-    logger.debug current_workspace_member
+    #session[:current_workspace_member_id] = nil
+    if session[:current_workspace_member_id]
+      if !current_workspace_member
+        session[:current_workspace_member_id] = nil
+      end
+      logger.debug "session[:current_workspace_member_id]: " + session[:current_workspace_member_id].to_s
+    end
     if params[:notice] 
       flash[:notice] = params[:notice]
     end
@@ -38,26 +59,6 @@ class ScratchUserController < InheritedResources::Base
     render :edit, :layout => 'workspace'
   end
   
-  def select_workspace
-    @user = current_user
-    if !params[:workspace_id]
-      flash[:notice] = "Aucun espace de travail séléctionné" # TODO: traduire.
-      render :show
-    else      
-      workspace = @user.workspaces.find(params[:workspace_id])
-      if workspace.nil?
-        #flash[:notice] = "Cet espace de travail est inexistant ou ne vous est pas accessible." # TODO: traduire.
-        format.html {redirect_to destroy_user_session_path, 
-                    :notice => "Cet espace de travail est inexistant ou ne vous est pas accessible."}
-        #render :show
-      else
-        set_current_worskspace(params[:workspace_id])
-        format.html {redirect_to destroy_user_session_path, 
-                    :notice => "Espace de travail modifié."}
-        #flash[:notice] = "Espace de travail modifié." # TODO: traduire.
-        #render :show
-      end
-    end
-  end
+  
   
 end

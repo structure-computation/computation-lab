@@ -15,7 +15,7 @@
           
             -#header_top_cadena
         %p#header_workspace_name
-          - if user_signed_in? && !current_workspace_member.nil? 
+          - if user_signed_in? && current_workspace_member 
             = current_workspace_member.workspace.name
           - else
             selectionner un workspace   
@@ -24,6 +24,7 @@
         = render :partial => "layouts/main_menu" 
       - else
         %p 
+          %br
             
 
 / fin partie header

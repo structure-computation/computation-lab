@@ -45,7 +45,7 @@ class WorkspacesController < InheritedResources::Base
       @new_workspace.save
       @new_workspace.members << current_user
       @new_workspace.save
-      @current_workspace_member = current_user.user_workspace_memberships.where(:workspace_id =>  @new_workspace.id )
+      @current_workspace_member = current_user.user_workspace_memberships.find(:first, :conditions => {:workspace_id =>  @new_workspace.id} )
       @current_workspace_member.manager = true
       @current_workspace_member.engineer = true
       @current_workspace_member.save
