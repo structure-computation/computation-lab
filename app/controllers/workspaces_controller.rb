@@ -21,6 +21,7 @@ class WorkspacesController < InheritedResources::Base
   
   def show
     @workspace    = current_workspace_member.workspace
+    @credits      = @workspace.token_account.credits.find(:all, :conditions => {:state => "active"})
     if @workspace 
       # show!
       render
@@ -79,7 +80,7 @@ class WorkspacesController < InheritedResources::Base
   # Suppr
   def create_solde
     # Creation d'une liste fictive d'opération.
-    @solde_calculs = current_workspace_member.workspace.solde_calcul_accounts.find(:all)
+    @solde_calculs = current_workspace_member.workspace.token_account.solde_token_accounts.find(:all)
   end
   
   

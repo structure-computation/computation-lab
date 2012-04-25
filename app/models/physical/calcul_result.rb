@@ -12,6 +12,7 @@ class CalculResult < ActiveRecord::Base
   belongs_to  :workspace_member, :class_name => "UserWorkspaceMembership", :foreign_key => "workspace_member_id"
   belongs_to  :sc_model
   has_one     :log_calcul
+  has_one     :solde_token_account
   
   #state = ['temp', 'in_process', 'finish','downloaded']
   #log_type = ['create', 'compute']
@@ -200,11 +201,7 @@ class CalculResult < ActiveRecord::Base
     #TEMP
     #self.launch_autorisation = true
     self.save
-    
-    
-    
-    send_data  = {:launch_autorisation => self.launch_autorisation, :gpu_allocated => self.gpu_allocated, :estimated_calcul_time => self.estimated_calcul_time, :estimated_debit_jeton => @debit_jeton}
-    
+    send_data  = {:launch_autorisation => self.launch_autorisation, :gpu_allocated => self.gpu_allocated, :estimated_calcul_time => self.estimated_calcul_time, :estimated_debit_jeton => @debit_jeton} 
     return send_data 
   end
   

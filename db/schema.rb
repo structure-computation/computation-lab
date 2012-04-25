@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120416095719) do
+ActiveRecord::Schema.define(:version => 20120424172757) do
 
   create_table "abonnements", :force => true do |t|
     t.string   "name"
@@ -28,14 +28,6 @@ ActiveRecord::Schema.define(:version => 20120416095719) do
   create_table "bills", :force => true do |t|
     t.integer  "workspace_id"
     t.integer  "credit_id"
-    t.integer  "log_abonnement_id"
-    t.string   "facture_type"
-    t.float    "price_calcul_HT"
-    t.float    "price_calcul_TVA"
-    t.float    "price_calcul_TTC"
-    t.float    "price_memory_HT"
-    t.float    "price_memory_TVA"
-    t.float    "price_memory_TTC"
     t.float    "total_price_HT"
     t.float    "total_price_TVA"
     t.float    "total_price_TTC"
@@ -44,6 +36,12 @@ ActiveRecord::Schema.define(:version => 20120416095719) do
     t.date     "paid_date"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.float    "token_price_HT"
+    t.float    "global_price_HT"
+    t.float    "global_price_TVA"
+    t.float    "global_price_TTC"
+    t.text     "description"
+    t.text     "bill_type"
   end
 
   create_table "boundary_conditions", :force => true do |t|
@@ -132,14 +130,18 @@ ActiveRecord::Schema.define(:version => 20120416095719) do
   end
 
   create_table "credits", :force => true do |t|
-    t.integer  "calcul_account_id"
     t.integer  "forfait_id"
-    t.integer  "nb_jetons"
-    t.integer  "nb_jetons_tempon"
     t.integer  "price"
-    t.date     "credit_date"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "token_account_id"
+    t.float    "token_price"
+    t.float    "global_price"
+    t.float    "nb_token"
+    t.float    "solde_token"
+    t.float    "used_token"
+    t.text     "state"
+    t.date     "end_date"
   end
 
   create_table "delayed_jobs", :force => true do |t|
@@ -172,16 +174,15 @@ ActiveRecord::Schema.define(:version => 20120416095719) do
 
   create_table "forfaits", :force => true do |t|
     t.string   "name"
-    t.float    "price"
-    t.float    "price_jeton"
-    t.integer  "nb_jetons"
-    t.integer  "nb_jetons_tempon"
     t.integer  "validity"
     t.string   "state"
     t.date     "start_date"
     t.date     "end_date"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.float    "token_price"
+    t.float    "global_price"
+    t.float    "nb_token"
   end
 
   create_table "links", :force => true do |t|
@@ -332,6 +333,29 @@ ActiveRecord::Schema.define(:version => 20120416095719) do
     t.integer  "debit_jeton_tempon"
     t.integer  "solde_jeton"
     t.integer  "solde_jeton_tempon"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "solde_token_accounts", :force => true do |t|
+    t.integer  "token_account_id"
+    t.integer  "calcul_result_id"
+    t.integer  "credit_id"
+    t.string   "solde_type"
+    t.integer  "credit_token"
+    t.integer  "used_token"
+    t.integer  "solde_token"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "token_accounts", :force => true do |t|
+    t.integer  "workspace_id"
+    t.string   "status"
+    t.integer  "used_token_counter"
+    t.integer  "purchased_token_counter"
+    t.integer  "reserved_token"
+    t.integer  "solde_token"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -1,0 +1,28 @@
+.search_filter
+  %p
+    %label{:for => "credits_search_filter"} Recherche
+    %input#credits_search_filter{:type => "text"}
+
+%table.grey#credits_table
+  %thead
+    %tr
+      %th Date
+      %th Echéance
+      %th Type
+      %th Solde de jetons
+      %th Jetons utilisés
+  %body
+    - credits_list.each do |credit|
+      %tr   
+        %td= credit.created_at.to_date
+        %td= credit.end_date
+        %td= credit.forfait.name
+        %td= credit.solde_token
+        %td= credit.used_token
+
+:coffeescript
+  $( ->
+    $('#credits_table').tablesorter()
+
+    searchFilter("credits_table", "credits_search_filter")
+  )

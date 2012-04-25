@@ -1,0 +1,38 @@
+-content_for :left_top do
+  .left_submenu
+    %h2.grey
+      Menu
+    %ul
+      %li.LM_pic_new_model
+        = link_to "Retour au workspace", workspace_path(@workspace)  
+
+-content_for :right_top do
+  %h2.grey
+    Liste des forfaits
+  %div
+    = render :partial => "search_filter"
+
+-content_for :workspace_content do
+  %table.grey#forfaits_table
+    %thead
+      %tr
+        %th.no_sorter
+        %th ID        
+        %th Nom
+        %th nb jetons
+        %th prix jeton (HT)
+        %th prix forfait (HT)
+        %th validité
+        
+    %tbody
+      - @forfaits.each do |forfait|
+        %tr
+          %td.escape_search.details_link= link_to 'Détails', forfait_path(forfait)
+          %td.id=             forfait.id
+          %td.name=           forfait.name ? forfait.name : 'Undefined'
+          %td.id=             forfait.nb_token
+          %td.id=             forfait.token_price
+          %td.id=             forfait.global_price
+          %td.id=             forfait.validity
+          
+ 

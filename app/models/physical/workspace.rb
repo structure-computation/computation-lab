@@ -15,20 +15,13 @@ class Workspace < ActiveRecord::Base
   has_many  :company_workspace_memberships
   has_many  :companies, :through => :company_workspace_memberships
   
+  has_one   :token_account              , :readonly => false
   
-  has_one   :calcul_account	, :readonly => false
-  has_one   :memory_account	, :readonly => false
-  
-  has_many  :projects		    , :readonly => false
-  has_many  :sc_models      , :readonly => false
-  has_many  :materials		  , :readonly => false
-  has_many  :links		      , :readonly => false
-  has_many  :factures		    , :readonly => false    
+  has_many  :sc_models                  , :readonly => false
+  has_many  :materials		        , :readonly => false
+  has_many  :links		        , :readonly => false 
 
-  
-  has_many  :solde_calcul_accounts,  :through => :calcul_account		, :readonly => false
-
-  has_many  :bills		, :readonly => false
+  has_many  :bills		        , :readonly => false
   
   belongs_to  :user_sc_admin
   
@@ -51,13 +44,7 @@ class Workspace < ActiveRecord::Base
   end
   
   def init_account()
-    current_calcul_account = self.create_calcul_account
-    current_calcul_account.init
-    
-    current_memory_account = self.create_memory_account
-    current_memory_account.init
+    current_token_account = self.create_token_account
+    current_token_account.init
   end
-  
-  
-  
 end

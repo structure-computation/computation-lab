@@ -11,6 +11,8 @@ SCInterface::Application.routes.draw do
   resources :sc_admin_company
   resources :sc_admin_user
   
+  resources :forfait
+  
   resources :members do
     resources :company
     resources :workspaces
