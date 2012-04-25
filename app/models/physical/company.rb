@@ -6,6 +6,8 @@ class Company < ActiveRecord::Base
   has_many  :company_workspace_memberships
   has_many  :workspaces, :through => :company_workspace_memberships
   
+  has_many  :bills
+  
   belongs_to  :user_sc_admin
   
   # TODO: Placé en prévision du moment ou un utilisateur pourra acceder à plusieurs entreprise 

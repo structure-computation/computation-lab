@@ -4,9 +4,13 @@
       Menu
     %ul
       %li.manage_pic_liste_factures
-        = link_to "Retour à la liste des factures", workspace_path(@workspace, :anchor => 'Factures') 
+        = link_to "Retour au workspace", workspace_path(@workspace, :anchor => 'Factures') 
       %li.manage_pic_liste_factures
         = link_to "Télécharger la facture", download_bill_workspace_bill_path(@workspace, @bill)
+      %li.manage_pic_liste_factures
+        = link_to "Payer en ligne", :controller => :bills, :action => :pay, :id => @bill.id
+      %li.manage_pic_liste_factures
+        = link_to "Annuler", :controller => :bills, :action => :cancel, :state => "canceled", :id => @bill.id
         
 -content_for :right_top do
   %h2.grey
@@ -14,25 +18,31 @@
     = @bill.ref
   .grey
     %p
-      Date :
-      /TODO: Quelle date ?
-      = @bill.created_at
-      Status :
-      = @bill.statut
-    
-    %h4
-      Gestionaire :
-    %p
-      = # @manager.firstname
-      = # @manager.lastname
-    %p
-      = @workspace.name
-      = @workspace.division
+      %tr
+        %td
+          Date :
+        %td
+          = @bill.created_at.to_date
+        %td
+          Status :
+        %td
+          = @bill.statut       
     %p 
-      = @workspace.address
-      = @workspace.zipcode
-      = @workspace.city
-      = @workspace.country
+      Responsable : 
+      %br
+      = @bill.company.firstname + " " +  @bill.company.lastname
+      %br
+      = @bill.company.phone
+
+    %p 
+      Société : 
+      %br
+      = @bill.company.address
+      %br
+      = @bill.company.zipcode  + " " +  @bill.company.city
+      %br
+      = @bill.company.country
+        
 
 -content_for :workspace_content do
   = render :partial => 'bill_detail', :object => @bill

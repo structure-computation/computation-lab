@@ -7,8 +7,9 @@ class Credit < ActiveRecord::Base
   
   
   # nouvelle ligne de crédit et nouvelle facture non validé
-  def new_credit_and_bill(id_forfait)
-    forfait = Forfait.find(id_forfait)
+  def create_credit_and_bill(forfait_id, company_id)
+    forfait = Forfait.find(forfait_id)
+    company = Company.find(company_id)
     
     #initialisation de la ligne de credit
     self.forfait = forfait
@@ -22,6 +23,7 @@ class Credit < ActiveRecord::Base
     #création de la facture
     current_bill = self.build_bill() 
     current_bill.workspace = self.token_account.workspace
+    current_bill.company = company
     current_bill.save
     
     #derniere mise a jour des info du compte et sauvegarde
@@ -30,11 +32,17 @@ class Credit < ActiveRecord::Base
   end
   
   # validation de la ligne de credit et sauvegarde du compte après paiement de la facture
-  def valid_credit_and_token_account()
+  def valid_credit()
     self.state = "active"
     self.end_date = Date.today + self.forfait.validity.month
     self.save
     self.token_account.valid_credit(self.id)
+  end
+  
+  def cancel_credit()
+    self.state = "canceled"
+    self.end_date = Date.today
+    self.save
   end
   
 end

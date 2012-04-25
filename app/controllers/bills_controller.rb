@@ -18,62 +18,27 @@ class BillsController < InheritedResources::Base
   end        
                                                       
   def show 
-    @bill      = Bill.from_workspace(current_workspace_member.workspace.id).find_by_id(params[:id])
     @workspace = current_workspace_member.workspace
-    if @bill 
-      #show!
+    @bill      = Bill.from_workspace(@workspace.id).find_by_id(params[:id])
+    if @bill.statut == "canceled"
+      redirect_to workspace_path(current_workspace_member.workspace), :notice => "Cette facture a été annulée" # TODO traduire 
+    else        
       render
-    else
-      respond_to do |format|         
-        format.html {redirect_to workspace_bills_path(current_workspace_member.workspace.bills), 
-                    :notice => "Cette facture n'existe pas ou n'est pas accessible à partir de cet espace de travail."}
-        format.json {render :status => 404, :json => {}}
-      end
     end                                  
-  end   
+  end 
   
+  def cancel 
+    @workspace = current_workspace_member.workspace
+    @bill      = Bill.from_workspace(@workspace.id).find_by_id(params[:id])
+    @bill.cancel_bill()        
+    redirect_to workspace_path(current_workspace_member.workspace), :notice => "La facture a été annulée" # TODO traduire                            
+  end 
   
-  #TODO remplacer chargement JSON par chargement normal (sans requête ajax)
-  # def index
-  #   @id_workspace = @current_workspace.id
-  #   #@current_gestionnaire = @current_workspace.users.find(:first, :conditions => {:role => "gestionnaire"})
-  # 
-  #   @bills_forfaits = []
-  #   @bills.each{ |bill_i|
-  #     bill_forfait = Hash.new
-  #     bill_forfait['facture'] = Hash.new
-  #     bill_forfait['facture'] = { :id =>bill_i.id, 
-  #                                 :ref =>bill_i.ref,
-  #                                 :date => bill_i.created_at.to_date.to_s(),
-  #                                 :price_calcul_HT  => bill_i.price_calcul_HT,
-  #                                 :price_calcul_TVA  => bill_i.price_calcul_TVA,
-  #                                 :price_calcul_TTC  => bill_i.price_calcul_TTC,
-  #                                 :price_memory_HT  => bill_i.price_memory_HT,
-  #                                 :price_memory_TVA  => bill_i.price_memory_TVA,
-  #                                 :price_memory_TTC  => bill_i.price_memory_TTC,
-  #                                 :total_price_HT  => bill_i.total_price_HT,
-  #                                 :total_price_TVA  => bill_i.total_price_TVA,
-  #                                 :total_price_TTC  => bill_i.total_price_TTC,
-  #                                 :statut  => bill_i.statut,
-  #                                 :facture_type => bill_i.facture_type }
-  #                 
-  #     bill_forfait['forfait'] = Hash.new
-  #     bill_forfait['abonnement'] = Hash.new
-  #     if(bill_i.facture_type == 'calcul')
-  #       bill_forfait['forfait'] = { :name =>bill_i.credit.forfait.name,
-  #                                   :nb_jetons =>bill_i.credit.forfait.nb_jetons,
-  #                                   :nb_jetons_tempon  => bill_i.credit.forfait.nb_jetons_tempon,
-  #                                   :validity  => bill_i.credit.forfait.validity }
-  #     elsif(bill_i.facture_type == 'memoire')
-  #       bill_forfait['abonnement'] = { :name =>bill_i.log_abonnement.abonnement.name,
-  #                                      :assigned_memory =>bill_i.log_abonnement.abonnement.assigned_memory,
-  #                                      :security_level  => bill_i.log_abonnement.abonnement.security_level,
-  #                                      :nb_max_user  => bill_i.log_abonnement.abonnement.nb_max_user }        
-  #     end
-  #     @bills_forfaits << bill_forfait
-  #   } 
-  # end
-
+  def pay 
+    @workspace = current_workspace_member.workspace
+    @bill      = Bill.from_workspace(@workspace.id).find_by_id(params[:id])
+    redirect_to workspace_path(current_workspace_member.workspace), :notice => "La facture a été payée" # TODO traduire                                 
+  end 
 
   def download_bill
     @current_workspace = current_workspace_member.workspace
@@ -83,7 +48,7 @@ class BillsController < InheritedResources::Base
     send_file name_file, :filename => name_bill
   end
 
- def generate_pdf_facture
+  def generate_pdf_facture
     @current_workspace = current_workspace_member.workspace
     @current_bill = @current_workspace.bills.find(params[:id_facture])
     @current_gestionnaire = @current_workspace.users.find(:first, :conditions => {:role => "gestionnaire"})

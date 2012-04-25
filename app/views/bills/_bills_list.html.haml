@@ -12,6 +12,7 @@
       %th Prix HT(Euros)
       %th Prix TTC(Euros)
       %th Status
+      %th.no_sorter Actions
   %body
     - bills_list.each do |bill|
       %tr
@@ -21,6 +22,15 @@
         %td= bill.total_price_HT
         %td= bill.total_price_TTC
         %td= bill.statut
+        %td.action_on_table.escape_search
+          -if bill.statut != "canceled"
+            %ul
+              %li
+                = link_to "Annuler", :controller => :bills, :action => :cancel, :state => "canceled", :id => bill.id
+              %li 
+                = link_to "pdf", download_bill_workspace_bill_path(@workspace, bill)
+              %li 
+                = link_to "payer en ligne",  :controller => :bills, :action => :pay, :id => bill.id
 
 :coffeescript
   $( ->

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120424172757) do
+ActiveRecord::Schema.define(:version => 20120425111607) do
 
   create_table "abonnements", :force => true do |t|
     t.string   "name"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(:version => 20120424172757) do
     t.float    "global_price_TTC"
     t.text     "description"
     t.text     "bill_type"
+    t.integer  "company_id"
   end
 
   create_table "boundary_conditions", :force => true do |t|
@@ -107,6 +108,9 @@ ActiveRecord::Schema.define(:version => 20120424172757) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "kind"
+    t.string   "phone"
+    t.string   "firstname"
+    t.string   "lastname"
   end
 
   create_table "company_user_memberships", :force => true do |t|

@@ -4,8 +4,7 @@
       Comptes
     %ul
       %li.manage_pic_compte_abonnement
-        %a
-          Nouveau forfait
+        = link_to 'Nouveau forfait', :controller => "forfait", :action => "index"
       %li.manage_pic_nouveau_membre
         = link_to 'Ajouter un membre', new_workspace_member_path(@workspace)
       %li.manage_pic_nouveau_membre
@@ -15,8 +14,8 @@
   %h2.grey
     = @workspace.name
   .grey
-    %p Abonnement
-    %p Forfait
+    %p 
+      = "Solde du compte de jetons : " + @workspace.token_account.solde_token.to_s
     
 -content_for :workspace_content do
   %h2.grey
@@ -41,48 +40,35 @@
       .tab_content.js_tab_content
         #tab_1_content
           %h3 Liste des factures de la société :
-          = render :partial => 'bills/bills_list', :object => @workspace.bills
+          = render :partial => 'bills/bills_list', :object => @workspace.bills.find(:all, :order=> " created_at DESC")
           
         #tab_2_content
-          %p Cet abonnement annuel donne accès à un espace mémoire sur les serveurs de Structure Computation. Il vous permet de stocker les modèles, les résultats de calculs et l'ensemble des informations relatives aux modèles.
-          %p Votre abonnement actuel est le suivant :
+          %p Solde du compte de jetons
+          %p Compteurs globaux :
           %table.grey
             -#TODO afficher les bonnes valeurs
             %thead
               %tr.no_sorter
-                %th Mémoire disponnible
-                %th Date d'échéance
+                %th Compteur de jetons utilisés
+                %th Compteur de jetons achetés
             %tbody
               %tr
-                %td= @workspace.calcul_account.solde_jeton
-                %td= @workspace.calcul_account.used_jeton
-                
-        #tab_3_content
-          %p Les forfaits de calcul vous permettent d'utiliser à la demande les outils et la puissance de calcul de Structure Computation (maillage de vos modèles, calcul de structures...). Vous pouvez cumuler plusieurs forfaits.
-          %p Dernier relevé :
-          %table.grey
-            %thead
-              %tr.no_sorter
-                %th Report de jetons
-                %th Jetons standards
-                %th Jetons tampons
-                %th Date d'échéance
-            %tbody
-              %tr
-                %td= @workspace.calcul_account.report_jeton
-                %td= @workspace.calcul_account.base_jeton
-                %td= @workspace.calcul_account.base_jeton_tempon
-                %td= @workspace.calcul_account.end_date
+                %td= @workspace.token_account.used_token_counter
+                %td= @workspace.token_account.purchased_token_counter
           %p Votre utilisation actuelle :
           %table.grey
             %thead
               %tr.no_sorter
-                %th Solde de jetons standards
-                %th Jetons utilisé
+                %th Solde courrant
+                %th Jetons réservés
             %tbody
               %tr
-                %td= @workspace.calcul_account.solde_jeton
-                %td= @workspace.calcul_account.used_jeton
+                %td= @workspace.token_account.solde_token
+                %td= @workspace.token_account.reserved_token
+                
+        #tab_3_content
+          %h3 Liste de vos forfait en cours d utilisation :
+          = render :partial => 'credit/credits_list', :object => @credits
                 
         #tab_4_content
           = render :partial => "members/search_filter"
@@ -99,9 +85,6 @@
               %td= @workspace.name
             %tr
               %th Public_description
-              %td= @workspace.public_description
-            %tr
-              %th Private_description
-              %td= @workspace.private_description   
+              %td= @workspace.public_description  
 
       = coffeescript_include_tag "manage_tab"

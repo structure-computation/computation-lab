@@ -2,6 +2,7 @@ class Bill < ActiveRecord::Base
   belongs_to :workspace
   belongs_to :credit
   belongs_to :log_abonnement
+  belongs_to :company
   
   scope :from_workspace , lambda { |workspace_id|
      where(:workspace_id => workspace_id)
@@ -27,11 +28,17 @@ class Bill < ActiveRecord::Base
     self.save
   end
   
-  def valid_facture_calcul()
+  def valid_bill()
     self.statut = "paid"
     self.paid_date = Date.today
     self.save
-    self.credit.valid_credit_and_calcul_account()
+    self.credit.valid_credit()
+  end
+  
+  def cancel_bill()
+    self.statut = "canceled"
+    self.save
+    self.credit.cancel_credit()
   end
   
   #on génère le fichier pdf de la facture
@@ -39,7 +46,7 @@ class Bill < ActiveRecord::Base
     
     @current_workspace = self.workspace
     @current_gestionnaire = @current_workspace.users.find(:first, :conditions => {:role => "gestionnaire"})
-    pdf = Prawn::Document.new(:page_size => 'A4',:background => "#{RAILS_ROOT}/public/images/fond_facture.jpg", :margin => [0,0,0,0])
+    pdf = Prawn::Document.new(:page_size => 'A4', :margin => [0,0,0,0])
     
     pdf.font "Helvetica" 
     colors = {:black => "000000", :grey => "8d8d8d", :blue => "2a3556", :magenta => "eb4f95", :white => "ffffff"} 
@@ -80,10 +87,11 @@ class Bill < ActiveRecord::Base
     pdf.bounding_box [300, 650], :width => 245, :height => 150 do
 	pdf.text @current_gestionnaire.firstname + " " + @current_gestionnaire.lastname , :align => :right
 	pdf.text @current_workspace.name, :align => :right
-	#pdf.text @current_workspace.division, :align => :right
-	#pdf.text @current_workspace.address, :align => :right
-	#pdf.text @current_workspace.zipcode + " " + @current_workspace.city, :align => :right
-	#pdf.text @current_workspace.country, :align => :right
+        pdf.text "  ", :align => :right
+	pdf.text self.company.name, :align => :right
+	pdf.text self.company.address, :align => :right
+	pdf.text self.company.zipcode + " " + self.company.city, :align => :right
+	pdf.text self.company.phone, :align => :right
     end
 
     #entete du tableau des prix

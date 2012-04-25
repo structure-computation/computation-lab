@@ -19,6 +19,10 @@ class WorkspacesController < InheritedResources::Base
   
   layout 'workspace'  
   
+  def set_page_name
+    @page = :manage
+  end
+  
   def show
     @workspace    = current_workspace_member.workspace
     @credits      = @workspace.token_account.credits.find(:all, :conditions => {:state => "active"})
@@ -71,10 +75,6 @@ class WorkspacesController < InheritedResources::Base
     #     when "Company"
     #       @workspace = Company.new(params[:workspace])  
     #     end
-  end
-    
-  def set_page_name
-    @page = :manage
   end
   
   # Suppr
