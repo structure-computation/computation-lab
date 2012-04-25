@@ -23,9 +23,6 @@
     %tr
       %th Epaisseur (Ep)
       %td= custom_text_field(:link, :Ep, "Ep", disabled)
-    %tr
-      %th Jeu (j)
-      %td= custom_text_field(:link, :jeu, "j", disabled)
 
     - if @link.comp_generique.downcase.include? "el" or show_all
       %tr

@@ -2,9 +2,10 @@
   %td.escape_search.details_link
     - if link.workspace
       =  link_to "Détails", [@workspace, link]
-  %td.name=           link.name
+    - else
+      =  link_to "Détails", [link]
   %td.id=             link.id
-  %td.reference=      link.reference
+  %td.name=           link.name
   %td.family=         link.family
   %td.comp_generic=   link.comp_generique
   %td.comp_complex=   link.comp_complexe

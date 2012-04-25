@@ -20,6 +20,7 @@
 
   = f.hidden_field :comp_generique
   = f.hidden_field :comp_complexe
+  = f.hidden_field :type_num
 
   .wrapper
     #left_content= render "link_tab_details"
@@ -29,4 +30,4 @@
     = submit_tag "Editer", :class => 'yellow_button'
   - else 
     = submit_tag "Créer", :class => 'yellow_button'
-    = link_to "Annuler", workspace_links_path, :class => 'yellow_button'
+    = link_to "Annuler", workspace_links_path(@workspace), :class => 'yellow_button'

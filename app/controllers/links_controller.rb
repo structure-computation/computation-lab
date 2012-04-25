@@ -21,6 +21,7 @@ class LinksController < InheritedResources::Base
   
   def update
     # Test pour savoir si les informations sont données en brut (en JSON, envoyées par le javascript)
+    @workspace           = current_workspace_member.workspace
     if params[:link].nil?
       @link = Link.find(params[:id])
       @link.update_attributes! retrieve_column_fields(params)
@@ -72,23 +73,28 @@ class LinksController < InheritedResources::Base
     # Le paramètre next signifie que l'utilisateur vient du premier formulaire 
     # dans lequel il doit spécifier si la liaison est parfaite, elastique, plastique etc.
     # Je crée une liaison et lui affecte les paramètres pour que les bonne partie du formulaire soit visible dans l'étape d'après.
+    @workspace           = current_workspace_member.workspace
     if params[:next]
       @link = Link.new
-      @link.comp_generique = ""
-      @link.comp_generique += "Pa " if params[:Parfaite]
-      @link.comp_generique += "El " if params[:Elastique]
-      @link.comp_generique += "Co " if params[:Contact]
+      @link.comp_generique = "Pa " if params[:type].include? "Parfaite"
+      @link.comp_generique = "El " if params[:type].include? "Elastique"
+      @link.comp_generique = "Co " if params[:type].include? "Contact"
 
       @link.comp_complexe  = ""
       @link.comp_complexe += "Pl " if params[:Plastique]
       @link.comp_complexe += "Ca " if params[:Cassable]
+ 
+      @link.type_num = 0 if params[:type].include? "Parfaite"
+      @link.type_num = 1 if params[:type].include? "Elastique"
+      @link.type_num = 2 if params[:type].include? "Contact"
     end
-    if params[:next] and (@link.comp_generique.empty? or @link.comp_complexe.empty?)
-      flash[:notice] = "Vous avez mal rempli le formulaire."
-      redirect_to new_workspace_link_path
-    else
-      new!
-    end
+    #if params[:next] and (@link.comp_generique.empty?)
+    #  flash[:notice] = "Vous avez mal rempli le formulaire."
+    #  redirect_to new_workspace_link_path(@workspace)
+    #else
+    #  new!
+    #end
+    new!
   end
   
   private

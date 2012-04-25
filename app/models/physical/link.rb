@@ -3,7 +3,7 @@ class Link < ActiveRecord::Base
   belongs_to  :workspace
   
   # TODO: On n'avait pas dit "null" pour la lib standard ?
-  scope :standard, where(:workspace_id => -1)
+  scope :standard, where(:state => "standard")
   scope :from_workspace , lambda { |workspace_id|
     where(:workspace_id => workspace_id)
   }
