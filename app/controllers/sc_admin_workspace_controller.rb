@@ -19,6 +19,7 @@ class ScAdminWorkspaceController < InheritedResources::Base
   def show
     @workspace    = Workspace.find_by_id(params[:id])
     @credits      = @workspace.token_account.credits.find(:all, :conditions => {:state => "active"})
+    @soldes       = @workspace.token_account.solde_token_accounts.find(:all, :order => " created_at DESC")
     if params[:notice] 
       flash[:notice] = params[:notice]
     end

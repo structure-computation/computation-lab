@@ -1,0 +1,48 @@
+-content_for :left_top do
+  .left_submenu
+    %h2.grey
+      Menu
+    %ul
+      %li.manage_pic_liste_factures
+        = link_to "Aller au workspace", sc_admin_workspace_path(@bill.workspace, :anchor => 'Factures') 
+      %li.manage_pic_liste_factures
+        = link_to "Télécharger la facture", :controller => :sc_admin_bill, :action => :download_bill, :id => @bill.id
+      %li.manage_pic_liste_factures
+        = link_to "Valider", :controller => :sc_admin_bill, :action => :valid, :id => @bill.id
+      %li.manage_pic_liste_factures
+        = link_to "Annuler", :controller => :sc_admin_bill, :action => :cancel, :state => "canceled", :id => @bill.id
+        
+-content_for :right_top do
+  %h2.grey
+    Référence Facture : 
+    = @bill.ref
+  .grey
+    %p
+      %tr
+        %td
+          Date :
+        %td
+          = @bill.created_at.to_date
+        %td
+          Status :
+        %td
+          = @bill.statut       
+    %p 
+      Responsable : 
+      %br
+      = @bill.company.firstname + " " +  @bill.company.lastname
+      %br
+      = @bill.company.phone
+
+    %p 
+      Société : 
+      %br
+      = @bill.company.address
+      %br
+      = @bill.company.zipcode  + " " +  @bill.company.city
+      %br
+      = @bill.company.country
+        
+
+-content_for :workspace_content do
+  = render :partial => 'sc_admin_bill/bill_detail', :object => @bill

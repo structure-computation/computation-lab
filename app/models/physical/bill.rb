@@ -29,10 +29,12 @@ class Bill < ActiveRecord::Base
   end
   
   def valid_bill()
-    self.statut = "paid"
-    self.paid_date = Date.today
-    self.save
-    self.credit.valid_credit()
+    if self.statut != "paid"
+      self.statut = "paid"
+      self.paid_date = Date.today
+      self.save
+      self.credit.valid_credit()
+    end
   end
   
   def cancel_bill()

@@ -1,0 +1,2 @@
+module ScAdminBillHelper
+end

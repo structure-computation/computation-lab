@@ -23,12 +23,11 @@ class MembersController < InheritedResources::Base
     def set_page_name
       @page = :manage
     end
-    
-    # render new.rhtml
+
     def new
+      @workspace = current_workspace_member.workspace
       @member = User.new
       new!
-      #render :layout => false 
     end
 
     def create

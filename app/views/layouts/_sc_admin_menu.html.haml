@@ -10,6 +10,8 @@
     = link_to 'Companies', :controller => "sc_admin_company", :action => "index"
   %li{:class => ( @page == :sc_admin_user ? "selected" : "")}
     = link_to 'Users', :controller => "sc_admin_user", :action => "index"
+  %li{:class => ( @page == :sc_admin_bill ? "selected" : "")}
+    = link_to 'Bills', :controller => "sc_admin_bill", :action => "index"
       
 -# TODO: Utiliser un helper pour le style "selected"
 -#   %li{:id => "menu_accueil"     , :class => "main_menu_item " + menu_item_selected_class( @page, :accueil   ) }

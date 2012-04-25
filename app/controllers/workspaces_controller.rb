@@ -26,6 +26,7 @@ class WorkspacesController < InheritedResources::Base
   def show
     @workspace    = current_workspace_member.workspace
     @credits      = @workspace.token_account.credits.find(:all, :conditions => {:state => "active"})
+    @soldes       = @workspace.token_account.solde_token_accounts.find(:all, :order => " created_at DESC")
     if @workspace 
       # show!
       render

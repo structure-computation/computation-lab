@@ -1,0 +1,34 @@
+%table.grey
+  %thead
+    %tr.no_sorter
+      %th
+      %th € HT
+      %th € TVA
+      %th € TTC
+  %body
+
+    %tr
+      %td= @bill.credit.forfait.name
+      %td= @bill.global_price_HT
+      %td= @bill.global_price_TVA
+      %td= @bill.global_price_TTC
+    %tr
+      %td 
+        Nombre de jetons : 
+        = @bill.credit.forfait.nb_token
+      %td -
+      %td -
+      %td -
+    %tr
+      %td 
+        Durée de validité (mois) : 
+        = @bill.credit.forfait.validity
+      %td -
+      %td -
+      %td -
+
+    %tr
+      %td Total
+      %td= @bill.total_price_HT
+      %td= @bill.total_price_TVA
+      %td= @bill.total_price_TTC

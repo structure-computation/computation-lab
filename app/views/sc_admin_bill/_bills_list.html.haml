@@ -16,7 +16,7 @@
   %body
     - bills_list.each do |bill|
       %tr
-        %td.escape_search.details_link= link_to "Détails", [@workspace, bill]      
+        %td.escape_search.details_link= link_to "Détails", sc_admin_bill_path(bill.id)
         %td= bill.ref
         %td= bill.bill_type
         %td= bill.total_price_HT
@@ -26,13 +26,12 @@
           -if bill.statut != "canceled"
             %ul
               %li 
-                = link_to "pdf", download_bill_workspace_bill_path(@workspace, bill)
+                = link_to "pdf", :controller => :sc_admin_bill, :action => :download_bill, :id => bill.id
               -if bill.statut != "paid"
                 %li
-                  /= button_to "Annuler", cancel_workspace_bill_path(@workspace, bill), :confirm => "Êtes-vous sûr ?"
-                  = button_to "Annuler", {:controller => :bills, :action => :cancel, :id => bill.id}, :confirm => "Êtes-vous sûr ?"
+                  = link_to "Annuler", :controller => :sc_admin_bill, :action => :cancel, :state => "canceled", :id => bill.id
                 %li 
-                  = link_to "payer en ligne",  :controller => :bills, :action => :pay, :id => bill.id
+                  = link_to "Valider", :controller => :sc_admin_bill, :action => :valid, :id => bill.id
 
 :coffeescript
   $( ->

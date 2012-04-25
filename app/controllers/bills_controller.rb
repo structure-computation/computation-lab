@@ -4,7 +4,7 @@ class BillsController < InheritedResources::Base
   before_filter :set_page_name
   respond_to :html, :json
   belongs_to :workspace
-  actions :index, :show, :new, :create
+  actions :index, :show, :new, :create, :cancel
   layout 'workspace'
   
   def set_page_name

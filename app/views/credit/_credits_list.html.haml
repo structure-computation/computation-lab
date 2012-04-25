@@ -11,7 +11,7 @@
       %th Type
       %th Solde de jetons
       %th Jetons utilisés
-  %body
+  %tbody
     - credits_list.each do |credit|
       %tr   
         %td= credit.created_at.to_date
@@ -23,6 +23,5 @@
 :coffeescript
   $( ->
     $('#credits_table').tablesorter()
-
     searchFilter("credits_table", "credits_search_filter")
   )
