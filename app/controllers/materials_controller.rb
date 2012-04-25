@@ -49,6 +49,7 @@ class MaterialsController < InheritedResources::Base
   
   # Essayer de faire une ressources accessibles par /material
   def show
+    @workspace           = current_workspace_member.workspace
     std_material = Material.standard.find_by_id(params[:id])
     ws_material  = Material.from_workspace(current_workspace_member.workspace.id).find_by_id(params[:id])
     # We take the ws_material if not nil, the ws_material otherwise
@@ -67,6 +68,7 @@ class MaterialsController < InheritedResources::Base
   end
 
   def new
+    @workspace           = current_workspace_member.workspace
     if params[:type]
       @material = Material.new
       @material.mtype = params[:type].downcase

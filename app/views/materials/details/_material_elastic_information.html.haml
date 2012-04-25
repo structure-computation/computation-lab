@@ -13,7 +13,7 @@
         %th.orthotropic_information Selon V3
   %tbody
     %tr
-      %th Module d'Young (E)
+      %th Module d Young (E)
       %td= custom_text_field(:material, :E_1, "E1", disabled)
       - if @material.mtype == "orthotrope" or show_all
         %td.orthotropic_information= custom_text_field(:material, :E_2, "E2", disabled)
@@ -25,8 +25,8 @@
         %td.orthotropic_information= custom_text_field(:material, :nu_23, "&nu;23", disabled)
         %td.orthotropic_information= custom_text_field(:material, :nu_13, "&nu;13", disabled)
     %tr
-      %th Limite de rupture (&sigma;r)
-      %td= custom_text_field(:material, :sigma_r_1, "&sigma;r1", disabled)
       - if @material.mtype == "orthotrope" or show_all
-        %td.orthotropic_information= custom_text_field(:material, :sigma_r_2, "&sigma;r2", disabled)
-        %td.orthotropic_information= custom_text_field(:material, :sigma_r_3, "&sigma;r3", disabled)
+        %th Module de cisaillement (G)
+        %td= custom_text_field(:material, :cis_1, "G12", disabled)
+        %td.orthotropic_information= custom_text_field(:material, :cis_2, "G23", disabled)
+        %td.orthotropic_information= custom_text_field(:material, :cis_3, "G13", disabled)

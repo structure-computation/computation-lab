@@ -10,6 +10,9 @@ SCInterface::Application.routes.draw do
   resources :sc_admin_workspace
   resources :sc_admin_company
   resources :sc_admin_user
+  resources :sc_admin_bill do
+    get 'download_bill'
+  end
   
   resources :forfait
   
@@ -25,6 +28,9 @@ SCInterface::Application.routes.draw do
   
   devise_for  :users,   :controllers => { :sessions => "users/sessions", :registrations => "users/registrations" }
 
+  resources :materials
+  resources :links
+  
   match 'workspaces/get_gestionnaire'   => "workspaces#get_gestionnaire"  
   resources :workspaces do
     resources :materials
@@ -35,6 +41,7 @@ SCInterface::Application.routes.draw do
     
     resources :bills do
       get 'download_bill', :on => :member
+      get 'cancel', :on => :member
     end
     resources :members
     resources :company

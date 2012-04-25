@@ -1,12 +1,11 @@
 %tr{:class => type}
   %td.escape_search.details_link
     - if material.workspace
-      =  link_to "Détails", [material.workspace, material]
-    / - else
-    /   =  link_to "Détails", [material]
+      =  link_to "Détails", [@workspace, material]
+    - else
+      =  link_to "Détails", [material]
   %td.name=           material.name
-  %td.id=             material.id
-  %td.reference=      material.reference            
+  %td.id=             material.id           
   %td.family=         material.family
   %td.type=           material.mtype
   %td.comp=           material.comp

@@ -26,4 +26,4 @@
     = submit_tag "Editer", :class => 'yellow_button'
   - else 
     = submit_tag "Créer", :class => 'yellow_button'
-    = link_to "Annuler", workspace_materials_path, :class => 'yellow_button'
+    = link_to "Annuler", workspace_materials_path(@workspace), :class => 'yellow_button'

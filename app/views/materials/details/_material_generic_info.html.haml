@@ -28,32 +28,29 @@
       %td= custom_text_field(:material, :rho, "&rho;￼", disabled)
 
 
-%h3 Directions principales
-%table.grey
-  %thead
-    %tr.no_sorter
-      %th
-      %th Selon V1
-      - if @material.mtype == "orthotrope" or show_all
+- if @material.mtype == "orthotrope" or show_all
+  %h3 Directions principales
+  %table.grey
+    %thead
+      %tr.no_sorter
+        %th
+        %th Selon V1
         %th.orthotropic_information Selon V2 
         %th.orthotropic_information Selon V3
-  %tbody
-    %tr
-      %th x
-      %td= custom_text_field(:material, :dir_1_x, "x1", disabled)
-      - if @material.mtype == "orthotrope" or show_all
+    %tbody
+      %tr
+        %th x
+        %td= custom_text_field(:material, :dir_1_x, "x1", disabled)
         %td.orthotropic_information= custom_text_field(:material, :dir_2_x, "x2", disabled)
         %td.orthotropic_information= custom_text_field(:material, :dir_3_x, "x3", disabled)
-    %tr
-      %th y 
-      %td= custom_text_field(:material, :dir_1_y, "y1", disabled)
-      - if @material.mtype == "orthotrope" or show_all
+      %tr
+        %th y 
+        %td= custom_text_field(:material, :dir_1_y, "y1", disabled)
         %td.orthotropic_information= custom_text_field(:material, :dir_2_y, "y2", disabled)
         %td.orthotropic_information= custom_text_field(:material, :dir_3_y, "y3", disabled)
-    %tr
-      %th z
-      %td= custom_text_field(:material, :dir_1_y, "z1", disabled)
-      - if @material.mtype == "orthotrope" or show_all
+      %tr
+        %th z
+        %td= custom_text_field(:material, :dir_1_y, "z1", disabled)
         %td.orthotropic_information= custom_text_field(:material, :dir_2_y, "z2", disabled)
         %td.orthotropic_information= custom_text_field(:material, :dir_3_y, "z3", disabled)
      

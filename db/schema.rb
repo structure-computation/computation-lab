@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120425111607) do
+ActiveRecord::Schema.define(:version => 20120425221746) do
 
   create_table "abonnements", :force => true do |t|
     t.string   "name"
@@ -210,6 +210,7 @@ ActiveRecord::Schema.define(:version => 20120425111607) do
     t.float    "Lr"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "state"
   end
 
   create_table "log_abonnements", :force => true do |t|
@@ -268,26 +269,25 @@ ActiveRecord::Schema.define(:version => 20120425111607) do
     t.float    "alpha_2"
     t.float    "alpha_3"
     t.float    "rho"
-    t.float    "sigma_p_1"
-    t.float    "sigma_p_2"
-    t.float    "sigma_p_3"
-    t.float    "sigma_r_1"
-    t.float    "sigma_r_2"
-    t.float    "sigma_r_3"
-    t.float    "sigma_e_1"
-    t.float    "sigma_e_2"
-    t.float    "sigma_e_3"
-    t.float    "H_1"
-    t.float    "H_2"
-    t.float    "H_3"
-    t.float    "p_1"
-    t.float    "p_2"
-    t.float    "p_3"
-    t.float    "ed_1"
-    t.float    "ed_2"
-    t.float    "ed_3"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.float    "viscosite"
+    t.string   "type_plast"
+    t.float    "k_p"
+    t.float    "m_p"
+    t.float    "R0"
+    t.float    "coeff_plast_cinematique"
+    t.float    "couplage"
+    t.string   "type_endo"
+    t.float    "Yo"
+    t.float    "Yc"
+    t.float    "Ycf"
+    t.float    "dmax"
+    t.float    "b_c"
+    t.float    "effet_retard"
+    t.float    "a"
+    t.float    "tau_c"
+    t.string   "state"
   end
 
   create_table "memory_accounts", :force => true do |t|

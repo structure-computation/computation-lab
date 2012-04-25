@@ -9,20 +9,36 @@
     %tr.no_sorter
       %th
       %th Selon V1
-      - if @material.mtype == "orthotrope" or show_all
-        %th.orthotropic_information Selon V2 
-        %th.orthotropic_information Selon V3
   %tbody
     %tr
-      %th Limite d'endomagement (Se) 
-      %td= text_field :material, :sigma_p_1, :value => "TODO", :disabled => disabled, :size => '10'
-      - if @material.mtype == "orthotrope" or show_all
-        %td.orthotropic_information= text_field :material, :sigma_p_2, :value => "TODO", :disabled => disabled, :size => '10'
-        %td.orthotropic_information= text_field :material, :sigma_p_3, :value => "TODO", :disabled => disabled, :size => '10'
+      %th Yo
+      %td= custom_text_field(:material, :Yo, "Yo", disabled)
     %tr
-      %th Endomagement (e)
-      %td= text_field :material, :sigma_p_3, :value => "TODO", :disabled => disabled, :size => '10'
-      - if @material.mtype == "orthotrope" or show_all
-        %td.orthotropic_information= text_field :material, :sigma_p_3, :value => "TODO", :disabled => disabled, :size => '10'
-        %td.orthotropic_information= text_field :material, :sigma_p_3, :value => "TODO", :disabled => disabled, :size => '10'
+      %th Yc
+      %td= custom_text_field(:material, :Yc, "Yc", disabled)
+    %tr
+      %th Ycf
+      %td= custom_text_field(:material, :Ycf, "Ycf", disabled)
+    %tr
+      %th dmax
+      %td= custom_text_field(:material, :dmax, "dmax", disabled)
+    %tr
+      %th b_c
+      %td= custom_text_field(:material, :b_c, "b_c", disabled)
+    %tr
+      %th effet_retard
+      %td= custom_text_field(:material, :effet_retard, "effet_retard", disabled)
+    %tr
+      %th a
+      %td= custom_text_field(:material, :a, "a", disabled)
+    %tr
+      %th tau_c
+      %td= custom_text_field(:material, :tau_c, "tau_c", disabled)
+
+    /%tr
+    /  %th Endomagement (e)
+    /  %td= text_field :material, :sigma_p_3, :value => "TODO", :disabled => disabled, :size => '10'
+    /  - if @material.mtype == "orthotrope" or show_all
+    /    %td.orthotropic_information= text_field :material, :sigma_p_3, :value => "TODO", :disabled => disabled, :size => '10'
+    /    %td.orthotropic_information= text_field :material, :sigma_p_3, :value => "TODO", :disabled => disabled, :size => '10'
           
