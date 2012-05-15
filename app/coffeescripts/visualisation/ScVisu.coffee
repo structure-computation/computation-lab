@@ -239,7 +239,7 @@ class ScPanel_VisuInfoDiv extends ScPanel_Div
 # s = new ScVisu
 # requires ScPanelManager.js and ScDisp.js
 # field_to_display can be a string or a [ string, int ] (value, num component)
-class ScVisu
+class ScVisualisation
     panel_manager  : undefined
     models_to_load : undefined
     info_pane      : undefined # info div
@@ -267,4 +267,4 @@ window.SCVisu = {} unless window.SCVisu?
 # Et l'on y rend accessibles les classes définies dans ce fichier :
 window.SCVisu.ScPanel_Visu        = ScPanel_Visu       
 window.SCVisu.ScPanel_VisuInfoDiv = ScPanel_VisuInfoDiv
-window.SCVisu.ScVisu              = ScVisu             
+window.SCVisu.ScVisualisation     = ScVisualisation             

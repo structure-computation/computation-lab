@@ -176,9 +176,22 @@ class ScItem_Model extends ScItem
 
     load_hdf: ( file, mesh ) ->
         @queue_img_server_cmd( 'load_hdf ' + file + ' ' + mesh + '\n' )
+        
+    load_initial_geometry_hdf: ( file ) ->
+        @queue_img_server_cmd( 'load_initial_geometry_hdf ' + file + '\n' )
 
-    get_info: () ->
-        @queue_img_server_cmd( 'get_info window.SCVisu.ScClient.get_item_by_id( ' + @item_id + ' ).set_info\n' )
+    load_geometry_hdf: ( file, nb_proc ) ->
+        @queue_img_server_cmd( 'load_geometry_hdf ' + file + ' ' + nb_proc + '\n' )
+
+    load_fields_hdf: ( file, nb_proc , pt, resolution) ->
+        @queue_img_server_cmd( 'load_fields_hdf ' + file + ' ' + nb_proc + ' ' + pt + ' ' + resolution + '\n' )
+
+    warp: ( name , coef=0 ) ->
+        @queue_img_server_cmd( 'warp ' + name + ' ' +  coef + '\n' )
+        @need_update = 1
+        
+    get_info: ( name ) ->
+        @queue_img_server_cmd( 'get_info ' + name + '\n' )
 
     get_num_group_info: ( name ) ->
         @queue_img_server_cmd( 'get_num_group_info ' + name + '\n' )

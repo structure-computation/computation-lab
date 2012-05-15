@@ -122,3 +122,7 @@
     SCVisu.calculCollection.reset #{@calculs.to_json.html_safe}
 
     SCVisu.calculListView = new SCViews.CalculListView {collection: SCVisu.calculCollection}
+    SCVisu.visualisation = new SCModels.Visualisation
+    SCVisu.visualisation.launchVisualisation()
+
+  /= coffeescript_include_tag "visualisation/launch_visualization"

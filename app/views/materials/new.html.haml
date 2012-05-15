@@ -9,7 +9,7 @@
 -content_for :workspace_content do
   .grey
     - if @material.mtype.nil?
-      - @behaviors = ["Elastique", "Plastique", "Endomageable"]
+      - @behaviors = ["Elastique", "Elastique Plastique", "Elastique Endomageable", "Elastique Plastique Endomageable"]
       - @types      = ["Isotrope", "Orthotrope"]
   
       = form_for new_workspace_material_path, :html => {:method => :get} do 
@@ -18,10 +18,12 @@
           = select "", :type, @types
   
         %p
-          - @behaviors.each do |behavior|
-            = check_box_tag behavior, true
-            = label_tag behavior
-            %br/
+          = label_tag("Comportement")
+          = select "", :comp, @behaviors
+          /- @behaviors.each do |behavior|
+          /  = check_box_tag behavior, true
+          /  = label_tag behavior
+          /  %br/
         %p
           = submit_tag "Suivant", :class => 'yellow_button'
     - else

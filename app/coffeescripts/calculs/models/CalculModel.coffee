@@ -7,13 +7,16 @@
 
 SCModels.Calcul = Backbone.Model.extend
   initialize: ->
-    @set boundary_condition    : []
-    @set materials             : []
+    #geometry
     @set pieces                : []
-    @set links                 : []
     @set interfaces            : []
-    @set volumic_forces        : []
     @set edges                 : []
+    #behaviour
+    @set materials             : []
+    @set links                 : []
+    @set boundary_condition    : []
+    @set volumic_forces        : []
+    #options parameters
     @set time_steps            :
       time_scheme : "static"
       collection  : []

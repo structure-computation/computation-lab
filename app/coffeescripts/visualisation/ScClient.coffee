@@ -41,12 +41,26 @@ class ScClient
        @cmd_list = ""
        
    send_data_to_server: ( data, opt_cmd = "" )->
-       @send_async_xml_http_request( "/img_server_" + @port + "?" + @session_id + opt_cmd, data, ( ( rep ) ->
-           c = {}
-           eval rep
-           if c.err and c.err.length
+       #@send_async_xml_http_request( "/img_server_" + @port + "?" + @session_id + opt_cmd, data, ( ( rep ) ->
+       data1 = @session_id + opt_cmd + "\n" + data
+       #alert SCVisu.visualisation.data1
+       $.post("/visualisation/update",{data: data1},
+          (response) ->
+            SCVisu.NOTIFICATIONS.close()
+            c = {}
+            #alert response
+            eval response
+            if c.err and c.err.length
                alert c.err
-       ) )
+       )
+       
+   
+       #@send_async_xml_http_request( "/visualisation/update", '{' + @session_id + opt_cmd + data + '}' , ( ( rep ) ->                                                                                            
+       #    c = {}
+       #    eval rep
+       #    if c.err and c.err.length
+       #        alert c.err
+       #) )
 
    my_xml_http_request: ->
        if window.XMLHttpRequest # Firefox
@@ -61,7 +75,9 @@ class ScClient
        xhr_object.onreadystatechange = ->
            if this.readyState == 4 && this.status == 200
                func( this.responseText )
+       alert data
        xhr_object.send( data )
+       
 
 window.SCVisu = {} unless window.SCVisu?
 

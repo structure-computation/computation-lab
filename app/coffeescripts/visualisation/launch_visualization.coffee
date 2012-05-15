@@ -34,4 +34,14 @@ visualizationDock.add_item( new window.SCVisu.ScItem_GradiendBackground( [
 # Ajout d'un axe.
 visualizationDock.add_item( new window.SCVisu.ScItem_Axes( "lb" ) )
 
+path_geometry = new String();
+path_geometry = "/share/sc2/Developpement/MODEL/model_" + window.SCVisu.current_model_id + "/MESH/visu_geometry";
 
+view_model = new window.SCVisu.ScItem_Model();
+item_id = view_model.item_id;
+view_model.load_initial_geometry_hdf( path_geometry ); 
+
+view_model.get_num_group_info( "num_group_info" ); 
+view_model.get_info("fields_info");
+view_model.fit();
+visualizationDock.add_item(view_model); 

@@ -5,7 +5,13 @@
 - content_for :visu do 
   %canvas#visualisation_dock
   #com
-    
-  = coffeescript_include_tag "visualisation/launch_visualization"
-  
+  #visu_bouton
+    %button#visu_bouton_01
+    %button#visu_bouton_02{ :onmousedown => "SCVisu.visualisation.fit_img( )" }
+    %button#visu_bouton_03{ :onmousedown => "SCVisu.visualisation.sx( [1,0,0], [0,1,0] )" }
+    %button#visu_bouton_04{ :onmousedown => "SCVisu.visualisation.sx( [0,0,1], [0,1,0] )" }
+    %button#visu_bouton_05{ :onmousedown => "SCVisu.visualisation.sx( [1,0,0], [0,0,1] )" }
+    %button#visu_bouton_06{ :onmousedown => "SCVisu.visualisation.shrink( )"}
+    %button#visu_bouton_07{ :onmousedown => "display_all_pieces( )" }
+    %button#visu_bouton_08{ :onmousedown => "display_all_interfaces( )" } 
 

@@ -49,7 +49,10 @@ SCInterface::Application.routes.draw do
   
   resources :sc_models do 
     resources :calculs
+    resources :visualisation
   end
+  
+  
 
 
   root :to => "scratch_user#show"
