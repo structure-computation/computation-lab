@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120425221746) do
+ActiveRecord::Schema.define(:version => 20120520153416) do
 
   create_table "abonnements", :force => true do |t|
     t.string   "name"
@@ -236,6 +236,24 @@ ActiveRecord::Schema.define(:version => 20120425221746) do
     t.datetime "updated_at"
   end
 
+  create_table "log_tools", :force => true do |t|
+    t.integer  "sc_model_id"
+    t.integer  "calcul_result_id"
+    t.integer  "workspace_member_id"
+    t.integer  "token_account_id"
+    t.string   "log_name"
+    t.string   "log_type"
+    t.string   "state"
+    t.boolean  "launch_autorisation", :default => false
+    t.integer  "cpu_allocated"
+    t.integer  "nb_token"
+    t.integer  "estimated_time"
+    t.integer  "real_time"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "launch_state"
+  end
+
   create_table "materials", :force => true do |t|
     t.string   "name"
     t.string   "family"
@@ -324,6 +342,8 @@ ActiveRecord::Schema.define(:version => 20120425221746) do
     t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "original_filename"
+    t.string   "units"
   end
 
   create_table "solde_calcul_accounts", :force => true do |t|
@@ -343,7 +363,7 @@ ActiveRecord::Schema.define(:version => 20120425221746) do
 
   create_table "solde_token_accounts", :force => true do |t|
     t.integer  "token_account_id"
-    t.integer  "calcul_result_id"
+    t.integer  "log_tool_id"
     t.integer  "credit_id"
     t.string   "solde_type"
     t.integer  "credit_token"
@@ -362,6 +382,8 @@ ActiveRecord::Schema.define(:version => 20120425221746) do
     t.integer  "solde_token"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "active_used_token_counter"
+    t.integer  "active_purchased_token_counter"
   end
 
   create_table "user_model_ownerships", :force => true do |t|

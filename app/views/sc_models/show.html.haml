@@ -17,7 +17,7 @@
           %th Dimension
           %td= @sc_model.dimension
         %tr
-          %th Nombre d'élèments
+          %th Nombre d élèments
           %td= @sc_model.parts
         %tr
           %th Nombre de pièces
@@ -53,18 +53,29 @@
     #right_content
       .tab_content.js_tab_content
         #tab_1_content.show
-          %h3
-            Pour accéder aux outils, vous devez d'abord charger un maillage pour ce modèle
-          %p
-            Charger votre maillage
-          - semantic_form_for [@workspace, @sc_model], :url => {:controller => "sc_models", :action => "load_mesh"}, :html => {:multipart => true, :method => :post} do |f|
-            = f.inputs do
-              = f.input :file, :as => :file
-            = f.buttons
-          %ul
-            %li= link_to "Calcul de structures", sc_model_calculs_path(@sc_model), :target => "_blank" #:controller => "calculs", :action => "index", :model_id => @sc_model.id
-            %li= link_to "Visualisation"        , :controller => "ext_app_visu", :action => "index", :model_id => @sc_model.id
-            %li= link_to "Partager un fichier"
+          %ul.toolBox
+            %li
+              %ul.subToolBox
+                %li.With70
+                  = link_to "SCult", :controller => "scult", :action => "index", :sc_model_id => @sc_model.id
+                %li
+                  dépot et maillage du modèle
+                %li
+                  statut : 
+                  =@sc_model.state
+            %li
+              %ul.subToolBox
+                %li.With70
+                  = link_to "SCills", sc_model_calculs_path(@sc_model), :target => "_blank" 
+                %li
+                  calcul de structures
+            %li
+              %ul.subToolBox
+                %li.With70
+                  = link_to "SCeen", :controller => "ext_app_visu", :action => "index", :model_id => @sc_model.id
+                %li
+                  visualisation du modèle et prévisualisation des résultats
+                
         #tab_2_content.hide
           %h3 Liste des résultats
           .search_filter

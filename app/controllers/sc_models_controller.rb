@@ -67,17 +67,7 @@ class ScModelsController < InheritedResources::Base
         format.json {render :status => 404, :json => {}}
       end
     end
-  end
-  
-  def load_mesh
-    @sc_model = ScModel.find(params[:id])
-    if params[:model].nil?
-      flash[:error] = "Vous n'avez pas séléctionné de fichier !"
-    else
-      @sc_model.send_mesh(params[:model][:file], current_workspace_member) unless params[:model][:file].nil?
-    end
-    redirect_to workspace_model_path(@sc_model)
-  end            
+  end          
   
   def destroy  
     @sc_model = ScModel.find(params[:id])    
@@ -97,7 +87,10 @@ class ScModelsController < InheritedResources::Base
         format.json {render :status => 404, :json => {}}
       end
     end
-
   end
+  
+  
+  
+  
 
 end

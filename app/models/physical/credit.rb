@@ -5,7 +5,7 @@ class Credit < ActiveRecord::Base
   has_one    :solde_token_account
   has_one    :bill
   
-  
+  #state : pending, active, canceled
   # nouvelle ligne de crédit et nouvelle facture non validé
   def create_credit_and_bill(forfait_id, company_id)
     forfait = Forfait.find(forfait_id)
