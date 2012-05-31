@@ -19,12 +19,12 @@
     %tbody
       = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Point (x,y,z)", :data_type => "number",
                                                                           :ids => ["surface_plan_point_x", "surface_plan_point_y", "surface_plan_point_z"], 
-                                                                          :names => ["point_x", "point_y", "point_z"], 
+                                                                          :names => ["point_1_x", "point_1_y", "point_1_z"], 
                                                                           :placeholders => ["x", "y", "z"]}                                                                          
 
       = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Direction normale (x,y,z)", :data_type => "number",
                                                                           :ids => ["surface_plan_normal_direction_x", "surface_plan_normal_direction_y", "surface_plan_normal_direction_z"], 
-                                                                          :names => ["normal_direction_x", "normal_direction_y", "normal_direction_z"], 
+                                                                          :names => ["direction_x", "direction_y", "direction_z"], 
                                                                           :placeholders => ["x", "y", "z"]}                                                                          
 #edge_surface_disc
 
@@ -32,12 +32,12 @@
     %tbody
       = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Centre (x,y,z)", :data_type => "number",
                                                                           :ids => ["surface_disc_center_x", "surface_disc_center_y", "surface_disc_center_z"], 
-                                                                          :names => ["center_x", "center_y", "center_z"], 
+                                                                          :names => ["point_1_x", "point_1_y", "point_1_z"], 
                                                                           :placeholders => ["x", "y", "z"]}                                                                          
 
       = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Direction normale (x,y,z)", :data_type => "number",
                                                                           :ids => ["surface_disc_normal_direction_x", "surface_disc_normal_direction_y", "surface_disc_normal_direction_z"], 
-                                                                          :names => ["normal_direction_x", "normal_direction_y", "normal_direction_z"], 
+                                                                          :names => ["direction_x", "direction_y", "direction_z"], 
                                                                           :placeholders => ["x", "y", "z"]}                                                                          
 
       = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Rayon (x)", :data_type => "number",
@@ -56,7 +56,7 @@
 
       = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Direction de l'axe (x,y,z)", :data_type => "number",
                                                                           :ids => ["surface_cylinder_axis_direction_x", "surface_cylinder_axis_direction_y", "surface_cylinder_axis_direction_z"], 
-                                                                          :names => ["axis_direction_x", "axis_direction_y", "axis_direction_z"], 
+                                                                          :names => ["direction_x", "direction_y", "direction_z"], 
                                                                           :placeholders => ["x", "y", "z"]}
       = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Rayon (x)", :data_type => "number",
                                                                           :ids => ["surface_cylinder_radius"], 
@@ -69,7 +69,7 @@
     %tbody
       = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Centre (x,y,z)", :data_type => "number",
                                                                           :ids => ["surface_sphere_center_x", "surface_sphere_center_y", "surface_sphere_center_z"], 
-                                                                          :names => ["center_x", "center_y", "center_z"], 
+                                                                          :names => ["point_1_x", "point_1_y", "point_1_z"], 
                                                                           :placeholders => ["x", "y", "z"]}
 
       = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Rayon (x)", :data_type => "number",
@@ -83,5 +83,5 @@
     %tbody
       = render :partial => "calculs/partials/row_label_text", :locals => {:header => "f(x,y,z) = 0 =", :data_type => "text",
                                                                           :ids => ["surface_parameterized_equation_radius"], 
-                                                                          :names => ["radius"], 
+                                                                          :names => ["equation"], 
                                                                           :placeholders => ["Equation"]}

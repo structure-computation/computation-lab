@@ -13,7 +13,6 @@ class LogTool < ActiveRecord::Base
   
   
   def pending?()
-    # on enregistre les fichier sur le disque et on change les droit pour que le serveur de calcul y ai acces
     void = false
     if self.launch_state == "pending"
       void = true
@@ -24,9 +23,18 @@ class LogTool < ActiveRecord::Base
   end
   
   def ready?()
-    # on enregistre les fichier sur le disque et on change les droit pour que le serveur de calcul y ai acces
     void = false
     if self.launch_state == "ready" or self.launch_state == "in_process"
+      void = true
+    else
+      void = false
+    end
+    return void
+  end
+  
+  def finish?()
+    void = false
+    if self.launch_state == "finish"
       void = true
     else
       void = false
@@ -46,6 +54,9 @@ class LogTool < ActiveRecord::Base
   
   def in_process()
     self.launch_state = "in_process"
+    if self.log_type == "scills"
+      self.calcul_result.calcul_in_process()
+    end
     self.save
   end
   
@@ -89,12 +100,28 @@ class LogTool < ActiveRecord::Base
       self.reserve_token()
     else
       self.sc_model.state = "echec"
+      self.real_time = params[:time]
       self.echec()
       self.reserve_token()
     end
   end
   
   
-  
+  # validation d'un log pour scills ---------------------------------------------------------------
+  def scills_valid(params)
+    calcul_state = Integer(params[:state]) 
+    if(calcul_state == 0) #si le calcul est arrivé au bout 
+      self.calcul_result.calcul_valid(params)
+      self.real_time = params[:time]
+      self.finish()
+      self.token_account.valid_log_tool(self.id)
+      self.reserve_token()
+    else
+      self.calcul_result.calcul_echec(params)
+      self.real_time = params[:time]
+      self.echec()
+      self.reserve_token()
+    end
+  end
   
 end

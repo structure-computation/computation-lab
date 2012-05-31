@@ -28,8 +28,10 @@ SCViews.OptionView = Backbone.View.extend
       @setPrecisionCalcul true
       
   events:
-    "change input#test_mode"         : "testModeSelected"
-    "change input:not('#test_mode')" : "normalModeSelected"
+    "change input#test_mode"                    : "testModeSelected"
+    "change input:not('#test_mode')"            : "normalModeSelected"
+    #"change input#multiscale_on"                : "normalModeSelected"
+    #"change input:not('#multiscale_on')"        : "normalModeSelected"
 
   testModeSelected: ->
     $(@el).find('input:not("#test_mode, #normal_mode")').attr 'disabled', 'disabled'

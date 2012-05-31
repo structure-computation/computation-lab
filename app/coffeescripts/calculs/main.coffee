@@ -72,9 +72,14 @@ $ ->
     edgeCollection                = new SCModels.EdgeCollection SCVisu.current_calcul.get('edges')
     SCVisu.edgeListView           = new SCViews.EdgeListView collection: edgeCollection
 
-    option = new SCModels.Option SCVisu.current_calcul.get('options')
     # Initialization of the OptionView
+    option                        = new SCModels.Option SCVisu.current_calcul.get('options')
     SCVisu.optionView             = new SCViews.OptionView model: option
+    
+    # Initialization of the ForcastView
+    forcast                       = new SCModels.Forcast SCVisu.current_calcul.get('forcasts')
+    SCVisu.forcastView            = new SCViews.ForcastView  model: forcast
+    #alert SCVisu.current_calcul.get('forcasts').nb_proc
     
   # Initialization of the Router
   SCVisu.router = new SCVisu. Router pushState: true

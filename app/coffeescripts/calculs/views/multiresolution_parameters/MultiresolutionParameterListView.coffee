@@ -13,6 +13,8 @@ SCViews.MultiresolutionParameterListView = Backbone.View.extend
     @collection.meta 'multiresolution_type', multiresolution_type
     if multiresolution_type == "fatigue"
       $(@el).find('button.add').attr('disabled','disabled')
+    else if multiresolution_type == "off"
+      $(@el).find('button.add').attr('disabled','disabled')
     else
       $(@el).find('button.add').removeAttr('disabled')
     $(@el).find('select#multiresolution_type').val(multiresolution_type)
@@ -40,6 +42,16 @@ SCViews.MultiresolutionParameterListView = Backbone.View.extend
         # Delete all except first element
         if @parameterViews.length > 1
           for i in [1..@parameterViews.length - 1]
+            @parameterViews[i].delete(true)
+        $(@el).find("button.add").attr('disabled', 'disabled')
+      else
+        $('#multiresolution_type').val('expert_plan')
+    else if $(event.srcElement).val() == "off"
+      if confirm "Êtes-vous sûr ? Cela va effacer tous vos paramêtre (sauf le premier)."
+        $(@el).find('button.add').attr('disabled','disabled')
+        # Delete all except first element
+        if @parameterViews.length > 1
+          for i in [0..@parameterViews.length - 1]
             @parameterViews[i].delete(true)
         $(@el).find("button.add").attr('disabled', 'disabled')
       else

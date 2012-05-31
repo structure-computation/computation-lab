@@ -18,7 +18,7 @@ SCViews.EditBoundaryConditionView = Backbone.View.extend
     # Unset certain attributes regarding the condition type. 
     # I do this to prevent to have useless and unappropriate attributes
     switch @boundaryConditionType
-      when "pressure", "normal_movement"   
+      when "effort_normal", "depl_normal"   
         for stepFunction in @model.get('stepFunctions')
           stepFunction.spatial_function_x = undefined
           stepFunction.spatial_function_y = undefined
@@ -72,7 +72,7 @@ SCViews.EditBoundaryConditionView = Backbone.View.extend
   fillInputsFromModel: ->
     # If the type is symetry, then it doesn't ave step functions
     if @boundaryConditionType!= "symetry" and !_.isUndefined(@model.get('stepFunctions'))
-      if @boundaryConditionType == "pressure" or @boundaryConditionType == "normal_movement"
+      if @boundaryConditionType == "effort_normal" or @boundaryConditionType == "depl_normal"
         for stepFunction in @model.get('stepFunctions')
           stepFunctionElement               = $($(@el).find(".step_#{stepFunction['step_id']}"))
           stepFunctionElement.find('input.normal_function') .val(stepFunction['normal_function'])
@@ -92,7 +92,7 @@ SCViews.EditBoundaryConditionView = Backbone.View.extend
     SCVisu.stepListView.collection.each (step) =>
       $(@el).find('select.steps').append("<option value='step_#{step.getId()}'>#{step.get('name')}</option>")
       switch @boundaryConditionType
-        when "pressure", "normal_movement"   
+        when "effort_normal", "depl_normal"   
           $(@el).find('.functionPart').append(@functionNormalPartTemplate(step))
         when "symetry"
           $(@el).find('.functionPartHeader').hide()

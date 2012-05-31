@@ -159,3 +159,35 @@ header#calcul
       background  : transparent url('/images/Logo_StructureComputation_gris.png') no-repeat top left
       height      : image-height('Logo_StructureComputation_gris.png')
       margin      : 5px 0px 5px 0px
+    #header_user_connected //TODO Trouver un nom d'ID plus clair et penser à le changer aussi dans le fichier haml
+      +columns($header-user-connected-cols)
+      +omega
+      #header_workspace_name
+        display        : inline-block
+        text-align     : right
+        float          : right
+        margin-top     : 0
+        background     : transparent url('/images/' + $separator-image) no-repeat top right
+        padding-right  : image-width($separator-image) + $gap-workspace-name-separator + 1
+        padding-bottom : 20px // Nécéssaire pour pourvoir afficher le cadenas en entier
+        padding-top    : $gap-top-page-header
+
+      #user_information
+        display      : inline-block  
+        text-align   : right
+        float        : right
+        margin-top   : 0
+        padding-top  : $gap-top-page-header + 1 // On rajoute un pour un alignement des textes plus précis
+        padding-left : $gap-user-infos-separator
+        
+
+        #user_name
+          background    : transparent url('/images/' + $lock-image) no-repeat center right
+          padding-right : image-width($lock-image) + $gap-cadena-user-infos
+          margin-top    : 0
+          color         : $color-font-header
+          a
+            color         : $color-font-header
+
+        #disconnect_link
+          color: $color-font-header

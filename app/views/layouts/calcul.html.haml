@@ -24,6 +24,21 @@
     .container
       #notification
       #header_logo
+      #header_user_connected  
+        #user_information
+          - if user_signed_in?  # Le cadenas est placé en premier car on aligne de droite à gauche dans cette zone. 
+            -#logo_session_lock  
+            %p#user_name
+              = current_user.full_name
+              %br
+              = link_to "déconnexion", destroy_user_session_path,  :id => "disconnect_link"
+          
+            -#header_top_cadena
+        %p#header_workspace_name
+          - if user_signed_in? && current_workspace_member 
+            = current_workspace_member.workspace.name
+          - else
+            selectionner un workspace   
   - # Inclusion des JS pour l'interface calcul.
   = render :partial => "layouts/partials/calcul_backbonejs_headers"
 

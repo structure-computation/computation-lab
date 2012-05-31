@@ -83,19 +83,28 @@ class CalculsController < ApplicationController
     render :json => @current_calcul.to_json
   end
   
-  def update_visu
-    request = params
-    host = 'localhost'     # The web server
-    port = 10000                           # Default HTTP port
-    
-    #path = "/index.htm"                 # The file we want 
-    ## This is the HTTP request we send to fetch a file
-    #request = "GET #{path} HTTP/1.0\r\n\r\n"
-
-    socket = TCPSocket.open(host,port)  # Connect to server
-    socket.print(request)               # Send request
-    response = socket.read              # Read complete response
-    # Split response at first blank line into headers and body
-    render :text => response
+  def compute_forcast
+    @current_model = current_workspace_member.sc_models.find(params[:sc_model_id])
+    @current_calcul = @current_model.calcul_results.find(params[:id])
+    @log_tool = @current_calcul.compute_forcast(current_workspace_member)
+    logger.debug @log_tool.to_json
+    # envoie de la reponse au client
+    render :json => @log_tool.to_json
   end
+  
+  def send_calcul
+    @current_model = current_workspace_member.sc_models.find(params[:sc_model_id])
+    @current_calcul = @current_model.calcul_results.find(params[:id])
+    @current_log_tool_scills = @current_calcul.compute_forcast(current_workspace_member)
+    send_data = {}
+    if @current_log_tool_scills.get_launch_autorisation()
+      @current_calcul.send_calcul(current_workspace_member, @current_log_tool_scills)
+      send_data[:message] = "calcul envoyé"
+    else
+      send_data[:message] = "Vous n'avez pas assez de jetons !" # TODO, traduire
+    end
+    # envoie de la reponse au client
+    render :json => send_data.to_json
+  end
+  
 end

@@ -17,7 +17,6 @@
 
 
 - content_for :left_list do 
-
   .materials
     = render "calculs/partials/pieces"
   .links
@@ -71,8 +70,7 @@
     = render "calculs/partials/calculus_options"
   
   .forecast
-    Télécharger le fichier de calcul au format JSON :
-    %a#downlaod_json{:target => "_blank", :href => ""} Télécharger
+    = render "calculs/partials/forcast_details"
     
 
 - content_for :details_calcul do 
