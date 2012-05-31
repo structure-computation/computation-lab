@@ -78,29 +78,8 @@
                 
         #tab_2_content.hide
           %h3 Liste des résultats
-          .search_filter
-            %p
-              %label{:for => "results_search_filter"} Recherche
-              %input#results_search_filter{:type => "text"}
-          %table.grey#results_table
-            %thead
-              %tr
-                %th Date
-                %th Nom
-                %th.no_sorter Actions
-            %tbody
-              - @sc_model.calcul_results.each do |result|
-                %tr
-                  %td= result.result_date
-                  %td= result.name ? result.name : 'Undefined'
-                  %td.action_on_table
-                    %ul
-                      %li
-                        = link_to "Voir"
-                      %li
-                        = link_to "Télécharger"
-                      %li
-                        = button_to "Supprimer", sc_model_calcul_path(@sc_model, result), :method => :delete, :confirm => "Êtes-vous sûr ?"
+          = render :partial => 'sc_models/results_list', :object => @sc_model.calcul_results
+
         #tab_3_content.hide
           %h3 Liste des utilisateurs ayant accès à ce modèle
           .search_filter
@@ -126,9 +105,7 @@
 
 :coffeescript
   $( ->
-    $('#results_table').tablesorter()
     $('#users_table').tablesorter()
 
-    searchFilter("results_table", "results_search_filter")
     searchFilter("users_table", "users_search_filter")
   )
