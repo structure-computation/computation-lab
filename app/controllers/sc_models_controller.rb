@@ -89,8 +89,33 @@ class ScModelsController < InheritedResources::Base
     end
   end
   
+  def share 
+    @sc_model  = ScModel.from_workspace(current_workspace_member.workspace.id).find_by_id(params[:id])
+    @workspace    = current_workspace_member.workspace
+    @members_list = @workspace.users
+    if @sc_model 
+      render
+    else
+      respond_to do |format|
+        format.html {redirect_to workspace_sc_models_path(current_workspace_member.workspace.id), 
+                    :notice => "Ce modèle n'existe pas ou n'est pas accessible à partir de cet espace de travail."}
+        format.json {render :status => 404, :json => {}}
+      end
+    end
+  end  
   
-  
+  def valid_share
+    @sc_model  = ScModel.from_workspace(current_workspace_member.workspace.id).find_by_id(params[:id])
+    @workspace    = current_workspace_member.workspace
+    @members = @workspace.users.find(params[:member_id])
+    if @sc_model.workspace_members.where(:user_id => @members.id).exists?
+      #if @sc_model.workspace_members.exists?(:first, :conditions => {:user_id => @members.id})
+      redirect_to workspace_sc_model_path(@sc_model.id), :notice => "Cet utilisateur a déjà accès à ce modèle."
+    else
+      @sc_model.workspace_members << @workspace.user_workspace_memberships.where(:user_id => @members.id)
+      redirect_to workspace_sc_model_path(@sc_model.id), :notice => "Utilisateur ajouté."
+    end
+  end
   
 
 end

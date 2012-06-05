@@ -4,21 +4,24 @@
       Menu
     %ul
       %li.LM_pic_model
-        = link_to "Retour à la liste de modèles", workspace_sc_models_path(@workspace) 
+        = link_to "Retour à la liste de modèles", workspace_sc_models_path(@workspace)
+      %li.manage_pic_nouveau_membre
+        = link_to "Partager", :controller => :sc_models, :action => :share, :id => @sc_model.id
 
 -content_for :right_top do
   %h2.grey
     Détail du modèle : 
     = @sc_model.name
-  .grey  
-    %table.grey#modele_details
+  .grey 
+    /#modele_details
+    %table.grey
       %tbody
         %tr
           %th Dimension
           %td= @sc_model.dimension
         %tr
-          %th Nombre d élèments
-          %td= @sc_model.parts
+          %th Nombre de degrés de libertés
+          %td= @sc_model.sst_number
         %tr
           %th Nombre de pièces
           %td= @sc_model.parts
@@ -72,7 +75,7 @@
             %li
               %ul.subToolBox
                 %li.With70
-                  = link_to "SCeen", :controller => "ext_app_visu", :action => "index", :model_id => @sc_model.id
+                  = link_to "SCeen", :controller => "ext_app_visu", :action => "index", :model_id => @sc_model.id, :target => "_blank" 
                 %li
                   visualisation du modèle et prévisualisation des résultats
                 

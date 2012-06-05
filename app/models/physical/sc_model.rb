@@ -273,7 +273,7 @@ class ScModel < ActiveRecord::Base
       dirsize += File.stat(f).size 
     end 
     self.used_memory = dirsize
-    nb_token = (dirsize/100000).ceil+1
+    nb_token = (dirsize/10000000).ceil+1
     return nb_token
   end
   
