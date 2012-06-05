@@ -96,31 +96,103 @@ SCViews.PieceListView = Backbone.View.extend
     
   events:
     'change input#hide_assigned_pieces'   : 'toggleAssignedPieces'
+    'change select#filter_type'           : 'setTypeFilter'
     'click button.assign_all'             : 'assignAllVisiblePieces'
     'click button.unassign_all'           : 'unassignAllVisiblePieces'
     'click button.filter'                 : 'filterPieces'
     'click button.cancel_filter'          : 'cancelFilter'
 
+  setTypeFilter: (event) ->
+    @filterValue = event.srcElement.value
+    
   cancelFilter: ->
     $(@el).find('button.cancel_filter').attr('disabled','disabled')
     # Show everything
     _.each @pieceViews, (pieceView) ->
       $(pieceView.el).show()
+      pieceView.showView()
+    @viewPieces()
   
   filterPieces: ->
     filter = $(@el).find('input').val()
     @filteredPieces = []
     $(@el).find('button.cancel_filter').removeAttr('disabled')
     # Hide everything
-    range = [filter]
     _.each @pieceViews, (pieceView) ->
-      if pieceView.model.get('id') in range
-        $(pieceView.el).show()
-      else 
         $(pieceView.el).hide()
-
-
+        pieceView.hideView()
+    
+    if @filterValue == "materials" 
+        group = filter.split(",")
+        for group_id in group
+            piece_id = parseFloat(group_id)
+            #alert piece_id
+            _.each @pieceViews, (pieceView) ->  
+              if pieceView.model.get('material_id') == piece_id
+                $(pieceView.el).show()
+                pieceView.showView()
       
+    else if @filterValue == "id"
+        group = filter.split(",")
+        #alert group.length
+        for group_id in group
+            group_modulo = group_id.split("%")
+            #alert group_modulo.length
+            if group_modulo.length==2
+                range = group_modulo[0].split("-")
+                modulo_id = parseInt(group_modulo[1])
+                modulo = 0
+                out = true
+                while out
+                    piece_id = []
+                    if range.length==2
+                        piece_id[0] = parseFloat(range[0]) + modulo
+                        piece_id[1] = parseFloat(range[1]) + modulo
+                        _.each @pieceViews, (pieceView) ->
+                            if pieceView.model.get('id') >= piece_id[0] and pieceView.model.get('id') <= piece_id[1]
+                              $(pieceView.el).show()
+                              pieceView.showView()
+                    else if range.length==1
+                        piece_id[0] = parseFloat(range[0]) + modulo
+                        _.each @pieceViews, (pieceView) ->
+                          if pieceView.model.get('id') == piece_id[0]
+                            $(pieceView.el).show()
+                            pieceView.showView()
+                    modulo += modulo_id
+                    if (parseFloat(piece_id[0]) + modulo) > @pieceViews.length
+                        out = false
+                        break
+                        
+            else if group_modulo.length==1
+                range = group_modulo[0].split("-")
+                piece_id = []
+                if range.length==2
+                    piece_id[0] = parseFloat(range[0])
+                    piece_id[1] = parseFloat(range[1])
+                    _.each @pieceViews, (pieceView) ->
+                      if pieceView.model.get('id') >= piece_id[0] and pieceView.model.get('id') <= piece_id[1]
+                        $(pieceView.el).show()
+                        pieceView.showView()
+                else if range.length==1
+                    piece_id[0] = parseFloat(range[0])
+                    _.each @pieceViews, (pieceView) ->  
+                      if pieceView.model.get('id') == piece_id[0]
+                        $(pieceView.el).show()
+                        pieceView.showView()
+          
+      
+    @viewPieces()
+    #range = filter.split('-')
+    #range = [filter]
+    #alert  range
+    #_.each @pieceViews, (pieceView) ->
+    #  if pieceView.model.get('id') in range
+    #    $(pieceView.el).show()
+    #  else 
+    #    $(pieceView.el).hide()
+
+  viewPieces: ->
+    SCVisu.visualisation.view_filter("pieces")   
       
   # If the checkbox is checked, hide all assigned pieces
   toggleAssignedPieces: (event) ->

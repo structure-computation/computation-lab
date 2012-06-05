@@ -90,3 +90,9 @@ SCViews.InterfaceView = Backbone.View.extend
     $(@el).removeClass('selected')
     return this
 
+  showView: ->
+    @model.to_visualize = true
+
+  hideView: ->
+    #$(@el).hide()
+    @model.to_visualize =  false

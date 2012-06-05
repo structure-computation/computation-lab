@@ -7,12 +7,12 @@
 
 SCModels.Visualisation = Backbone.Model.extend
 
-
   initialize: ->
     #geometry
     @set pieces                : []
     @set interfaces            : []
     @set edges                 : []
+    @set select_num_group_info : []
       
     @sc_model_id  = SCVisu.current_model_id
     @url = "/visualisation/"
@@ -58,7 +58,7 @@ SCModels.Visualisation = Backbone.Model.extend
     @view_model.load_initial_geometry_hdf( path_geometry )
 
     @view_model.get_num_group_info( "num_group_info" )
-    @view_model.get_info("fields_info")
+    #@view_model.get_info("fields_info")
     @view_model.fit()
     @visualizationDock.add_item(@view_model)
 
@@ -76,6 +76,56 @@ SCModels.Visualisation = Backbone.Model.extend
       s = 0.05
       @visualizationDock_shrink_on = true
     @visualizationDock.shrink(s)
+    
+  
+    
+  make_select_num_group_info_interface: () ->
+    @select_num_group_info = []
+    #alert num_group_info.length
+    for x in [0..num_group_info.length-1]
+        @select_num_group_info[ x ] = false
+        if(num_group_info[x].type==2 )
+            interface = window.SCVisu.interfaceListView.getInterface(num_group_info[ x ].id)
+            if interface.to_visualize
+                @select_num_group_info[ x ] = true
+                #alert "x = " + x  
+    
+  make_select_num_group_info_piece: () ->
+    @select_num_group_info = []
+    #alert num_group_info.length
+    for x in [0..num_group_info.length-1]
+        @select_num_group_info[ x ] = false
+        if(num_group_info[x].type==-1 )
+            piece = window.SCVisu.pieceListView.getPiece(num_group_info[ x ].id)
+            if piece.to_visualize
+                @select_num_group_info[ x ] = true
+                #alert "x = " + x
+    
+  
+  display_all_pieces: () ->
+    window.SCVisu.pieceListView.cancelFilter()
+                
+  display_all_interfaces: () ->
+    window.SCVisu.interfaceListView.cancelFilter()
+    
+  view_filter: (type) -> 
+    #alert   @select_num_group_info.length   
+    filter = ""
+    if type=="pieces"
+        @make_select_num_group_info_piece()
+        filter=" num_group >= " + @select_num_group_info.length
+        for num_group in [0..@select_num_group_info.length-1]
+            if !@select_num_group_info[ num_group ]
+                filter += " or num_group== " + num_group
+    else if type=="interfaces"
+        @make_select_num_group_info_interface()
+        filter=" num_group >= " + @select_num_group_info.length
+        for num_group in [0..@select_num_group_info.length-1]
+            if !@select_num_group_info[ num_group ]
+                filter += " or num_group== " + num_group
+    #alert  filter        
+    @visualizationDock.set_elem_filter(filter)
+
     
 
    

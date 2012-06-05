@@ -2,6 +2,9 @@
   .filtre
     %h2.grey Filtre
     %div
+      %select#filter_type
+        %option{:value => "id"}       Par id
+        %option{:value => "materials"}    Par matériau
       %input{:type => "text"}
       %button.filter Filter
     %div

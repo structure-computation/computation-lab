@@ -119,6 +119,7 @@ SCViews.InterfaceListView = Backbone.View.extend
     # Unhide every interface before filtering
     _.each @interfaceViews, (view) ->
       $(view.el).show()
+      view.showView()
     firstID  = parseInt($(@el).find('input#first_input' ).val(), 10)
     secondID = parseInt($(@el).find('input#second_input').val(), 10)
 
@@ -136,6 +137,7 @@ SCViews.InterfaceListView = Backbone.View.extend
       # If user wants unassigned interfaces, we remove assigned interfaces
       if (interfaceToFilter == "assigned" and !interfaceView.model.isAssigned()) or (interfaceToFilter == "unassigned" and interfaceView.model.isAssigned())
         $(@filteredInterfaces[i].el).hide()
+        interfaceView.hideView()
       else
         temp.push interfaceView
     @filteredInterfaces = temp
@@ -143,6 +145,9 @@ SCViews.InterfaceListView = Backbone.View.extend
     # If a link is selected and the array of filtered interfaces is not empty => Enable 'assign all' and 'unassign all' button
     if !_.isEmpty(@filteredInterfaces) and SCVisu.linkListView.selectedLinkView != null
       $(@el).find("button.assign_all, button.unassign_all").removeAttr('disabled')
+      
+      
+    @viewInterfaces()
   # Go through all the interfaces
   # Check get the two pieces it is attached to
   # Check if the material of those pieces correspond to the filter
@@ -159,6 +164,7 @@ SCViews.InterfaceListView = Backbone.View.extend
         @filteredInterfaces.push interfaceView if firstID != secondID or (materialIDs[0] == materialIDs[1])
       else
         $(interfaceView.el).hide()
+        interfaceView.hideView()
 
   # Go throug all interfaces and check if the id of the pieces 
   # attached two correspond to the filter
@@ -171,13 +177,19 @@ SCViews.InterfaceListView = Backbone.View.extend
         @filteredInterfaces.push interfaceView
       else
         $(interfaceView.el).hide() 
+        interfaceView.hideView()
 
   cancelFilter: ->
     $("button.assign_all, button.unassign_all, button.cancel_filter").attr('disabled','disabled')
     @filteredInterfaces = []
     _.each @interfaceViews, (interfaceView) ->
         $(interfaceView.el).show()
+        interfaceView.showView()
+    @viewInterfaces()
 
+  viewInterfaces: ->
+    SCVisu.visualisation.view_filter("interfaces")   
+    
   ############################################################################# Filter functions - end
   # If the checkbox is checked, hide all assigned interfaces
   toggleAssignedinterfaces: (event) ->
@@ -210,3 +222,10 @@ SCViews.InterfaceListView = Backbone.View.extend
       interface.render()
       interface.deselect()
     return this
+
+  getInterface: (interfaceID) ->
+    # I don't go through @collection.each because it would go through all 
+    # elements and would not stop on return statement
+    for interface in @collection.models
+      if parseInt(interface.get('id'),10) == parseInt(interfaceID,10)
+        return interface
