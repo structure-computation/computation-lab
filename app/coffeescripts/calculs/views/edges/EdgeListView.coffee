@@ -138,7 +138,7 @@ SCViews.EdgeListView = Backbone.View.extend
   # Update the calcul JSON
   saveCalcul: ->
     SCVisu.current_calcul.set edges: @collection.models
-    SCVisu.current_calcul.set boundary_conditions: SCVisu.boundaryConditionListView.collection.models
+    SCVisu.current_calcul.set boundary_conditions : SCVisu.boundaryConditionListView.collection.models
     SCVisu.current_calcul.trigger 'change'
 
   render: ->

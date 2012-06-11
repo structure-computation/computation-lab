@@ -10,7 +10,6 @@ SCViews.EditBoundaryConditionView = Backbone.View.extend
   events:
     "change"             : "updateModelAttributes"
     "click button.close" : "hide"
-    "change select.steps": "showFunctionPart"
     "change select.boundary_condition_type" : "typeChanged"
   
   typeChanged: (event) ->    
@@ -18,23 +17,18 @@ SCViews.EditBoundaryConditionView = Backbone.View.extend
     # Unset certain attributes regarding the condition type. 
     # I do this to prevent to have useless and unappropriate attributes
     switch @boundaryConditionType
-      when "effort_normal", "depl_normal"   
-        for stepFunction in @model.get('stepFunctions')
-          stepFunction.spatial_function_x = undefined
-          stepFunction.spatial_function_y = undefined
-          stepFunction.spatial_function_z = undefined
+      when "effort_normal", "depl_normal"    
+        @model.set 'spatial_function_x' : undefined
+        @model.set 'spatial_function_y' : undefined
+        @model.set 'spatial_function_z' : undefined
       when "symetry"
-        @model.unset('stepFunctions')
+        @model.unset('spatial_function_x')
+        @model.unset('spatial_function_y')
+        @model.unset('spatial_function_z')
       else
-        for stepFunction in @model.get('stepFunctions')
-          stepFunction.normal_function = undefined
+        @model.set 'normal_function'  : undefined
     @render()
     @fillInputsFromModel()
-    
-  # Show the good function form. Relative to the step selected
-  showFunctionPart: (event) ->
-    $(@el).find('.functionPart > div').hide()
-    $(@el).find(".#{event.srcElement.value}").show()
 
   # Update the model attributes reguarding the inputs
   updateModelAttributes: ->
@@ -42,24 +36,19 @@ SCViews.EditBoundaryConditionView = Backbone.View.extend
       condition_type      : $(@el).find('select.boundary_condition_type') .val()
       name                : $(@el).find('input.name')                     .val()
       description         : $(@el).find('textarea.description')           .val()
-
-    # Each function is related to a step in the calcul
-    stepFunctions = []
-    for stepFunctionElement in $(@el).find('.functionPart div')
-      stepFunctionElement = $(stepFunctionElement)
-      stepFunctions.push
-        step_id             : stepFunctionElement.data("step_id")
-        spatial_function_x  : stepFunctionElement.find('input.x') .val()
-        spatial_function_y  : stepFunctionElement.find('input.y') .val()
-        spatial_function_z  : stepFunctionElement.find('input.z') .val()
-        temporal_function_t : stepFunctionElement.find('input.ft').val()
-    @model.set stepFunctions: stepFunctions
+      
+    stepFunctionElement = $($(@el).find(".step_1")) 
+    @model.set
+      spatial_function_x  : stepFunctionElement.find('input.x')           .val()
+      spatial_function_y  : stepFunctionElement.find('input.y')           .val()
+      spatial_function_z  : stepFunctionElement.find('input.z')           .val()
+      normal_function     : stepFunctionElement.find('input.normal_function')           .val()
+    
     SCVisu.current_calcul.trigger 'change'
 
   # Set the inputs reguarding the model passed
   setModel: (model) ->
     $("#edge_form, #visu_calcul").hide()
-    $(@el).find('select.steps, .functionPart').html('')
     @show()
     @model = model
     @boundaryConditionType = @model.get('condition_type')
@@ -67,37 +56,31 @@ SCViews.EditBoundaryConditionView = Backbone.View.extend
     $(@el).find('input.name')                     .val(@model.get('name'))
     $(@el).find('textarea.description')           .val(@model.get('description'))
     @render()
-
     @fillInputsFromModel()
+    
   fillInputsFromModel: ->
+    #alert @model.get('normal_function')
     # If the type is symetry, then it doesn't ave step functions
-    if @boundaryConditionType!= "symetry" and !_.isUndefined(@model.get('stepFunctions'))
+    if @boundaryConditionType!= "symetry"
       if @boundaryConditionType == "effort_normal" or @boundaryConditionType == "depl_normal"
-        for stepFunction in @model.get('stepFunctions')
-          stepFunctionElement               = $($(@el).find(".step_#{stepFunction['step_id']}"))
-          stepFunctionElement.find('input.normal_function') .val(stepFunction['normal_function'])
-          stepFunctionElement.find('input.ft').val(stepFunction['temporal_function_t'])
+        stepFunctionElement = $($(@el).find(".step_1"))
+        stepFunctionElement.find('input.normal_function') .val(@model.get('normal_function'))
       else
-        for stepFunction in @model.get('stepFunctions')
-          stepFunctionElement               = $($(@el).find(".step_#{stepFunction['step_id']}"))
-          stepFunctionElement.find('input.x') .val(stepFunction['spatial_function_x'])
-          stepFunctionElement.find('input.y') .val(stepFunction['spatial_function_y'])
-          stepFunctionElement.find('input.z') .val(stepFunction['spatial_function_z'])
-          stepFunctionElement.find('input.ft').val(stepFunction['temporal_function_t'])
+        stepFunctionElement = $($(@el).find(".step_1"))
+        stepFunctionElement.find('input.x') .val(@model.get('spatial_function_x'))
+        stepFunctionElement.find('input.y') .val(@model.get('spatial_function_y'))
+        stepFunctionElement.find('input.z') .val(@model.get('spatial_function_z'))
 
   render: ->
     $(@el).find('.functionPart').html('')
-    $(@el).find('select.steps').html('')
     $(@el).find('.functionPartHeader').show()
-    SCVisu.stepListView.collection.each (step) =>
-      $(@el).find('select.steps').append("<option value='step_#{step.getId()}'>#{step.get('name')}</option>")
-      switch @boundaryConditionType
-        when "effort_normal", "depl_normal"   
-          $(@el).find('.functionPart').append(@functionNormalPartTemplate(step))
-        when "symetry"
-          $(@el).find('.functionPartHeader').hide()
-        else
-          $(@el).find('.functionPart').append(@functionPartTemplate(step))
+    switch @boundaryConditionType
+      when "effort_normal", "depl_normal"   
+        $(@el).find('.functionPart').append(@functionNormalPartTemplate())
+      when "symetry"
+        $(@el).find('.functionPartHeader').hide()
+      else
+        $(@el).find('.functionPart').append(@functionPartTemplate())
       
     $(@el).find('.functionPart > div:not(:first)').hide()
 
@@ -112,9 +95,9 @@ SCViews.EditBoundaryConditionView = Backbone.View.extend
     $('#visu_calcul').hide()
 
   # Template for inputs for step function part
-  functionPartTemplate: (step) ->
+  functionPartTemplate: () ->
     """
-    <div class="step_#{step.getId()}" data-step_id="#{step.getId()}">
+    <div class="step_1">
       <table class="grey">
         <tbody>
           <tr>
@@ -133,24 +116,12 @@ SCViews.EditBoundaryConditionView = Backbone.View.extend
           </tr>
         </tbody>
       </table>
-      <table class="grey">
-        <tbody>
-          <tr>
-            <th>
-              Fonction temporelle (ft) = 0 = 
-            </th>
-            <td>
-              <input class="ft" data-type="number" class="time_function" name="" placeholder="" size="10" type="text">
-            </td>
-          </tr>
-        </tbody>
-      </table>
     </div>
   """  
   # Template for inputs for step function part when type is normal
-  functionNormalPartTemplate: (step) ->
+  functionNormalPartTemplate: () ->
     """
-    <div class="step_#{step.getId()}" data-step_id="#{step.getId()}">
+    <div class="step_1">
       <table class="grey">
         <tbody>
           <tr>
@@ -159,18 +130,6 @@ SCViews.EditBoundaryConditionView = Backbone.View.extend
             </th>
             <td>
               <input class="normal_function" data-type="number" name="normal_function" size="10" type="text">
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <table class="grey">
-        <tbody>
-          <tr>
-            <th>
-              Fonction temporelle (ft) = 0 = 
-            </th>
-            <td>
-              <input class="ft" data-type="number" class="time_function" name="" placeholder="" size="10" type="text">
             </td>
           </tr>
         </tbody>

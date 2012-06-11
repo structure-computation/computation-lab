@@ -13,7 +13,7 @@ SCViews.StepListView = Backbone.View.extend
     if time_scheme == "static"
       @disableAddButton()
     else
-      $(@el).find('button.add').removeAttr('disabled')
+      @ableAddButton()
 
     # Select the list item according to the JSON
     @setSelectList time_scheme
@@ -40,6 +40,7 @@ SCViews.StepListView = Backbone.View.extend
   render : ->
     for stepView in @stepViews
       stepView.render()
+    $(@stepViews[0].el).find('button.delete').remove() if @stepViews[0]
       
   # Clears all elements previously loaded in the DOM. 
   # Indeed, the 'ul#materials' element already exists in the DOM and every time we create a MaterialListView, 
@@ -47,7 +48,7 @@ SCViews.StepListView = Backbone.View.extend
   # each time we render we add elements to the same view. 
   # So we have to clear the content each time we create a new MaterialListView 
   clearView: ->
-    $(@el).find('table#steps_table tbody').html('')
+    $(@el).find('table#steps_table tbody#steps').html('')
 
   events:
     'keyup'                   : 'updateFields'
@@ -63,6 +64,7 @@ SCViews.StepListView = Backbone.View.extend
       @collection.updateModels()
     SCVisu.current_calcul.trigger 'change'  
     SCVisu.current_calcul.setTimeStepsCollection SCVisu.stepListView.collection.models
+    
   selectChanged: (event) ->
     # Change the value of the calcul type according to the value of the select list
     @setTimeScheme($(event.srcElement).val())
@@ -72,18 +74,23 @@ SCViews.StepListView = Backbone.View.extend
         # Delete all
         for i in [0..@stepViews.length - 1]
           @stepViews[i].delete(true)
-        $(@el).find("button.add").attr('disabled', 'disabled')
+        @disableAddButton()
       else
         $('#step_type').val('dynamic')
     else
-      $(@el).find("button.add").removeAttr('disabled')
+     @ableAddButton()
 
   disableAddButton: ->
     $(@el).find("button.add").attr('disabled', 'disabled')
+    $(@el).find("button.add_parameter").attr('disabled', 'disabled')
+    
+  ableAddButton: ->
+    $(@el).find('button.add').removeAttr('disabled')
+    $(@el).find('button.add_parameter').removeAttr('disabled')
     
   setTimeScheme: (value) ->
     @collection.meta('time_scheme', value)
     SCVisu.current_calcul.setTimeScheme value
     
   setSelectList: (value) ->
-    $(@el).find('select#step_type').val(value)    
+    $(@el).find('select#step_type').val(value)  

@@ -16,14 +16,16 @@ SCModels.Calcul = Backbone.Model.extend
     #behaviour
     @set materials             : []
     @set links                 : []
-    @set boundary_condition    : []
+    @set boundary_conditions   : []
     @set volumic_forces        : []
     #options parameters
     @set time_steps            :
-      time_scheme : "static"
-      collection  : []
+      time_scheme           : "static"
+      collection            : []
+      parameter_collection  : []
     @set multiresolution_parameters :
       multiresolution_type : "off"
+      resolution_number    : 10
       collection  : []
     @set options               : 
              convergence_method_LATIN : 
@@ -51,32 +53,42 @@ SCModels.Calcul = Backbone.Model.extend
     @url = "/sc_models/#{@sc_model_id}/calculs/" + @get 'id'
      
   setElements: (params) ->
-    @setTimeStepsCollection params.time_steps.collection
+    #time_scheme
     @setTimeScheme params.time_steps.time_scheme
+    @setTimeStepsCollection params.time_steps.collection
+    @setTimeStepsParameter params.time_steps.parameter_collection
+    
     @setMultiresolutionParameterCollection params.multiresolution_parameters.collection
     @setMultiresolutionParameterType params.multiresolution_parameters.multiresolution_type
-    @set mesh               : params.mesh
-    @set materials          : params.materials
-    @set pieces             : params.pieces  
-    @set links              : params.links  
-    @set interfaces         : params.interfaces
-    @set boundary_condition : params.boundary_condition
-    @set options            : params.options
-    @set volumic_forces     : params.volumic_forces
-    @set edges              : params.edges
-    @set last_saved         : params.last_saved
+    @setMultiresolutionnumber params.multiresolution_parameters.resolution_number
+    @set mesh                   : params.mesh
+    @set materials              : params.materials
+    @set pieces                 : params.pieces  
+    @set links                  : params.links  
+    @set interfaces             : params.interfaces
+    @set boundary_conditions    : params.boundary_conditions
+    @set options                : params.options
+    @set volumic_forces         : params.volumic_forces
+    @set edges                  : params.edges
+    @set last_saved             : params.last_saved
     
-  setTimeStepsCollection: (time_steps) ->
-    @get('time_steps').collection = time_steps
-
   setTimeScheme: (time_scheme) ->
     @get('time_steps').time_scheme = time_scheme
+  
+  setTimeStepsCollection: (time_steps) ->
+    @get('time_steps').collection = time_steps
+    
+  setTimeStepsParameter: (time_steps_parameters) ->
+    @get('time_steps').parameter_collection = time_steps_parameters
 
   setMultiresolutionParameterCollection: (multiresolution_parameters) ->
     @get('multiresolution_parameters').collection = multiresolution_parameters
 
   setMultiresolutionParameterType:   (multiresolution_type) ->
     @get('multiresolution_parameters').multiresolution_type = multiresolution_type
+    
+  setMultiresolutionnumber:   (resolution_number) ->
+    @get('multiresolution_parameters').resolution_number = resolution_number
     
 # Collection of Calcul
 SCModels.Calculs = Backbone.Collection.extend

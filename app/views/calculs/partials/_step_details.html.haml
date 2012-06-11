@@ -14,7 +14,18 @@
         %th Nombre de pas de temps
         %th Temps final
         %th
-    %tbody
+    %tbody#steps
+
+  %button.add_parameter Ajouter un Paramètre
+  %table#parameters_table.grey
+    %thead
+      %tr.no_sorter
+        %th ID
+        %th Nom
+        %th Alias
+        %th Editer
+        %th
+    %tbody#parameters
   :coffeescript
     $ ->      
       $('#time_parameters').click( () ->

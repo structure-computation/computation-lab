@@ -7,10 +7,15 @@ SCViews.MultiresolutionParameterListView = Backbone.View.extend
   init: (collection) ->
     @parameterViews = []
     @clearView()
+    @editView = new SCViews.EditMultiresolutionParameterView()
     @collection = collection
     
     multiresolution_type = SCVisu.current_calcul.get('multiresolution_parameters').multiresolution_type
     @collection.meta 'multiresolution_type', multiresolution_type
+    resolution_number = SCVisu.current_calcul.get('multiresolution_parameters').resolution_number
+    @collection.meta 'resolution_number', resolution_number
+    
+    
     if multiresolution_type == "fatigue"
       $(@el).find('button.add').attr('disabled','disabled')
     else if multiresolution_type == "off"
@@ -18,46 +23,49 @@ SCViews.MultiresolutionParameterListView = Backbone.View.extend
     else
       $(@el).find('button.add').removeAttr('disabled')
     $(@el).find('select#multiresolution_type').val(multiresolution_type)
-
-    @collection.bind "add", (model) =>
-      @parameterViews.push new SCViews.MultiresolutionParameterView model: model, parentElement: this
+    $(@el).find('input.resolution_number').val(resolution_number)
 
     if @collection.size() == 0
       @collection.add new SCModels.MultiresolutionParameter()
+    
+    for parameter in @collection.models
+      @parameterViews.push new SCViews.MultiresolutionParameterView model: parameter, parentElement: this  
       
     @render()
     
 
   events:
+    "change input.resolution_number"     : "updateResolutionNumber"
     "click button.add"                   : "addParameter"
     "change select#multiresolution_type" : "selectChanged"
 
   addParameter: ->
-    @collection.add new SCModels.MultiresolutionParameter()
+    parameter = new SCModels.MultiresolutionParameter()
+    @collection.add parameter
+    @parameterViews.push new SCViews.MultiresolutionParameterView model: parameter, parentElement: this
+    SCVisu.current_calcul.trigger 'change' 
 
   selectChanged: (event) ->
     if $(event.srcElement).val() == "fatigue"
       if confirm "Êtes-vous sûr ? Cela va effacer tous vos paramêtre (sauf le premier)."
-        $(@el).find('button.add').attr('disabled','disabled')
         # Delete all except first element
         if @parameterViews.length > 1
           for i in [1..@parameterViews.length - 1]
             @parameterViews[i].delete(true)
-        $(@el).find("button.add").attr('disabled', 'disabled')
+        @disableAddButton()
       else
         $('#multiresolution_type').val('expert_plan')
     else if $(event.srcElement).val() == "off"
       if confirm "Êtes-vous sûr ? Cela va effacer tous vos paramêtre (sauf le premier)."
-        $(@el).find('button.add').attr('disabled','disabled')
         # Delete all except first element
         if @parameterViews.length > 1
           for i in [0..@parameterViews.length - 1]
             @parameterViews[i].delete(true)
-        $(@el).find("button.add").attr('disabled', 'disabled')
+        @disableAddButton()
       else
         $('#multiresolution_type').val('expert_plan')
     else
-      $(@el).find("button.add").removeAttr('disabled')
+      @ableAddButton()
     SCVisu.current_calcul.trigger 'change'  
     SCVisu.current_calcul.setMultiresolutionParameterType $('#multiresolution_type').val()
     SCVisu.current_calcul.setMultiresolutionParameterCollection @collection.models
@@ -75,4 +83,21 @@ SCViews.MultiresolutionParameterListView = Backbone.View.extend
   render: ->
     for view in @parameterViews
       view.render()
-    $(@parameterViews[0].el).find('button.delete').remove() if @parameterViews[0]
+    #$(@parameterViews[0].el).find('button.delete').remove() if @parameterViews[0]
+
+  disableAddButton: ->
+    $(@el).find("button.add").attr('disabled', 'disabled')
+    
+  ableAddButton: ->
+    $(@el).find('button.add').removeAttr('disabled')
+  
+  # Show edit view of the given model.
+  showDetails: (model) ->
+    $(@el).find('input.resolution_number').val(SCVisu.current_calcul.get('multiresolution_parameters').resolution_number)
+    @editView.setModel model
+    
+  updateResolutionNumber: ->
+    SCVisu.current_calcul.get('multiresolution_parameters').resolution_number = $(@el).find('input.resolution_number').val()
+    #@set('resolution_number') $(@el).find('input.resolution_number').val()
+    SCVisu.current_calcul.trigger 'change'
+      

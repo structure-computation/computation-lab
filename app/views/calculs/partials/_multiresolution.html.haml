@@ -2,10 +2,13 @@
 #multiresolution_parameters.toggler.maximize
   %select#multiresolution_type
     %option{:value => "off"}         Off
-    /%option{:value => "fatigue"}     Fatigue
-    /%option{:value => "expert_plan"} Plan d'expérience
+    %option{:value => "function"}    Fonction
+    %option{:value => "orthogonal_plan"} Plan d'expérience orthogonal
 
   %button.add Ajouter un paramètre
+  %p
+    Nombre de résolutions :
+    %input.resolution_number
   %table.grey
     %thead
       %tr.no_sorter
@@ -14,6 +17,7 @@
         %th Valeur minimale
         %th Valeur maximale
         %th Nombre de valeurs
+        %th
         %th
     %tbody
 

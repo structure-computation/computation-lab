@@ -6,7 +6,7 @@ SCViews.StepView = Backbone.View.extend
   initialize:  (options)->
     @parentElement = options.parentElement
     @render()
-    $(@parentElement.el).find('tbody').append(@el)
+    $(@parentElement.el).find('tbody#steps').append(@el)
 
   tagName   : "tr"
 

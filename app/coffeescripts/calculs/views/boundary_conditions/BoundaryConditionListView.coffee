@@ -123,7 +123,7 @@ SCViews.BoundaryConditionListView = Backbone.View.extend
     SCVisu.current_calcul.trigger 'change'
 
   render: ->
-    SCVisu.current_calcul.set boundary_condition: @collection
+    SCVisu.current_calcul.set boundary_conditions : @collection
     _.each @boundaryConditionViews, (boundaryCondition) ->
       boundaryCondition.render()
       boundaryCondition.deselect()

@@ -26,6 +26,9 @@ SCViews.MultiresolutionParameterView = Backbone.View.extend
                 <input type='number' value='<%= nb_value %>'> 
               </td> 
               <td>
+                <button class='edit'>Editer</button>
+              </td> 
+              <td>
                 <button class='delete'>X</button>
               </td> 
           """
@@ -37,8 +40,15 @@ SCViews.MultiresolutionParameterView = Backbone.View.extend
       nb_value      : @model.get('nb_value')      
 
   events:
-    "click button.delete" : "delete"
-    "change input"        : "updateModel"
+    'click button.delete' : 'delete'
+    'change input'        : 'updateModel'
+    'click button.edit'   : 'edit'
+  
+  # Show the edit part
+  edit: ->
+    @parentElement.showDetails(@model)
+    # Trigger selection change only when the material selected change because it
+    $('#visu_calcul').hide()  
     
   updateModel: ->
     SCVisu.current_calcul.trigger 'change'

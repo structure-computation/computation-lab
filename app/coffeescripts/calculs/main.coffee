@@ -5,6 +5,7 @@ $ ->
   #   When two calculs was loaded and users clicked on 'add step', two steps were added...
   #   In fact, two references of StepListViews were created but I couldn't tell why.
   SCVisu.stepListView                       = new SCViews.StepListView()
+  SCVisu.stepParameterListView              = new SCViews.StepParameterListView()
   SCVisu.multiresolutionParametersListView  = new SCViews.MultiresolutionParameterListView()
 
   # Initialize views for database materials
@@ -49,8 +50,9 @@ $ ->
 
     # Initialization of the StepListView    
     steps                         = new SCModels.StepCollection SCVisu.current_calcul.get('time_steps').collection
-    # Initialize the step list view passing it a step collection
     SCVisu.stepListView.init(steps)
+    stepParameters                = new SCModels.StepParameterCollection SCVisu.current_calcul.get('time_steps').parameter_collection
+    SCVisu.stepParameterListView.init(stepParameters)
     
     multiresolutionParameters     = new SCModels.MultiresolutionParameterCollection SCVisu.current_calcul.get('multiresolution_parameters').collection
     SCVisu.multiresolutionParametersListView.init multiresolutionParameters
@@ -64,7 +66,7 @@ $ ->
     SCVisu.volumicForcesListView  = new SCViews.VolumicForceListView    collection : volumicForcesCollection 
 
     # Initialisation of boundaryConditionListView
-    boundaryConditionCollection   = new SCModels.BoundaryConditionCollection  SCVisu.current_calcul.get('boundary_condition')
+    boundaryConditionCollection   = new SCModels.BoundaryConditionCollection  SCVisu.current_calcul.get('boundary_conditions')
     SCVisu.boundaryConditionListView = new SCViews.BoundaryConditionListView collection : boundaryConditionCollection 
     #SCVisu.volumicForcesListView = new SCViews.VolumicForceListView    collection : volumicForcesCollection 
 
