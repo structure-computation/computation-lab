@@ -56,9 +56,9 @@ SCViews.InterfaceListView = Backbone.View.extend
     # Check if a interface had the link associated to it before. 
     # If it is the case, then it removes the association
     @bind "action:removed_link", (linkView) =>
-      _.each @collection.models, (interface) ->
-        if interface.get('link_id') == linkView.model.getId()
-          interface.unset 'link_id'
+      _.each @collection.models, (inter) ->
+        if inter.get('link_id') == linkView.model.getId()
+          inter.unset 'link_id'
       @render()
 
     # Triggered when the unassigned button of a link is clicked.
