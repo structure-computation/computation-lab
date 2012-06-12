@@ -218,14 +218,14 @@ SCViews.InterfaceListView = Backbone.View.extend
     SCVisu.current_calcul.trigger 'change'
 
   render : ->
-    _.each @interfaceViews, (interface) ->
-      interface.render()
-      interface.deselect()
+    _.each @interfaceViews, (inter) ->
+      inter.render()
+      inter.deselect()
     return this
 
   getInterface: (interfaceID) ->
     # I don't go through @collection.each because it would go through all 
     # elements and would not stop on return statement
-    for interface in @collection.models
-      if parseInt(interface.get('id'),10) == parseInt(interfaceID,10)
-        return interface
+    for inter in @collection.models
+      if parseInt(inter.get('id'),10) == parseInt(interfaceID,10)
+        return inter
