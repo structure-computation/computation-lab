@@ -85,8 +85,8 @@ SCModels.Visualisation = Backbone.Model.extend
     for x in [0..num_group_info.length-1]
         @select_num_group_info[ x ] = false
         if(num_group_info[x].type==2 )
-            interface = window.SCVisu.interfaceListView.getInterface(num_group_info[ x ].id)
-            if interface.to_visualize
+            inter = window.SCVisu.interfaceListView.getInterface(num_group_info[ x ].id)
+            if inter.to_visualize
                 @select_num_group_info[ x ] = true
                 #alert "x = " + x  
     

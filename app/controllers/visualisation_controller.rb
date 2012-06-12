@@ -41,7 +41,8 @@ class VisualisationController < ApplicationController
     port = 10001                           # Default HTTP port
 
     socket = TCPSocket.open(host,port)  # Connect to server
-    socket.print(request)               # Send request
+    socket.write(request)               # Send request
+    socket.flush()
     response = socket.read              # Read complete response
     #logger.debug response
     
