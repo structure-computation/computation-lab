@@ -8,8 +8,8 @@ SCViews.InterfaceListView = Backbone.View.extend
     @clearView()
     @interfaceViews = []
     @filteredInterfaces = []
-    for interface in @collection.models
-      @interfaceViews.push new SCViews.InterfaceView model: interface, parentElement: this
+    for inter in @collection.models
+      @interfaceViews.push new SCViews.InterfaceView model: inter, parentElement: this
     @selectedInterfaceView = null
     @render()
     $(@el).find('table').tablesorter()
