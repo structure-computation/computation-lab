@@ -47,7 +47,8 @@ class Bill < ActiveRecord::Base
   def generate_bill_pdf()
     
     @current_workspace = self.workspace
-    @current_gestionnaire = @current_workspace.users.find(:first, :conditions => {:role => "gestionnaire"})
+    @current_member_gestionnaire = @current_workspace.user_workspace_memberships.find(:first, :conditions => {:manager => 1})
+    @current_gestionnaire = @current_member_gestionnaire.user
     pdf = Prawn::Document.new(:page_size => 'A4', :margin => [0,0,0,0])
     
     pdf.font "Helvetica" 
