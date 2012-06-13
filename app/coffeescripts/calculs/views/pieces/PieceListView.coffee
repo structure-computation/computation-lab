@@ -101,6 +101,7 @@ SCViews.PieceListView = Backbone.View.extend
     'click button.unassign_all'           : 'unassignAllVisiblePieces'
     'click button.filter'                 : 'filterPieces'
     'click button.cancel_filter'          : 'cancelFilter'
+    'click button.view_filter'            : 'viewPieces'
 
   setTypeFilter: (event) ->
     @filterValue = event.srcElement.value
@@ -159,7 +160,10 @@ SCViews.PieceListView = Backbone.View.extend
                             $(pieceView.el).show()
                             pieceView.showView()
                     modulo += modulo_id
-                    if (parseFloat(piece_id[0]) + modulo) > @pieceViews.length
+                    if (parseFloat(range[0]) + modulo) > @pieceViews.length
+                        #alert modulo
+                        #alert parseFloat(piece_id[0]) + modulo
+                        #alert @pieceViews.length
                         out = false
                         break
                         
@@ -181,7 +185,8 @@ SCViews.PieceListView = Backbone.View.extend
                         pieceView.showView()
           
       
-    @viewPieces()
+    #@viewPieces()
+    
     #range = filter.split('-')
     #range = [filter]
     #alert  range

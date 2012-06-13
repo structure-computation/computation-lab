@@ -105,6 +105,7 @@ SCViews.InterfaceListView = Backbone.View.extend
     'click button.unassign_all'             : 'unassignAllVisibleInterfaces'
     'click button.filter'                   : 'executeFilter'
     'click button.cancel_filter'            : 'cancelFilter'
+    'click button.view_filter'              : 'viewInterfaces'
     
   ############################################################################# Filter functions - start
 
@@ -147,7 +148,7 @@ SCViews.InterfaceListView = Backbone.View.extend
       $(@el).find("button.assign_all, button.unassign_all").removeAttr('disabled')
       
       
-    @viewInterfaces()
+    #@viewInterfaces()
   # Go through all the interfaces
   # Check get the two pieces it is attached to
   # Check if the material of those pieces correspond to the filter
