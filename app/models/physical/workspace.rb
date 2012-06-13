@@ -39,8 +39,26 @@ class Workspace < ActiveRecord::Base
     users
   end
   
+  #def managers
+  #  users.where(:role => "gestionnaire")
+  #end
+  
   def managers
-    users.where(:role => "gestionnaire")
+    @members = self.user_workspace_memberships.where({:manager => 1})
+    @users = []
+    @members.each do |member|
+      @users.push member.user if member.user
+    end
+    return @users
+  end
+  
+  def engineers
+    @members = self.user_workspace_memberships.where({:engineer => 1, :manager => 0})
+    @users = []
+    @members.each do |member|
+      @users.push member.user if member.user
+    end
+    return @users
   end
   
   def init_account()

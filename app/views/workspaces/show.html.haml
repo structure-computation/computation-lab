@@ -64,7 +64,11 @@
                 
         #tab_4_content
           = render :partial => "members/search_filter"
-          = render :partial => "members/members_list", :object => @workspace.members
+          %h3 managers
+          = render :partial => "members/members_list", :object => @workspace.managers
+          %h3 engineers
+          = render :partial => "members/members_list", :object => @workspace.engineers
+          /= render :partial => "members/members_list", :object => @workspace.members
           
         #tab_5_content
           %table.grey#workspace_information_table

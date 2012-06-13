@@ -27,6 +27,7 @@ class WorkspacesController < InheritedResources::Base
     @workspace    = current_workspace_member.workspace
     @credits      = @workspace.token_account.credits.find(:all, :conditions => {:state => "active"})
     @soldes       = @workspace.token_account.solde_token_accounts.find(:all, :order => " created_at DESC")
+    
     if @workspace 
       # show!
       render
@@ -97,7 +98,8 @@ class WorkspacesController < InheritedResources::Base
     #   format.js   {render :json => @current_workspace.to_json}
     # end
   end
-    
+  
+  
   #protected
     # def begin_of_association_chain
     #   Workspace.accessible_by_user(current_user)

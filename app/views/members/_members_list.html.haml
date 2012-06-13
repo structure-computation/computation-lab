@@ -1,26 +1,24 @@
 %table#members_table.grey
   %thead
     %tr
-      %th.no_sorter
       %th Mail
       %th Nom
-      %th Role
-      %th Status
+      %th Prénom
       %th.no_sorter Actions
   %tbody
     - members_list.each do |member|
       %tr
-        %td.escape_search.details_link= link_to "Détails", workspace_member_path( current_workspace_member.workspace, member)
         %td= member.email
+        %td= member.lastname
         %td= member.firstname
-        %td= member.role
-        %td= member.state
         %td.action_on_table.escape_search
           %ul
             %li
               = button_to "Supprimer", workspace_member_path(current_workspace_member.workspace, member), :confirm => "Êtes vous sûr ?", :method => :delete, :confirm => "Êtes-vous sûr ?"
             %li 
-              = link_to "Editer", edit_workspace_member_path(current_workspace_member.workspace, member)
+              = button_to "Manager", :controller => :members, :action => :manager, :member_id => member.id
+            %li 
+              = button_to "Ingénieur", :controller => :members, :action => :engineer, :member_id => member.id
 
 /= link_to 'Ajouter un membre', new_workspace_member_path(@workspace), :class => 'yellow_button'
 
