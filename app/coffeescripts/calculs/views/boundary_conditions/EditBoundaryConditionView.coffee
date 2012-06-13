@@ -26,7 +26,7 @@ SCViews.EditBoundaryConditionView = Backbone.View.extend
         @model.unset('spatial_function_y')
         @model.unset('spatial_function_z')
       else
-        @model.set 'normal_function'  : undefined
+        @model.set 'spatial_function_x'  : undefined
     @render()
     @fillInputsFromModel()
 
@@ -64,7 +64,7 @@ SCViews.EditBoundaryConditionView = Backbone.View.extend
     if @boundaryConditionType!= "symetry"
       if @boundaryConditionType == "effort_normal" or @boundaryConditionType == "depl_normal"
         stepFunctionElement = $($(@el).find(".step_1"))
-        stepFunctionElement.find('input.normal_function') .val(@model.get('normal_function'))
+        stepFunctionElement.find('input.x') .val(@model.get('spatial_function_x'))
       else
         stepFunctionElement = $($(@el).find(".step_1"))
         stepFunctionElement.find('input.x') .val(@model.get('spatial_function_x'))
@@ -129,7 +129,7 @@ SCViews.EditBoundaryConditionView = Backbone.View.extend
               Fonction normale 
             </th>
             <td>
-              <input class="normal_function" data-type="number" name="normal_function" size="10" type="text">
+              <input class="x" data-type="number" name="spatial_function_x" size="10" type="text">
             </td>
           </tr>
         </tbody>

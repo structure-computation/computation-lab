@@ -77,7 +77,7 @@ SCViews.EditStepParameterView = Backbone.View.extend
         <tbody>
           <tr>
             <th>
-              Fonction temporelle (ft) = 0 = 
+              Fonction temporelle f(t) = 
             </th>
             <td>
               <input class="ft" data-type="number" class="time_function" name="" placeholder="" size="10" type="text">

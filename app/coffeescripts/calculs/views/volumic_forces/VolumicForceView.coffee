@@ -46,10 +46,10 @@ SCViews.VolumicForceView = Backbone.View.extend
   render: ->
     template = """
               <td class="name" > <input type='text'   value='#{@model.get("name")}'  > </td> 
-              <td class="gamma"> <input type='number' value='#{@model.get("gamma")}' > </td>                 
-              <td class="dx"   > <input type='number' value='#{@model.get("dx")}'    > </td> 
-              <td class="dy"   > <input type='number' value='#{@model.get("dy")}'    > </td> 
-              <td class="dz"   > <input type='number' value='#{@model.get("dz")}'    > </td> 
+              <td class="gamma"> <input type='text'   value='#{@model.get("gamma")}' > </td>                 
+              <td class="dx"   > <input type='text'   value='#{@model.get("dx")}'    > </td> 
+              <td class="dy"   > <input type='text'   value='#{@model.get("dy")}'    > </td> 
+              <td class="dz"   > <input type='text'   value='#{@model.get("dz")}'    > </td> 
               <td              > <button class="remove">X</button>                     </td> 
           """ 
     $(@el).html(template) 

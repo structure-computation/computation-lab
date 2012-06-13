@@ -11,7 +11,7 @@ SCModels.StepParameter = Backbone.Model.extend
     @set 'description' : "description"
 
   getId: ->
-    @get('id_param')
+    @get('id_in_calcul')
     
 # Collection of Step. Keep all steps up to date with each others.
 SCModels.StepParameterCollection = Backbone.Collection.extend
@@ -20,7 +20,7 @@ SCModels.StepParameterCollection = Backbone.Collection.extend
     @._meta = {}
 
     @bind 'add', (parameter) =>
-      parameter.set 'id_param'     : @getNewId()
+      parameter.set 'id_in_calcul'     : @getNewId()
       parameter.set 'name'   : "PT_" + parameter.getId()
       parameter.set 'alias_name'   : "PT_" + parameter.getId()
 
