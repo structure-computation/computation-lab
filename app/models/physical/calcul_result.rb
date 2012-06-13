@@ -28,7 +28,7 @@ class CalculResult < ActiveRecord::Base
   end
   
   def save_new_brouillon(params)
-    path_to_file = "#{SC_MODEL_ROOT}/model_#{self.sc_model.id}/MESH/mesh_v2.txt"
+    path_to_file = "#{SC_MODEL_ROOT}/model_#{self.sc_model.id}/MESH/mesh.txt"
     results      = File.read(path_to_file)
     jsonobject   = JSON.parse(results)
     jsonobject["sc_model_id"]                = params["sc_model_id"].to_i
