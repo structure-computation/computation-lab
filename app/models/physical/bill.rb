@@ -33,6 +33,7 @@ class Bill < ActiveRecord::Base
       self.statut = "paid"
       self.paid_date = Date.today
       self.save
+      self.generate_bill_pdf()
       self.credit.valid_credit()
     end
   end
@@ -40,6 +41,7 @@ class Bill < ActiveRecord::Base
   def cancel_bill()
     self.statut = "canceled"
     self.save
+    self.generate_bill_pdf()
     self.credit.cancel_credit()
   end
   
@@ -54,19 +56,22 @@ class Bill < ActiveRecord::Base
     pdf.font "Helvetica" 
     colors = {:black => "000000", :grey => "8d8d8d", :blue => "2a3556", :magenta => "eb4f95", :white => "ffffff"} 
     pdf.line_width = 0.75
-    pdf.stroke_color colors[:white]
+    pdf.stroke_color colors[:grey]
 
     logoimage = "public/images/logo.jpg" 
-    pdf.bounding_box [50, 820], :width => 150, :height => 100 do
-	pdf.image "public/images/Logo_StructureComputation_gris.png", :scale => 0.75, :position  => :left, :vposition  => :top
+    #pdf.bounding_box [50, 820], :width => 150, :height => 100 do
+    pdf.bounding_box [0, 850], :width => 820, :height => 120 do
+	#pdf.stroke_bounds
+        #pdf.image "public/images/Logo_StructureComputation_bleu.png", :scale => 1, :position  => :left, :vposition  => :top
+        pdf.image "public/images/entete.png", :scale => 0.725, :position  => :left, :vposition  => :top
     end
 
-    pdf.fill_color colors[:grey]
-    pdf.bounding_box [400, 800], :width => 150, :height => 100 do
-	pdf.text "Facture", :size => 20, :align => :right
+    pdf.fill_color colors[:blue]
+    pdf.bounding_box [250, 720], :width => 100, :height => 30 do
+	pdf.text "Facture", :size => 20, :align => :center
     end
-    pdf.fill_color colors[:black]
-    pdf.stroke_horizontal_line(0,595)
+#     pdf.fill_color colors[:blue]
+#     pdf.stroke_horizontal_line(0,595)
 
 
     pdf.bounding_box([50, 650], :width => 100, :height => 150) do
@@ -79,7 +84,7 @@ class Bill < ActiveRecord::Base
     end
 
     pdf.bounding_box [150, 650], :width => 100, :height => 150 do
-	pdf.fill_color colors[:black]
+	pdf.fill_color colors[:blue]
 	pdf.text self.ref , :align => :left
 	pdf.move_down(5)
 	pdf.text self.created_at.to_date.to_s(), :align => :left
@@ -98,7 +103,7 @@ class Bill < ActiveRecord::Base
     end
 
     #entete du tableau des prix
-    pdf.fill_color colors[:grey]
+    pdf.fill_color colors[:blue]
     pdf.bounding_box [360, 500], :width => 70, :height => 20 do
 	pdf.text "€ HT ", :align => :center
     end
@@ -173,11 +178,29 @@ class Bill < ActiveRecord::Base
 	pdf.text  self.total_price_TTC.to_s(), :align => :center, :style => :bold
     end
 
-    # mentions légales
-    pdf.bounding_box [50, 380], :width => 500, :height => 40 do
+    pdf.bounding_box [50, 380], :width => 500, :height => 150 do
     end
-    pdf.stroke_color colors[:white]
-    pdf.stroke_horizontal_line(0,595)     
+    
+    pdf.fill_color colors[:grey]
+    pdf.stroke_color colors[:grey]
+    
+    # mentions légales
+    pdf.bounding_box [50, 220], :width => 500, :height => 100 do
+        pdf.text "RIB" , :align => :center, :size => 10
+        pdf.text "Banque   Guichet    N°compte        Clé          Devise" , :align => :center, :size => 10
+        pdf.text "30066     10633    00020036101      16            EUR  " , :align => :center, :size => 10
+        pdf.text "   " , :align => :center, :size => 10
+        pdf.text "IBAN" , :align => :center, :size => 10
+        pdf.text "FR76 3006 6106 3300 0200 3610 116" , :align => :center, :size => 10
+    end
+    
+    pdf.stroke_horizontal_line(0,595)
+    pdf.bounding_box [50, 100], :width => 500, :height => 80 do
+        pdf.text "Structure Computation, 86 rue de Paris, 91400 Orsay" , :align => :center, :size => 10
+        pdf.text "www.structure-computation.com, contact@structure-computation.com" , :align => :center, :size => 10
+        pdf.text "SAS au capital de 45 000 €" , :align => :center, :size => 10
+        pdf.text "SIREN : 514 972 306 " , :align => :center, :size => 10
+    end     
     
     #enregistrement du fichier pdf
     pdf.render_file "#{SC_FACTURE_ROOT}/facture_" + self.id.to_s() + ".pdf"
