@@ -3,8 +3,10 @@
     %h2.grey
       Menu
     %ul
+      /%li.LM_pic_materiau
+      /  =link_to 'Retour à la liste des matériaux', workspace_materials_path(@workspace)
       %li.LM_pic_materiau
-        =link_to 'Retour à la liste des matériaux', workspace_materials_path(@workspace)
+        =link_to 'Retour au laboratoire', :controller => :laboratory, :action => :index, :anchor => 'Matériaux'
       %li.LM_pic_materiau
         =link_to 'Editer le matériau', edit_workspace_material_path(@workspace, @material)
         

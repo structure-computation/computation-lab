@@ -23,25 +23,27 @@ class MaterialsController < InheritedResources::Base
   
   def update
     # Test pour savoir si les informations sont données en brut (en JSON, envoyées par le javascript)
+    @workspace           = current_workspace_member.workspace
     if params[:material].nil?
       @material = Material.find(params[:id])
       @material.update_attributes! retrieve_column_fields(params)
     end
-    update! { workspace_materials_path }
+    update! { workspace_material_path (@workspace, @material)}
   end
   
   def create
     if params[:material].nil?
       @material = Material.create retrieve_column_fields(params)
     end
-    create! { workspace_materials_path }
+    create! { {:controller => :laboratory, :action => :index, :anchor => 'Matériaux'} }
   end
   
   def edit
+    @workspace           = current_workspace_member.workspace
     @material = Material.find(params[:id])
     if @material.workspace_id == -1
-      flash[:notice] = "Vous n'avez pas le droit d'éditer cette pièce !"
-      redirect_to workspace_materials_path
+      flash[:notice] = "Vous n'avez pas le droit d'éditer ce materiaux !"
+      redirect_to workspace_material_path(@workspace, @material)
     else
       edit!
     end
@@ -81,6 +83,13 @@ class MaterialsController < InheritedResources::Base
     new!
   end
 
+  def destroy
+    @workspace           = current_workspace_member.workspace
+    @material            = Material.from_workspace(current_workspace_member.workspace.id).find_by_id(params[:id])
+    @material.destroy
+    redirect_to :controller => :laboratory, :action => :index, :anchor => 'Matériaux'
+  end
+  
   private
     def retrieve_column_fields(params)
       to_update = {}

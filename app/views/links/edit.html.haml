@@ -4,7 +4,9 @@
       Menu
     %ul
       %li.LM_pic_liaison
-        =link_to 'Retour à la liste des liaisons', workspace_links_path(@workspace)
+        =link_to 'Retour au laboratoire', :controller => :laboratory, :action => :index, :anchor => 'Liaisons'
+      %li.LM_pic_liaison
+        =link_to 'Fermer', workspace_link_path(@workspace, @link)
 
 -content_for :workspace_content do 
   .grey

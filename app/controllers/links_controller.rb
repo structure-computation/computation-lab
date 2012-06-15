@@ -26,21 +26,23 @@ class LinksController < InheritedResources::Base
       @link = Link.find(params[:id])
       @link.update_attributes! retrieve_column_fields(params)
     end
-    update! { workspace_links_path }
+    update! { workspace_link_path(@workspace, @link) }
   end
   
   def create
     if params[:link].nil?
       @link = Link.create retrieve_column_fields(params)
     end
-    create! { workspace_links_path }
+    create! { {:controller => :laboratory, :action => :index, :anchor => 'Liaisons'} }
   end
 
   def edit
+    @workspace           = current_workspace_member.workspace
     @link = Link.find(params[:id])
+    @disable = false
     if @link.workspace_id == -1
       flash[:notice] = "Vous n'avez pas le droit d'éditer cette liaison !"
-      redirect_to workspace_materials_path
+      redirect_to workspace_link_path(@workspace, @link)
     else
       edit!
     end
@@ -55,6 +57,7 @@ class LinksController < InheritedResources::Base
     # We take the std_link if not nil, the ws_link otherwise
     @link     = std_link ? std_link : ws_links
     @workspace        = current_workspace_member.workspace
+    @disable = true
     # If we have a link, it is rendered, otherwise we send an error (forbidden or missing, ).  
     if @link 
       # show!
@@ -74,6 +77,7 @@ class LinksController < InheritedResources::Base
     # dans lequel il doit spécifier si la liaison est parfaite, elastique, plastique etc.
     # Je crée une liaison et lui affecte les paramètres pour que les bonne partie du formulaire soit visible dans l'étape d'après.
     @workspace           = current_workspace_member.workspace
+    @disable = false
     if params[:next]
       @link = Link.new
       @link.comp_generique = "Pa " if params[:type].include? "Parfaite"
@@ -95,6 +99,13 @@ class LinksController < InheritedResources::Base
     #  new!
     #end
     new!
+  end
+  
+  def destroy
+    @workspace          = current_workspace_member.workspace
+    @link               = Link.from_workspace(current_workspace_member.workspace.id).find_by_id(params[:id])
+    @link.destroy
+    redirect_to :controller => :laboratory, :action => :index, :anchor => 'Liaisons'
   end
   
   private

@@ -3,8 +3,10 @@
     %h2.grey
       Menu
     %ul
+      /%li.LM_pic_liaison
+      /  =link_to 'Retour à la liste des liaisons', workspace_links_path(@workspace)
       %li.LM_pic_liaison
-        =link_to 'Retour à la liste des liaisons', workspace_links_path(@workspace)
+        =link_to 'Retour au laboratoire', :controller => :laboratory, :action => :index, :anchor => 'Liaisons'
       %li.LM_pic_liaison
         =link_to 'Editer la liaison', edit_workspace_link_path(@workspace, @link)
 

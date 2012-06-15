@@ -41,7 +41,6 @@ class WorkspacesController < InheritedResources::Base
   end
   
   def new
-    @page = :mon_compte
     @workspace = Workspace.new
   end
   
@@ -77,6 +76,21 @@ class WorkspacesController < InheritedResources::Base
     #     when "Company"
     #       @workspace = Company.new(params[:workspace])  
     #     end
+  end
+  
+  def edit
+    @workspace = current_workspace_member.workspace
+  end
+  
+  def update
+    @workspace = current_workspace_member.workspace
+    if @workspace.update_attributes(params[:workspace]) 
+      logger.debug "ok"
+      redirect_to workspace_path(@workspace, :anchor => "Description"), :notice => "Le workspace a été modifié." # TODO traduire 
+    else
+      logger.debug "pas ok"
+      redirect_to edit_workspace_path(@workspace), :notice => "Le workspace n'a pas été modifié." # TODO traduire 
+    end
   end
   
   # Suppr

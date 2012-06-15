@@ -1,0 +1,74 @@
+-content_for :left_top do
+  .left_top
+    %h2.grey
+      Comptes
+    %ul
+      %li.LM_pic_new_model
+        = link_to "Nouveau modèle", new_workspace_sc_model_path(@workspace)
+      %li.LM_pic_new_mat
+        = link_to "Nouveau materiau", new_workspace_material_path(@workspace)
+      %li.LM_pic_new_liaison
+        = link_to 'Nouvelle liaison', new_workspace_link_path(@workspace)
+
+-content_for :right_top do
+  %h2.grey
+    = @workspace.name
+  .grey
+    %p 
+      = "Solde du compte de jetons : " + @workspace.token_account.solde_token.to_s
+    
+-content_for :workspace_content do
+  %h2.grey
+    Détails du workspace
+  .wrapper
+    #left_content
+      %ul.tab_submenu.js_tab_submenu
+        %li 
+          %a#tab_1{:href => "#Modèles"} Modèles
+        %li 
+          %a#tab_2{:href => "#Matériaux"} Matériaux
+        %li                    
+          %a#tab_3{:href => "#Liaisons"} Liaisons
+            
+    #right_content
+      .tab_content.js_tab_content
+        #tab_1_content
+          %h3 Liste des modèles :
+          = render :partial => 'sc_models/search_filter'
+          = render :partial => 'sc_models/sc_models_list', :object => @sc_models
+          
+        #tab_2_content
+          %h3 Liste des matériaux :
+          = render :partial => 'materials/simple_search_filter'
+          %table.grey#materials_table
+            %thead
+              %tr
+                %th.no_sorter 
+                %th Nom
+                %th ID
+                %th Famille
+                %th Type
+                %th Comportement
+                %th.no_sorter Actions
+            %tbody
+              = render :partial => "materials/material", :collection => @standard_materials, :locals => {:type => "standard"}
+              = render :partial => "materials/material", :collection => @workspace_materials,  :locals => {:type => "workspace"}
+                
+        #tab_3_content
+          %h3 Liste des liaisons :
+          = render :partial => 'links/simple_search_filter'
+          %table.grey#links_table
+            %thead
+              %tr
+                %th.no_sorter
+                %th ID
+                %th Nom
+                %th Famille
+                %th Générique
+                %th Complexe
+                %th.no_sorter Actions
+            %tbody
+              = render :partial => "links/link", :collection => @standard_links, :locals => {:type => "standard"}
+              = render :partial => "links/link", :collection => @workspace_links,  :locals => {:type => "workspace"} 
+
+      = coffeescript_include_tag "manage_tab"

@@ -10,8 +10,8 @@
         
 
   %p
-    %label{:for => "search_filter"} Recherche
-    %input#search_filter{:type => "text"}
+    %label{:for => "link_search_filter"} Recherche
+    %input#link_search_filter{:type => "text"}
     %button#links_more_details.yellow_button Recherche avancée
 
   #links_advanced_search.advanced_search
@@ -46,5 +46,5 @@
     advancedSearchFilter("links_table",
                          ["name_search_filter","id_search_filter","reference_search_filter","family_search_filter","comp_generic_search_filter","comp_complex_search_filter"],
                          ["name"              ,"id"              ,"reference"              ,"family"              ,"comp_generic"              ,"comp_complex"])
-    searchFilter("links_table", "search_filter")
+    searchFilter("links_table", "link_search_filter")
   )

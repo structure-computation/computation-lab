@@ -4,7 +4,7 @@
       Menu
     %ul
       %li.LM_pic_materiau
-        =link_to 'Retour à la liste des matériaux', workspace_materials_path(@workspace)
+        =link_to 'Retour au laboratoire', :controller => :laboratory, :action => :index, :anchor => 'Matériaux'
         
 -content_for :workspace_content do
   .grey
