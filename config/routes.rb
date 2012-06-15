@@ -26,8 +26,9 @@ SCInterface::Application.routes.draw do
     resources :workspaces
   end
   
-  devise_for  :users,   :controllers => { :sessions => "users/sessions", :registrations => "users/registrations" }
+  devise_for  :users,   :controllers => { :sessions => "users/sessions", :registrations => "users/registrations", :confirmations => "users/confirmations" , :passwords => "users/passwords"}
 
+  resources :laboratory
   resources :materials
   resources :links
   

@@ -4,7 +4,7 @@
       Menu
     %ul
       %li.LM_pic_new_model
-        = link_to "Retour au modèle", workspace_sc_models_path(@workspace, @model)  
+        = link_to "Retour au modèle", workspace_sc_model_path(@workspace, @sc_model, :anchor => 'Utilisateurs')
 
 -content_for :right_top do
   %h2.grey

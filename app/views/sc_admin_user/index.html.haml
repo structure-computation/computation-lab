@@ -31,10 +31,7 @@
           %td.lastname=       user.lastname ? user.lastname : 'Undefined'
           %td.email=          user.email ? user.email : 'Undefined'
           %td.action_on_table.escape_search
-            %ul
-              %li
-                %a Visualisation
-              %li
-                %a Calcul
-              %li
-                = button_to 'Supprimer', sc_admin_user_path(user.id), :method => :delete, :confirm => "Êtes-vous sûr ?"
+            -unless user==current_user 
+              %ul
+                %li
+                  = button_to 'Supprimer', sc_admin_user_path(user.id), :method => :delete, :confirm => "Êtes-vous sûr ?"

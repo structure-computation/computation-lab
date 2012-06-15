@@ -7,6 +7,8 @@
         = link_to 'Nouveau forfait', :controller => "forfait", :action => "index"
       %li.manage_pic_nouveau_membre
         = link_to 'Ajouter un membre', new_workspace_member_path(@workspace)
+      %li.LM_pic_materiau
+        = link_to 'Editer', edit_workspace_path(@workspace)
 
 -content_for :right_top do
   %h2.grey

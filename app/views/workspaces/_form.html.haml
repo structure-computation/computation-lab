@@ -1,11 +1,11 @@
 %p
-= semantic_form_for @workspace, :url => {:controller => "workspaces", :action => "create"}  do |form|
+= semantic_form_for @workspace, :url => workspace_path(@workspace)  do |form|
   %table.grey#workspace_information_table
     %tr
       %th Name
       %td= form.text_field :name
     %tr
-      %th Description publique
+      %th Description
       %td= form.text_area :public_description
 
   = form.buttons

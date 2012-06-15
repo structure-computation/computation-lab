@@ -4,7 +4,7 @@
       Menu
     %ul
       %li.LM_pic_model
-        = link_to "Retour à la liste de modèles", workspace_sc_models_path(@workspace) 
+        =link_to 'Retour au laboratoire', :controller => :laboratory, :action => :index, :anchor => 'Modèles'
 -content_for :workspace_content do
   .grey
     = render "form"

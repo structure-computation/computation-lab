@@ -12,13 +12,14 @@
         %td= member.lastname
         %td= member.firstname
         %td.action_on_table.escape_search
-          %ul
-            %li
-              = button_to "Supprimer", workspace_member_path(current_workspace_member.workspace, member), :confirm => "Êtes vous sûr ?", :method => :delete, :confirm => "Êtes-vous sûr ?"
-            %li 
-              = button_to "Manager", :controller => :members, :action => :manager, :member_id => member.id
-            %li 
-              = button_to "Ingénieur", :controller => :members, :action => :engineer, :member_id => member.id
+          -unless member==current_user 
+            %ul
+              %li
+                = button_to "Supprimer", workspace_member_path(current_workspace_member.workspace, member), :confirm => "Êtes vous sûr ?", :method => :delete, :confirm => "Êtes-vous sûr ?" 
+              %li 
+                = button_to "Manager", :controller => :members, :action => :manager, :member_id => member.id
+              %li 
+                = button_to "Ingénieur", :controller => :members, :action => :engineer, :member_id => member.id
 
 /= link_to 'Ajouter un membre', new_workspace_member_path(@workspace), :class => 'yellow_button'
 
