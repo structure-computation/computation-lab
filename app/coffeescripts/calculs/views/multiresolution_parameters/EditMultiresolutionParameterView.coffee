@@ -44,3 +44,4 @@ SCViews.EditMultiresolutionParameterView = Backbone.View.extend
   show: ->
     $(@el).show()
     $('#visu_calcul').hide()
+    $('#time_parameter_form').hide()

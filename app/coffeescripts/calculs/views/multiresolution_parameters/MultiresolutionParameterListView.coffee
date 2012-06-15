@@ -25,8 +25,8 @@ SCViews.MultiresolutionParameterListView = Backbone.View.extend
     $(@el).find('select#multiresolution_type').val(multiresolution_type)
     $(@el).find('input.resolution_number').val(resolution_number)
 
-    if @collection.size() == 0
-      @collection.add new SCModels.MultiresolutionParameter()
+    #if @collection.size() == 0
+    #  @collection.add new SCModels.MultiresolutionParameter()
     
     for parameter in @collection.models
       @parameterViews.push new SCViews.MultiresolutionParameterView model: parameter, parentElement: this  
@@ -46,24 +46,14 @@ SCViews.MultiresolutionParameterListView = Backbone.View.extend
     SCVisu.current_calcul.trigger 'change' 
 
   selectChanged: (event) ->
-    if $(event.srcElement).val() == "fatigue"
-      if confirm "Êtes-vous sûr ? Cela va effacer tous vos paramêtre (sauf le premier)."
+    if $(event.srcElement).val() == "off"
+      if confirm "Êtes-vous sûr ? Cela va effacer tous vos paramêtres."
         # Delete all except first element
-        if @parameterViews.length > 1
-          for i in [1..@parameterViews.length - 1]
-            @parameterViews[i].delete(true)
+        for i in [0..@parameterViews.length - 1]
+          @parameterViews[i].delete(true)
         @disableAddButton()
       else
-        $('#multiresolution_type').val('expert_plan')
-    else if $(event.srcElement).val() == "off"
-      if confirm "Êtes-vous sûr ? Cela va effacer tous vos paramêtre (sauf le premier)."
-        # Delete all except first element
-        if @parameterViews.length > 1
-          for i in [0..@parameterViews.length - 1]
-            @parameterViews[i].delete(true)
-        @disableAddButton()
-      else
-        $('#multiresolution_type').val('expert_plan')
+        $('#multiresolution_type').val('function')
     else
       @ableAddButton()
     SCVisu.current_calcul.trigger 'change'  

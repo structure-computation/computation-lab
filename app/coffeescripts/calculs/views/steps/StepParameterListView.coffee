@@ -14,9 +14,9 @@ SCViews.StepParameterListView = Backbone.View.extend
       @disableAddButton()
     else
       @ableAddButton()
-      if @collection.size() == 0
-        parameter = new SCModels.StepParameter()
-        @collection.add parameter
+      #if @collection.size() == 0
+      #  parameter = new SCModels.StepParameter()
+      #  @collection.add parameter
 
     for parameter in @collection.models
       @stepParameterViews.push new SCViews.StepParameterView model: parameter, parentElement: this
@@ -64,4 +64,8 @@ SCViews.StepParameterListView = Backbone.View.extend
     # Show edit view of the given model.
   showDetails: (model) ->
     @editView.setModel model
+    
+  delete_views: ()->
+    for i in [0..@stepParameterViews.length - 1]
+      @stepParameterViews[i].delete(true)
       

@@ -54,6 +54,7 @@ SCViews.StepParameterView = Backbone.View.extend
     # makes lose the focus
     $('#visu_calcul').hide()  
     
+    
   delete: (withoutPrompting = false)->
     if withoutPrompting
       @model.destroy()

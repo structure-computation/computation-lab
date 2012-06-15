@@ -68,6 +68,7 @@ SCViews.EditStepParameterView = Backbone.View.extend
   show: ->
     $(@el).show()
     $('#visu_calcul').hide()
+    $('#multiresolution_parameter_form').hide()
 
   # Template for inputs for step function part
   functionPartTemplate: (step) ->

@@ -7,6 +7,7 @@ SCViews.StepListView = Backbone.View.extend
   # The init method is here to prevent having multiple reference of a step list view
   init: (collection) ->
     @stepViews = []
+    @stepParameterListView = SCVisu.stepParameterListView
     @clearView()
     @collection = collection
     time_scheme = SCVisu.current_calcul.get('time_steps').time_scheme
@@ -19,9 +20,9 @@ SCViews.StepListView = Backbone.View.extend
     @setSelectList time_scheme
     @collection.meta 'time_scheme', time_scheme
     
-    if @collection.size() == 0
-      step = new SCModels.Step()
-      @collection.add step
+    #if @collection.size() == 0
+    #  step = new SCModels.Step()
+    #  @collection.add step
 
     for step in @collection.models
       @stepViews.push new SCViews.StepView model: step, parentElement: this
@@ -70,10 +71,11 @@ SCViews.StepListView = Backbone.View.extend
     @setTimeScheme($(event.srcElement).val())
   
     if $(event.srcElement).val() == "static"
-      if confirm "Êtes-vous sûr ? Cela va effacer tous vos pas de temps"
+      if confirm "Êtes-vous sûr ? Cela va effacer tous vos pas de temps et vos paramètres temporels"
         # Delete all
         for i in [0..@stepViews.length - 1]
           @stepViews[i].delete(true)
+        @stepParameterListView.delete_views()
         @disableAddButton()
       else
         $('#step_type').val('dynamic')

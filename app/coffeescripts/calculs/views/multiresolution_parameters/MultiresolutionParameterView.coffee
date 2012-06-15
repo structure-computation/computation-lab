@@ -50,6 +50,7 @@ SCViews.MultiresolutionParameterView = Backbone.View.extend
     # Trigger selection change only when the material selected change because it
     $('#visu_calcul').hide()  
     
+    
   updateModel: ->
     SCVisu.current_calcul.trigger 'change'
     @model.set 
