@@ -97,9 +97,14 @@ class User < ActiveRecord::Base
     self.save
   end
   
-  def change_mdp(params)
-    user = current_user.authenticated?(params[:password]) && !params[:new_password].blank? && params[:new_password] == params[:password_confirmation]
-    return true
+  def change_mdp?(params)
+    logger.debug params
+    logger.debug self.password 
+    if self.password == params[:password] && !params[:new_password].blank? && params[:new_password] == params[:password_confirmation]
+      return true
+    else 
+      return false
+    end
   end
   
 

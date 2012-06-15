@@ -1,12 +1,12 @@
 # This controller handles the login/logout function of the site.  
 class Users::SessionsController < Devise::SessionsController
   
-
+  layout 'login'
   # render new.rhtml
   def new
     clean_up_passwords(build_resource)
     session[:current_workspace_member_id] = nil
-    render '/devise/sessions/new', :layout => 'login'
+    render '/devise/sessions/new'
   end
 
   # def create

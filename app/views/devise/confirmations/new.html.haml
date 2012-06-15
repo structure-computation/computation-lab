@@ -1,9 +1,23 @@
-%h2 Resend confirmation instructions
-= form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f|
-  = devise_error_messages!
-  %p
-    = f.label :email
-    %br/
-    = f.text_field :email
-  %p= f.submit "Resend confirmation instructions"
-= render :partial => "devise/shared/links"
+-content_for :left_top do
+  .left_submenu
+    %h2.grey
+      Menu
+    %ul
+      %li.manage_pic_nouveau_membre
+        =link_to 'Page de login', new_session_path(resource_name)
+      %li.manage_pic_nouveau_membre
+        = link_to "Forgot your password?", new_password_path(resource_name)
+
+
+-content_for :right_top do
+  %h2.grey
+    Resend confirmation instructions
+  .grey
+    = form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f|
+      #login_format
+        %p= f.label :email
+        = f.text_field :email
+        %p
+        %p= f.submit "Resend confirmation instructions"
+        %p
+          %br
