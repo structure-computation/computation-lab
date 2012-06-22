@@ -14,22 +14,22 @@
   %h2.grey
     Détail du modèle : 
     = @sc_model.name
-  .grey 
-    /#modele_details
-    %table.grey
-      %tbody
-        %tr
-          %th Dimension
-          %td= @sc_model.dimension
-        %tr
-          %th Nombre de degrés de libertés
-          %td= @sc_model.sst_number
-        %tr
-          %th Nombre de pièces
-          %td= @sc_model.parts
-        %tr
-          %th Nombre de liaisons
-          %td= @sc_model.interfaces
+  /.grey 
+  /#modele_details
+  %table.grey
+    %tbody
+      %tr
+        %th Dimension
+        %td= @sc_model.dimension
+      %tr
+        %th Nombre de degrés de libertés
+        %td= @sc_model.sst_number
+      %tr
+        %th Nombre de pièces
+        %td= @sc_model.parts
+      %tr
+        %th Nombre de liaisons
+        %td= @sc_model.interfaces
 
 -content_for :left_content do
 
