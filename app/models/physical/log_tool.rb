@@ -69,6 +69,12 @@ class LogTool < ActiveRecord::Base
     self.launch_state = "echec"
     self.save
   end
+  
+  def deleted()
+    self.launch_state = "deleted"
+    self.state = "deleted"
+    self.save
+  end
 
   def get_launch_autorisation()
     self.launch_autorisation = false

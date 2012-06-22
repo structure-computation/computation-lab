@@ -8,7 +8,7 @@ class ScModel < ActiveRecord::Base
   
   has_many    :files_sc_models 
 
-  has_many    :model_ownerships, :class_name => "WorkspaceMemberToModelOwnership"
+  has_many    :model_ownerships, :class_name => "WorkspaceMemberToModelOwnership", :dependent => :delete_all
   has_many    :workspace_members,                  :through => :model_ownerships
 
   has_many    :log_tools
@@ -19,6 +19,7 @@ class ScModel < ActiveRecord::Base
      where(:workspace_id => workspace_id)
    }
   
+  before_destroy :delete_model
   #state possibles : void, in_process, active, deleted, 
   
   def has_result? 
@@ -106,7 +107,7 @@ class ScModel < ActiveRecord::Base
     # analyse et création du log_tools_scult
     @nb_token = self.mesh_file_analysis
     @log_tool_scult = []
-    if log_tool_scult = self.log_tools.find(:last)
+    if log_tool_scult = self.log_tools.find(:last, :conditions => {:log_type => "scult"})
       if log_tool_scult.pending?
         @log_tool_scult = log_tool_scult
       else
@@ -278,16 +279,19 @@ class ScModel < ActiveRecord::Base
   end
   
   
-  def delete_mesh
-    path_to_sc_model = "#{SC_MODEL_ROOT}/model_#{self.id}/MESH/mesh"
-    logger.debug path_to_sc_model
-    #     Dir["#{File.dirname(path_to_sc_model)}/*"].each do |file|
-    #       logger.debug file
-    #       next if File.basename(file) == File.basename(path_to_sc_model)
-    #       FileUtils.rm_rf file, :noop => true, :verbose => true
-    #     end
-    self.state = "void"
-    self.save
+  def delete_mesh    
+    log_tool_scult = self.log_tools.find(:last, :conditions => {:log_type => "scult"})
+    if !log_tool_scult.nil? and log_tool_scult.ready?
+      raise ActiveRecord::RecordInvalid
+    else
+      log_tool_scult.pending() unless log_tool_scult.nil?
+      self.updated_at = Time.now
+      path_to_sc_model = "#{SC_MODEL_ROOT}/model_#{self.id}/MESH"
+      FileUtils.rm_rf path_to_sc_model
+      self.state = "void"
+      self.save
+      return true
+    end
   end
   
   
@@ -299,14 +303,15 @@ class ScModel < ActiveRecord::Base
   end
   
   def delete_model()
-    self.users.clear
+    self.model_ownerships.clear
     self.change_state('deleted')
     self.deleted_at = Time.now
-    #self.used_memory = 0
+    path_to_sc_model = "#{SC_MODEL_ROOT}/model_#{self.id}"
+    FileUtils.rm_rf path_to_sc_model
     self.save
   end
   
-   def change_state(state)
+  def change_state(state)
     self.state = state
     self.save
   end

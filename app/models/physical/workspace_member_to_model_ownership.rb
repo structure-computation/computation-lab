@@ -8,6 +8,6 @@ class WorkspaceMemberToModelOwnership < ActiveRecord::Base
     @sc_model = ScModel.find(params[:id])
     @sc_model.workspace_members << @member_to_add #(:rights => "readonly") 
     flash[:notice] = 'Sc_model was shared.'     
-   end   
+  end   
             
 end

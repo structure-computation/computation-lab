@@ -23,20 +23,7 @@ class ScModelsController < InheritedResources::Base
   end
   
   def create
-    num_model = 1
-    # File.open("#{RAILS_ROOT}/public/test/test_post_create_#{num_model}", 'w+') do |f|
-    #     f.write(params[:json])
-    # end                          
-
-    #Assign as user model owner when current user create a new sc_model                         
-    # respond_to do |format|
-    #   if @sc_model.save
-    #     format.html { redirect_to(:action => :index) }
-    #   else
-    #         format.html { render :action => "new" }
-    #   end
-    # end 
-    #             
+    num_model = 1           
     @sc_model = ScModel.new(params[:sc_model]) #retrieve_column_fields(params)  
     @sc_model.save                   
     @ownership = WorkspaceMemberToModelOwnership.new
@@ -44,7 +31,7 @@ class ScModelsController < InheritedResources::Base
     @ownership.workspace_member = current_workspace_member
     @ownership.save    
     
-    create! { workspace_sc_models_path }
+    redirect_to :controller => :laboratory, :action => :index,:notice => "Nouveau modèle crée." # TODO: traduire.
   end
 
   # TODO: Uncomment for production
@@ -57,15 +44,21 @@ class ScModelsController < InheritedResources::Base
   def show 
     @sc_model  = ScModel.from_workspace(current_workspace_member.workspace.id).find_by_id(params[:id])
     @workspace    = current_workspace_member.workspace
+    #     @sc_model.model_ownerships.each do |ownership|
+    #       if ownership.workspace_member.nil?
+    #         logger.debug ownership.id
+    #         ownership.destroy
+    #         if ownership.workspace_member.user.nil?
+    #           logger.debug ownership.id
+    #           ownership.destroy
+    #         end
+    #       end
+    #     end
     if @sc_model 
       # show!
       render
     else
-      respond_to do |format|
-        format.html {redirect_to workspace_sc_models_path(current_workspace_member.workspace.id), 
-                    :notice => "Ce modèle n'existe pas ou n'est pas accessible à partir de cet espace de travail."}
-        format.json {render :status => 404, :json => {}}
-      end
+      redirect_to :controller => :laboratory, :action => :index, :notice => "Ce modèle n'existe pas ou n'est pas accessible à partir de cet espace de travail."
     end
   end          
   
@@ -73,19 +66,11 @@ class ScModelsController < InheritedResources::Base
     @sc_model = ScModel.find(params[:id])    
     @ownership = WorkspaceMemberToModelOwnership.find(:all, :conditions => ["sc_model_id = ? AND workspace_member_id = ?" , @sc_model.id, current_workspace_member])
     #@ownership.find_by_workspace_member(current_workspace_member)    
-
     if !@ownership.empty?
       @sc_model.destroy
-      respond_to do |format| 
-        format.html {redirect_to workspace_sc_models_path(current_workspace_member.workspace.id), 
-                  :notice => "Le modèle a bien été détruit."}  
-      end  
+      redirect_to :controller => :laboratory, :action => :index, :notice => "Le modèle a bien été détruit."
     else
-      respond_to do |format|
-        format.html {redirect_to workspace_sc_models_path(current_workspace_member.workspace.id), 
-                    :notice => "Vous ne pouvez pas détruire ce modèle."}
-        format.json {render :status => 404, :json => {}}
-      end
+      redirect_to :controller => :laboratory, :action => :index, :notice => "Vous ne pouvez pas détruire ce modèle."
     end
   end
   
@@ -96,11 +81,7 @@ class ScModelsController < InheritedResources::Base
     if @sc_model 
       render
     else
-      respond_to do |format|
-        format.html {redirect_to workspace_sc_models_path(current_workspace_member.workspace.id), 
-                    :notice => "Ce modèle n'existe pas ou n'est pas accessible à partir de cet espace de travail."}
-        format.json {render :status => 404, :json => {}}
-      end
+      redirect_to :controller => :laboratory, :action => :index, :notice => "Ce modèle n'existe pas ou n'est pas accessible à partir de cet espace de travail."
     end
   end  
   

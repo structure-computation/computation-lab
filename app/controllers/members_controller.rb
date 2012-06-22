@@ -38,7 +38,7 @@ class MembersController < InheritedResources::Base
           else
             @workspace.members << test_user
             @current_workspace_member = test_user.user_workspace_memberships.find(:first, :conditions => {:workspace_id =>  @workspace.id} )
-            @current_workspace_member.manager = true
+            @current_workspace_member.manager = false
             @current_workspace_member.engineer = true
             @current_workspace_member.make_role()
             @current_workspace_member.save
@@ -48,7 +48,7 @@ class MembersController < InheritedResources::Base
           @new_user = User.create(params["user"])
           @workspace.members << @new_user
           @current_workspace_member = @new_user.user_workspace_memberships.find(:first, :conditions => {:workspace_id =>  @workspace.id} )
-          @current_workspace_member.manager = true
+          @current_workspace_member.manager = false
           @current_workspace_member.engineer = true
           @current_workspace_member.make_role()
           @current_workspace_member.save

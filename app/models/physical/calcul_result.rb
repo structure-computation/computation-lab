@@ -11,9 +11,10 @@ class CalculResult < ActiveRecord::Base
   belongs_to  :user         # utilisateur ayant lance le calcul
   belongs_to  :workspace_member, :class_name => "UserWorkspaceMembership", :foreign_key => "workspace_member_id"
   belongs_to  :sc_model
-  has_one     :log_calcul
   has_one     :log_tool
   has_one     :solde_token_account
+  
+  before_destroy :delete_calcul
   
   #state = ['temp', 'in_process', 'finish','downloaded']
   #log_type = ['create', 'compute']
@@ -235,12 +236,18 @@ class CalculResult < ActiveRecord::Base
   end
   
   def delete_calcul()
-    self.change_state('deleted')
-    self.updated_at = Time.now
-    path_to_calcul = "#{SC_MODEL_ROOT}/model_#{self.sc_model.id}/calcul_#{self.id}"
-    FileUtils.rm_rf path_to_calcul
-    self.used_memory = 0
-    self.save
+    if !self.log_tool.nil? and self.log_tool.ready?
+      raise ActiveRecord::RecordInvalid
+      return false
+    else
+      self.change_state('deleted')
+      self.log_tool.deleted() unless self.log_tool.nil?
+      self.updated_at = Time.now
+      path_to_calcul = "#{SC_MODEL_ROOT}/model_#{self.sc_model.id}/calcul_#{self.id}"
+      FileUtils.rm_rf path_to_calcul
+      self.save
+      return true
+    end
   end
   
   def change_state(state)

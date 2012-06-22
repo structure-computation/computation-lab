@@ -2,7 +2,7 @@ class UserWorkspaceMembership < ActiveRecord::Base
   belongs_to  :user
   belongs_to  :workspace
   
-  has_many    :model_ownerships, :class_name => "WorkspaceMemberToModelOwnership", :foreign_key => "workspace_member_id"
+  has_many    :model_ownerships, :class_name => "WorkspaceMemberToModelOwnership", :foreign_key => "workspace_member_id", :dependent => :delete_all
   has_many    :sc_models,                 :through => :model_ownerships
 
   
@@ -15,6 +15,14 @@ class UserWorkspaceMembership < ActiveRecord::Base
       self.role = "engineer"
     end
     self.save
+  end
+  
+  def is_manager?
+    result = false
+    if self.manager
+      result = true
+    end
+    return result
   end
   
   # TODO: exemple pour mise en place des scopes.

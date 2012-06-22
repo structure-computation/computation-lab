@@ -19,6 +19,7 @@ class LaboratoryController < InheritedResources::Base
     @workspace_materials        = Material.from_workspace @workspace.id
     @standard_links             = Link.standard
     @workspace_links            = Link.from_workspace @workspace.id
+    
   end
   
 end

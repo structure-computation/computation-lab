@@ -13,20 +13,20 @@ class User < ActiveRecord::Base
   
   # Relations
   # belongs_to  :workspace
-  has_many    :user_workspace_memberships
+  has_many    :user_workspace_memberships, :dependent => :delete_all
   has_many    :workspaces, :through => :user_workspace_memberships
   
-  has_many    :company_user_memberships
+  has_many    :company_user_memberships, :dependent => :delete_all
   has_many    :companies, :through => :company_user_memberships
   
   # Relations sur les modèles.
-  has_many    :model_ownerships,     :through => :user_workspace_memberships, :class_name => "WorkspaceMemberToModelOwnership", :foreign_key => "workspace_member_id"
+  has_many    :model_ownerships, :through => :user_workspace_memberships, :class_name => "WorkspaceMemberToModelOwnership", :foreign_key => "workspace_member_id", :dependent => :delete_all
   
   
   # TODO: Ancienne relation !
-  has_many    :old_user_model_ownerships, :class_name => "UserModelOwnership", :foreign_key => "user_id"
+  #has_many    :old_user_model_ownerships, :class_name => "UserModelOwnership", :foreign_key => "user_id"
   # has_many    :old_relation_sc_models, :through => :old_user_model_ownerships, :class_name => "ScModel", :foreign_key => "sc_model_id"
-  has_many    :sc_models, :through => :old_user_model_ownerships #, :class_name => "ScModel", :foreign_key => "sc_model_id"
+  #has_many    :sc_models, :through => :old_user_model_ownerships #, :class_name => "ScModel", :foreign_key => "sc_model_id"
   
   
   

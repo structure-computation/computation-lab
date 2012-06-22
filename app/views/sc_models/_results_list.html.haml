@@ -19,12 +19,10 @@
         %td.action_on_table
           %ul
             %li
-              = link_to "Voir"
+              = link_to "Scills", sc_model_calculs_path(@sc_model)
             -if !result.log_tool.nil? and result.log_tool.finish?()   
               %li
                 = link_to "Télécharger"
-            %li
-              = button_to "Supprimer", sc_model_calcul_path(@sc_model, result), :method => :delete, :confirm => "Êtes-vous sûr ?"
 
 :coffeescript
   $( ->

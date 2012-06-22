@@ -17,9 +17,8 @@
     /    = link_to 'Matériaux', workspace_materials_path(current_workspace_member.workspace)
     /  %li
     /    = link_to 'Liaisons', workspace_links_path(current_workspace_member.workspace)
-  %li{:class => ( @page == :forum ? "selected" : "")}
-    /= link_to 'Laboratoire', workspace_sc_models_path(current_workspace_member.workspace)
-    = link_to 'Forum', :controller => "laboratory", :action => "index"
+  /%li{:class => ( @page == :forum ? "selected" : "")}
+  /  = link_to 'Forum', :controller => "laboratory", :action => "index"
   - if is_mobile?
 
     :coffeescript

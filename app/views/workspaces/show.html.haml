@@ -9,6 +9,9 @@
         = link_to 'Ajouter un membre', new_workspace_member_path(@workspace)
       %li.LM_pic_materiau
         = link_to 'Editer', edit_workspace_path(@workspace)
+      - if current_workspace_member.is_manager?
+        %li.LM_pic_model
+          = link_to 'liste de tous les modèles', workspace_sc_models_path(@workspace)
 
 -content_for :right_top do
   %h2.grey
