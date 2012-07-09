@@ -37,6 +37,13 @@ class CalculResult < ActiveRecord::Base
     jsonobject["multiresolution_parameters"] = params["multiresolution_parameters"]
     save_brouillon(jsonobject)
   end
+  
+  def duplicate_brouillon(params)
+    path_to_file = "#{SC_MODEL_ROOT}/model_#{self.sc_model.id}/calcul_#{params[:id]}/results/calcul.txt"
+    results      = File.read(path_to_file)
+    jsonobject   = JSON.parse(results)
+    save_brouillon(jsonobject)
+  end
 
   def save_brouillon(params) #enregistrement du fichier brouillon
     jsonobject = JSON.parse(params.to_json)
@@ -143,17 +150,39 @@ class CalculResult < ActiveRecord::Base
     #logger.debug results
     
     #calcul des prévisions
-    logger.debug jsonobject['options']['convergence_method_LATIN']['max_iteration']
-    logger.debug jsonobject['time_steps']['collection'].length 
-    logger.debug self.sc_model.dimension
-    logger.debug jsonobject['mesh']['nb_groups_elem']
     
+    
+    #calcul du nombre de pas de temps
+    nb_steps = jsonobject['time_steps']['collection'].length
+    nb_pdt = 0
+    logger.debug "nb_steps = " + nb_steps.to_s
+    for i in 0..nb_steps-1
+      logger.debug i
+      nb_pdt += jsonobject['time_steps']['collection'][i]["nb_time_steps"]
+    end
+    logger.debug "nb_steps = " + nb_pdt.to_s
+    
+    #calcul du nombre de résolutions
+    nb_resolution = jsonobject['multiresolution_parameters']['resolution_number']
+    logger.debug "nb_resolution = " + nb_resolution.to_s
+    
+    #correction si on est en statique ou sans multiresolution
+    nb_pdt = 1 if jsonobject['time_steps']['time_scheme'] == "static"
+    nb_resolution = 1 if jsonobject['multiresolution_parameters']['multiresolution_type'] == "off"
+    logger.debug "nb_resolution = " + nb_resolution.to_s
+    logger.debug "nb_steps = " + nb_pdt.to_s
+    
+    nb_resolution = nb_resolution.to_s.to_i
+    
+    #autres grandeur utils
     sst_number = jsonobject['mesh']['nb_sst'].to_i
     ddl_number = jsonobject['mesh']['nb_ddl'].to_i
     max_iteration = jsonobject['options']['convergence_method_LATIN']['max_iteration'].to_i
-    nb_time_steps = jsonobject['time_steps']['collection'].length
     
-    @estimated_calcul_points = self.sc_model.dimension * self.sc_model.dimension * ddl_number * max_iteration * (nb_time_steps + 1) 
+    @estimated_calcul_points = self.sc_model.dimension * self.sc_model.dimension * ddl_number * max_iteration * nb_pdt * nb_resolution
+    @estimated_load_data = @estimated_calcul_points / (nb_pdt * nb_resolution)
+    @estimated_save_data = @estimated_calcul_points / (nb_pdt * nb_resolution)
+    logger.debug "estimated_calcul_points = " + @estimated_calcul_points.to_s
     #self.gpu_allocated = (self.sc_model.dimension * self.sc_model.dimension * sst_number * 0.001).ceil
     self.gpu_allocated = 1
     if(jsonobject['mesh']['nb_groups_elem'] > 8)
@@ -163,11 +192,12 @@ class CalculResult < ActiveRecord::Base
     if(jsonobject['options']['mode'] == "test")
       self.gpu_allocated = 1
     end
-    self.estimated_calcul_time = (@estimated_calcul_points * 0.000001 / self.gpu_allocated)
+    
+    self.estimated_calcul_time = @estimated_load_data * 0.000001 + (@estimated_calcul_points + @estimated_save_data) * 0.000001 / self.gpu_allocated
     self.save
     
     # analyse et création du log_tools_scult
-    @nb_token = ((self.estimated_calcul_time * self.gpu_allocated)/15).ceil+1
+    @nb_token = ((self.estimated_calcul_time * self.gpu_allocated)/30).ceil+1
     @log_tool_scills = []
     if log_tool_scills = self.log_tool
       @log_tool_scills = log_tool_scills

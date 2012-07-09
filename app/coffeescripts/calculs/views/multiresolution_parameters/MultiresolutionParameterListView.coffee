@@ -51,6 +51,10 @@ SCViews.MultiresolutionParameterListView = Backbone.View.extend
         # Delete all except first element
         for i in [0..@parameterViews.length - 1]
           @parameterViews[i].delete(true)
+        resolution_number = 1
+        SCVisu.current_calcul.setMultiresolutionnumber resolution_number
+        @collection.meta 'resolution_number', resolution_number
+        $(@el).find('input.resolution_number').val(resolution_number)
         @disableAddButton()
       else
         $('#multiresolution_type').val('function')

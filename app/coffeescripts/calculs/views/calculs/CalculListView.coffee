@@ -82,7 +82,29 @@ SCViews.CalculListView = Backbone.View.extend
       $(calculView.el).removeClass('selected')
     $(calcul.el).addClass 'selected'
     @selected_calcul = new SCModels.Calcul calcul.model
+    
+    
+  duplicateCalcul:(calcul) ->
+    $('#new_calcul').attr("disabled", "disabled")
+    @selected_calcul = new SCModels.Calcul calcul.model
+    SCVisu.current_calcul = new SCModels.Calcul
+    SCVisu.router.calculIsCreating()
+    that = this
+    #alert("in duplicate")
+    $.post("/calculs/duplicate",{sc_model_id: calcul.model.get('sc_model_id'), id: calcul.model.get('id')},
+      (response) ->
+        #alert("in duplicate")
+        SCVisu.current_calcul.set 'name' : response.name, 'id' : response.id, 'state' : response.state, 'description' : response.description
+        SCVisu.current_calcul.resetUrl()
+        calculView = SCVisu.calculListView.createCalculView SCVisu.current_calcul
+        SCVisu.calculListView.renderChildViews()
+        SCVisu.router.calculHasBeenCreated()
+        $('#new_calcul').removeAttr("disabled")
+        that.disableSaveButton()
+    )
+    
 
+    
   createCalculView: (calcul) ->
     c = new SCViews.CalculView model: calcul, parentElement: this
     @calculViews.push c

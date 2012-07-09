@@ -57,6 +57,18 @@ class CalculsController < ApplicationController
     render :json => @current_calcul.to_json
   end
   
+  def duplicate
+    @current_model              = current_workspace_member.sc_models.find(params[:sc_model_id])
+    @current_calcul             = CalculResult.new
+    @current_calcul.name        = "brouillon_" + (CalculResult.find_all_by_sc_model_id(@current_model).length + 1).to_s
+    @current_calcul.sc_model_id = @current_model.id
+    @current_calcul.user_id     = current_workspace_member.user_id
+    @current_calcul.state       = "temp"
+    @current_calcul.save!
+    results = @current_calcul.duplicate_brouillon(params)
+    render :json => @current_calcul.to_json
+  end
+  
   def new
     @id_model = params[:id_model]
     @current_model = current_workspace_member.sc_models.find(@id_model)

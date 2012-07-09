@@ -153,6 +153,7 @@ SCViews.InterfaceListView = Backbone.View.extend
   # Check get the two pieces it is attached to
   # Check if the material of those pieces correspond to the filter
   filterBetweenMaterials: (firstID, secondID) ->
+    #alert("firstID : " + firstID + ", secondID : " + secondID)
     for interfaceView in @interfaceViews
       ids = interfaceView.model.get('adj_num_group').split(' ')
       piece1 = SCVisu.pieceListView.getPiece(ids[0])

@@ -76,6 +76,7 @@ SCViews.EditEdgeView = Backbone.View.extend
   updateInputs: ->
     for key of @model.attributes
       if key != 'criteria' or key != 'geometry'
+        #alert "##{@currentCriteria}_#{@currentGeometry}_#{key}"
         $(@el).find("##{@currentCriteria}_#{@currentGeometry}_#{key}").val(@model.get(key))
     
   # Hide everything except the criteria select box

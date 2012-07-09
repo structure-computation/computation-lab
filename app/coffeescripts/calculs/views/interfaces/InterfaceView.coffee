@@ -81,6 +81,7 @@ SCViews.InterfaceView = Backbone.View.extend
     template = """
       <td>#{@model.get('id')}</td>
       <td>#{@model.get('name')}</td>
+      <td>#{@model.get('adj_num_group')}</td>
     """
     $(@el).html(template)
     if @model.isAssigned()
