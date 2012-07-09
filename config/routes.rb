@@ -32,6 +32,9 @@ SCInterface::Application.routes.draw do
   resources :materials
   resources :links
   
+  resources :calculs
+  match 'calculs/duplicate'   => "calculs#duplicate" 
+  
   match 'workspaces/get_gestionnaire'   => "workspaces#get_gestionnaire"  
   resources :workspaces do
     resources :materials

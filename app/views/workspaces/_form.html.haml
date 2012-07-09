@@ -1,5 +1,5 @@
 %p
-= semantic_form_for @workspace, :url => workspace_path(@workspace)  do |form|
+= semantic_form_for @workspace, :url => {:controller => :workspaces, :action => :create}  do |form|
   %table.grey#workspace_information_table
     %tr
       %th Name
