@@ -1,0 +1,27 @@
+.search_filter
+  %p
+    %label{:for => "soldes_search_filter"} Recherche
+    %input#soldes_search_filter{:type => "text"}
+
+%table.grey#soldes_table
+  %thead
+    %tr
+      %th Date
+      %th Type
+      %th Débit
+      %th Crédit
+      %th Solde
+  %tbody
+    - soldes_list.each do |solde|
+      %tr
+        %td= solde.created_at.to_date
+        %td= solde.solde_type
+        %td= solde.used_token
+        %td= solde.credit_token
+        %td= solde.solde_token
+
+:coffeescript
+  $( ->
+    $("#soldes_table").tablesorter()
+    searchFilter("soldes_table", "soldes_search_filter")
+  )

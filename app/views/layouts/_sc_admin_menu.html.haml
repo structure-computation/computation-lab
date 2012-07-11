@@ -1,0 +1,22 @@
+/ Menu principal de l'application.
+
+%ul#main_menu
+  -# %li{:class => ( @page == :accueil ? "selected" : "")}
+  -#   =link_to 'Accueil', root_path
+  
+  %li{:class => ( @page == :sc_admin_workspace ? "selected" : "")}
+    = link_to 'Workspaces'    , :controller => "sc_admin_workspace", :action => "index"
+  %li{:class => ( @page == :sc_admin_company ? "selected" : "")}
+    = link_to 'Companies', :controller => "sc_admin_company", :action => "index"
+  %li{:class => ( @page == :sc_admin_user ? "selected" : "")}
+    = link_to 'Users', :controller => "sc_admin_user", :action => "index"
+  %li{:class => ( @page == :sc_admin_bill ? "selected" : "")}
+    = link_to 'Bills', :controller => "sc_admin_bill", :action => "index"
+      
+-# TODO: Utiliser un helper pour le style "selected"
+-#   %li{:id => "menu_accueil"     , :class => "main_menu_item " + menu_item_selected_class( @page, :accueil   ) }
+
+
+
+
+    

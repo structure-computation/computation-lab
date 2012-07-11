@@ -1,0 +1,109 @@
+ul.horizontal_tab_submenu
+  list-style: none
+  margin-bottom: 0
+  padding-left: 0
+  display: table
+  width: 100%
+  li
+    font-size: 0.9em
+    display: inline-block
+    margin: 0
+    width: 25% /* Mis à 25% car pour le moment il y a au maximum 4 onglets (100 / 4 = 25), si on rajoute des onglets, il faut changer cette valeur en consèquence */
+    a
+      width: 99%
+      text-decoration: none
+      line-height: 2em
+      display: inline-block
+      background-color: $color-tab-start
+      margin: 0
+      +border-top-radius(0.4em)
+      color: $color-font-header
+      text-align: center
+      border-bottom: none
+    a.selected
+      +background-image(linear-gradient($color-tab-selected-start, $color-tab-selected-end))
+      color       : $color-font-selected-tab
+      border-bottom: none      
+      font-weight : bold
+      text-align: center
+    a.disabled
+      background-color: gray
+ul.tab_submenu
+  list-style: none
+  margin-top: 2em
+  padding-left: 0
+  margin-right: -7%
+  margin-bottom: 0
+  li
+    font-size: 0.9em
+    margin-bottom: 0.2em
+    a
+      text-decoration: none
+      line-height: 2em
+      display: block
+      background-color: $color-tab-start
+      //background-color: #999
+      padding: 0.2em 0.5em 0.2em 1em
+      +border-radius(0.4em)
+      color: $color-font-header
+      text-align: right
+      text-align: left
+      margin-right: 5%
+      margin-left: 5%
+      //white-space: pre-wrap
+      //word-wrap: break-word
+  li
+    a.selected
+      //background: darken( $color-tab-selected-start, 5%)
+      +background-image(linear-gradient($color-tab-selected-start, $color-tab-selected-end))
+      //background: $color-tab-selected-start
+      color       : $color-font-selected-tab
+      border: 1px #B2B2B2 solid
+      border-right: none
+        //color: white
+      font-weight : bold
+      +border-right-radius(0)
+      +border-left-radius(0.4em)
+      padding: 0.2em 2em 0.2em 1em
+      margin-right: 0
+      text-align: right
+
+h3
+  clear: both
+                
+div.tab_content
+  min-height: 20em
+  border-left: 1px #B2B2B2 solid
+  background-color: #F0F0F0
+  padding: 1%   
+  .hide
+    display: none
+  .show
+    display: block
+
+div.horizontal_tab_content
+  min-height: 20em
+  border: 1px #B2B2B2 solid
+  background-color: #F0F0F0
+  padding: 1%   
+  .hide
+    display: none
+  .show
+    display: block
+    
+
+#content_workspace
+  overflow: auto
+  h2
+    //border: none
+    margin-top: 0
+    +border-top-radius(0.4em)
+  .wrapper
+    background-color: #F5F5F5
+    border: 1px #B2B2B2 solid  
+    overflow: auto  
+    min-height: 20em
+    #left_content  
+      min-height: 20em
+    #right_content
+

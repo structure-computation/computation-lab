@@ -1,117 +1,193 @@
+/* Variables ------------------------------------------------------------- */
 
-@import "compass/typography/links/unstyled-link"
-@import "compass/typography/links/hover-link"
+$header-logo-cols           : 8  // Largeur de la zone du logo en colonne 
+$header-user-connected-cols : 16 // Largeur de la zone du nom de l'entreprise et des infos utilisateur en colonne
+                            
+$gap-workspace-name-separator : 10px // Ecart entre le nom de l'entreprise et l'image qui le sépare du nom d'utilisateur
+$gap-user-infos-separator   : $gap-workspace-name-separator // Idem mais entre le nom d'utilisateur et l'image séparateur
+$gap-cadena-user-infos      : 6px  // Ecart entre le nom d'utilisateur et le logo du cadena
+                            
+$gap-top-page-header        : 10px  // Ecart entre le haut de la page et le header
+$gap-bottom-logo-menu       : 10px // Ecart entre le logo et le menu
+                            
+$color-header-start         : #4551AA // Couleur du début du gradient du fond du header
+$color-header-end           : #2B3657 // Couleur de fin du gradient du fond du header
+$color-font-header          : #E5E5E5 // Couleur de la police du header
+$font-size-header           : 13px    // Taille de la police de l'ensemble des textes du header ormis le menu
+                            
+$gap-between-tabs           : 2px     // Ecart entre les onglets du menu
+$width-tab                  : 10em     // Largeur des onglets, définie en 'em' pour s'agrandir avec la taille de la police
+$height-tab                 : 30px    // Hauteur des onglets
+$radius-tab                 : 10px    // taille de l'arrondi des onglets
+$font-size-tab              : 16px    // Taille de la police des onglets
+                            
+$color-font-selected-tab    : #323751 // Couleur de la police de l'onglet sélectionné
+$color-font-tab             : #E5E5E5 // Couleur de la police des onglets non séléctionnés
+$color-font-hover-tab       : #FFDB00 // Couleur de la police des onglets au survol de ces derniers
+                            
+$color-tab-selected-start   : #FDDE35 // Couleur du début du gradient en fond de l'onglet selectionné
+$color-tab-selected-end     : #FEA82A // Couleur du fin du gradient en fond de l'onglet selectionné
+$color-tab-start            : #535781 // Couleur du début du gradient en fond des onglets non selectionnés
+$color-tab-end              : #515783 // Couleur du fin du gradient en fond des onglets non selectionnés
+                            
+$lock-image                 : 'header_cadena.png' // Nom de l'image se situant à coté du nom d'utilisateur
+$separator-image            : 'header_bg_separateur.png' // Nom de l'image séparant le nom de la workspace et le nom d'utilisateur
 
-$header-logo-cols:          7
-$header-company-name-cols:  5
-$submenu-col-number:        4
-$user-information-columns:  6 // Taille de la zone comportant les informations utilisateur nom, prénom et icone cadenas.
-$lock-image:                'header_cadena.png'
-
-
-
+/* Mixins ---------------------------------------------------------------- */
 
 @mixin main-menu-tab
-  width:            125px // Ne fonctionne pas comme on le souhaite avec +column(3)
-  height:           25px
-  float:            left  
-  marging-bottom:   5px
-  margin-right :    2px
-  text-align:       center 
-  list-style-type:  none
-  font-size:        16px
+  width           : $width-tab
+  line-height     : $height-tab
+  margin-right    : $gap-between-tabs
+  text-align      : center 
+  font-size       : $font-size-tab
+  +background-image(linear-gradient($color-tab-start, $color-tab-end))
+  +border-top-radius($radius-tab)
   
-  +background-image(linear-gradient(#535781, #515783))
-  +border-top-radius(12px)   // Double effet avec l'image de fond.
+/* Global ---------------------------------------------------------------- */
 
-body #header
-  +background-image(linear-gradient(#4551AA, #2B3657))
-  width:      100%
-  height:     90px
-  position: fixed
-  top:    0
-  left:   0
-
-// Header général de l'application. Appelle le partial du main menu
-
-body #header #container
-  height:       90px  // Finalement fixé par le contenu. Environs 90px
-  font-family:  Verdana, Arial, Helvetica, sans-serif
-  font-size:    13px
-  font-weight:  normal
-  color:        #E5E5E5
+header
+  +full
+  +background-image(linear-gradient($color-header-start, $color-header-end))
+  min-width    : 100%
+  height       : $gap-top-page-header + $gap-bottom-logo-menu + $height-tab + 42px
+  display      : block
+  font-family  : Helvetica, Arial, Helvetica, sans-serif
+  font-size    : $font-size-header
+  font-weight  : normal
+  color        : $color-font-header
   
-  #header_logo
-    +column(7)
-    background: transparent url('/images/Logo_StructureComputation_gris.png') no-repeat top left
-    height:     image-height('Logo_StructureComputation_gris.png')
-    margin: 7px 0px 0px 11px
-    padding: 10px 0px 0px
-  #header_company_name
-    padding-top:  10px
-    text-align: right
-    float:      right
-    
-    a#administration_link 
-  #vertical_separator // Le séparateur vertical, ne dois pas impacter la grille... 
-    $separator-width: 10px
-    background:       transparent url('/images/header_bg_separateur.png') no-repeat top left
-    height:           53px
-    width:            $separator-width
-    float:            right
-    margin-left:      10px
-    margin-right:     10px
-    
-  #user_information
-    +column ( $user-information-columns , true)
-    
-    
-    padding-top:  10px
-    text-align:   right
-    float:      right
-    
-    #user_name
-      float:    right
-      $user-name-width: floor(span($user-information-columns) - image-width($lock-image) - 15) // -10 n'était pas assez après essais. On passe à 15 pour garder une sécurité.
-
-      width: $user-name-width
-      //display:  block
-      a#disconnect_link
-    #logo_session_lock  
-      float:          right
-      background:     transparent url('/images/' + $lock-image) no-repeat top left
-      height:         image-height($lock-image)
-      width :         image-width($lock-image)
-      margin-top:     -4px // La marge de 10Px est déjà comprise dans l'image. la valeur est empirique pour aligner la ligne basse et la base de l'image.
-      
-    // #header_top_cadena        
-  #main_menu
-    +column($blueprint-grid-columns)
-    padding-left:   0 // Suppression du padding pour aligner les tabs à gauche.
-    margin-top:     4px
-    #home_tab, #company_tab, #lab_tab
-      +main-menu-tab
-      margin-right : 2px
-      
-      a
-        +unstyled-link
-        // +hover-link
-        // link-colors($normal, $hover, $active, $visited, $focus)
-        color: #E5E5E5
-      a:hover
-        color: #FFDB00
+  .container
+    +background-image(linear-gradient($color-header-start, $color-header-end))
+    #header_top      
+      #header_logo
+        +columns($header-logo-cols)
+        background  : transparent url('/images/Logo_StructureComputation_gris.png') no-repeat top left
+        height      : image-height('Logo_StructureComputation_gris.png')
+        margin      : $gap-top-page-header 0px 0px 0px
+        padding     : $gap-bottom-logo-menu 0px 0px 0px
         
-          
-      .main_submenu
-        display: none
-        .submenu_separator
-          +colruler($submenu-col-number)
+      #header_user_connected //TODO Trouver un nom d'ID plus clair et penser à le changer aussi dans le fichier haml
+        +columns($header-user-connected-cols)
+        +omega
+        #header_workspace_name
+          display        : inline-block
+          text-align     : right
+          float          : right
+          margin-top     : 0
+          background     : transparent url('/images/' + $separator-image) no-repeat top right
+          padding-right  : image-width($separator-image) + $gap-workspace-name-separator + 1
+          padding-bottom : 20px // Nécéssaire pour pourvoir afficher le cadenas en entier
+          padding-top    : $gap-top-page-header
 
-    // append-selector("#home_tab, #company_tab, #lab_tab", ".selected") Ne marche pas...
-    #home_tab.selected, #company_tab.selected, #lab_tab.selected
-      // background: transparent url(http://localhost:3000/images/header_menu_selected.png) no-repeat 0% 0%
-      +background-image(linear-gradient(#FDDE35, #FEA82A))
-      a
-        color: #551A8B
-        font-weight: bold
-      
+        #user_information
+          display      : inline-block  
+          text-align   : right
+          float        : right
+          margin-top   : 0
+          padding-top  : $gap-top-page-header + 1 // On rajoute un pour un alignement des textes plus précis
+          padding-left : $gap-user-infos-separator
+          
+
+          #user_name
+            background    : transparent url('/images/' + $lock-image) no-repeat center right
+            padding-right : image-width($lock-image) + $gap-cadena-user-infos
+            margin-top    : 0
+            color         : $color-font-header
+            a
+              color         : $color-font-header
+
+          #disconnect_link
+            color: $color-font-header
+          
+    #header_bottom
+      +full   
+      #main_menu
+        padding-left : 0 // Suppression du padding pour aligner les tabs à gauche.
+        li
+          float : left
+          list-style-type : none
+          background-color: transparent
+          a
+            display: block
+            +main-menu-tab
+            +unstyled-link
+            +hover-link
+            color   : $color-font-tab
+            
+          a:hover
+            +unstyled-link
+            color   : $color-font-hover-tab
+            +background-image(linear-gradient(lighten($color-tab-start, 5%), lighten($color-tab-end, 5%)))
+          .main_submenu
+            display : none
+        li:hover
+          ul
+            display: block
+        li.selected
+          > a
+            +background-image(linear-gradient($color-tab-selected-start, $color-tab-selected-end))
+            color       : $color-font-selected-tab
+            font-weight : bold
+      #library_drop_down_menu
+        display      : none
+        position     : absolute
+        z-index      : 100
+        padding-left : 0
+        li
+          float: none
+          a
+            +border-top-radius(0)
+        li:last-child
+          a
+            +border-bottom-radius($radius-tab)          
+            
+header#calcul
+  +full
+  +background-image(linear-gradient($color-header-start, $color-header-end))
+  min-width    : 100%
+  height       : image-height('Logo_StructureComputation_gris.png') + 10px
+  display      : block
+  font-family  : Helvetica, Arial, Helvetica, sans-serif
+  font-size    : $font-size-header
+  font-weight  : normal
+  color        : $color-font-header
+              
+  .container
+    #header_logo
+      +columns($header-logo-cols)
+      background  : transparent url('/images/Logo_StructureComputation_gris.png') no-repeat top left
+      height      : image-height('Logo_StructureComputation_gris.png')
+      margin      : 5px 0px 5px 0px
+    #header_user_connected //TODO Trouver un nom d'ID plus clair et penser à le changer aussi dans le fichier haml
+      +columns($header-user-connected-cols)
+      +omega
+      #header_workspace_name
+        display        : inline-block
+        text-align     : right
+        float          : right
+        margin-top     : 0
+        background     : transparent url('/images/' + $separator-image) no-repeat top right
+        padding-right  : image-width($separator-image) + $gap-workspace-name-separator + 1
+        padding-bottom : 20px // Nécéssaire pour pourvoir afficher le cadenas en entier
+        padding-top    : $gap-top-page-header
+
+      #user_information
+        display      : inline-block  
+        text-align   : right
+        float        : right
+        margin-top   : 0
+        padding-top  : $gap-top-page-header + 1 // On rajoute un pour un alignement des textes plus précis
+        padding-left : $gap-user-infos-separator
+        
+
+        #user_name
+          background    : transparent url('/images/' + $lock-image) no-repeat center right
+          padding-right : image-width($lock-image) + $gap-cadena-user-infos
+          margin-top    : 0
+          color         : $color-font-header
+          a
+            color         : $color-font-header
+
+        #disconnect_link
+          color: $color-font-header

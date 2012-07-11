@@ -1,0 +1,33 @@
+%h2#time_parameters Paramètres temporels 
+#steps.toggler.maximize
+  %select#step_type
+    %option{:value => "static"} Statique
+    %option{:value => "quasistatic"} Quasistatique
+    %option{:value => "dynamic"} Dynamique
+  %button.add Ajouter un Step
+  %table#steps_table.grey
+    %thead
+      %tr.no_sorter
+        %th Nom
+        %th Temps initial
+        %th Pas de temps
+        %th Nombre de pas de temps
+        %th Temps final
+        %th
+    %tbody#steps
+
+  %button.add_parameter Ajouter un Paramètre
+  %table#parameters_table.grey
+    %thead
+      %tr.no_sorter
+        %th ID
+        %th Nom
+        %th Alias
+        %th Editer
+        %th
+    %tbody#parameters
+  :coffeescript
+    $ ->      
+      $('#time_parameters').click( () ->
+        $('#steps').toggleClass 'maximize'
+      )

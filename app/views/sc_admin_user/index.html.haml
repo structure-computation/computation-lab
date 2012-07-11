@@ -1,0 +1,37 @@
+-content_for :left_top do
+  .left_submenu
+    %h2.grey
+      Menu
+    %ul
+      %li.LM_pic_new_model
+        = link_to "Nouvel utilsateur", new_sc_admin_user_path  
+
+-content_for :right_top do
+  %h2.grey
+    Liste des utilsateurs 
+  %div
+    = render :partial => "search_filter"
+
+-content_for :workspace_content do
+  %table.grey#workspaces_table
+    %thead
+      %tr
+        %th.no_sorter
+        %th ID
+        %th Nom
+        %th Prénom
+        %th email
+        %th.no_sorter Actions
+    %tbody
+      - @users.each do |user|
+        %tr
+          %td.escape_search.details_link= link_to 'Détails' , sc_admin_user_path(user.id)
+          %td.id=             user.id
+          %td.firstname=      user.firstname ? user.firstname : 'Undefined'
+          %td.lastname=       user.lastname ? user.lastname : 'Undefined'
+          %td.email=          user.email ? user.email : 'Undefined'
+          %td.action_on_table.escape_search
+            -unless user==current_user 
+              %ul
+                %li
+                  = button_to 'Supprimer', sc_admin_user_path(user.id), :method => :delete, :confirm => "Êtes-vous sûr ?"

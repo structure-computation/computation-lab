@@ -1,0 +1,40 @@
+-content_for :left_top do
+  .left_submenu
+    %h2.grey
+      Menu
+
+-content_for :right_top do
+  %h2.grey
+    Liste des factures
+  %div
+    = render :partial => "search_filter"
+
+-content_for :workspace_content do
+  %table.grey#bills_table
+    %thead
+      %tr
+        %th.no_sorter
+        %th Référence
+        %th Workspace
+        %th Prix HT(Euros)
+        %th Prix TTC(Euros)
+        %th Status
+        %th.no_sorter Actions
+    %tbody
+      - @bills.each do |bill|
+        %tr
+          %td.escape_search.details_link= link_to "Détails", sc_admin_bill_path(bill.id)
+          %td= bill.ref
+          %td= link_to bill.workspace.id, sc_admin_workspace_path(bill.workspace.id)
+          %td= bill.total_price_HT
+          %td= bill.total_price_TTC
+          %td= bill.statut
+          %td.action_on_table.escape_search
+            -if bill.statut != "canceled"
+              %ul
+                %li 
+                  = link_to "pdf"
+                %li
+                  = link_to "Annuler", :controller => :sc_admin_bill, :action => :cancel, :state => "canceled", :id => bill.id
+                %li 
+                  = link_to "Valider", :controller => :sc_admin_bill, :action => :valid, :id => bill.id

@@ -1,0 +1,94 @@
+-content_for :left_top do
+  .left_submenu
+    %h2.grey
+      Menu
+    %ul
+      %li.manage_pic_nouveau_membre
+        = link_to "Retour au workspace", workspace_path(@workspace) 
+      %li.manage_pic_nouveau_membre
+        = link_to "Retour à la liste des forfaits", :controller => "forfait", :action => "index"
+
+-content_for :right_top do
+  %h2.grey
+    = @forfait.name 
+  .grey
+    %p
+    %table.grey#forfaits_table
+      %thead
+        %tr.no_sorter
+          %th ID        
+          %th nb de jetons
+          %th prix par jeton (HT)
+          %th prix du forfait (HT)
+          %th TVA
+          %th prix du forfait (TTC)
+          %th validité (mois)
+      %tbody
+        %tr
+          %td=           @forfait.id
+          %td=           @forfait.nb_token
+          %td=           @forfait.token_price
+          %td=           @forfait.global_price
+          %td=           @forfait.global_price * 0.196
+          %td=           @forfait.global_price * 1.196
+          %td=           @forfait.validity
+
+    %p
+      %br
+-content_for :workspace_content do
+  %h2.grey
+    Informations de facturation
+  
+  .grey
+    %p Sélectionnez des informations de facturation déjà saisies
+    = render :partial => 'credit/companies_list', :object => @workspace.companies
+    %p Ou remplissez de nouvelles informations de facturation
+    = semantic_form_for @new_company, :url => {:controller => "credit", :action => "create"}  do |form|
+      = form.hidden_field :forfait_id, :id => "forfait_id", :name => "forfait_id", :value => @forfait.id
+      = form.hidden_field :informations, :id => "informations", :name => "informations", :value => "new"
+      %table.grey
+        %tr
+          %th Responsable :
+          %td
+        %tr
+          %th Nom
+          %td= form.text_field :lastname
+        %tr
+          %th Prénom
+          %td= form.text_field :firstname
+        %tr
+          %th Téléphone
+          %td= form.text_field :phone
+
+      %table.grey
+        %tr
+          %th Société :
+          %td
+        %tr
+          %th Nom
+          %td= form.text_field :name
+        %tr
+          %th= form.label :division
+          %td= form.text_field :division
+        %tr
+          %th= form.label :address
+          %td= form.text_area :address
+        %tr
+          %th= form.label :city
+          %td= form.text_field :city
+        %tr
+          %th= form.label :zipcode
+          %td= form.text_field :zipcode
+        %tr
+          %th= form.label :country
+          %td= form.text_field :country
+        %tr
+          %th= form.label :TVA
+          %td= form.text_field :TVA
+        %tr
+          %th= form.label :siren
+          %td= form.text_field :siren
+
+      = submit_tag "valider", :class => 'yellow_button'
+      %p
+   

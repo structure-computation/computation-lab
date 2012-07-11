@@ -4,16 +4,22 @@ class ScModel < ActiveRecord::Base
   require 'socket'
   include Socket::Constants
   
-  belongs_to  :company
-  belongs_to  :project
+  belongs_to  :workspace
   
-  has_many    :user_sc_models 
   has_many    :files_sc_models 
-  has_many    :users    ,  :through => :user_sc_models
-  
+
+  has_many    :model_ownerships, :class_name => "WorkspaceMemberToModelOwnership", :dependent => :delete_all
+  has_many    :workspace_members,                  :through => :model_ownerships
+
+  has_many    :log_tools
   has_many    :calcul_results
-  has_many    :forum_sc_models
+  has_many    :forum_sc_models  
   
+  scope :from_workspace , lambda { |workspace_id|
+     where(:workspace_id => workspace_id)
+   }
+  
+  before_destroy :delete_model
   #state possibles : void, in_process, active, deleted, 
   
   def has_result? 
@@ -22,21 +28,143 @@ class ScModel < ActiveRecord::Base
   
   def add_repository()
     # on crée le repertoir du modele
-    path_to_model = "#{SC_MODEL_ROOT}/model_#{self.id}"
-    Dir.mkdir(path_to_model, 0777) unless File.exists?(path_to_model)
-    File.chmod 0777, path_to_model
+    path_to_sc_model = "#{SC_MODEL_ROOT}/model_#{self.id}"
+    Dir.mkdir(path_to_sc_model, 0777) unless File.exists?(path_to_sc_model)
+    File.chmod 0777, path_to_sc_model
   end
   
-  def send_mesh(params,current_user)
-    # on enregistre les fichier sur le disque et on change les droit pour que le serveur de calcul y ai acces
-    file = params[:fichier] 
-    name = file.original_filename
-    if name.match(/.bdf/)
+  def load_mesh(params, current_workspace_member)
+    # on enregistre les fichier sur le disque et on change les droit réaliser une analyse
+    file = params[:sc_model][:file]
+    logger.debug file.size()
+    self.dimension = params[:sc_model][:dimension]
+    self.units = params[:sc_model][:units]
+    result = ''
+    self.original_filename = file.original_filename
+    name = self.original_filename
+    
+    to_decomp = 0
+    extension = ""
+    if name.match(/.bz2/)
+      extension = ".bz2"
+      self.change_state('to_decompress')
+      to_decomp = 1
+    elsif name.match(/.gz/)
+      extension = ".gz"
+      self.change_state('to_decompress')
+      to_decomp = 1
+    elsif name.match(/.zip/)
+      extension = ".zip"
+      self.change_state('to_decompress')
+      to_decomp = 1
+    elsif name.match(/.tgz/)
+      extension = ".tgz"
+      self.change_state('to_decompress')
+      to_decomp = 1
+    elsif name.match(/.iges/) or name.match(/.igs/)
+      extension = ".iges"
+      self.change_state('to_salome')
+    elsif name.match(/.step/) or name.match(/.stp/)
+      extension = ".step"
+      self.change_state('to_salome')
+    elsif name.match(/.bdf/)
       extension = ".bdf"
+      self.change_state('to_create')
     elsif name.match(/.avs/)
       extension = ".avs"
+      self.change_state('to_create')
     elsif name.match(/.unv/)
       extension = ".unv"
+      self.change_state('to_create')
+    else
+      results = "type de fichier de maillage non reconnu"
+      return results
+    end
+
+    path_to_model = "#{SC_MODEL_ROOT}/model_#{self.id}"
+    path_to_mesh = "#{SC_MODEL_ROOT}/model_#{self.id}/MESH"
+    Dir.mkdir(path_to_model, 0777) unless File.exists?(path_to_model)
+    Dir.mkdir(path_to_mesh, 0777) unless File.exists?(path_to_mesh)
+    
+    logger.debug path_to_mesh
+    logger.debug extension
+    if to_decomp == 1
+       path_to_file = path_to_mesh + "/"+ name
+    else
+       path_to_file = path_to_mesh + "/mesh" + extension
+    end
+    File.chmod 0777, path_to_model
+    File.chmod 0777, path_to_mesh
+    
+    self.change_state('void')
+    File.open(path_to_file, 'w+') do |f|
+        if f.write(file.read) 
+          self.change_state('to_analyse')
+        end
+    end
+    self.save
+    
+    # analyse et création du log_tools_scult
+    @nb_token = self.mesh_file_analysis
+    @log_tool_scult = []
+    if log_tool_scult = self.log_tools.find(:last, :conditions => {:log_type => "scult"})
+      if log_tool_scult.pending?
+        @log_tool_scult = log_tool_scult
+      else
+        @log_tool_scult = self.log_tools.build()
+      end
+    else
+      @log_tool_scult = self.log_tools.build()
+    end
+    @log_tool_scult.token_account = self.workspace.token_account
+    @log_tool_scult.log_type = "scult"
+    @log_tool_scult.state = "pending"
+    @log_tool_scult.nb_token = @nb_token
+    @log_tool_scult.cpu_allocated = 1
+    @log_tool_scult.workspace_member = current_workspace_member
+    @log_tool_scult.pending()
+    @log_tool_scult.save
+    
+    # on retourne le resultats
+    return true
+  end
+  
+  def create_mesh(current_workspace_member, current_log_tool_scult)
+    # on enregistre les fichier sur le disque et on change les droit pour que le serveur de calcul y ai acces
+    result = ''
+    name = self.original_filename
+    to_decomp = 0
+    if name.match(/.bz2/)
+      extension = ".bz2"
+      self.change_state('to_decompress')
+      to_decomp = 1
+    elsif name.match(/.gz/)
+      extension = ".gz"
+      self.change_state('to_decompress')
+      to_decomp = 1
+    elsif name.match(/.zip/)
+      extension = ".zip"
+      self.change_state('to_decompress')
+      to_decomp = 1
+    elsif name.match(/.tgz/)
+      extension = ".tgz"
+      self.change_state('to_decompress')
+      to_decomp = 1
+    elsif name.match(/.iges/) or name.match(/.igs/)
+      extension = ".iges"
+      self.change_state('to_salome')
+    elsif name.match(/.step/) or name.match(/.stp/)
+      extension = ".step"
+      self.change_state('to_salome')
+    elsif name.match(/.bdf/)
+      extension = ".bdf"
+      self.change_state('to_create')
+    elsif name.match(/.avs/)
+      extension = ".avs"
+      self.change_state('to_create')
+    elsif name.match(/.unv/)
+      extension = ".unv"
+      self.change_state('to_create')
     else
       results = "type de fichier de maillage non reconnu"
       return results
@@ -44,18 +172,8 @@ class ScModel < ActiveRecord::Base
     
     path_to_model = "#{SC_MODEL_ROOT}/model_#{self.id}"
     path_to_mesh = "#{SC_MODEL_ROOT}/model_#{self.id}/MESH"
-    Dir.mkdir(path_to_model, 0777) unless File.exists?(path_to_model)
-    Dir.mkdir(path_to_mesh, 0777) unless File.exists?(path_to_mesh)
-    path_to_file = path_to_mesh + "/mesh" + extension
-    File.chmod 0777, path_to_model
-    File.chmod 0777, path_to_mesh
-    
-    File.open(path_to_file, 'w+') do |f|
-        f.write(file.read)
-    end
-    
     # création du fichier json_model 
-    identite_calcul = { :id_societe => self.company.id, :id_user => current_user.id, :id_projet => '', :id_model => self.id, :id_calcul => '', :dimension  => self.dimension};
+    identite_calcul = { :id_workspace => self.workspace_id, :id_user => current_workspace_member.user_id, :id_projet => '', :id_model => self.id, :id_calcul => '', :dimension  => self.dimension};
     priorite_calcul = { :priorite => 0 };                               
     mesh = { :mesh_directory => "MESH", :mesh_name  => "mesh", :extension  => extension};
     json_model = { :identite_calcul => identite_calcul, :priorite_calcul => priorite_calcul, :mesh => mesh}; 
@@ -66,17 +184,12 @@ class ScModel < ActiveRecord::Base
         f.write(JSON.pretty_generate(json_model))
     end
     
-#     # envoi de la requette de création de model au serveur de calcul
-#     send_data = { :id_user => current_user.id, :mode => "create", :identite_calcul => identite_calcul };   
-#     # socket d'envoie au serveur
-#     socket    = Socket.new( AF_INET, SOCK_STREAM, 0 )
-#     sockaddr  = Socket.pack_sockaddr_in( SC_CALCUL_PORT, SC_CALCUL_SERVER )
-#     socket.connect( sockaddr )
-#     socket.write( send_data.to_json )
-#     
-#     # reponse du calculateur
-#     results = socket.read
-    self.change_state('uploaded')
+    current_log_tool_scult.state = self.state
+    current_log_tool_scult.ready()
+    current_log_tool_scult.save
+    current_log_tool_scult.reserve_token()
+    
+    results = "Demande de dépot envoyée"
     self.save
     
     # on retourne le resultats
@@ -84,79 +197,67 @@ class ScModel < ActiveRecord::Base
     
   end
   
+  def void_state()
+    # on enregistre les fichier sur le disque et on change les droit pour que le serveur de calcul y ai acces
+    self.state
+    void = false
+    if self.state == "void" or self.state == "echec"
+      void = true
+    else
+      void = false
+    end
+    return void
+  end
   
-  def send_file(params,current_user)
+  def valid_state()
+    # on enregistre les fichier sur le disque et on change les droit pour que le serveur de calcul y ai acces
+    self.state
+    void = false
+    if self.state == "in_process" or self.state == "to_create" or self.state == "to_decomp" or self.state == "to_decompress" or self.state == "to_salome" or self.state == "active"
+      void = true
+    else
+      void = false
+    end
+    return void
+  end
+  
+  def mesh_valid()
+    path_to_file = "#{SC_MODEL_ROOT}/model_#{self.id}/MESH/mesh.txt"
+    results = File.read(path_to_file)
+    jsonobject = JSON.parse(results)
+    
+    #mise à jour des infos modèle
+    self.parts = jsonobject[0]['mesh']['nb_groups_elem']
+    self.interfaces = jsonobject[0]['mesh']['nb_groups_inter']
+    self.sst_number = jsonobject[0]['mesh']['nb_sst']
+    self.change_state('active')
+    self.save 
+  end
+  
+  def send_file(params,current_workspace_member)
     # on enregistre les fichier sur le disque et on change les droit pour que le serveur de calcul y ai acces
     file = params[:file] 
     name = file.original_filename
     
-    path_to_model = "#{SC_MODEL_ROOT}/model_#{self.id}"
+    path_to_sc_model = "#{SC_MODEL_ROOT}/model_#{self.id}"
     path_to_dir_file = "#{SC_MODEL_ROOT}/model_#{self.id}/FILE"
-    Dir.mkdir(path_to_model, 0777) unless File.exists?(path_to_model)
+    Dir.mkdir(path_to_sc_model, 0777) unless File.exists?(path_to_sc_model)
     Dir.mkdir(path_to_dir_file, 0777) unless File.exists?(path_to_dir_file)
     path_to_file = path_to_dir_file + '/' + name
-    File.chmod 0777, path_to_model
+    File.chmod 0777, path_to_sc_model
     File.chmod 0777, path_to_dir_file
     
     File.open(path_to_file, 'w+') do |f|
         f.write(file.read)
     end
     
-    self.files_sc_models.create(:name => name, :user_id => current_user.id, :state =>'uploaded', :size => File.stat(path_to_file).size)
+    self.files_sc_models.create(:name => name, :user_id => current_workspace_member.id, :state =>'uploaded', :size => File.stat(path_to_file).size)
     self.save
     
     # on retourne le resultats
     return results
-    
   end
-  
-  
-  #def mesh_valid(id_user,calcul_time,json)
-  def mesh_valid(params)
-    id_user=params[:id_user]
-    calcul_time=params[:time]
-    calcul_state = Integer(params[:state])
-    current_user = User.find(id_user)
-    
-    if(calcul_state == 0) #si le calcul est arrivé au bout
-      path_to_file = "#{SC_MODEL_ROOT}/model_#{self.id}/MESH/mesh.txt"
-      results = File.read(path_to_file)
-      jsonobject = JSON.parse(results)
-      #jsonobject = JSON.parse(json)
-      
-      #mise à jour des infos modèle
-      self.parts = jsonobject[0]['mesh']['nb_groups_elem']
-      self.interfaces = jsonobject[0]['mesh']['nb_groups_inter']
-      self.sst_number = jsonobject[0]['mesh']['nb_sst']
-      self.change_state('active')
-      self.get_used_memory()
-      #self.save
-      
-      #mise à jour du résultat de calcul
-      @calcul_result = self.calcul_results.build(:calcul_time => calcul_time, :log_type => 'create', :state => 'finish', :gpu_allocated => 1) 
-      @calcul_result.user = current_user
-      @calcul_result.result_date = Time.now
-      @calcul_result.save
-      
-      #mise à jour du compte de calcul
-      self.company.calcul_account.log_model(@calcul_result.id)
-    else
-      self.change_state('void')
-    end
-    
-  end
-  
-  def get_used_memory()
-    dirsize =0
-    path_to_model = "#{SC_MODEL_ROOT}/model_#{self.id}"
-    Find.find(path_to_model) do |f| 
-      dirsize += File.stat(f).size 
-    end 
-    self.used_memory = dirsize
-    self.save
-    self.company.memory_account.get_used_memory()
-  end
-  
+
   def self.save_mesh_file(upload)
     name        =  upload['upload'].original_filename
     directory   = "public/test"
@@ -166,37 +267,53 @@ class ScModel < ActiveRecord::Base
     File.open(path, "wb") { |f| f.write(upload['datafile'].read) }
   end
 
+  def mesh_file_analysis
+    dirsize =0
+    path_to_sc_model = "#{SC_MODEL_ROOT}/model_#{self.id}/MESH"
+    Find.find(path_to_sc_model) do |f| 
+      dirsize += File.stat(f).size 
+    end 
+    self.used_memory = dirsize
+    nb_token = (dirsize/10000000).ceil+1
+    return nb_token
+  end
+  
+  
+  def delete_mesh    
+    log_tool_scult = self.log_tools.find(:last, :conditions => {:log_type => "scult"})
+    if !log_tool_scult.nil? and log_tool_scult.ready?
+      raise ActiveRecord::RecordInvalid
+    else
+      log_tool_scult.pending() unless log_tool_scult.nil?
+      self.updated_at = Time.now
+      path_to_sc_model = "#{SC_MODEL_ROOT}/model_#{self.id}/MESH"
+      FileUtils.rm_rf path_to_sc_model
+      self.state = "void"
+      self.save
+      return true
+    end
+  end
+  
+  
   def request_mesh_analysis
     # TODO: Ecrire l'objet CalculatorInterface qui appellera la bonne ligne de commande (entre autre) dans une lib.
-    CalculatorInterface.delay.analyse_mesh_for_model self
+    nb_token = CalculatorInterface.delay.analyse_mesh_for_model self
+    return nb_token
     # A ce stade la demande est placee dans la file des demande en attente.
   end
   
-  def test_delete?
-    list_result = self.calcul_results.find(:all)
-    value_to_return = true
-    list_result.each{ |result_i| 
-      if(result_i.state == 'finish' || result_i.state == 'in_process')
-         value_to_return = false
-      end
-    }
-    value_to_return = true  # TODO
-    return value_to_return
-  end
-  
   def delete_model()
-    self.users.clear
+    self.model_ownerships.clear
     self.change_state('deleted')
     self.deleted_at = Time.now
-    #self.used_memory = 0
+    path_to_sc_model = "#{SC_MODEL_ROOT}/model_#{self.id}"
+    FileUtils.rm_rf path_to_sc_model
     self.save
   end
   
-   def change_state(state)
-    #mise à jour dde l'état du sc_model
-    #state possibles : void, in_process, active, deleted, 
+  def change_state(state)
     self.state = state
-    #self.save
+    self.save
   end
   
 end

@@ -1,0 +1,28 @@
+%h2#multiresolution_parameters_header Paramètres de multi résolution 
+#multiresolution_parameters.toggler.maximize
+  %select#multiresolution_type
+    %option{:value => "off"}         Off
+    %option{:value => "function"}    Fonction
+    %option{:value => "orthogonal_plan"} Plan d'expérience orthogonal
+
+  %button.add Ajouter un paramètre
+  %p
+    Nombre de résolutions :
+    %input.resolution_number
+  %table.grey
+    %thead
+      %tr.no_sorter
+        %th Nom
+        %th Valeur nominale
+        %th Valeur minimale
+        %th Valeur maximale
+        %th Nombre de valeurs
+        %th
+        %th
+    %tbody
+
+  :coffeescript
+    $ ->      
+      $('#multiresolution_parameters_header').click( () ->
+        $("#multiresolution_parameters").toggleClass("maximize")
+      )

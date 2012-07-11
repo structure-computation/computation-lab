@@ -1,0 +1,38 @@
+#interfaces
+  .filter
+    %h2.grey Filtre
+    %div
+      Filtrer les interfaces :
+      %label{:for => "unassigned_interface"} Non assigné
+      %input#unassigned_interface{:type => "radio", :name => "interface_assigned", :value => "unassigned", :checked => "checked"}
+
+      %label{:for => "assigned_interface"} Déjà assigné
+      %input#assigned_interface{:type => "radio", :name => "interface_assigned", :value => "assigned"}
+
+    %div
+      %select.between_two
+        %option{:value => "pieces"}       Entre deux pièces
+        %option{:value => "materials"}    Entre deux matériaux
+      %input#first_input{:type => "text", :size => 4}
+      \-
+      %input#second_input{:type => "text", :size => 4}
+      %button.filter Filter
+    %div
+      %button.assign_all{:disabled => true} Assigner le filtre
+      %button.unassign_all{:disabled => true} Tout désassigner
+      %button.cancel_filter{:disabled => true} Annuler le filtre
+      %button.view_filter Visualiser la selection
+
+  %h2.grey Liste des interfaces
+  %div
+    %label{:for => "hide_assigned_interfaces"} Cacher les interfaces déjà assignés
+    %input#hide_assigned_interfaces{:type => "checkbox"}
+
+  %table.data_table.grey
+    %thead
+      %tr
+        %th ID
+        %th Nom
+        %th Pièces
+        %th Liaison
+    %tbody

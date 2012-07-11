@@ -1,0 +1,53 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+# one:
+#   sc_model_id: 51848956
+#   user_id: 1
+#   result_date: 2009-12-16 23:48:15
+#   launch_date: 2009-12-16 23:48:15
+#   name: resultat_1 51848956
+#   description: MyText
+#   ctype: statique
+#   D2type: CP
+#   log_type: MyString
+#   state: MyString
+#   #cpu_second_used: 1
+#   #gpu_second_used: 10
+#   #cpu_allocated: 1
+#   gpu_allocated: 4
+#   estimated_calcul_time: 40
+#   calcul_time: 40
+#   used_memory:
+# 
+# two:
+#   sc_model_id: 51848956
+#   user_id: 1
+#   result_date: 2009-12-16 23:48:15
+#   launch_date: 2009-12-16 23:48:15
+#   name: resultat_2 51848956
+#   description: MyText
+#   ctype: statique
+#   D2type: CP
+#   log_type: MyString
+#   state: MyString
+#   gpu_allocated: 4
+#   estimated_calcul_time: 40
+#   calcul_time: 40
+#   used_memory:
+#   
+# three:
+#   sc_model_id: 51848956
+#   user_id: 1
+#   result_date: 2009-12-16 23:48:15
+#   launch_date: 2009-12-16 23:48:15
+#   name: resultat_3 51848956
+#   description: MyText
+#   ctype: statique
+#   D2type: CP
+#   log_type: MyString
+#   state: MyString
+#   gpu_allocated: 4
+#   estimated_calcul_time: 40
+#   calcul_time: 40
+#   used_memory:
+

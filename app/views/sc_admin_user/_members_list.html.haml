@@ -1,0 +1,28 @@
+%table#members_table.grey
+  %thead
+    %tr
+      %th.no_sorter
+      %th Mail
+      %th Nom
+      %th Role
+      %th Status
+      %th.no_sorter Actions
+  %tbody
+    - members_list.each do |member|
+      %tr
+        %td.escape_search.details_link= link_to "Détails", sc_admin_user_path(member)
+        %td= member.email
+        %td= member.firstname
+        %td= member.role
+        %td= member.state
+        %td.action_on_table.escape_search
+          %ul
+            %li
+              = button_to "Supprimer", sc_admin_user_path(member), :confirm => "Êtes vous sûr ?", :method => :delete, :confirm => "Êtes-vous sûr ?"
+            %li 
+              = link_to "Editer", edit_sc_admin_user_path(member)
+
+/= link_to 'Ajouter un membre', new_workspace_member_path(@workspace), :class => 'yellow_button'
+
+:coffeescript
+  $('#members_table').tablesorter()

@@ -1,0 +1,12 @@
+-content_for :header do
+  = render :partial => "layouts/partials/header_login"
+-content_for :content do
+  #header_workspace
+    #left_top
+      = yield :left_top
+    #right_top
+      = yield :right_top
+  #content_workspace
+    = yield :workspace_content
+
+=render :file => 'layouts/application'

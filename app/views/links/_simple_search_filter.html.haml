@@ -1,0 +1,22 @@
+.search_filter
+  #links_library_filter
+    %label{:for => "links_library_workspace"}   Ma bibliothèque
+    = check_box_tag 'links_library_workspace', 'workspace', true
+    %label{:for => "links_library_standard"}    Bibliothèque standard
+    = check_box_tag 'links_library_standard', 'standard', true
+  :coffeescript
+    $('#links_library_filter input[type=checkbox]').click (event) ->
+      $("#links_table tbody tr." + event.srcElement.value).toggle()
+        
+
+  %p
+    %label{:for => "link_search_filter"} Recherche
+    %input#link_search_filter{:type => "text"}
+
+
+:coffeescript
+  
+  $( ->
+    $('#links_table').tablesorter()
+    searchFilter("links_table", "link_search_filter")
+  )

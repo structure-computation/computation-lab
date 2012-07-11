@@ -1,0 +1,34 @@
+#forcast  
+  %h2.grey Fichier de calcul
+  Télécharger le fichier de calcul au format JSON :
+  %a#downlaod_json{:target => "_blank", :href => ""} Télécharger
+
+  %h3 Calcul des prévisions
+  %button#forcast_ask Calculer
+
+  #forcast_ask_detail
+    %h3 Prévisions
+    %table.grey
+      %tbody
+        %tr
+          %th Nombre de processeurs
+          %td#forcast_cpu_allocated 0
+
+        %tr
+          %th Temps de calcul estimé (s)
+          %td#forcast_estimated_time 0
+
+        %tr
+          %th Nombre de jetons débités
+          %td#forcast_nb_token 0
+
+        %tr
+          %th Autorisation
+          %td#forcast_launch_autorisation 0
+
+    #forcast_valid_div
+      %h3 Valider et lancer le calcul
+      %button#forcast_valid Valider
+
+    #forcast_unvalid_div
+      %h3 Vous n'avez pas assez de jeton pour lancer votre calcul

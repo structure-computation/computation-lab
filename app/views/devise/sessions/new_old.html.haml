@@ -1,0 +1,83 @@
+!!!
+%html{ "xml:lang" => "fr", :lang => "fr", :xmlns => "http://www.w3.org/1999/xhtml" }
+  %head
+    %title
+      Structure Computation
+
+    / Balises META    
+    %meta{ :content => "text/html; charset=utf-8", "http-equiv" => "Content-Type" }
+    %meta{ :name    => "title", :content => "Structure Computation" }
+    %meta{ :name    => "language", :content => "fr" }
+    %meta{ :name    => "robots", :content => "index, follow" }
+    
+    / Liens vers les CSS
+    %link{ :href => "/stylesheets/main.css", :rel => "stylesheet", :media => "screen" }
+    
+    = javascript_include_tag "libs/jquery"
+    = javascript_include_tag 'libs/jquery_ujs'
+
+
+  %body#login_page
+    #headerLarge 
+      #conteneur
+        #header_top_logo
+        
+        
+        
+    / Debut affichage du code de la vue
+    #conteneur
+      .content
+        .contentheightmin
+        #bl_5.black.off
+        / wizard de creation d'un nouveau modele
+        #New_wiz_layer.on
+          #New_wiz_layer_top
+            Accédez à votre espace calcul
+          = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+            #New_wiz_layer_milieu
+              = render :partial => "/layouts/partials/flashs_and_notices"
+              %div{ :style => "width: 400px; height:300px; margin: 100px 0px 0 170px;" }
+                #login_format
+                  %p= f.label :email
+                  = f.text_field :email #, :style => "width: 300px"
+
+                  %br
+                  %br
+
+                  %p= f.label :password
+                  = f.password_field :password #, :style => "width: 400px"
+
+                  - if devise_mapping.rememberable? 
+                    %p
+                      = f.check_box :remember_me 
+                      = f.label     :remember_me
+
+                  -# %p= submit_tag 'Log in' 
+
+                  / TODO: Replacer cela dans la page.
+                  / = render :partial => "devise/shared/links"
+
+            #New_wiz_layer_bas
+              %button.login_button.yellow_button{ :type => "submit"}
+                Se connecter
+              -# %a{ :href => "#", :onclick => '$("#user_new").submit();'}
+              -#  #login_button.New_footer_bouton_suivant.New_footer_top_bouton
+              -#    Se connecter
+              
+              - #= submit_tag 'Log in', :class => "New_footer_bouton_suivant New_footer_top_bouton", :style => "border: none; margin-right: 5px"
+              -#  Log in
+
+    #footerLarge
+      #conteneur
+        .contentTransparent
+          .black.on
+          -#footerLargeCarre
+      
+      
+    :javascript
+      $(document).ready(displayBlack('on'));
+      
+      
+/Fin conteneur
+
+

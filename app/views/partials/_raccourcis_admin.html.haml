@@ -1,23 +1,11 @@
-#leftBox
-  %h2
+.left_submenu
+  %h2.grey
     Racourcis
-#leftBoxcontent
-  %table#tableleftBox
-    %tr
-      %td{ :style => "width:22px ;" }
-        %img{ :src => "/images/picto_profil.png" }
-      %td
-        %a{ :href => "/accueil" }
-          Acceuil
-    %tr
-      %td{ :style => "width:22px ;" }
-        %img{ :src => "/images/manage_pic_liste_compte.png" }
-      %td
-        %a{ :href => "/company" }
-          Ma société
-    %tr
-      %td{ :style => "width:22px ;" }
-        %img{ :src => "/images/LM_pic_model.png" }
-      %td
-        %a{ :href => "/modele" }
-          Mes modèles
+  %ul
+    %li.picto_profil
+      = link_to 'Accueil', :controller => 'home'
+    %li.manage_pic_liste_compte
+      = link_to "Ma société", workspaces_path
+    %li.LM_pic_model
+      %a{ :href => "/modele" }
+        Mes modèles

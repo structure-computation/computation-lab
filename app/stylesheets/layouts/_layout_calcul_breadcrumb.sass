@@ -1,0 +1,76 @@
+$breadcrumb_tabs_number : 8
+$breadcrumb_tabs_size   : 100% / $breadcrumb_tabs_number
+
+
+
+div.breadcrumb_tab_content
+  min-height: 20em
+  background-color: #F0F0F0  
+  .hide
+    display: none
+  .show
+    display: block
+
+#breadcrumb
+  ul.horizontal_tab_submenu
+    list-style: none
+    margin: 0
+    padding-left: 0
+    width: 100%
+    background-color: $color-tab-start
+    border: 1px solid rgba(0,0,0,0.5)
+    border-top: none
+    display: table
+    li
+      font-size: 0.9em
+      display: table-cell
+      width: $breadcrumb_tabs_size
+      margin: 0
+      vertical-align: middle
+      a
+        cursor: pointer
+        width: 92%
+        text-decoration: none
+        line-height: 2em
+        display: inline-block
+        background-color: $color-tab-start
+        margin: auto
+        padding-right: 4%
+        +border-top-radius(0)
+        +border-right-radius(1em)
+        +single-box-shadow(rgba(0,0,0,0.4), 0.2em, 0px, 0px)
+        color: $color-font-header
+        text-align: center
+        border-bottom: none
+        height: 100%
+        vertical-align: middle
+
+    li:last-child
+      a
+        +border-right-radius(0)
+        +single-box-shadow(#000, 0px, 0px, 0px)
+        width: 96%
+    li.tab_before
+      +background-image(linear-gradient($color-tab-selected-start, $color-tab-selected-end))
+      a
+        +single-box-shadow(rgba(0,0,0,0.6), 0.2em, 0px, 0px)   
+    li
+      a.selected
+        +background-image(linear-gradient($color-tab-selected-start, $color-tab-selected-end))
+        color         : $color-font-selected-tab
+        border-bottom : none      
+        font-weight   : bold
+        text-align    : center
+    li.disable
+      +background-image(linear-gradient(#97958b, #86847b))
+      cursor: default
+      a
+        +background-image(linear-gradient(#97958b, #86847b))
+        color  : darken($color-font-header, 10%)
+        cursor : default
+
+    li.disable:first-child
+      background-color: gray
+      a
+        +background-image(linear-gradient($color-tab-selected-start, $color-tab-selected-end))
+        color : $color-font-selected-tab

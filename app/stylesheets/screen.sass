@@ -1,75 +1,177 @@
-// This import applies a global reset to any page that imports this stylesheet.
-@import blueprint/reset
-// To configure blueprint, edit the partials/base.sass file.
-@import partials/base
-// Import all the default blueprint modules so that we can access their mixins.
-@import blueprint
-// On importe aussi la version "liquide" (redimentionnable)
-//@import "blueprint/liquid"
-// Import the non-default scaffolding module.
-@import blueprint/scaffolding
+/* Imports de base ------------------------------------------------------- */
 
-@import compass/css3
-@import compass/css3/images
-// To generate css equivalent to the blueprint css but with your
-// configuration applied, uncomment:
-// @include blueprint
+@import base
+@import compass/css3/gradient
+@import compass/css3/border-radius
+@import compass/typography/links/unstyled-link
+@import compass/typography/links/hover-link
+@import compass/typography
+@import compass/css3/box-shadow
 
-// If you are doing a lot of stylesheet concatenation, it is suggested
-// that you scope your blueprint styles, so that you can better control
-// what pages use blueprint when stylesheets are concatenated together.
-body.bp
-  +blueprint-typography(true)
-  +blueprint-utilities
-  +blueprint-debug
-  +blueprint-interaction
-  // Remove the scaffolding when you're ready to start doing visual design.
-  // Or leave it in if you're happy with how blueprint looks out-of-the-box
-form.bp
-  +blueprint-form
-  // You'll probably want to remove the scaffolding once you start styling your site.
-  +blueprint-scaffolding
+/* Mixins ---------------------------------------------------------------- */
 
 
+/* Imports des autres fichiers sass -------------------------------------- */
 
+@import partials/mixins
 @import partials/header
+@import partials/sub_menu
+@import partials/table
 @import partials/footer
- 
+@import partials/large_ligne
+@import partials/tab_menu_and_content
 
-// Page layout can be done using mixins applied to your semantic classes and IDs:
-body
-  #container
-    +container
-    // +showgrid
-    // width: 90%
-    margin:auto
+@import specifics/workspaces_show
+@import specifics/modeles_show
+@import specifics/calcul
+
+@import layouts/layout_workspace
+@import layouts/layout_calcul
+@import layouts/layout_calcul_breadcrumb
+
+/* Notifications : Error - Notice ---------------------------------------- */
+
+#flash_notice, #flash_error
+  +columns(16,24)
+  line-height: 2em
+  +prefix(1,24)
   
-     
-    
-    
-    
-  #sidebar
-    // One third of the grid columns, rounding down. With 24 cols, this is 8.
-    $sidebar-columns: floor($blueprint-grid-columns / 3)
-    +column($sidebar-columns)
-  #content
-    // Two thirds of the grid columns, rounding up.
-    // With 24 cols, this is 16.
-    $content-columns: ceil(2 * $blueprint-grid-columns / 3)
-    $prepend-content-columns: floor(($blueprint-grid-columns - $content-columns) / 2)
-    +prepend($prepend-content-columns)
-    // true means it's the last column in the row
-    +column($content-columns, true)
-  #container_ext_app
-    position: relative
-    top:      0px
-    width:    100% 
-    border:   thin solid #696969
-    
-  #my_panel
-    position: fixed
-    top:      100px
-    bottom:   25px
-    right:    0px
-    width:    100% 
+#flash_notice
+  border: 1px solid #C6D880
+  color: #264409
+  background-color: #E6EFC2
+  
+#flash_error
+  color: #8A1F11
+  border: 1px solid #FBC2C4
+  background-color: #FBE3E4
 
+/* Boutons --------------------------------------------------------------- */
+
+/* -- Variables pour la partie boutons -- */
+
+$color-button-start       : #FDDE35 // Couleur du début du gradient du fond des boutons qui ont la class .yellow_button
+$color-button-end         : #FEA82A // Couleur de fin du gradient du fond des boutons qui ont la class .yellow_button
+$color-button-start-hover : $color-button-end // Couleur du début du gradient du fond des boutons qui ont la class .yellow_button au survol de la souris
+$color-button-end-hover   : $color-button-start // Couleur de fin du gradient du fond des boutons qui ont la class .yellow_button au survol de la souris
+
+$font-color-button        : #333
+$radius-button            : 0.4em
+
+$border-width-button      : 1px
+$border-color-button      : #555
+$padding-bottom-button    : 0.3em
+$padding-top-button       : $padding-bottom-button
+$padding-left-button      : 1em
+$padding-right-button     : $padding-left-button
+
+/* -- Fin variables pour la partie boutons -- */
+
+.yellow_button
+  +background-image(linear-gradient($color-button-start, $color-button-end))
+  +border-radius($radius-button)
+  +single-box-shadow(rgba(0,0,0,0.2), 0px, 0px, 1px)
+  padding         : $padding-top-button $padding-right-button $padding-bottom-button $padding-left-button 
+  border          : $border-width-button solid $border-color-button
+  color           : $font-color-button
+  text-decoration : none
+  cursor          : pointer
+  display         : inline-block
+  font-size       : 0.9em
+  font-family     : Helvetica, Arial, sans-serif
+
+.yellow_button:hover, .pressed_button
+  +background-image(linear-gradient($color-button-start-hover, $color-button-end-hover))
+  
+.yellow_button[disabled]
+  +background-image(linear-gradient(#e5e2d3, #C3CAD1))
+  color         : lighten($font-color-button, 25%)
+  border-color  : lighten($border-color-button, 25%)
+  cursor        : default
+
+/* Global ---------------------------------------------------------------- */
+
+/* -- Variables pour la partie global -- */
+
+$largeur-min : 1024px
+$largeur-max : 99%
+
+$background-color-content       : #F0F0F0
+$border-color-content-and-title : #B2B2B2
+$border-width-content-and-title : 1px
+$radius-title                   : 0.3em
+$font-size-title                : 1.3em
+$padding-h2                     : 0.2em
+$margin-bottom-title            : 0
+$padding-left-and-right-content : 0%
+
+$color-title-start              : #E6E6E6 // Couleur du début du gradient du fond du titre h2 qui a la class .grey
+$color-title-end                : #B2B2B2 // Couleur de fin du gradient du fond du titre h2 qui a la class .grey
+
+/* -- Fin variables pour la partie global -- */
+
+html
+  font-family: Helvetica, Arial, sans-serif
+  font-size: 90%
+  
+body
+  margin: 0
+  min-height: 100%
+  
+.container
+  +container
+  +susy-grid-background
+  border-left   : $border-width-content-and-title solid $border-color-content-and-title
+  border-right   : $border-width-content-and-title solid $border-color-content-and-title
+  padding-left     : $padding-left-and-right-content
+  padding-right    : $padding-left-and-right-content
+  padding-bottom    : $padding-left-and-right-content                              
+  min-width: $largeur-min
+  max-width: $largeur-max
+  background-color: #F0F0F0
+  
+#content
+  +full
+
+h2.grey
+  +border-top-radius($radius-title)
+  +background-image(linear-gradient($color-title-start, $color-title-end))
+  font-size     : $font-size-title
+  text-align    : center
+  border        : $border-width-content-and-title solid $border-color-content-and-title
+  padding       : $padding-h2
+  margin-bottom : $margin-bottom-title
+  
+div.grey
+  border           : $border-width-content-and-title solid $border-color-content-and-title
+  background-color : $background-color-content
+  padding-left     : $padding-left-and-right-content
+  padding-right    : $padding-left-and-right-content
+
+fieldset
+  border: none
+
+.right
+  border: none
+  text-align     : right
+  float          : right
+  color: $color-font-header
+  a
+    color: $color-font-header
+
+#content
+  +full
+
+@media screen and (orientation:landscape)
+  body
+    min-width: 1024px !important
+  .container
+    min-width: 1024px !important
+    max-width: 99%
+    
+@media screen and (orientation:portrait)
+  body
+    min-width: 768px !important
+  .container
+    min-width: 768px !important
+    max-width: 99%

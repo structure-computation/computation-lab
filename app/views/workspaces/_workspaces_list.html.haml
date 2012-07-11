@@ -1,0 +1,26 @@
+%table#workspaces_table.grey
+  %thead
+    %tr
+      %th.no_sorter
+      %th ID
+      %th Nom
+      %th Description
+      /%th.no_sorter Actions
+  %tbody
+    - workspaces_list.each do |workspace|
+      %tr
+        %td.escape_search.details_link= link_to "sélectionner", :controller => :scratch_user, :action => :index, :workspace_id => workspace.id
+        %td= workspace.id
+        %td= workspace.name
+        %td= workspace.public_description
+        /%td.action_on_table.escape_search
+        /  %ul
+        /    %li
+        /      = button_to "Supprimer", workspace_path(workspace), :confirm => "Êtes vous sûr ?", :method => :delete, :confirm => "Êtes-vous sûr ?"
+        /    %li 
+        /      = link_to "Editer", edit_workspace_path(workspace)
+
+/= link_to 'Ajouter un membre', new_workspace_member_path(@workspace), :class => 'yellow_button'
+
+:coffeescript
+  $('#workspaces_table').tablesorter()

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110315132131) do
+ActiveRecord::Schema.define(:version => 20120520153416) do
 
   create_table "abonnements", :force => true do |t|
     t.string   "name"
@@ -25,10 +25,29 @@ ActiveRecord::Schema.define(:version => 20110315132131) do
     t.datetime "updated_at"
   end
 
+  create_table "bills", :force => true do |t|
+    t.integer  "workspace_id"
+    t.integer  "credit_id"
+    t.float    "total_price_HT"
+    t.float    "total_price_TVA"
+    t.float    "total_price_TTC"
+    t.string   "ref"
+    t.string   "statut"
+    t.date     "paid_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.float    "token_price_HT"
+    t.float    "global_price_HT"
+    t.float    "global_price_TVA"
+    t.float    "global_price_TTC"
+    t.text     "description"
+    t.text     "bill_type"
+    t.integer  "company_id"
+  end
+
   create_table "boundary_conditions", :force => true do |t|
     t.string   "name"
     t.integer  "user_id"
-    t.integer  "project_id"
     t.integer  "ref"
     t.integer  "id_select"
     t.string   "name_select"
@@ -40,7 +59,7 @@ ActiveRecord::Schema.define(:version => 20110315132131) do
   end
 
   create_table "calcul_accounts", :force => true do |t|
-    t.integer  "company_id"
+    t.integer  "workspace_id"
     t.date     "start_date"
     t.date     "end_date"
     t.string   "status"
@@ -73,6 +92,7 @@ ActiveRecord::Schema.define(:version => 20110315132131) do
     t.integer  "used_memory"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "workspace_member_id"
   end
 
   create_table "companies", :force => true do |t|
@@ -87,17 +107,45 @@ ActiveRecord::Schema.define(:version => 20110315132131) do
     t.integer  "user_sc_admin_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "kind"
+    t.string   "phone"
+    t.string   "firstname"
+    t.string   "lastname"
+  end
+
+  create_table "company_user_memberships", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "company_id"
+    t.string   "rights"
+    t.string   "status"
+    t.string   "role"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "company_workspace_memberships", :force => true do |t|
+    t.integer  "workspace_id"
+    t.integer  "company_id"
+    t.string   "rights"
+    t.string   "status"
+    t.string   "role"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "credits", :force => true do |t|
-    t.integer  "calcul_account_id"
     t.integer  "forfait_id"
-    t.integer  "nb_jetons"
-    t.integer  "nb_jetons_tempon"
     t.integer  "price"
-    t.date     "credit_date"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "token_account_id"
+    t.float    "token_price"
+    t.float    "global_price"
+    t.float    "nb_token"
+    t.float    "solde_token"
+    t.float    "used_token"
+    t.text     "state"
+    t.date     "end_date"
   end
 
   create_table "delayed_jobs", :force => true do |t|
@@ -115,27 +163,6 @@ ActiveRecord::Schema.define(:version => 20110315132131) do
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
-  create_table "factures", :force => true do |t|
-    t.integer  "company_id"
-    t.integer  "credit_id"
-    t.integer  "log_abonnement_id"
-    t.string   "facture_type"
-    t.float    "price_calcul_HT"
-    t.float    "price_calcul_TVA"
-    t.float    "price_calcul_TTC"
-    t.float    "price_memory_HT"
-    t.float    "price_memory_TVA"
-    t.float    "price_memory_TTC"
-    t.float    "total_price_HT"
-    t.float    "total_price_TVA"
-    t.float    "total_price_TTC"
-    t.string   "ref"
-    t.string   "statut"
-    t.date     "paid_date"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "files_sc_models", :force => true do |t|
     t.integer  "sc_model_id"
     t.integer  "user_id"
@@ -146,26 +173,26 @@ ActiveRecord::Schema.define(:version => 20110315132131) do
     t.float    "size"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "workspace_member_id"
   end
 
   create_table "forfaits", :force => true do |t|
     t.string   "name"
-    t.float    "price"
-    t.float    "price_jeton"
-    t.integer  "nb_jetons"
-    t.integer  "nb_jetons_tempon"
     t.integer  "validity"
     t.string   "state"
     t.date     "start_date"
     t.date     "end_date"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.float    "token_price"
+    t.float    "global_price"
+    t.float    "nb_token"
   end
 
   create_table "links", :force => true do |t|
     t.string   "name"
-    t.string   "familly"
-    t.integer  "company_id"
+    t.string   "family"
+    t.integer  "workspace_id"
     t.integer  "reference"
     t.integer  "id_select"
     t.string   "name_select"
@@ -174,7 +201,7 @@ ActiveRecord::Schema.define(:version => 20110315132131) do
     t.string   "comp_complexe"
     t.integer  "type_num"
     t.float    "Ep"
-    t.float    "jeux"
+    t.float    "jeu"
     t.float    "R"
     t.float    "f"
     t.float    "Lp"
@@ -183,6 +210,7 @@ ActiveRecord::Schema.define(:version => 20110315132131) do
     t.float    "Lr"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "state"
   end
 
   create_table "log_abonnements", :force => true do |t|
@@ -208,10 +236,28 @@ ActiveRecord::Schema.define(:version => 20110315132131) do
     t.datetime "updated_at"
   end
 
+  create_table "log_tools", :force => true do |t|
+    t.integer  "sc_model_id"
+    t.integer  "calcul_result_id"
+    t.integer  "workspace_member_id"
+    t.integer  "token_account_id"
+    t.string   "log_name"
+    t.string   "log_type"
+    t.string   "state"
+    t.boolean  "launch_autorisation", :default => false
+    t.integer  "cpu_allocated"
+    t.integer  "nb_token"
+    t.integer  "estimated_time"
+    t.integer  "real_time"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "launch_state"
+  end
+
   create_table "materials", :force => true do |t|
     t.string   "name"
-    t.string   "familly"
-    t.integer  "company_id"
+    t.string   "family"
+    t.integer  "workspace_id"
     t.integer  "reference"
     t.integer  "id_select"
     t.string   "name_select"
@@ -241,30 +287,29 @@ ActiveRecord::Schema.define(:version => 20110315132131) do
     t.float    "alpha_2"
     t.float    "alpha_3"
     t.float    "rho"
-    t.float    "sigma_p_1"
-    t.float    "sigma_p_2"
-    t.float    "sigma_p_3"
-    t.float    "sigma_r_1"
-    t.float    "sigma_r_2"
-    t.float    "sigma_r_3"
-    t.float    "sigma_e_1"
-    t.float    "sigma_e_2"
-    t.float    "sigma_e_3"
-    t.float    "H_1"
-    t.float    "H_2"
-    t.float    "H_3"
-    t.float    "p_1"
-    t.float    "p_2"
-    t.float    "p_3"
-    t.float    "ed_1"
-    t.float    "ed_2"
-    t.float    "ed_3"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.float    "viscosite"
+    t.string   "type_plast"
+    t.float    "k_p"
+    t.float    "m_p"
+    t.float    "R0"
+    t.float    "coeff_plast_cinematique"
+    t.float    "couplage"
+    t.string   "type_endo"
+    t.float    "Yo"
+    t.float    "Yc"
+    t.float    "Ycf"
+    t.float    "dmax"
+    t.float    "b_c"
+    t.float    "effet_retard"
+    t.float    "a"
+    t.float    "tau_c"
+    t.string   "state"
   end
 
   create_table "memory_accounts", :force => true do |t|
-    t.integer  "company_id"
+    t.integer  "workspace_id"
     t.text     "description"
     t.date     "inscription_date"
     t.date     "end_date"
@@ -276,28 +321,15 @@ ActiveRecord::Schema.define(:version => 20110315132131) do
     t.datetime "updated_at"
   end
 
-  create_table "projects", :force => true do |t|
-    t.string   "name"
-    t.text     "description"
-    t.date     "start_date"
-    t.date     "estimated_end_date"
-    t.date     "end_date"
-    t.integer  "estimated_done"
-    t.string   "state"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "sc_admins", :force => true do |t|
-    t.integer  "company_id"
+    t.integer  "workspace_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "sc_models", :force => true do |t|
     t.string   "name"
-    t.integer  "company_id"
-    t.integer  "project_id"
+    t.integer  "workspace_id"
     t.string   "model_file_path"
     t.string   "image_path"
     t.text     "description"
@@ -310,6 +342,8 @@ ActiveRecord::Schema.define(:version => 20110315132131) do
     t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "original_filename"
+    t.string   "units"
   end
 
   create_table "solde_calcul_accounts", :force => true do |t|
@@ -327,26 +361,40 @@ ActiveRecord::Schema.define(:version => 20110315132131) do
     t.datetime "updated_at"
   end
 
-  create_table "tasks", :force => true do |t|
-    t.integer  "project_id"
-    t.integer  "created_by"
-    t.integer  "attributed_to"
-    t.string   "name"
-    t.text     "description"
-    t.date     "due_date"
-    t.string   "state"
-    t.integer  "estimated_done"
+  create_table "solde_token_accounts", :force => true do |t|
+    t.integer  "token_account_id"
+    t.integer  "log_tool_id"
+    t.integer  "credit_id"
+    t.string   "solde_type"
+    t.integer  "credit_token"
+    t.integer  "used_token"
+    t.integer  "solde_token"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "user_projects", :force => true do |t|
+  create_table "token_accounts", :force => true do |t|
+    t.integer  "workspace_id"
+    t.string   "status"
+    t.integer  "used_token_counter"
+    t.integer  "purchased_token_counter"
+    t.integer  "reserved_token"
+    t.integer  "solde_token"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "active_used_token_counter"
+    t.integer  "active_purchased_token_counter"
+  end
+
+  create_table "user_model_ownerships", :force => true do |t|
     t.integer  "user_id"
-    t.integer  "project_id"
-    t.integer  "is_admin"
+    t.integer  "sc_model_id"
+    t.string   "rights"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "user_model_ownerships", ["user_id", "sc_model_id"], :name => "index_user_model_informations_on_user_id_and_model_id"
 
   create_table "user_sc_admins", :force => true do |t|
     t.integer  "user_id"
@@ -355,25 +403,21 @@ ActiveRecord::Schema.define(:version => 20110315132131) do
     t.datetime "updated_at"
   end
 
-  create_table "user_sc_models", :force => true do |t|
+  create_table "user_workspace_memberships", :force => true do |t|
     t.integer  "user_id"
-    t.integer  "sc_model_id"
-    t.integer  "role"
+    t.integer  "workspace_id"
+    t.string   "rights"
+    t.string   "status"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "user_tasks", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "task_id"
-    t.integer  "is_creator"
-    t.integer  "is_assigned_to"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.boolean  "engineer"
+    t.boolean  "manager"
+    t.string   "preference"
+    t.string   "role"
   end
 
   create_table "users", :force => true do |t|
-    t.integer  "company_id"
+    t.integer  "workspace_id"
     t.string   "firstname",            :limit => 100, :default => ""
     t.string   "lastname",             :limit => 100, :default => ""
     t.string   "telephone",            :limit => 23,  :default => ""
@@ -404,5 +448,35 @@ ActiveRecord::Schema.define(:version => 20110315132131) do
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
+  create_table "workspace_accounts", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "workspace_member_to_model_ownerships", :force => true do |t|
+    t.integer  "workspace_member_id"
+    t.integer  "sc_model_id"
+    t.string   "rights"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "workspace_relationships", :force => true do |t|
+    t.integer  "workspace_id"
+    t.integer  "related_workspace_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "workspaces", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "kind"
+    t.string   "public_description"
+    t.string   "private_description"
+    t.string   "state"
+  end
 
 end

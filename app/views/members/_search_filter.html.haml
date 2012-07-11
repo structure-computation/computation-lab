@@ -1,0 +1,10 @@
+.search_filter
+  %p
+    %label{:for => "search_filter"} Recherche
+    %input#search_filter{:type => "text"}
+  
+:coffeescript
+  $( ->
+    $("member_table").tablesorter()
+    searchFilter("members_table", "search_filter")
+  )

@@ -1,0 +1,16 @@
+-content_for :left_top do
+  .left_submenu
+    %h2.grey
+      Menu
+    %ul
+      %li.manage_pic_compte_memoire
+        = link_to "Nouvel abonnement", workspace_sc_models_path(@workspace) 
+      %li.manage_pic_compte_abonnement
+        = link_to "Nouveau forfait", workspace_sc_models_path(@workspace)
+                 
+-content_for :right_top do
+  %h2.grey
+    Liste des factures
+
+-content_for :workspace_content do
+  =render :partial => 'bills_list', :object => @workspace.bills

@@ -1,0 +1,17 @@
+
+
+
+
+- content_for :visu do 
+  %canvas#visualisation_dock
+  #com
+  #visu_bouton
+    %button#visu_bouton_01{ :onmousedown => "SCVisu.visualisation.sx( [0.8263362165277776, -0.3081882094270371, 0.47136873551892977], [-0.12495696080697871, 0.7157861160528666, 0.6870487566481984] )" }
+    %button#visu_bouton_02{ :onmousedown => "SCVisu.visualisation.fit_img( )" }
+    %button#visu_bouton_03{ :onmousedown => "SCVisu.visualisation.sx( [1,0,0], [0,1,0] )" }
+    %button#visu_bouton_04{ :onmousedown => "SCVisu.visualisation.sx( [0,0,1], [0,1,0] )" }
+    %button#visu_bouton_05{ :onmousedown => "SCVisu.visualisation.sx( [1,0,0], [0,0,1] )" }
+    %button#visu_bouton_06{ :onmousedown => "SCVisu.visualisation.shrink( )"}
+    %button#visu_bouton_07{ :onmousedown => "SCVisu.visualisation.display_all_pieces( )" }
+    %button#visu_bouton_08{ :onmousedown => "SCVisu.visualisation.display_all_interfaces( )" } 
+

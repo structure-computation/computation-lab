@@ -1,0 +1,24 @@
+%dl    
+  %dt Email
+  %dd= current_user.email
+  
+  %dt Nom
+  %dd= current_user.lastname
+  
+  %dt Prénom
+  %dd= current_user.firstname
+  
+  %dt Droits
+  %dd TODO
+  
+  %dt Statut
+  %dd TODO
+  
+  %dt Date d'arrivée
+  %dd= current_user.created_at.to_date
+
+%a.yellow_button{ :onclick => "affich_change_detail_user()", :style => "cursor: pointer;" } 
+  Modifier mes données
+
+%a.yellow_button{ :onclick => "affich_change_mdp_user()", :style => "cursor: pointer;" } 
+  Modifier mon mot de passe

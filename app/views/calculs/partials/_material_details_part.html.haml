@@ -1,0 +1,33 @@
+%h2.grey 
+  %button.close Fermer
+  Détail
+%ul.horizontal_tab_submenu
+  %li
+    %a#tab_generic Génériques
+  %li        
+    %a#tab_elastic Elasticité
+  %li        
+    %a#tab_plastic Plasticité
+  %li        
+    %a#tab_damage Endommagement
+
+.horizontal_tab_content
+  #tab_generic_content
+    = render "materials/details/material_basic_information"
+    = render :partial => "materials/details/material_generic_info", :locals => { :show_all => true }
+
+  #tab_elastic_content
+    = render :partial => "materials/details/material_elastic_information", :locals => { :show_all => true }
+  #tab_plastic_content
+    = render :partial => "materials/details/material_plastic_information", :locals => { :show_all => true }
+  #tab_damage_content
+    = render :partial => "materials/details/material_damageable_information", :locals => { :show_all => true }
+
+:coffeescript
+  $ ->
+    manage_tabs
+      "#tab_generic" : "#tab_generic_content"
+      "#tab_elastic" : "#tab_elastic_content"
+      "#tab_plastic" : "#tab_plastic_content"
+      "#tab_damage" : "#tab_damage_content"
+    

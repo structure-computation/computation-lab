@@ -1,0 +1,44 @@
+-content_for :left_submenu do
+  #contentleft
+    = render :partial => "partials/raccourcis_accueil"
+    = render :partial => "left_submenu"
+
+-content_for :content_workspace do  
+  .large_ligne
+    %h2
+      Mes outils
+    %div
+      .ligne
+        =link_to '>',  :controller => "modele" 
+        %p.description
+          Utilisation en ligne de nos logiciels
+        %h3
+          Mes modèles 
+      .ligne
+        =link_to '>', workspaces_path
+        %p.description
+          Gestion des comptes et des droits d'accès
+        %h3
+          Ma société
+      
+  .large_ligne
+    %h2
+      Mon profil
+    %div      
+      /compte d'abonnement annuel
+      .ligne
+        %a{ :style => "cursor: pointer;", :onclick => "affich_contenu_profil_user()" }
+          >
+        %p.description
+          Modification de vos données personnelles
+        %h3
+          Mes profil  
+      = render :partial => "contenu_mon_profil"
+      .ligne
+        %a{ :style => "cursor: pointer;", :onclick => "affich_contenu_profil_workspace()" }
+          >
+        %p.description
+          Contactez vos gestionnaires
+        %h3
+          Liste de vos gestionnaires
+      = render :partial => "contenu_workspace"

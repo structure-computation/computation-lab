@@ -1,0 +1,25 @@
+- disabled = false if disabled.nil?
+- show_all = false if show_all.nil?
+
+/ TODO !!!!!!!!!!! CHANGER LES VALEURS DES CHAMPS. Elles ne sont pas adapté à celle présente en BDD
+%h3 Plasticité
+%table.grey
+  %thead
+    %tr.no_sorter
+      %th
+      %th Selon V1
+
+  %tbody
+    %tr
+      %th Limite de plasticité (R0)
+      %td= custom_text_field(:material, :R0, "R0", disabled)
+    %tr
+      %th Facteur de la loi d écrouissage (k_p)
+      %td= custom_text_field :material, :k_p, "k_p", disabled
+    %tr
+      %th Exposant de la loi d écrouissage (m_p)
+      %td= custom_text_field(:material, :m_p, "m_p", disabled)
+    %tr
+      %th Coefficient d écrouissage cinématique (C)
+      %td= custom_text_field(:material, :coeff_plast_cinematique, "C", disabled)
+

@@ -2,12 +2,12 @@ class VisualisationController < ApplicationController
   require 'json'
   require 'socket'
   include Socket::Constants
-  before_filter :authenticate_user! , :except => :calcul_valid
+  before_filter :authenticate_user!
   
   def index
     @page = 'SCcompute'
     @id_model = params[:id_model]
-    current_model = current_user.sc_models.find(@id_model)
+    current_model = current_workspace_member.sc_models.find(@id_model)
     @dim_model = current_model.dimension
     respond_to do |format|
       format.html {render :layout => false }
@@ -28,6 +28,25 @@ class VisualisationController < ApplicationController
     result = system("cd /home/scproduction/code_dev/Visu; make;")
     #stdin, stdout, stderr = Open3.popen3("cd /home/jbellec/code_dev/Visu; make;") 
     render :text => result
+  end
+  
+  def update
+    request = params[:data]
+    
+    logger.debug params[:data].size()
+    request = params[:data] + "$"
+    logger.debug request
+    
+    host = 'localhost'     # The web server
+    port = 10001                           # Default HTTP port
+
+    socket = TCPSocket.open(host,port)  # Connect to server
+    socket.write(request)               # Send request
+    socket.flush()
+    response = socket.read              # Read complete response
+    #logger.debug response
+    
+    render :text => response
   end
   
   

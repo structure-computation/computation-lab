@@ -1,0 +1,9 @@
+%tr
+  %td
+    = link_to 'Détails', workspace_sc_model_path(@workspace, sc_model)
+  %td= sc_model.name
+  %td= sc_model.project
+  %td= sc_model.results
+  %td v
+  %td c
+  %td= link_to "Editer", edit_workspace_sc_model_path(@workspace, sc_model)

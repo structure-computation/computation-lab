@@ -1,68 +1,41 @@
-class CompanyController < ApplicationController
+class CompanyController < InheritedResources::Base
   
-  before_filter :authenticate_user!
+    helper :application     
   
-  def index
-    @page = 'SCmanage' 
-    @current_company = current_user.company
-    @id_company = @current_company.id
-    respond_to do |format|
-      format.html {render :layout => true }
-      format.js   {render :json => @current_company.to_json}
-    end
-  end
-
-
+  # # Un espace de travail peut avoir plusieurs espaces de travail  
+  # has_many :workspace_relationships                             
+  # has_many :related_workspaces, :through => :workspace_relationships   
+  # 
+  # # Relation "inverse", permet de voir les workspaces qui partagent avec vous
+  # has_many :inverse_workspace_relationships, :class_name => "WorkspaceRelationship", :foreign_key => "related_workspaces_id"  
+  # has_many :inverse_workspace_relationships, :through => :inverse_workspace_relationships, :source => :workspace  
   
-  def get_gestionnaire
-    #recherche des gestionnaires dans la bdd
-    gestionnaire = current_user.company.users.find(:all, :conditions => {:role => "gestionnaire"})
-
-    # creation du tableau des gestionnaires réduit a envoyer
-    @users = []
-    gestionnaire.each{ |gestionnaire_i|
-      user = Hash.new
-      user['user'] = Hash.new 
-      user['user'] = { :id =>gestionnaire_i.id ,:date => gestionnaire_i.created_at.to_date, :email  => gestionnaire_i.email, :name => gestionnaire_i.firstname + " " + gestionnaire_i.lastname }
-      @users << user
-    } 
-    render :json => @users.to_json
-  end
+  before_filter :authenticate_user!  
+  before_filter :must_be_manager
+  #before_filter :set_page_name 
   
+  # Actions inherited ressource. 
+  actions :all, :except => [ :index, :edit, :update, :destroy ]
   
-  def get_solde
-    # Creation d'une liste fictive d'opération.
-    @soldes = current_user.company.solde_calcul_accounts.find(:all)
-    render :json => @soldes.to_json
-  end
+  layout 'workspace'  
   
-  def get_calcul_account
-    @id_company = params[:id_company]
-    @current_company = Company.find(@id_company)
-    @calcul_account = @current_company.calcul_account
-    respond_to do |format|
-      format.js   {render :json => @calcul_account.to_json}
-    end 
-  end
-  
-  def get_memory_account
-    @id_company = params[:id_company]
-    @current_company = Company.find(@id_company)
-    @memory_account = @current_company.memory_account
-    respond_to do |format|
-      format.js   {render :json => @memory_account.to_json}
-    end 
-  end
-  
-  def delete_user
-    @current_company = current_user.company
-    @user = @current_company.users.find(params[:id_membre])
-    if(@user && @user.id == current_user.id)
-      render :text => "false " + @user.id.to_s() + "  " + current_user.id.to_s()
+  def show
+    @company    = current_workspace_member.company
+    if @company 
+      # show!
+      render
     else
-      @user.delete!
-      render :text => "true" + @user.id.to_s() + "  " + current_user.id.to_s()
+      respond_to do |format|
+        format.html {redirect_to workspace_path(current_workspace_member), 
+                    :notice => "Vous n'avez pas acces à cette page."}
+        format.json {render :status => 404, :json => {}}
+      end
     end
   end
+  
+  def new
+    @new_company = Company.new
+  end
+  
   
 end

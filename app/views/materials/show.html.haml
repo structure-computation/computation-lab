@@ -1,0 +1,38 @@
+-content_for :left_top do
+  .left_submenu
+    %h2.grey
+      Menu
+    %ul
+      /%li.LM_pic_materiau
+      /  =link_to 'Retour à la liste des matériaux', workspace_materials_path(@workspace)
+      %li.LM_pic_materiau
+        =link_to 'Retour au laboratoire', :controller => :laboratory, :action => :index, :anchor => 'Matériaux'
+      %li.LM_pic_materiau
+        =link_to 'Editer le matériau', edit_workspace_material_path(@workspace, @material)
+        
+-content_for :right_top do          
+  %h2.grey
+    Description
+  .grey
+    %p
+      = @material.description
+    %ul
+      %li
+        Référence :
+        = @material.reference
+      %li
+        ID :
+        = @material.id
+      %li
+        Famille :
+        = @material.family
+          
+-content_for :workspace_content do
+  %h2.grey
+    Matériaux : 
+    = @material.name
+  .wrapper
+    #left_content
+      = render "material_tab_details"
+    #right_content
+      = render "material_details"

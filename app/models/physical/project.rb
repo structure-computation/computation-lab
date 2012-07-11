@@ -1,14 +1,48 @@
-class Project < ActiveRecord::Base
+class Company < ActiveRecord::Base
   
-  belongs_to  :company
+  has_many  :user_workspace_memberships
+  has_many  :users, :through => :user_workspace_memberships
+  # has_many  :managers , :conditions => {:role => "gestionnaire"} # TODO: Appliquer un filtre.
   
-  has_many    :user_projects
-  has_many    :users , :through => :user_projects
-  has_many    :admins, :through => :user_projects, :source => :users, :conditions => {"user_projects.is_admin"     => true}
-              
-  has_many    :sc_models
-  has_many    :tasks
-  #has_many    :log_calculs
+  has_one   :calcul_account	, :readonly => false
+  has_one   :memory_account	, :readonly => false
   
-  # has_many :forums
+  has_many  :projects		    , :readonly => false
+  has_many  :sc_models      , :readonly => false
+  has_many  :materials		  , :readonly => false
+  has_many  :links		      , :readonly => false
+  has_many  :factures		    , :readonly => false
+  
+  has_many  :solde_calcul_accounts,  :through => :calcul_account		, :readonly => false
+
+  has_many  :bills		, :readonly => false
+  
+  belongs_to  :user_sc_admin
+  
+  # TODO: Placé en prévision du moment ou un utilisateur pourra acceder à plusieurs entreprise 
+  # ET pour faire fonctionner inherited ressource qui fait un current_user.companies.find(...)
+  scope :accessible_by_user, lambda { |user| 
+          joins(:users).where("users.id = ?", user.id)
+  }
+  
+
+  
+  def members
+    users
+  end
+  
+  def managers
+    users.where(:role => "gestionnaire")
+  end
+  
+  def init_account()
+    current_calcul_account = self.create_calcul_account
+    current_calcul_account.init
+    
+    current_memory_account = self.create_memory_account
+    current_memory_account.init
+  end
+  
+  
+  
 end

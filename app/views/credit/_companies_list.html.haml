@@ -1,0 +1,21 @@
+%table#companies_table.grey
+  %thead
+    %tr
+      %th.no_sorter
+      %th Responsable
+      %th Téléphone
+      %th Société
+      %th Adresse
+  %tbody
+    - companies_list.each do |company|
+      %tr
+        %td.escape_search.details_link= link_to "Valider", :controller => "credit", :action => "create", :forfait_id => @forfait.id, :company_id => company.id, :informations => "exist"
+        %td= company.firstname + " " + company.lastname
+        %td= company.phone
+        %td= company.name
+        %td= company.address + ", " + company.city + " - " + company.zipcode
+
+/= link_to 'Ajouter un membre', new_workspace_member_path(@workspace), :class => 'yellow_button'
+
+:coffeescript
+  $('#companies_table').tablesorter()

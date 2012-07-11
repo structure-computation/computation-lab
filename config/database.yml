@@ -3,10 +3,10 @@ defaults_development: &defaults_development
   encoding: utf8
   host:     localhost
   username: structcomp
-  # password: u7N5TeqPXt4pxtjX
+  password: 
 
 development:
-  database: structcompDev
+  database: sc_backbone_dev 
   <<: *defaults_development
 
 production:

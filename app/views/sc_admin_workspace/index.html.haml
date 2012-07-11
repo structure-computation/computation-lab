@@ -1,0 +1,36 @@
+-content_for :left_top do
+  .left_submenu
+    %h2.grey
+      Menu
+    %ul
+      %li.LM_pic_new_model
+        = link_to "Nouveau workspace", new_sc_admin_workspace_path  
+
+-content_for :right_top do
+  %h2.grey
+    Liste des workspace 
+  %div
+    = render :partial => "search_filter"
+
+-content_for :workspace_content do
+  %table.grey#workspaces_table
+    %thead
+      %tr
+        %th.no_sorter
+        %th Nom
+        %th ID
+        %th.no_sorter Actions
+    %tbody
+      - @workspaces.each do |workspace|
+        %tr
+          %td.escape_search.details_link= link_to 'Détails' , sc_admin_workspace_path(workspace.id)
+          %td.name=           workspace.name ? workspace.name : 'Undefined'
+          %td.id=             workspace.id
+          %td.action_on_table.escape_search
+            %ul
+              %li
+                %a Visualisation
+              %li
+                %a Calcul
+              %li
+                = button_to 'Supprimer', sc_admin_workspace_path(workspace.id), :method => :delete, :confirm => "Êtes-vous sûr ?"

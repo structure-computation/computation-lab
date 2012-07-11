@@ -1,0 +1,48 @@
+-content_for :left_top do
+  .left_submenu
+    %h2.grey
+      Menu
+    %ul
+      /%li.LM_pic_liaison
+      /  =link_to 'Retour à la liste des liaisons', workspace_links_path(@workspace)
+      %li.LM_pic_liaison
+        =link_to 'Retour au laboratoire', :controller => :laboratory, :action => :index, :anchor => 'Liaisons'
+      %li.LM_pic_liaison
+        =link_to 'Editer la liaison', edit_workspace_link_path(@workspace, @link)
+
+-content_for :right_top do 
+  %h2.grey
+    Description
+  .grey
+    %ul
+      %li
+        Référence :
+        = @link.reference
+      %li
+        ID :
+        = @link.id
+      %li
+        Famille :
+        = @link.family
+      %li
+        Comportement générique :
+        Parfait
+        = check_box_tag "link_comp_generic_pa", "pa", @link.comp_generique.downcase.include?("pa"), :disabled => true
+        Elastique
+        = check_box_tag "link_comp_generic_el", "el", @link.comp_generique.downcase.include?("el"), :disabled => true
+        Contact
+        = check_box_tag "link_comp_generic_co", "co", @link.comp_generique.downcase.include?("co"), :disabled => true
+      %li
+        Comportement complexe :
+        Plastique
+        = check_box_tag "link_comp_complexe_pl", "pl", @link.comp_complexe.downcase.include?("pl"), :disabled => true
+        Cassable
+        = check_box_tag "link_comp_complexe_ca", "ca", @link.comp_complexe.downcase.include?("ca"), :disabled => true
+
+-content_for :workspace_content do    
+  %h2.grey
+    Liaison : 
+    = @link.name
+  .wrapper
+    #left_content= render "link_tab_details"
+    #right_content= render "link_details"

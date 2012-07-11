@@ -1,0 +1,65 @@
+-content_for :left_top do
+  .left_top
+    %h2.grey
+      Comptes
+    %ul
+      %li.manage_pic_compte_abonnement
+        %a
+          Nouveau forfait
+      %li.manage_pic_nouveau_membre
+        = link_to 'Ajouter un membre', new_company_member_path(@company)
+      %li.manage_pic_nouveau_membre
+        = link_to 'Editer', edit_sc_admin_company_path(@company.id)
+
+-content_for :right_top do
+  %h2.grey
+    = @company.name
+  .grey
+    %p
+    
+    
+-content_for :workspace_content do
+  %h2.grey
+    Détails de la société
+  .wrapper
+    #left_content
+      %ul.tab_submenu.js_tab_submenu  
+        %li                    
+          %a#tab_1{:href => "#Membres"} Membres
+        %li                    
+          %a#tab_2{:href => "#Workspaces"} Workspaces
+        %li                    
+          %a#tab_3{:href => "#Description"} Description
+            
+    #right_content
+      .tab_content.js_tab_content
+        #tab_1_content
+          = render :partial => "members/search_filter"
+          = render :partial => "sc_admin_user/members_list", :object => @company.members
+        #tab_2_content
+          = render :partial => "workspaces/search_filter"
+          = render :partial => "sc_admin_workspace/workspaces_list", :object => @company.workspaces  
+        #tab_3_content
+          %table.grey#workspace_information_table
+            %tr
+              %th Division
+              %td= @company.division
+            %tr
+              %th Adresse
+              %td= @company.address
+            %tr
+              %th Ville
+              %td= @company.city   
+            %tr
+              %th Code Postal
+              %td= @company.zipcode
+            %tr
+              %th Pays
+              %td= @company.country
+            %tr
+              %th TVA intracommunautaire
+              %td= @company.TVA
+            %tr
+              %th SIREN
+              %td= @company.siren
+      = coffeescript_include_tag "manage_tab"

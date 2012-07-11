@@ -135,7 +135,7 @@ function init_Tableau_abonnement_list(Tableau_abonnement_temp)
 // requette pour l'obtention du tableau des resultats
 function get_Tableau_abonnement_list()
 { 
-    var url_php = "/sc_admin_detail_company/get_list_abonnement";
+    var url_php = "/sc_admin_detail_workspace/get_list_abonnement";
     $.getJSON(url_php,{},init_Tableau_abonnement_list);
 }
 
@@ -222,7 +222,7 @@ function ok_new_abonnement_info(result)
 	//alert(result);
 	document.getElementById('new_abonnement_pic_wait').classname = 'off';
 	document.getElementById('new_abonnement_pic_ok').classname = 'on';
-	get_current_memory_account(Current_company['id']);
+	get_current_memory_account(Current_workspace['id']);
 }
 
 
@@ -230,8 +230,8 @@ function send_new_abonnement_info()
 { 
     document.getElementById('new_abonnement_pic_wait').classname = 'on';
     document.getElementById('new_abonnement_pic_ok').classname = 'off';
-    var url_php = "/sc_admin_detail_company/valid_new_abonnement";
-    $.getJSON(url_php,{"id_company": Current_company['id'], "id_abonnement":Tableau_abonnement['abonnement']['id']},ok_new_abonnement_info);
+    var url_php = "/sc_admin_detail_workspace/valid_new_abonnement";
+    $.getJSON(url_php,{"id_workspace": Current_workspace['id'], "id_abonnement":Tableau_abonnement['abonnement']['id']},ok_new_abonnement_info);
 }
 
 -->

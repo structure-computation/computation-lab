@@ -1,0 +1,18 @@
+%p
+  %label
+    Mot de passe actuel
+  %input#membre_change_password{ :type => "password", :onKeyup => "user_mdp_change_value()" }
+%p
+  %label
+    Nouveau mot de passe
+  %input#membre_change_new_password{ :type => "password", :onKeyup => "user_mdp_change_value()" }
+%p
+  %label
+    Répéter mot de passe
+  %input#membre_change_password_confirmation{ :type => "password", :onKeyup => "user_mdp_change_value()" }
+
+%a.yellow_button{ :onclick => "affich_detail_user()", :style => "cursor: pointer;" } 
+  Annuler
+
+%a.yellow_button{ :onclick => "user_mdp_change_valid()", :style => "cursor: pointer;" } 
+  Valider

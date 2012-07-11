@@ -1,0 +1,33 @@
+-content_for :left_top do
+  .left_submenu
+    %h2.grey
+      Menu
+    %ul
+      %li.LM_pic_materiau
+        =link_to 'Retour à la liste des membres', workspace_path(@workspace, :anchor => 'Membres')
+
+-content_for :right_top do
+  %h2.grey
+    Détail du membre
+  %table.grey
+    %thead
+      %tr.no_sorter
+        %th Mail
+        %th Prénom
+        %th Nom
+        %th Rôle
+        %th Status
+        %th Date d'inscription
+    %tbody
+      %tr
+        %td= @member.email
+        %td= @member.firstname
+        %td= @member.lastname
+        %td= @member.role
+        %td= @member.state
+        %td= @member.created_at.to_date
+  
+  = link_to 'Editer',     edit_workspace_member_path(@workspace, @member), :class => 'yellow_button'
+  = link_to 'Désactiver', edit_workspace_member_path(@workspace, @member), :class => 'yellow_button'
+  -# TODO Créer un fonction pour désactiver un user 
+  = link_to 'Editer',     edit_workspace_member_path(@workspace, @member), :class => 'yellow_button'

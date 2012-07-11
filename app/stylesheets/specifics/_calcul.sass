@@ -1,0 +1,192 @@
+$hover-color: #BBF
+ul.data_list
+  border: 1px solid #B2B2B2
+  list-style-type: none
+  padding-left: 0
+  padding-top: 0
+  margin: 0
+  li
+    cursor: pointer
+    padding: 0.5em
+    button
+      float: right
+      
+  li:nth-child(odd)
+    background-color: #F7F7F7
+  li.calcul_view.selected
+    background-color: #CCF
+    font-weight: bold
+  li:hover
+    background-color: $hover-color
+  li.selected
+    color: green
+    background-color: #CCF
+  li.gray
+    color: gray
+        
+.breadcrumb_button
+  padding: 1em
+  button
+    float: right
+  a  
+    float: right
+#wizard_buttons
+  margin-top : 1%
+  +full
+  div
+    display: inline-block
+
+#ajax-loader
+  background-image : url(../images/ajax-loader3.gif)
+  background-repeat: no-repeat
+  background-position: 50% 50%
+  position         : absolute
+  left             : 50%
+  height: 30px
+  width: 220px
+  margin-left: -110px
+  display          : none
+
+.is_not_assigned, .is_assigned
+  float: right
+
+#bottom_list_calcul
+  padding-top: 1em
+  table
+    font-size: 95%
+
+#materials_database, #links_database
+  tbody
+    tr:hover
+      background-color: $hover-color
+
+.toggler
+  +transition-out(1s)
+  max-height: 0px
+  overflow: hidden
+  background-color: white
+  border: 1px solid #CCC
+  padding: 1%
+  visibility: hidden
+  
+.toggler.maximize
+  +transition-in(1s)
+  max-height: 100em
+  visibility: visible
+
+.previous_button
+  float : left
+  a
+    +border-left-radius(1em)
+    
+.next_button
+  float : right
+  a
+    +border-right-radius(1em)  
+.save_div
+  margin-left: 2%
+  
+#saved_for
+  display: block
+  text-align: center
+  margin-top: 0.5em
+  margin-bottom: 0.5em  
+  
+#calcul_container
+  h2.grey
+    background-image: none
+    font-size: 110%
+    font-weight: normal
+    margin-top: 0em
+    border: none
+    
+#left_list_calcul
+  > div
+    background-color: white
+    border: 1px solid #CCC
+    padding: 1%
+#right_list_calcul
+  > div
+    background-color: white
+    border: 1px solid #CCC
+    padding: 1%
+    
+#notification
+  color: black
+  height: 2.2em
+  border: 1px solid #CCC
+  border-top: none
+  +border-bottom-radius(0.5em)
+  position: absolute
+  left: 50%
+  width: 40%
+  margin-left: -20%
+  background-color: white
+  +transition(0.5s)
+  +translateY(-2.8em)
+  +single-box-shadow(rgba(0,0,0,0.7), 0px, 2px, 9px)
+  p
+    margin: 0.2em
+    text-align: center
+    line-height: 2em
+    
+#notification.show
+  +transition(0.5s)
+  +translateY(0)
+
+#visu_bouton
+  height: 31px
+  
+#visu_bouton_01
+  height: 31px
+  width: 31px
+  float: left
+  background-image : url(../images/NC_bouton_visu_01.png)
+  
+#visu_bouton_02
+  height: 31px
+  width: 31px
+  float: left
+  background-image : url(../images/NC_bouton_visu_02.png)
+
+#visu_bouton_03
+  height: 31px
+  width: 31px
+  float: left
+  background-image : url(../images/NC_bouton_visu_03.png)
+
+#visu_bouton_04
+  height: 31px
+  width: 31px
+  float: left
+  background-image : url(../images/NC_bouton_visu_04.png)
+
+#visu_bouton_05
+  height: 31px
+  width: 31px
+  float: left
+  background-image : url(../images/NC_bouton_visu_05.png)
+
+#visu_bouton_06
+  height: 31px
+  width: 31px
+  float: left
+  background-image : url(../images/NC_bouton_visu_06.png)
+
+#visu_bouton_07
+  height: 31px
+  width: 31px
+  float: left
+  background-image : url(../images/NC_bouton_visu_07.png)
+
+#visu_bouton_08
+  height: 31px
+  width: 31px
+  float: left
+  background-image : url(../images/NC_bouton_visu_08.png)
+
+#visu_bouton_09
+  height: 31px
+  width: 31px
+  float: left
+  background-image : url(../images/NC_bouton_visu_09.png)

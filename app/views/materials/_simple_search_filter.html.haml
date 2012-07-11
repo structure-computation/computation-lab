@@ -1,0 +1,22 @@
+.search_filter
+
+  #materials_library_filter
+    %label{:for => "materials_library_workspace"}   Ma bibliothèque
+    = check_box_tag 'materials_library_workspace', 'workspace', true
+    %label{:for => "materials_library_standard"}    Bibliothèque standard
+    = check_box_tag 'materials_library_standard', 'standard', true
+
+  :coffeescript
+    $('#materials_library_filter input[type=checkbox]').click (event) ->
+      $("#materials_table tbody tr." + event.srcElement.value).toggle()
+        
+  %p
+    %label{:for => "material_search_filter"} Recherche
+    %input#material_search_filter{:type => "text"}
+
+
+:coffeescript
+  $( ->
+    $('#materials_table').tablesorter()
+    searchFilter("materials_table", "material_search_filter")
+  )

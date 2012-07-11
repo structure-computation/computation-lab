@@ -1,0 +1,8 @@
+.grey
+  = semantic_form_for [@workspace, @member], :url => {:controller => "members", :action => "create"} do |form|
+    = form.inputs do
+      = form.input :email
+      = form.hidden_field :password, :as => :password, :value => "ERT123FGH"
+      = form.input :firstname
+      = form.input :lastname
+    = form.buttons

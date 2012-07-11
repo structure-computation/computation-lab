@@ -1,9 +1,23 @@
-%h2 Forgot your password?
-= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f|
-  = devise_error_messages!
-  %p
-    = f.label :email
-    %br/
-    = f.text_field :email
-  %p= f.submit "Send me reset password instructions"
-= render :partial => "devise/shared/links"
+-content_for :left_top do
+  .left_submenu
+    %h2.grey
+      Menu
+    %ul
+      %li.manage_pic_nouveau_membre
+        =link_to 'Page de login', new_session_path(resource_name)
+
+
+-content_for :right_top do
+  %h2.grey
+    Forgot your password? 
+  .grey
+    = form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f|
+      #login_format
+        %p= f.label :email
+        = f.text_field :email
+
+        %p= f.submit "Send me reset password instructions"
+        /%button.login_button.yellow_button{ :type => "submit"}
+        /  Se connecter
+        %p
+          %br

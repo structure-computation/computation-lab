@@ -1,0 +1,2 @@
+module LaboratoryHelper
+end

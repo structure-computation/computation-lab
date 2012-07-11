@@ -1,0 +1,32 @@
+/ partie header commune à toute les pages, CSproject.selected
+
+%header
+  .container
+    #header_top
+      #header_logo
+      #header_user_connected  
+        #user_information
+          - if user_signed_in?  # Le cadenas est placé en premier car on aligne de droite à gauche dans cette zone. 
+            -#logo_session_lock  
+            %p#user_name
+              = link_to current_user.full_name, scratch_user_path(current_user)
+              %br
+              = link_to "déconnexion", destroy_user_session_path,  :id => "disconnect_link"
+          
+            -#header_top_cadena
+        %p#header_workspace_name
+          - if user_signed_in? && current_workspace_member.workspace
+            = current_workspace_member.workspace.name
+            / 
+              TODO: Supprimer la ligne suivante dans une version ultérieure. C'est une mauvaise façon de se connecter.
+              - if(current_workspace_member.workspace.id == 240607020)
+                %br
+                %a{:href => "/sc_admin_workspace", :id=>"administration_link" }
+                  administration
+          - else
+            Nom entreprise      
+    #header_bottom
+      = render :partial => "layouts/sc_admin_menu" 
+            
+
+/ fin partie header

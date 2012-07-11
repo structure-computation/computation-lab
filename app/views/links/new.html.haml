@@ -1,0 +1,33 @@
+-content_for :left_top do
+  .left_submenu
+    %h2.grey
+      Menu
+    %ul
+      %li.LM_pic_liaison
+        =link_to 'Retour au laboratoire', :controller => :laboratory, :action => :index, :anchor => 'Liaisons'
+
+-content_for :workspace_content do
+  .grey
+    - if @link.comp_generique.empty?
+      - @comp_generique  = ["Parfaite", "Elastique", "Contact"]
+      - @comp_complexe = ["Plastique", "Cassable"]
+  
+      %h2 Comportement de la liaison
+      = form_for new_workspace_link_path(@workspace), :html => {:method => :get} do 
+        
+        %h3 Comportement générique
+        %p
+          = label_tag("Comportement générique")
+          = select "", :type, @comp_generique
+
+        %h3 Comportement complexe
+        %p
+          - @comp_complexe.each do |comp|
+            = label_tag  comp
+            = check_box_tag comp, true
+        %p
+          = hidden_field_tag :next, true
+        %p
+          = submit_tag "Suivant"
+    - else
+      = render "form"

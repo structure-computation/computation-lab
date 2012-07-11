@@ -1,0 +1,30 @@
+@mixin transition($time: 0.3s)
+  -webkit-transition : all $time ease-in-out
+  -moz-transition    : all $time ease-in-out
+  -ms-transition     : all $time ease-in-out
+  -o-transition      : all $time ease-in-out
+  transition         : all $time ease-in-out
+  -webkit-transform: translateZ(0) /* Android end iOS improvement, force to use GPU hardware acceleration on these device */
+  
+@mixin transition-out($time: 0.3s)
+  -webkit-transition : all $time ease-out
+  -moz-transition    : all $time ease-out
+  -ms-transition     : all $time ease-out
+  -o-transition      : all $time ease-out
+  transition         : all $time ease-out
+  -webkit-transform: translateZ(0) /* Android end iOS improvement, force to use GPU hardware acceleration on these device */
+  
+@mixin transition-in($time: 0.3s)
+  -webkit-transition : all $time ease-in
+  -moz-transition    : all $time ease-in
+  -ms-transition     : all $time ease-in
+  -o-transition      : all $time ease-in
+  transition         : all $time ease-in
+  -webkit-transform: translateZ(0) /* Android end iOS improvement, force to use GPU hardware acceleration on these device */
+  
+@mixin translateY($height)
+  -webkit-transform : translateY($height)
+  -moz-transform    : translateY($height)
+  -ms-transform     : translateY($height)
+  -o-transform      : translateY($height)
+  transform         : translateY($height)

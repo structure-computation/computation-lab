@@ -1,11 +1,11 @@
 class CalculAccount < ActiveRecord::Base
   
-  belongs_to :company
+  belongs_to :workspace
   has_many   :log_calculs
   has_many   :solde_calcul_accounts
   has_many   :credits
 
-  # initialisation d'un nouveau compte lors de la création d'une nouvelle company
+  # initialisation d'un nouveau compte lors de la création d'une nouvelle workspace
   def init()
     self.report_jeton = 0
     self.base_jeton = 0

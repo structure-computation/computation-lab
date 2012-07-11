@@ -1,0 +1,75 @@
+<% # Configure in file and call with 
+   # erb routespec_template.erb  > spec_routes.rb
+   # to générate a spec file for all routes.
+   
+   require 'rubygems'
+   require 'active_support/inflector'
+    
+%>
+
+<% routes_to_test = {
+    # :workspace_relationships  => ""           , # Présent pour tester la camélization.
+    :customers                => ""           ,
+    :workspaces               => ""           ,
+    "workspaces/materials"    => "materials"  ,
+    "workspaces/links"        => "links"      ,
+    "workspaces/sc_models"    => "sc_models"  ,
+    :bills                    => ""           ,
+    :members                  => ""           
+
+
+
+    # resources :sc_models do 
+    #   post 'load_mesh', :on => :member
+    # end
+    # 
+    # resources :bills do
+    #   get 'download_bill', :on => :member
+    # end
+    # root :to => "home#index"
+    # match 'companies/get_gestionnaire'   => "companies#get_gestionnaire"
+}%>
+
+require "spec_helper"
+                    
+<% routes_to_test.each do |route, controller| 
+    the_route       = route.to_s
+    the_controller  = controller.empty? ? the_route : controller.to_s  # Si le controlleur n'est pas spécifié on prend le nom de la route par défaut.
+    controllerClass = the_controller.camelize + "Controller"
+    %>
+
+describe <%=controllerClass%> do
+  describe "routing" do
+
+    it "recognizes and generates #index" do
+      { :get => "/<%=the_route%>" }.should route_to(:controller => "<%=the_controller%>", :action => "index")
+    end
+
+    it "recognizes and generates #new" do
+      { :get => "/<%=the_route%>/new" }.should route_to(:controller => "<%=the_controller%>", :action => "new")
+    end
+
+    it "recognizes and generates #show" do
+      { :get => "/<%=the_route%>/1" }.should route_to(:controller => "<%=the_controller%>", :action => "show", :id => "1")
+    end
+
+    it "recognizes and generates #edit" do
+      { :get => "/<%=the_route%>/1/edit" }.should route_to(:controller => "<%=the_controller%>", :action => "edit", :id => "1")
+    end
+
+    it "recognizes and generates #create" do
+      { :post => "/<%=the_route%>" }.should route_to(:controller => "<%=the_controller%>", :action => "create")
+    end
+
+    it "recognizes and generates #update" do
+      { :put => "/<%=the_route%>/1" }.should route_to(:controller => "<%=the_controller%>", :action => "update", :id => "1")
+    end
+
+    it "recognizes and generates #destroy" do
+      { :delete => "/<%=the_route%>/1" }.should route_to(:controller => "<%=the_controller%>", :action => "destroy", :id => "1")
+    end
+
+  end
+end
+
+<% end %>

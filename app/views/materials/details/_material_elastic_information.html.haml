@@ -1,0 +1,32 @@
+- disabled = false if disabled.nil?
+- show_all = false if show_all.nil?
+
+%h3 Elasticité
+
+%table.grey
+  %thead
+    %tr.no_sorter
+      %th
+      %th Selon V1
+      - if @material.mtype == "orthotrope" or show_all
+        %th.orthotropic_information Selon V2 
+        %th.orthotropic_information Selon V3
+  %tbody
+    %tr
+      %th Module d Young (E)
+      %td= custom_text_field(:material, :E_1, "E1", disabled)
+      - if @material.mtype == "orthotrope" or show_all
+        %td.orthotropic_information= custom_text_field(:material, :E_2, "E2", disabled)
+        %td.orthotropic_information= custom_text_field(:material, :E_3, "E3", disabled)
+    %tr
+      %th Coefficient de Poisson (&nu;)
+      %td= custom_text_field(:material, :nu_12, "&nu;12", disabled)
+      - if @material.mtype == "orthotrope" or show_all
+        %td.orthotropic_information= custom_text_field(:material, :nu_23, "&nu;23", disabled)
+        %td.orthotropic_information= custom_text_field(:material, :nu_13, "&nu;13", disabled)
+    %tr
+      - if @material.mtype == "orthotrope" or show_all
+        %th Module de cisaillement (G)
+        %td= custom_text_field(:material, :cis_1, "G12", disabled)
+        %td.orthotropic_information= custom_text_field(:material, :cis_2, "G23", disabled)
+        %td.orthotropic_information= custom_text_field(:material, :cis_3, "G13", disabled)

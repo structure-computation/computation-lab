@@ -1,24 +1,12 @@
-#leftBox
+.left_submenu
   %h2
     Racourcis
-#leftBoxcontent
-  %table#tableleftBox
-    %tr
-      %td{ :style => "width:22px ;" }
-        %img{ :src => "/images/manage_pic_liste_compte.png" }
-      %td
-        %a{ :href => "/company" }
-          Ma société
-    %tr
-      %td{ :style => "width:22px ;" }
-        %img{ :src => "/images/LM_pic_model.png" }
-      %td
-        %a{ :href => "/modele" }
-          Mes modèles
-    /
-      %tr
-        %td{ :style => "width:22px ;" }
-          %img{ :src => "/images/manage_pic_liste_factures.png" }
-        %td
-          %a{ :href => "/factures" }
-            Forum des utilisateurs
+  %ul
+    %li.manage_pic_liste_compte
+      = link_to "Ma société", workspaces_path    
+    %li.LM_pic_model
+      %a{ :href => "/modele" }
+        Mes modèles
+    %li.manage_pic_liste_factures
+      = link_to 'Forum des utilisateurs', workspace_bills_path(current_workspace_member.workspace)
+        

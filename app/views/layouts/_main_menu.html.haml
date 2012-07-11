@@ -1,36 +1,34 @@
 / Menu principal de l'application.
 
 %ul#main_menu
-  %li#home_tab{   :class => ( @page == :home      ? "selected" : "")}
-    %a{ :href => "/accueil" }  Accueil
+  -# %li{:class => ( @page == :accueil ? "selected" : "")}
+  -#   =link_to 'Accueil', root_path
   
-  %li#company_tab{:class => ( @page == :manage    ? "selected" : "")}
-    %a{ :href => "/company" }  Ma société
-    %ul.main_submenu
-      %li
-        %a{:href => member_index_path} Liste des membres
-      %li
-        %a{:href => ""} Liste des factures
-      %li.submenu_separator
-      %li
-        %a{:href => ""} Abonnement
-      %li
-        %a{:href => ""} Forfait calcul
-        
-  %li#lab_tab{    :class => ( @page == :lab       ? "selected" : "")}
-    %a{ :href => "/modele" }   Mes modèles
-    %ul#main_submenu_solution.main_submenu
-      %li
-        %a{:href => "#"} Liste des modèles
-      %li
-        %a{:href => "#"} Bibliothèque matériaux
-      %li
-        %a{:href => "#"} Bibliothèque liaisons
-      %li.submenu_separator
-      %li
-        %a{:href => "#"} Déposer un modèle
-      
+  %li{:class => ( @page == :manage ? "selected" : "")}
+    = link_to 'Gestion'    , workspaces_path(:anchor => 'Factures')
+  %li{:class => ( @page == :lab ? "selected" : "")}
+    = link_to 'Laboratoire'    , :controller => :laboratory, :action => :index
+    /%a#library_menu 
+    /   = link_to 'Laboratoire'    , :controller => :laboratory, :action => :index
+    /%ul#library_drop_down_menu
+    /  %li
+    /    = link_to 'Modèles', workspace_sc_models_path(current_workspace_member.workspace)
+    /  %li
+    /    = link_to 'Matériaux', workspace_materials_path(current_workspace_member.workspace)
+    /  %li
+    /    = link_to 'Liaisons', workspace_links_path(current_workspace_member.workspace)
+  /%li{:class => ( @page == :forum ? "selected" : "")}
+  /  = link_to 'Forum', :controller => "laboratory", :action => "index"
+  - if is_mobile?
 
+    :coffeescript
+      # Gestion du touch pour le drop_down_menu.
+      # On est obligé de 'hide' les éléments pour pouvoir les 'toggle' après.
+      $("#library_drop_down_menu").hide()
+      $("#library_menu").onGesture 'tap', ->
+        $("#library_drop_down_menu").toggle()
+
+    
 -# TODO: Utiliser un helper pour le style "selected"
 -#   %li{:id => "menu_accueil"     , :class => "main_menu_item " + menu_item_selected_class( @page, :accueil   ) }
 

@@ -1,0 +1,29 @@
+%p
+= semantic_form_for @company, :url => {:controller => "sc_admin_company", :action => "create"}  do |form|
+  %table.grey#workspace_information_table
+    %tr
+      %th= form.label :name
+      %td= form.text_field :name
+    %tr
+      %th= form.label :division
+      %td= form.text_field :division
+    %tr
+      %th= form.label :address
+      %td= form.text_area :address
+    %tr
+      %th= form.label :city
+      %td= form.text_field :city
+    %tr
+      %th= form.label :zipcode
+      %td= form.text_field :zipcode
+    %tr
+      %th= form.label :country
+      %td= form.text_field :country
+    %tr
+      %th= form.label :TVA
+      %td= form.text_field :TVA
+    %tr
+      %th= form.label :siren
+      %td= form.text_field :siren
+         
+  = form.buttons

@@ -1,0 +1,26 @@
+%table#companies_table.grey
+  %thead
+    %tr
+      %th.no_sorter
+      %th ID
+      %th Nom
+      %th code postal
+      %th.no_sorter Actions
+  %tbody
+    - companies_list.each do |company|
+      %tr
+        %td.escape_search.details_link= link_to "Détails", company_path( company )
+        %td= company.id
+        %td= company.name
+        %td= company.zipcode
+        %td.action_on_table.escape_search
+          %ul
+            %li
+              = button_to "Supprimer", company_path(company), :confirm => "Êtes vous sûr ?", :method => :delete, :confirm => "Êtes-vous sûr ?"
+            %li 
+              = link_to "Editer", edit_company_path(company)
+
+/= link_to 'Ajouter un membre', new_workspace_member_path(@workspace), :class => 'yellow_button'
+
+:coffeescript
+  $('#companies_table').tablesorter()
