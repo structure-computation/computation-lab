@@ -90,5 +90,6 @@ SCViews.EditMaterialView = Backbone.View.extend
     else
       @getAndSetMaterialCompAndType()
       for input in $(@el).find('textarea, input:not("input[type=radio], input[type=checkbox]")')
+        #alert $(input).attr('id').split("material_")[1]
         $(input).val(@model.get($(input).attr('id').split("material_")[1]))
 
