@@ -18,6 +18,8 @@
   = check_box_tag "material_comp_pl", "pl", @material.comp.include?("pl"), :disabled => true
   Endommageable
   = check_box_tag "material_comp_en", "en", @material.comp.include?("en"), :disabled => true
+  Mésomodèle
+  = check_box_tag "material_comp_mes", "mes", @material.comp.include?("mes"), :disabled => true
 
 %h2 Propriétés physiques
 %h3 Masse volumique / Densité
@@ -70,5 +72,5 @@
       %th Dilatation thermique (&alpha;)
       %td= custom_text_field(:material, :alpha_1, "&alpha;1", disabled)
       - if @material.mtype == "orthotrope" or show_all
-        %td.orthotropic_information= custom_text_field(:material, :alpha_1, "&alpha;￼2", disabled)
-        %td.orthotropic_information= custom_text_field(:material, :alpha_1, "&alpha;3", disabled) 
+        %td.orthotropic_information= custom_text_field(:material, :alpha_2, "&alpha;￼2", disabled)
+        %td.orthotropic_information= custom_text_field(:material, :alpha_3, "&alpha;3", disabled) 

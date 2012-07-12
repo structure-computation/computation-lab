@@ -82,15 +82,20 @@ class LinksController < InheritedResources::Base
       @link = Link.new
       @link.comp_generique = "Pa " if params[:type].include? "Parfaite"
       @link.comp_generique = "El " if params[:type].include? "Elastique"
-      @link.comp_generique = "Co " if params[:type].include? "Contact"
+      @link.comp_generique = "Con " if params[:type].include? "Contact"
+      @link.comp_generique = "Coh " if params[:type].include? "Cohésive"
 
       @link.comp_complexe  = ""
-      @link.comp_complexe += "Pl " if params[:Plastique]
-      @link.comp_complexe += "Ca " if params[:Cassable]
+      @link.comp_complexe += "Pl " if params[:type].include? "Plastique"
+      @link.comp_complexe += "Ca " if params[:type].include? "Cassable"
  
-      @link.type_num = 0 if params[:type].include? "Parfaite"
-      @link.type_num = 1 if params[:type].include? "Elastique"
-      @link.type_num = 2 if params[:type].include? "Contact"
+      #["Parfaite", "Elastique", "Contact", "Parfaite Cassable", "Elastique Cassable", "Cohésive"]
+      @link.type_num = 0 if params[:type] == "Parfaite"
+      @link.type_num = 1 if params[:type] == "Elastique"
+      @link.type_num = 2 if params[:type] == "Contact"
+      @link.type_num = 3 if params[:type] == "Parfaite Cassable"
+      @link.type_num = 4 if params[:type] == "Elastique Cassable"
+      @link.type_num = 5 if params[:type] == "Cohésive"
     end
     #if params[:next] and (@link.comp_generique.empty?)
     #  flash[:notice] = "Vous avez mal rempli le formulaire."

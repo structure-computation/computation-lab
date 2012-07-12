@@ -22,6 +22,20 @@ SCViews.EditLinkView = Backbone.View.extend
     @selectFirstTab()    
     @model = model
     if readonly then @disableAllInputs() else @enableAllInputs()
+    
+    $(@el).find("#raideur").hide()
+    $(@el).find("#frottement").hide()
+    $(@el).find("#Lrupture").hide()
+    $(@el).find("#Lendo").hide()
+    $(@el).find("#Pendo").hide()
+          
+    $(@el).find("#raideur").show()  if @model.get('type_num') == 1 or @model.get('type_num') == 4 or @model.get('type_num') == 5
+    $(@el).find("#frottement").show()  if @model.get('type_num') == 2 or @model.get('type_num') == 5 or @model.get('type_num') == 4 or @model.get('type_num') == 5
+    $(@el).find("#Lrupture").show()  if @model.get('type_num') == 3 or @model.get('type_num') == 4 or @model.get('type_num') == 5
+    $(@el).find("#Lendo").show()  if @model.get('type_num') == 5
+    $(@el).find("#Pendo").show()  if @model.get('type_num') == 5
+      
+    
     @render()
 
   # Enable all inputs

@@ -1,0 +1,33 @@
+- disabled = false if disabled.nil?
+- show_all = false if show_all.nil?
+
+%h3
+  Comportement
+%table.grey
+  %tbody
+    %tr
+      %th Epaisseur (Ep)
+      %td= custom_text_field(:link, :Ep, "Ep", disabled)
+
+    %tr#raideur
+      %th Raideur (R)
+      %td= custom_text_field(:link, :R, "R", disabled)
+
+    %tr#frottement
+      %th Coefficient de frottement (f)
+      %td= custom_text_field(:link, :f, "f", disabled)
+
+    %tr#Lrupture
+      %th Limite de rupture (Lr)
+      %td= custom_text_field(:link, :Lr, "Lr", disabled)
+
+    %tr#Lendo
+      %th Limite d endomagement (Lp)
+      %td= custom_text_field(:link, :Lp, "Lp", disabled)
+
+    %tr#Pendo
+      %th Parametre d endommagement  (Dp)
+      %td= custom_text_field(:link, :Dp, "Dp", disabled)
+      /%tr
+      /  %th Déformation plastique (p)
+      /  %td= custom_text_field(:link, :p, "p", disabled)

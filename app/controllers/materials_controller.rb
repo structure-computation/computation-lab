@@ -73,12 +73,15 @@ class MaterialsController < InheritedResources::Base
     @workspace           = current_workspace_member.workspace
     if params[:type]
       @material = Material.new
-      @material.mtype = params[:type].downcase
+      @material.mtype = "isotrope" if params[:type].include? "Isotrope"
+      @material.mtype = "orthotrope" if params[:type].include? "Orthotrope"
+      @material.mtype = "orthotrope" if params[:type].include? "Mésomodèle"
       @material.comp  = ""
-      @material.comp += "el " if params[:comp].include? "Elastique"
-      @material.comp += "pl " if params[:comp].include? "Plastique"
-      @material.comp += "en " if params[:comp].include? "Endomageable"
-      @material.comp += "vi " if params[:comp].include? "Visqueux"
+      @material.comp += "el " if params[:type].include? "Elastique"
+      @material.comp += "pl " if params[:type].include? "Plastique"
+      @material.comp += "en " if params[:type].include? "Endomageable"
+      @material.comp += "vi " if params[:type].include? "Visqueux"
+      @material.comp += "mes " if params[:type].include? "Mésomodèle"
     end
     new!
   end

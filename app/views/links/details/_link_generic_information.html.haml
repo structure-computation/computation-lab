@@ -20,18 +20,6 @@
     %tr
       %th Description
       %td= text_area :link, :description, :disabled => disabled, :rows => 5, :cols => 10
-    %tr
-      %th Epaisseur (Ep)
-      %td= custom_text_field(:link, :Ep, "Ep", disabled)
-
-    - if @link.comp_generique.downcase.include? "el" or show_all
-      %tr
-        %th Raideur (R)
-        %td= custom_text_field(:link, :R, "R", disabled)
-
-    - if @link.comp_generique.downcase.include? "co" or show_all
-      %tr
-        %th Coefficient de frottement (f)
-        %td= custom_text_field(:link, :f, "f", disabled)
+   
 
 

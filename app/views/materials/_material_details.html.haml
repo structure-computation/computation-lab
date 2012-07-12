@@ -12,5 +12,8 @@
   - if @material.comp.include? "en"
     #tab_4_content
       = render :partial => "materials/details/material_damageable_information", :locals => { :disabled => disabled }
+  - if @material.comp.include? "mes"
+    #tab_4_content
+      = render :partial => "materials/details/material_mesomodel_information", :locals => { :disabled => disabled }
 
 = coffeescript_include_tag "manage_tab"

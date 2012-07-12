@@ -1,12 +1,16 @@
 %h2
   Type :
   = @material.mtype
-  - if @material.mtype.include? "el"
+  - if @material.comp.include? "el"
     Elastique
-  - if @material.mtype.include? "pl"
+  - if @material.comp.include? "pl"
     Plastique
-  - if @material.mtype.include? "en"
-    Endo
+  - if @material.comp.include? "en"
+    Endommageable
+  - if @material.comp.include? "Vi"
+    Visqueux
+  - if @material.comp.include? "Mes"
+    Mésomodèle
 
 = form_for [@workspace, @material] do |f|
   %h3 Informations

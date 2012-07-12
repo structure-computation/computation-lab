@@ -66,6 +66,9 @@ SCViews.EditMaterialView = Backbone.View.extend
       if @model.get('comp').indexOf('en') != -1
         $('#material_comp_en').attr('checked', 'checked')
         $(@el).find("#tab_damage").show()
+      if @model.get('comp').indexOf('mes') != -1
+        $('#material_comp_mes').attr('checked', 'checked')
+        $(@el).find("#tab_mesomodel").show()
 
     if !_.isNull(@model.get('mtype'))
       # Checking good checkboxes regarding material behavior
