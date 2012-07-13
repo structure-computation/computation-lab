@@ -15,21 +15,17 @@ SCViews.MultiresolutionParameterListView = Backbone.View.extend
     resolution_number = SCVisu.current_calcul.get('multiresolution_parameters').resolution_number
     @collection.meta 'resolution_number', resolution_number
     
-    
-    if multiresolution_type == "fatigue"
-      $(@el).find('button.add').attr('disabled','disabled')
-    else if multiresolution_type == "off"
-      $(@el).find('button.add').attr('disabled','disabled')
-    else
-      $(@el).find('button.add').removeAttr('disabled')
-    $(@el).find('select#multiresolution_type').val(multiresolution_type)
-    $(@el).find('input.resolution_number').val(resolution_number)
-
-    #if @collection.size() == 0
-    #  @collection.add new SCModels.MultiresolutionParameter()
-    
     for parameter in @collection.models
       @parameterViews.push new SCViews.MultiresolutionParameterView model: parameter, parentElement: this  
+    $(@el).find('select#multiresolution_type').val(multiresolution_type)
+    $(@el).find('input.resolution_number').val(resolution_number)
+    
+    if multiresolution_type == "off"
+      @setOffTable()
+    else if multiresolution_type == "function"
+      @setFunctionTable()
+    else if multiresolution_type == "orthogonal_plan"
+      @setOrthogonalPlanTable()
       
     @render()
     
@@ -49,21 +45,26 @@ SCViews.MultiresolutionParameterListView = Backbone.View.extend
     if $(event.srcElement).val() == "off"
       if confirm "Êtes-vous sûr ? Cela va effacer tous vos paramêtres."
         # Delete all except first element
-        for i in [0..@parameterViews.length - 1]
-          @parameterViews[i].delete(true)
         resolution_number = 1
         SCVisu.current_calcul.setMultiresolutionnumber resolution_number
         @collection.meta 'resolution_number', resolution_number
         $(@el).find('input.resolution_number').val(resolution_number)
-        @disableAddButton()
+        @setOffTable()
+        for i in [0..@parameterViews.length - 1]
+          @parameterViews[i].delete(true)
+        
       else
-        $('#multiresolution_type').val('function')
-    else
-      @ableAddButton()
+        $('#multiresolution_type').val(SCVisu.current_calcul.setMultiresolutionParameterType)
+    else if $(event.srcElement).val() == "function"
+      @setFunctionTable()
+    else if $(event.srcElement).val() == "orthogonal_plan"
+      @setOrthogonalPlanTable()
+      
     SCVisu.current_calcul.trigger 'change'  
     SCVisu.current_calcul.setMultiresolutionParameterType $('#multiresolution_type').val()
     SCVisu.current_calcul.setMultiresolutionParameterCollection @collection.models
     
+    @render()
 
 
   # Clears all elements previously loaded in the DOM. 
@@ -84,6 +85,24 @@ SCViews.MultiresolutionParameterListView = Backbone.View.extend
     
   ableAddButton: ->
     $(@el).find('button.add').removeAttr('disabled')
+  
+  setFunctionTable: ->
+    @ableAddButton()
+    $(@el).find('input.resolution_number').show()
+    $(@el).find('table thead#orthogonal_plan').hide()
+    $(@el).find('table thead#function').show()
+    
+  setOrthogonalPlanTable: ->
+    @ableAddButton()
+    $(@el).find('input.resolution_number').hide()
+    $(@el).find('table thead#orthogonal_plan').show()
+    $(@el).find('table thead#function').hide()
+    
+  setOffTable: ->
+    @disableAddButton()
+    $(@el).find('input.resolution_number').hide()
+    $(@el).find('table thead#orthogonal_plan').hide()
+    $(@el).find('table thead#function').hide()
   
   # Show edit view of the given model.
   showDetails: (model) ->

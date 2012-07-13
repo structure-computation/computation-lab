@@ -25,7 +25,7 @@ SCModels.Calcul = Backbone.Model.extend
       parameter_collection  : []
     @set multiresolution_parameters :
       multiresolution_type : "off"
-      resolution_number    : 10
+      resolution_number    : 1
       collection  : []
     @set options               : 
              convergence_method_LATIN : 

@@ -7,7 +7,17 @@ SCViews.MultiresolutionParameterView = Backbone.View.extend
 
   tagName   : "tr"
 
+  clearView: ->
+    $(@el).html('')
+  
+    
   render : ->
+    if SCVisu.current_calcul.get('multiresolution_parameters').multiresolution_type == "function"
+      @render_function()
+    else if SCVisu.current_calcul.get('multiresolution_parameters').multiresolution_type == "orthogonal_plan"
+      @render_orthogonal_plan()
+    
+  render_orthogonal_plan : ->
     # Using Underscore "_" template
     template = _.template """
               <td class="name">
@@ -26,9 +36,6 @@ SCViews.MultiresolutionParameterView = Backbone.View.extend
                 <input type='number' value='<%= nb_value %>'> 
               </td> 
               <td>
-                <button class='edit'>Editer</button>
-              </td> 
-              <td>
                 <button class='delete'>X</button>
               </td> 
           """
@@ -37,7 +44,29 @@ SCViews.MultiresolutionParameterView = Backbone.View.extend
       nominal_value : @model.get('nominal_value')
       min_value     : @model.get('min_value')
       max_value     : @model.get('max_value')
-      nb_value      : @model.get('nb_value')      
+      nb_value      : @model.get('nb_value')
+  
+  
+  render_function : ->
+    # Using Underscore "_" template
+    template = _.template """
+              <td class="name">
+                <input type='text' value='<%= name %>' disabled> 
+              </td> 
+              <td class="nominal_value">
+                <input type='number' value='<%= nominal_value %>'> 
+              </td> 
+              <td class="parametric_function"> 
+                <input type='text' value='<%= parametric_function %>'> 
+              </td> 
+              <td>
+                <button class='delete'>X</button>
+              </td> 
+          """
+    $(@el).html template
+      name          : @model.get('name')
+      nominal_value : @model.get('nominal_value')
+      parametric_function     : @model.get('parametric_function')
 
   events:
     'click button.delete' : 'delete'
@@ -53,11 +82,16 @@ SCViews.MultiresolutionParameterView = Backbone.View.extend
     
   updateModel: ->
     SCVisu.current_calcul.trigger 'change'
-    @model.set 
-      'nominal_value' : $(@el).find('.nominal_value input').val()
-      'min_value'     : $(@el).find('.min_value input')    .val()
-      'max_value'     : $(@el).find('.max_value input')    .val()
-      'nb_value'      : $(@el).find('.nb_value input')     .val()
+    if SCVisu.current_calcul.get('multiresolution_parameters').multiresolution_type == "function"
+      @model.set 
+        'nominal_value'           : $(@el).find('.nominal_value input').val()
+        'parametric_function'     : $(@el).find('.parametric_function input').val()
+    else if SCVisu.current_calcul.get('multiresolution_parameters').multiresolution_type == "orthogonal_plan"
+      @model.set 
+        'nominal_value'           : $(@el).find('.nominal_value input').val()
+        'min_value'               : $(@el).find('.min_value input')    .val()
+        'max_value'               : $(@el).find('.max_value input')    .val()
+        'nb_value'                : $(@el).find('.nb_value input')     .val()
     SCVisu.current_calcul.trigger 'change'  
     SCVisu.current_calcul.setMultiresolutionParameterCollection @parentElement.collection.models
 
