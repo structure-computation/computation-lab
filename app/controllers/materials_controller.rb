@@ -28,7 +28,7 @@ class MaterialsController < InheritedResources::Base
       @material = Material.find(params[:id])
       @material.update_attributes! retrieve_column_fields(params)
     end
-    update! { workspace_material_path (@workspace, @material)}
+    update! { workspace_material_path(@workspace, @material)}
   end
   
   def create
