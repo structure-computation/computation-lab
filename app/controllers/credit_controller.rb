@@ -21,12 +21,16 @@ class CreditController < InheritedResources::Base
     @company_id = -1
     if params[:informations] == "new"
       @company    = @workspace.companies.create(params[:company])
-      @company.members << current_user
       @company_id = @company.id
+      logger.debug @company.id
+      logger.debug current_user.id
+      current_user.companies << @company
+      #@company.members << current_user  
     elsif params[:informations] == "exist"
       @company    = @workspace.companies.find(params[:company_id])
-      if !@company.members.exists?(current_user.id)
-        @company.members << current_user
+      if current_user.companies.exists?(@company.id)
+        #@company.members << current_user
+        current_user.companies << @company
       end
       @company_id = params[:company_id]
     else

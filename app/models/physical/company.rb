@@ -1,10 +1,13 @@
 class Company < ActiveRecord::Base
   
-  has_many  :company_user_memberships
-  has_many  :users, :through => :company_user_memberships
+  
+  
   # has_many  :managers , :conditions => {:role => "gestionnaire"} # TODO: Appliquer un filtre.
   has_many  :company_workspace_memberships
   has_many  :workspaces, :through => :company_workspace_memberships
+  
+  has_many  :company_user_memberships
+  has_many  :users, :through =>  :company_user_memberships 
   
   has_many  :bills
   
@@ -12,9 +15,9 @@ class Company < ActiveRecord::Base
   
   # TODO: Placé en prévision du moment ou un utilisateur pourra acceder à plusieurs entreprise 
   # ET pour faire fonctionner inherited ressource qui fait un current_user.companies.find(...)
-  scope :accessible_by_user, lambda { |user| 
-          joins(:users).where("users.id = ?", user.id)
-  }
+  #   scope :accessible_by_user, lambda { |user| 
+  #           joins(:users).where("users.id = ?", user.id)
+  #   }
   
   
   
