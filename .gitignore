@@ -3,6 +3,7 @@ db/*.sqlite3
 log/*.log
 tmp/
 Gemfile.lock
+config/database.yml
 .DS_Store
 *.css
 public/javascripts/search.js
