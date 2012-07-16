@@ -1,0 +1,42 @@
+/* line 6, ../../app/stylesheets/member.sass */
+#new_member {
+  background: transparent url("../images/button_jaune.png") no-repeat left top;
+}
+/* line 8, ../../app/stylesheets/member.sass */
+#new_member a {
+  padding-left: 2em;
+  background: transparent url("../images/manage_pic_nouveau_membre.png") no-repeat left top;
+}
+
+/* line 13, ../../app/stylesheets/member.sass */
+h4 {
+  text-align: center;
+}
+
+/* line 16, ../../app/stylesheets/member.sass */
+dl {
+  margin: auto;
+  width: 80%;
+  font-size: 0.8em;
+  font-style: bold;
+}
+/* line 21, ../../app/stylesheets/member.sass */
+dl dt {
+  color: white;
+  width: 30%;
+  line-height: 22px;
+  background-color: #9297a8;
+  float: left;
+  margin: 0;
+  margin-right: 1em;
+  margin-bottom: 1px;
+  clear: both;
+  padding-left: 0.5em;
+}
+/* line 32, ../../app/stylesheets/member.sass */
+dl dd {
+  line-height: 22px;
+  background-color: #b8b9c3;
+  margin: 0;
+  margin-bottom: 1px;
+}
