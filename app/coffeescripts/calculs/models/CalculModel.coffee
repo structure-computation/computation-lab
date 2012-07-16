@@ -18,6 +18,7 @@ SCModels.Calcul = Backbone.Model.extend
     @set links                 : []
     @set boundary_conditions   : []
     @set volumic_forces        : []
+    @set thermal_load          : []
     #options parameters
     @set time_steps            :
       time_scheme           : "static"
@@ -69,6 +70,7 @@ SCModels.Calcul = Backbone.Model.extend
     @set boundary_conditions    : params.boundary_conditions
     @set options                : params.options
     @set volumic_forces         : params.volumic_forces
+    @set thermal_load           : params.thermal_load
     @set edges                  : params.edges
     @set last_saved             : params.last_saved
     

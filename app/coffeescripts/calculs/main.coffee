@@ -65,6 +65,10 @@ $ ->
     volumicForcesCollection       = new SCModels.VolumicForceCollection  SCVisu.current_calcul.get('volumic_forces')
     SCVisu.volumicForcesListView  = new SCViews.VolumicForceListView    collection : volumicForcesCollection 
 
+    # Initialization of the ThermalLoadView
+    thermalLoad                   = new SCModels.ThermalLoad SCVisu.current_calcul.get('thermal_load')
+    SCVisu.thermalLoadView        = new SCViews.ThermalLoadView model: thermalLoad
+    
     # Initialisation of boundaryConditionListView
     boundaryConditionCollection   = new SCModels.BoundaryConditionCollection  SCVisu.current_calcul.get('boundary_conditions')
     SCVisu.boundaryConditionListView = new SCViews.BoundaryConditionListView collection : boundaryConditionCollection 
