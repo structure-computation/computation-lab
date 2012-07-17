@@ -3,18 +3,18 @@ defaults_development: &defaults_development
   encoding: utf8
   host:     localhost
   username: structcomp
-  password: 
+  # password: 
 
 development:
-  database: sc_backbone_dev 
+  database: computation_lab_dev 
   <<: *defaults_development
 
 production:
-  database: structcomp
+  database: computation_lab_prod
   <<: *defaults_development
 
 test:
-  database: structcompTest
+  database: computation_lab_test
   <<: *defaults_development
 
 # cucumber:
