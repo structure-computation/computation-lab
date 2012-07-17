@@ -21,6 +21,7 @@ gem 'acts_as_api' , '~>0.3.5'
 gem 'compass'     , '>= 0.11.5'
 gem 'compass-susy-plugin'
 gem 'inherited_resources'
+gem 'therubyracer', :platforms => :ruby
 
 # Use unicorn as the web server
 # gem 'unicorn'
@@ -47,7 +48,6 @@ group :development, :test do
   # gem 'webrat'
   gem 'ruby-debug'          , :require => 'ruby-debug'
   
-  gem 'factory_girl_rails'  #, '~>1.2'    
   gem 'capybara'            #, '=0.3.9'
   gem 'rspec'
   gem 'rspec-rails'         #, '~>2.2.1'
