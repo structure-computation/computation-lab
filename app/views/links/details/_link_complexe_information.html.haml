@@ -3,34 +3,81 @@
 
 %h3
   Comportement
+
 %table.grey
   %tbody
     %tr
-      %th Epaisseur (Ep)
-      %td= custom_text_field(:link, :Ep, "Ep", disabled)
+      %th Epaisseur normale
+      %td= custom_text_field(:link, :Ep_n, "Ep_n", disabled)
+      %td
+      %td
+
+    %tr
+      %th Epaisseur (x,y,z)
+      %td= custom_text_field(:link, :Ep_x, "Ep_x", disabled)
+      %td= custom_text_field(:link, :Ep_y, "Ep_y", disabled)
+      %td= custom_text_field(:link, :Ep_z, "Ep_z", disabled)
+
+%table.grey
+  %tbody
+    %tr
+      %th Précharge normale
+      %td= custom_text_field(:link, :Preload_n, "Preload_n", disabled)
+      %td
+      %td
+
+    %tr
+      %th Précharge (x,y,z)
+      %td= custom_text_field(:link, :Preload_x, "Preload_x", disabled)
+      %td= custom_text_field(:link, :Preload_y, "Preload_y", disabled)
+      %td= custom_text_field(:link, :Preload_z, "Preload_z", disabled)
 
     -if @link.type_num == 1 or @link.type_num == 4 or @link.type_num == 5 #elastique ou elastique cassable
-      %tr
-        %th Raideur (R)
-        %td= custom_text_field(:link, :R, "R", disabled)
+      %table.grey
+        %tbody
+          %tr
+            %th Raideur normale (Kn)
+            %td= custom_text_field(:link, :Kn, "Kn", disabled)
+          %tr
+            %th Raideur normale en compression (Knc)
+            %td= custom_text_field(:link, :Knc, "Knc", disabled)
+          %tr
+            %th Raideur tangentielle (Kt)
+            %td= custom_text_field(:link, :Kt, "Kt", disabled)
 
     - if @link.type_num == 2 or @link.type_num == 3 or @link.type_num == 4 or @link.type_num == 5 #contact ou parfait cassable ou elastique cassable ou cohésif
-      %tr
-        %th Coefficient de frottement (f)
-        %td= custom_text_field(:link, :f, "f", disabled)
+      %table.grey
+        %tbody
+          %tr
+            %th Coefficient de frottement (f)
+            %td= custom_text_field(:link, :f, "f", disabled)
 
-    - if @link.type_num == 3 or @link.type_num == 4  or @link.type_num == 5 #parfait cassable ou elastique cassable ou cohésif
-      %tr
-        %th Limite de rupture (Lr)
-        %td= custom_text_field(:link, :Lr, "Lr", disabled)
+    - if @link.type_num == 3 or @link.type_num == 4  #parfait cassable ou elastique cassable ou cohésif
+      %table.grey
+        %tbody
+          %tr
+            %th Limite de rupture normale (Fcr_n)
+            %td= custom_text_field(:link, :Fcr_n, "Fcr_n", disabled)
+          %tr
+            %th Limite de rupture tangentielle (Fcr_t)
+            %td= custom_text_field(:link, :Fcr_t, "Fcr_t", disabled)
 
     - if @link.type_num == 5   #cohesif
-      %tr
-        %th Limite d endomagement (Lp)
-        %td= custom_text_field(:link, :Lp, "Lp", disabled)
-      %tr
-        %th Parametre d endommagement  (Dp)
-        %td= custom_text_field(:link, :Dp, "Dp", disabled)
-      /%tr
-      /  %th Déformation plastique (p)
-      /  %td= custom_text_field(:link, :p, "p", disabled)
+      %table.grey
+        %tbody
+          %tr
+            %th Gamma (gamma)
+            %td= custom_text_field(:link, :gamma, "gamma", disabled)
+          %tr
+            %th Alpha (alpha)
+            %td= custom_text_field(:link, :alpha, "alpha", disabled)
+          %tr
+            %th Coefficient (n)
+            %td= custom_text_field(:link, :n, "n", disabled)
+          %tr
+            %th Energie limite  (Yc)
+            %td= custom_text_field(:link, :Yc, "Yc", disabled)
+          %tr
+            %th Energie limite  (Yo)
+            %td= custom_text_field(:link, :Yo, "Yo", disabled)
+          

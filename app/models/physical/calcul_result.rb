@@ -185,8 +185,10 @@ class CalculResult < ActiveRecord::Base
     logger.debug "estimated_calcul_points = " + @estimated_calcul_points.to_s
     #self.gpu_allocated = (self.sc_model.dimension * self.sc_model.dimension * sst_number * 0.001).ceil
     self.gpu_allocated = 1
-    if(jsonobject['mesh']['nb_groups_elem'] > 8)
+    if(jsonobject['mesh']['nb_groups_elem'] > 5 and jsonobject['mesh']['nb_groups_elem'] <= 10)
       self.gpu_allocated = 3
+    elsif(jsonobject['mesh']['nb_groups_elem'] > 10)
+      self.gpu_allocated = 5
     end
     
     if(jsonobject['options']['mode'] == "test")

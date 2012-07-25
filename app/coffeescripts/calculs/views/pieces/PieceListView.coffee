@@ -7,6 +7,7 @@ SCViews.PieceListView = Backbone.View.extend
   initialize: ->
     @clearView()
     @pieceViews = []
+    @filterValue = "id"
     for piece in @collection.models
       @pieceViews.push new SCViews.PieceView model: piece, parentElement: this
     @selectedPieceView = null

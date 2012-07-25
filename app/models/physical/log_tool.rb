@@ -130,4 +130,9 @@ class LogTool < ActiveRecord::Base
     end
   end
   
+  # décompte du temps d'utilisation des outils ---------------------------------------------------------------
+  def tool_in_use()
+    
+  end
+  
 end

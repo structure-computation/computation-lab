@@ -38,7 +38,7 @@ SCViews.StepParameterListView = Backbone.View.extend
   render : ->
     for stepParameterView in @stepParameterViews
       stepParameterView.render()
-    $(@stepParameterViews[0].el).find('button.delete').remove() if @stepParameterViews[0]
+    #$(@stepParameterViews[0].el).find('button.delete').remove() if @stepParameterViews[0]
       
   # Clears all elements previously loaded in the DOM. 
   # Indeed, the 'ul#materials' element already exists in the DOM and every time we create a MaterialListView, 

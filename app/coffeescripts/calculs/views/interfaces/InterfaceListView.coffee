@@ -8,6 +8,7 @@ SCViews.InterfaceListView = Backbone.View.extend
     @clearView()
     @interfaceViews = []
     @filteredInterfaces = []
+    @filterValue = "materials"
     for inter in @collection.models
       @interfaceViews.push new SCViews.InterfaceView model: inter, parentElement: this
     @selectedInterfaceView = null

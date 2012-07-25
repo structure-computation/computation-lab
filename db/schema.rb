@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120520153416) do
+ActiveRecord::Schema.define(:version => 20120725160004) do
 
   create_table "abonnements", :force => true do |t|
     t.string   "name"
@@ -200,17 +200,32 @@ ActiveRecord::Schema.define(:version => 20120520153416) do
     t.string   "comp_generique"
     t.string   "comp_complexe"
     t.integer  "type_num"
-    t.float    "Ep"
-    t.float    "jeu"
-    t.float    "R"
     t.float    "f"
-    t.float    "Lp"
-    t.float    "Dp"
-    t.float    "p"
-    t.float    "Lr"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "state"
+    t.float    "Preload_n"
+    t.float    "Preload_x"
+    t.float    "Preload_y"
+    t.float    "Preload_z"
+    t.float    "Ep_n"
+    t.float    "Ep_x"
+    t.float    "Ep_y"
+    t.float    "Ep_z"
+    t.float    "Kn"
+    t.float    "Knc"
+    t.float    "Kt"
+    t.float    "gamma"
+    t.float    "alpha"
+    t.float    "n"
+    t.float    "Yc"
+    t.float    "Yo"
+    t.float    "Fcr_n"
+    t.float    "Fcr_t"
+    t.float    "Rop"
+    t.float    "kp"
+    t.float    "np"
+    t.integer  "Ep_type"
   end
 
   create_table "log_abonnements", :force => true do |t|
