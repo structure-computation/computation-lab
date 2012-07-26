@@ -20,7 +20,7 @@ SCViews.EditLinkView = Backbone.View.extend
 
   # Update edit view 
   selectEpType: ->
-    @model.set  "Ep_Type" : $(event.srcElement).val()
+    @model.set  "Ep_type" : $(event.srcElement).val()
     @setEpType()
    
   setEpType: ->
@@ -29,20 +29,20 @@ SCViews.EditLinkView = Backbone.View.extend
     $(@el).find("#preload_normale").hide()
     $(@el).find("#preload_direction").hide()
     
-    if @model.get("Ep_Type") == "0"
-      #alert  @model.get("Ep_Type")
+    if @model.get("Ep_type") == "0"
+      #alert  @model.get("Ep_type")
       $(@el).find("#epaisseur_normale").show()
-    else if @model.get("Ep_Type") == "1"
+    else if @model.get("Ep_type") == "1"
       $(@el).find("#epaisseur_direction").show()  
-    else if @model.get("Ep_Type") == "2"
+    else if @model.get("Ep_type") == "2"
       $(@el).find("#preload_normale").show()
-    else if @model.get("Ep_Type") == "3"
+    else if @model.get("Ep_type") == "3"
       $(@el).find("#preload_direction").show()  
     else
-      @model.set "Ep_Type" : "0"
+      @model.set "Ep_type" : "0"
       $(@el).find("#epaisseur_normale").show()
       
-    $(@el).find("select.ep_type").val(@model.get("Ep_Type"))
+    $(@el).find("select.ep_type").val(@model.get("Ep_type"))
     
   # Update edit view with the given model
   updateModel: (model, readonly = false) ->

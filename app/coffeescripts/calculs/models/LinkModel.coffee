@@ -6,7 +6,7 @@ SCModels.Link = Backbone.Model.extend
   initialize: ->
     @workspace_id = if SCVisu.current_workspace? then SCVisu.current_workspace else 0
     @url = "/workspaces/#{@workspace_id}/links/"
-    @set "Ep_Type" : "0" if _.isUndefined(@get("Ep_Type"))
+    @set "Ep_type" : "0" if _.isUndefined(@get("Ep_type"))
 
   # Get the ID of the link in the JSON
   getId: ->
