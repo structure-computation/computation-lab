@@ -8,6 +8,7 @@ class CalculsController < ApplicationController
   
   def index
     @current_model = current_workspace_member.sc_models.find(params[:sc_model_id])
+    @current_model.tool_in_use("scills", current_workspace_member)
     if @current_model.state != "active"
       redirect_to workspace_sc_model_path(current_workspace_member.workspace.id, @current_model), :notice => "Pour accéder à cet outils, vous devez d'abord charger un maillage ou une géometrie."
     else

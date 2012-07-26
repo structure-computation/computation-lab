@@ -294,6 +294,20 @@ class ScModel < ActiveRecord::Base
     end
   end
   
+  def tool_in_use(name_tool, current_workspace_member)
+    #name_tool = "scills, sceen, score..."
+    log_type = "use_" + name_tool
+    log_tool_in_use = self.log_tools.find(:last, :conditions => {:log_type => log_type})
+    if !log_tool_in_use.nil? and log_tool_in_use.in_use?
+      #heure déja facturée sur cet outil
+      return true
+    else
+      @new_log_tool_in_use = self.log_tools.build()
+      @new_log_tool_in_use.token_account = self.workspace.token_account
+      @new_log_tool_in_use.workspace_member = current_workspace_member
+      return @new_log_tool_in_use.use_tool_for_one_hour(name_tool)
+    end
+  end
   
   def request_mesh_analysis
     # TODO: Ecrire l'objet CalculatorInterface qui appellera la bonne ligne de commande (entre autre) dans une lib.
