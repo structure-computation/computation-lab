@@ -67,4 +67,5 @@
 #main_window.CorreliWindow
 
 %script{ :type => "text/javascript" }
-  launch_CorreliOnline(document.getElementById("main_window"));
+  model_id = #{@model_id}
+  launch_CorreliOnline(document.getElementById("main_window"), model_id);
