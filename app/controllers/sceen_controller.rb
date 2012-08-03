@@ -35,7 +35,8 @@ class SceenController < ApplicationController
     #request = params[:data] + "$"
     #logger.debug request
     
-    host = 'localhost'     # The web server
+    #host = 'localhost'     # The web server
+    host = '192.168.38.241'     # The web server
     port = 8888                           # Default HTTP port
     logger.debug "avant open _"
     socket = TCPSocket.open(host,port)  # Connect to server
