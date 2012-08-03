@@ -60,7 +60,7 @@ SCViews.EditLinkView = Backbone.View.extend
           
     $(@el).find("#raideur").show()  if @model.get('type_num') == 1 or @model.get('type_num') == 4 or @model.get('type_num') == 5
     $(@el).find("#frottement").show()  if @model.get('type_num') == 2 or @model.get('type_num') == 3 or @model.get('type_num') == 4 or @model.get('type_num') == 5
-    $(@el).find("#Lrupture").show()  if @model.get('type_num') == 3 or @model.get('type_num') == 4 or @model.get('type_num') == 5
+    $(@el).find("#Lrupture").show()  if @model.get('type_num') == 3 or @model.get('type_num') == 4
     $(@el).find("#Lendo").show()  if @model.get('type_num') == 5
     $(@el).find("#PalphaEndo").show()  if @model.get('type_num') == 5
     $(@el).find("#PnEndo").show()  if @model.get('type_num') == 5
