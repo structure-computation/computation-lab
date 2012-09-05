@@ -50,21 +50,30 @@
       .tab_content.js_tab_content
         #tab_1_content.show
           %ul.toolBox
+            /%li
+            /  %ul.subToolBox
+            /    %li.With70
+            /      = link_to "SCult", :controller => "scult", :action => "index", :sc_model_id => @sc_model.id
+            /    %li
+            /      dépot et maillage du modèle
+            /    %li
+            /      statut : 
+            /      =@sc_model.state
             %li
               %ul.subToolBox
-                %li.With70
-                  = link_to "SCult", :controller => "scult", :action => "index", :sc_model_id => @sc_model.id
-                %li
-                  dépot et maillage du modèle
+                -if @sc_model.state != "active"
+                  %li.With70
+                    = link_to "SCills", :controller => "scult", :action => "index", :sc_model_id => @sc_model.id
+                  %li
+                    dépot de maillage
+                -else
+                  %li.With70
+                    = link_to "SCills", sc_model_calculs_path(@sc_model), :target => "_blank" 
+                  %li
+                    calcul de structures
                 %li
                   statut : 
                   =@sc_model.state
-            %li
-              %ul.subToolBox
-                %li.With70
-                  = link_to "SCills", sc_model_calculs_path(@sc_model), :target => "_blank" 
-                %li
-                  calcul de structures
 
             %li
               %ul.subToolBox
