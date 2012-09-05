@@ -1,0 +1,71 @@
+%link{ :href => "/javascripts/ext_app/Soja/ModelEditor.css", :rel => "stylesheet", :type => "text/css" }
+%link{ :href => "/javascripts/ext_app/Soja/TreeView.css", :rel => "stylesheet", :type => "text/css" }
+%link{ :href => "/javascripts/ext_app/Soja/Color.css", :rel => "stylesheet", :type => "text/css" }
+%link{ :href => "/javascripts/ext_app/Soja/TreeApp.css", :rel => "stylesheet", :type => "text/css" }
+%link{ :href => "/javascripts/ext_app/Soja/LayoutManager.css", :rel => "stylesheet", :type => "text/css" }
+%link{ :href => "/javascripts/ext_app/Soja/CodeEditor.css", :rel => "stylesheet", :type => "text/css" }
+%link{ :href => "/javascripts/ext_app/Soja/FileSystem.css", :rel => "stylesheet", :type => "text/css" }
+%link{ :href => "/javascripts/ext_app/gen/CorreliOnline.css", :rel => "stylesheet", :type => "text/css" }
+%link{ :href => "/stylesheets/main_ext_app.css", :rel => "stylesheet", :type => "text/css" }
+
+%link{ :href => "/javascripts/ext_app/CodeMirror-2.22/lib/codemirror.css", :rel => "stylesheet", :type => "text/css" }
+%link{ :href => "/javascripts/ext_app/CodeMirror-2.22/lib/util/dialog.css", :rel => "stylesheet", :type => "text/css" }
+
+
+%script{ :src => "/javascripts/ext_app/Soja/Soja.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/ext_app/Soja/DomHelper.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/ext_app/Soja/TreeView.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/ext_app/Soja/BrowserState.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/ext_app/Soja/LayoutManager.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/ext_app/Soja/ModelEditor.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/ext_app/Soja/FileSystem.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/ext_app/Soja/Color.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/ext_app/Soja/CodeEditor.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/ext_app/Soja/Geometry.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/ext_app/Soja/UndoManager.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/ext_app/Soja/Theme.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/ext_app/Soja/TypedArray.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/ext_app/Soja/CanvasManager.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/ext_app/Soja/Animation.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/ext_app/Soja/TreeApp.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/ext_app/gen/Browse.js", :type => "text/javascript" }
+
+%script{ :src => "/javascripts/ext_app/CodeMirror-2.22/lib/codemirror.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/ext_app/CodeMirror-2.22/mode/xml/xml.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/ext_app/CodeMirror-2.22/lib/util/dialog.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/ext_app/CodeMirror-2.22/mode/javascript/javascript.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/ext_app/CodeMirror-2.22/mode/ruby/ruby.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/ext_app/CodeMirror-2.22/lib/util/searchcursor.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/ext_app/CodeMirror-2.22/lib/util/search.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/ext_app/CodeMirror-2.22/lib/util/match-highlighter.js", :type => "text/javascript" }
+
+%script{ :src => "/javascripts/ext_app/gen/CorreliOnline.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/ext_app/croix.js", :type => "text/javascript" }
+
+%header
+  .container
+    #header_top
+      #header_logo
+      #header_user_connected  
+        #user_information
+          - if user_signed_in?  # Le cadenas est placé en premier car on aligne de droite à gauche dans cette zone. 
+            -#logo_session_lock  
+            %p#user_name
+              = current_user.full_name
+              %br
+              = link_to "déconnexion", destroy_user_session_path,  :id => "disconnect_link"
+          
+            -#header_top_cadena
+        %p#header_workspace_name
+          - if user_signed_in? && current_workspace_member.workspace
+            = current_workspace_member.workspace.name
+          - else
+            Nom entreprise
+    
+
+/#correli_header.CorreliHeader
+#main_window.CorreliWindow
+
+%script{ :type => "text/javascript" }
+  model_id = #{@model_id}
+  launch_CorreliOnline(document.getElementById("main_window"), model_id);
