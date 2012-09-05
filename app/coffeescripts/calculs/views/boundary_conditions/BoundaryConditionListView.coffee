@@ -72,6 +72,9 @@ SCViews.BoundaryConditionListView = Backbone.View.extend
 
     # Triggered when a edge is remove
     @bind "action:removed_edge", (edgeView) =>
+      _.each @collection.models, (boundaryCondition) ->
+        if boundaryCondition.get('edge_id') == edgeView.model.getId()
+          boundaryCondition.unset 'edge_id'
       @render()
 
     @bind "action:unassign:boundary_condition", (boundaryConditionView) =>

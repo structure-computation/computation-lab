@@ -5,7 +5,7 @@ tmp/
 Gemfile.lock
 config/database.yml
 .DS_Store
-*.css
+#*.css
 public/javascripts/search.js
 public/javascripts/table.js
 public/javascripts/manage_tab.js
@@ -20,4 +20,4 @@ public/javascripts/calculs/*.js
 public/javascripts/manage_tabs_new.js
 public/javascripts/visualisation/*.js
 *.sql
-app/stylesheets/partials/.sass-cache
+#app/stylesheets/partials/.sass-cache

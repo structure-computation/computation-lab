@@ -42,6 +42,21 @@ class LogTool < ActiveRecord::Base
     return void
   end
   
+  def in_use?()
+    void = false
+    current_time = Time.now.utc
+    end_time = self.created_at + 1.hours
+    logger.debug "current_time    = " + current_time.to_s
+    logger.debug "end_time        = " + end_time.to_s
+    logger.debug "self.created_at = " + self.created_at.to_s
+    if current_time > end_time
+      void = false
+    else
+      void = true
+    end
+    return void
+  end
+
   def pending()
     self.launch_state = "pending"
     self.save
@@ -112,7 +127,6 @@ class LogTool < ActiveRecord::Base
     end
   end
   
-  
   # validation d'un log pour scills ---------------------------------------------------------------
   def scills_valid(params)
     calcul_state = Integer(params[:state]) 
@@ -130,4 +144,20 @@ class LogTool < ActiveRecord::Base
     end
   end
   
+  # décompte du temps d'utilisation des outils ---------------------------------------------------------------
+  def use_tool_for_one_hour(name_tool)
+    self.log_type = "use_" + name_tool
+    self.nb_token = 1
+    if name_tool == "sceen"
+      self.nb_token = 5
+    elsif name_tool == "scills"
+      self.nb_token = 2
+    end
+    logger.debug "nb_token = " + self.nb_token.to_s
+    
+    self.real_time = 3600
+    self.finish()
+    self.token_account.valid_log_tool(self.id)
+    self.reserve_token()
+  end
 end

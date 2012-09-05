@@ -39,8 +39,9 @@ SCViews.EdgeView = Backbone.View.extend
     if confirm "Êtes-vous sûr ?"
       SCVisu.boundaryConditionListView.trigger("action:removed_edge", this)
       @parentElement.collection.remove @model
-      @parentElement.updateCalcul()
+      SCVisu.current_calcul.trigger 'change'
       @remove()
+      
 
   # Assign the selected condition to the current model
   asssignConditionFromEdge: ->

@@ -27,17 +27,17 @@
       %li
         Comportement générique :
         Parfait
-        = check_box_tag "link_comp_generic_pa", "pa", @link.comp_generique.downcase.include?("pa"), :disabled => true
+        = check_box_tag "link_comp_generic_pa", "pa", (@link.type_num == 0 or @link.type_num == 3), :disabled => true
         Elastique
-        = check_box_tag "link_comp_generic_el", "el", @link.comp_generique.downcase.include?("el"), :disabled => true
+        = check_box_tag "link_comp_generic_el", "el", (@link.type_num == 1 or @link.type_num == 4), :disabled => true
         Contact
-        = check_box_tag "link_comp_generic_co", "co", @link.comp_generique.downcase.include?("co"), :disabled => true
+        = check_box_tag "link_comp_generic_co", "co", @link.type_num == 2, :disabled => true
       %li
         Comportement complexe :
         Plastique
-        = check_box_tag "link_comp_complexe_pl", "pl", @link.comp_complexe.downcase.include?("pl"), :disabled => true
+        = check_box_tag "link_comp_complexe_pl", "pl", @link.type_num == 5, :disabled => true
         Cassable
-        = check_box_tag "link_comp_complexe_ca", "ca", @link.comp_complexe.downcase.include?("ca"), :disabled => true
+        = check_box_tag "link_comp_complexe_ca", "ca", (@link.type_num == 3 or @link.type_num == 4), :disabled => true
 
 -content_for :workspace_content do    
   %h2.grey

@@ -50,8 +50,9 @@ SCViews.MultiresolutionParameterListView = Backbone.View.extend
         @collection.meta 'resolution_number', resolution_number
         $(@el).find('input.resolution_number').val(resolution_number)
         @setOffTable()
-        for i in [0..@parameterViews.length - 1]
-          @parameterViews[i].delete(true)
+        if @parameterViews.length
+          for i in [0..@parameterViews.length - 1]
+            @parameterViews[i].delete(true)
         
       else
         $('#multiresolution_type').val(SCVisu.current_calcul.setMultiresolutionParameterType)

@@ -31,7 +31,7 @@
                                                                           :placeholders => ["x", "y", "z"]}
 
       = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Direction de l'axe (x,y,z)", :data_type => "number",
-                                                                          :ids => ["volume_cylinder_axis_direction_x", "volume_cylinder_axis_direction_y", "volume_cylinder_axis_direction_z"], 
+                                                                          :ids => ["volume_cylinder_direction_x", "volume_cylinder_direction_y", "volume_cylinder_direction_z"], 
                                                                           :names => ["direction_x", "direction_y", "direction_z"], 
                                                                           :placeholders => ["x", "y", "z"]}
 
@@ -45,7 +45,7 @@
   %table.grey
     %tbody
       = render :partial => "calculs/partials/row_label_text", :locals => {:header => "Centre (x,y,z)", :data_type => "number",
-                                                                          :ids => ["volume_sphere_center_x", "volume_sphere_center_y", "volume_sphere_center_z"], 
+                                                                          :ids => ["volume_sphere_point_1_x", "volume_sphere_point_1_y", "volume_sphere_point_1_z"], 
                                                                           :names => ["point_1_x", "point_1_y", "point_1_z"], 
                                                                           :placeholders => ["x", "y", "z"]}
   %table.grey
