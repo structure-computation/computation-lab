@@ -11,8 +11,8 @@
     - if @link.comp_generique.empty?
       /- @comp_generique  = ["Parfaite", "Elastique", "Contact"]
       /- @comp_complexe = ["Plastique", "Cassable"]
-      - @comp_generique  = ["Parfaite", "Elastique", "Contact", "Parfaite Cassable", "Elastique Cassable"]
       /- @comp_generique  = ["Parfaite", "Elastique", "Contact", "Parfaite Cassable", "Elastique Cassable", "Cohésive"]
+      - @comp_generique  = ["Parfaite", "Elastique", "Contact", "Parfaite Cassable", "Elastique Cassable"]
   
       %h2 Comportement de la liaison
       = form_for new_workspace_link_path(@workspace), :html => {:method => :get} do 

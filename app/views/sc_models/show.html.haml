@@ -65,6 +65,14 @@
                   = link_to "SCills", sc_model_calculs_path(@sc_model), :target => "_blank" 
                 %li
                   calcul de structures
+
+            %li
+              %ul.subToolBox
+                %li.With70
+                  = link_to "SCore", :controller => "score", :action => "index", :sc_model_id => @sc_model.id, :target => "_blank" 
+                %li
+                  corrélation
+
             %li
               %ul.subToolBox
                 %li.With70
