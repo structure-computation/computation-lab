@@ -22,7 +22,7 @@
               = link_to "Scills", sc_model_calculs_path(@sc_model)
             -if !result.log_tool.nil? and result.log_tool.finish?()   
               %li
-                = link_to "Télécharger"
+                = link_to "Télécharger", :controller => :sc_models, :action => :download_result, :id => @sc_model.id, :id_result => result.id
 
 :coffeescript
   $( ->
