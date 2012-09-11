@@ -98,5 +98,16 @@ class ScModelsController < InheritedResources::Base
     end
   end
   
+  def download_result
+    @sc_model  = ScModel.from_workspace(current_workspace_member.workspace.id).find_by_id(params[:id])
+    @id_model = @sc_model.id
+    @current_calcul = @sc_model.calcul_results.find(params[:id_result])
+    @id_result = params[:id_result]
+    name_file = "#{SC_MODEL_ROOT}/model_" + @id_model.to_s + "/calcul_" + @id_result.to_s + "/results.zip"
+    name_resultats = 'result_' + @id_result.to_s + '.zip'
+    send_file name_file, :filename => name_resultats, :x_sendfile=>true
+    @current_calcul.change_state('downloaded') 
+  end
+  
 
 end
