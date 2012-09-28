@@ -15,6 +15,9 @@ class Workspace < ActiveRecord::Base
   has_many  :company_workspace_memberships
   has_many  :companies, :through => :company_workspace_memberships
   
+  has_many  :workspace_application_ownerships
+  has_many  :applications, :through => :workspace_application_ownerships
+  
   has_one   :token_account              , :readonly => false
   
   has_many  :sc_models                  , :readonly => false
