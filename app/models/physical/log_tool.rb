@@ -7,6 +7,8 @@ class LogTool < ActiveRecord::Base
   has_one     :workspace ,  :through => :token_account
   has_one     :solde_token_account
   
+  belongs_to  :application
+  
   #launch_state = ['pending', 'ready', 'in_process', 'finish', 'echec']
   #state = ['temp', 'pending', 'in_process', 'finish', 'echec', 'downloaded', 'uploaded']
   #log_type = ['scult', 'scills', 'sceen', 'script']
