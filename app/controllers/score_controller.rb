@@ -17,6 +17,7 @@ class ScoreController < ApplicationController
     logger.debug  request.method + " " + request.fullpath + " \n\n" + request.raw_post 
     socket.write( request.method + " " + request.fullpath + " \n\n" + request.raw_post ) # Send request
     response = socket.read              # Read complete response
+    logger.debug response
     socket.close
     render :text => response
   end
