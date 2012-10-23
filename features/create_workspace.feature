@@ -7,7 +7,6 @@ Feature: Create a workspace
   Scenario: Create a Workspace by an AdminSC 
     Given I am logged in as an AdminSC   
     And   I associate user "Jérémy" to workspace "Structure Computation"
-    And   I associate user "Jérémy" to workspace "Structure Computation" 
     And   I create a User with firstname "Jérémy"
     Then  I should see this manager with firstname "Jérémy"  
     And   I should see this workspace with name "Structure Computation"      
