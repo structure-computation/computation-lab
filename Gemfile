@@ -12,6 +12,7 @@ gem 'mysql'       , '~>2.8.1'
 gem 'delayed_job' , '~>3.0.2'
 
 gem 'haml'        , '~>3.1.4'
+gem 'coffee-filter'
 gem 'barista'     , '~>1.2.1'  # Attention, haml doit être chargé AVANT barrista.
 gem 'prawn'       , '~>0.8.4'  # 0.12 dispo
 
