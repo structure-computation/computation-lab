@@ -19,7 +19,7 @@ gem 'prawn'       , '~>0.8.4'  # 0.12 dispo
 gem 'jquery-rails', '~>2.0.2'
 gem 'transitions' , '~>0.0.9'
 gem 'warden'      , '~>1.1.1'
-gem 'devise'      , '~>2.0.4'
+gem 'devise'      , '~>2.1.0'
 gem 'formtastic'  , '~>1.2.3'
 gem 'acts_as_api' , '~>0.3.11'
 gem 'compass'     , '>= 0.11.5'
