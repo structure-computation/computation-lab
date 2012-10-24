@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class ApplicationController < ActionController::Base 
   include SCAuthenticationHelpers
   #before_filter :current_workspace_member

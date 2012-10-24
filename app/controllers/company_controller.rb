@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class CompanyController < InheritedResources::Base
   
     helper :application     

@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Users::ConfirmationsController < Devise::ConfirmationsController
   include Devise::Controllers::InternalHelpers
   layout 'workspace'

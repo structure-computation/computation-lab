@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class CustomersController < InheritedResources::Base
     layout 'workspace'
 

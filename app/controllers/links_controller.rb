@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class LinksController < InheritedResources::Base
   helper :all
   #session :cookie_only => false, :only => :upload

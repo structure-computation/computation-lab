@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class ExtAppVisuController < ApplicationController
   layout "application_ext_app"
   def index

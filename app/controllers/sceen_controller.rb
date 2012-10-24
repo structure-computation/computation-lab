@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class SceenController < ApplicationController
   before_filter :authenticate_user!
   layout "application_ext_app"

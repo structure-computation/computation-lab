@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class ScratchUserController < InheritedResources::Base  
   before_filter :authenticate_user!  , :except => [:new, :create]   
   layout 'login'

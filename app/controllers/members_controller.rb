@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 # Controlleur permettant de gerer les utilisateurs (user) au sein d'une équipe.
 # Ulterieurement pourra être une ressource incluse dans une ressource workspace
 

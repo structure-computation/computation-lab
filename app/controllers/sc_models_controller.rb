@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 # This controller handles the login/logout function of the site.  
 class ScModelsController < InheritedResources::Base
   #session :cookie_only => false, :only => :upload
