@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 # Fichier de traduction en français
 # See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
@@ -86,7 +88,7 @@ fr:
     abbr_day_names: [dim, lun, mar, mer, jeu, ven, sam]
     month_names: [~, Janvier, Février, Mars, Avril, Mai, Juin, Juillet, Août, Septembre, Octobre, Novembre, Décembre]
     abbr_month_names: [~, jan, fév, mar, avr, mai, juin, juil, août, sept, oct, nov, déc]
-    order: [ :day, :month, :year ]
+    # order: [ :day, :month, :year ]
 
   time:
     formats:
