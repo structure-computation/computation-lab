@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Fillial < ActiveRecord::Base
   
   has_many  :user_workspace_memberships

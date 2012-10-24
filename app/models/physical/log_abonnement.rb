@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class LogAbonnement < ActiveRecord::Base
   belongs_to :memory_account
   belongs_to :abonnement

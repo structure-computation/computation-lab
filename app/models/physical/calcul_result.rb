@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class CalculResult < ActiveRecord::Base
   require 'find'
   require 'json'

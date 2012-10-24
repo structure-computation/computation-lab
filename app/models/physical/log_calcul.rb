@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class LogCalcul < ActiveRecord::Base
   
   # Le calcul sur le quel porte ce log

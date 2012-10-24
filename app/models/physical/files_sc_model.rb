@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class FilesScModel < ActiveRecord::Base
   
   belongs_to  :sc_model

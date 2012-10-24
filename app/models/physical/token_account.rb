@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class TokenAccount < ActiveRecord::Base
   belongs_to :workspace
   has_many   :solde_token_accounts

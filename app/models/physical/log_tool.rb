@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class LogTool < ActiveRecord::Base
   
   belongs_to  :sc_model

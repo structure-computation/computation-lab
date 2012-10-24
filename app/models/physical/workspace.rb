@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Workspace < ActiveRecord::Base
   
   # Un workspace peut posséder plusieurs workspaces grâce à la table :workspace_relationship 

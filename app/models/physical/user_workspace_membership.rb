@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class UserWorkspaceMembership < ActiveRecord::Base
   belongs_to  :user
   belongs_to  :workspace
