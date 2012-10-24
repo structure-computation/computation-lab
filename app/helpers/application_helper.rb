@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module ApplicationHelper
   # TODO cette méthode ne fonctionne pas partout, à corriger
   include SCAuthenticationHelpers
