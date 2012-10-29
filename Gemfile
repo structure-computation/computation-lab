@@ -7,7 +7,7 @@ source :rubygems
 
 
 gem 'rails'       , '~>3.2.0'
-gem 'mysql'       , '~>2.8.1'
+gem 'mysql2'  # Attention, nouvelle version necessaire pour éviter les problèmes d'UTF-8     , '~>2.8.1'
 
 gem 'delayed_job' , '~>3.0.2'
 
