@@ -27,6 +27,7 @@ class WorkspacesController < InheritedResources::Base
     @workspace    = current_workspace_member.workspace
     @credits      = @workspace.token_account.credits.find(:all, :conditions => {:state => "active"})
     @soldes       = @workspace.token_account.solde_token_accounts.find(:all, :order => " created_at DESC")
+    @applications = @workspace.workspace_application_ownerships.find(:all)
     
     if @workspace 
       # show!
@@ -113,6 +114,21 @@ class WorkspacesController < InheritedResources::Base
     # end
   end
   
+  
+  def add_application
+    @workspace = current_workspace_member.workspace
+    @application = Application.find_by_id(params[:application_id])
+    if @workspace.workspace_application_ownerships.find(:first, :conditions => {:workspace_id =>  @workspace.id, :application_id =>  @application.id } )
+      redirect_to workspace_path(@workspace, :anchor => "Applications"), :notice => "Vous avez déjà ajouté cette application." # TODO traduire 
+    else
+      @workspace.applications << @application
+      @workspace.save
+      @current_workspace_application = @workspace.workspace_application_ownerships.find(:first, :conditions => {:workspace_id =>  @workspace.id, :application_id =>  @application.id } )
+      @current_workspace_application.end_date = Date.today + 1.year
+      @current_workspace_application.save
+      redirect_to workspace_path(@workspace, :anchor => "Applications"), :notice => "Application ajoutée." # TODO traduire 
+    end
+  end
   
   #protected
     # def begin_of_association_chain

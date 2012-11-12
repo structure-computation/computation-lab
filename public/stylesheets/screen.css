@@ -999,12 +999,14 @@ ul.toolBox {
 }
 /* line 13, ../../app/stylesheets/specifics/_modeles_show.sass */
 ul.toolBox li {
-  background: transparent url("../images/manage_compte_bg.png") repeat-x left top;
-  width: 95%;
-  height: 60px;
+  background: transparent url("../images/manage_compte_bg.png") repeat-x left bottom;
+  width: 30%;
+  height: 180px;
   padding: 0;
   margin-top: 15px;
+  margin-left: 15px;
   border: thin solid #696969;
+  float: left;
 }
 
 /* line 22, ../../app/stylesheets/specifics/_modeles_show.sass */
@@ -1016,20 +1018,21 @@ ul.subToolBox {
 }
 /* line 27, ../../app/stylesheets/specifics/_modeles_show.sass */
 ul.subToolBox li {
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 0px;
+  padding-right: 0px;
   background: none;
   text-decoration: none;
   font-weight: bold;
-  width: auto;
-  min-with: 100px;
+  width: 100%;
+  min-with: 50px;
   height: 60px;
   margin: 0;
   border: none;
-  border-left: thin solid #696969;
+  //border-bottom: thin solid #696969;
   float: left;
   line-height: 60px;
   text-align: center;
+  
 }
 /* line 42, ../../app/stylesheets/specifics/_modeles_show.sass */
 ul.subToolBox li a {
@@ -1051,7 +1054,7 @@ ul.subToolBox li.With70 {
   height: 60px;
   margin: 0;
   border: none;
-  border-left: thin solid #696969;
+  //border-left: thin solid #696969;
   float: left;
   line-height: 60px;
   text-align: center;
@@ -1799,14 +1802,14 @@ body {
   margin: auto;
   width: 99.992%;
   max-width: 100%;
-  border-left: 1px solid #b2b2b2;
-  border-right: 1px solid #b2b2b2;
+  //border-left: 1px solid #b2b2b2;
+  //border-right: 1px solid #b2b2b2;
   padding-left: 0%;
   padding-right: 0%;
   padding-bottom: 0%;
   min-width: 1024px;
   max-width: 99%;
-  background-color: #f0f0f0;
+  //background-color: #f0f0f0;
 }
 /* line 38, ../../../../.rvm/gems/ruby-1.8.7-p334/gems/compass-0.11.5/frameworks/compass/stylesheets/compass/utilities/general/_clearfix.scss */
 .container:after {

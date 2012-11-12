@@ -3,6 +3,7 @@ class CreateApplications < ActiveRecord::Migration
     create_table :applications do |t|
       t.string  :name
       t.string  :description
+      t.string  :key_words
       t.string  :powered_by
       t.string  :company_id                      # powered by this company
       t.string  :logo

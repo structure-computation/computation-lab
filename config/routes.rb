@@ -9,12 +9,14 @@ SCInterface::Application.routes.draw do
   
   resources :sc_admin_workspace
   resources :sc_admin_company
+  resources :sc_admin_application
   resources :sc_admin_user
   resources :sc_admin_bill do
     get 'download_bill'
   end
   
   resources :forfait
+  resources :sc_application
   
   resources :members do
     resources :company
@@ -36,6 +38,7 @@ SCInterface::Application.routes.draw do
   match 'calculs/duplicate'   => "calculs#duplicate" 
   
   match 'workspaces/get_gestionnaire'   => "workspaces#get_gestionnaire"  
+  match 'workspaces/add_application'   => "workspaces#add_application"  
   resources :workspaces do
     resources :materials
     resources :links

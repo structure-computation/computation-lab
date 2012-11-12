@@ -77,7 +77,9 @@ class SceenController < ApplicationController
     #logger.debug  request.method + " " + request.fullpath + " \n\n" + request.raw_post 
     length = request.raw_post.length
     logger.debug  "request.raw_post.length = " + length.to_s
-    #logger.debug  request.method + " " + request.fullpath + " Content-Length: " + length.to_s + " \n\n" + request.raw_post
+    #file = request.raw_post.to_s
+    #logger.debug  "request.raw_post = " + file
+    logger.debug  request.method + " " + request.fullpath + " Content-Length: " + length.to_s + " \n\n" + request.raw_post
     socket.write( request.method + " " + request.fullpath + " Content-Length: " + length.to_s + " \n\n" + request.raw_post ) # Send request
     response = socket.read              # Read complete response
     socket.close

@@ -19,6 +19,7 @@ class ScModelsController < InheritedResources::Base
   def index
     @workspace  = current_workspace_member.workspace
     @sc_models  = ScModel.from_workspace @workspace.id
+    @apps = @workspace.applications
     index!
   end
   
@@ -44,6 +45,7 @@ class ScModelsController < InheritedResources::Base
   def show 
     @sc_model  = ScModel.from_workspace(current_workspace_member.workspace.id).find_by_id(params[:id])
     @workspace    = current_workspace_member.workspace
+    @apps = @workspace.applications
     #     @sc_model.model_ownerships.each do |ownership|
     #       if ownership.workspace_member.nil?
     #         logger.debug ownership.id

@@ -9,14 +9,14 @@
 
 -content_for :right_top do
   %h2.grey
-    Forgot your password? 
+    Mot de passe oublié ?
   .grey
     = form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f|
       #login_format
         %p= f.label :email
         = f.text_field :email
 
-        %p= f.submit "Send me reset password instructions"
+        %p= f.submit "Envoyer moi les instructions"
         /%button.login_button.yellow_button{ :type => "submit"}
         /  Se connecter
         %p
