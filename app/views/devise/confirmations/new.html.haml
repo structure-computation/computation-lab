@@ -6,7 +6,7 @@
       %li.manage_pic_nouveau_membre
         =link_to 'Page de login', new_session_path(resource_name)
       %li.manage_pic_nouveau_membre
-        = link_to "Forgot your password?", new_password_path(resource_name)
+        = link_to "Mot de passe oublié ?", new_password_path(resource_name)
 
 
 -content_for :right_top do
@@ -18,6 +18,6 @@
         %p= f.label :email
         = f.text_field :email
         %p
-        %p= f.submit "Resend confirmation instructions"
+        %p= f.submit "réexpédier les instructions"
         %p
           %br

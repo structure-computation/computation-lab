@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120725160004) do
+ActiveRecord::Schema.define(:version => 20120926200728) do
 
   create_table "abonnements", :force => true do |t|
     t.string   "name"
@@ -21,6 +21,22 @@ ActiveRecord::Schema.define(:version => 20120725160004) do
     t.string   "state"
     t.date     "start_date"
     t.date     "end_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "applications", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.string   "key_words"
+    t.string   "powered_by"
+    t.string   "company_id"
+    t.string   "logo"
+    t.integer  "registration_token"
+    t.integer  "utilization_token"
+    t.integer  "distribution_token"
+    t.integer  "exploitation_token"
+    t.string   "state"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -267,6 +283,7 @@ ActiveRecord::Schema.define(:version => 20120725160004) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "launch_state"
+    t.integer  "application_id"
   end
 
   create_table "materials", :force => true do |t|
@@ -465,6 +482,15 @@ ActiveRecord::Schema.define(:version => 20120725160004) do
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
   create_table "workspace_accounts", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "workspace_application_ownerships", :force => true do |t|
+    t.integer  "workspace_id"
+    t.integer  "application_id"
+    t.date     "end_date"
+    t.string   "status"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

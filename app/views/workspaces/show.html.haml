@@ -5,6 +5,8 @@
     %ul
       %li.manage_pic_compte_abonnement
         = link_to 'Nouveau forfait', :controller => "forfait", :action => "index"
+      %li.manage_pic_compte_abonnement
+        = link_to 'Ajouter une application', :controller => "sc_application", :action => "index"
       %li.manage_pic_nouveau_membre
         = link_to 'Ajouter un membre', new_workspace_member_path(@workspace)
       %li.LM_pic_materiau
@@ -31,7 +33,7 @@
         %li 
           %a#tab_2{:href => "#Compte"} Compte
         %li                    
-          %a#tab_3{:href => "#Forfaits"} Forfaits
+          %a#tab_3{:href => "#Applications"} Applications
         %li                    
           %a#tab_4{:href => "#Membres"} Membres
         %li                    
@@ -64,8 +66,10 @@
           = render :partial => "workspaces/soldes_list", :object => @soldes
                 
         #tab_3_content
-          %h3 Liste de vos forfait en cours d utilisation :
-          = render :partial => 'credit/credits_list', :object => @credits
+          /%h3 Liste de vos forfait en cours d utilisation :
+          /= render :partial => 'credit/credits_list', :object => @credits
+          %h3 Liste de vos Applications en cours d utilisation :
+          = render :partial => 'sc_application/applications_list', :object => @applications
                 
         #tab_4_content
           = render :partial => "members/search_filter"
