@@ -1,0 +1,20 @@
+.search_filter
+  %p
+    %label{:for => "search_filter"} Recherche
+    %input#search_filter{:type => "text"}
+    %button#more_details.close.yellow_button Recherche avancée
+
+  #sc_models_advanced_search.advanced_search
+    %p
+      %label{:for => "name_search_filter"} Nom
+      %input#name_search_filter{:type => "text"}
+    %p      
+      %label{:for => "id_search_filter"} ID
+      %input#id_search_filter{:type => "text"}    
+
+
+:coffeescript
+  $( ->
+    $('#applications_table').tablesorter()
+    searchFilter("#applications_table", "search_filter")
+  )

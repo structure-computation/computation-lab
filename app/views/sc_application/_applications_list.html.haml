@@ -1,0 +1,29 @@
+.search_filter
+  %p
+    %label{:for => "applications_search_filter"} Recherche
+    %input#applications_search_filter{:type => "text"}
+
+%table.grey#applications_table
+  %thead
+    %tr
+      %th Echeance
+      %th Nom
+      %th Description
+      %th powered_by
+      %th Prix d utilisation
+      %th Prix de distribution
+  %tbody
+    - applications_list.each do |app|
+      %tr   
+        %td= app.end_date
+        %td= app.application.name
+        %td= app.application.description
+        %td= app.application.powered_by
+        %td= app.application.utilization_token
+        %td= app.application.distribution_token
+
+:coffeescript
+  $( ->
+    $('#applications_table').tablesorter()
+    searchFilter("applications_table", "applications_search_filter")
+  )

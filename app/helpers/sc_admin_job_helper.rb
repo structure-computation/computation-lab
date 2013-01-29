@@ -1,0 +1,2 @@
+module ScAdminJobHelper
+end
