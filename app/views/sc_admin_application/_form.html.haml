@@ -1,0 +1,26 @@
+%p
+= semantic_form_for @application, :url => {:controller => "sc_admin_application", :action => "create"}  do |form|
+  %table.grey#workspace_information_table
+    %tr
+      %th= form.label :name
+      %td= form.text_field :name
+    %tr
+      %th= form.label :description
+      %td= form.text_area :description
+    %tr
+      %th= form.label :powered_by
+      %td= form.text_field :powered_by
+    %tr
+      %th= form.label :registration_token
+      %td= form.text_field :registration_token
+    %tr
+      %th= form.label :utilization_token
+      %td= form.text_field :utilization_token
+    %tr
+      %th= form.label :distribution_token
+      %td= form.text_field :distribution_token
+    %tr
+      %th= form.label :exploitation_token
+      %td= form.text_field :exploitation_token
+   
+  = form.buttons

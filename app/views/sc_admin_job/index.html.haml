@@ -1,0 +1,32 @@
+-content_for :left_top do
+  .left_submenu
+    %h2.grey
+      Menu
+    %ul
+       
+
+-content_for :right_top do
+  %h2.grey
+    Liste des job en cours 
+  %div
+    = render :partial => "search_filter"
+
+-content_for :workspace_content do
+  %table.grey#jobs_table
+    %thead
+      %tr
+        %th ID
+        %th Nom du workspace
+        %th Member_id
+        %th.no_sorter Actions
+    %tbody
+      - @jobs.each do |job|
+        %tr
+          %td.id=               job.id
+          %td.workspace=        link_to job.workspace.name , sc_admin_workspace_path(job.workspace.id)
+          %td.name=             link_to job.workspace_member.user.lastname , sc_admin_user_path(job.workspace_member.user.id)
+          %td.action_on_table.escape_search
+            %ul
+              %li
+                %a=button_to 'Echec', :controller => "sc_admin_job", :action => "end_job", :id => job.id, :confirm => "Êtes-vous sûr ?" 
+              

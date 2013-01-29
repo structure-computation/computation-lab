@@ -1,0 +1,2 @@
+module EcosystemMecanicHelper
+end

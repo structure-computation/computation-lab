@@ -1,12 +1,12 @@
 # encoding: utf-8
 
-class ScoreController < ApplicationController
+class EcosystemMecanicController < ApplicationController  
   before_filter :authenticate_user!
   layout "application_ext_app"
   
   def index
     @current_model = current_workspace_member.sc_models.find(params[:sc_model_id])
-    @current_model.tool_in_use("sceen", current_workspace_member)
+    @current_model.tool_in_use("EcosystemMecanic", current_workspace_member)
     @model_id = params[:sc_model_id]
     #@page = :home # Pour afficher le menu en selected.
     render :layout => false 
@@ -16,7 +16,7 @@ class ScoreController < ApplicationController
     host = 'localhost'     # The web server
     port = 8888                           # Default HTTP port
     socket = TCPSocket.open(host,port)  # Connect to server
-    logger.debug  request.method + " " + request.fullpath + " \n\n" + request.raw_post 
+    logger.debug  request.method + " " + request.fullpath + " \n\n" + request.raw_post  
     socket.write( request.method + " " + request.fullpath + " \n\n" + request.raw_post ) # Send request
     response = socket.read              # Read complete response
     socket.close
@@ -24,7 +24,7 @@ class ScoreController < ApplicationController
   end
   
   
-  def _ 
+  def _
     host = 'localhost'     # The web server
     port = 8888                           # Default HTTP port
     socket = TCPSocket.open(host,port)  # Connect to server

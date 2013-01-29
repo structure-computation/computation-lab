@@ -76,7 +76,7 @@ class SceenController < ApplicationController
     host = 'localhost'     # The web server
     port = 8888                           # Default HTTP port
     socket = TCPSocket.open(host,port)  # Connect to server
-    #logger.debug  request.method + " " + request.fullpath + " \n\n" + request.raw_post 
+    logger.debug  "request.method = " + request.method + " " + request.fullpath + " \n\n" + request.raw_post 
     length = request.raw_post.length
     logger.debug  "request.raw_post.length = " + length.to_s
     #logger.debug  request.method + " " + request.fullpath + " Content-Length: " + length.to_s + " \n\n" + request.raw_post
