@@ -79,23 +79,10 @@
             %li
               %ul.subToolBox
                 %li
-                  = link_to "Score", :controller => "score", :action => "index", :sc_model_id => @sc_model.id, :target => "_blank" 
+                  = link_to "Ecosystem Sciences", :controller => "ecosystem_mecanic", :action => "index", :sc_model_id => @sc_model.id, :target => "_blank" 
                 %li
-                  Correlation
+                  Applications scientifiques
 
-            %li
-              %ul.subToolBox
-                %li
-                  = link_to "Ecosystem Mecanic", :controller => "ecosystem_mecanic", :action => "index", :sc_model_id => @sc_model.id, :target => "_blank" 
-                %li
-                  Applications mécaniques
-
-            %li
-              %ul.subToolBox
-                %li
-                  = link_to "Ecosystem Biologic", :controller => "ecosystem_biologic", :action => "index", :sc_model_id => @sc_model.id, :target => "_blank" 
-                %li
-                  Applications biologiques
                 
         #tab_2_content.hide
           %h3 Liste des résultats
