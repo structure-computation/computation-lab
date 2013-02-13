@@ -63,12 +63,12 @@
             %li
               %ul.subToolBox
                 -if @sc_model.state != "active"
-                  %li.With70
+                  %li
                     = link_to "SCills", :controller => "scult", :action => "index", :sc_model_id => @sc_model.id
                   %li
                     dépot de maillage
                 -else
-                  %li.With70
+                  %li
                     = link_to "SCills", sc_model_calculs_path(@sc_model), :target => "_blank" 
                   %li
                     calcul de structures
