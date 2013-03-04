@@ -171,7 +171,7 @@ class LogTool < ActiveRecord::Base
       self.nb_token = 0
     elsif type_app == 1                 # fixe
       self.nb_token = 1
-    elsif type_app == 1                 # nb minute/proc
+    elsif type_app == 2                 # nb minute/proc
       self.nb_token = ((self.real_time * self.cpu_allocated)/60).ceil+1
     end
     logger.debug "nb_token = " + self.nb_token.to_s

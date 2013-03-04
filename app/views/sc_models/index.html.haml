@@ -26,7 +26,7 @@
     %tbody
       - @sc_models.each do |sc_model|
         %tr
-          %td.escape_search.details_link= link_to 'Détails', workspace_sc_model_path(@workspace, sc_model)
+          %td.escape_search.details_link= link_to "Go", :controller => "ecosystem_mecanic", :action => "index", :sc_model_id => sc_model.id, :target => "_blank"
           %td.name=           sc_model.name ? sc_model.name : 'Undefined'
           %td.id=             sc_model.id
           -# Suppression de la colonne "Projet" %td
@@ -35,8 +35,6 @@
           %td.action_on_table.escape_search
             %ul
               %li
-                %a Visualisation
-              %li
-                %a Calcul
+                = link_to 'gérer', workspace_sc_model_path(@workspace, sc_model)
               %li
                 = button_to 'Supprimer', workspace_sc_model_path(@workspace, sc_model), :method => :delete, :confirm => "Êtes-vous sûr ?"

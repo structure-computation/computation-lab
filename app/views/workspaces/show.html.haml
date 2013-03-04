@@ -12,7 +12,7 @@
         = link_to 'Editer', edit_workspace_path(@workspace)
       - if current_workspace_member.is_manager?
         %li.LM_pic_model
-          = link_to 'liste de tous les modèles', workspace_sc_models_path(@workspace)
+          = link_to 'liste de tous les projets', workspace_sc_models_path(@workspace)
 
 -content_for :right_top do
   %h2.grey
@@ -28,54 +28,54 @@
     #left_content
       %ul.tab_submenu.js_tab_submenu
         %li 
-          %a#tab_1{:href => "#Factures"} Factures
-        %li 
-          %a#tab_2{:href => "#Compte"} Compte
+          %a#tab_1{:href => "#Compte"} Compte
+        %li                    
+          %a#tab_2{:href => "#Membres"} Membres
         %li                    
           %a#tab_3{:href => "#Forfaits"} Forfaits
-        %li                    
-          %a#tab_4{:href => "#Membres"} Membres
+        %li 
+          %a#tab_4{:href => "#Factures"} Factures
         %li                    
           %a#tab_5{:href => "#Description"} Description
             
     #right_content
       .tab_content.js_tab_content
         #tab_1_content
-          %h3 Liste des factures du workspace :
-          = render :partial => 'bills/bills_list', :object => @workspace.bills.find(:all, :order => " created_at DESC")
-          
-        #tab_2_content
           %p Solde du compte de jetons
           %p Compteurs globaux :
           %table.grey
             -#TODO afficher les bonnes valeurs
             %thead
               %tr.no_sorter
-                %th Compteur de jetons utilisés
-                %th Compteur de jetons achetés
-                %th Solde courrant
-                %th Jetons réservés
+                /%th Compteur de jetons utilisés
+                /%th Compteur de jetons achetés
+                %th Solde courant
+                /%th Jetons réservés
             %tbody
               %tr
-                %td= @workspace.token_account.used_token_counter
-                %td= @workspace.token_account.purchased_token_counter
+                /%td= @workspace.token_account.used_token_counter
+                /%td= @workspace.token_account.purchased_token_counter
                 %td= @workspace.token_account.solde_token
-                %td= @workspace.token_account.reserved_token
+                /%td= @workspace.token_account.reserved_token
           %p Compte détaillé :
-          = render :partial => "workspaces/soldes_list", :object => @soldes
-                
-        #tab_3_content
-          %h3 Liste de vos forfait en cours d utilisation :
-          = render :partial => 'credit/credits_list', :object => @credits
-                
-        #tab_4_content
+          = render :partial => "workspaces/soldes_list", :object => @soldes_resume
+        
+        #tab_2_content
           = render :partial => "members/search_filter"
           %h3 managers
           = render :partial => "members/members_list", :object => @workspace.managers
           %h3 engineers
           = render :partial => "members/members_list", :object => @workspace.engineers
           /= render :partial => "members/members_list", :object => @workspace.members
-          
+        
+        #tab_3_content
+          %h3 Liste de vos forfait en cours d utilisation :
+          = render :partial => 'credit/credits_list', :object => @credits
+
+        #tab_4_content
+          %h3 Liste des factures du workspace :
+          = render :partial => 'bills/bills_list', :object => @workspace.bills.find(:all, :order => " created_at DESC")
+  
         #tab_5_content
           %table.grey#workspace_information_table
             %tr
