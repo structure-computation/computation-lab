@@ -314,18 +314,18 @@ class ScModel < ActiveRecord::Base
   def use_scwal_tool(params)
     #name_tool = "scills, sceen, score..."
     #"App=TestItem&typeApp=1&time=10&proc=2&wmid=2&sc_model_id=200"
-    log_type = params[:App]
-    log_type_app = params[:typeApp]
-    log_time = params[:time]
-    log_nbproc = params[:proc]
+    log_type = params[:app_type]
+    log_type_app = 2 #params[:typeApp]
+    log_time = params[:app_time]
+    log_nbproc = params[:app_cpu]
     
     @new_log_tool = self.log_tools.build()
     @new_log_tool.token_account = self.workspace.token_account
-    @new_log_tool.workspace_member = self.workspace.user_workspace_memberships(:first)
+    @new_log_tool.workspace_member = self.workspace_members.find(:first)
     @new_log_tool.log_type = log_type
     @new_log_tool.cpu_allocated = log_nbproc
     @new_log_tool.real_time = log_time
-    @new_log_tool.use_tool_for_one_hour(log_type_app)
+    @new_log_tool.use_tool_type(log_type_app)
   end
   
   def request_mesh_analysis

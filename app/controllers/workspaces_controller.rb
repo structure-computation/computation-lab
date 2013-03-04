@@ -28,7 +28,39 @@ class WorkspacesController < InheritedResources::Base
   def show
     @workspace    = current_workspace_member.workspace
     @credits      = @workspace.token_account.credits.find(:all, :conditions => {:state => "active"})
-    @soldes       = @workspace.token_account.solde_token_accounts.find(:all, :order => " created_at DESC")
+    @last_credit  = @workspace.token_account.solde_token_accounts.find(:last, :conditions => {:solde_type => "token"})
+    @soldes       = @workspace.token_account.solde_token_accounts.find(:all, :order => " created_at DESC", :conditions => ["created_at >= ? ", @last_credit.created_at])
+    
+    @old_solde    = @workspace.token_account.solde_token_accounts.find(:last, :conditions => ["created_at < ? ", @last_credit.created_at])
+    @old_solde.used_token = ""
+    @old_solde.credit_token = ""
+    @old_solde.solde_type = "ancien solde"
+    
+    @new_solde    = @workspace.token_account.solde_token_accounts.find(:last)
+    @new_solde.used_token = ""
+    @new_solde.credit_token = ""
+    @new_solde.solde_type = "solde courant"
+    
+    @soldes_resume= []
+    @soldes_resume << @new_solde
+    @soldes.each do |solde_i|
+        find_type = false
+        @soldes_resume.each do |solde_resume_i|
+            if solde_resume_i.solde_type == solde_i.solde_type
+                find_type = true
+                solde_resume_i.used_token += solde_i.used_token
+                solde_resume_i.credit_token += solde_i.credit_token
+                solde_resume_i.solde_token = ""
+                break
+            end
+        end
+        if !find_type
+            @soldes_resume.push solde_i
+            @soldes_resume.last.solde_token = ""
+        end
+    end
+    @soldes_resume << @old_solde
+    
     
     if @workspace 
       # show!
