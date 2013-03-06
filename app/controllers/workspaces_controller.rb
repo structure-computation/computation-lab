@@ -29,9 +29,16 @@ class WorkspacesController < InheritedResources::Base
     @workspace    = current_workspace_member.workspace
     @credits      = @workspace.token_account.credits.find(:all, :conditions => {:state => "active"})
     @last_credit  = @workspace.token_account.solde_token_accounts.find(:last, :conditions => {:solde_type => "token"})
-    @soldes       = @workspace.token_account.solde_token_accounts.find(:all, :order => " created_at DESC", :conditions => ["created_at >= ? ", @last_credit.created_at])
     
-    @old_solde    = @workspace.token_account.solde_token_accounts.find(:last, :conditions => ["created_at < ? ", @last_credit.created_at])
+    if @last_credit
+      created_at = @last_credit.created_at 
+    else
+      created_at = DateTime.now
+    end
+    
+    @soldes       = @workspace.token_account.solde_token_accounts.find(:all, :order => " created_at DESC", :conditions => ["created_at >= ? ", created_at])
+    
+    @old_solde    = @workspace.token_account.solde_token_accounts.find(:last, :conditions => ["created_at < ? ", created_at])
     @old_solde.used_token = ""
     @old_solde.credit_token = ""
     @old_solde.solde_type = "ancien solde"
