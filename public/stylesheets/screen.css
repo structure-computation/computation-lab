@@ -1917,8 +1917,9 @@ h2.grey {
 div.grey {
   border: 1px solid #b2b2b2;
   background-color: #f0f0f0;
-  padding-left: 0%;
-  padding-right: 0%;
+  padding: 0 10px 0 10px;
+  /*padding-left: 0%;
+  padding-right: 0%;*/
 }
 
 /* line 151, ../../app/stylesheets/screen.sass */

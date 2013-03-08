@@ -6,8 +6,9 @@
     #header_top
       #header_token_account
         - if user_signed_in?
-          #account_icon
-            = link_to image_tag( 'base-de-donnees-ajouter-icone-7539-16.png'), :controller => "forfait", :action => "index"
+          -if current_workspace_member.manager?
+            #account_icon
+              = link_to image_tag( 'base-de-donnees-ajouter-icone-7539-16.png'), :controller => "forfait", :action => "index"
           #account_information
             tokens : &nbsp
             = current_workspace_member.workspace.token_account.solde_token
