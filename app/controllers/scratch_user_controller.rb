@@ -9,14 +9,20 @@ class ScratchUserController < InheritedResources::Base
     #current_workspace_member =  @change_current_workspace_member
     session[:current_workspace_member_id] = @change_current_workspace_member.id
     
+    #     @change_current_workspace_sc_model=ScModel.from_workspace(current_workspace_member.workspace.id).first
+    #     session[:current_workspace_sc_model_id] = @change_current_workspace_sc_model.id
+    
     logger.debug "current_user_id: " + current_user.id.to_s
     logger.debug "workspace_id: " + params[:workspace_id].to_s
     logger.debug "session[:current_workspace_member_id]: " + session[:current_workspace_member_id].to_s
+    logger.debug "session[:current_workspace_sc_model_id]: " + session[:current_workspace_sc_model_id].to_s
     
     if params[:workspace_id]
-      redirect_to scratch_user_path(current_user.id), :notice => "Espace de travail modifié." # TODO: traduire.
+      redirect_to  :controller => "ecosystem_mecanic", :action => "index", :sc_model_id => current_workspace_sc_model.id
+      #redirect_to scratch_user_path(current_user.id), :notice => "Espace de travail modifié." # TODO: traduire.
     else
-      redirect_to scratch_user_path(current_user.id), :notice => "Aucun espace de travail séléctionné." # TODO: traduire. 
+      redirect_to  :controller => "ecosystem_mecanic", :action => "index", :sc_model_id => current_workspace_sc_model.id
+      #redirect_to scratch_user_path(current_user.id), :notice => "Aucun espace de travail séléctionné." # TODO: traduire. 
     end
   end
   
@@ -49,11 +55,25 @@ class ScratchUserController < InheritedResources::Base
         session[:current_workspace_member_id] = nil
       end
       logger.debug "session[:current_workspace_member_id]: " + session[:current_workspace_member_id].to_s
+    else
+      current_workspace = @user.workspaces.first
+      @change_current_workspace_member=current_user.user_workspace_memberships.find(:first, :conditions => {:workspace_id => current_workspace.id})
+      session[:current_workspace_member_id] = @change_current_workspace_member.id
+      
+      @change_current_workspace_sc_model=ScModel.from_workspace(current_workspace_member.workspace.id).first
+      session[:current_workspace_sc_model_id] = @change_current_workspace_sc_model.id
     end
-    if params[:notice] 
-      flash[:notice] = params[:notice]
-    end
-    render :show, :layout => 'workspace'
+    logger.debug "session[:current_workspace_member_id]: " + session[:current_workspace_member_id].to_s
+    logger.debug "session[:current_workspace_sc_model_id]: " + session[:current_workspace_sc_model_id].to_s
+    
+    logger.debug current_workspace_member.id
+    logger.debug current_workspace_sc_model.id
+    
+    redirect_to  :controller => "ecosystem_mecanic", :action => "index", :sc_model_id => current_workspace_sc_model.id
+#     if params[:notice] 
+#       flash[:notice] = params[:notice]
+#     end
+#     render :show, :layout => 'workspace'
   end
   
   def edit  

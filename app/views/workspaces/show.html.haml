@@ -1,29 +1,6 @@
 -# encoding: utf-8 
--content_for :left_top do
-  .left_top
-    %h2.grey
-      Comptes
-    %ul
-      %li.manage_pic_compte_abonnement
-        = link_to 'Nouveau forfait', :controller => "forfait", :action => "index"
-      %li.manage_pic_nouveau_membre
-        = link_to 'Ajouter un membre', new_workspace_member_path(@workspace)
-      %li.LM_pic_materiau
-        = link_to 'Editer', edit_workspace_path(@workspace)
-      - if current_workspace_member.is_manager?
-        %li.LM_pic_model
-          = link_to 'liste de tous les projets', workspace_sc_models_path(@workspace)
-
--content_for :right_top do
-  %h2.grey
-    = @workspace.name
-  .grey
-    %p 
-      = "Solde du compte de jetons : " + @workspace.token_account.solde_token.to_s
     
 -content_for :workspace_content do
-  %h2.grey
-    Détails du workspace
   .wrapper
     #left_content
       %ul.tab_submenu.js_tab_submenu
@@ -41,22 +18,6 @@
     #right_content
       .tab_content.js_tab_content
         #tab_1_content
-          %p Solde du compte de jetons
-          %p Compteurs globaux :
-          %table.grey
-            -#TODO afficher les bonnes valeurs
-            %thead
-              %tr.no_sorter
-                /%th Compteur de jetons utilisés
-                /%th Compteur de jetons achetés
-                %th Solde courant
-                /%th Jetons réservés
-            %tbody
-              %tr
-                /%td= @workspace.token_account.used_token_counter
-                /%td= @workspace.token_account.purchased_token_counter
-                %td= @workspace.token_account.solde_token
-                /%td= @workspace.token_account.reserved_token
           %p Compte détaillé :
           = render :partial => "workspaces/soldes_list", :object => @soldes_resume
         

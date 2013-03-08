@@ -96,17 +96,11 @@ class WorkspacesController < InheritedResources::Base
       @current_workspace_member.manager = true
       @current_workspace_member.engineer = true
       @current_workspace_member.save
-      respond_to do |format|
-        format.html {redirect_to scratch_user_path(current_user), 
-                    :notice => "Nouveau workspace créée."}
-        format.json {render :status => 404, :json => {}}
-      end
+      session[:current_workspace_member_id] = @current_workspace_member.id
+      
+      redirect_to  :controller => "ecosystem_mecanic", :action => "index", :sc_model_id => current_workspace_sc_model.id
     else
-      respond_to do |format|
-        format.html {redirect_to scratch_user_path(current_user), 
-                    :notice => "Le workspace n'a pas été créé."}
-        format.json {render :status => 404, :json => {}}
-      end
+      redirect_to  :controller => "ecosystem_mecanic", :action => "index", :sc_model_id => current_workspace_sc_model.id, :notice => "Le workspace n'a pas été créé."
     end
     #kind = params[:workspace][:kind]
     #     case kind
@@ -142,7 +136,7 @@ class WorkspacesController < InheritedResources::Base
   
   
   def index   
-    redirect_to workspace_path(current_workspace_member.workspace)                                                   
+    #redirect_to workspace_path(current_workspace_member.workspace)                                                   
     # if !current_worksapce.member.manager?  
     #   redirect_to workspace_sc_models_path(current_workspace_member.workspace) 
     #   flash[:notice] = "Vous n'avez pas accès à cette partie de l'espace de travail."

@@ -15,6 +15,7 @@ SCInterface::Application.routes.draw do
   end
   
   resources :forfait
+  resources :ecosystem_mecanic
   
   resources :members do
     resources :company

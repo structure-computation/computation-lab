@@ -1,15 +1,16 @@
 -# encoding: utf-8 
 = semantic_form_for [@workspace, @sc_model] do |form|
-  %table.grey#workspace_information_table
-    %tr
-      %th= form.label :name
-      %td= form.text_field :name 
-    %tr
-      %th= form.label :description
-      %td= form.text_area :description
+  #sc_model_information_table
+    %p= form.label :name
+    = form.text_field :name
+    %p= "Description"
+    = form.text_area :description
+    
+    = form.hidden_field :state,  :as => :hidden, :value => "void"
+    = form.hidden_field :workspace_id,  :as => :hidden, :value => current_workspace_member.workspace.id
 
-  
-  = form.hidden_field :state,  :as => :hidden, :value => "void"
-  = form.hidden_field :workspace_id,  :as => :hidden, :value => current_workspace_member.workspace.id
+    %p
+    %button.login_button.yellow_button{ :type => "submit"}
+      Create project
+    %p
 
-  = form.buttons

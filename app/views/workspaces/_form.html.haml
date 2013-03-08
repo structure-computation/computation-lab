@@ -1,12 +1,12 @@
 -# encoding: utf-8 
 %p
 = semantic_form_for @workspace, :url => {:controller => :workspaces, :action => :create}  do |form|
-  %table.grey#workspace_information_table
-    %tr
-      %th Name
-      %td= form.text_field :name
-    %tr
-      %th Description
-      %td= form.text_area :public_description
-
-  = form.buttons
+  #workspace_information_table
+    %p= form.label :name
+    = form.text_field :name
+    %p= "Description"
+    = form.text_area :public_description
+    %p
+    %button.login_button.yellow_button{ :type => "submit"}
+      Create workspace
+    %p

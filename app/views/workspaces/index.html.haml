@@ -1,0 +1,12 @@
+-# encoding: utf-8 
+
+    
+-content_for :workspace_content do
+  .grey
+    %h2
+      Workspaces
+    
+    = render :partial => "workspaces/search_filter"
+    = render :partial => "workspaces/workspaces_list", :object => current_user.workspaces
+          
+

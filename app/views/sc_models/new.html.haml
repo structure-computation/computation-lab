@@ -1,11 +1,5 @@
 -# encoding: utf-8 
--content_for :left_top do
-  .left_submenu
-    %h2.grey
-      Menu
-    %ul
-      %li.LM_pic_model
-        =link_to 'Retour au laboratoire', :controller => :laboratory, :action => :index, :anchor => 'Modèles'
+
 -content_for :workspace_content do
-  .grey
+  %div.grey.centered
     = render "form"

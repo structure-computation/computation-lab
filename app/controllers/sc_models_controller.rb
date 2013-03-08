@@ -20,8 +20,8 @@ class ScModelsController < InheritedResources::Base
 
   def index
     @workspace  = current_workspace_member.workspace
-    @sc_models  = ScModel.from_workspace @workspace.id
-    index!
+    #@sc_models  = ScModel.from_workspace @workspace.id
+    @sc_models  = current_workspace_member.sc_models
   end
   
   def create
@@ -33,7 +33,8 @@ class ScModelsController < InheritedResources::Base
     @ownership.workspace_member = current_workspace_member
     @ownership.save    
     
-    redirect_to :controller => :laboratory, :action => :index,:notice => "Nouveau modèle crée." # TODO: traduire.
+    redirect_to :controller => "ecosystem_mecanic", :action => "index", :sc_model_id => @sc_model.id
+    #redirect_to :controller => :laboratory, :action => :index,:notice => "Nouveau modèle crée." # TODO: traduire.
   end
 
   # TODO: Uncomment for production

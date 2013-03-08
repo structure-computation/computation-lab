@@ -9,28 +9,31 @@ header {
   clear: both;
   margin-left: 0%;
   margin-right: 0%;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #4551aa), color-stop(100%, #2b3657));
+  /*background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #4551aa), color-stop(100%, #2b3657));
   background-image: -webkit-linear-gradient(#4551aa, #2b3657);
   background-image: -moz-linear-gradient(#4551aa, #2b3657);
   background-image: -o-linear-gradient(#4551aa, #2b3657);
   background-image: -ms-linear-gradient(#4551aa, #2b3657);
-  background-image: linear-gradient(#4551aa, #2b3657);
+  background-image: linear-gradient(#4551aa, #2b3657);*/
+  background: #262626;
   min-width: 100%;
-  height: 92px;
+  height: 30px;
   display: block;
   font-family: Helvetica, Arial, Helvetica, sans-serif;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: normal;
+  line-height: 30px;
   color: #e5e5e5;
 }
 /* line 60, ../../app/stylesheets/partials/_header.sass */
 header .container {
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #4551aa), color-stop(100%, #2b3657));
+  /*background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #4551aa), color-stop(100%, #2b3657));
   background-image: -webkit-linear-gradient(#4551aa, #2b3657);
   background-image: -moz-linear-gradient(#4551aa, #2b3657);
   background-image: -o-linear-gradient(#4551aa, #2b3657);
   background-image: -ms-linear-gradient(#4551aa, #2b3657);
-  background-image: linear-gradient(#4551aa, #2b3657);
+  background-image: linear-gradient(#4551aa, #2b3657);*/
+  background: #262626;
 }
 /* line 63, ../../app/stylesheets/partials/_header.sass */
 header .container #header_top #header_logo {
@@ -43,15 +46,52 @@ header .container #header_top #header_logo {
   margin: 10px 0px 0px 0px;
   padding: 10px 0px 0px 0px;
 }
+
+/* line 70, ../../app/stylesheets/partials/_header.sass */
+header .container #header_top #header_token_account {
+  //width: 66.333%;
+  display: inline;
+  float: left;
+  margin-right: 0%;
+  border-bottom: 1px solid #565656;
+  #margin-left: -1%;
+}
+/* line 83, ../../app/stylesheets/partials/_header.sass */
+header .container #header_top #header_token_account #account_information {
+  display: inline-block;
+  text-align: left;
+  float: left;
+  margin-top: 0;
+  padding: 1px 5px 0px 5px;
+  height: 29px;
+  border-right:1px solid #565656;
+  //background: transparent url("/images/header_bg_separateur.png") no-repeat bottom left;
+}
+/* line 83, ../../app/stylesheets/partials/_header.sass */
+header .container #header_top #account_icon {
+  display: inline-block;
+  float: left;
+  margin-top: 0px;
+  padding-top: 5px;
+  padding-left: 4px;
+  padding-right: 5px;
+  height: 25px;
+}
+/* line 83, ../../app/stylesheets/partials/_header.sass */
+header .container #header_top #account_icon:hover {
+  background: #969696;
+}
+
 /* line 70, ../../app/stylesheets/partials/_header.sass */
 header .container #header_top #header_user_connected {
   display: inline;
   float: left;
-  width: 66.333%;
+  //width: 66.333%;
   margin-right: 1.0%;
   display: inline;
   float: right;
   margin-right: 0%;
+  border-bottom: 1px solid #565656;
   #margin-left: -1%;
 }
 /* line 73, ../../app/stylesheets/partials/_header.sass */
@@ -61,9 +101,8 @@ header .container #header_top #header_user_connected #header_workspace_name {
   float: right;
   margin-top: 0;
   background: transparent url("/images/header_bg_separateur.png") no-repeat top right;
-  padding-right: 12px;
-  padding-bottom: 20px;
-  padding-top: 10px;
+  padding: 1px 12px 0 8px;
+  height: 29px;
 }
 /* line 83, ../../app/stylesheets/partials/_header.sass */
 header .container #header_top #header_user_connected #user_information {
@@ -71,15 +110,37 @@ header .container #header_top #header_user_connected #user_information {
   text-align: right;
   float: right;
   margin-top: 0;
-  padding-top: 11px;
-  padding-left: 10px;
+  padding: 1px 5px 0px 30px;
+  height: 29px;
+  border-left:1px solid #565656;
+  //background: transparent url("/images/header_bg_separateur.png") no-repeat bottom left;
 }
+header .container #header_top #header_user_connected #user_information a {
+  //text-decoration : none;
+  color : #ffffff;
+}
+
+header .container #header_top #user_icon {
+  display: inline-block;
+  text-align: right;
+  float: right;
+  margin-top: 0px;
+  padding-top: 5px;
+  padding-left: 4px;
+  padding-right: 5px;
+  height: 25px;
+}
+/* line 83, ../../app/stylesheets/partials/_header.sass */
+header .container #header_top #user_icon:hover {
+  background: #969696;
+}
+
 /* line 92, ../../app/stylesheets/partials/_header.sass */
 header .container #header_top #header_user_connected #user_information #user_name {
   background: transparent url("/images/header_cadena.png") no-repeat center right;
-  padding-right: 36px;
+  padding-right: 5px;
   margin-top: 0;
-  color: #e5e5e5;
+  //color: #e5e5e5;
 }
 /* line 97, ../../app/stylesheets/partials/_header.sass */
 header .container #header_top #header_user_connected #user_information #user_name a {
@@ -660,12 +721,13 @@ footer {
   clear: both;
   margin-left: 0%;
   margin-right: 0%;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #4551aa), color-stop(100%, #2b3657));
+  /*background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #4551aa), color-stop(100%, #2b3657));
   background-image: -webkit-linear-gradient(#4551aa, #2b3657);
   background-image: -moz-linear-gradient(#4551aa, #2b3657);
   background-image: -o-linear-gradient(#4551aa, #2b3657);
   background-image: -ms-linear-gradient(#4551aa, #2b3657);
-  background-image: linear-gradient(#4551aa, #2b3657);
+  background-image: linear-gradient(#4551aa, #2b3657);*/
+  background: #262626;
   min-width: 100%;
   display: block;
 }
@@ -677,7 +739,7 @@ footer .container {
   font-weight: normal;
   color: #e5e5e5;
   text-align: center;
-  background: url("/images/footer_bg_carre.png") no-repeat bottom right;
+  background: url("/images/Logo_StructureComputation_gris.png") no-repeat bottom center;
 }
 
 /* line 2, ../../app/stylesheets/partials/_large_ligne.sass */
@@ -1704,15 +1766,15 @@ div.breadcrumb_tab_content .show {
 #flash_notice, #flash_error {
   display: inline;
   float: left;
-  width: 66.333%;
-  margin-right: 1.0%;
+  width: 100%;
   line-height: 2em;
-  padding-left: 4.208%;
+  text-align: center;
+  //padding-left: 4.208%;
 }
 
 /* line 39, ../../app/stylesheets/screen.sass */
 #flash_notice {
-  border: 1px solid #c6d880;
+  //border: 1px solid #c6d880;
   color: #264409;
   background-color: #e6efc2;
 }
@@ -1720,7 +1782,7 @@ div.breadcrumb_tab_content .show {
 /* line 44, ../../app/stylesheets/screen.sass */
 #flash_error {
   color: #8a1f11;
-  border: 1px solid #fbc2c4;
+  //border: 1px solid #fbc2c4;
   background-color: #fbe3e4;
 }
 
@@ -1791,6 +1853,7 @@ html {
 body {
   margin: 0;
   min-height: 100%;
+  background-color: #262626;
 }
 
 /* line 121, ../../app/stylesheets/screen.sass */
@@ -1799,14 +1862,15 @@ body {
   margin: auto;
   width: 99.992%;
   max-width: 100%;
-  border-left: 1px solid #b2b2b2;
-  border-right: 1px solid #b2b2b2;
+  //border-left: 1px solid #b2b2b2;
+  //border-right: 1px solid #b2b2b2;
   padding-left: 0%;
   padding-right: 0%;
   padding-bottom: 0%;
   min-width: 1024px;
   max-width: 99%;
-  background-color: #f0f0f0;
+  //background-color: #f0f0f0;
+  //background-color: #262626;
 }
 /* line 38, ../../../../.rvm/gems/ruby-1.8.7-p334/gems/compass-0.11.5/frameworks/compass/stylesheets/compass/utilities/general/_clearfix.scss */
 .container:after {
@@ -1860,6 +1924,29 @@ div.grey {
 /* line 151, ../../app/stylesheets/screen.sass */
 fieldset {
   border: none;
+}
+
+.loginMarge{
+  margin-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 600px; /* largeur obligatoire pour être centré */
+  text-align: center;
+}
+
+.centered{
+  margin-left: auto;
+  margin-right: auto;
+  width: 600px; /* largeur obligatoire pour être centré */
+  text-align: center;
+}
+.loginLeft{
+  text-align: left;
+  float: left;
+  margin-left: 20px;
+}
+.loginLeft a {
+  color: #e5e5e5;
 }
 
 /* line 154, ../../app/stylesheets/screen.sass */

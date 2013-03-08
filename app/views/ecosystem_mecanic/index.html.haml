@@ -57,22 +57,53 @@
 %header
   .container
     #header_top
-      #header_logo
-      #header_user_connected  
-        #user_information
-          - if user_signed_in?  # Le cadenas est placé en premier car on aligne de droite à gauche dans cette zone. 
-            -#logo_session_lock  
-            %p#user_name
-              = current_user.full_name
-              %br
-              = link_to "déconnexion", destroy_user_session_path,  :id => "disconnect_link"
+      #header_token_account
+        - if user_signed_in?
+          #account_icon
+            = link_to image_tag( 'base-de-donnees-ajouter-icone-7539-16.png'), :controller => "forfait", :action => "index"
+          #account_information
+            tokens : &nbsp
+            = current_workspace_member.workspace.token_account.solde_token
           
-            -#header_top_cadena
-        %p#header_workspace_name
-          - if user_signed_in? && current_workspace_member.workspace
-            = current_workspace_member.workspace.name
-          - else
-            Nom entreprise
+
+
+      #header_user_connected  
+        - if user_signed_in?
+          #user_icon
+            = link_to image_tag( 'gnome-logout-icone-4198-16.png'), destroy_user_session_path  
+          #user_icon
+            = link_to image_tag( 'info-utilisateur-icone-5701-16.png'), edit_registration_path(current_user)
+          #user_information
+            = current_user.full_name
+          
+
+          #user_icon 
+            = link_to image_tag( 'catalogue-icone-4673-16.png'), :controller => :sc_models, :action => :index
+          #user_icon 
+            = link_to image_tag( 'carte-icone-8223-16.png'), workspace_sc_model_path(current_workspace_member.workspace, @current_model)
+          #user_icon 
+            = link_to image_tag( 'carte-icone-8223-16-new.png'), new_workspace_sc_model_path(current_workspace_member.workspace)
+          #user_icon 
+            = link_to image_tag( 'sharepoint-icone-6402-16.png'), :controller => :sc_models, :action => :share, :id => @current_model.id
+          #user_information
+            - if current_workspace_member.workspace
+              = @current_model.name
+            - else
+              Project name
+
+          #user_icon 
+            = link_to image_tag( 'catalogue-icone-4673-16.png'), :controller => :workspaces, :action => :index
+          #user_icon 
+            = link_to image_tag( 'carte-icone-8223-16.png'), workspace_path(current_workspace_member.workspace)
+          #user_icon 
+            = link_to image_tag( 'carte-icone-8223-16-new.png'), new_workspace_path
+          #user_icon 
+            = link_to image_tag( 'ajouter-une-liste-personne-utilisateur-icone-8190-16.png'), new_workspace_member_path(current_workspace_member.workspace)
+          #user_information
+            - if current_workspace_member.workspace
+              = current_workspace_member.workspace.name
+            - else
+              Nom entreprise
     
 
 /#correli_header.CorreliHeader
@@ -80,4 +111,7 @@
 
 %script{ :type => "text/javascript" }
   SC_MODEL_ID = #{@model_id}
-  launch_ecosystem_mecanic(document.getElementById("main_window"), SC_MODEL_ID);
+  SC_USER_NAME = '#{@current_user.full_name}'
+  SC_PROJECT_NAME = '#{@current_model.name}'
+  SC_WORSPACE_NAME = '#{@current_workspace_member.workspace.name}'
+  launch_ecosystem_mecanic(document.getElementById("main_window"));
