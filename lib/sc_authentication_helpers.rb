@@ -15,10 +15,12 @@ module  SCAuthenticationHelpers
       @current_workspace_member = current_user.user_workspace_memberships.first
       #si pas de workspace pour cet utilisateur
       if !@current_workspace_member
-        @new_workspace = current_user.workspaces.build() 
+        @new_workspace = current_user.workspaces.create() 
         @new_workspace.name = "first workspace"
         @new_workspace.init_account
         if @new_workspace 
+          @new_workspace.save
+          @new_workspace.members << current_user
           @new_workspace.save
           @current_workspace_member = current_user.user_workspace_memberships.find(:first, :conditions => {:workspace_id =>  @new_workspace.id} )
           @current_workspace_member.manager = true
@@ -40,7 +42,8 @@ module  SCAuthenticationHelpers
         @current_workspace_sc_model = ScModel.from_workspace(current_workspace_member.workspace.id).first
         #si ce workspace n'as pas encore de modèle
         if !@current_workspace_sc_model
-          @current_workspace_sc_model = current_workspace_member.workspace.sc_models.build() #retrieve_column_fields(params) 
+          @current_workspace_sc_model = current_workspace_member.workspace.sc_models.create() #retrieve_column_fields(params) 
+          @current_workspace_sc_model.save
           @current_workspace_sc_model.workspace_members << current_workspace_member
           @current_workspace_sc_model.name = "first project"
           @current_workspace_sc_model.save
@@ -52,7 +55,8 @@ module  SCAuthenticationHelpers
       @current_workspace_sc_model = ScModel.from_workspace(current_workspace_member.workspace.id).first
       #si ce workspace n'as pas encore de modèle
       if !@current_workspace_sc_model
-        @current_workspace_sc_model = current_workspace_member.workspace.sc_models.build() #retrieve_column_fields(params) 
+        @current_workspace_sc_model = current_workspace_member.workspace.sc_models.create() #retrieve_column_fields(params) 
+        @current_workspace_sc_model.save
         @current_workspace_sc_model.workspace_members << current_workspace_member
         @current_workspace_sc_model.name = "first project"
         @current_workspace_sc_model.save

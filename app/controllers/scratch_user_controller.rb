@@ -56,11 +56,14 @@ class ScratchUserController < InheritedResources::Base
       end
       logger.debug "session[:current_workspace_member_id]: " + session[:current_workspace_member_id].to_s
     else
-      current_workspace = @user.workspaces.first
-      @change_current_workspace_member=current_user.user_workspace_memberships.find(:first, :conditions => {:workspace_id => current_workspace.id})
+      
+      @change_current_workspace_member = current_workspace_member
+      @change_current_workspace_sc_model = current_workspace_sc_model
+      #current_workspace = @user.workspaces.first
+      #@change_current_workspace_member=current_user.user_workspace_memberships.find(:first, :conditions => {:workspace_id => current_workspace.id})
       session[:current_workspace_member_id] = @change_current_workspace_member.id
       
-      @change_current_workspace_sc_model=ScModel.from_workspace(current_workspace_member.workspace.id).first
+      #@change_current_workspace_sc_model=ScModel.from_workspace(current_workspace_member.workspace.id).first
       session[:current_workspace_sc_model_id] = @change_current_workspace_sc_model.id
     end
     logger.debug "session[:current_workspace_member_id]: " + session[:current_workspace_member_id].to_s
