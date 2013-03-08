@@ -93,12 +93,14 @@
 
           #user_icon 
             = link_to image_tag( 'catalogue-icone-4673-16.png'), :controller => :workspaces, :action => :index
-          #user_icon 
-            = link_to image_tag( 'carte-icone-8223-16.png'), workspace_path(current_workspace_member.workspace)
+          -if current_workspace_member.manager?
+            #user_icon 
+              = link_to image_tag( 'carte-icone-8223-16.png'), workspace_path(current_workspace_member.workspace)
           #user_icon 
             = link_to image_tag( 'carte-icone-8223-16-new.png'), new_workspace_path
-          #user_icon 
-            = link_to image_tag( 'ajouter-une-liste-personne-utilisateur-icone-8190-16.png'), new_workspace_member_path(current_workspace_member.workspace)
+          -if current_workspace_member.manager?
+            #user_icon 
+              = link_to image_tag( 'ajouter-une-liste-personne-utilisateur-icone-8190-16.png'), new_workspace_member_path(current_workspace_member.workspace)
           #user_information
             - if current_workspace_member.workspace
               = current_workspace_member.workspace.name

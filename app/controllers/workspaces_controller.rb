@@ -12,7 +12,7 @@ class WorkspacesController < InheritedResources::Base
   # has_many :inverse_workspace_relationships, :through => :inverse_workspace_relationships, :source => :workspace  
   
   before_filter :authenticate_user!  
-  before_filter :must_be_manager, :except => [ :new, :create ]
+  before_filter :must_be_manager, :except => [ :new, :create, :index ]
   before_filter :set_page_name 
   before_filter :create_solde, :only =>[:index, :show]
   
@@ -136,6 +136,8 @@ class WorkspacesController < InheritedResources::Base
   
   
   def index   
+    
+    
     #redirect_to workspace_path(current_workspace_member.workspace)                                                   
     # if !current_worksapce.member.manager?  
     #   redirect_to workspace_sc_models_path(current_workspace_member.workspace) 
