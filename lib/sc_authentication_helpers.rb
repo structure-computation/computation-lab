@@ -36,10 +36,10 @@ module  SCAuthenticationHelpers
     # Si déjà initialisé, on renvoie l'objet existant.
     # Sinon on le recherche.
     if session[:current_workspace_sc_model_id]
-      @current_workspace_sc_model = ScModel.from_workspace(current_workspace_member.workspace.id).find_by_id(session[:current_workspace_sc_model_id])
+      @current_workspace_sc_model = current_workspace_member.sc_models.find_by_id(session[:current_workspace_sc_model_id])
       #si ce model ne fait pas parti du workspace
       if !@current_workspace_sc_model 
-        @current_workspace_sc_model = ScModel.from_workspace(current_workspace_member.workspace.id).first
+        @current_workspace_sc_model = current_workspace_member.sc_models.first
         #si ce workspace n'as pas encore de modèle
         if !@current_workspace_sc_model
           @current_workspace_sc_model = current_workspace_member.workspace.sc_models.create() #retrieve_column_fields(params) 
@@ -52,7 +52,7 @@ module  SCAuthenticationHelpers
       logger.debug @current_workspace_sc_model.to_s
       return @current_workspace_sc_model 
     else
-      @current_workspace_sc_model = ScModel.from_workspace(current_workspace_member.workspace.id).first
+      @current_workspace_sc_model = current_workspace_member.sc_models.first
       #si ce workspace n'as pas encore de modèle
       if !@current_workspace_sc_model
         @current_workspace_sc_model = current_workspace_member.workspace.sc_models.create() #retrieve_column_fields(params) 
