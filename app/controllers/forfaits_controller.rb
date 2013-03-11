@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-class ForfaitController < InheritedResources::Base
+class ForfaitsController < InheritedResources::Base
   before_filter :authenticate_user!  
   before_filter :must_be_manager
   before_filter :set_page_name

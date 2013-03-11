@@ -15,7 +15,7 @@ header {
   background-image: -o-linear-gradient(#4551aa, #2b3657);
   background-image: -ms-linear-gradient(#4551aa, #2b3657);
   background-image: linear-gradient(#4551aa, #2b3657);*/
-  background: #262626;
+  background: #e5e5e5;
   min-width: 100%;
   height: 30px;
   display: block;
@@ -23,7 +23,8 @@ header {
   font-size: 12px;
   font-weight: normal;
   line-height: 30px;
-  color: #e5e5e5;
+  color: #262626;
+  border-bottom: 1px solid #262626;
 }
 /* line 60, ../../app/stylesheets/partials/_header.sass */
 header .container {
@@ -33,7 +34,7 @@ header .container {
   background-image: -o-linear-gradient(#4551aa, #2b3657);
   background-image: -ms-linear-gradient(#4551aa, #2b3657);
   background-image: linear-gradient(#4551aa, #2b3657);*/
-  background: #262626;
+  //background: #262626;
 }
 /* line 63, ../../app/stylesheets/partials/_header.sass */
 header .container #header_top #header_logo {
@@ -53,7 +54,7 @@ header .container #header_top #header_token_account {
   display: inline;
   float: left;
   margin-right: 0%;
-  border-bottom: 1px solid #565656;
+  //border-bottom: 1px solid #565656;
   #margin-left: -1%;
 }
 /* line 83, ../../app/stylesheets/partials/_header.sass */
@@ -117,7 +118,7 @@ header .container #header_top #header_user_connected #user_information {
 }
 header .container #header_top #header_user_connected #user_information a {
   //text-decoration : none;
-  color : #ffffff;
+  color : #262626;
 }
 
 header .container #header_top #user_icon {

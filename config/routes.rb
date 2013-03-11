@@ -14,7 +14,7 @@ SCInterface::Application.routes.draw do
     get 'download_bill'
   end
   
-  resources :forfait
+  resources :forfaits
   resources :ecosystem_mecanic
   
   resources :members do
@@ -40,8 +40,11 @@ SCInterface::Application.routes.draw do
   resources :workspaces do
     resources :materials
     resources :links
+    resources :forfaits
     resources :sc_models do 
       post 'load_mesh', :on => :member
+      get 'share', :on => :member
+      get 'ecosystem_mecanic', :on => :member
     end
     
     resources :bills do

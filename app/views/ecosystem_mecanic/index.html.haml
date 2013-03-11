@@ -61,7 +61,7 @@
         - if user_signed_in?
           -if current_workspace_member.manager?
             #account_icon
-              = link_to image_tag( 'base-de-donnees-ajouter-icone-7539-16.png'), :controller => "forfait", :action => "index"
+              = link_to image_tag( 'base-de-donnees-ajouter-icone-7539-16.png'), workspace_forfaits_path(current_workspace_member.workspace), :target => "_blank" # {:controller => "forfait", :action => "index"}, :target => "_blank"
           #account_information
             tokens : &nbsp
             = current_workspace_member.workspace.token_account.solde_token
@@ -71,21 +71,21 @@
       #header_user_connected  
         - if user_signed_in?
           #user_icon
-            = link_to image_tag( 'gnome-logout-icone-4198-16.png'), destroy_user_session_path  
+            = link_to image_tag( 'gnome-logout-icone-4198-16.png'), destroy_user_session_path, :target => "_blank"
           #user_icon
-            = link_to image_tag( 'info-utilisateur-icone-5701-16.png'), edit_registration_path(current_user)
+            = link_to image_tag( 'info-utilisateur-icone-5701-16.png'), edit_registration_path(current_user), :target => "_blank"
           #user_information
             = current_user.full_name
           
 
           #user_icon 
-            = link_to image_tag( 'catalogue-icone-4673-16.png'), :controller => :sc_models, :action => :index
+            = link_to image_tag( 'catalogue-icone-4673-16.png'), workspace_sc_models_path(current_workspace_member.workspace), :target => "_blank" 
           #user_icon 
-            = link_to image_tag( 'carte-icone-8223-16.png'), workspace_sc_model_path(current_workspace_member.workspace, @current_model)
+            = link_to image_tag( 'carte-icone-8223-16.png'), workspace_sc_model_path(current_workspace_member.workspace, @current_model), :target => "_blank"
           #user_icon 
-            = link_to image_tag( 'carte-icone-8223-16-new.png'), new_workspace_sc_model_path(current_workspace_member.workspace)
+            = link_to image_tag( 'carte-icone-8223-16-new.png'), new_workspace_sc_model_path(current_workspace_member.workspace), :target => "_blank"
           #user_icon 
-            = link_to image_tag( 'sharepoint-icone-6402-16.png'), :controller => :sc_models, :action => :share, :id => @current_model.id
+            = link_to image_tag( 'sharepoint-icone-6402-16.png'), share_workspace_sc_model_path(current_workspace_member.workspace, current_workspace_sc_model), :target => "_blank"
           #user_information
             - if current_workspace_member.workspace
               = @current_model.name
@@ -93,15 +93,15 @@
               Project name
 
           #user_icon 
-            = link_to image_tag( 'catalogue-icone-4673-16.png'), :controller => :workspaces, :action => :index
+            = link_to image_tag( 'catalogue-icone-4673-16.png'),  workspaces_path(), :target => "_blank"
           -if current_workspace_member.manager?
             #user_icon 
-              = link_to image_tag( 'carte-icone-8223-16.png'), workspace_path(current_workspace_member.workspace)
+              = link_to image_tag( 'carte-icone-8223-16.png'), workspace_path(current_workspace_member.workspace), :target => "_blank"
           #user_icon 
-            = link_to image_tag( 'carte-icone-8223-16-new.png'), new_workspace_path
+            = link_to image_tag( 'carte-icone-8223-16-new.png'), new_workspace_path, :target => "_blank"
           -if current_workspace_member.manager?
             #user_icon 
-              = link_to image_tag( 'ajouter-une-liste-personne-utilisateur-icone-8190-16.png'), new_workspace_member_path(current_workspace_member.workspace)
+              = link_to image_tag( 'ajouter-une-liste-personne-utilisateur-icone-8190-16.png'), new_workspace_member_path(current_workspace_member.workspace), :target => "_blank"
           #user_information
             - if current_workspace_member.workspace
               = current_workspace_member.workspace.name
