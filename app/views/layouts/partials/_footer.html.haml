@@ -2,7 +2,8 @@
 / Footer, mentions légales, etc.
   
 %footer
-  .container
+  - if !user_signed_in?
+    .container
     %p
       %br
       %br

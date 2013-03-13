@@ -57,17 +57,6 @@
 %header
   .container
     #header_top
-      #header_token_account
-        - if user_signed_in?
-          -if current_workspace_member.manager?
-            #account_icon
-              = link_to image_tag( 'base-de-donnees-ajouter-icone-7539-16.png'), workspace_forfaits_path(current_workspace_member.workspace), :target => "_blank" # {:controller => "forfait", :action => "index"}, :target => "_blank"
-          #account_information
-            tokens : &nbsp
-            = current_workspace_member.workspace.token_account.solde_token
-          
-
-
       #header_user_connected  
         - if user_signed_in?
           #user_icon
@@ -87,6 +76,7 @@
           #user_icon 
             = link_to image_tag( 'sharepoint-icone-6402-16.png'), share_workspace_sc_model_path(current_workspace_member.workspace, current_workspace_sc_model), :target => "_blank"
           #user_information
+            Project : &nbsp
             - if current_workspace_member.workspace
               = @current_model.name
             - else
@@ -103,11 +93,19 @@
             #user_icon 
               = link_to image_tag( 'ajouter-une-liste-personne-utilisateur-icone-8190-16.png'), new_workspace_member_path(current_workspace_member.workspace), :target => "_blank"
           #user_information
+            Workspace : &nbsp
             - if current_workspace_member.workspace
               = current_workspace_member.workspace.name
             - else
               Nom entreprise
     
+          -if current_workspace_member.manager?
+            #user_icon
+              = link_to image_tag( 'base-de-donnees-ajouter-icone-7539-16.png'),workspace_forfaits_path(current_workspace_member.workspace) # :controller => "forfait", :action => "index"
+          #user_information
+            Account : &nbsp
+            = current_workspace_member.workspace.token_account.solde_token
+
 
 /#correli_header.CorreliHeader
 #main_window.CorreliWindow

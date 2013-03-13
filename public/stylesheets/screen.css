@@ -15,7 +15,8 @@ header {
   background-image: -o-linear-gradient(#4551aa, #2b3657);
   background-image: -ms-linear-gradient(#4551aa, #2b3657);
   background-image: linear-gradient(#4551aa, #2b3657);*/
-  background: #e5e5e5;
+  //background: #262626;
+  background: #262626 url("/images/Logo_StructureComputation_gris_long.png") no-repeat center left;
   min-width: 100%;
   height: 30px;
   display: block;
@@ -23,8 +24,8 @@ header {
   font-size: 12px;
   font-weight: normal;
   line-height: 30px;
-  color: #262626;
-  border-bottom: 1px solid #262626;
+  color: #e6e6e6;
+  border-bottom: 1px solid #969696;
 }
 /* line 60, ../../app/stylesheets/partials/_header.sass */
 header .container {
@@ -65,7 +66,7 @@ header .container #header_top #header_token_account #account_information {
   margin-top: 0;
   padding: 1px 5px 0px 5px;
   height: 29px;
-  border-right:1px solid #565656;
+  border-right:1px solid #969696;
   //background: transparent url("/images/header_bg_separateur.png") no-repeat bottom left;
 }
 /* line 83, ../../app/stylesheets/partials/_header.sass */
@@ -92,7 +93,7 @@ header .container #header_top #header_user_connected {
   display: inline;
   float: right;
   margin-right: 0%;
-  border-bottom: 1px solid #565656;
+  //border-bottom: 1px solid #565656;
   #margin-left: -1%;
 }
 /* line 73, ../../app/stylesheets/partials/_header.sass */
@@ -113,12 +114,12 @@ header .container #header_top #header_user_connected #user_information {
   margin-top: 0;
   padding: 1px 5px 0px 30px;
   height: 29px;
-  border-left:1px solid #565656;
+  border-left:1px solid #969696;
   //background: transparent url("/images/header_bg_separateur.png") no-repeat bottom left;
 }
 header .container #header_top #header_user_connected #user_information a {
   //text-decoration : none;
-  color : #262626;
+  color : #e6e6e6;
 }
 
 header .container #header_top #user_icon {
@@ -728,7 +729,7 @@ footer {
   background-image: -o-linear-gradient(#4551aa, #2b3657);
   background-image: -ms-linear-gradient(#4551aa, #2b3657);
   background-image: linear-gradient(#4551aa, #2b3657);*/
-  background: #262626;
+  //background: #262626;
   min-width: 100%;
   display: block;
 }
@@ -740,7 +741,10 @@ footer .container {
   font-weight: normal;
   color: #e5e5e5;
   text-align: center;
+  margin-top: 50px;
+  height: 50px;
   background: url("/images/Logo_StructureComputation_gris.png") no-repeat bottom center;
+  //border: 1px solid #262626;
 }
 
 /* line 2, ../../app/stylesheets/partials/_large_ligne.sass */
@@ -1854,7 +1858,7 @@ html {
 body {
   margin: 0;
   min-height: 100%;
-  background-color: #262626;
+  background-color: #e5e5e5;
 }
 
 /* line 121, ../../app/stylesheets/screen.sass */
@@ -1948,7 +1952,7 @@ fieldset {
   margin-left: 20px;
 }
 .loginLeft a {
-  color: #e5e5e5;
+  color: #262626;
 }
 
 /* line 154, ../../app/stylesheets/screen.sass */
