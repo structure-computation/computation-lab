@@ -8,31 +8,31 @@
         - if user_signed_in?
           #user_icon
             = link_to image_tag( 'gnome-logout-icone-4198-16.png'), destroy_user_session_path  
-          #user_icon
-            = link_to image_tag( 'info-utilisateur-icone-5701-16.png'), edit_registration_path(current_user)
+          /#user_icon
+          /  = link_to image_tag( 'info-utilisateur-icone-5701-16.png'), edit_registration_path(current_user)
           #user_information
-            = current_user.full_name
+            = link_to current_user.full_name, edit_registration_path(current_user), :target => "_blank"
           
           #user_icon 
-            = link_to image_tag( 'catalogue-icone-4673-16.png'),  workspace_sc_models_path(current_workspace_member.workspace) #:controller => :sc_models, :action => :index, :workspace => current_workspace_member.workspace
-          #user_icon 
-            = link_to image_tag( 'carte-icone-8223-16.png'), workspace_sc_model_path(current_workspace_member.workspace, current_workspace_sc_model)
+            = link_to image_tag( 'catalogue-icone-4673-16.png'), workspace_sc_models_path(current_workspace_member.workspace) 
           #user_icon 
             = link_to image_tag( 'carte-icone-8223-16-new.png'), new_workspace_sc_model_path(current_workspace_member.workspace)
           #user_icon 
-            = link_to image_tag( 'sharepoint-icone-6402-16.png'), share_workspace_sc_model_path(current_workspace_member.workspace, current_workspace_sc_model) # {:controller => :sc_models, :action => :share, :id => current_workspace_sc_model.id}
+            = link_to image_tag( 'sharepoint-icone-6402-16.png'), share_workspace_sc_model_path(current_workspace_member.workspace, current_workspace_sc_model) 
+          #user_icon 
+            = link_to image_tag( 'proprietes-session-icone-5116-16.png'), ecosystem_mecanic_workspace_sc_model_path(current_workspace_member.workspace, current_workspace_sc_model) 
           #user_information
             Project : &nbsp
             - if current_workspace_member.workspace
-              = link_to current_workspace_sc_model.name, ecosystem_mecanic_workspace_sc_model_path(current_workspace_member.workspace, current_workspace_sc_model) # :sc_model_id => current_workspace_sc_model.id # {:controller => "ecosystem_mecanic", :action => "index", :sc_model_id => current_workspace_sc_model.id}
+              = link_to current_workspace_sc_model.name, workspace_sc_model_path(current_workspace_member.workspace, current_workspace_sc_model)
             - else
               Project name
           
           #user_icon 
-            = link_to image_tag( 'catalogue-icone-4673-16.png'), workspaces_path() #:controller => :workspaces, :action => :index
-          -if current_workspace_member.manager?
-            #user_icon 
-              = link_to image_tag( 'carte-icone-8223-16.png'), workspace_path(current_workspace_member.workspace)
+            = link_to image_tag( 'catalogue-icone-4673-16.png'), workspaces_path()
+          /-if current_workspace_member.manager?
+          /  #user_icon 
+          /    = link_to image_tag( 'carte-icone-8223-16.png'), workspace_path(current_workspace_member.workspace)
           #user_icon 
             = link_to image_tag( 'carte-icone-8223-16-new.png'), new_workspace_path
           -if current_workspace_member.manager?
@@ -40,10 +40,10 @@
               = link_to image_tag( 'ajouter-une-liste-personne-utilisateur-icone-8190-16.png'), new_workspace_member_path(current_workspace_member.workspace)
           #user_information
             Workspace : &nbsp
-            - if current_workspace_member.workspace
-              = current_workspace_member.workspace.name
+            - if current_workspace_member.manager?
+              = link_to current_workspace_member.workspace.name, workspace_path(current_workspace_member.workspace)
             - else
-              Nom entreprise
+              = current_workspace_member.workspace.name
 
           -if current_workspace_member.manager?
             #user_icon

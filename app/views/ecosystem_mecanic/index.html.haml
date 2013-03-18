@@ -40,6 +40,8 @@
 %script{ :src => "/javascripts/EcosystemScience/gen/Scult3D.js", :type => "text/javascript" }
 %script{ :src => "/javascripts/EcosystemScience/gen/Scills3D.js", :type => "text/javascript" }
 %script{ :src => "/javascripts/EcosystemScience/gen/Function.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/EcosystemScience/gen/CsvReader.js", :type => "text/javascript" }
+
 
 %script{ :src => "/javascripts/EcosystemScience/CodeMirror-2.22/lib/codemirror.js", :type => "text/javascript" }
 %script{ :src => "/javascripts/EcosystemScience/CodeMirror-2.22/mode/xml/xml.js", :type => "text/javascript" }
@@ -61,16 +63,16 @@
         - if user_signed_in?
           #user_icon
             = link_to image_tag( 'gnome-logout-icone-4198-16.png'), destroy_user_session_path, :target => "_blank"
-          #user_icon
-            = link_to image_tag( 'info-utilisateur-icone-5701-16.png'), edit_registration_path(current_user), :target => "_blank"
+          /#user_icon
+          /  = link_to image_tag( 'info-utilisateur-icone-5701-16.png'), edit_registration_path(current_user), :target => "_blank"
           #user_information
-            = current_user.full_name
+            = link_to current_user.full_name, edit_registration_path(current_user), :target => "_blank"
           
 
           #user_icon 
             = link_to image_tag( 'catalogue-icone-4673-16.png'), workspace_sc_models_path(current_workspace_member.workspace), :target => "_blank" 
-          #user_icon 
-            = link_to image_tag( 'carte-icone-8223-16.png'), workspace_sc_model_path(current_workspace_member.workspace, @current_model), :target => "_blank"
+          /#user_icon 
+          /  = link_to image_tag( 'carte-icone-8223-16.png'), workspace_sc_model_path(current_workspace_member.workspace, @current_model), :target => "_blank"
           #user_icon 
             = link_to image_tag( 'carte-icone-8223-16-new.png'), new_workspace_sc_model_path(current_workspace_member.workspace), :target => "_blank"
           #user_icon 
@@ -78,15 +80,15 @@
           #user_information
             Project : &nbsp
             - if current_workspace_member.workspace
-              = @current_model.name
+              = link_to @current_model.name, workspace_sc_model_path(current_workspace_member.workspace, @current_model), :target => "_blank"
             - else
               Project name
 
           #user_icon 
             = link_to image_tag( 'catalogue-icone-4673-16.png'),  workspaces_path(), :target => "_blank"
-          -if current_workspace_member.manager?
-            #user_icon 
-              = link_to image_tag( 'carte-icone-8223-16.png'), workspace_path(current_workspace_member.workspace), :target => "_blank"
+          /-if current_workspace_member.manager?
+          /  #user_icon 
+          /    = link_to image_tag( 'carte-icone-8223-16.png'), workspace_path(current_workspace_member.workspace), :target => "_blank"
           #user_icon 
             = link_to image_tag( 'carte-icone-8223-16-new.png'), new_workspace_path, :target => "_blank"
           -if current_workspace_member.manager?
@@ -94,10 +96,10 @@
               = link_to image_tag( 'ajouter-une-liste-personne-utilisateur-icone-8190-16.png'), new_workspace_member_path(current_workspace_member.workspace), :target => "_blank"
           #user_information
             Workspace : &nbsp
-            - if current_workspace_member.workspace
-              = current_workspace_member.workspace.name
+            - if current_workspace_member.manager?
+              = link_to current_workspace_member.workspace.name, workspace_path(current_workspace_member.workspace), :target => "_blank"
             - else
-              Nom entreprise
+              = current_workspace_member.workspace.name
     
           -if current_workspace_member.manager?
             #user_icon

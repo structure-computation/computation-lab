@@ -108,6 +108,11 @@ header .container #header_top #header_user_connected #user_information {
   border-left:1px solid #969696;
   //background: transparent url("/images/header_bg_separateur.png") no-repeat bottom left;
 }
+
+header .container #header_top #header_user_connected #user_information a {
+  //text-decoration : none;
+  color : #e6e6e6;
+}
 /* line 83, ../../app/stylesheets/partials/_header.sass */
 header .container #header_top #user_icon {
   display: inline-block;
