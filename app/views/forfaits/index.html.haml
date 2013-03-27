@@ -1,9 +1,15 @@
 -# encoding: utf-8 
 
+-content_for :left_top do
+  .left_submenu
+    %h2.grey
+    %ul.grey
+      %li.manage_pic_edit
+        = link_to "Back to workspace", workspace_path(@workspace) 
+
 -content_for :workspace_content do
   .grey
-    %h2
-      Liste des forfaits
+    &nbsp
     %div
       = render :partial => "search_filter"
 

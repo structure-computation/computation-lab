@@ -2,16 +2,14 @@
 -content_for :left_top do
   .left_submenu
     %h2.grey
-      Menu
     %ul
-      %li.manage_pic_nouveau_membre
-        = link_to "Retour au workspace", workspace_path(@workspace) 
-      %li.manage_pic_nouveau_membre
-        = link_to "Retour à la liste des forfaits", :controller => "forfait", :action => "index"
+      %li.manage_pic_edit
+        = link_to "Back to workspace", workspace_path(@workspace) 
+      %li.manage_pic_compte_abonnement
+        = link_to "Back to forfaits", workspace_forfaits_path(current_workspace_member.workspace)
 
 -content_for :right_top do
   %h2.grey
-    = @forfait.name 
   .grey
     %p
     %table.grey#forfaits_table

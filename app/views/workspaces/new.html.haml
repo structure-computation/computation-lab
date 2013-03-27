@@ -1,5 +1,15 @@
 -# encoding: utf-8 
 
+-content_for :left_top do
+  .left_submenu
+    %h2.grey
+    %ul.grey
+      %li.manage_pic_liste_compte
+        = link_to "Back to workspace list", workspaces_path() 
+
 -content_for :workspace_content do
-  %div.grey.centered
-    = render "form"
+  .grey
+    &nbsp
+    .grey.centered
+      = render "form"
+    &nbsp

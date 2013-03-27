@@ -397,7 +397,8 @@ header#calcul .container #header_user_connected #user_information #disconnect_li
 }
 /* line 22, ../../app/stylesheets/partials/_sub_menu.sass */
 #left_top ul li.manage_pic_liste_compte a {
-  background: url("/images/manage_pic_liste_compte.png") no-repeat left center;
+  /*background: url("/images/manage_pic_liste_compte.png") no-repeat left center;*/
+  background: url("/images/catalogue-icone-4673-16.png") no-repeat left center;
 }
 /* line 25, ../../app/stylesheets/partials/_sub_menu.sass */
 #left_top ul li.manage_pic_liste_membre a {
@@ -411,10 +412,6 @@ header#calcul .container #header_user_connected #user_information #disconnect_li
 /* line 31, ../../app/stylesheets/partials/_sub_menu.sass */
 #left_top ul li.manage_pic_liste_factures a {
   background: url("/images/manage_pic_liste_factures.png") no-repeat left center;
-}
-/* line 34, ../../app/stylesheets/partials/_sub_menu.sass */
-#left_top ul li.manage_pic_liste_compte a {
-  background: url("/images/manage_pic_liste_compte.png") no-repeat left center;
 }
 /* line 37, ../../app/stylesheets/partials/_sub_menu.sass */
 #left_top ul li.manage_pic_compte_abonnement a {
@@ -590,7 +587,6 @@ table.grey tbody tr td.details_link a {
   text-decoration: none;
   color: #555555;
 }
-/* line 124, ../../app/stylesheets/partials/_table.sass */
 table.grey tbody tr td.details_link:hover {
   background: transparent url("/images/fleche_select.png") no-repeat 0% 50%;
 }
@@ -598,6 +594,33 @@ table.grey tbody tr td.details_link:hover {
 table.grey tbody tr td.details_link:hover a {
   color: #202c6b;
 }
+
+
+/* line 114, ../../app/stylesheets/partials/_table.sass */
+table.grey tbody tr td.details_work {
+  background: transparent url("/images/proprietes-session-icone-5116-16.png") no-repeat 0% 50%;
+  width: 4em;
+  padding-left: 0;
+}
+/* line 118, ../../app/stylesheets/partials/_table.sass */
+table.grey tbody tr td.details_work a {
+  padding-left: 20px;
+  padding-right: 10px;
+  display: block;
+  text-decoration: none;
+  color: #555555;
+}
+/* line 124, ../../app/stylesheets/partials/_table.sass */
+table.grey tbody tr td.details_work:hover {
+  /*background: transparent url("/images/fleche_select.png") no-repeat 0% 50%;*/
+  background: transparent url("/images/proprietes-session-icone-5116-16.png") no-repeat 0% 50%;
+}
+/* line 126, ../../app/stylesheets/partials/_table.sass */
+table.grey tbody tr td.details_work:hover a {
+  color: #202c6b;
+}
+
+
 /* line 129, ../../app/stylesheets/partials/_table.sass */
 table.grey tbody tr:nth-child(odd) {
   background-color: #d0d1d7;

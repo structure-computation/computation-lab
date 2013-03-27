@@ -2,10 +2,13 @@
 -content_for :left_top do
   .left_submenu
     %h2.grey
-      Menu
-    %ul
-      %li.LM_pic_model
-        = link_to "Fermer", workspace_path(@workspace)
+    %ul.grey
+      %li.manage_pic_edit
+        = link_to "Back to workspace", workspace_path(@workspace) 
+
 -content_for :workspace_content do
   .grey
-    = render "form"
+    &nbsp
+    .grey.centered
+      = render "form"
+    &nbsp
