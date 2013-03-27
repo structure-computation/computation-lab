@@ -50,9 +50,9 @@ class LogToolsController < ApplicationController
   end
   
   def use_scwal_tool
-    @current_model = ScModel.find(params[:sc_model_id])
-    @current_model.use_scwal_tool(params)
-    @model_id = params[:sc_model_id]
+    @current_workspace = Workspace.find(params[:sc_model_id])
+    @current_workspace.use_scwal_tool(params)
+    @workspace_id = params[:sc_model_id]
     #@page = :home # Pour afficher le menu en selected.
     render :text => 'success'
   end

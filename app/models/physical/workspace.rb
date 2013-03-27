@@ -36,7 +36,12 @@ class Workspace < ActiveRecord::Base
           joins(:users).where("users.id = ?", user.id)
   }
   
-                          
+  
+  def init_account()
+    current_token_account = self.create_token_account
+    current_token_account.init
+  end
+  
   # si on passe en multi tenant,  companies devint workspaces
   #scope :workspace_relationship                    
   
@@ -66,8 +71,37 @@ class Workspace < ActiveRecord::Base
     return @users
   end
   
-  def init_account()
-    current_token_account = self.create_token_account
-    current_token_account.init
+  def tool_in_use(name_tool, current_workspace_member)
+    #name_tool = "scills, sceen, score..."
+    log_type = "use_" + name_tool
+    log_tool_in_use = self.token_account.log_tools.find(:last, :conditions => {:log_type => log_type})
+    if !log_tool_in_use.nil? and log_tool_in_use.in_use?
+      #heure déja facturée sur cet outil
+      return true
+    else
+      @new_log_tool_in_use = self.token_account.log_tools.build()
+      @new_log_tool_in_use.token_account = self.token_account
+      @new_log_tool_in_use.workspace_member = current_workspace_member
+      return @new_log_tool_in_use.use_tool_for_one_hour(name_tool)
+    end
   end
+  
+  def use_scwal_tool(params)
+    #name_tool = "scills, sceen, score..."
+    #"App=TestItem&typeApp=1&time=10&proc=2&wmid=2&sc_model_id=200"
+    log_type = params[:app_type]
+    log_type_app = 2 #params[:typeApp]
+    log_time = params[:app_time]
+    log_nbproc = params[:app_cpu]
+    
+    @new_log_tool = self.token_account.log_tools.build()
+    @new_log_tool.token_account = self.token_account
+    @new_log_tool.workspace_member = self.user_workspace_memberships.find(:first)
+    @new_log_tool.log_type = log_type
+    @new_log_tool.cpu_allocated = log_nbproc
+    @new_log_tool.real_time = log_time
+    @new_log_tool.use_tool_type(log_type_app)
+  end
+  
+  
 end

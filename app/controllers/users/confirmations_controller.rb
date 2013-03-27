@@ -20,7 +20,7 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
       set_flash_message(:notice, :send_instructions) #if is_navigational_format?
       redirect_to after_resending_confirmation_instructions_path_for(resource_name)
     else
-      set_flash_message(:notice, "Ce compte ne peut pas être rinitialisé !")
+      set_flash_message(:notice, "Ce compte ne peut pas être réinitialisé !")
       redirect_to new_confirmation_path(resource_name, resource)
     end
   end
@@ -34,7 +34,7 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
       sign_in(resource_name, resource)
       redirect_to new_session_path(resource_name, resource)
     else
-      set_flash_message(:notice, "Ce compte ne peut pas être rinitialisé !")
+      set_flash_message(:notice, "Ce compte ne peut pas être réinitialisé !")
       redirect_to new_confirmation_path(resource_name, resource)
     end
   end

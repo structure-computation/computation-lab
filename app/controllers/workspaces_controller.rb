@@ -26,6 +26,11 @@ class WorkspacesController < InheritedResources::Base
   end
   
   def show
+    if params[:workspace_id]
+      @change_current_workspace_member=current_user.user_workspace_memberships.find(:first, :conditions => {:workspace_id => params[:workspace_id]})
+      session[:current_workspace_member_id] = @change_current_workspace_member.id
+    end
+    
     @workspace    = current_workspace_member.workspace
     @credits      = @workspace.token_account.credits.find(:all, :conditions => {:state => "active"})
     @last_credit  = @workspace.token_account.solde_token_accounts.find(:last, :conditions => {:solde_type => "token"})
@@ -149,6 +154,11 @@ class WorkspacesController < InheritedResources::Base
     #   format.js   {render :json => @current_workspace.to_json}
     # end
   end
+  
+  def ecosystem_mecanic 
+    @workspace    = current_workspace_member.workspace
+    redirect_to :controller => "ecosystem_mecanic", :action => "index"
+  end  
   
   
   #protected

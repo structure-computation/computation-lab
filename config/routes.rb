@@ -4,6 +4,7 @@ SCInterface::Application.routes.draw do
 
   resources :customers
   
+  #match 'scratch_user/manage_workspace'   => "calculs#manage_workspace" 
   resources :scratch_user
  
   
@@ -41,6 +42,7 @@ SCInterface::Application.routes.draw do
     resources :materials
     resources :links
     resources :forfaits
+    get 'ecosystem_mecanic', :on => :member
     resources :sc_models do 
       post 'load_mesh', :on => :member
       get 'share', :on => :member

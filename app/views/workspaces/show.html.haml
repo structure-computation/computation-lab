@@ -1,5 +1,26 @@
 -# encoding: utf-8 
-    
+
+-content_for :left_top do
+  .left_submenu
+    %h2.grey
+    %ul.grey
+      %li.manage_pic_edit
+        = link_to "Edit", edit_workspace_path(current_workspace_member.workspace) 
+      %li.manage_pic_nouveau_membre
+        = link_to "Share", new_workspace_member_path(current_workspace_member.workspace)
+      %li.manage_pic_compte_abonnement
+        = link_to "Add token", workspace_forfaits_path(current_workspace_member.workspace)
+
+-content_for :right_top do
+  %h2.grey
+  .grey_centered 
+    %br  &nbsp
+    - if @workspace.public_description != "" 
+      = @workspace.public_description 
+    - else 
+      = link_to "add a description", edit_workspace_path(current_workspace_member.workspace) 
+    %br &nbsp
+
 -content_for :workspace_content do
   .wrapper
     #left_content
@@ -12,8 +33,8 @@
           %a#tab_3{:href => "#Forfaits"} Forfaits
         %li 
           %a#tab_4{:href => "#Factures"} Factures
-        %li                    
-          %a#tab_5{:href => "#Description"} Description
+        /%li                    
+        /  %a#tab_5{:href => "#Description"} Description
             
     #right_content
       .tab_content.js_tab_content
@@ -37,13 +58,13 @@
           %h3 Liste des factures du workspace :
           = render :partial => 'bills/bills_list', :object => @workspace.bills.find(:all, :order => " created_at DESC")
   
-        #tab_5_content
-          %table.grey#workspace_information_table
-            %tr
-              %th Name
-              %td= @workspace.name
-            %tr
-              %th Description
-              %td= @workspace.public_description
+        /#tab_5_content
+        /  %table.grey#workspace_information_table
+        /    %tr
+        /      %th Name
+        /      %td= @workspace.name
+        /    %tr
+        /      %th Description
+        /      %td= @workspace.public_description
 
       = coffeescript_include_tag "manage_tab"

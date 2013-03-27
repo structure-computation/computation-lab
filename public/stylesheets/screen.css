@@ -388,6 +388,14 @@ header#calcul .container #header_user_connected #user_information #disconnect_li
   text-decoration: underline;
 }
 /* line 22, ../../app/stylesheets/partials/_sub_menu.sass */
+#left_top ul li.manage_pic_edit a {
+  background: url("/images/carte-icone-8223-16.png") no-repeat left center;
+}
+/* line 22, ../../app/stylesheets/partials/_sub_menu.sass */
+#left_top ul li.manage_pic_new a {
+  background: url("/images/carte-icone-8223-16-new.png") no-repeat left center;
+}
+/* line 22, ../../app/stylesheets/partials/_sub_menu.sass */
 #left_top ul li.manage_pic_liste_compte a {
   background: url("/images/manage_pic_liste_compte.png") no-repeat left center;
 }
@@ -397,7 +405,8 @@ header#calcul .container #header_user_connected #user_information #disconnect_li
 }
 /* line 28, ../../app/stylesheets/partials/_sub_menu.sass */
 #left_top ul li.manage_pic_nouveau_membre a {
-  background: url("/images/manage_pic_nouveau_membre.png") no-repeat left center;
+  /*background: url("/images/manage_pic_nouveau_membre.png") no-repeat left center;*/
+  background: url("/images/ajouter-une-liste-personne-utilisateur-icone-8190-16.png") no-repeat left center; 
 }
 /* line 31, ../../app/stylesheets/partials/_sub_menu.sass */
 #left_top ul li.manage_pic_liste_factures a {
@@ -409,7 +418,8 @@ header#calcul .container #header_user_connected #user_information #disconnect_li
 }
 /* line 37, ../../app/stylesheets/partials/_sub_menu.sass */
 #left_top ul li.manage_pic_compte_abonnement a {
-  background: url("/images/manage_pic_compte_abonnement.png") no-repeat left center;
+  /*background: url("/images/manage_pic_compte_abonnement.png") no-repeat left center;*/
+  background: url("/images/base-de-donnees-ajouter-icone-7539-16.png") no-repeat left center;
 }
 /* line 40, ../../app/stylesheets/partials/_sub_menu.sass */
 #left_top ul li.manage_pic_compte_memoire a {
@@ -1464,7 +1474,7 @@ ul.data_list li.gray {
 }
 
 /* line 188, ../../app/stylesheets/specifics/_calcul.sass */
-#visu_bouton_09 {
+#visu_bouton_09 {manage_pic_new
   height: 31px;
   width: 31px;
   float: left;
@@ -1718,7 +1728,7 @@ div.breadcrumb_tab_content .show {
   box-shadow: 0.2em 0px 0px rgba(0, 0, 0, 0.6);
 }
 /* line 58, ../../app/stylesheets/layouts/_layout_calcul_breadcrumb.sass */
-#breadcrumb ul.horizontal_tab_submenu li a.selected {
+#breadcrumb ul.horizontal_manage_pic_newtab_submenu li a.selected {
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #fdde35), color-stop(100%, #fea82a));
   background-image: -webkit-linear-gradient(#fdde35, #fea82a);
   background-image: -moz-linear-gradient(#fdde35, #fea82a);
@@ -1746,7 +1756,7 @@ div.breadcrumb_tab_content .show {
   background-image: -webkit-linear-gradient(#97958b, #86847b);
   background-image: -moz-linear-gradient(#97958b, #86847b);
   background-image: -o-linear-gradient(#97958b, #86847b);
-  background-image: -ms-linear-gradient(#97958b, #86847b);
+  background-image: -ms-limanage_pic_newnear-gradient(#97958b, #86847b);
   background-image: linear-gradient(#97958b, #86847b);
   color: #cccccc;
   cursor: default;
@@ -1761,7 +1771,7 @@ div.breadcrumb_tab_content .show {
   background-image: -webkit-linear-gradient(#fdde35, #fea82a);
   background-image: -moz-linear-gradient(#fdde35, #fea82a);
   background-image: -o-linear-gradient(#fdde35, #fea82a);
-  background-image: -ms-linear-gradient(#fdde35, #fea82a);
+  background-image: -ms-limanage_pic_newnear-gradient(#fdde35, #fea82a);
   background-image: linear-gradient(#fdde35, #fea82a);
   color: #323751;
 }
@@ -1776,7 +1786,7 @@ div.breadcrumb_tab_content .show {
   text-align: center;
   //padding-left: 4.208%;
 }
-
+manage_pic_new
 /* line 39, ../../app/stylesheets/screen.sass */
 #flash_notice {
   //border: 1px solid #c6d880;
@@ -1925,6 +1935,12 @@ div.grey {
   padding: 0 10px 0 10px;
   /*padding-left: 0%;
   padding-right: 0%;*/
+}
+.grey_centered{
+  border: 1px solid #b2b2b2;
+  background-color: #f0f0f0;
+  padding: 0 10px 0 10px;
+  text-align: center;
 }
 
 /* line 151, ../../app/stylesheets/screen.sass */

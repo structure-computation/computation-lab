@@ -1,10 +1,15 @@
 -# encoding: utf-8 
 
+-content_for :left_top do
+  .left_submenu
+    %h2.grey
+    %ul.grey
+      %li.manage_pic_new
+        = link_to "New workspace", new_workspace_path
     
 -content_for :workspace_content do
   .grey
-    %h2
-      Workspaces
+    &nbsp
     
     = render :partial => "workspaces/search_filter"
     = render :partial => "workspaces/workspaces_list", :object => current_user.workspaces

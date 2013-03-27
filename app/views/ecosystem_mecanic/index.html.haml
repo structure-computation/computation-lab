@@ -69,41 +69,41 @@
             = link_to current_user.full_name, edit_registration_path(current_user), :target => "_blank"
           
 
-          #user_icon 
-            = link_to image_tag( 'catalogue-icone-4673-16.png'), workspace_sc_models_path(current_workspace_member.workspace), :target => "_blank" 
+          /#user_icon 
+          /  = link_to image_tag( 'catalogue-icone-4673-16.png'), workspace_sc_models_path(current_workspace_member.workspace), :target => "_blank" 
           /#user_icon 
           /  = link_to image_tag( 'carte-icone-8223-16.png'), workspace_sc_model_path(current_workspace_member.workspace, @current_model), :target => "_blank"
-          #user_icon 
-            = link_to image_tag( 'carte-icone-8223-16-new.png'), new_workspace_sc_model_path(current_workspace_member.workspace), :target => "_blank"
-          #user_icon 
-            = link_to image_tag( 'sharepoint-icone-6402-16.png'), share_workspace_sc_model_path(current_workspace_member.workspace, current_workspace_sc_model), :target => "_blank"
-          #user_information
-            Project : &nbsp
-            - if current_workspace_member.workspace
-              = link_to @current_model.name, workspace_sc_model_path(current_workspace_member.workspace, @current_model), :target => "_blank"
-            - else
-              Project name
+          /#user_icon 
+          /  = link_to image_tag( 'carte-icone-8223-16-new.png'), new_workspace_sc_model_path(current_workspace_member.workspace), :target => "_blank"
+          /#user_icon 
+          /  = link_to image_tag( 'sharepoint-icone-6402-16.png'), share_workspace_sc_model_path(current_workspace_member.workspace, current_workspace_sc_model), :target => "_blank"
+          /#user_information
+          /  Project : &nbsp
+          /  - if current_workspace_member.workspace
+          /    = link_to @current_model.name, workspace_sc_model_path(current_workspace_member.workspace, @current_model), :target => "_blank"
+          /  - else
+          /    Project name
 
           #user_icon 
             = link_to image_tag( 'catalogue-icone-4673-16.png'),  workspaces_path(), :target => "_blank"
           /-if current_workspace_member.manager?
           /  #user_icon 
           /    = link_to image_tag( 'carte-icone-8223-16.png'), workspace_path(current_workspace_member.workspace), :target => "_blank"
-          #user_icon 
-            = link_to image_tag( 'carte-icone-8223-16-new.png'), new_workspace_path, :target => "_blank"
-          -if current_workspace_member.manager?
-            #user_icon 
-              = link_to image_tag( 'ajouter-une-liste-personne-utilisateur-icone-8190-16.png'), new_workspace_member_path(current_workspace_member.workspace), :target => "_blank"
+          /#user_icon 
+          /  = link_to image_tag( 'carte-icone-8223-16-new.png'), new_workspace_path, :target => "_blank"
+          /-if current_workspace_member.manager?
+          /  #user_icon 
+          /    = link_to image_tag( 'ajouter-une-liste-personne-utilisateur-icone-8190-16.png'), new_workspace_member_path(current_workspace_member.workspace), :target => "_blank"
           #user_information
             Workspace : &nbsp
             - if current_workspace_member.manager?
-              = link_to current_workspace_member.workspace.name, workspace_path(current_workspace_member.workspace), :target => "_blank"
+              = link_to current_workspace_member.workspace.name, workspace_path(current_workspace_member.workspace, :anchor => 'Compte'), :target => "_blank"
             - else
               = current_workspace_member.workspace.name
     
-          -if current_workspace_member.manager?
-            #user_icon
-              = link_to image_tag( 'base-de-donnees-ajouter-icone-7539-16.png'),workspace_forfaits_path(current_workspace_member.workspace) # :controller => "forfait", :action => "index"
+          /-if current_workspace_member.manager?
+          /  #user_icon
+          /    = link_to image_tag( 'base-de-donnees-ajouter-icone-7539-16.png'),workspace_forfaits_path(current_workspace_member.workspace) # :controller => "forfait", :action => "index"
           #user_information
             Account : &nbsp
             = current_workspace_member.workspace.token_account.solde_token
@@ -113,8 +113,10 @@
 #main_window.CorreliWindow
 
 %script{ :type => "text/javascript" }
-  SC_MODEL_ID = #{@model_id}
-  SC_USER_NAME = '#{@current_user.full_name}'
-  SC_PROJECT_NAME = '#{@current_model.name}'
+  SC_MODEL_ID = #{current_workspace_member.workspace.id}
   SC_WORSPACE_NAME = '#{@current_workspace_member.workspace.name}'
+  SC_WORSPACE_MEMBER_ID = '#{@current_workspace_member.id}'
+  SC_USER_ID = '#{@current_user.id}'
+  SC_USER_NAME = '#{@current_user.full_name}'
+  
   launch_ecosystem_mecanic(document.getElementById("main_window"));

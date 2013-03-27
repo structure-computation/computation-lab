@@ -5,14 +5,14 @@ class EcosystemMecanicController < ApplicationController
   layout "application_ext_app"
   
   def index
-    if params[:sc_model_id] 
-      @current_model = current_workspace_member.sc_models.find(params[:sc_model_id])
-    else
-      @current_model = current_workspace_sc_model
-    end
-    session[:current_workspace_sc_model_id] = @current_model.id
-    @current_model.tool_in_use("EcosystemMecanic", current_workspace_member)
-    @model_id = params[:sc_model_id]
+#     if params[:sc_model_id] 
+#       @current_model = current_workspace_member.sc_models.find(params[:sc_model_id])
+#     else
+#       @current_model = current_workspace_sc_model
+#     end
+#     session[:current_workspace_sc_model_id] = @current_model.id
+    current_workspace_member.workspace.tool_in_use("EcosystemMecanic", current_workspace_member)
+#     @model_id = params[:sc_model_id]
     #@page = :home # Pour afficher le menu en selected.
     render :layout => false 
   end
