@@ -9,7 +9,7 @@ header {
   background-image: -ms-linear-gradient(#4551aa, #2b3657);
   background-image: linear-gradient(#4551aa, #2b3657);*/
   //background: #262626;
-  background: #262626 url("/images/Logo_StructureComputation_gris_long.png") no-repeat center left;
+  background: #262626 url("/images/logo_issim.png") no-repeat center left;
   min-width: 100%;
   height: 30px;
   display: block;
