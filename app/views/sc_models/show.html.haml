@@ -56,7 +56,7 @@
                     dépot de maillage
                 -else
                   %li
-                    = link_to "SCills", sc_model_calculs_path(@sc_model), :target => "_blank" 
+                    = link_to "SCills", sc_model_calculs_path(@sc_model), :target => "SecondaryWindow" 
                   %li
                     calcul de structures
                 %li
@@ -66,7 +66,7 @@
             %li
               %ul.subToolBox
                 %li
-                  = link_to "Ecosystem Sciences", :controller => "ecosystem_mecanic", :action => "index", :sc_model_id => @sc_model.id, :target => "_blank" 
+                  = link_to "Ecosystem Sciences", :controller => "ecosystem_mecanic", :action => "index", :sc_model_id => @sc_model.id, :target => "SecondaryWindow" 
                 %li
                   Applications scientifiques
 

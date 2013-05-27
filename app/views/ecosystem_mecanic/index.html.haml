@@ -62,42 +62,42 @@
       #header_user_connected  
         - if user_signed_in?
           #user_icon
-            = link_to image_tag( 'gnome-logout-icone-4198-16.png'), destroy_user_session_path, :target => "_blank"
+            = link_to image_tag( 'gnome-logout-icone-4198-16.png'), destroy_user_session_path, :target => "SecondaryWindow"
           /#user_icon
-          /  = link_to image_tag( 'info-utilisateur-icone-5701-16.png'), edit_registration_path(current_user), :target => "_blank"
+          /  = link_to image_tag( 'info-utilisateur-icone-5701-16.png'), edit_registration_path(current_user), :target => "SecondaryWindow"
           #user_information
-            = link_to current_user.full_name, edit_registration_path(current_user), :target => "_blank"
+            = link_to current_user.full_name, edit_registration_path(current_user), :target => "SecondaryWindow"
           
 
           /#user_icon 
-          /  = link_to image_tag( 'catalogue-icone-4673-16.png'), workspace_sc_models_path(current_workspace_member.workspace), :target => "_blank" 
+          /  = link_to image_tag( 'catalogue-icone-4673-16.png'), workspace_sc_models_path(current_workspace_member.workspace), :target => "SecondaryWindow" 
           /#user_icon 
-          /  = link_to image_tag( 'carte-icone-8223-16.png'), workspace_sc_model_path(current_workspace_member.workspace, @current_model), :target => "_blank"
+          /  = link_to image_tag( 'carte-icone-8223-16.png'), workspace_sc_model_path(current_workspace_member.workspace, @current_model), :target => "SecondaryWindow"
           /#user_icon 
-          /  = link_to image_tag( 'carte-icone-8223-16-new.png'), new_workspace_sc_model_path(current_workspace_member.workspace), :target => "_blank"
+          /  = link_to image_tag( 'carte-icone-8223-16-new.png'), new_workspace_sc_model_path(current_workspace_member.workspace), :target => "SecondaryWindow"
           /#user_icon 
-          /  = link_to image_tag( 'sharepoint-icone-6402-16.png'), share_workspace_sc_model_path(current_workspace_member.workspace, current_workspace_sc_model), :target => "_blank"
+          /  = link_to image_tag( 'sharepoint-icone-6402-16.png'), share_workspace_sc_model_path(current_workspace_member.workspace, current_workspace_sc_model), :target => "SecondaryWindow"
           /#user_information
           /  Project : &nbsp
           /  - if current_workspace_member.workspace
-          /    = link_to @current_model.name, workspace_sc_model_path(current_workspace_member.workspace, @current_model), :target => "_blank"
+          /    = link_to @current_model.name, workspace_sc_model_path(current_workspace_member.workspace, @current_model), :target => "SecondaryWindow"
           /  - else
           /    Project name
 
           #user_icon 
-            = link_to image_tag( 'catalogue-icone-4673-16.png'),  workspaces_path(), :target => "_blank"
+            = link_to image_tag( 'catalogue-icone-4673-16.png'),  workspaces_path(), :target => "SecondaryWindow"
           /-if current_workspace_member.manager?
           /  #user_icon 
-          /    = link_to image_tag( 'carte-icone-8223-16.png'), workspace_path(current_workspace_member.workspace), :target => "_blank"
+          /    = link_to image_tag( 'carte-icone-8223-16.png'), workspace_path(current_workspace_member.workspace), :target => "SecondaryWindow"
           /#user_icon 
-          /  = link_to image_tag( 'carte-icone-8223-16-new.png'), new_workspace_path, :target => "_blank"
+          /  = link_to image_tag( 'carte-icone-8223-16-new.png'), new_workspace_path, :target => "SecondaryWindow"
           /-if current_workspace_member.manager?
           /  #user_icon 
-          /    = link_to image_tag( 'ajouter-une-liste-personne-utilisateur-icone-8190-16.png'), new_workspace_member_path(current_workspace_member.workspace), :target => "_blank"
+          /    = link_to image_tag( 'ajouter-une-liste-personne-utilisateur-icone-8190-16.png'), new_workspace_member_path(current_workspace_member.workspace), :target => "SecondaryWindow"
           #user_information
             Workspace : &nbsp
             - if current_workspace_member.manager?
-              = link_to current_workspace_member.workspace.name, workspace_path(current_workspace_member.workspace, :anchor => 'Compte'), :target => "_blank"
+              = link_to current_workspace_member.workspace.name, workspace_path(current_workspace_member.workspace, :anchor => 'Compte'), :target => "SecondaryWindow"
             - else
               = current_workspace_member.workspace.name
     

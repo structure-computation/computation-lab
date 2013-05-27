@@ -3,7 +3,7 @@
 = semantic_form_for @new_company :url => {:controller => "company", :action => "create"}do |form| 
   = form.inputs do                     
     - if @new_company.kind.nil? 
-      = f.input :kind, :as => :select, :collection => ["Company", "Fillial", "Project"], :include_blank => false,     
+      = f.input :kind, :as => :select, :collection => ["Company", "Fillial", "Project"], :includeSecondaryWindow => false,     
     - else   
       - case @new_company.kind
         - when "Company"                                 

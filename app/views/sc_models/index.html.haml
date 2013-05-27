@@ -30,7 +30,7 @@
       %tbody
         - @sc_models.each do |sc_model|
           %tr
-            %td.escape_search.details_link= link_to "Go", :controller => "ecosystem_mecanic", :action => "index", :sc_model_id => sc_model.id, :target => "_blank"
+            %td.escape_search.details_link= link_to "Go", :controller => "ecosystem_mecanic", :action => "index", :sc_model_id => sc_model.id, :target => "SecondaryWindow"
             %td.name=           sc_model.name ? sc_model.name : 'Undefined'
             %td.id=             sc_model.id
             -# Suppression de la colonne "Projet" %td
