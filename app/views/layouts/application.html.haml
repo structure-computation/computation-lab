@@ -3,7 +3,7 @@
 %html{ "xml:lang" => "fr", :lang => "fr", :xmlns => "http://www.w3.org/1999/xhtml" }
   %head
     %title
-      Structure Computation
+      Is'sim
     
     / Inclusions des CSS, javascripts... dans un partial.
     = render      :partial      => "layouts/partials/html_header_content"
@@ -11,13 +11,16 @@
     / CSS et javascript additionnels
     = yield :additionnal_stylesheets
     = yield :additionnal_javascript
-    
+
     
   %body{:onload => "window.scrollTo(0, 1)"}
-    = yield :header
+    = content_for?(:header) ? yield(:header) : render(:partial => "layouts/partials/header")
+    
     .container
       = render :partial => "layouts/partials/breadcrumb"
       = render :partial => "layouts/partials/flashs_and_notices"
+      
+      %p
       
       #content
         = content_for?(:content) ? yield(:content) : yield

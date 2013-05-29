@@ -2,14 +2,14 @@ SCInterface::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
   # chemin d'acces pour l'enregistrement des models
-  SC_MODEL_ROOT = "/share/sc2/Developpement/MODEL"
+  SC_MODEL_ROOT   = "/share/sc2/Developpement/MODEL"
   SC_FACTURE_ROOT = "/share/sc2/Developpement/FACTURE"
-  #SC_MODEL_ROOT = "/home/scproduction/MODEL"
+  #SC_MODEL_ROOT  = "/home/scproduction/MODEL"
 
   # In the development environment your application's code is reloaded on
   # every request.  This slows down response time but is perfect for development
   # since you don't have to restart the webserver when you make code changes.
-  config.cache_classes = true
+  config.cache_classes = false
 
   # Log error messages when you accidentally call methods on nil.
   config.whiny_nils = true
