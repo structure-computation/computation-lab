@@ -2,7 +2,6 @@
 
 class EcosystemMecanicController < ApplicationController  
   before_filter :authenticate_user!
-  layout "application_ext_app"
   
   def index
 #     if params[:sc_model_id] 
@@ -14,7 +13,6 @@ class EcosystemMecanicController < ApplicationController
     current_workspace_member.workspace.tool_in_use("EcosystemMecanic", current_workspace_member)
 #     @model_id = params[:sc_model_id]
     #@page = :home # Pour afficher le menu en selected.
-    render :layout => false 
   end
   
   def upload

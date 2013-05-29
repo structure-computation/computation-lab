@@ -2,7 +2,6 @@
 
 class ScoreController < ApplicationController
   before_filter :authenticate_user!
-  layout "application_ext_app"
   
   def index
     @current_model = current_workspace_member.sc_models.find(params[:sc_model_id])
