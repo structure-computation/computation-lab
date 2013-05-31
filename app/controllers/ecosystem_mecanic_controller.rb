@@ -15,6 +15,8 @@ class EcosystemMecanicController < ApplicationController
     #@page = :home # Pour afficher le menu en selected.
   end
   
+  
+  # TODO: Cette action n'est peut être plus utilisée. A valider.
   def upload
     host = 'localhost'     # The web server
     port = 8888                           # Default HTTP port
@@ -26,7 +28,8 @@ class EcosystemMecanicController < ApplicationController
     render :text => response
   end
   
-  
+  # Action qui fait le passage entre l'appel HTTP et SODA.
+  # Cette action est appellée par les API SOJA (appellé par le filesystem SOJA).
   def _
     host = 'localhost'     # The web server
     port = 8888                           # Default HTTP port

@@ -1,5 +1,7 @@
 # encoding: utf-8
 
+# TODO: Voir si l'on garde.
+
 class CompanyController < InheritedResources::Base
   
     helper :application     

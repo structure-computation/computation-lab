@@ -5,15 +5,15 @@ class LogToolsController < ApplicationController
   
   # scult -----------------------------------------------------------------------------------
   def scult_launch
-    @current_log_tools = LogTool.find(params[:log_id])
-    @current_model = @current_log_tools.sc_model
+    @current_log_tools        = LogTool.find(params[:log_id])
+    @current_model            = @current_log_tools.sc_model
     @current_workspace_member = @current_log_tools.workspace_member
-    @workspace    = @current_workspace_member.workspace
-    @current_user = @current_workspace_member.user
+    @workspace                = @current_workspace_member.workspace
+    @current_user             = @current_workspace_member.user
     
     logger.debug "@current_model.id : " + @current_model.id.to_s
-    logger.debug "@workspace.id : " + @workspace.id.to_s
-    logger.debug "@current_user.id : " + @current_user.id.to_s
+    logger.debug "@workspace.id : "     + @workspace.id.to_s
+    logger.debug "@current_user.id : "  + @current_user.id.to_s
     
     @current_log_tools.in_process()
     render :text => 'success'
@@ -28,16 +28,16 @@ class LogToolsController < ApplicationController
   
   # scills -----------------------------------------------------------------------------------
   def scills_launch
-    @current_log_tools = LogTool.find(params[:log_id])
-    @current_model = @current_log_tools.sc_model
-    @current_calcul = @current_log_tools.calcul_result
+    @current_log_tools        = LogTool.find(params[:log_id])
+    @current_model            = @current_log_tools.sc_model
+    @current_calcul           = @current_log_tools.calcul_result
     @current_workspace_member = @current_log_tools.workspace_member
-    @workspace    = @current_workspace_member.workspace
-    @current_user = @current_workspace_member.user
+    @workspace                = @current_workspace_member.workspace
+    @current_user             = @current_workspace_member.user
     
     logger.debug "@current_model.id : " + @current_model.id.to_s
-    logger.debug "@workspace.id : " + @workspace.id.to_s
-    logger.debug "@current_user.id : " + @current_user.id.to_s
+    logger.debug "@workspace.id : "     + @workspace.id.to_s
+    logger.debug "@current_user.id : "  + @current_user.id.to_s
     
     @current_log_tools.in_process()
     render :text => 'success'
@@ -50,11 +50,11 @@ class LogToolsController < ApplicationController
   end
   
   def use_scwal_tool
-    @current_workspace = Workspace.find(params[:sc_model_id])
+    @current_workspace  = Workspace.find(params[:sc_model_id])
     @current_workspace.use_scwal_tool(params)
-    @workspace_id = params[:sc_model_id]
-    #@page = :home # Pour afficher le menu en selected.
-    render :text => 'success'
+    @workspace_id       = params[:sc_model_id]
+    #@page              = :home # Pour afficher le menu en selected.
+    render :text        => 'success'
   end
   
   

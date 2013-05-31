@@ -13,8 +13,8 @@ class ScApplicationController < InheritedResources::Base
   end
   
   def index
-    @workspace  = current_workspace_member.workspace
-    @applications  = Application.find(:all, :conditions => {:state => "active"})
+    @workspace      = current_workspace_member.workspace
+    @applications   = Application.find(:all, :conditions => {:state => "active"})
   end
   
   
