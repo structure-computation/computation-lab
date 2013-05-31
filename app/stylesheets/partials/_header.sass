@@ -62,8 +62,8 @@ header
     #header_top      
       #header_logo
         +columns($header-logo-cols)
-        background  : transparent url('/images/Logo_StructureComputation_gris.png') no-repeat top left
-        height      : image-height('Logo_StructureComputation_gris.png')
+        // background  : transparent url('/images/Logo_StructureComputation_gris.png') no-repeat top left
+        //  height      : image-height('Logo_StructureComputation_gris.png')
         margin      : $gap-top-page-header 0px 0px 0px
         padding     : $gap-bottom-logo-menu 0px 0px 0px
         
@@ -79,6 +79,8 @@ header
           padding-right  : image-width($separator-image) + $gap-workspace-name-separator + 1
           padding-bottom : 20px // Nécéssaire pour pourvoir afficher le cadenas en entier
           padding-top    : $gap-top-page-header
+          a
+            color         : $color-font-header
 
         #user_information
           display      : inline-block  

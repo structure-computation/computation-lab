@@ -7,38 +7,28 @@
       #header_user_connected  
         - if user_signed_in?
           #user_icon
-            = link_to image_tag( 'gnome-logout-icone-4198-16.png'), destroy_user_session_path, :target => "SecondaryWindow"
-          /#user_icon
-          /  = link_to image_tag( 'info-utilisateur-icone-5701-16.png'), edit_registration_path(current_user), :target => "SecondaryWindow"
+            = link_to image_tag( 'gnome-logout-icone-4198-16.png'), destroy_user_session_path,  :target => "SecondaryWindow"
           #user_information
-            = link_to current_user.full_name, edit_registration_path(current_user), :target => "SecondaryWindow"
+            - user_identity = current_user.full_name.blank? ? current_user.email : current_user.full_name
+            = link_to user_identity, edit_registration_path(current_user),             :target => "SecondaryWindow"
           
-          /#user_information
-          /  Project : &nbsp
-          /  - if current_workspace_member.workspace
-          /    = link_to @current_model.name, workspace_sc_model_path(current_workspace_member.workspace, @current_model), :target => "SecondaryWindow"
-          /  - else
-          /    Project name
 
-          #user_icon 
-            = link_to image_tag( 'catalogue-icone-4673-16.png'),  workspaces_path(), :target => "SecondaryWindow"
-          /-if current_workspace_member.manager?
-          /  #user_icon 
-          /    = link_to image_tag( 'carte-icone-8223-16.png'), workspace_path(current_workspace_member.workspace), :target => "SecondaryWindow"
-          /#user_icon 
-          /  = link_to image_tag( 'carte-icone-8223-16-new.png'), new_workspace_path, :target => "SecondaryWindow"
-          /-if current_workspace_member.manager?
-          /  #user_icon 
-          /    = link_to image_tag( 'ajouter-une-liste-personne-utilisateur-icone-8190-16.png'), new_workspace_member_path(current_workspace_member.workspace), :target => "SecondaryWindow"
-          #user_information
+ 
+          -#  = link_to "",  workspaces_path(),            :target => "SecondaryWindow"
+
+          #header_workspace_name
             Workspace : &nbsp
+            %select#current_workspace_selector
+              -# On place systématiquement le WS de travail actuel en premier. 
+              %option{:label=>current_workspace_member.workspace.name, :value=>current_workspace_member.workspace.id, :selected => true}
+              - current_user.workspaces.select{|ws| ws.id != current_workspace_member.workspace.id}.each do |workspace|
+                %option{:label=>workspace.name,:value=>workspace.id}
+              
             - if current_workspace_member.manager?
-              = link_to current_workspace_member.workspace.name, workspace_path(current_workspace_member.workspace, :anchor => 'Compte'), :target => "SecondaryWindow"
-            - else
-              = current_workspace_member.workspace.name
-    
-          #user_information
-            Account : &nbsp
+              = link_to "Manage", workspace_path(current_workspace_member.workspace, :anchor => 'Compte'), :target => "SecondaryWindow"
+                
+          #token_balance_information
+            Token balance : &nbsp
             = current_workspace_member.workspace.token_account.solde_token
 
 

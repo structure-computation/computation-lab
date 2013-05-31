@@ -43,7 +43,7 @@ header .container #header_top #header_logo {
   float: left;
   width: 32.667%;
   margin-right: 1.0%;
-  background: transparent url("/images/Logo_StructureComputation_gris.png") no-repeat top left;
+  //background: transparent url("/images/Logo_StructureComputation_gris.png") no-repeat top left;
   height: 42px;
   margin: 10px 0px 0px 0px;
   padding: 10px 0px 0px 0px;
@@ -311,7 +311,7 @@ header#calcul .container #header_logo {
   float: left;
   width: 32.667%;
   margin-right: 1.0%;
-  background: transparent url("/images/Logo_StructureComputation_gris.png") no-repeat top left;
+  //background: transparent url("/images/Logo_StructureComputation_gris.png") no-repeat top left;
   height: 42px;
   margin: 5px 0px 5px 0px;
 }
@@ -776,7 +776,7 @@ footer .container {
   text-align: center;
   margin-top: 50px;
   height: 50px;
-  background: url("/images/Logo_StructureComputation_gris.png") no-repeat bottom center;
+  //background: url("/images/Logo_StructureComputation_gris.png") no-repeat bottom center;
   //border: 1px solid #262626;
 }
 
