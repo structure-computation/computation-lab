@@ -1,8 +1,0 @@
--# encoding: utf-8 
-.tab_content.js_tab_content
-  #tab_1_content
-    = render :partial => "links/details/link_generic_information", :locals => { :link => @link, :disabled => @disable }
-  #tab_2_content
-    = render :partial => "links/details/link_complexe_information", :locals => { :link => @link, :disabled => @disable }
-
-  = coffeescript_include_tag "manage_tab"
