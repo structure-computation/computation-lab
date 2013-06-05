@@ -38,7 +38,7 @@ class WorkspacesController < InheritedResources::Base
     if @last_credit
       created_at = @last_credit.created_at 
     else
-      new_solde1_token_account = self.solde_token_accounts.new()
+      new_solde1_token_account = @workspace.token_account.solde_token_accounts.new()
       new_solde1_token_account.log_tool_id = -1
       new_solde1_token_account.credit_id = -1
       new_solde1_token_account.credit_token = 0
