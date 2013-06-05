@@ -1,30 +1,80 @@
+-# encoding: utf-8 
 / partie header commune à toute les pages, CSproject.selected
 
 %header
   .container
     #header_top
-      #header_logo
       #header_user_connected  
-        #user_information
-          - if user_signed_in?  # Le cadenas est placé en premier car on aligne de droite à gauche dans cette zone. 
-            -#logo_session_lock  
-            %p#user_name
-              = link_to current_user.full_name, scratch_user_path(current_user)
-              %br
-              = link_to "déconnexion", destroy_user_session_path,  :id => "disconnect_link"
+        - if user_signed_in?
+          #user_icon
+            = link_to image_tag( 'gnome-logout-icone-4198-16.png'), destroy_user_session_path  
+          /#user_icon
+          /  = link_to image_tag( 'info-utilisateur-icone-5701-16.png'), edit_registration_path(current_user)
+          #user_information
+            = link_to current_user.full_name, edit_registration_path(current_user), :target => "_blank"
           
-            -#header_top_cadena
-        %p#header_workspace_name
-          - if user_signed_in? && current_workspace_member 
-            = current_workspace_member.workspace.name
-          - else
-            selectionner un workspace   
-    #header_bottom
-      - if user_signed_in? && current_workspace_member
-        = render :partial => "layouts/main_menu" 
-      - else
-        %p 
-          %br
+          /#user_icon 
+          /  = link_to image_tag( 'catalogue-icone-4673-16.png'), workspace_sc_models_path(current_workspace_member.workspace) 
+          /#user_icon 
+          /  = link_to image_tag( 'carte-icone-8223-16-new.png'), new_workspace_sc_model_path(current_workspace_member.workspace)
+          /#user_icon 
+          /  = link_to image_tag( 'sharepoint-icone-6402-16.png'), share_workspace_sc_model_path(current_workspace_member.workspace, current_workspace_sc_model) 
+          
+          /#user_information
+          /  Project : &nbsp
+          /  - if current_workspace_member.workspace
+          /    = link_to current_workspace_sc_model.name, workspace_sc_model_path(current_workspace_member.workspace, current_workspace_sc_model)
+          /  - else
+          /    Project name
+          
+          #user_icon 
+            = link_to image_tag( 'proprietes-session-icone-5116-16.png'), ecosystem_mecanic_workspace_path(current_workspace_member.workspace) 
+          #user_icon 
+            = link_to image_tag( 'catalogue-icone-4673-16.png'), workspaces_path()
+          /-if current_workspace_member.manager?
+          /  #user_icon 
+          /    = link_to image_tag( 'carte-icone-8223-16.png'), workspace_path(current_workspace_member.workspace)
+          /#user_icon 
+          /  = link_to image_tag( 'carte-icone-8223-16-new.png'), new_workspace_path
+          /-if current_workspace_member.manager?
+          /  #user_icon 
+          /    = link_to image_tag( 'ajouter-une-liste-personne-utilisateur-icone-8190-16.png'), new_workspace_member_path(current_workspace_member.workspace)
+          #user_information
+            Workspace : &nbsp
+            - if current_workspace_member.manager?
+              = link_to current_workspace_member.workspace.name, workspace_path(current_workspace_member.workspace, :anchor => 'Compte')
+            - else
+              = current_workspace_member.workspace.name
+
+          /-if current_workspace_member.manager?
+          /  #user_icon
+          /    = link_to image_tag( 'base-de-donnees-ajouter-icone-7539-16.png'),workspace_forfaits_path(current_workspace_member.workspace) # :controller => "forfait", :action => "index"
+          #user_information
+            Account : &nbsp
+            = current_workspace_member.workspace.token_account.solde_token
+    /#header_top
+    /  /#header_logo
+    /  #header_user_connected  
+    /    #user_information
+    /      - if user_signed_in?  # Le cadenas est placé en premier car on aligne de droite à gauche dans cette zone. 
+    /        -#logo_session_lock  
+    /        %p#user_name
+    /          = link_to current_user.full_name, scratch_user_path(current_user)
+    /          %br
+    /          = link_to "déconnexion", destroy_user_session_path,  :id => "disconnect_link"
+    /      
+    /        -#header_top_cadena
+    /    %p#header_workspace_name
+    /      - if user_signed_in? && current_workspace_member 
+    /        = current_workspace_member.workspace.name
+    /      - else
+    /        selectionner un workspace   
+    /#header_bottom
+    /  - if user_signed_in? && current_workspace_member
+    /    = render :partial => "layouts/main_menu" 
+    /  - else
+    /    %p 
+    /      %br
             
 
 / fin partie header

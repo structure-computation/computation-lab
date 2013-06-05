@@ -108,11 +108,17 @@ SCViews.InterfaceListView = Backbone.View.extend
     'click button.cancel_filter'            : 'cancelFilter'
     'click button.view_filter'              : 'viewInterfaces'
     
-  ############################################################################# Filter functions - start
+  # ---------------------------------------------------------------------------Filter functions - start
 
   # Set if the filter is between two "pieces" or two "materials"
   setBetweenFilter: (event) ->
     @filterValue = event.srcElement.value
+    if @filterValue == "ids"
+      #$('input#first_input').size() = 10
+      $('input#second_input').hide()
+    else
+      #$('input#first_input').size() = 4
+      $('input#second_input').show()
   
   executeFilter: ->
     $(@el).find("button.cancel_filter").removeAttr('disabled') # Enable the button to cancel the filter
@@ -130,6 +136,8 @@ SCViews.InterfaceListView = Backbone.View.extend
       @filterBetweenMaterials(firstID, secondID)
     else if @filterValue == "pieces"
       @filterBetweenPieces(firstID, secondID)
+    else if @filterValue == "ids"
+      @filterId(firstID)
 
     # Remove assign or unassign interface from filter
     interfaceToFilter = $(@el).find('input:radio[name=interface_assigned]:checked').val()
@@ -182,6 +190,72 @@ SCViews.InterfaceListView = Backbone.View.extend
         $(interfaceView.el).hide() 
         interfaceView.hideView()
 
+
+  filterId: (firstID) ->
+    filter = $(@el).find('input#first_input' ).val() 
+    group = filter.split(",")
+    #alert group.length
+    for group_id in group
+        group_modulo = group_id.split("%")
+        #alert group_modulo.length
+        if group_modulo.length==2
+            range = group_modulo[0].split("-")
+            modulo_id = parseInt(group_modulo[1])
+            modulo = 0
+            out = true
+            while out
+                piece_id = []
+                if range.length==2
+                    piece_id[0] = parseFloat(range[0]) + modulo
+                    piece_id[1] = parseFloat(range[1]) + modulo
+                    _.each @interfaceViews, (interfaceView) ->
+                        if interfaceView.model.get('id') >= piece_id[0] and interfaceView.model.get('id') <= piece_id[1]
+                          @filteredInterfaces.push interfaceView
+                        else
+                          $(interfaceView.el).hide()
+                          interfaceView.hideView()
+                else if range.length==1
+                    piece_id[0] = parseFloat(range[0]) + modulo
+                    _.each @interfaceViews, (interfaceView) ->
+                      if interfaceView.model.get('id') == piece_id[0]
+                        @filteredInterfaces.push interfaceView
+                      else
+                        $(interfaceView.el).hide()
+                        interfaceView.hideView()
+                modulo += modulo_id
+                if (parseFloat(range[0]) + modulo) > @interfaceViews.length
+                    #alert modulo
+                    #alert parseFloat(piece_id[0]) + modulo
+                    #alert @interfaceViews.length
+                    out = false
+                    break
+                    
+        else if group_modulo.length==1
+            range = group_modulo[0].split("-")
+            piece_id = []
+            if range.length==2
+                piece_id[0] = parseFloat(range[0])
+                piece_id[1] = parseFloat(range[1])
+                _.each @interfaceViews, (interfaceView) ->
+                  if interfaceView.model.get('id') >= piece_id[0] and interfaceView.model.get('id') <= piece_id[1]
+                    @filteredInterfaces.push interfaceView
+                  else
+                    $(interfaceView.el).hide()
+                    interfaceView.hideView()
+            else if range.length==1
+                piece_id[0] = parseFloat(range[0])
+                _.each @interfaceViews, (interfaceView) ->  
+                  if interfaceView.model.get('id') == piece_id[0]
+                    @filteredInterfaces.push interfaceView
+                  else
+                    $(interfaceView.el).hide()
+                    interfaceView.hideView() 
+        
+        
+        
+        
+        
+        
   cancelFilter: ->
     $("button.assign_all, button.unassign_all, button.cancel_filter").attr('disabled','disabled')
     @filteredInterfaces = []
@@ -193,7 +267,7 @@ SCViews.InterfaceListView = Backbone.View.extend
   viewInterfaces: ->
     SCVisu.visualisation.view_filter("interfaces")   
     
-  ############################################################################# Filter functions - end
+  #--------------------------------------------------------------------------------------------------------# Filter functions - end
   # If the checkbox is checked, hide all assigned interfaces
   toggleAssignedinterfaces: (event) ->
     if event.srcElement.checked

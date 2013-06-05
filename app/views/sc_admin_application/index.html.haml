@@ -1,0 +1,49 @@
+-content_for :left_top do
+  .left_submenu
+    %h2.grey
+      Menu
+    %ul
+      %li.LM_pic_new_model
+        /= link_to "Nouvelle date de facturation", :controller => :sc_admin_application, :action => :new_applications_bill
+
+-content_for :right_top do
+  %h2.grey
+    Liste des application
+  %div
+    = render :partial => "search_filter"
+
+-content_for :workspace_content do
+  %table.grey#applications_table
+    %thead
+      %tr
+        /%th.no_sorter
+        %th Id
+        %th Nom
+        /%th Description
+        %th powered_by
+        /%th prix d achat
+        %th Utilisation globale
+        /%th Prix de distribution
+        %th Utilisation depuis la dernière facture
+        /%th Statut
+        %th.no_sorter Actions
+    %tbody
+      - @applications.each do |app|
+        %tr
+          /%td.escape_search.details_link= link_to "Détails", sc_admin_bill_path(bill.id)
+          %td= app.id
+          %td= app.name
+          /%td= app.description
+          %td= app.powered_by
+          /%td= app.registration_token
+          %td= app.utilization_token
+          /%td= app.distribution_token
+          %td= app.exploitation_token
+          /%td= app.state
+          %td.action_on_table.escape_search
+            %ul
+              %li
+                = link_to "active", :controller => :sc_admin_application, :action => :activate, :id => app.id
+              %li 
+                = link_to "pause", :controller => :sc_admin_application, :action => :pause, :id => app.id
+         

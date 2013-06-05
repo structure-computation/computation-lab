@@ -1,37 +1,31 @@
--content_for :left_top do
-  .left_submenu
-    %h2.grey
-      Menu
-    %ul
-      %li.LM_pic_new_model
-        = link_to "Retour au modèle", workspace_sc_model_path(@workspace, @sc_model, :anchor => 'Utilisateurs')
+-# encoding: utf-8 
 
--content_for :right_top do
-  %h2.grey
-    Liste des utilisateurs de workspace
-  %div
+
+-content_for :workspace_content do
+  .grey
+    %h2
+      Worspace members
     .search_filter
       %p
         %label{:for => "search_filter"} Recherche
         %input#search_filter{:type => "text"}
-
--content_for :workspace_content do
-  %table#members_table.grey
-    %thead
-      %tr
-        %th.no_sorter
-        %th Mail
-        %th Nom
-        %th Role
-        %th Status
-    %tbody
-      - @members_list.each do |member|
+    
+    %table#members_table.grey
+      %thead
         %tr
-          %td.escape_search.details_link= link_to "ajouter", :controller => :sc_models, :action => :valid_share, :id => @sc_model.id, :member_id => member.id
-          %td= member.email
-          %td= member.firstname
-          %td= member.role
-          %td= member.state
+          %th.no_sorter
+          %th Mail
+          %th Nom
+          %th Role
+          %th Status
+      %tbody
+        - @members_list.each do |member|
+          %tr
+            %td.escape_search.details_link= link_to "ajouter", :controller => :sc_models, :action => :valid_share, :id => @sc_model.id, :member_id => member.id
+            %td= member.email
+            %td= member.firstname
+            %td= member.role
+            %td= member.state
 
 :coffeescript
     $( ->

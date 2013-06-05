@@ -1,6 +1,7 @@
+-# encoding: utf-8 
 %p
 = semantic_form_for @user, :url => {:controller => "scratch_user", :action => "create"}  do |form|
-  %table.grey#workspace_information_table
+  %table#workspace_information_table
     %tr
       %th= form.label :email
       %td= form.text_field :email
@@ -13,5 +14,7 @@
     %tr
       %th= form.label :lastname
       %td= form.text_field :lastname
-   
-  = form.buttons
+
+  %button.login_button.yellow_button{ :type => "submit"} 
+    create
+  /= form.buttons

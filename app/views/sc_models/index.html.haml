@@ -1,41 +1,44 @@
--content_for :left_top do
-  .left_submenu
-    %h2.grey
-      Menu
-    %ul
-      %li.LM_pic_new_model
-        = link_to "Nouveau modèle", new_workspace_sc_model_path  
-
--content_for :right_top do
-  %h2.grey
-    Liste des modèles 
-  %div
-    = render :partial => "search_filter"
+-# encoding: utf-8 
+/-content_for :left_top do
+/  .left_submenu
+/    %h2.grey
+/      Menu
+/    %ul
+/      %li.LM_pic_new_model
+/        = link_to "Nouveau modèle", new_workspace_sc_model_path  
+/
+/-content_for :right_top do
+/  %h2.grey
+/    Liste des modèles 
+/  %div
+/    = render :partial => "search_filter"
 
 -content_for :workspace_content do
-  %table.grey#models_table
-    %thead
-      %tr
-        %th.no_sorter
-        %th Nom
-        %th ID
-        -# Suppression de la colonne "Projet" %th Projet
-        %th Résultat
-        %th.no_sorter Actions
-    %tbody
-      - @sc_models.each do |sc_model|
+  .grey
+    %h2
+      Project list
+    = render :partial => "search_filter"
+    %table.grey#models_table
+      %thead
         %tr
-          %td.escape_search.details_link= link_to 'Détails', workspace_sc_model_path(@workspace, sc_model)
-          %td.name=           sc_model.name ? sc_model.name : 'Undefined'
-          %td.id=             sc_model.id
-          -# Suppression de la colonne "Projet" %td
-          %td
-          -#%td.result=         sc_model.results
-          %td.action_on_table.escape_search
-            %ul
-              %li
-                %a Visualisation
-              %li
-                %a Calcul
-              %li
-                = button_to 'Supprimer', workspace_sc_model_path(@workspace, sc_model), :method => :delete, :confirm => "Êtes-vous sûr ?"
+          %th.no_sorter
+          %th Nom
+          %th ID
+          -# Suppression de la colonne "Projet" %th Projet
+          %th Résultat
+          %th.no_sorter Actions
+      %tbody
+        - @sc_models.each do |sc_model|
+          %tr
+            %td.escape_search.details_link= link_to "Go", :controller => "ecosystem_mecanic", :action => "index", :sc_model_id => sc_model.id, :target => "_blank"
+            %td.name=           sc_model.name ? sc_model.name : 'Undefined'
+            %td.id=             sc_model.id
+            -# Suppression de la colonne "Projet" %td
+            %td
+            -#%td.result=         sc_model.results
+            %td.action_on_table.escape_search
+              %ul
+                %li
+                  = link_to 'gérer', workspace_sc_model_path(@workspace, sc_model)
+                %li
+                  = button_to 'Supprimer', workspace_sc_model_path(@workspace, sc_model), :method => :delete, :confirm => "Êtes-vous sûr ?"

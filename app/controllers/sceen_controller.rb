@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class SceenController < ApplicationController
   before_filter :authenticate_user!
   layout "application_ext_app"
@@ -73,12 +75,10 @@ class SceenController < ApplicationController
     host = '192.168.38.241'
     port = 8888                           # Default HTTP port
     socket = TCPSocket.open(host,port)  # Connect to server
-    #logger.debug  request.method + " " + request.fullpath + " \n\n" + request.raw_post 
+    #logger.debug  "request.method = " + request.method + " " + request.fullpath + " \n\n" + request.raw_post 
     length = request.raw_post.length
-    logger.debug  "request.raw_post.length = " + length.to_s
-    #file = request.raw_post.to_s
-    #logger.debug  "request.raw_post = " + file
-    logger.debug  request.method + " " + request.fullpath + " Content-Length: " + length.to_s + " \n\n" + request.raw_post
+    #logger.debug  "request.raw_post.length = " + length.to_s
+    #logger.debug  request.method + " " + request.fullpath + " Content-Length: " + length.to_s + " \n\n" + request.raw_post
     socket.write( request.method + " " + request.fullpath + " Content-Length: " + length.to_s + " \n\n" + request.raw_post ) # Send request
     response = socket.read              # Read complete response
     socket.close

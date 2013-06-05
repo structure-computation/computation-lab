@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class ScAdminCompanyController < InheritedResources::Base
   before_filter :authenticate_user!
   before_filter :valid_admin_user

@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Credit < ActiveRecord::Base
   belongs_to :token_account
   belongs_to :forfait

@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class WorkspaceRelationshipsController < InheritedResources::Base   
   belongs_to :workspace
   belongs_to :related_workspace, :class_name => "Workspace"

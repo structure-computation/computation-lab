@@ -1,15 +1,8 @@
--content_for :left_top do
-  .left_submenu
-    %h2.grey
-      Menu
-    %ul
-      %li.manage_pic_nouveau_membre
-        =link_to 'Page de login', new_session_path(resource_name)
+-# encoding: utf-8 
 
--content_for :right_top do
-  %h2.grey
-    Change your password 
-  .grey
+-content_for :workspace_content do
+  %div.loginMarge
+  %div.grey.centered
     = form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f|
       #login_format
         = f.hidden_field :reset_password_token
@@ -20,5 +13,7 @@
         = f.password_field :password_confirmation
         %p
         %p= f.submit "Change my password"
-        %p
-          %br
+
+    %br
+    %div.loginLeft
+      =link_to "back to login page", destroy_user_session_path

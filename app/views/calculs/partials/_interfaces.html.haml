@@ -1,3 +1,4 @@
+-# encoding: utf-8 
 #interfaces
   .filter
     %h2.grey Filtre
@@ -13,6 +14,7 @@
       %select.between_two
         %option{:value => "materials"}    Entre deux matériaux
         %option{:value => "pieces"}       Entre deux pièces
+        %option{:value => "ids"}          Par id
       %input#first_input{:type => "text", :size => 4}
       \-
       %input#second_input{:type => "text", :size => 4}

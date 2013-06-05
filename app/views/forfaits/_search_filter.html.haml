@@ -1,0 +1,27 @@
+-# encoding: utf-8 
+.search_filter
+  %p
+    %label{:for => "search_filter"} Recherche
+    %input#search_filter{:type => "text"}
+    %button#more_details.close.yellow_button Recherche avancée
+
+  #sc_models_advanced_search.advanced_search
+    %p
+      %label{:for => "name_search_filter"} Nom
+      %input#name_search_filter{:type => "text"}
+    %p      
+      %label{:for => "id_search_filter"} ID
+      %input#id_search_filter{:type => "text"}    
+    %p
+      %label{:for => "project_search_filter"} Projets
+      %input#project_search_filter{:type => "text"}
+    %p
+      %label{:for => "result_generic_search_filter"} Résultats
+      %input#result_generic_search_filter{:type => "text"}
+
+
+:coffeescript
+  $( ->
+    $('#forfaits_table').tablesorter()
+    searchFilter("#forfaits_table", "search_filter")
+  )

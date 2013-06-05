@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class MemoryAccount < ActiveRecord::Base
   
   belongs_to :workspace

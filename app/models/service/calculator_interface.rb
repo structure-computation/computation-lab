@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 
 
 # Classe utilisee sur le calculateur. Elle comporte les fonction et constantes permettant d'appeller en ligne de commande les differents outils 

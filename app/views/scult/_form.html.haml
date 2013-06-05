@@ -1,5 +1,6 @@
+-# encoding: utf-8 
 %p
-- semantic_form_for [@workspace, @sc_model], :url => {:controller => "scult", :action => "create"}, :html => {:multipart => true, :method => :post} do |form|
+= semantic_form_for [@workspace, @sc_model], :url => {:controller => "scult", :action => "create"}, :html => {:multipart => true, :method => :post} do |form|
   %table.grey#workspace_information_table
     %tr
       %th= form.label :dimension

@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class ScoreController < ApplicationController
   before_filter :authenticate_user!
   layout "application_ext_app"
@@ -29,7 +31,7 @@ class ScoreController < ApplicationController
     port = 8888                           # Default HTTP port
     socket = TCPSocket.open(host,port)  # Connect to server
     length = request.raw_post.length
-    file = request.raw_post.to_s
+    logger.debug  "request.method = " + request.method + " " + request.fullpath + " \n\n" + request.raw_post 
     logger.debug  "request.raw_post.length = " + length.to_s
     logger.debug  "request.raw_post = " + file
     socket.write( request.method + " " + request.fullpath + " Content-Length: " + length.to_s + " \n\n" + request.raw_post ) # Send request
@@ -38,6 +40,4 @@ class ScoreController < ApplicationController
     logger.debug response
     render :text => response
   end
-  
-  
 end

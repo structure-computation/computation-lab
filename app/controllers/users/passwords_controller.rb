@@ -1,7 +1,11 @@
+# encoding: utf-8
+
 class Users::PasswordsController < Devise::PasswordsController
   layout 'login'
   
-  include Devise::Controllers::InternalHelpers
+  # include Devise::Controllers::InternalHelpers
+  # TODO: Vérifier que la suppression de la ligne ci-dessus (passage à une nouvelle version de devise)
+  # ne perturbe pas le fonctionnement.
 
   # GET /resource/password/new
   def new

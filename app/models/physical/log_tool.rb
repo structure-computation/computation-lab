@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class LogTool < ActiveRecord::Base
   
   belongs_to  :sc_model
@@ -158,6 +160,22 @@ class LogTool < ActiveRecord::Base
     logger.debug "nb_token = " + self.nb_token.to_s
     
     self.real_time = 3600
+    self.finish()
+    self.token_account.valid_log_tool(self.id)
+    self.reserve_token()
+  end
+  
+  # décompte du temps d'utilisation des outils ---------------------------------------------------------------
+  def use_tool_type(type_app)
+    if type_app == 0                    # gratuis
+      self.nb_token = 0
+    elsif type_app == 1                 # fixe
+      self.nb_token = 1
+    elsif type_app == 2                 # nb minute/proc
+      self.nb_token = ((self.real_time * self.cpu_allocated)/60).ceil+1
+    end
+    logger.debug "nb_token = " + self.nb_token.to_s
+    
     self.finish()
     self.token_account.valid_log_tool(self.id)
     self.reserve_token()

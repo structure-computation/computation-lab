@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class ScModel < ActiveRecord::Base
   require 'json'
   require 'find'
@@ -307,6 +309,23 @@ class ScModel < ActiveRecord::Base
       @new_log_tool_in_use.workspace_member = current_workspace_member
       return @new_log_tool_in_use.use_tool_for_one_hour(name_tool)
     end
+  end
+  
+  def use_scwal_tool(params)
+    #name_tool = "scills, sceen, score..."
+    #"App=TestItem&typeApp=1&time=10&proc=2&wmid=2&sc_model_id=200"
+    log_type = params[:app_type]
+    log_type_app = 2 #params[:typeApp]
+    log_time = params[:app_time]
+    log_nbproc = params[:app_cpu]
+    
+    @new_log_tool = self.log_tools.build()
+    @new_log_tool.token_account = self.workspace.token_account
+    @new_log_tool.workspace_member = self.workspace_members.find(:first)
+    @new_log_tool.log_type = log_type
+    @new_log_tool.cpu_allocated = log_nbproc
+    @new_log_tool.real_time = log_time
+    @new_log_tool.use_tool_type(log_type_app)
   end
   
   def request_mesh_analysis

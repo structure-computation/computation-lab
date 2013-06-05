@@ -1,16 +1,8 @@
+-# encoding: utf-8 
 
--content_for :left_top do
-  .left_submenu
-    %h2.grey
-      Menu
-    %ul
-      %li.manage_pic_nouveau_membre
-        =link_to 'fermer', scratch_user_path(current_user)
-
--content_for :right_top do
-  %h2.grey
-    Edit #{resource_name.to_s.humanize}
-  .grey
+-content_for :workspace_content do
+  %div.loginMarge
+  %div.grey.centered
     = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
       #login_format
         %p
@@ -35,4 +27,3 @@
         %button.login_button.yellow_button{ :type => "submit"}
           Update
         %p
-          %br

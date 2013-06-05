@@ -1,0 +1,122 @@
+-# encoding: utf-8 
+%link{ :href => "/javascripts/EcosystemScience/Soja/ModelEditor.css", :rel => "stylesheet", :type => "text/css" }
+%link{ :href => "/javascripts/EcosystemScience/Soja/TreeView.css", :rel => "stylesheet", :type => "text/css" }
+%link{ :href => "/javascripts/EcosystemScience/Soja/Color.css", :rel => "stylesheet", :type => "text/css" }
+%link{ :href => "/javascripts/EcosystemScience/Soja/TreeApp.css", :rel => "stylesheet", :type => "text/css" }
+%link{ :href => "/javascripts/EcosystemScience/Soja/LayoutManager.css", :rel => "stylesheet", :type => "text/css" }
+%link{ :href => "/javascripts/EcosystemScience/Soja/CodeEditor.css", :rel => "stylesheet", :type => "text/css" }
+%link{ :href => "/javascripts/EcosystemScience/Soja/FileSystem.css", :rel => "stylesheet", :type => "text/css" }
+%link{ :href => "/javascripts/EcosystemScience/gen/EcosystemScience.css", :rel => "stylesheet", :type => "text/css" }
+%link{ :href => "/stylesheets/main_ext_app.css", :rel => "stylesheet", :type => "text/css" }
+
+%link{ :href => "/javascripts/EcosystemScience/CodeMirror-2.22/lib/codemirror.css", :rel => "stylesheet", :type => "text/css" }
+%link{ :href => "/javascripts/EcosystemScience/CodeMirror-2.22/lib/util/dialog.css", :rel => "stylesheet", :type => "text/css" }
+
+%script{ :src => "/javascripts/EcosystemScience/Soja/Soja.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/EcosystemScience/Soja/DomHelper.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/EcosystemScience/Soja/TreeView.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/EcosystemScience/Soja/BrowserState.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/EcosystemScience/Soja/LayoutManager.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/EcosystemScience/Soja/ModelEditor.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/EcosystemScience/Soja/FileSystem.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/EcosystemScience/Soja/Color.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/EcosystemScience/Soja/CodeEditor.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/EcosystemScience/Soja/Geometry.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/EcosystemScience/Soja/UndoManager.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/EcosystemScience/Soja/Theme.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/EcosystemScience/Soja/TypedArray.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/EcosystemScience/Soja/CanvasManager.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/EcosystemScience/Soja/Animation.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/EcosystemScience/Soja/TreeApp.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/EcosystemScience/gen/Browse.js", :type => "text/javascript" }
+
+%script{ :src => "/javascripts/EcosystemScience/gen/EcosystemMecanicModuls.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/EcosystemScience/gen/Gmsh.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/EcosystemScience/gen/Correli.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/EcosystemScience/gen/ScillsResult.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/EcosystemScience/gen/UnvReader2D.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/EcosystemScience/gen/UnvReader3D.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/EcosystemScience/gen/Scult2D.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/EcosystemScience/gen/Scult3D.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/EcosystemScience/gen/Scills3D.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/EcosystemScience/gen/Function.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/EcosystemScience/gen/CsvReader.js", :type => "text/javascript" }
+
+
+%script{ :src => "/javascripts/EcosystemScience/CodeMirror-2.22/lib/codemirror.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/EcosystemScience/CodeMirror-2.22/mode/xml/xml.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/EcosystemScience/CodeMirror-2.22/lib/util/dialog.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/EcosystemScience/CodeMirror-2.22/mode/javascript/javascript.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/EcosystemScience/CodeMirror-2.22/mode/ruby/ruby.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/EcosystemScience/CodeMirror-2.22/lib/util/searchcursor.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/EcosystemScience/CodeMirror-2.22/lib/util/search.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/EcosystemScience/CodeMirror-2.22/lib/util/match-highlighter.js", :type => "text/javascript" }
+
+/%script{ :src => "/javascripts/EcosystemScience/Touchable-jQuery-Plugin/touchable.js", :type => "text/javascript" }
+
+%script{ :src => "/javascripts/EcosystemScience/gen/EcosystemScience.js", :type => "text/javascript" }
+
+%header
+  .container
+    #header_top
+      #header_user_connected  
+        - if user_signed_in?
+          #user_icon
+            = link_to image_tag( 'gnome-logout-icone-4198-16.png'), destroy_user_session_path, :target => "_blank"
+          /#user_icon
+          /  = link_to image_tag( 'info-utilisateur-icone-5701-16.png'), edit_registration_path(current_user), :target => "_blank"
+          #user_information
+            = link_to current_user.full_name, edit_registration_path(current_user), :target => "_blank"
+          
+
+          /#user_icon 
+          /  = link_to image_tag( 'catalogue-icone-4673-16.png'), workspace_sc_models_path(current_workspace_member.workspace), :target => "_blank" 
+          /#user_icon 
+          /  = link_to image_tag( 'carte-icone-8223-16.png'), workspace_sc_model_path(current_workspace_member.workspace, @current_model), :target => "_blank"
+          /#user_icon 
+          /  = link_to image_tag( 'carte-icone-8223-16-new.png'), new_workspace_sc_model_path(current_workspace_member.workspace), :target => "_blank"
+          /#user_icon 
+          /  = link_to image_tag( 'sharepoint-icone-6402-16.png'), share_workspace_sc_model_path(current_workspace_member.workspace, current_workspace_sc_model), :target => "_blank"
+          /#user_information
+          /  Project : &nbsp
+          /  - if current_workspace_member.workspace
+          /    = link_to @current_model.name, workspace_sc_model_path(current_workspace_member.workspace, @current_model), :target => "_blank"
+          /  - else
+          /    Project name
+
+          #user_icon 
+            = link_to image_tag( 'catalogue-icone-4673-16.png'),  workspaces_path(), :target => "_blank"
+          /-if current_workspace_member.manager?
+          /  #user_icon 
+          /    = link_to image_tag( 'carte-icone-8223-16.png'), workspace_path(current_workspace_member.workspace), :target => "_blank"
+          /#user_icon 
+          /  = link_to image_tag( 'carte-icone-8223-16-new.png'), new_workspace_path, :target => "_blank"
+          /-if current_workspace_member.manager?
+          /  #user_icon 
+          /    = link_to image_tag( 'ajouter-une-liste-personne-utilisateur-icone-8190-16.png'), new_workspace_member_path(current_workspace_member.workspace), :target => "_blank"
+          #user_information
+            Workspace : &nbsp
+            - if current_workspace_member.manager?
+              = link_to current_workspace_member.workspace.name, workspace_path(current_workspace_member.workspace, :anchor => 'Compte'), :target => "_blank"
+            - else
+              = current_workspace_member.workspace.name
+    
+          /-if current_workspace_member.manager?
+          /  #user_icon
+          /    = link_to image_tag( 'base-de-donnees-ajouter-icone-7539-16.png'),workspace_forfaits_path(current_workspace_member.workspace) # :controller => "forfait", :action => "index"
+          /#user_information
+          /  Account : &nbsp
+          /  = current_workspace_member.workspace.token_account.solde_token
+
+
+/#correli_header.CorreliHeader
+#main_window.CorreliWindow
+
+%script{ :type => "text/javascript" }
+  SC_MODEL_ID = #{current_workspace_member.workspace.id}
+  SC_WORSPACE_NAME = '#{@current_workspace_member.workspace.name}'
+  SC_WORSPACE_MEMBER_ID = '#{@current_workspace_member.id}'
+  SC_USER_ID = '#{@current_user.id}'
+  SC_USER_NAME = '#{@current_user.full_name}'
+  
+  launch_ecosystem_mecanic(document.getElementById("main_window"));

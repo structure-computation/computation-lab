@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Users::RegistrationsController < Devise::RegistrationsController
   before_filter :authenticate_user!
   layout 'workspace'
@@ -13,7 +15,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       set_flash_message :notice, :updated
       # Line below required if using Devise >= 1.2.0
       sign_in resource_name, resource #, :bypass => true
-      redirect_to after_update_path_for(resource)
+      redirect_to after_update_path_for(resource), :notice => "L'utilisateur a été crée" # TODO traduire 
     else
       clean_up_passwords(resource)
       redirect_to edit_registration_path(@user), :notice => "L'adresse mail déjà utilisé ou le mot de passe est éroné" # TODO traduire 

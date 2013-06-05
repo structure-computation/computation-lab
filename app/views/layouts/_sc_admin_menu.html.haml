@@ -1,3 +1,4 @@
+-# encoding: utf-8 
 / Menu principal de l'application.
 
 %ul#main_menu
@@ -14,8 +15,6 @@
     = link_to 'Bills', :controller => "sc_admin_bill", :action => "index"
   %li{:class => ( @page == :sc_admin_application ? "selected" : "")}
     = link_to 'Applications', :controller => "sc_admin_application", :action => "index"
-  %li{:class => ( @page == :sc_admin_job ? "selected" : "")}
-    = link_to 'Jobs', :controller => "sc_admin_job", :action => "index"
       
 -# TODO: Utiliser un helper pour le style "selected"
 -#   %li{:id => "menu_accueil"     , :class => "main_menu_item " + menu_item_selected_class( @page, :accueil   ) }

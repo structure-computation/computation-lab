@@ -1,20 +1,9 @@
--content_for :left_top do
-  .left_submenu
-    %h2.grey
-      Menu
-    %ul
-      %li.manage_pic_nouveau_membre
-        =link_to 'créer un compte utilisateur', new_scratch_user_path
-      %li.manage_pic_nouveau_membre
-        = link_to "Mot de passe oublié ?", new_password_path(resource_name)
-      %li.manage_pic_nouveau_membre
-        = link_to "réexpedier les instructions de confirmation", new_confirmation_path(resource_name)
+-# encoding: utf-8 
 
 
--content_for :right_top do
-  %h2.grey
-    Loggin 
-  .grey
+-content_for :workspace_content do
+  %div.loginMarge
+  %div.grey.centered
     = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
       #login_format
         %p= f.label :email
@@ -30,5 +19,11 @@
         %button.login_button.yellow_button{ :type => "submit"}
           Se connecter
         -# %a{ :href => "#", :onclick => '$("#user_new").submit();'}
-        %p
-          %br
+    %br
+    %div.loginLeft
+      = link_to "New user ?", new_scratch_user_path
+    %div.loginLeft
+      = link_to "Forgot your password ?", new_password_path(resource_name)
+    %div.loginLeft
+      = link_to "Resend confirmation instructions", new_confirmation_path(resource_name)
+    

@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 # This controller handles the login/logout function of the site.  
 class Users::SessionsController < Devise::SessionsController
   
@@ -6,6 +8,7 @@ class Users::SessionsController < Devise::SessionsController
   def new
     clean_up_passwords(build_resource)
     session[:current_workspace_member_id] = nil
+    session[:current_workspace_sc_model_id] = nil
     render '/devise/sessions/new'
   end
 

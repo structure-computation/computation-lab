@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 
 # Cela ne doit plus être necessaire sous devise. 
 

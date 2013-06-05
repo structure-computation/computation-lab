@@ -1,0 +1,25 @@
+.search_filter
+  %p
+    %label{:for => "search_filter"} Recherche
+    %input#search_filter{:type => "text"}
+    %button#more_details.close.yellow_button Recherche avancée
+
+  #workspaces_advanced_search.advanced_search
+    %p
+      %label{:for => "statut_search_filter"} Nom
+      %input#statut_search_filter{:type => "text"}   
+
+
+:coffeescript
+  $( ->
+    $('#applications_table').tablesorter()
+
+    $('#more_details').click( () ->
+      $('#applications_advanced_search').toggleClass('maximize')
+    )
+
+    advancedSearchFilter("applications_table",
+                         ["statut_search_filter"],
+                         ["statut"])
+    searchFilter("applications_table", "search_filter")
+  )

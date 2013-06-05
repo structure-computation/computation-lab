@@ -1,0 +1,2 @@
+module ScAdminApplicationHelper
+end

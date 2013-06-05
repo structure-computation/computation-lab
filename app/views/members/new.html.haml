@@ -1,10 +1,14 @@
+-# encoding: utf-8 
 -content_for :left_top do
   .left_submenu
     %h2.grey
-      Menu
-    %ul
-      %li.LM_pic_materiau
-        =link_to 'Retour au workspaces', workspace_path(@workspace, :anchor => 'Membres')
+    %ul.grey
+      %li.manage_pic_edit
+        = link_to "Back to workspace", workspace_path(@workspace) 
 
--content_for :workspace_content do        
-  = render "form"
+-content_for :workspace_content do 
+  .grey
+    &nbsp
+    .grey.centered
+      = render "form"
+    &nbsp

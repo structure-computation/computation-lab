@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class CalculsController < ApplicationController
   require 'json'
   require 'socket'

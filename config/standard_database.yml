@@ -1,5 +1,5 @@
 defaults_development: &defaults_development
-  adapter:  mysql
+  adapter:  mysql2
   encoding: utf8
   host:     localhost
   username: structcomp

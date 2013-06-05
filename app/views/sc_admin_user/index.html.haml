@@ -1,3 +1,4 @@
+-# encoding: utf-8 
 -content_for :left_top do
   .left_submenu
     %h2.grey
@@ -13,6 +14,33 @@
     = render :partial => "search_filter"
 
 -content_for :workspace_content do
+  %span
+    liste des administrateurs
+  %table.grey#workspaces_table
+    %thead
+      %tr
+        %th.no_sorter
+        %th ID
+        %th Nom
+        %th Prénom
+        %th email
+        %th.no_sorter Actions
+    %tbody
+      - @admin_users.each do |user|
+        %tr
+          %td.escape_search.details_link= link_to 'Détails' , sc_admin_user_path(user.id)
+          %td.id=             user.id
+          %td.firstname=      user.user.firstname ? user.user.firstname : 'Undefined'
+          %td.lastname=       user.user.lastname ? user.user.lastname : 'Undefined'
+          %td.email=          user.user.email ? user.user.email : 'Undefined'
+          %td.action_on_table.escape_search
+            -unless user==current_user 
+              %ul
+                %li
+                  = button_to 'Supprimer', :controller => :sc_admin_user, :action => :remove_admin_user, :id => user.id, :confirm => "Êtes-vous sûr ?"
+  %br
+  %span
+    liste des utilisateurs
   %table.grey#workspaces_table
     %thead
       %tr
@@ -35,3 +63,5 @@
               %ul
                 %li
                   = button_to 'Supprimer', sc_admin_user_path(user.id), :method => :delete, :confirm => "Êtes-vous sûr ?"
+                %li
+                  = button_to 'Admin', :controller => :sc_admin_user, :action => :add_admin_user, :id => user.id, :confirm => "Êtes-vous sûr ?"

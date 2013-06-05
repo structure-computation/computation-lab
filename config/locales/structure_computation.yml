@@ -1,0 +1,34 @@
+# encoding: utf-8
+
+# Fichier de traduction en français pour les messages de l'application
+# Structure Computation.
+fr:
+  activerecord:
+    attributes:
+      user:
+        email:       L'adresse e-mail
+    password:
+      modification:
+        # Réussite de la modification du mot de passe
+        worked: Modification du mot de passe réalisée avec succès.
+
+           
+# setup_users:
+#   activerecord:
+#     errors:
+#       models:
+#         user:
+#           attributes:
+#             email:
+#               invalid:
+
+# setup_team:
+#   activerecord:
+#     errors:
+#       models:
+#         user:
+#           attributes:
+#             email:
+#               invalid: Erreur setup team email invalide
+
+# TODO: Voir pour ajouter la gestion de human_attribute_name

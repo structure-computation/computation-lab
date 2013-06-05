@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,7 +11,8 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120926200728) do
+
+ActiveRecord::Schema.define(:version => 20121024225539) do
 
   create_table "abonnements", :force => true do |t|
     t.string   "name"
@@ -28,7 +30,6 @@ ActiveRecord::Schema.define(:version => 20120926200728) do
   create_table "applications", :force => true do |t|
     t.string   "name"
     t.string   "description"
-    t.string   "key_words"
     t.string   "powered_by"
     t.string   "company_id"
     t.string   "logo"
@@ -37,8 +38,9 @@ ActiveRecord::Schema.define(:version => 20120926200728) do
     t.integer  "distribution_token"
     t.integer  "exploitation_token"
     t.string   "state"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
   end
 
   create_table "bills", :force => true do |t|
@@ -450,31 +452,32 @@ ActiveRecord::Schema.define(:version => 20120926200728) do
 
   create_table "users", :force => true do |t|
     t.integer  "workspace_id"
-    t.string   "firstname",            :limit => 100, :default => ""
-    t.string   "lastname",             :limit => 100, :default => ""
-    t.string   "telephone",            :limit => 23,  :default => ""
-    t.string   "email",                :limit => 100
-    t.string   "role",                 :limit => 100
+    t.string   "firstname",              :limit => 100, :default => ""
+    t.string   "lastname",               :limit => 100, :default => ""
+    t.string   "telephone",              :limit => 23,  :default => ""
+    t.string   "email",                  :limit => 100
+    t.string   "role",                   :limit => 100
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "state",                               :default => "passive"
+    t.string   "state",                                 :default => "passive"
     t.datetime "deleted_at"
-    t.string   "encrypted_password",                  :default => "",        :null => false
-    t.string   "password_salt",                       :default => "",        :null => false
+    t.string   "encrypted_password",                    :default => "",        :null => false
+    t.string   "password_salt",                         :default => "",        :null => false
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "reset_password_token"
-    t.string   "remember_token"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                       :default => 0
+    t.integer  "sign_in_count",                         :default => 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.integer  "failed_attempts",                     :default => 0
+    t.integer  "failed_attempts",                       :default => 0
     t.string   "unlock_token"
     t.datetime "locked_at"
+    t.datetime "reset_password_sent_at"
+    t.string   "unconfirmed_email"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
@@ -491,8 +494,8 @@ ActiveRecord::Schema.define(:version => 20120926200728) do
     t.integer  "application_id"
     t.date     "end_date"
     t.string   "status"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "workspace_member_to_model_ownerships", :force => true do |t|

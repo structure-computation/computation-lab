@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class CreditController < InheritedResources::Base
   before_filter :authenticate_user!  
   before_filter :must_be_manager

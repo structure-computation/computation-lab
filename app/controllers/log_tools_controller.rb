@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class LogToolsController < ApplicationController
   require 'json'
   
@@ -46,5 +48,14 @@ class LogToolsController < ApplicationController
     @current_log_tools.scills_valid(params)
     render :text => 'success'
   end
+  
+  def use_scwal_tool
+    @current_workspace = Workspace.find(params[:sc_model_id])
+    @current_workspace.use_scwal_tool(params)
+    @workspace_id = params[:sc_model_id]
+    #@page = :home # Pour afficher le menu en selected.
+    render :text => 'success'
+  end
+  
   
 end

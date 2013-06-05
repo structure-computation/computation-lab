@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class ScAdminUserController < InheritedResources::Base
   before_filter :authenticate_user!
   before_filter :valid_admin_user
@@ -8,6 +10,7 @@ class ScAdminUserController < InheritedResources::Base
   def index 
     @page = :sc_admin_user
     @users = User.all
+    @admin_users = UserScAdmin.all
     if params[:notice] 
       flash[:notice] = params[:notice]
     end
@@ -62,6 +65,34 @@ class ScAdminUserController < InheritedResources::Base
       @user = User.find_by_id(params[:id])
       @user.destroy
       redirect_to :controller => :sc_admin_user, :action => :index,  :notice => "Utilsateur suprimé." # TODO: traduire. 
+      #destroy!{ workspace_path(@workspace, :anchor => 'Membres') }
+  end
+  
+  def add_admin_user
+      @admin_workspace = ScAdmin.find_by_workspace_id(current_workspace_member.workspace.id)
+      @user_to_add = User.find_by_id(params[:id])
+      @test_workspace = @user_to_add.workspaces.find(@admin_workspace.workspace.id)
+      
+      unless @test_workspace.nil?
+          new_user_admin = @admin_workspace.user_sc_admins.build() 
+          new_user_admin.user = @user_to_add
+          new_user_admin.save
+          redirect_to :controller => :sc_admin_user, :action => :index,  :notice => "Super utilsateur ajouté." # TODO: traduire. 
+      else
+          redirect_to :controller => :sc_admin_user, :action => :index,  :notice => "Aucun super utilsateur ajouté." # TODO: traduire. 
+      end
+      #destroy!{ workspace_path(@workspace, :anchor => 'Membres') }
+  end
+  
+  def remove_admin_user
+      admin_users = UserScAdmin.find(:all)
+      if admin_users.length > 1
+          @user_to_remove = UserScAdmin.find_by_id(params[:id])
+          @user_to_remove.destroy
+          redirect_to :controller => :sc_admin_user, :action => :index,  :notice => "Super utilsateur suprimé." # TODO: traduire. 
+      else
+          redirect_to :controller => :sc_admin_user, :action => :index,  :notice => "Le super utilsateur ne peut pas être suprimé." # TODO: traduire. 
+      end
       #destroy!{ workspace_path(@workspace, :anchor => 'Membres') }
   end
 

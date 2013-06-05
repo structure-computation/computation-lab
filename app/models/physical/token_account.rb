@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class TokenAccount < ActiveRecord::Base
   belongs_to :workspace
   has_many   :solde_token_accounts
@@ -11,6 +13,25 @@ class TokenAccount < ActiveRecord::Base
     self.purchased_token_counter = 0
     self.reserved_token = 0
     self.solde_token = 0
+    
+    new_solde_token_account = self.solde_token_accounts.new()
+    new_solde_token_account.log_tool_id = -1
+    new_solde_token_account.credit_id = -1
+    new_solde_token_account.credit_token = 0
+    new_solde_token_account.used_token = 0
+    new_solde_token_account.solde_token = 0
+    new_solde_token_account.solde_type = "workspace_initialisation"
+    new_solde_token_account.save
+    
+    new_solde1_token_account = self.solde_token_accounts.new()
+    new_solde1_token_account.log_tool_id = -1
+    new_solde1_token_account.credit_id = -1
+    new_solde1_token_account.credit_token = 0
+    new_solde1_token_account.used_token = 0
+    new_solde1_token_account.solde_token = 0
+    new_solde1_token_account.solde_type = "token"
+    new_solde1_token_account.save
+
     self.save
   end
   
