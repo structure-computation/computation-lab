@@ -104,9 +104,9 @@
           /-if current_workspace_member.manager?
           /  #user_icon
           /    = link_to image_tag( 'base-de-donnees-ajouter-icone-7539-16.png'),workspace_forfaits_path(current_workspace_member.workspace) # :controller => "forfait", :action => "index"
-          #user_information
-            Account : &nbsp
-            = current_workspace_member.workspace.token_account.solde_token
+          /#user_information
+          /  Account : &nbsp
+          /  = current_workspace_member.workspace.token_account.solde_token
 
 
 /#correli_header.CorreliHeader

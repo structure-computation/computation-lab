@@ -38,12 +38,24 @@ class WorkspacesController < InheritedResources::Base
     if @last_credit
       created_at = @last_credit.created_at 
     else
-      created_at = DateTime.now
+      new_solde1_token_account = self.solde_token_accounts.new()
+      new_solde1_token_account.log_tool_id = -1
+      new_solde1_token_account.credit_id = -1
+      new_solde1_token_account.credit_token = 0
+      new_solde1_token_account.used_token = 0
+      new_solde1_token_account.solde_token = 0
+      new_solde1_token_account.solde_type = "token"
+      new_solde1_token_account.save
+      created_at = new_solde1_token_account.created_at
+      #created_at = DateTime.now
     end
     
     @soldes       = @workspace.token_account.solde_token_accounts.find(:all, :order => " created_at DESC", :conditions => ["created_at >= ? ", created_at])
     
     @old_solde    = @workspace.token_account.solde_token_accounts.find(:last, :conditions => ["created_at < ? ", created_at])
+    if not @old_solde
+      @old_solde    = @workspace.token_account.solde_token_accounts.find(:last, :conditions => ["created_at <= ? ", created_at])
+    end
     @old_solde.used_token = ""
     @old_solde.credit_token = ""
     @old_solde.solde_type = "ancien solde"
