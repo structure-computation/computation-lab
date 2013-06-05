@@ -25,13 +25,8 @@ gem 'acts_as_api' , '~>0.3.11'
 gem 'compass'     , '>= 0.11.5'
 gem 'compass-susy-plugin'
 gem 'inherited_resources'
-<<<<<<< HEAD
-gem 'therubyracer', :platforms => :ruby
 
-# gem 'capistrano'
-=======
 gem 'capistrano'
->>>>>>> new_design
 
 group :development, :test do
   # gem 'ruby-debug'          , :platforms => :ruby_18#
