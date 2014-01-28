@@ -26,22 +26,11 @@
 %script{ :src => "/javascripts/EcosystemScience/Soja/Theme.js", :type => "text/javascript" }
 %script{ :src => "/javascripts/EcosystemScience/Soja/TypedArray.js", :type => "text/javascript" }
 %script{ :src => "/javascripts/EcosystemScience/Soja/CanvasManager.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/EcosystemScience/Soja/Application.js", :type => "text/javascript" }
+
 %script{ :src => "/javascripts/EcosystemScience/Soja/Animation.js", :type => "text/javascript" }
 %script{ :src => "/javascripts/EcosystemScience/Soja/TreeApp.js", :type => "text/javascript" }
 %script{ :src => "/javascripts/EcosystemScience/gen/Browse.js", :type => "text/javascript" }
-
-%script{ :src => "/javascripts/EcosystemScience/gen/EcosystemMecanicModuls.js", :type => "text/javascript" }
-%script{ :src => "/javascripts/EcosystemScience/gen/Gmsh.js", :type => "text/javascript" }
-%script{ :src => "/javascripts/EcosystemScience/gen/Correli.js", :type => "text/javascript" }
-%script{ :src => "/javascripts/EcosystemScience/gen/ScillsResult.js", :type => "text/javascript" }
-%script{ :src => "/javascripts/EcosystemScience/gen/UnvReader2D.js", :type => "text/javascript" }
-%script{ :src => "/javascripts/EcosystemScience/gen/UnvReader3D.js", :type => "text/javascript" }
-%script{ :src => "/javascripts/EcosystemScience/gen/Scult2D.js", :type => "text/javascript" }
-%script{ :src => "/javascripts/EcosystemScience/gen/Scult3D.js", :type => "text/javascript" }
-%script{ :src => "/javascripts/EcosystemScience/gen/Scills3D.js", :type => "text/javascript" }
-%script{ :src => "/javascripts/EcosystemScience/gen/Function.js", :type => "text/javascript" }
-%script{ :src => "/javascripts/EcosystemScience/gen/CsvReader.js", :type => "text/javascript" }
-
 
 %script{ :src => "/javascripts/EcosystemScience/CodeMirror-2.22/lib/codemirror.js", :type => "text/javascript" }
 %script{ :src => "/javascripts/EcosystemScience/CodeMirror-2.22/mode/xml/xml.js", :type => "text/javascript" }
@@ -52,9 +41,26 @@
 %script{ :src => "/javascripts/EcosystemScience/CodeMirror-2.22/lib/util/search.js", :type => "text/javascript" }
 %script{ :src => "/javascripts/EcosystemScience/CodeMirror-2.22/lib/util/match-highlighter.js", :type => "text/javascript" }
 
+%script{ :src => "/javascripts/EcosystemScience/gen/EcosystemScience.js", :type => "text/javascript" }
+
+%script{ :src => "/javascripts/EcosystemScience/gen/Gmsh.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/EcosystemScience/gen/Correli.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/EcosystemScience/gen/UnvReader2D.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/EcosystemScience/gen/UnvReader3D.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/EcosystemScience/gen/Scult2D.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/EcosystemScience/gen/Scult3D.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/EcosystemScience/gen/Scills3D.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/EcosystemScience/gen/Function.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/EcosystemScience/gen/CsvReader.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/EcosystemScience/gen/Scilab.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/EcosystemScience/gen/Acquisition.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/EcosystemScience/gen/Test.js", :type => "text/javascript" }
+%script{ :src => "/javascripts/EcosystemScience/gen/CRM.js", :type => "text/javascript" }
+
+
+
 /%script{ :src => "/javascripts/EcosystemScience/Touchable-jQuery-Plugin/touchable.js", :type => "text/javascript" }
 
-%script{ :src => "/javascripts/EcosystemScience/gen/EcosystemScience.js", :type => "text/javascript" }
 
 %header
   .container
@@ -118,5 +124,6 @@
   SC_WORSPACE_MEMBER_ID = '#{@current_workspace_member.id}'
   SC_USER_ID = '#{@current_user.id}'
   SC_USER_NAME = '#{@current_user.full_name}'
+  SC_USER_EMAIL = '#{@current_user.email}'
   
   launch_ecosystem_mecanic(document.getElementById("main_window"));

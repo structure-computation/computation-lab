@@ -17,28 +17,28 @@ class EcosystemMecanicController < ApplicationController
     render :layout => false 
   end
   
-  def upload
-    host = 'localhost'     # The web server
-    port = 8888                           # Default HTTP port
-    socket = TCPSocket.open(host,port)  # Connect to server
-    #logger.debug  request.method + " " + request.fullpath + " \n\n" + request.raw_post  
-    socket.write( request.method + " " + request.fullpath + " \n\n" + request.raw_post ) # Send request
-    response = socket.read              # Read complete response
-    socket.close
-    render :text => response
-  end
-  
-  
-  def _
-    host = 'localhost'     # The web server
-    port = 8888                           # Default HTTP port
-    socket = TCPSocket.open(host,port)  # Connect to server
-    length = request.raw_post.length
-    #logger.debug  "request.method = " + request.method + " " + request.fullpath + " \n\n" + request.raw_post 
-    #logger.debug  "request.raw_post.length = " + length.to_s
-    socket.write( request.method + " " + request.fullpath + " Content-Length: " + length.to_s + " \n\n" + request.raw_post ) # Send request
-    response = socket.read              # Read complete response
-    socket.close
-    render :text => response
-  end
+#   def upload
+#     host = 'localhost'     # The web server
+#     port = 8888                           # Default HTTP port
+#     socket = TCPSocket.open(host,port)  # Connect to server
+#     #logger.debug  request.method + " " + request.fullpath + " \n\n" + request.raw_post  
+#     socket.write( request.method + " " + request.fullpath + " \n\n" + request.raw_post ) # Send request
+#     response = socket.read              # Read complete response
+#     socket.close
+#     render :text => response
+#   end
+#   
+#   
+#   def _
+#     host = 'localhost'     # The web server
+#     port = 8888                           # Default HTTP port
+#     socket = TCPSocket.open(host,port)  # Connect to server
+#     length = request.raw_post.length
+#     #logger.debug  "request.method = " + request.method + " " + request.fullpath + " \n\n" + request.raw_post 
+#     #logger.debug  "request.raw_post.length = " + length.to_s
+#     socket.write( request.method + " " + request.fullpath + " Content-Length: " + length.to_s + " \n\n" + request.raw_post ) # Send request
+#     response = socket.read              # Read complete response
+#     socket.close
+#     render :text => response
+#   end
 end
