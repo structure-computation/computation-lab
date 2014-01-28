@@ -1,0 +1,24 @@
+defaults_development: &defaults_development
+  adapter:  mysql2
+  encoding: utf8
+  host:     localhost
+  username: structcomp
+  pool: 500
+  # password: 
+
+development:
+  database: computation_lab_dev 
+  <<: *defaults_development
+
+production:
+  database: computation_lab_prod
+  <<: *defaults_development
+
+test:
+  database: computation_lab_test
+  <<: *defaults_development
+
+# cucumber:
+#   database: structcompCucumberTest
+#   <<: *defaults_development
+
