@@ -1,17 +1,17 @@
 -# encoding: utf-8 
-%link{ :href => "/javascripts/IpolLabs/Soja/ModelEditor.css", :rel => "stylesheet", :type => "text/css" }
-%link{ :href => "/javascripts/IpolLabs/Soja/TreeView.css", :rel => "stylesheet", :type => "text/css" }
-%link{ :href => "/javascripts/IpolLabs/Soja/Color.css", :rel => "stylesheet", :type => "text/css" }
-%link{ :href => "/javascripts/IpolLabs/Soja/TreeApp.css", :rel => "stylesheet", :type => "text/css" }
-%link{ :href => "/javascripts/IpolLabs/Soja/LayoutManager.css", :rel => "stylesheet", :type => "text/css" }
-%link{ :href => "/javascripts/IpolLabs/Soja/CodeEditor.css", :rel => "stylesheet", :type => "text/css" }
-%link{ :href => "/javascripts/IpolLabs/Soja/Application.css", :rel => "stylesheet", :type => "text/css" }
-%link{ :href => "/javascripts/IpolLabs/Soja/FileSystem.css", :rel => "stylesheet", :type => "text/css" }
-%link{ :href => "/javascripts/IpolLabs/gen/IpolLabs.css", :rel => "stylesheet", :type => "text/css" }
+%link{ :href => "/javascripts/EcosystemScience/Soja/ModelEditor.css", :rel => "stylesheet", :type => "text/css" }
+%link{ :href => "/javascripts/EcosystemScience/Soja/TreeView.css", :rel => "stylesheet", :type => "text/css" }
+%link{ :href => "/javascripts/EcosystemScience/Soja/Color.css", :rel => "stylesheet", :type => "text/css" }
+%link{ :href => "/javascripts/EcosystemScience/Soja/TreeApp.css", :rel => "stylesheet", :type => "text/css" }
+%link{ :href => "/javascripts/EcosystemScience/Soja/LayoutManager.css", :rel => "stylesheet", :type => "text/css" }
+%link{ :href => "/javascripts/EcosystemScience/Soja/CodeEditor.css", :rel => "stylesheet", :type => "text/css" }
+%link{ :href => "/javascripts/EcosystemScience/Soja/Application.css", :rel => "stylesheet", :type => "text/css" }
+%link{ :href => "/javascripts/EcosystemScience/Soja/FileSystem.css", :rel => "stylesheet", :type => "text/css" }
+%link{ :href => "/javascripts/EcosystemScience/gen/EcosystemScience.css", :rel => "stylesheet", :type => "text/css" }
 %link{ :href => "/stylesheets/main_ext_app.css", :rel => "stylesheet", :type => "text/css" }
 
-%link{ :href => "/javascripts/IpolLabs/CodeMirror-2.22/lib/codemirror.css", :rel => "stylesheet", :type => "text/css" }
-%link{ :href => "/javascripts/IpolLabs/CodeMirror-2.22/lib/util/dialog.css", :rel => "stylesheet", :type => "text/css" }
+%link{ :href => "/javascripts/EcosystemScience/CodeMirror-2.22/lib/codemirror.css", :rel => "stylesheet", :type => "text/css" }
+%link{ :href => "/javascripts/EcosystemScience/CodeMirror-2.22/lib/util/dialog.css", :rel => "stylesheet", :type => "text/css" }
 
 %script{ :src => "/javascripts/EcosystemScience/Soja/Soja.js", :type => "text/javascript" }
 %script{ :src => "/javascripts/EcosystemScience/Soja/DomHelper.js", :type => "text/javascript" }
@@ -33,6 +33,7 @@
 %script{ :src => "/javascripts/EcosystemScience/Soja/TreeApp.js", :type => "text/javascript" }
 %script{ :src => "/javascripts/EcosystemScience/gen/Browse.js", :type => "text/javascript" }
 
+
 %script{ :src => "/javascripts/EcosystemScience/CodeMirror-2.22/lib/codemirror.js", :type => "text/javascript" }
 %script{ :src => "/javascripts/EcosystemScience/CodeMirror-2.22/mode/xml/xml.js", :type => "text/javascript" }
 %script{ :src => "/javascripts/EcosystemScience/CodeMirror-2.22/lib/util/dialog.js", :type => "text/javascript" }
@@ -43,7 +44,6 @@
 %script{ :src => "/javascripts/EcosystemScience/CodeMirror-2.22/lib/util/match-highlighter.js", :type => "text/javascript" }
 
 %script{ :src => "/javascripts/EcosystemScience/gen/EcosystemScience.js", :type => "text/javascript" }
-
 %script{ :src => "/javascripts/EcosystemScience/gen/Gmsh.js", :type => "text/javascript" }
 %script{ :src => "/javascripts/EcosystemScience/gen/Correli.js", :type => "text/javascript" }
 %script{ :src => "/javascripts/EcosystemScience/gen/UnvReader2D.js", :type => "text/javascript" }
@@ -59,16 +59,8 @@
 %script{ :src => "/javascripts/EcosystemScience/gen/CRM.js", :type => "text/javascript" }
 
 
-%script{ :src => "/javascripts/IpolLabs/CodeMirror-2.22/lib/codemirror.js", :type => "text/javascript" }
-%script{ :src => "/javascripts/IpolLabs/CodeMirror-2.22/mode/xml/xml.js", :type => "text/javascript" }
-%script{ :src => "/javascripts/IpolLabs/CodeMirror-2.22/lib/util/dialog.js", :type => "text/javascript" }
-%script{ :src => "/javascripts/IpolLabs/CodeMirror-2.22/mode/javascript/javascript.js", :type => "text/javascript" }
-%script{ :src => "/javascripts/IpolLabs/CodeMirror-2.22/mode/ruby/ruby.js", :type => "text/javascript" }
-%script{ :src => "/javascripts/IpolLabs/CodeMirror-2.22/lib/util/searchcursor.js", :type => "text/javascript" }
-%script{ :src => "/javascripts/IpolLabs/CodeMirror-2.22/lib/util/search.js", :type => "text/javascript" }
-%script{ :src => "/javascripts/IpolLabs/CodeMirror-2.22/lib/util/match-highlighter.js", :type => "text/javascript" }
 
-/%script{ :src => "/javascripts/IpolLabs/Touchable-jQuery-Plugin/touchable.js", :type => "text/javascript" }
+/%script{ :src => "/javascripts/EcosystemScience/Touchable-jQuery-Plugin/touchable.js", :type => "text/javascript" }
 
 
 %header
@@ -135,4 +127,4 @@
   SC_USER_NAME = '#{@current_user.full_name}'
   SC_USER_EMAIL = '#{@current_user.email}'
   
-  launch_ipollabs(document.getElementById("main_window"));
+  launch_ecosystem_mecanic(document.getElementById("main_window"));

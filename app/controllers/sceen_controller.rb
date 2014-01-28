@@ -75,12 +75,13 @@ class SceenController < ApplicationController
     #@current_model = current_workspace_member.sc_models.find(params[:sc_model_id])
     #@current_model.tool_in_use("sceen", current_workspace_member)
     
-    #host = 'localhost'     # The web server
+    host = 'localhost'     # The web server
     #host = '192.168.38.241'
-    #port = 8888   # Default HTTP port
+    port = 8888   # Default HTTP port
+
     
-    host = '91.121.167.175'     # The web server
-    port = 80                           # Default HTTP port
+    #host = '91.121.167.175'     # The web server
+    #port = 80                           # Default HTTP port
     
     socket = TCPSocket.open(host,port)  # Connect to server
     #logger.debug  "request.method = " + request.method + " " + request.fullpath + " \n\n" + request.raw_post 
